@@ -1,0 +1,13 @@
+# Public status mirror — docs only. Ignore everything by default so this
+# repo can never accidentally contain code, keys, renders, or secrets.
+*
+# Un-ignore only the seven status documents
+!CONTEXT.md
+!STATUS.md
+!PROGRESS.md
+!GAPS.md
+!DECISIONS.md
+!TOOLS.md
+!ARCHITECTURE.md
+# Keep .gitignore itself tracked
+!.gitignore
