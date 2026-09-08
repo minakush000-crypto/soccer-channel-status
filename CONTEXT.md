@@ -18,6 +18,16 @@ confusion. Only the one inside yt-digest is real.
 The .env is at ~/yt-digest/.env. yolov8s.pt is at ~/yolov8s.pt, outside
 the project folder.
 
+## STATUS MIRROR (public)
+Current project state is mirrored to a PUBLIC docs-only repo so any
+session (or the coordinator) can read it via web fetch instead of
+pasting fragments:
+https://github.com/minakush000-crypto/soccer-channel-status
+Contains only: CONTEXT.md, STATUS.md, PROGRESS.md, GAPS.md, DECISIONS.md,
+TOOLS.md, ARCHITECTURE.md. No code, no keys, no renders. A Stop hook
+(.claude/hooks/push_status.sh) re-pushes these after any change, so the
+mirror is always current. Read it from a fresh session with WebFetch.
+
 ## THE PIPELINE
 Entry point: tools/produce_v2.py
 Run it with: ~/yt-digest/.venv/bin/python tools/produce_v2.py <slug>
