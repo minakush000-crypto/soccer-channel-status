@@ -1,6 +1,6 @@
 # ARCHITECTURE.md — soccer-channel code map
 
-Verified against code on 2026-09-08. Every line number is from `wc -l` /
+Verified against code on 2026-09-08 (Stage 2: 720p cap + 180-1200s filter applied to produce_v2.py). Every line number is from `wc -l` /
 `grep -n` against the file on disk today. If a line moved, re-read. This
 rebuild supersedes the 2026-09-05 version, whose step-4 wiring (`tactical_overlay`
 at `produce_v2.py:232`) no longer exists in the code.
@@ -41,7 +41,7 @@ step4b (567) → step6_voice (570) → step6b_ambience (575) → step5_assemble
 |---|---|---|---|
 | 1 | `step1_match_data` (67) | `match_data.py <slug> --query <q>` (line 69) | `renders/<slug>/match_data.json` |
 | 2 | `step2_boards` (76) | `tactical_boards.py <slug>` (line 78) | `renders/<slug>/boards/*.png + *.mp4` |
-| 3 | `step3_download_clips` (95) | `yt-dlp` inline (line 175), `--max-filesize 200M` (line 177), 720p gate (line 193), 200MB guard (line 195), cookies at `secrets/yt_cookies.txt` (line 155) | `renders/<slug>/clips/clip_<id>.mp4` |
+| 3 | `step3_download_clips` (95) | `yt-dlp` inline (line 175), format capped at **720p** (`height<=720`, line 176), duration filter **180-1200s** (3-20min, line 141), `--max-filesize 200M` (line 177), 720p gate (line 193), 200MB guard (line 195), cookies at `secrets/yt_cookies.txt` (line 155) | `renders/<slug>/clips/clip_<id>.mp4` |
 | 4 | `step4b_tactical_render` (211) | `runpod_fulltrack.py --clip <clip>` (line 235, ships `cv_annotate.py`+`pitch_radar.py`+`ffmpeg_utils.py` to RunPod, runs cv_annotate on the pod) then `tactical_render.py <tracking.json>` (line 285) | `renders/<slug>/clips/<prefix>_full.tracking.json` + `tactical_view.mp4` |
 | 5 | `step6_voice` (467) | `generate_voice.py <slug> --tts-only` (line 474) | `renders/<slug>/voice_elevenlabs.mp3` |
 | 6 | `step6b_ambience` (479) | `generate_ambience.py <slug> 30` (line 493). Non-fatal. | `renders/<slug>/crowd_ambience.mp3` |

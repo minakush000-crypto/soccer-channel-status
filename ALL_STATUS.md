@@ -11,7 +11,7 @@ NOT include the artifacts/ or frames/ trees — fetch those directly.
 
 # CONTEXT.md — soccer-channel session brief
 
-Verified against code on 2026-09-08. Drifted sections (the tactical_overlay
+Verified against code on 2026-09-08 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s). Drifted sections (the tactical_overlay
 wiring, "no upload", the 8-step list, the cv_annotate export list) were
 regenerated from grep; see ARCHITECTURE.md / STATUS.md / RECONCILIATION.md.
 
@@ -85,10 +85,12 @@ Working example: 2026-08-30_liverpool-forest --query "Liverpool Forest"
   --date-range 20260801-20260831
 
 9 steps (verified 2026-09-08, see ARCHITECTURE.md): match data (ESPN)
--> boards -> download clip (200MB guard) -> tactical render (runpod_fulltrack
-ships cv_annotate to RunPod, then tactical_render.py draws the top-down view)
--> voice (ElevenLabs) -> crowd ambience -> assemble -> merge -> shorts crop.
-Latest produce_v2 output: 720x1280, 62.3s, 24.8MB (liverpool-forest, Sep 7).
+-> boards -> download clip (720p cap + 200MB guard, 3-20min filter) -> tactical
+render (runpod_fulltrack ships cv_annotate to RunPod, then tactical_render.py
+draws the top-down view) -> voice (ElevenLabs) -> crowd ambience -> assemble ->
+merge -> shorts crop. Latest produce_v2 output: 720x1280, 62.3s, 24.8MB
+(liverpool-forest, Sep 7). Source is now 720p (Stage 2: height<=720 at
+produce_v2.py:176; duration 180-1200s at :141).
 A separate words-match path (assemble_words_match.py) built arsenal-chelsea:
 1280x720, 45.2s, 15.0MB (Sep 8).
 
@@ -225,7 +227,7 @@ See PROGRESS.md and STATUS.md for full detail.
 
 # STATUS.md — verified current state
 
-Verified against code on 2026-09-08. This rebuild supersedes the 2026-09-05
+Verified against code on 2026-09-08 (Stage 2: 720p cap + 180-1200s filter applied to produce_v2.py). This rebuild supersedes the 2026-09-05
 version: the tactical_overlay wiring it described (`produce_v2.py:232`) no
 longer exists, and the "no upload" claim is reversed (2 uploads happened
 2026-09-06). No plans, no hopes, no hand-typed quality scores. Every claim has
@@ -294,9 +296,10 @@ but match data has him as a 71st-minute sub.
 
 ### 3. Output is 720x1280, not 1080x1920 (broken format)
 `shorts_crop.py:64` `OUT_W, OUT_H = 720, 1280`. Deliberate downscale to avoid a
-soft 1.78x upscale from 1080p. A 2160p source can crop+downscale to 1080x1920
-(comment, line 78) but that path is not the default and no 4K source has been
-tested through produce_v2.
+soft 1.78x upscale. produce_v2 now caps the source at **720p** (`height<=720`,
+`produce_v2.py:176`, Stage 2), so the 1080p/2160p source path is gone —
+`shorts_crop`'s 4K→1080x1920 downscale branch (comment, line 78) is now
+unreachable through produce_v2. Output stays 720x1280.
 
 ### 4. OVERLAYS ARE GONE (was broken, now resolved)
 The 2026-09-05 STATUS said `tactical_overlay.py` guesses coords via
@@ -1885,7 +1888,7 @@ Transitive libs: `ffmpeg_utils.py` (imported by generate_voice/merge_voice/short
 
 # ARCHITECTURE.md — soccer-channel code map
 
-Verified against code on 2026-09-08. Every line number is from `wc -l` /
+Verified against code on 2026-09-08 (Stage 2: 720p cap + 180-1200s filter applied to produce_v2.py). Every line number is from `wc -l` /
 `grep -n` against the file on disk today. If a line moved, re-read. This
 rebuild supersedes the 2026-09-05 version, whose step-4 wiring (`tactical_overlay`
 at `produce_v2.py:232`) no longer exists in the code.
@@ -1926,7 +1929,7 @@ step4b (567) → step6_voice (570) → step6b_ambience (575) → step5_assemble
 |---|---|---|---|
 | 1 | `step1_match_data` (67) | `match_data.py <slug> --query <q>` (line 69) | `renders/<slug>/match_data.json` |
 | 2 | `step2_boards` (76) | `tactical_boards.py <slug>` (line 78) | `renders/<slug>/boards/*.png + *.mp4` |
-| 3 | `step3_download_clips` (95) | `yt-dlp` inline (line 175), `--max-filesize 200M` (line 177), 720p gate (line 193), 200MB guard (line 195), cookies at `secrets/yt_cookies.txt` (line 155) | `renders/<slug>/clips/clip_<id>.mp4` |
+| 3 | `step3_download_clips` (95) | `yt-dlp` inline (line 175), format capped at **720p** (`height<=720`, line 176), duration filter **180-1200s** (3-20min, line 141), `--max-filesize 200M` (line 177), 720p gate (line 193), 200MB guard (line 195), cookies at `secrets/yt_cookies.txt` (line 155) | `renders/<slug>/clips/clip_<id>.mp4` |
 | 4 | `step4b_tactical_render` (211) | `runpod_fulltrack.py --clip <clip>` (line 235, ships `cv_annotate.py`+`pitch_radar.py`+`ffmpeg_utils.py` to RunPod, runs cv_annotate on the pod) then `tactical_render.py <tracking.json>` (line 285) | `renders/<slug>/clips/<prefix>_full.tracking.json` + `tactical_view.mp4` |
 | 5 | `step6_voice` (467) | `generate_voice.py <slug> --tts-only` (line 474) | `renders/<slug>/voice_elevenlabs.mp3` |
 | 6 | `step6b_ambience` (479) | `generate_ambience.py <slug> 30` (line 493). Non-fatal. | `renders/<slug>/crowd_ambience.mp3` |

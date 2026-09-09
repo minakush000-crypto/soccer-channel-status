@@ -1,6 +1,6 @@
 # STATUS.md — verified current state
 
-Verified against code on 2026-09-08. This rebuild supersedes the 2026-09-05
+Verified against code on 2026-09-08 (Stage 2: 720p cap + 180-1200s filter applied to produce_v2.py). This rebuild supersedes the 2026-09-05
 version: the tactical_overlay wiring it described (`produce_v2.py:232`) no
 longer exists, and the "no upload" claim is reversed (2 uploads happened
 2026-09-06). No plans, no hopes, no hand-typed quality scores. Every claim has
@@ -69,9 +69,10 @@ but match data has him as a 71st-minute sub.
 
 ### 3. Output is 720x1280, not 1080x1920 (broken format)
 `shorts_crop.py:64` `OUT_W, OUT_H = 720, 1280`. Deliberate downscale to avoid a
-soft 1.78x upscale from 1080p. A 2160p source can crop+downscale to 1080x1920
-(comment, line 78) but that path is not the default and no 4K source has been
-tested through produce_v2.
+soft 1.78x upscale. produce_v2 now caps the source at **720p** (`height<=720`,
+`produce_v2.py:176`, Stage 2), so the 1080p/2160p source path is gone —
+`shorts_crop`'s 4K→1080x1920 downscale branch (comment, line 78) is now
+unreachable through produce_v2. Output stays 720x1280.
 
 ### 4. OVERLAYS ARE GONE (was broken, now resolved)
 The 2026-09-05 STATUS said `tactical_overlay.py` guesses coords via

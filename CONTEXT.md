@@ -1,6 +1,6 @@
 # CONTEXT.md — soccer-channel session brief
 
-Verified against code on 2026-09-08. Drifted sections (the tactical_overlay
+Verified against code on 2026-09-08 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s). Drifted sections (the tactical_overlay
 wiring, "no upload", the 8-step list, the cv_annotate export list) were
 regenerated from grep; see ARCHITECTURE.md / STATUS.md / RECONCILIATION.md.
 
@@ -74,10 +74,12 @@ Working example: 2026-08-30_liverpool-forest --query "Liverpool Forest"
   --date-range 20260801-20260831
 
 9 steps (verified 2026-09-08, see ARCHITECTURE.md): match data (ESPN)
--> boards -> download clip (200MB guard) -> tactical render (runpod_fulltrack
-ships cv_annotate to RunPod, then tactical_render.py draws the top-down view)
--> voice (ElevenLabs) -> crowd ambience -> assemble -> merge -> shorts crop.
-Latest produce_v2 output: 720x1280, 62.3s, 24.8MB (liverpool-forest, Sep 7).
+-> boards -> download clip (720p cap + 200MB guard, 3-20min filter) -> tactical
+render (runpod_fulltrack ships cv_annotate to RunPod, then tactical_render.py
+draws the top-down view) -> voice (ElevenLabs) -> crowd ambience -> assemble ->
+merge -> shorts crop. Latest produce_v2 output: 720x1280, 62.3s, 24.8MB
+(liverpool-forest, Sep 7). Source is now 720p (Stage 2: height<=720 at
+produce_v2.py:176; duration 180-1200s at :141).
 A separate words-match path (assemble_words_match.py) built arsenal-chelsea:
 1280x720, 45.2s, 15.0MB (Sep 8).
 
