@@ -206,6 +206,6 @@ Bug is intermittent in this reel (absent @90,99,168,258 — cuts to
 fan/replay/celebration). gemma4 reads it correctly when present (102, 261
 confirmed by Claude). Cost ~$0.10 (free bulk + ~7-15 Claude confirmations).
 Scanner beats Gemini+Claude hybrid on accuracy (found the goal Gemini missed
-at 250-254, no phantom) AND cost (~$0.10 vs ~$0.30-0.41). KNOWN REFINEMENT:
-add persistence filter to the script (auto-drop blips reverting <9s); currently
-filtered manually.
+at 250-254, no phantom) AND cost (~$0.10 vs ~$0.30-0.41). Persistence filter
+now implemented in the script (run-based blip absorption, MIN_PERSIST=9s;
+verified on the saved timeline — yields exactly the 3 real goals).
