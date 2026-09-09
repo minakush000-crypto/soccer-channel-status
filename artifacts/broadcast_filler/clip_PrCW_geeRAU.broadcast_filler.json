@@ -1,0 +1,186 @@
+{
+ "source": "artifacts/gemini_inventory/clip_PrCW_geeRAU.gemini_inventory.json",
+ "signal": "gemini_inventory action_type/shot_type (NOT the score bug)",
+ "classification_rule": "broadcast if action_type in {shot, build-up} and shot_type != replay; filler if action_type == non-action or shot_type == replay. Goal times are NOT trusted from Gemini; cross-check against match_data / scoreboard timeline.",
+ "n_segments": 21,
+ "broadcast_total_s": 43.0,
+ "filler_total_s": 440.0,
+ "broadcast_fraction": 0.089,
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 5.0,
+   "class": "broadcast",
+   "action_type": "shot",
+   "shot_type": "wide",
+   "description": "An Arsenal player scores a goal from inside the penalty area."
+  },
+  {
+   "start": 5.0,
+   "end": 88.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "Players line up on the pitch for pre-match ceremonies and handshakes."
+  },
+  {
+   "start": 88.0,
+   "end": 99.0,
+   "class": "broadcast",
+   "action_type": "build-up",
+   "shot_type": "wide",
+   "description": "A Chelsea player receives the ball in midfield and advances towards the opponent's half."
+  },
+  {
+   "start": 99.0,
+   "end": 111.0,
+   "class": "broadcast",
+   "action_type": "shot",
+   "shot_type": "wide",
+   "description": "A Chelsea player scores a goal with a low shot past the goalkeeper."
+  },
+  {
+   "start": 111.0,
+   "end": 135.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "Chelsea players celebrate their goal with the fans."
+  },
+  {
+   "start": 135.0,
+   "end": 140.0,
+   "class": "filler",
+   "action_type": "shot",
+   "shot_type": "replay",
+   "description": "A replay shows the Chelsea player scoring the goal."
+  },
+  {
+   "start": 140.0,
+   "end": 161.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "Chelsea players continue to celebrate their goal."
+  },
+  {
+   "start": 161.0,
+   "end": 172.0,
+   "class": "broadcast",
+   "action_type": "shot",
+   "shot_type": "wide",
+   "description": "An Arsenal player receives a pass in the box and scores a goal."
+  },
+  {
+   "start": 172.0,
+   "end": 187.0,
+   "class": "filler",
+   "action_type": "shot",
+   "shot_type": "replay",
+   "description": "A replay shows the Arsenal player scoring the goal."
+  },
+  {
+   "start": 187.0,
+   "end": 250.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "Arsenal players celebrate their goal, followed by shots of the crowd and players preparing to restart."
+  },
+  {
+   "start": 250.0,
+   "end": 254.0,
+   "class": "broadcast",
+   "action_type": "shot",
+   "shot_type": "wide",
+   "description": "An Arsenal player shoots and scores a goal from inside the penalty area."
+  },
+  {
+   "start": 254.0,
+   "end": 260.0,
+   "class": "filler",
+   "action_type": "shot",
+   "shot_type": "replay",
+   "description": "A replay shows the Arsenal player scoring the goal."
+  },
+  {
+   "start": 260.0,
+   "end": 275.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "Arsenal players celebrate their goal."
+  },
+  {
+   "start": 275.0,
+   "end": 283.0,
+   "class": "filler",
+   "action_type": "shot",
+   "shot_type": "replay",
+   "description": "Another replay shows the Arsenal player scoring the goal from a different angle."
+  },
+  {
+   "start": 283.0,
+   "end": 325.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "Arsenal players continue to celebrate their goal with the fans."
+  },
+  {
+   "start": 325.0,
+   "end": 330.0,
+   "class": "filler",
+   "action_type": "shot",
+   "shot_type": "replay",
+   "description": "A third replay shows the Arsenal player scoring the goal."
+  },
+  {
+   "start": 330.0,
+   "end": 374.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "Arsenal players celebrate, and the goalscorer receives a yellow card for removing his shirt."
+  },
+  {
+   "start": 374.0,
+   "end": 409.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "crowd",
+   "description": "Shots of the crowd cheering in the stadium."
+  },
+  {
+   "start": 409.0,
+   "end": 440.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "Substitutions are made for both teams."
+  },
+  {
+   "start": 440.0,
+   "end": 469.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "medium",
+   "description": "A Chelsea player walks off the pitch while the crowd is shown."
+  },
+  {
+   "start": 469.0,
+   "end": 483.0,
+   "class": "filler",
+   "action_type": "non-action",
+   "shot_type": "wide",
+   "description": "The final whistle blows, and players react on the pitch."
+  }
+ ],
+ "old_bug_signal_comparison": {
+  "note": "OLD signal (now rejected): bug-present == broadcast. Wrong because the bug is burned in across all footage.",
+  "bug_present_samples": 70,
+  "bug_absent_samples": 91,
+  "bug_present_fraction": 0.435,
+  "bug_present_approx_s": 210.0
+ }
+}
