@@ -270,3 +270,25 @@ Board appearance RATED by Opus 5 (authoritative), NOT fixed (per instruction):
   narrative furniture, stat-card bars both grow the same way (Arsenal should
   mirror). Verbatim responses: artifacts/board_ratings/boards_opus_ratings.md.
 Source frames: frames/2026-09-06_arsenal-chelsea/board_*_full.png.
+
+## Goal cut-window diagnosis (2026-09-08, Part 5)
+
+Per-goal relay (gemma4) + Opus-authoritative read of the first/mid/last second
+of each final cut window (frames at frames/.../goal_*.png):
+- Rogers (Chelsea), 119-127 (8s): 100% celebration + ROGERS 1-0 caption, NO
+  shot in the reel (Opus: "no goal shot whatsoever"; relay-verified search found
+  none). Script's "finds the bottom corner" (a shot claim) FIXED to narrate the
+  celebration: "gives the visitors a shock lead, and the travelling fans erupt."
+  match_data fact kept, no shot claimed. Backup scripts/*.md.bak2.
+- Havertz (Arsenal), 181-191 (10s): first second = ball-in-net aftermath (Opus:
+  keeper beaten, ball in net, no player shooting) + HAVERTZ 1-1 caption; the live
+  STRIKE is NOT in the window (~163-166, before it). ~1s goal-result + ~9s
+  non-goal. Narration shows the result, not the strike.
+- Odegaard (Arsenal), 253-262 (9s): first second (253) = LIVE STRIKE (Opus:
+  player striking, bug still 1-1 pre-update); then ~6-8s aftermath/celebration,
+  ØDEGAARD 1-2 caption @262. Strike is the first second.
+Why goals 2 and 3 read wrong: both windows are mostly aftermath, so the
+strike-implying narration plays over mostly-celebration. Goal 1 "matched"
+because its window is coherently all celebration+caption (no mixed content),
+even though it shows no strike. Video not re-rendered (narration fix applied
+to the script; re-render is a separate pipeline run).

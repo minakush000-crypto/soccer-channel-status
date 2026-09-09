@@ -1082,3 +1082,60 @@ strokes, flat fills, no drop shadows), no layered depth, no condensed athletic
 fonts. Confirms Mayo's "PowerPoint and crayon". Appearance NOT fixed yet.
 
 Cost Part 4: ~$0.10 (1 Opus possession confirm + 3 Opus board ratings).
+
+PART 5 (diagnose goals 2 and 3 cut timing) — DONE.
+Mayo: goal 1 matched, goals 2 and 3 read wrong. Diagnosis per goal, with the
+relay (gemma4) description of the first/middle/last second of each window and
+the Opus-authoritative shot/no-shot call. Frames at frames/.../goal_*.png.
+
+GOAL 1 — Rogers (Chelsea), window footage=119-127 (8s):
+  first 119: CELEBRATION, ROGERS 1-0 caption, bug ARS 0-1
+  mid   123: CELEBRATION, ROGERS 1-0, bug ARS 0-1
+  last  127: CELEBRATION, ROGERS 1-0, bug ARS 0-1
+  Opus (mid): "no goal shot whatsoever — no pitch, ball, or player striking;
+  purely crowd celebration." The relay-verified search found no shot anywhere
+  in the reel (searched +-20s around the bug-update @102). The actual strike is
+  NOT in the reel. So 8/8s (100%) of the window is not the shot — it is all
+  celebration + the ROGERS 1-0 caption.
+  FIX applied: the script's Rogers line said "finds the bottom corner" (claims a
+  shot). Rewritten to state the goal fact and describe the celebration instead:
+  "Morgan Rogers, right-footed from outside the box, gives the visitors a shock
+  lead, and the travelling fans erupt." (match_data fact kept; no shot claimed.)
+  Backup scripts/2026-09-06_arsenal-chelsea.md.bak2. Video NOT re-rendered yet
+  (separate pipeline run; narration fix is the Part 5 deliverable).
+
+GOAL 2 — Havertz (Arsenal), window footage=181-191 (10s):
+  first 181: ball-in-net aftermath (Opus: "keeper lying face-down beaten, ball
+            over by the goal line, no player shooting"), HAVERTZ 1-1 caption,
+            bug ARS 1-1
+  mid   186: OTHER, no caption, bug ARS 1-1
+  last  191: CELEBRATION, no caption, bug ARS 1-1
+  The actual live STRIKE is NOT in the window (scoreboard scan inferred ~163-166,
+  before the bug-update @171 and before this window). The window's first second
+  is the ball-in-net result, not the strike. So ~1s goal-result + ~9s non-goal;
+  0s live strike in the window. Narration "finds the bottom corner" shows the
+  result (ball in net) but not the strike.
+
+GOAL 3 — Odegaard (Arsenal), window footage=253-262 (9s):
+  first 253: LIVE STRIKE (Opus: "player striking the ball, Chelsea #3 closing
+            down, keeper stranded"), no caption, bug still ARS 1-1 (pre-update)
+  mid   258: shot/aftermath, no caption, bug none
+  last  262: CELEBRATION, ODEGAARD 1-2 caption, bug ARS 2-1
+  The actual strike IS in the window (first second, 253). So ~1-3s strike +
+  ~6-8s aftermath/celebration; the strike is the first second, the rest is not
+  the goal.
+
+Why 2 and 3 read wrong to the viewer: goal 2 shows the ball-in-net result, not
+the strike, then celebration; goal 3 shows 1s of strike then ~8s of celebration.
+Both windows are mostly aftermath, so the narration (which implies a strike)
+plays over mostly-celebration footage. Goal 1 read as "matched" because its
+window is coherently all celebration+caption (no mixed shot/celebration), even
+though it never shows a strike.
+
+Recommendation (not yet applied, per "diagnose" scope): for goals with a strike
+in the reel (Odegaard), start the window ON the strike and keep it short (~3s);
+for goals with only the ball-in-net (Havertz), trim to the ball-in-net moment;
+for goals with no shot at all (Rogers), narrate the celebration (done) and do
+not lengthen the window looking for a shot that is not there.
+
+Cost Part 5: ~$0.10 (3 Opus shot/no-shot confirmations; gemma4 bulk was free).
