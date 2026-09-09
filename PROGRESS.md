@@ -855,3 +855,9 @@ Answers to coordinator Q5-8:
   redundant (overlap); not recommended.
 
 Cost this session (part 2): ~$0.20 (scanner confirmations + walk-back frames).
+
+Session 4 total: status mirror live at
+https://github.com/minakush000-crypto/soccer-channel-status (auto-pushed by
+Stop hook .claude/hooks/push_status.sh); scoreboard scanner built and
+verified (3/3 goals, Ødegaard winner pinned to 261s bug-update / 253s shot).
+Total session 4 cost: ~$0.65.
