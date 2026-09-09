@@ -1139,3 +1139,49 @@ for goals with no shot at all (Rogers), narrate the celebration (done) and do
 not lengthen the window looking for a shot that is not there.
 
 Cost Part 5: ~$0.10 (3 Opus shot/no-shot confirmations; gemma4 bulk was free).
+
+PART 6 (audio: crowd ambience + British narrator) — DONE.
+
+6a. Crowd ambience wired into produce_v2.py (the orphan).
+generate_ambience.py was called by produce_episode.py and cloud_produce.py but
+NOT produce_v2.py; produce_v2 step7_merge called merge_voice.py without the
+crowd mp3. Fix in tools/produce_v2.py:
+  - Added step6b_ambience(): calls generate_ambience.py <slug> 30 (idempotent,
+    skips if crowd_ambience.mp3 exists; non-fatal on failure).
+  - step7_merge() now passes renders/<slug>/crowd_ambience.mp3 to merge_voice.py
+    when it exists; merge_voice mixes it under the voice at 30% volume with
+    fade in/out (voice is 1.6x), so the crowd is an audible presence that never
+    competes with the narration.
+  - Called in main after the voice step, before the merge.
+Backup tools/produce_v2.py.bak.
+Verified: generate_ambience produced crowd_ambience.mp3 for arsenal-chelsea
+(30s, 0.5MB, ElevenLabs Sound API). merge_voice on a TEMP slug (non-destructive;
+published source untouched) ran the multi-layer mix — log: "Layers: voice(1.6x)
++ crowd(0.3x)", output 45.2s with audio. Temp cleaned up. Note: the existing
+merge_voice mix is a fixed 30% crowd (no sidechain ducking); if it ever
+competes during quiet speech, add sidechain compression to merge_voice.py
+(separate change, not needed now).
+
+6b. British narrator voice (samples for Mayo to pick).
+Listed all 23 ElevenLabs voices on the account; 5 are British. The current .env
+VOICE_ID is 1stSYyl7ZVPJk2ECrNlo = the "british soccer commentator" custom clone
+(NOT a default, despite the brief saying so). Sampled the top 3 fitting an
+analytical British football broadcaster, same ~15s script excerpt with the
+production TTS settings, saved LOCAL (gitignored) for Mayo to listen:
+  experiments/voice-test/audio/
+  - voice1_daniel_steady_broadcaster.mp3  (onwK4e9ZLuTAKqWW03F9, 20s)
+  - voice2_george_storyteller.mp3        (JBFqnCBsd6RMkjVDRZzb, 16.5s)
+  - voice3_current_british_soccer_commentator.mp3 (1stSYyl7ZVPJk2ECrNlo, 14.7s)
+Did NOT choose for Mayo. experiments/voice-test/audio/VOICES.md lists the 3 with
+voice IDs, how to play (mpv/ffplay/Explorer), and how to set the choice.
+Per-episode config added: tools/generate_voice.py now accepts
+  --voice-id <id>  (overrides .env VOICE_ID for that run)
+so each episode can use a different narrator. The .env VOICE_ID stays the
+default. Syntax OK. Backup tools/generate_voice.py.bak.
+Other British voices available (not sampled): Alice (Xb7hH8MSUJpSbSDYk0k2),
+Lily (pFZP5JQG7iQjIQuC4Bku). Mayo picks; I will set the default or wire per
+episode.
+
+Cost Part 6: ~$0.02 (1 ambience sound-gen + 3 short TTS samples; all tiny).
+TOTAL session cost (all 6 parts): ~$0.27 (Part 1 Opus ~0.02, Part 4 ~0.10,
+Part 5 ~0.10, Part 6 ~0.02; Parts 2-3 free).

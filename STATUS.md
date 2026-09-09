@@ -292,3 +292,21 @@ strike-implying narration plays over mostly-celebration. Goal 1 "matched"
 because its window is coherently all celebration+caption (no mixed content),
 even though it shows no strike. Video not re-rendered (narration fix applied
 to the script; re-render is a separate pipeline run).
+
+## Audio (2026-09-08, Part 6)
+
+Crowd ambience: generate_ambience.py was an orphan (produce_episode/cloud_produce
+called it, produce_v2 did not). FIXED: produce_v2.py now generates
+crowd_ambience.mp3 (step6b_ambience) and passes it to merge_voice.py, which mixes
+it under the voice at 30% volume with fade in/out (voice 1.6x) — audible
+presence, does not compete. Verified on a temp slug (non-destructive): multi-
+layer mix ran, 45.2s output. Backup produce_v2.py.bak.
+
+Narrator voice: listed 23 ElevenLabs voices (5 British). Current .env VOICE_ID =
+1stSYyl7ZVPJk2ECrNlo ("british soccer commentator" clone, not a default). 3
+candidate samples (same ~15s excerpt) saved LOCAL at experiments/voice-test/audio/
+for Mayo to pick (NOT chosen for him): Daniel (onwK4e9ZLuTAKqWW03F9), George
+(JBFqnCBsd6RMkjVDRZzb), current clone (1stSYyl7ZVPJk2ECrNlo). Voice ID is now a
+per-episode config: generate_voice.py accepts --voice-id <id> (overrides .env
+VOICE_ID). Mayo picks; I set the default or wire per episode. Backups:
+produce_v2.py.bak, generate_voice.py.bak.
