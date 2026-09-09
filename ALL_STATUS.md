@@ -1727,6 +1727,44 @@ switch scoped ~1.5-2.5h.
 6E: encrypted .env backup (backup_env.py, gpg AES256, restore proven), b2_upload.py
 built (pending B2 key), pod-to-B2 scoped. Tool count 46 -> 37.
 
+## 2026-09-09 session: Stage 7 — rule 3 for documents + four-template blocker
+
+7A (document audit): grep proved ZERO root docs are read by any pipeline tool at
+runtime (tools read scripts/<slug>.md, never a root doc). Classified all 21 root
+docs: 11 CANONICAL, 5 RECORD, 4 ORPHANED. Retired the 4 orphaned via git rm
+(CONFIG, HANDOFF, PLAN_ARTIFACT.html, PROJECT_REPORT — all contradicted by code:
+vastai_shorts deleted yet HANDOFF says it works; 29 tools hard-code
+"soccer-channel" yet CONFIG claims nothing does; PROJECT_REPORT wrong per
+REPORT_AUDIT; PLAN_ARTIFACT claims 9/10 with no CV annotation). Added a
+purpose/reader/last-verified header to every surviving doc. Rule 3 now covers
+documents. Retirement recorded in DECISIONS.md.
+
+7B (four-template blocker, BUILT + PROVEN): SCRIPT_TEMPLATE.md rewritten to 4
+lane shapes (A tactical / B preview / C hot-topic / D historical). validate_script.py
+gained --lane A|B|C|D with per-lane structural rules: visual vocabulary (A
+board/footage/tactical; B/C board/stills; D board/footage), B/C no footage= +
+same-day fresh-brief required (fresh_fetch wired), D narration-first +
+footage=START-END format + [CUTLIST:] ref. Existing [SRC]/[RUMOR] freshness
+preserved for all lanes. Proven with real runs: lane B PASS, lane C PASS,
+deliberate B-with-footage FAIL, lane D PASS, deliberate D-narration-first FAIL.
+Lane D + transformation_gate composition proven (footage=119-130 passes
+validate_script format; the 11s excerpt fails transformation_gate rule 2 — they
+check different artifacts, no conflict). fresh_fetch run live (43 items, exit 0).
+
+7C (open items): 7C.1 keyframe 3/3 verify attempted on a fresh L4 — pod throttled
+(hung 540s+, zero webhook posts, exit 124), same as 6A.2/6D.1; left open with
+bound (fix is diagnosed+fixed+bounded; pending a non-throttled pod; tonight's
+L4s throttled). Found runpod_download pod-leak on timeout (SIGTERM kills python
+before pod cleanup) — terminated the leaked verify pod. 7C.2 found TWO leftover
+"soccer-stage1" pods still RUNNING (billing) despite prior stages reporting them
+terminated; both terminated; pod count 0; known RunPod spend ~$0.20-0.25 (API
+exposes no balance field). 7C.3 Gemini-cloud switch scope confirmed 1.5-2.5h,
+unchanged by 7B (report only, not built).
+
+New fragile: runpod_download/runpod_fulltrack leak the pod on timeout/crash
+(manual termination required until a finally/signal-handler cleanup is added).
+Committed 6b349f8, pushed to master.
+
 
 ---
 
