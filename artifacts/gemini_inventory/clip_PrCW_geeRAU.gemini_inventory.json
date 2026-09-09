@@ -1,0 +1,170 @@
+[
+  {
+    "start": 0.0,
+    "end": 5.0,
+    "description": "An Arsenal player scores a goal from inside the penalty area.",
+    "pitch_third": "attacking",
+    "shot_type": "wide",
+    "action_type": "shot"
+  },
+  {
+    "start": 5.0,
+    "end": 88.0,
+    "description": "Players line up on the pitch for pre-match ceremonies and handshakes.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 88.0,
+    "end": 99.0,
+    "description": "A Chelsea player receives the ball in midfield and advances towards the opponent's half.",
+    "pitch_third": "middle",
+    "shot_type": "wide",
+    "action_type": "build-up"
+  },
+  {
+    "start": 99.0,
+    "end": 111.0,
+    "description": "A Chelsea player scores a goal with a low shot past the goalkeeper.",
+    "pitch_third": "attacking",
+    "shot_type": "wide",
+    "action_type": "shot"
+  },
+  {
+    "start": 111.0,
+    "end": 135.0,
+    "description": "Chelsea players celebrate their goal with the fans.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 135.0,
+    "end": 140.0,
+    "description": "A replay shows the Chelsea player scoring the goal.",
+    "pitch_third": "attacking",
+    "shot_type": "replay",
+    "action_type": "shot"
+  },
+  {
+    "start": 140.0,
+    "end": 161.0,
+    "description": "Chelsea players continue to celebrate their goal.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 161.0,
+    "end": 172.0,
+    "description": "An Arsenal player receives a pass in the box and scores a goal.",
+    "pitch_third": "attacking",
+    "shot_type": "wide",
+    "action_type": "shot"
+  },
+  {
+    "start": 172.0,
+    "end": 187.0,
+    "description": "A replay shows the Arsenal player scoring the goal.",
+    "pitch_third": "attacking",
+    "shot_type": "replay",
+    "action_type": "shot"
+  },
+  {
+    "start": 187.0,
+    "end": 250.0,
+    "description": "Arsenal players celebrate their goal, followed by shots of the crowd and players preparing to restart.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 250.0,
+    "end": 254.0,
+    "description": "An Arsenal player shoots and scores a goal from inside the penalty area.",
+    "pitch_third": "attacking",
+    "shot_type": "wide",
+    "action_type": "shot"
+  },
+  {
+    "start": 254.0,
+    "end": 260.0,
+    "description": "A replay shows the Arsenal player scoring the goal.",
+    "pitch_third": "attacking",
+    "shot_type": "replay",
+    "action_type": "shot"
+  },
+  {
+    "start": 260.0,
+    "end": 275.0,
+    "description": "Arsenal players celebrate their goal.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 275.0,
+    "end": 283.0,
+    "description": "Another replay shows the Arsenal player scoring the goal from a different angle.",
+    "pitch_third": "attacking",
+    "shot_type": "replay",
+    "action_type": "shot"
+  },
+  {
+    "start": 283.0,
+    "end": 325.0,
+    "description": "Arsenal players continue to celebrate their goal with the fans.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 325.0,
+    "end": 330.0,
+    "description": "A third replay shows the Arsenal player scoring the goal.",
+    "pitch_third": "attacking",
+    "shot_type": "replay",
+    "action_type": "shot"
+  },
+  {
+    "start": 330.0,
+    "end": 374.0,
+    "description": "Arsenal players celebrate, and the goalscorer receives a yellow card for removing his shirt.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 374.0,
+    "end": 409.0,
+    "description": "Shots of the crowd cheering in the stadium.",
+    "pitch_third": "unknown",
+    "shot_type": "crowd",
+    "action_type": "non-action"
+  },
+  {
+    "start": 409.0,
+    "end": 440.0,
+    "description": "Substitutions are made for both teams.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 440.0,
+    "end": 469.0,
+    "description": "A Chelsea player walks off the pitch while the crowd is shown.",
+    "pitch_third": "unknown",
+    "shot_type": "medium",
+    "action_type": "non-action"
+  },
+  {
+    "start": 469.0,
+    "end": 483.0,
+    "description": "The final whistle blows, and players react on the pitch.",
+    "pitch_third": "unknown",
+    "shot_type": "wide",
+    "action_type": "non-action"
+  }
+]

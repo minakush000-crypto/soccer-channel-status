@@ -1,7 +1,6 @@
-# Public status mirror — docs only. Ignore everything by default so this
-# repo can never accidentally contain code, keys, renders, or secrets.
+# Public status mirror — docs + small artifacts + verification frames only.
+# Ignore everything by default, then un-ignore only what should be public.
 *
-# Un-ignore only the status documents + the readable entry pages
 !CONTEXT.md
 !STATUS.md
 !PROGRESS.md
@@ -11,5 +10,21 @@
 !ARCHITECTURE.md
 !README.md
 !ALL_STATUS.md
-# Keep .gitignore itself tracked
+!artifacts
+!artifacts/**
+!frames
+!frames/**
 !.gitignore
+# Defense in depth: even inside allowed dirs, never ship these.
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+*.m4v
+*.env
+*.key
+*.pth
+*.pt
+*.bak
+*.cookies.txt

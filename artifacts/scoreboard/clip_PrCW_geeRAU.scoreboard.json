@@ -1,0 +1,1008 @@
+{
+  "clip": "~/yt-digest/soccer-channel/renders/2026-09-06_arsenal-chelsea/clips/clip_PrCW_geeRAU.mp4",
+  "duration": 482.417778,
+  "interval": 3.0,
+  "crop": "420:150:0:0",
+  "n_samples": 161,
+  "elapsed_s": 76.2,
+  "timeline": [
+    {
+      "t": 0.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 3.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 6.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 9.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 12.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 15.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 18.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 21.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 24.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 27.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 30.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 33.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 36.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 39.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 42.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 45.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 48.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 51.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 54.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 57.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 60.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 63.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 66.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 69.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 72.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 75.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 78.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 81.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 84.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 87.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 90.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 93.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 96.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 99.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "PRE"
+    },
+    {
+      "t": 102.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 105.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 108.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 111.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 114.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 117.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 120.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 123.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 126.0,
+      "score": "ARS 0-1 CHE",
+      "raw": "ARS 0-1 CHE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 129.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 132.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 135.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 138.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 141.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 144.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 147.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 150.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 153.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 156.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 159.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 162.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 165.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 168.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 0-1 CHE"
+    },
+    {
+      "t": 171.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 174.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 177.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 180.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 183.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 186.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 189.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 192.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 195.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 198.0,
+      "score": "NONE",
+      "raw": "ERR Command '['~/tools/vision_analyze.py', '/tmp/score_crops/f_0067.pn",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 201.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 204.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 207.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 210.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 213.0,
+      "score": "ARS 1-1 BUE",
+      "raw": "ARS 1-1 BUE",
+      "effective": "ARS 1-1 BUE"
+    },
+    {
+      "t": 216.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 219.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 222.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 225.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 228.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 231.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 234.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 237.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 240.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 243.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 246.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 249.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 252.0,
+      "score": "ARS 1-1 CHE",
+      "raw": "ARS 1-1 CHE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 255.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 258.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 1-1 CHE"
+    },
+    {
+      "t": 261.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 264.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 267.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 270.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 273.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 276.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 279.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 282.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 285.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 288.0,
+      "score": "ARS 2-4 CHE",
+      "raw": "ARS 2-4 CHE",
+      "effective": "ARS 2-4 CHE"
+    },
+    {
+      "t": 291.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 294.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 297.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 300.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 303.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 306.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 309.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 312.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 315.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 318.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 321.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 324.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 327.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 330.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 333.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 336.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 339.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 342.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 345.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 348.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 351.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 354.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 357.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 360.0,
+      "score": "ARS 2-1 CHE",
+      "raw": "ARS 2-1 CHE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 363.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 366.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 369.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 372.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 375.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 378.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 381.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 384.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 387.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 390.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 393.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 396.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 399.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 402.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 405.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 408.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 411.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 414.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 417.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 420.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 423.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 426.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 429.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 432.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 435.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 438.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 441.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 444.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 447.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 450.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 453.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 456.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 459.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 462.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 465.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 468.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 471.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 474.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 477.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    },
+    {
+      "t": 480.0,
+      "score": "NONE",
+      "raw": "NONE",
+      "effective": "ARS 2-1 CHE"
+    }
+  ],
+  "changes": [
+    {
+      "at_t": 171.0,
+      "from": "ARS 0-1 CHE",
+      "to": "ARS 1-1 CHE"
+    },
+    {
+      "at_t": 213.0,
+      "from": "ARS 1-1 CHE",
+      "to": "ARS 1-1 BUE"
+    },
+    {
+      "at_t": 216.0,
+      "from": "ARS 1-1 BUE",
+      "to": "ARS 1-1 CHE"
+    },
+    {
+      "at_t": 261.0,
+      "from": "ARS 1-1 CHE",
+      "to": "ARS 2-1 CHE"
+    },
+    {
+      "at_t": 288.0,
+      "from": "ARS 2-1 CHE",
+      "to": "ARS 2-4 CHE"
+    },
+    {
+      "at_t": 291.0,
+      "from": "ARS 2-4 CHE",
+      "to": "ARS 2-1 CHE"
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 # soccer-channel — combined status (auto-generated)
 
 Every status doc concatenated on each push. Source of truth is the
-individual files; this page is a single-fetch convenience.
+individual files; this page is a single-fetch convenience. It does
+NOT include the artifacts/ or frames/ trees — fetch those directly.
 
 
 ---

@@ -1,13 +1,14 @@
 # soccer-channel-status
 
-Public, docs-only mirror of the soccer-channel project state.
+Public mirror of the soccer-channel project state: docs + small
+machine-readable artifacts + downscaled verification frames.
 Readable without authentication via the raw host. Do NOT use the
 github.com/.../blob/... HTML view, it is not reliably fetchable by
 automated readers.
 
 ## One-fetch full state
 
-ALL_STATUS.md concatenates every doc below into one file:
+ALL_STATUS.md concatenates every status doc below into one file:
 
 ```
 https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/ALL_STATUS.md
@@ -22,3 +23,13 @@ https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/
 - [DECISIONS.md](https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/DECISIONS.md)
 - [TOOLS.md](https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/TOOLS.md)
 - [ARCHITECTURE.md](https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/ARCHITECTURE.md)
+
+## Machine-readable artifacts (artifacts/)
+
+Small JSON outputs Claude can recompute and check arithmetic from:
+Files live at https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/artifacts/<type>/<file>
+
+## Verification frames (frames/)
+
+Downscaled 640px-wide images behind visual claims, named by
+timestamp (e.g. frame_0253.png). Files at https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/frames/<...>

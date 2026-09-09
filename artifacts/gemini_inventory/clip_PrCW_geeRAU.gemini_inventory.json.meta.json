@@ -1,0 +1,11 @@
+{
+  "model_used": "gemini-3.1-pro-preview",
+  "models_tried": [
+    "gemini-3.1-pro-preview"
+  ],
+  "clip": "~/yt-digest/soccer-channel/renders/2026-09-06_arsenal-chelsea/clips/clip_PrCW_geeRAU.mp4",
+  "size_mb": 134.844701,
+  "prompt_tokens": 44218,
+  "output_tokens": 1658,
+  "total_tokens": 48270
+}
