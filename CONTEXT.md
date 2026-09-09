@@ -41,6 +41,27 @@ headings, so it understands the state but is NOT a verbatim source. For
 exact text or numbers, pull the raw bytes with curl (no auth needed).
 Real Claude (Opus 5) confirmed all these URLs return HTTP 200 unauthenticated.
 
+## ARTIFACTS and FRAMES (public, in the mirror repo)
+The mirror repo also carries the results themselves, not just the doc
+descriptions, so Claude can recompute and check the arithmetic:
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/artifacts/<type>/<file>
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/frames/<file>
+- artifacts/ — small machine-readable JSON: scoreboard scan timeline + changes
+  (artifacts/scoreboard/), Gemini footage inventory (artifacts/gemini_inventory/),
+  YouTube publish-log entries (artifacts/publish-log/), and trimmed per-tracker
+  tracking summaries (artifacts/tracking_summary/, NOT the 8MB per-frame files).
+- frames/ — downscaled 640px-wide PNGs behind every visual claim, named by
+  timestamp (e.g. frame_0253.png). Claude reads these directly; the relay's word
+  is not needed when the frame is in the repo.
+Both are staged in this project under artifacts/ and frames/ (gitignored here),
+redacted (~ -> ~), secret-scanned, and synced to the mirror by the
+same push_status.sh Stop hook. The mirror .gitignore allows only the two
+subtrees plus the docs, and blocks renders/clips/.env/keys. Never put a
+render, clip, or secret in artifacts/ or frames/. NOTE on the scoreboard
+artifact: count goals from timeline[] (first occurrence of each new
+scoreline), NOT from len(changes) — changes[] misses the first goal when the
+bug was absent before it (see artifacts/scoreboard/README.md in the mirror).
+
 ## THE PIPELINE
 Entry point: tools/produce_v2.py
 Run it with: ~/yt-digest/.venv/bin/python tools/produce_v2.py <slug>

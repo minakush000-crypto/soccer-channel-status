@@ -953,3 +953,43 @@ for exact text/numbers, pull raw bytes with curl. Documented in CONTEXT.md.
 The URL to give any session: the combined page
   https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/ALL_STATUS.md
 Cost Part 1: ~$0.02 (one Opus 5 WebFetch confirmation).
+
+PART 3 (push artifacts/ + frames/ to mirror) — DONE.
+Staged in soccer-channel under artifacts/ and frames/ (gitignored here, synced
+to the public mirror by push_status.sh). Redacted (~ -> ~),
+secret-scanned (no keys, tokens, /home paths), .gitignore allows only the two
+subtrees + docs and blocks renders/clips/.env/keys.
+
+artifacts/ (288K total, all under a few hundred KB each):
+  - scoreboard/clip_PrCW_geeRAU.scoreboard.json (19KB) + README.md caveat
+  - gemini_inventory/clip_PrCW_geeRAU.gemini_inventory.json (4.6KB) + .meta.json
+  - publish-log/2026-09-06_arsenal-chelsea_*.json (2 x 228B)
+  - tracking_summary/clip_PrCW_geeRAU.summary.json (175KB, 3248 trackers)
+  - tracking_summary/clip_nxPNT4TU5_Q.summary.json (54KB, 1020 trackers)
+frames/ — empty for now (Parts 4 and 5 populate it).
+
+New tool: tools/trim_tracking.py — reduces an 8-16MB per-frame tracking JSON to
+a compact per-tracker summary (id, team, norm centre, area_frac, n_frames,
+first/last frame, location class via a documented pitch/crowd/edge heuristic).
+Valid JSON, recomputable from the source per-frame file.
+
+push_status.sh rewritten: now syncs artifacts/ + frames/ (rsync --delete,
+excludes dangerous types, redacts text/json), always rewrites the mirror
+.gitignore, regenerates README (lists the two trees) + ALL_STATUS, and commits
+only when the git index actually changed. Backup at push_status.sh.bak.
+
+Verified:
+  - Live raw URLs: scoreboard JSON 18912B HTTP 200, scoreboard README 1960B
+    HTTP 200, arsenal tracking summary 174798B HTTP 200. All unauthenticated.
+  - Secret scan on mirror: clean (no sk-/AIza/rpa_/ghp_ keys, no /home paths).
+  - Recheckable arithmetic: timeline[] first-occurrences = 0-1 @102s, 1-1
+    @171s, 2-1 @261s, matching match_data (Rogers 2', Havertz 25', Odegaard 50').
+
+FINDING (scoreboard changes[] gap): the changes[] array has 6 entries (2 real
+goals + 4 OCR blips) and MISSES Rogers (first goal, 0-0->0-1 @102s) because the
+bug was PRE/absent before ~99s, so there is no prior score to change from.
+len(changes) undercounts goals by 1. Recheck goal count from timeline[]
+first-occurrences, not len(changes). Documented in artifacts/scoreboard/README.md
+and CONTEXT.md. This does not affect goal-finding; only naive len(changes).
+
+Cost Part 3: $0 (all local + the mirror push).
