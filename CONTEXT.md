@@ -1,6 +1,6 @@
 # CONTEXT.md — soccer-channel session brief
 
-Verified against code on 2026-09-08 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s). Drifted sections (the tactical_overlay
+Verified against code on 2026-09-09 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s; Stage 3: broadcast_filler + produce_episode fixed). Drifted sections (the tactical_overlay
 wiring, "no upload", the 8-step list, the cv_annotate export list) were
 regenerated from grep; see ARCHITECTURE.md / STATUS.md / RECONCILIATION.md.
 

@@ -11,7 +11,7 @@ NOT include the artifacts/ or frames/ trees — fetch those directly.
 
 # CONTEXT.md — soccer-channel session brief
 
-Verified against code on 2026-09-08 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s). Drifted sections (the tactical_overlay
+Verified against code on 2026-09-09 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s; Stage 3: broadcast_filler + produce_episode fixed). Drifted sections (the tactical_overlay
 wiring, "no upload", the 8-step list, the cv_annotate export list) were
 regenerated from grep; see ARCHITECTURE.md / STATUS.md / RECONCILIATION.md.
 
@@ -227,7 +227,7 @@ See PROGRESS.md and STATUS.md for full detail.
 
 # STATUS.md — verified current state
 
-Verified against code on 2026-09-08 (Stage 2: 720p cap + 180-1200s filter applied to produce_v2.py). This rebuild supersedes the 2026-09-05
+Verified against code on 2026-09-09 (Stage 3: broadcast_filler phantom bug fixed 3A.1, produce_episode 800M guard 3A.4; Stage 2: 720p cap + 180-1200s filter on produce_v2.py). This rebuild supersedes the 2026-09-05
 version: the tactical_overlay wiring it described (`produce_v2.py:232`) no
 longer exists, and the "no upload" claim is reversed (2 uploads happened
 2026-09-06). No plans, no hopes, no hand-typed quality scores. Every claim has
@@ -384,7 +384,10 @@ OCR the bug", not "bug absent". Replacement signal: Gemini inventory
 content classification. broadcast = {shot, build-up} with shot_type != replay;
 filler = {non-action} or {replay}. On the 482s reel: 43.0s broadcast (9%) /
 440.0s filler (21 segments). The old bug signal claimed ~210s (44%), inflated
-~5x. Tool: `broadcast_filler.py`. Goal-finding is unaffected (scanner works).
+~5x. Tool: `broadcast_filler.py` (FIXED 3A.1: now clips segments to the video
+duration and discards past-end phantoms via --clip/--duration; the 43s and 192s
+figures stand, the 18.7min figure corrected 644→373s). Goal-finding is
+unaffected (scanner works).
 
 ## Build one video: words match pictures (2026-09-08)
 
@@ -1834,7 +1837,7 @@ tactical_overlay.
 | `ffmpeg_utils.py` | WIRED (lib) | imported by `generate_voice.py:24`, `merge_voice.py:25`, `shorts_crop.py:31`; shipped to pod by `runpod_fulltrack.py:72` | 2026-09-08 | works (now holds the 200MB guard) |
 | `script_utils.py` | WIRED (lib) | imported by `generate_voice.py:25` | 2026-08-25 | works |
 | `cv_annotate.py` | WIRED (pod) | shipped+run on pod by `runpod_fulltrack.py:72,91` | 2026-09-07 | works (per-frame positions export, STATUS) |
-| `produce_episode.py` | STANDALONE | entry point; no caller | 2026-08-30 | untested (no verified output) |
+| `produce_episode.py` | STANDALONE | entry point; no caller | 2026-09-09 | untested (no verified output); 800M guard added (3A.4), keeps 1080p anti-blur source |
 | `cloud_produce.py` | STANDALONE | entry point; no caller | 2026-09-08 | untested (pod-side yt-dlp + download_url guarded) |
 | `runpod_annotate.py` | STANDALONE | entry point; no caller | 2026-08-23 | untested (GAPS) |
 | `runpod_shorts.py` | STANDALONE | entry point; no caller; uploads `luminance_pod.py:254` | 2026-08-29 | untested |
@@ -1850,7 +1853,7 @@ tactical_overlay.
 | `enhance_clips.py` | STANDALONE | no caller (only `tests/`) | 2026-08-23 | untested |
 | `segment_scorer.py` | STANDALONE | no caller; `cv_annotate.py:332` is a comment only | 2026-09-05 | works (hand-run on full-clip data, STATUS) |
 | `scoreboard_scan.py` | STANDALONE | no caller | 2026-09-08 | works (3/3 goals, STATUS) |
-| `broadcast_filler.py` | STANDALONE | no caller | 2026-09-08 | works (43s/482s broadcast, STATUS) |
+| `broadcast_filler.py` | STANDALONE | no caller | 2026-09-09 | works; FIXED 3A.1 (phantom-segment bug: --clip/--duration bounds); yields 43s/8min, 192s/13.5min, 373s/18.7min |
 | `assemble_words_match.py` | STANDALONE | no caller | 2026-09-08 | works (arsenal-chelsea 45.2s, STATUS) |
 | `trim_tracking.py` | STANDALONE | no caller; has `main()` CLI; output in `artifacts/tracking_summary/` | 2026-09-08 | works (hand-run) |
 | `viral_angle.py` | STANDALONE | no caller | 2026-08-25 | untested |
@@ -1888,7 +1891,7 @@ Transitive libs: `ffmpeg_utils.py` (imported by generate_voice/merge_voice/short
 
 # ARCHITECTURE.md — soccer-channel code map
 
-Verified against code on 2026-09-08 (Stage 2: 720p cap + 180-1200s filter applied to produce_v2.py). Every line number is from `wc -l` /
+Verified against code on 2026-09-09 (Stage 2: 720p cap + 180-1200s filter on produce_v2.py). Every line number is from `wc -l` /
 `grep -n` against the file on disk today. If a line moved, re-read. This
 rebuild supersedes the 2026-09-05 version, whose step-4 wiring (`tactical_overlay`
 at `produce_v2.py:232`) no longer exists in the code.

@@ -1,6 +1,6 @@
 # ARCHITECTURE.md — soccer-channel code map
 
-Verified against code on 2026-09-08 (Stage 2: 720p cap + 180-1200s filter applied to produce_v2.py). Every line number is from `wc -l` /
+Verified against code on 2026-09-09 (Stage 2: 720p cap + 180-1200s filter on produce_v2.py). Every line number is from `wc -l` /
 `grep -n` against the file on disk today. If a line moved, re-read. This
 rebuild supersedes the 2026-09-05 version, whose step-4 wiring (`tactical_overlay`
 at `produce_v2.py:232`) no longer exists in the code.

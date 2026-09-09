@@ -1,6 +1,6 @@
 # STATUS.md — verified current state
 
-Verified against code on 2026-09-08 (Stage 2: 720p cap + 180-1200s filter applied to produce_v2.py). This rebuild supersedes the 2026-09-05
+Verified against code on 2026-09-09 (Stage 3: broadcast_filler phantom bug fixed 3A.1, produce_episode 800M guard 3A.4; Stage 2: 720p cap + 180-1200s filter on produce_v2.py). This rebuild supersedes the 2026-09-05
 version: the tactical_overlay wiring it described (`produce_v2.py:232`) no
 longer exists, and the "no upload" claim is reversed (2 uploads happened
 2026-09-06). No plans, no hopes, no hand-typed quality scores. Every claim has
@@ -157,7 +157,10 @@ OCR the bug", not "bug absent". Replacement signal: Gemini inventory
 content classification. broadcast = {shot, build-up} with shot_type != replay;
 filler = {non-action} or {replay}. On the 482s reel: 43.0s broadcast (9%) /
 440.0s filler (21 segments). The old bug signal claimed ~210s (44%), inflated
-~5x. Tool: `broadcast_filler.py`. Goal-finding is unaffected (scanner works).
+~5x. Tool: `broadcast_filler.py` (FIXED 3A.1: now clips segments to the video
+duration and discards past-end phantoms via --clip/--duration; the 43s and 192s
+figures stand, the 18.7min figure corrected 644→373s). Goal-finding is
+unaffected (scanner works).
 
 ## Build one video: words match pictures (2026-09-08)
 
