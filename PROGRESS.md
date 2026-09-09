@@ -802,3 +802,56 @@ Gemini timestamps as cut points without match_data cross-check.
 
 Cost this session: ~$0.45 of $25 (pro full-clip $0.11 + ~30 Claude frame
 judgements ~$0.30 + small inline calls).
+
+## 2026-09-08 session 4: scoreboard scanner + status mirror
+
+PART 1 — status mirror (public docs repo):
+- soccer-channel is a SUBDIR of the private yt-digest repo, not its own
+  repo; the 7 docs were untracked (never in any remote).
+- Created PUBLIC repo minakush000-crypto/soccer-channel-status, docs only
+  (7 files + .gitignore). Scanned all 7 for secrets BEFORE push: only
+  ~ paths + masked-key example; redacted on copy (~->~,
+  <masked>-><masked>). Verified clean on remote.
+- Automated: .claude/hooks/push_status.sh (idempotent, redacts, no-ops,
+  exit 0) wired as 2nd Stop hook in ~/.claude/settings.json. Proven: manual
+  run committed + pushed. URL written into CONTEXT.md.
+
+PART 2 — scoreboard scanner (goal-finding by scoreline change):
+- Built tools/scoreboard_scan.py. Goal-finding as a scanning problem (read
+  the broadcast score bug), not model judgement. gemma4:cloud reads the
+  top-left score bug every 3s (free, 0.25s/frame, 4 workers); tesseract OCR
+  rejected (0/3 readable). NONE (bug-absent) frames carry last-known score.
+- 482s arsenal-chelsea clip: 161 frames, 76s, free. 3 real scoreline changes
+  (after dropping 1-frame blips "1-1 BUE"@213, "2-4"@288):
+  102s 0-0->0-1 Rogers; 171s 0-1->1-1 Havertz; 261s 1-1->2-1 Ødegaard.
+  Matches match_data.json exactly (Rogers 2', Havertz 25', Ødegaard 50').
+- Walk-back (Claude full frames) to the shot: Chelsea offset ~1-3s, Havertz
+  ~5-8s, Ødegaard 8s (bug 261, shot 253 "Arsenal player shooting" still 1-1).
+  Offset variable 1-8s; fixed 8s pre-roll captures all 3.
+- Corrected my own earlier error: "~305-315s" Ødegaard winner was the
+  CELEBRATION, not the goal. Scanner pins bug-update 261s, shot 253s.
+- Confirmations (ask_claude): 102 ARS 0-1 CHE (match), 261 ARS 2-1 CHE
+  (match). 171 value confirmed via HAVERTZ 1-1 caption + bug @172.5
+  (bug intermittent, ±1-2s on exact frame).
+
+Answers to coordinator Q5-8:
+- Q5 Scanner vs Gemini+Claude: scanner wins on accuracy (found the goal
+  Gemini missed at 250-254, no phantom) AND cost (~$0.10 vs ~$0.30-0.41).
+- Q6 Non-goal events (build-ups/presses/overloads): no scoreboard change.
+  Use scanner bug-presence to segment broadcast-action vs
+  celebration/replay/fan; run Gemini (content classification, WHAT is
+  reliable) on broadcast-action segments only; scanner for goals, match_data
+  validates, Claude confirms. Scanner removes the goal-mislocation failure
+  mode for the highest-value events.
+- Q7 Coordinates/crowd: tracking half-crowd (200/379, crowd as team, 14
+  close-ups). Resolve: filter to pitch-region detections + render arrows only
+  on wide shots (segment_scorer scores this); if fragmentation still too high
+  on the reupload, cleaner source = full-match 1080p broadcast (~3-8GB,
+  ~$1.5/episode tracking on RunPod, delete after render). Scanner doesn't
+  need tracking; only arrows do.
+- Q8 Scope: ~50s action in 482s. One reel = ~60-90s video (3 goals + 1-2
+  build-ups). For Tifo-length (5-10min), need full-match broadcast (~3-8GB,
+  ~$1.5 tracking) — scanner scales to it (1800 frames, free). Several reels
+  redundant (overlap); not recommended.
+
+Cost this session (part 2): ~$0.20 (scanner confirmations + walk-back frames).

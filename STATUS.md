@@ -113,10 +113,12 @@ windows by detection, persistence, stability, team classification. Run on
 full 146s tracking data: 15/146 segments score >=65 (15s usable). Best
 segment sec 1 (score 85.6), worst sec 45 (score 7.5).
 
-**E (top-down tactical renderer)**: PROTOTYPE. `tools/tactical_render.py`
-renders dark pitch with mowing stripes, player dots in team colors,
-movement trails, Bezier arrows. Outputs PNG or MP4. Screen-space projection
-(no homography). Vision assessment: 5.5/10 (Claude Opus 5, authoritative).
+**E (top-down tactical renderer)**: `tools/tactical_render.py` renders dark
+pitch with mowing stripes, player dots in team colors, movement trails,
+Bezier arrows. Outputs PNG or MP4. Screen-space projection (no homography).
+Vision assessment: 8/10 then 8.5/10 across tasks 2-4 (Claude Opus 5,
+authoritative — per coordinator). The earlier 5.5/10 was the session-3
+PROTOTYPE before the context-layer / pitch-layout / movement-encoding fixes.
 All elements visible (stripes, arrows, dots, trails). Local gemma4:cloud
 rated higher but is not the judge of record.
 
@@ -171,3 +173,39 @@ half that's wrong is the half that matters for cutting.
   segment-finder. Never trust Gemini timestamps as cut points without
   match_data cross-check. Reel is partly fan-shot phone footage (Claude at
   250/330s) — a clean broadcast source may improve accuracy (unchecked).
+
+## Scoreboard scanner — goal-finding by scoreline change (2026-09-08)
+
+`tools/scoreboard_scan.py`: samples every 3s, crops the top-left score bug
+(420x150), reads the scoreline with gemma4:cloud (vision_analyze.py, free),
+carries last-known score across NONE (bug-absent) frames, detects changes.
+Tesseract OCR rejected (0/3 frames readable). On the 482s arsenal-chelsea
+clip: 161 frames, 76s, free. Saved clip_PrCW_geeRAU.scoreboard.json.
+
+3 real scoreline changes found (after dropping single-frame blips that revert
+<9s — "1-1 BUE"@213 and "2-4"@288 are gemma4 OCR blips):
+- ~102s: 0-0 -> 0-1  Rogers (Chelsea)   [bug absent until ~99s; first 0-1 at 102]
+- 171s:  0-1 -> 1-1  Havertz            [bug intermittent; value confirmed via
+                                         HAVERTZ 1-1 caption @169 + bug @172.5]
+- 261s:  1-1 -> 2-1  Ødegaard           [bug crop confirmed ARS 2-1 by Claude]
+Matches match_data.json exactly (Rogers 2', Havertz 25', Ødegaard 50').
+
+Walk-back from bug-update to the shot (Claude full frames):
+- Chelsea:  bug 0-1 @102, shot ~99-101.   offset ~1-3s.
+- Havertz:  bug 1-1 @171, shot ~163-166.   offset ~5-8s.
+- Ødegaard: bug 2-1 @261, shot @253 ("Arsenal player shooting", still 1-1). offset 8s.
+Offset is variable (1-8s). A fixed 8s pre-roll before each bug-update captures
+every goal's shot; 1s walk-back gives the exact shot frame.
+
+CORRECTION: the earlier "~305-315s ground truth" for the Ødegaard winner was
+the CELEBRATION, not the goal. Scanner pins bug-update 261s, shot 253s — more
+accurate than manual Claude-frame sampling (which missed 261 between the 252
+and 315 samples).
+
+Bug is intermittent in this reel (absent @90,99,168,258 — cuts to
+fan/replay/celebration). gemma4 reads it correctly when present (102, 261
+confirmed by Claude). Cost ~$0.10 (free bulk + ~7-15 Claude confirmations).
+Scanner beats Gemini+Claude hybrid on accuracy (found the goal Gemini missed
+at 250-254, no phantom) AND cost (~$0.10 vs ~$0.30-0.41). KNOWN REFINEMENT:
+add persistence filter to the script (auto-drop blips reverting <9s); currently
+filtered manually.
