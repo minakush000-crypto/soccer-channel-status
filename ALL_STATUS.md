@@ -435,6 +435,30 @@ confirms Gemini-only is unsafe; cut-list-first + relay-verify works.
 Possession board has a pre-existing data bug (39.3/32.7 vs stat_card
 54.6/45.4), not fixed (renderer off-limits this build). Honest length 45.2s.
 
+## Broadcast/filler signal (2026-09-08, Part 2 — verified)
+
+The score bug is NOT a broadcast/filler signal. Mayo's independent frame check
+found the uploader burned the bug in across ALL footage types (frame 261 =
+fan-shot phone footage with the ARS 2-1 bug top-left). Re-checking what the
+scanner's NONE reads correspond to (10 frames, gemma4, in
+frames/2026-09-06_arsenal-chelsea/nonecheck_*.png on the mirror):
+- NONE/PRE in the scanner = "gemma4 failed to OCR the bug", NOT "bug absent"
+  (gemma4 re-read saw the bug at 150s/400s where the scanner said NONE).
+- NONE frames are mostly BROADCAST (pre-match, in-play wide, post-match),
+  not filler. Bug-present frames are MIXED (goals = broadcast, 200/261s =
+  crowd/celebration filler). So bug presence does not split broadcast/filler.
+
+Replacement signal: Gemini inventory content classification (action_type /
+shot_type), already found accurate for WHAT. broadcast = {shot, build-up} with
+shot_type != replay; filler = {non-action} or {replay}. Goal times cross-checked
+against match_data + scoreboard timeline (NOT trusted from Gemini timestamps).
+On the 482s reel: NEW signal = 43.0s broadcast (9%) / 440.0s filler (21 segments,
+artifacts/broadcast_filler/ on the mirror). The old bug signal claimed ~210s
+(44%), inflated ~5x by bug-burned-in celebration/crowd; the 43s matches the 45.2s
+video actually produced. Scene-change alone is insufficient: cv_annotate
+shot_boundaries has only 7 cuts for 482s and cuts do not classify type.
+Tool: tools/broadcast_filler.py. Goal-finding is unaffected (scanner still works).
+
 ---
 
 # FILE: PROGRESS.md
@@ -1434,6 +1458,55 @@ first-occurrences, not len(changes). Documented in artifacts/scoreboard/README.m
 and CONTEXT.md. This does not affect goal-finding; only naive len(changes).
 
 Cost Part 3: $0 (all local + the mirror push).
+
+PART 2 (re-examine NONE reads; find a non-bug broadcast/filler signal) — DONE.
+Trigger: Mayo's independent frame check found the score bug is burned in by the
+uploader across ALL footage types (frame 261 = fan-shot phone footage with the
+ARS 2-1 bug top-left), so bug presence does not split broadcast from filler.
+
+Re-check of what NONE reads correspond to (10 frames at 640px, gemma4 vision,
+in frames/2026-09-06_arsenal-chelsea/nonecheck_*.png):
+- NONE is NOT "bug absent". The scanner's NONE/PRE = "gemma4 failed to OCR the
+  bug", not "no bug". gemma4 re-read saw the bug at 150s and 400s where the
+  scanner recorded NONE. So NONE is an OCR-failure signal, not a presence signal.
+- NONE frames are mostly BROADCAST: pre-match lineups/huddle (15/45/75s),
+  in-play wide shot (150s), post-match (400/460s). Not filler.
+- Bug-present frames are MIXED: broadcast goals (110s) AND filler crowd/
+  celebration (200/240/261s). So bug presence does NOT separate broadcast from
+  filler. Confirmed.
+
+New signal (the replacement): Gemini inventory content classification
+(action_type / shot_type), which the project already found accurate for WHAT.
+  broadcast  = action_type in {shot, build-up} AND shot_type != replay
+  filler     = action_type == non-action  OR  shot_type == replay
+Goal times are NOT trusted from Gemini (timestamps drift); cross-check against
+match_data + the scoreboard timeline (0-1@102, 1-1@171, 2-1@261).
+
+Result on the 482s Arsenal-Chelsea reel (artifacts/broadcast_filler/):
+  NEW signal: 43.0s broadcast (9%) / 440.0s filler (91%), 21 segments.
+  OLD bug signal: ~210s "broadcast" (44%) — inflated ~5x by bug-burned-in
+  celebration/crowd. The 43s matches the 45.2s video actually produced, which
+  is independent confirmation the new signal is realistic.
+Broadcast windows: 0-5, 88-99, 99-111, 161-172, 250-254s (4 goal shots + 1 build-up).
+
+Scene-change detection alone is INSUFFICIENT: cv_annotate shot_boundaries has
+only 7 cuts for the 482s reel (far too coarse), and cuts segment but do not
+classify broadcast vs filler. Content classification is required either way.
+
+Caveat (◑): gemma4 single-frame calls disagreed with Gemini's segment class at
+two boundaries (150s: Gemini celebration vs gemma4 in-play wide; 400s: Gemini
+crowd vs gemma4 player-on-pitch). Gemini's segment classification is the one
+Mayo already validated as accurate, so the segmentation trusts Gemini; the
+single-frame gemma4 calls are ◑ and not used for the split.
+
+Goal-finding is UNAFFECTED: the scoreboard scanner still finds all 3 goals via
+scoreline changes in the timeline (count from timeline[] first-occurrences, not
+len(changes) — see Part 3 finding).
+
+New tool: tools/broadcast_filler.py. New artifact: artifacts/broadcast_filler/.
+10 verification frames pushed to frames/. All live on the mirror (HTTP 200).
+
+Cost Part 2: $0 (gemma4 vision is free; no Opus needed for this finding).
 
 
 ---
