@@ -211,7 +211,10 @@ the lane expansion and the cut-list generator.
 See PROGRESS.md and STATUS.md for full detail.
 
 ## STANDING OPERATING DOCTRINE
-1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads. No local GPU work.
+1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads, except raw source
+   staging on the USB flash drive at /mnt/f (staging area ONLY: download lands
+   there, ships to the pod, gets deleted; never a working directory, because the
+   vhdx never shrinks and /mnt/f frees normally). No local GPU work.
    All compute and all storage go to the cloud GPU providers.
 2. No tasking without calling the available tools, skills, connectors, web
    fetch, research or MCPs where they apply.

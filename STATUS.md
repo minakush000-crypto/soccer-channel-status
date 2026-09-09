@@ -224,3 +224,17 @@ could produce a real number but is not in produce_v2.py.
   still run locally (DECISIONS.md gap list updated).
 - 5A.5: 720p cap KEPT for the local path (pod yt-dlp bot-blocked, so 1080p-on-pod
   untested); pod path is 1080p-ready for when a proxy unblocks it.
+
+## Stage 6 — /mnt/f staging + name overlap + beliefs closed + keys, 2026-09-09
+
+- NEW tools: staging.py (/mnt/f staging), backup_env.py (encrypted .env backup),
+  b2_upload.py (B2 archive, pending key). RETIRED 5: luminance_pod, runpod_stage1,
+  runpod_annotate, vastai_shorts, runpod_shorts. Tool count 46 -> 37.
+- Doctrine rule 1: +/mnt/f staging exception (4 docs).
+- produce_v2: canonical-path assertion (6B.4) + step3 downloads to /mnt/f (6A).
+- runpod_download: keyframe fix (stream-copy + re-encode fallback, timeout-bounded).
+- 6C closures: OAuth valid, 95 Mbps upload, mirror redaction proven, runpod_annotate
+  broken (retired), cut-list 2nd-source partial, 1200s estimate, SoccerNet reasoned.
+- Open: 6A.2/6E.1 real /mnt/f proofs (pending mount: sudo mount -t drvfs F: /mnt/f),
+  6E.2 real B2 upload (pending key), 6D.1 3/3 (pending non-throttled pod), cut-list
+  on pod (6D.4), SCRIPT_TEMPLATE 4-template blocker.

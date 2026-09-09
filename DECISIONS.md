@@ -92,7 +92,9 @@ secrets/yt_cookies.txt, fails loudly. Verified: source is now 1920x1080
 
 ## STANDING OPERATING DOCTRINE (added 2026-09-09, Stage 4A)
 
-1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads. No local GPU work.
+1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads, except raw source
+   staging on the USB flash drive at /mnt/f (staging area ONLY: download lands
+   there, ships to the pod, gets deleted; never a working directory). No local GPU work.
    All compute and all storage go to the cloud GPU providers.
 2. No tasking without calling the available tools, skills, connectors, web
    fetch, research or MCPs where they apply.
@@ -100,44 +102,53 @@ secrets/yt_cookies.txt, fails loudly. Verified: source is now 1920x1080
    may exist. Everything is wired, tested, or retired.
 4. Every brief carries this doctrine as a footer.
 
-### Gap: what does NOT yet meet the doctrine (updated 2026-09-09, Stage 5)
+### Gap: what does NOT yet meet the doctrine (updated 2026-09-09, Stage 6)
 
-**Rule 1 (nothing local) — VIOLATED by every stage EXCEPT step3 (pod) and step4b
-(pod), not by the whole pipeline.** Stage 5A built `runpod_download.py` and wired
-it into produce_v2 as `--pod-download`: the clip download + excerpt cut now run
-on a RunPod pod, and only small guarded excerpts come home. The full-resolution
-source never touches ~ (proven, LANE_PLAN 5A.3). step4b (tracking) was
-already on RunPod. The remaining local violators:
+**Rule 1 (nothing local) — VIOLATED by the CPU/storage stages, not by the
+download.** Stage 5A put step3 (download+cut) and step4b (tracking) on the pod.
+Stage 6A moved the RAW DOWNLOAD to /mnt/f USB staging (`tools/staging.py`,
+fail-loudly if /mnt/f not mounted, no ~ fallback), so a local download
+no longer permanently grows the vhdx. The remaining local violators:
 
 - step1 match_data (local ESPN API), step2 boards (local matplotlib),
   step5 assemble (local ffmpeg), step6 voice (local ElevenLabs API),
   step6b ambience (local ffmpeg), step7 merge (local ffmpeg),
   step8 shorts (local ffmpeg crop), and the final `shutil.copy2` to
   /mnt/c/Downloads (the one permitted local hand-off of the finished file).
+- Transitional: until step5 moves to the pod, the staged clip on /mnt/f is read
+  during local processing (slow 9p, unplug risk) — a temporary breach of the
+  "staging-only" limit that closes when step5 runs on the pod (5A.4 gap).
 - cut-list GENERATION (`scoreboard_scan.py` + `broadcast_filler.py` +
-  `cut_list_gen.py` + PySceneDetect) runs locally and needs the clip — the
-  architectural gap: until cut-list generation moves to the pod, the pod-download
-  path needs pre-known windows. Blocked by scoreboard_scan's local-vision
-  dependency (gemma4 via localhost:11434; switch to GEMINI_API_KEY cloud vision).
+  `cut_list_gen.py` + PySceneDetect) runs locally and needs the clip. Blocked by
+  scoreboard_scan's local-vision dependency (gemma4 via localhost:11434; switch
+  to GEMINI_API_KEY cloud vision — scoped 6D.4).
 - `produce_episode.py`, `assemble_words_match.py` (separate local pipelines).
 - `cloud_produce.py` still downloads raw clips locally (`cloud_produce.py:223`).
-- Caveat: the pod yt-dlp path is bot-blocked by YouTube today (datacenter IP,
-  LANE_PLAN 5A.3), so the working rule-1 path is local-download → catbox → pod
-  cut, or a residential proxy to unblock pod yt-dlp (future work).
+- Caveat: pod yt-dlp is bot-blocked by YouTube (datacenter IP, 5A.3); the working
+  rule-1 path is local-download → /mnt/f staging → catbox → pod cut → excerpts
+  home → /mnt/f cleanup. A residential proxy would unblock pod yt-dlp (6D.2/6D.3).
 
-**Rule 3 (no orphaned/untested) — 4 DEAD RETIRED (Stage 5C.2); smoke test done.**
-- DEAD, RETIRED 2026-09-09 (deleted, in git history): `tactical_overlay.py`,
-  `pitch_radar.py`, `render_video.py`, `check_and_download.py`. Tool count 46→42.
-- STANDALONE `--help` smoke test run (5C.1, $0): 26/27 LAUNCH. 10 have proper
-  argparse; 15 treat `--help` as a positional arg (no `-h`); `luminance_pod.py`
-  crashes (IndexError on argv[2]); `runpod_stage1.py` hangs (starts side effects
-  with no arg parsing). `--help` proves "launches," not "works end-to-end"
-  (4E.3 falsifier) — so rule 3 is NOT closed per-tool; e2e runs are still owed.
-  luminance_pod + runpod_stage1 are now fix-or-retire candidates.
-- `runpod_annotate.py` end-to-end: COSTED (~$0.01-0.02, ~5-8 min, same shape as
-  the verified runpod_fulltrack), NOT run (5C.3 per brief).
-- `runpod_fulltrack.py` + `runpod_download.py` are WIRED + tested (the compliant tools).
+**Rule 3 (no orphaned/untested) — 9 tools RETIRED total (5 in 5C.2, 5 in 6C.7
+incl. vastai_shorts which was marked-retired but not deleted in 4B.4).**
+- RETIRED (deleted, in git history): tactical_overlay, pitch_radar, render_video,
+  check_and_download (5C.2); luminance_pod (crashed, dead callers), runpod_stage1
+  (one-off done, hung on --help), runpod_annotate (6C.1: pod ran ~60s/$0.004 but
+  captured 0 results — broken webhook, superseded by runpod_fulltrack), vastai_shorts
+  (4B.4 retired, file deleted now), runpod_shorts (untested, depended on retired
+  luminance_pod). Tool count 46 → 37.
+- 27 STANDALONE decisions (6C.7): 10 have proper argparse (launch fine); 15
+  treat `--help` as a positional arg (launch but no `-h` — low-priority polish,
+  not a rule-3 failure); the 5 broken/dead ones retired above. `--help` proves
+  "launches," not "works" — e2e runs are still owed for the untested STANDALONE
+  (cloud_produce, runpod_superres, gpu_superres, produce_episode, etc.).
+- `runpod_fulltrack.py` + `runpod_download.py` are WIRED + tested (compliant).
+- 6C closures: OAuth token VALID (refresh works, 6C.5); upload 95 Mbps (6C.8);
+  mirror redaction PROVEN (6C.4, path+key-pattern+file-type, not a general
+  scanner); cut-list gen on 2nd source PARTIAL (6C.6 — snapping holds, but
+  broadcast_filler misses celebration-classified goals); 1200s yield stays an
+  ESTIMATE (6C.2 — no 1200s source exists, longest is 1120s); SoccerNet is a
+  dataset/benchmark not a drop-in tool (6C.3 — reasoned, never measured).
 
-This list is the work queue for rules 1 and 3. Stage 5 closed the download
-violation (rule 1) and the 4 DEAD (rule 3); the CPU/storage stages and the
-untested-STANDALONE e2e runs remain.
+This list is the work queue for rules 1 and 3. Stage 6 closed the raw-download
+vhdx-growth (6A), 5 more dead tools (6C.7), and every open belief (6C). The
+CPU/storage stages, cut-list-on-pod, and untested-STANDALONE e2e runs remain.

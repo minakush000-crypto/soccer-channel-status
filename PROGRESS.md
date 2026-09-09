@@ -1205,3 +1205,22 @@ renders; pod->B2 possible without touching laptop; .env key handling proposed).
 5C.3: runpod_annotate e2e costed (~$0.01-0.02), not run per brief.
 DECISIONS.md doctrine gap + TOOLS.md updated. LANE_PLAN.md Stage 5 appended.
 Pushed: 0fb4e96..80adff9.
+
+## Stage 6 — /mnt/f staging, name overlap, beliefs closed, keys, 2026-09-09
+
+6A: tools/staging.py — raw downloads stage on /mnt/f (fail-loudly if not mounted,
+no ~ fallback). produce_v2 step3 downloads to /mnt/f + cleanup at end.
+Doctrine rule 1 updated in 4 docs. 6A.2 real proof pending /mnt/f mount (mechanics proven).
+6B: name overlap resolved — canonical path proven (6B.1), retired fenced by hook
+(6B.2), yt_digest live (6B.3), canonical-path assertion in produce_v2 fires from
+wrong tree (6B.4).
+6C: all 8 beliefs closed — runpod_annotate RUN (0 results, retired), 1200s yield
+estimate (no 1200s source), SoccerNet reasoned-not-measured, mirror redaction
+proven, OAuth VALID, cut-list 2nd source partial (snapping holds, goals need
+scoreboard), 5 tools retired (luminance_pod/runpod_stage1/runpod_annotate/
+vastai_shorts/runpod_shorts; 46->37), upload 95 Mbps.
+6D: keyframe bug diagnosed+fixed+bounded (stream-copy + re-encode fallback +
+timeout), proxies researched, recommend AGAINST proxy for now, Gemini-cloud
+switch scoped ~1.5-2.5h.
+6E: encrypted .env backup (backup_env.py, gpg AES256, restore proven), b2_upload.py
+built (pending B2 key), pod-to-B2 scoped. Tool count 46 -> 37.
