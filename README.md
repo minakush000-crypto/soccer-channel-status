@@ -27,6 +27,10 @@ https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/
 ## Machine-readable artifacts (artifacts/)
 
 Small JSON outputs Claude can recompute and check arithmetic from:
+- scoreboard/ — raw scoreline per sampled frame + detected changes
+- gemini_inventory/ — Gemini footage inventory JSON
+- publish-log/ — YouTube upload log entries
+- tracking_summary/ — trimmed per-tracker tracking summaries
 Files live at https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/artifacts/<type>/<file>
 
 ## Verification frames (frames/)
