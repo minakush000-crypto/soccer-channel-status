@@ -1,5 +1,9 @@
 # GAPS.md — what nobody has verified
 
+> **Purpose:** registry of unverified claims and open uncertainties.
+> **Reader:** every session; mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
+
 This file existing and being short is a warning sign, not a success. Each
 entry is something that could be true or false and nobody has run the command
 to find out. If you verify one, move it to STATUS.md or DECISIONS.md and date

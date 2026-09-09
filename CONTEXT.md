@@ -1,5 +1,9 @@
 # CONTEXT.md — soccer-channel session brief
 
+> **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
+> **Reader:** every session (CLAUDE.md @CONTEXT.md); mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
+
 Verified against code on 2026-09-09 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s; Stage 3: broadcast_filler + produce_episode fixed). Drifted sections (the tactical_overlay
 wiring, "no upload", the 8-step list, the cv_annotate export list) were
 regenerated from grep; see ARCHITECTURE.md / STATUS.md / RECONCILIATION.md.

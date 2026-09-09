@@ -1,5 +1,9 @@
 # TOOLS.md — one row per file in tools/
 
+> **Purpose:** one row per file in tools/ (status: WIRED / STANDALONE / DEAD).
+> **Reader:** every session; mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
+
 Verified against code on 2026-09-08. Caller column is from
 `grep -rnE "import <mod>|TOOLS / \"<name>\"|\"<name>.py\"" tools/ --include="*.py"`
 limited to real call sites (subprocess `cmd=[PYTHON,...]`, `import`, or curl

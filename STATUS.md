@@ -1,5 +1,9 @@
 # STATUS.md — verified current state
 
+> **Purpose:** verified current state of the pipeline (the status spine).
+> **Reader:** every session (CLAUDE.md @STATUS.md); mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
+
 Verified against code on 2026-09-09 (Stage 3: broadcast_filler phantom bug fixed 3A.1, produce_episode 800M guard 3A.4; Stage 2: 720p cap + 180-1200s filter on produce_v2.py). This rebuild supersedes the 2026-09-05
 version: the tactical_overlay wiring it described (`produce_v2.py:232`) no
 longer exists, and the "no upload" claim is reversed (2 uploads happened

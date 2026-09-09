@@ -1,5 +1,9 @@
 # ARCHITECTURE.md — soccer-channel code map
 
+> **Purpose:** code map — which tool calls which, the 9-step produce_v2 pipeline.
+> **Reader:** every session (CLAUDE.md loads it); mirrored to the public status repo by `.claude/hooks/push_status.sh`.
+> **Last verified against code:** 2026-09-09.
+
 Verified against code on 2026-09-09 (Stage 2: 720p cap + 180-1200s filter on produce_v2.py). Every line number is from `wc -l` /
 `grep -n` against the file on disk today. If a line moved, re-read. This
 rebuild supersedes the 2026-09-05 version, whose step-4 wiring (`tactical_overlay`

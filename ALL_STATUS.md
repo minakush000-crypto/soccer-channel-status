@@ -11,6 +11,10 @@ NOT include the artifacts/ or frames/ trees — fetch those directly.
 
 # CONTEXT.md — soccer-channel session brief
 
+> **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
+> **Reader:** every session (CLAUDE.md @CONTEXT.md); mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
+
 Verified against code on 2026-09-09 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s; Stage 3: broadcast_filler + produce_episode fixed). Drifted sections (the tactical_overlay
 wiring, "no upload", the 8-step list, the cv_annotate export list) were
 regenerated from grep; see ARCHITECTURE.md / STATUS.md / RECONCILIATION.md.
@@ -243,6 +247,10 @@ STANDALONE tools. Not yet fixed.
 # FILE: STATUS.md
 
 # STATUS.md — verified current state
+
+> **Purpose:** verified current state of the pipeline (the status spine).
+> **Reader:** every session (CLAUDE.md @STATUS.md); mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
 
 Verified against code on 2026-09-09 (Stage 3: broadcast_filler phantom bug fixed 3A.1, produce_episode 800M guard 3A.4; Stage 2: 720p cap + 180-1200s filter on produce_v2.py). This rebuild supersedes the 2026-09-05
 version: the tactical_overlay wiring it described (`produce_v2.py:232`) no
@@ -489,6 +497,10 @@ could produce a real number but is not in produce_v2.py.
 # FILE: PROGRESS.md
 
 # PROGRESS.md — chronological log
+
+> **Purpose:** dated chronological log of what was done when.
+> **Reader:** every session; mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
 
 ## 2026-09-05 session 1: documentation spine + skill fix
 
@@ -1722,6 +1734,10 @@ built (pending B2 key), pod-to-B2 scoped. Tool count 46 -> 37.
 
 # GAPS.md — what nobody has verified
 
+> **Purpose:** registry of unverified claims and open uncertainties.
+> **Reader:** every session; mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
+
 This file existing and being short is a warning sign, not a success. Each
 entry is something that could be true or false and nobody has run the command
 to find out. If you verify one, move it to STATUS.md or DECISIONS.md and date
@@ -1794,6 +1810,10 @@ it.
 # FILE: DECISIONS.md
 
 # DECISIONS.md — running log of choices and why
+
+> **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
+> **Reader:** every session; mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
 
 Newest first. Each entry is dated. "Why" is the actual reason, not a
 retcon. If a decision is reversed, add a new entry above, do not edit the old
@@ -1948,11 +1968,56 @@ This list is the work queue for rules 1 and 3. Stage 6 closed the raw-download
 vhdx-growth (6A), 5 more dead tools (6C.7), and every open belief (6C). The
 CPU/storage stages, cut-list-on-pod, and untested-STANDALONE e2e runs remain.
 
+## Stage 7 — rule 3 applies to documents (2026-09-09)
+
+Rule 3 ("nothing orphaned may exist") covers documents, not just tools. A stale
+doc that reads as authoritative is the exact failure that cost a session
+(PROJECT_REPORT.md read as current for two weeks after the code moved on).
+
+Audit method: `grep -rl "<doc>.md" tools/ scripts/ tests/` for every root doc
+(7A.1). Result: NO root doc is read by any pipeline tool at runtime. Tools read
+`scripts/<slug>.md` (the per-episode scripts), never a root doc. The one hit,
+`SCRIPT_TEMPLATE.md` in `fresh_fetch.py:249`, is a string literal ("see
+SCRIPT_TEMPLATE.md") embedded in output text, not a file read. So FUNCTIONAL
+(read by code at runtime) = zero root docs. The rest split into CANONICAL /
+RECORD / ORPHANED.
+
+Retired (ORPHANED — read by nothing, superseded or contradicted by code):
+- `PROJECT_REPORT.md` (dated 2026-08-23) — REPORT_AUDIT.md proved it wrong on
+  every structural point. Retired per 7A.2.
+- `HANDOFF.md` (dated 2026-08-29) — says `vastai_shorts.py` works and RunPod is
+  dead. Code contradicts: `ls tools/vastai_shorts.py` → "No such file" (retired
+  Stage 6); RunPod is the working path (Stage 5).
+- `CONFIG.md` — claims "Nothing else in the workspace hard-codes the name;
+  everything references CHANNEL_SLUG." Code contradicts: 29 of tools/*.py
+  hard-code the string "soccer-channel" (grep). No tool reads CONFIG.md.
+- `PLAN_ARTIFACT.html` (2026-08-25 blueprint) — claims "9/10 ACHIEVED" with "No
+  CV annotation"; cv_annotate works now and the pipeline is 720x1280 with
+  footage/narration mismatch. Superseded + contradicted.
+
+Where retired docs go: DELETED from the working tree via `git rm` (all four were
+tracked, so recoverable from git history with `git show <rev>:<path>`). The
+retirement is recorded here. No `retired/` folder is kept in the tree (it would
+itself be an orphan); git history is the archive.
+
+Survivors (16) carry a header line: purpose / reader / last-verified-against-code
+date (7A.4). CANONICAL (mirrored spine + active plan/instructions):
+ARCHITECTURE, CLAUDE, CONTEXT, DECISIONS, GAPS, LANE_PLAN, PROGRESS, README,
+SCRIPT_TEMPLATE, STATUS, TOOLS. RECORD (completed-stage artifacts, kept for
+history): GATES (Stage 5 gates), RECONCILIATION (2026-09-08 audit),
+REPORT_AUDIT (the audit that proved PROJECT_REPORT wrong), SKILLS (2026-09-05
+skill analysis), VISUAL_QUALITY_ASSESSMENT (2026-08-25 snapshot, superseded by
+STATUS for current state).
+
 ---
 
 # FILE: TOOLS.md
 
 # TOOLS.md — one row per file in tools/
+
+> **Purpose:** one row per file in tools/ (status: WIRED / STANDALONE / DEAD).
+> **Reader:** every session; mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
 
 Verified against code on 2026-09-08. Caller column is from
 `grep -rnE "import <mod>|TOOLS / \"<name>\"|\"<name>.py\"" tools/ --include="*.py"`
@@ -2042,6 +2107,10 @@ Transitive libs: `ffmpeg_utils.py` (imported by generate_voice/merge_voice/short
 # FILE: ARCHITECTURE.md
 
 # ARCHITECTURE.md — soccer-channel code map
+
+> **Purpose:** code map — which tool calls which, the 9-step produce_v2 pipeline.
+> **Reader:** every session (CLAUDE.md loads it); mirrored to the public status repo by `.claude/hooks/push_status.sh`.
+> **Last verified against code:** 2026-09-09.
 
 Verified against code on 2026-09-09 (Stage 2: 720p cap + 180-1200s filter on produce_v2.py). Every line number is from `wc -l` /
 `grep -n` against the file on disk today. If a line moved, re-read. This

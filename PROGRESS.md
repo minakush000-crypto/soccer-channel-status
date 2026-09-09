@@ -1,5 +1,9 @@
 # PROGRESS.md — chronological log
 
+> **Purpose:** dated chronological log of what was done when.
+> **Reader:** every session; mirrored to the public status repo.
+> **Last verified against code:** 2026-09-09.
+
 ## 2026-09-05 session 1: documentation spine + skill fix
 
 - Built CONTEXT.md, ARCHITECTURE.md, TOOLS.md, STATUS.md, DECISIONS.md,
