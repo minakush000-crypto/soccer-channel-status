@@ -459,6 +459,25 @@ video actually produced. Scene-change alone is insufficient: cv_annotate
 shot_boundaries has only 7 cuts for 482s and cuts do not classify type.
 Tool: tools/broadcast_filler.py. Goal-finding is unaffected (scanner still works).
 
+## Possession board bug (2026-09-08, Part 4a — fixed) + board ratings (4b)
+
+Possession bug FIXED. Root cause was NOT a data misread (match_data has the
+correct 54.6/45.4 and the code parses it correctly; the static possession.png
+was already right). The bug was the ANIMATED possession.mp4: it filled the bar
+over 75% of frames, so it broadcast intermediate values (e.g. 39.3/32.7 = 72%
+of the real 54.6/45.4, with a 28% gap) for 3 of 4 seconds; the assemble step
+loops/trims the mp4, so captured frames landed mid-fill. Fix in tactical_boards
+_render_possession_animation: fill in first ~6% of frames, hold full ~94%,
+label only with final values once full. Verified by Opus (54.6/45.4, full
+width, sum 100). Backup: tools/tactical_boards.py.bak.
+
+Board appearance RATED by Opus 5 (authoritative), NOT fixed (per instruction):
+  formation 3/10, possession 4/10, stat_card 5/10. Common fails: matplotlib
+  defaults, flat (no depth/shadows), default fonts (no Bebas/Barlow), no
+  narrative furniture, stat-card bars both grow the same way (Arsenal should
+  mirror). Verbatim responses: artifacts/board_ratings/boards_opus_ratings.md.
+Source frames: frames/2026-09-06_arsenal-chelsea/board_*_full.png.
+
 ---
 
 # FILE: PROGRESS.md
@@ -1507,6 +1526,46 @@ New tool: tools/broadcast_filler.py. New artifact: artifacts/broadcast_filler/.
 10 verification frames pushed to frames/. All live on the mirror (HTTP 200).
 
 Cost Part 2: $0 (gemma4 vision is free; no Opus needed for this finding).
+
+PART 4 (fix possession board bug, then rate board appearance) — DONE.
+
+4a. Possession bug — FIXED and verified.
+The user's framing was "the board misreads the data (39.3/32.7 vs stat_card
+54.6/45.4)." The actual root cause is NOT a data misread:
+  - match_data.json has possession '54.6' / '45.4' (strings, no %). Both the
+    possession board (bare float) and stat_card (strip %) parse them to
+    54.6 / 45.4 correctly. The on-disk possession.png is correct (Opus: 54.6/
+    45.4, full width, sum 100).
+  - The bug is the ANIMATED possession.mp4: _render_possession_animation filled
+    the bar from 0 to the values over 75% of frames (frac = frame/(ANIM_FRAMES*
+    0.75)), broadcasting INTERMEDIATE values for 3 of 4 seconds. assemble_
+    words_match.py loops/trims the board mp4, so the captured frame at @30.2s
+    landed mid-fill at frac ~= 0.72 -> 54.6*0.72 = 39.3, 45.4*0.72 = 32.7, with
+    a 28% gap. Exactly the "wrong" numbers.
+Fix (tools/tactical_boards.py, _render_possession_animation): fill in the
+first ~6% of frames, hold full for ~94%, and show ONLY the final values once
+the bar is full (no intermediate labels ever). Backup at tools/tactical_boards.py.bak.
+Verified: re-rendered possession.mp4; Opus read of the previously-broken 1.5s
+frame now = Arsenal 54.6%, Chelsea 45.4%, full width, no gap, sum 100 (matches
+match_data). gemma4 confirmed 54.6/45.4 full at 1.5s and 2.0s too.
+Frame evidence: frames/.../board_possession_video_0302.png (the bug) and
+board_possession_fixed_0150.png (the fix), both on the mirror.
+
+4b. Board appearance — RATED ONLY (not fixed, per instruction).
+Opus 5 (authoritative judge) rated one full-state frame of each board against
+the 7-criterion Coaches' Voice benchmark. Verbatim responses saved to
+artifacts/board_ratings/boards_opus_ratings.md on the mirror. Scores:
+  - formation : 3/10  (flat; matplotlib defaults; chips collide/clip pitch
+    lines; ~5px unreadable numbers; default font; no narrative furniture)
+  - possession: 4/10  (flat single plane; hard 90 deg butt-join; square caps;
+    default font; no 50% marker; ~40% dead space)
+  - stat_card : 5/10  (both bar sets grow left-to-right, Arsenal should mirror;
+    numerals colliding with bar ends; inconsistent scaling; no crests/scoreline)
+Common thread: matplotlib fingerprints (default fonts, hairline uniform
+strokes, flat fills, no drop shadows), no layered depth, no condensed athletic
+fonts. Confirms Mayo's "PowerPoint and crayon". Appearance NOT fixed yet.
+
+Cost Part 4: ~$0.10 (1 Opus possession confirm + 3 Opus board ratings).
 
 
 ---

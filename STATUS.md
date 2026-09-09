@@ -251,3 +251,22 @@ artifacts/broadcast_filler/ on the mirror). The old bug signal claimed ~210s
 video actually produced. Scene-change alone is insufficient: cv_annotate
 shot_boundaries has only 7 cuts for 482s and cuts do not classify type.
 Tool: tools/broadcast_filler.py. Goal-finding is unaffected (scanner still works).
+
+## Possession board bug (2026-09-08, Part 4a — fixed) + board ratings (4b)
+
+Possession bug FIXED. Root cause was NOT a data misread (match_data has the
+correct 54.6/45.4 and the code parses it correctly; the static possession.png
+was already right). The bug was the ANIMATED possession.mp4: it filled the bar
+over 75% of frames, so it broadcast intermediate values (e.g. 39.3/32.7 = 72%
+of the real 54.6/45.4, with a 28% gap) for 3 of 4 seconds; the assemble step
+loops/trims the mp4, so captured frames landed mid-fill. Fix in tactical_boards
+_render_possession_animation: fill in first ~6% of frames, hold full ~94%,
+label only with final values once full. Verified by Opus (54.6/45.4, full
+width, sum 100). Backup: tools/tactical_boards.py.bak.
+
+Board appearance RATED by Opus 5 (authoritative), NOT fixed (per instruction):
+  formation 3/10, possession 4/10, stat_card 5/10. Common fails: matplotlib
+  defaults, flat (no depth/shadows), default fonts (no Bebas/Barlow), no
+  narrative furniture, stat-card bars both grow the same way (Arsenal should
+  mirror). Verbatim responses: artifacts/board_ratings/boards_opus_ratings.md.
+Source frames: frames/2026-09-06_arsenal-chelsea/board_*_full.png.
