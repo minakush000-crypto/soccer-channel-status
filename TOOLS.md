@@ -1,54 +1,81 @@
 # TOOLS.md — one row per file in tools/
 
-Built 2026-09-05. Caller column is from `grep -rn "<toolname>" tools/ scripts/`,
-limited to real call sites (subprocess.run, import, or inline shell), not
-docstring mentions. "ORPHANED" means no caller found anywhere in the repo.
+Verified against code on 2026-09-08. Caller column is from
+`grep -rnE "import <mod>|TOOLS / \"<name>\"|\"<name>.py\"" tools/ --include="*.py"`
+limited to real call sites (subprocess `cmd=[PYTHON,...]`, `import`, or curl
+download), not docstring/test mentions. "ORPHANED" = no caller anywhere.
 Line numbers are where the tool is invoked or imported; re-read before relying.
+This rebuild supersedes the 2026-09-05 version (33 tools, tactical_overlay
+wiring): the repo now has 43 tools and produce_v2 no longer calls
+tactical_overlay.
 
-| File | What it does | Called by (file:line) | Last modified | Last evidence of execution | Works? |
-|---|---|---|---|---|---|
-| `produce_v2.py` | End-to-end pipeline, 8 steps (authoritative) | ORPHANED (entry point) | 2026-09-05 | output `renders/2026-08-30_liverpool-forest/shorts/final_video_shorts.mp4` Sep 5 20:08, ffprobe 720x1280 64.2s | works |
-| `produce_episode.py` | Older end-to-end pipeline | ORPHANED (entry point) | 2026-08-30 | not checked | untested |
-| `match_data.py` | Fetch match data from ESPN API | `produce_v2.py:64`, `cloud_produce.py` (referenced) | 2026-09-01 | `match_data.json` 9176B Sep 5 20:02 | works |
-| `tactical_boards.py` | Generate data-driven boards with mplsoccer | `produce_v2.py:73`, `produce_episode.py:173` | 2026-09-01 | `boards/` dir Sep 5 19:17 | works |
-| `tactical_overlay.py` | Draw arrows/zones/circles on footage; LLM guesses coords (line ~120 `generate_overlay_spec`) | `produce_v2.py:232` | 2026-09-01 | overlay output Sep 5 (clips dir) | runs, output is the "PowerPoint clipart" problem (broken quality) |
-| `generate_voice.py` | ElevenLabs TTS voiceover | `produce_v2.py:397`, `produce_episode.py:339` | 2026-08-30 | `voice_elevenlabs.mp3` 514KB Sep 5 19:18 | works |
-| `merge_voice.py` | Multi-layer audio mix: video + voice + crowd | `produce_v2.py:416` | 2026-08-25 | `final_video.mp4` 47.2MB Sep 5 20:07 | works |
-| `shorts_crop.py` | Crop to 9:16 Shorts | `produce_v2.py:423`, `cloud_produce.py:592` | 2026-08-30 | `final_video_shorts.mp4` Sep 5 20:08 | works |
-| `cv_annotate.py` | YOLOv8 + ByteTrack + KMeans tracking overlays | `produce_episode.py:288` ONLY. NOT called by produce_v2.py | 2026-08-25 | produce_episode run: not checked today | works (per CONTEXT.md vision-model verdict), but isolated from the v2 pipeline |
-| `pitch_radar.py` | 2D pitch radar overlay (library) | `cv_annotate.py:27` (import), shipped by `runpod_annotate.py:229` | 2026-08-23 | not checked | untested |
-| `ffmpeg_utils.py` | Shared ffmpeg selection + duration helper (library) | imported by `assemble_video.py:9`, `render_video.py:17`, `merge_voice.py:25`, `generate_captions.py:21`, `thumbnail_generator.py:15`, `generate_voice.py:24` | 2026-08-25 | runs whenever callers run | works |
-| `script_utils.py` | Shared script-parsing utilities (library) | imported by `generate_captions.py:22`, `generate_voice.py:25`; listed in `cloud_produce.py:58` | 2026-08-25 | runs with generate_voice | works |
-| `assemble_video.py` | Commentary-driven timeline assembly | ORPHANED. produce_v2.py does its own inline ffmpeg concat (lines 326-373) instead | 2026-08-30 | not checked | untested |
-| `render_video.py` | Combine boards + voice into 1080p MP4 | ORPHANED. Its own docstring (line 48) says "DEPRECATED: use assemble_video.py" | 2026-08-25 | not checked | deprecated |
-| `cloud_produce.py` | Run entire pipeline on a cloud GPU pod | ORPHANED (entry point) | 2026-09-01 | not checked | untested |
-| `runpod_annotate.py` | Run cv_annotate on RunPod GPU (multi-clip) | ORPHANED (entry point) | 2026-08-23 | not checked end-to-end (see GAPS.md) | untested |
-| `runpod_stage1.py` | One-off RunPod runner for single 10s clip (Stage 1 test) | ORPHANED (one-off) | 2026-09-05 | ran Sep 5: 300 frames, 23s, $0.05, tracking JSON downloaded | works (webhook parser has a bug, see DECISIONS.md) |
-| `runpod_shorts.py` | Encode Shorts on RunPod with NVENC | ORPHANED (entry point) | 2026-08-29 | not checked | untested |
-| `runpod_superres.py` | Real-ESRGAN super-res on RunPod | ORPHANED (entry point) | 2026-08-30 | not checked | untested |
-| `vastai_shorts.py` | Encode Shorts on Vast.ai with NVENC | ORPHANED (entry point) | 2026-08-30 | not checked | untested |
-| `gpu_superres.py` | Real-ESRGAN super-res on Vast.ai | ORPHANED (entry point) | 2026-08-30 | not checked | untested |
-| `luminance_pod.py` | Luminance analysis for smart crop (runs on pod) | `runpod_shorts.py:254`, `vastai_shorts.py:334` (uploaded to pod) | 2026-08-29 | not checked | untested |
-| `validate_script.py` | Verify [SRC]/[RUMOR] tags resolve to sources.json | `produce_episode.py:155` ONLY. NOT in produce_v2.py | 2026-08-25 | not checked | untested |
-| `generate_ambience.py` | Crowd ambience via ElevenLabs Sound API | `produce_episode.py:324`, `cloud_produce.py:554`. NOT in produce_v2.py | 2026-08-22 | `crowd_ambience.mp3` Aug 23 (iraola run) | works |
-| `generate_captions.py` | SRT captions from script + voice | ORPHANED | 2026-08-25 | `captions.srt` Aug 23 (iraola run, maybe manual) | untested |
-| `youtube_upload.py` | Upload final video to YouTube Data API | ORPHANED. `publish-log/` is empty (ls confirmed) | 2026-08-23 | never (publish-log empty) | untested |
-| `oauth_setup.py` | One-time YouTube OAuth | ORPHANED (one-time setup) | 2026-08-23 | `youtube_token.json` exists Aug 23 | ran once |
-| `thumbnail_generator.py` | Auto YouTube thumbnail from final video | ORPHANED | 2026-08-25 | not checked | untested |
-| `viral_angle.py` | Find trending soccer topics | ORPHANED | 2026-08-25 | not checked | untested |
-| `enhance_clips.py` | FFmpeg upscale/enhance clips | ORPHANED | 2026-08-23 | not checked | untested |
-| `ltx_enhance.py` | Animate static board PNGs via LTX Studio | ORPHANED | 2026-08-23 | not checked | untested |
-| `fresh_fetch.py` | Dated sports news from RSS | ORPHANED. `USAGE.md` documents it | 2026-08-18 | not checked | untested |
-| `check_and_download.py` | Download annotated clips from RunPod webhook | ORPHANED | 2026-08-23 | not checked | untested |
-| `sharpness_check.py` | Laplacian blur metric on a frame | `cloud_produce.py:984` | 2026-08-30 | not checked today | untested |
-| `agent_reach_research.py` | Multi-platform research layer | ORPHANED | 2026-08-30 | not checked | untested |
+## Classification (from RECONCILIATION.md 1.1)
 
-## Orphan count
+- **WIRED** = reachable from produce_v2.py (12 tools).
+- **STANDALONE** = CLI entry point or hand-run utility, or wired only into
+  another standalone entry point (27 tools).
+- **DEAD** = no caller anywhere (4 tools).
 
-Of 33 Python tools: 7 are called by produce_v2.py (match_data, tactical_boards,
-tactical_overlay, generate_voice, merge_voice, shorts_crop + yt-dlp inline).
-2 libraries (ffmpeg_utils, script_utils) are transitively used. 1 (cv_annotate)
-is called only by the older entry point. The remaining ~20 are ORPHANED or
-alternate entry points nothing invokes. UNVERIFIED that all 20 are truly dead —
-they may be invoked by hand or by cloud_produce.py on the pod. GAPS.md tracks
-this.
+## The 43 tools
+
+| File | Class | Called by (file:line) | Last modified | Works? |
+|---|---|---|---|---|
+| `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-08 | works (liverpool-forest 720x1280 62.3s Sep 7) |
+| `match_data.py` | WIRED | `produce_v2.py:69` | 2026-09-01 | works |
+| `tactical_boards.py` | WIRED | `produce_v2.py:78` | 2026-09-08 | works |
+| `runpod_fulltrack.py` | WIRED | `produce_v2.py:235` | 2026-09-08 | works (146s full-clip, $0.011, STATUS) |
+| `tactical_render.py` | WIRED | `produce_v2.py:285` | 2026-09-06 | works (Opus 8/8.5, STATUS) |
+| `generate_voice.py` | WIRED | `produce_v2.py:474` | 2026-09-08 | works |
+| `generate_ambience.py` | WIRED | `produce_v2.py:493` | 2026-08-22 | works (wired 2026-09-08, STATUS Part 6) |
+| `merge_voice.py` | WIRED | `produce_v2.py:514` | 2026-08-25 | works |
+| `shorts_crop.py` | WIRED | `produce_v2.py:524` | 2026-08-30 | works (outputs 720x1280) |
+| `ffmpeg_utils.py` | WIRED (lib) | imported by `generate_voice.py:24`, `merge_voice.py:25`, `shorts_crop.py:31`; shipped to pod by `runpod_fulltrack.py:72` | 2026-09-08 | works (now holds the 200MB guard) |
+| `script_utils.py` | WIRED (lib) | imported by `generate_voice.py:25` | 2026-08-25 | works |
+| `cv_annotate.py` | WIRED (pod) | shipped+run on pod by `runpod_fulltrack.py:72,91` | 2026-09-07 | works (per-frame positions export, STATUS) |
+| `produce_episode.py` | STANDALONE | entry point; no caller | 2026-08-30 | untested (no verified output) |
+| `cloud_produce.py` | STANDALONE | entry point; no caller | 2026-09-08 | untested (pod-side yt-dlp + download_url guarded) |
+| `runpod_annotate.py` | STANDALONE | entry point; no caller | 2026-08-23 | untested (GAPS) |
+| `runpod_shorts.py` | STANDALONE | entry point; no caller; uploads `luminance_pod.py:254` | 2026-08-29 | untested |
+| `vastai_shorts.py` | STANDALONE | entry point; no caller; uploads `luminance_pod.py:334` | 2026-08-30 | untested |
+| `runpod_superres.py` | STANDALONE | entry point; no caller | 2026-08-30 | untested |
+| `gpu_superres.py` | STANDALONE | entry point; no caller | 2026-08-30 | untested |
+| `luminance_pod.py` | STANDALONE (transitive) | `runpod_shorts.py:254`, `vastai_shorts.py:334` (uploaded to pod) | 2026-08-29 | untested |
+| `sharpness_check.py` | STANDALONE (transitive) | `cloud_produce.py:984` | 2026-08-30 | untested |
+| `assemble_video.py` | STANDALONE (legacy) | `produce_episode.py:303`, `cloud_produce.py:564`; NOT produce_v2 | 2026-08-30 | untested |
+| `validate_script.py` | STANDALONE (legacy) | `produce_episode.py:155`; NOT produce_v2 | 2026-08-25 | untested |
+| `generate_captions.py` | STANDALONE | no caller (only `tests/`) | 2026-08-25 | untested |
+| `thumbnail_generator.py` | STANDALONE | no caller | 2026-08-25 | untested |
+| `enhance_clips.py` | STANDALONE | no caller (only `tests/`) | 2026-08-23 | untested |
+| `segment_scorer.py` | STANDALONE | no caller; `cv_annotate.py:332` is a comment only | 2026-09-05 | works (hand-run on full-clip data, STATUS) |
+| `scoreboard_scan.py` | STANDALONE | no caller | 2026-09-08 | works (3/3 goals, STATUS) |
+| `broadcast_filler.py` | STANDALONE | no caller | 2026-09-08 | works (43s/482s broadcast, STATUS) |
+| `assemble_words_match.py` | STANDALONE | no caller | 2026-09-08 | works (arsenal-chelsea 45.2s, STATUS) |
+| `trim_tracking.py` | STANDALONE | no caller; has `main()` CLI; output in `artifacts/tracking_summary/` | 2026-09-08 | works (hand-run) |
+| `viral_angle.py` | STANDALONE | no caller | 2026-08-25 | untested |
+| `agent_reach_research.py` | STANDALONE | no caller | 2026-08-30 | untested |
+| `fresh_fetch.py` | STANDALONE | no caller | 2026-08-18 | untested |
+| `youtube_upload.py` | STANDALONE | no code caller; invoked by hand | 2026-09-07 | works (2 publish-log entries, Sep 6) |
+| `oauth_setup.py` | STANDALONE | one-time; no caller | 2026-08-23 | ran once |
+| `gemini_inventory_test.py` | STANDALONE | no caller | 2026-09-08 | works (hand-run, STATUS Gemini section) |
+| `runpod_stage1.py` | STANDALONE (one-off) | no caller; docstring = one-off | 2026-09-05 | works (one-off, $0.05, STATUS) |
+| `ltx_enhance.py` | STANDALONE | no caller | 2026-08-23 | untested |
+| `tactical_overlay.py` | DEAD | no caller anywhere (`grep -rn` → only self) | 2026-09-01 | retire (superseded by tactical_render; LLM-guess-coords was the clipart root cause) |
+| `pitch_radar.py` | DEAD | shipped to pod by 3 runpod tools but never imported/run | 2026-08-23 | wire or retire (2D radar library, unused) |
+| `render_video.py` | DEAD | no caller; docstring says DEPRECATED | 2026-08-25 | retire |
+| `check_and_download.py` | DEAD | no caller; RunPod-webhook downloader, superseded by runpod_fulltrack | 2026-08-23 | retire |
+
+Counts: **12 WIRED, 27 STANDALONE, 4 DEAD** = 43.
+
+## Wired set (reachable from produce_v2.py)
+
+8 direct subprocess calls + 2 shared libs + 1 pod-shipped tracker:
+
+```
+$ grep -nE "cmd = \[PYTHON|str\(TOOLS / \"" tools/produce_v2.py
+69:  match_data.py       78:  tactical_boards.py   235: runpod_fulltrack.py
+285: tactical_render.py  474: generate_voice.py    493: generate_ambience.py
+514: merge_voice.py      524: shorts_crop.py
+```
+Transitive libs: `ffmpeg_utils.py` (imported by generate_voice/merge_voice/shorts_crop),
+`script_utils.py` (imported by generate_voice). Pod: `cv_annotate.py`
+(shipped+run by runpod_fulltrack). `pitch_radar.py` is shipped but never run.

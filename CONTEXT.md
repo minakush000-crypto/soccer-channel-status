@@ -1,5 +1,9 @@
 # CONTEXT.md — soccer-channel session brief
 
+Verified against code on 2026-09-08. Drifted sections (the tactical_overlay
+wiring, "no upload", the 8-step list, the cv_annotate export list) were
+regenerated from grep; see ARCHITECTURE.md / STATUS.md / RECONCILIATION.md.
+
 Read this at the start of every session instead of pasting the brief.
 The project is ~/yt-digest/soccer-channel. Nothing else.
 
@@ -69,12 +73,16 @@ Run it with: ~/yt-digest/.venv/bin/python tools/produce_v2.py <slug>
 Working example: 2026-08-30_liverpool-forest --query "Liverpool Forest"
   --date-range 20260801-20260831
 
-8 steps: match data (ESPN) -> boards -> download clip -> tactical
-overlays -> voice (ElevenLabs) -> assemble -> merge -> shorts crop.
-Confirmed working: exit 0 in 6m31s, output 720x1280, 64.2s, 27.3MB.
+9 steps (verified 2026-09-08, see ARCHITECTURE.md): match data (ESPN)
+-> boards -> download clip (200MB guard) -> tactical render (runpod_fulltrack
+ships cv_annotate to RunPod, then tactical_render.py draws the top-down view)
+-> voice (ElevenLabs) -> crowd ambience -> assemble -> merge -> shorts crop.
+Latest produce_v2 output: 720x1280, 62.3s, 24.8MB (liverpool-forest, Sep 7).
+A separate words-match path (assemble_words_match.py) built arsenal-chelsea:
+1280x720, 45.2s, 15.0MB (Sep 8).
 
 tools/produce_episode.py is an older entry point. It calls cv_annotate.py
-at line 288. Do not break that.
+at line 288. Do not break that. It is NOT reachable from produce_v2.py.
 
 ## WHAT WAS FIXED (verified)
 FIX 1: produce_v2.py was downloading 360p clips and accepting them
@@ -84,27 +92,32 @@ than falling back. Verified: source is now 1920x1080.
 Backup at tools/produce_v2.py.bak.
 
 ## WHAT IS STILL BROKEN, WORST FIRST
-1. Overlays look like PowerPoint clipart. tactical_overlay.py sends the
-   text description to glm-5.2:cloud and asks it to GUESS coordinates
-   between 0.0 and 1.0 (lines 88-108). draw_arrow stamps those fixed
-   coordinates on all 900 frames (lines 58-61). Nothing looks at pixels.
-   A vision model independently confirmed: "PowerPoint clipart, static
-   markers, not tracking players."
-2. Footage does not match narration. produce_v2.py line 307 cuts at
-   fixed 5-second offsets. The script's [VISUAL: description] tags drive
-   only the overlays, never the footage selection.
-3. The script is factually wrong. It says "Gravenberch receives" but
+1. Footage does not match narration. produce_v2.py line 433 cuts at
+   fixed 5-second offsets (`clip_idx*5`). The script's [VISUAL: footage=]
+   tag is treated as a boolean (line 361), never as a timestamp window.
+   assemble_words_match.py holds the content-matched fix but is NOT folded
+   in — blocked by missing timestamp-window data + schema mismatch
+   (RECONCILIATION 1.2). A cut-list generator is a prerequisite for every
+   footage lane.
+2. The script is factually wrong. It says "Gravenberch receives" but
    match data shows he is a 71st-minute sub for Frimpong. Nothing
-   validates the script against match data.
-4. No YouTube upload has ever happened. tools/youtube_upload.py exists
-   (Aug 23) but publish-log/ is empty and nothing calls it.
-5. Output is 720x1280. shorts_crop.py downscales deliberately to avoid
+   validates the script against match data (grep -c validate_script
+   tools/produce_v2.py -> 0).
+3. Output is 720x1280. shorts_crop.py downscales deliberately to avoid
    a soft 1.78x upscale to 1080x1920.
+4. No upload step in produce_v2.py. youtube_upload.py is invoked by hand;
+   2 private uploads happened 2026-09-06 (artifacts/publish-log/ has 2
+   entries). produce_v2 does not wire upload.
+RESOLVED (was #1): the tactical_overlay "PowerPoint clipart" problem is
+gone. produce_v2.py no longer calls tactical_overlay.py (grep exit 1);
+the step is now step4b_tactical_render (runpod_fulltrack + tactical_render,
+real tracking, Opus 8/8.5). tactical_overlay.py is DEAD.
 
 ## MEASURED FACTS, DO NOT RE-DERIVE
 - cv_annotate.py (YOLOv8 + ByteTrack + KMeans team classification) works
   and produces real tracking. A vision model called its output
-  "professional broadcast tracking." produce_v2.py does NOT call it.
+  "professional broadcast tracking." produce_v2.py does NOT call it locally;
+  runpod_fulltrack.py ships it to RunPod and runs it on the pod (line 72,91).
 - Local speed: 1.30s/frame at 1080p. 900 frames = 19.5 min. Full clip
   = 95 min. Too slow.
 - roboflow/sports was evaluated and REJECTED. Its football-specific
@@ -115,8 +128,9 @@ Backup at tools/produce_v2.py.bak.
   The source is a compressed wide-shot reupload. Drop every
   ball-dependent feature: no ball trail, no ball-following crop, no
   arrows tied to the ball. Anchor to PLAYERS ONLY.
-- cv_annotate.py currently exports team_assignment and ball_positions,
-  but NOT per-frame player positions.
+- cv_annotate.py exports team_assignment, ball_positions, AND per-frame
+  player_positions (Stage 1 done 2026-09-05: {frame, players:[{id,bbox,team}]}).
+  No path from tracker ID to player name exists (no jersey OCR, no mapping).
 - Cloud: RunPod and Vast.ai both authenticate. runpod_annotate.py is the
   tool for tracking; it tarballs tools/ and ships it, so edits propagate
   automatically. Roughly $0.15 and 5 minutes per episode on an L4.
@@ -163,7 +177,9 @@ Current output violates 1, 3, 4, and 5.
 3. Every factual claim names the command you ran and pastes its output.
    If you did not run a command, write "not checked."
 4. Never print full API keys. Mask them (<masked>).
-5. cp <file> <file>.bak before editing anything in tools/.
+5. Git is the backup. The .bak files were deleted 2026-09-08 (superseded by
+   git, RECONCILIATION Amendment 2). Do not recreate .bak; commit first if you
+   want a rollback point.
 6. One change, one run, one verification. Never batch changes.
 7. Ask before guessing. If a required argument or path is unclear, stop
    and ask rather than assuming.
@@ -175,17 +191,19 @@ Current output violates 1, 3, 4, and 5.
   point at ~/soccer-pipeline).
 - Option C Stage 1: cv_annotate.py exports per-frame player positions.
   Verified on RunPod (L4, 300 frames, 129 tracker IDs, 23s, $0.05).
-  Backup at tools/cv_annotate.py.bak. One-off runner at tools/runpod_stage1.py.
+  One-off runner at tools/runpod_stage1.py. (Pre-edit backups were .bak
+  files, deleted 2026-09-08; git is the backup now.)
 - Key finding: NO path from tracker ID to player name exists. No jersey OCR,
   no position heuristics, no manual mapping. match_data.py has jersey numbers
   but nothing reads them from video. Stage 2 is arrows on unnamed tracked
   players, or hand-mapped. Tracker fragmentation is high (129 IDs in 10s).
 
-## NEXT TASK (2026-09-05 session 3 end)
-C+E prototype built. Next iteration priorities for E (from Claude Opus 5):
-1. Add context layer (title, team names, ball marker, attacking direction).
-2. Fix pitch layout (centre, complete markings, lower stripe contrast).
-3. Rebuild movement encoding with hierarchy (highlight key players,
-   smooth trails, separate trail color from team dot color).
-C is functional. Full 146s tracking data available.
+## NEXT TASK (2026-09-08)
+The C+E prototype is done (tactical_render 8/8.5, full 146s tracking).
+The lane expansion is planned in LANE_PLAN.md (four lanes A/B/C/D). Shared
+prerequisite for every footage lane: a cut-list generator that emits
+`[VISUAL: footage=START-END]` timestamp windows (scoreboard_scan + ±20s
+relay-verified search) — no wired tool generates them today (RECONCILIATION
+1.2). E iteration priorities from Opus remain open but are now lower than
+the lane expansion and the cut-list generator.
 See PROGRESS.md and STATUS.md for full detail.
