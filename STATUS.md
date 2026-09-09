@@ -209,3 +209,21 @@ Scanner beats Gemini+Claude hybrid on accuracy (found the goal Gemini missed
 at 250-254, no phantom) AND cost (~$0.10 vs ~$0.30-0.41). Persistence filter
 now implemented in the script (run-based blip absorption, MIN_PERSIST=9s;
 verified on the saved timeline — yields exactly the 3 real goals).
+
+## Build one video: words match pictures (2026-09-08)
+
+End-to-end cut-list-first build on Arsenal-Chelsea. No arrows, no renderer,
+no crowd fix (boards + clean footage only). tools/assemble_words_match.py
+(new) cuts footage at exact verified timestamps, replacing produce_v2's
+fixed-5s-offset bug. Output final_video.mp4 45.2s, 1280x720.
+PRIVATE: https://www.youtube.com/watch?v=WFi2LBwXINU
+
+Step 7 (the never-run test) PASSES: relay on the mid-frame of each of 7
+sections of the uploaded video — 6/7 clean match, 1 partial. All 3 goals
+match narration via on-screen scorer captions (ROGERS 1-0, HAVERTZ 1-1,
+ODEGAARD 1-2). The 8s pre-roll rule FAILED (offset varies in sign:
++17/+10/-8s); fix = search +-20s around each bug-update, relay-verified.
+Gemini invented a goal in a celebration segment (discarded by relay) —
+confirms Gemini-only is unsafe; cut-list-first + relay-verify works.
+Possession board has a pre-existing data bug (39.3/32.7 vs stat_card
+54.6/45.4), not fixed (renderer off-limits this build). Honest length 45.2s.

@@ -861,3 +861,60 @@ https://github.com/minakush000-crypto/soccer-channel-status (auto-pushed by
 Stop hook .claude/hooks/push_status.sh); scoreboard scanner built and
 verified (3/3 goals, Ødegaard winner pinned to 261s bug-update / 253s shot).
 Total session 4 cost: ~$0.65.
+
+## 2026-09-08 session 5: build one video where words match pictures
+
+End-to-end cut-list-first build on the Arsenal-Chelsea clip. No arrows, no
+renderer, no crowd fix — boards + clean footage only.
+
+Step 1 segmentation (scanner bug-presence): 482s reel = 210s broadcast-action
+(43%) vs 273s filler (57% celebration/replay/fan). Windows 102-129, 171-198,
+201-255, 261-363.
+
+Step 2 goals — the 8s pre-roll rule FAILED (offset varies in SIGN): Chelsea
++17s (footage is celebration, no clean shot in the reel), Havertz +10s
+(ball-in-net replay AFTER bug-update), Odegaard -8s (live shot BEFORE).
+Fix: search +-20s around each bug-update for the goal-scoring visual,
+relay-verified. Verified cut windows: Rogers [119-127] (celebration +
+ROGERS 1-0 caption; the shot isn't in the reel), Havertz [181-191]
+(ball-in-net @182 + HAVERTZ 1-1 caption), Odegaard [253-262] (shot @253 +
+ODEGAARD 1-2 caption @259).
+
+Step 3 non-goal: Gemini on broadcast segments invented a goal-shot at 275
+that the relay showed was celebration (discarded — confirms Gemini-only
+unsafe). Relay found sparse on-ball action; used Rice build-up [173-177]
+(broadcast, on-ball, Rice named).
+
+Step 4 script (GLM 5.2, 150 words), cut-list-first, each line tied to a
+verified clip. Validated vs match_data: Rogers (Chelsea #17, outside-box
+right foot), Havertz (Arsenal #29, left foot outside box), Odegaard (Arsenal
+#8, centre of box), Rice (Arsenal #41, midfield). No wrong role, no invented
+event. scripts/2026-09-06_arsenal-chelsea.md (backup .bak).
+
+Step 5 assemble: tools/assemble_words_match.py (new) cuts footage at exact
+[VISUAL: footage=START-END] timestamps (replaces produce_v2 fixed-5s-offset
+bug), allocates time by narration word-count, scales to 1280x720, tpad-holds
+shortfall, merges ElevenLabs voice. final_video.mp4 45.2s, 1280x720, 15MB.
+(First run had a hold-last-frame bug producing a 0.04s segment; fixed with
+tpad.)
+
+Step 6 upload PRIVATE: https://www.youtube.com/watch?v=WFi2LBwXINU
+publish-log/2026-09-06_arsenal-chelsea_WFi2LBwXINU.json
+
+Step 7 words-match-pictures (the never-run test) — relay on the mid-frame of
+each of 7 sections of the FINAL video:
+  formation board @3.2s -> Arsenal vs Chelsea lineups MATCH
+  Chelsea goal @10.8s -> crowd celebrating, ARS 0-1 CHE, ROGERS 1-0 caption MATCH
+  Rice build-up @17.7s -> Arsenal attacking build-up MATCH
+  Havertz goal @24.0s -> Arsenal #29 celebrating, HAVERTZ 1-1 caption MATCH
+  possession board @30.2s -> Arsenal 39.3 vs Chelsea 32.7 PARTIAL (board
+    numbers buggy: 39.3/32.7 vs stat_card 54.6/45.4; pre-existing
+    tactical_boards.py bug, not fixed — renderer off-limits)
+  Odegaard winner @36.9s -> Arsenal goal moment, keeper beaten (ODEGAARD 1-2
+    caption elsewhere in clip) MATCH
+  stat_card @43.2s -> MATCH STATS 16-13 shots, 54.6-45.4 poss MATCH
+RESULT: 6/7 clean match, 1 partial (possession board data bug). All 3 goals
+match narration via on-screen scorer captions. The picture matches the
+words. Honest length 45.2s.
+
+Cost this session: ~$0.30 (relay frames + ElevenLabs + Gemini inline).
