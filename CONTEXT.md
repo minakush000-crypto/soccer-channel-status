@@ -21,12 +21,25 @@ the project folder.
 ## STATUS MIRROR (public)
 Current project state is mirrored to a PUBLIC docs-only repo so any
 session (or the coordinator) can read it via web fetch instead of
-pasting fragments:
-https://github.com/minakush000-crypto/soccer-channel-status
-Contains only: CONTEXT.md, STATUS.md, PROGRESS.md, GAPS.md, DECISIONS.md,
-TOOLS.md, ARCHITECTURE.md. No code, no keys, no renders. A Stop hook
-(.claude/hooks/push_status.sh) re-pushes these after any change, so the
-mirror is always current. Read it from a fresh session with WebFetch.
+pasting fragments.
+Repo: https://github.com/minakush000-crypto/soccer-channel-status
+Contains only: the seven docs (CONTEXT.md, STATUS.md, PROGRESS.md, GAPS.md,
+DECISIONS.md, TOOLS.md, ARCHITECTURE.md) plus README.md and ALL_STATUS.md.
+No code, no keys, no renders. A Stop hook (.claude/hooks/push_status.sh)
+re-pushes these after any change, so the mirror is always current.
+
+HOW TO READ IT (important — the github.com URL does NOT work for fetchers):
+GitHub's github.com/.../blob/... HTML view is not reliably fetchable; it
+returns the page chrome, not the content. Use the RAW host instead:
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/<FILE>
+One-fetch full state (all seven docs concatenated):
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/ALL_STATUS.md
+Index of every raw URL:
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/README.md
+Caveat: WebFetch summarizes through a small model and can rewrite
+headings, so it understands the state but is NOT a verbatim source. For
+exact text or numbers, pull the raw bytes with curl (no auth needed).
+Real Claude (Opus 5) confirmed all these URLs return HTTP 200 unauthenticated.
 
 ## THE PIPELINE
 Entry point: tools/produce_v2.py

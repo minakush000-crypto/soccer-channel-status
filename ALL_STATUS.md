@@ -31,12 +31,25 @@ the project folder.
 ## STATUS MIRROR (public)
 Current project state is mirrored to a PUBLIC docs-only repo so any
 session (or the coordinator) can read it via web fetch instead of
-pasting fragments:
-https://github.com/minakush000-crypto/soccer-channel-status
-Contains only: CONTEXT.md, STATUS.md, PROGRESS.md, GAPS.md, DECISIONS.md,
-TOOLS.md, ARCHITECTURE.md. No code, no keys, no renders. A Stop hook
-(.claude/hooks/push_status.sh) re-pushes these after any change, so the
-mirror is always current. Read it from a fresh session with WebFetch.
+pasting fragments.
+Repo: https://github.com/minakush000-crypto/soccer-channel-status
+Contains only: the seven docs (CONTEXT.md, STATUS.md, PROGRESS.md, GAPS.md,
+DECISIONS.md, TOOLS.md, ARCHITECTURE.md) plus README.md and ALL_STATUS.md.
+No code, no keys, no renders. A Stop hook (.claude/hooks/push_status.sh)
+re-pushes these after any change, so the mirror is always current.
+
+HOW TO READ IT (important — the github.com URL does NOT work for fetchers):
+GitHub's github.com/.../blob/... HTML view is not reliably fetchable; it
+returns the page chrome, not the content. Use the RAW host instead:
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/<FILE>
+One-fetch full state (all seven docs concatenated):
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/ALL_STATUS.md
+Index of every raw URL:
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/README.md
+Caveat: WebFetch summarizes through a small model and can rewrite
+headings, so it understands the state but is NOT a verbatim source. For
+exact text or numbers, pull the raw bytes with curl (no auth needed).
+Real Claude (Opus 5) confirmed all these URLs return HTTP 200 unauthenticated.
 
 ## THE PIPELINE
 Entry point: tools/produce_v2.py
@@ -1324,6 +1337,41 @@ match narration via on-screen scorer captions. The picture matches the
 words. Honest length 45.2s.
 
 Cost this session: ~$0.30 (relay frames + ElevenLabs + Gemini inline).
+
+## 2026-09-08 session 6: Mayo review + 6-part fix list, Part 1 done
+
+Mayo watched the WFi2LBwXINU video. Goal 1 matched narration; goals 2 and 3
+were off; the opening board section read "PowerPoint and crayon." Six-part
+fix list, order 1 -> (2+3) -> 4 -> 5 -> 6, one change per run.
+
+PART 1 (unblock status-mirror read loop) — DONE.
+Problem: github.com/.../blob/... returns the HTML page chrome (317KB), not
+content, so Claude's fetcher could not read STATUS.md or PROGRESS.md.
+Fix: use the RAW host, which needs zero setup and returns plain text.
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/<FILE>
+Added two generated pages to the mirror, wired into push_status.sh:
+  - README.md: index of every raw URL.
+  - ALL_STATUS.md: all seven docs concatenated (one fetch = full state).
+Backups: .claude/hooks/push_status.sh.bak. CONTEXT.md STATUS MIRROR section
+rewritten to point at the raw host (the old text sent sessions to the broken
+github.com URL). .gitignore in the mirror now allows README.md + ALL_STATUS.md.
+Verified:
+  - curl: README 1210B, ALL_STATUS 88930B (7 FILE sections), STATUS 12119B,
+    PROGRESS 49269B, all HTTP 200, no auth.
+  - WebFetch (this session) reads STATUS.md + PROGRESS.md verbatim.
+  - Real Claude Opus 5 (claude5 -p --allowedTools WebFetch) confirmed all
+    three URLs return HTTP 200 unauthenticated and quoted first lines:
+      STATUS.md     -> "# STATUS.md — verified current state"
+      PROGRESS.md   -> "# PROGRESS.md — chronological log"
+      ALL_STATUS.md -> "# soccer-channel — combined status (auto-generated)"
+Caveat found (Opus 5): WebFetch summarizes through a small model and can
+rewrite headings (it fabricated ALL_STATUS's title as "# Soccer-Channel
+Status Summary"). WebFetch understands state but is NOT a verbatim source;
+for exact text/numbers, pull raw bytes with curl. Documented in CONTEXT.md.
+
+The URL to give any session: the combined page
+  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/ALL_STATUS.md
+Cost Part 1: ~$0.02 (one Opus 5 WebFetch confirmation).
 
 
 ---
