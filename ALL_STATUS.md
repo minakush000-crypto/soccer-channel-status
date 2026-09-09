@@ -450,6 +450,22 @@ for Mayo to pick. Current .env VOICE_ID = 1stSYyl7ZVPJk2ECrNlo.
 The old STATE.md's 7/10, 8/10, 9/10 vision quality scores were typed by hand.
 No code produces a score. Do not cite them. `sharpness_check.py` exists and
 could produce a real number but is not in produce_v2.py.
+## Stage 5 — pod-side download path + rule-3 debt, 2026-09-09
+
+- NEW: tools/runpod_download.py (WIRED via --pod-download). Pod downloads +
+  cuts excerpts; only guarded excerpts come home. Proven: 2/3 windows, 4MB each,
+  128MB source never local, $0.005/run. YouTube bot-blocks pod yt-dlp (all
+  clients) — --source-url (catbox) is the working path today.
+- 4 DEAD RETIRED: tactical_overlay, pitch_radar, render_video, check_and_download
+  deleted (git history); pitch_radar ship-list refs removed. Tool count 46 -> 42.
+- 27 STANDALONE smoke test: 26/27 launch; luminance_pod crashes, runpod_stage1
+  hangs. Rule 3 not closed per-tool (e2e owed).
+- Rule 1: step3 (download) + step4b (tracking) now have pod paths; the CPU/storage
+  stages (boards, assemble, voice, ambience, merge, shorts) + cut-list generation
+  still run locally (DECISIONS.md gap list updated).
+- 5A.5: 720p cap KEPT for the local path (pod yt-dlp bot-blocked, so 1080p-on-pod
+  untested); pod path is 1080p-ready for when a proxy unblocks it.
+
 
 ---
 
@@ -1643,6 +1659,26 @@ Cost Part 6: ~$0.02 (1 ambience sound-gen + 3 short TTS samples; all tiny).
 TOTAL session cost (all 6 parts): ~$0.27 (Part 1 Opus ~0.02, Part 4 ~0.10,
 Part 5 ~0.10, Part 6 ~0.02; Parts 2-3 free).
 
+## Stage 5 — pod-side download path + rule-3 debt, 2026-09-09
+
+5A (built): tools/runpod_download.py — pod-side yt-dlp + excerpt cut; only
+guarded excerpts come home, full source stays on pod. Wired into produce_v2 as
+--pod-download. PROVEN with real runs: 2/3 goal-window excerpts (4MB each) came
+home under the 200MB guard; 128MB source never written locally; $0.005/run.
+YouTube bot-blocks the RunPod datacenter IP on every player client (web_safari,
+ios, android, default) — "Sign in to confirm you're not a bot" — so pod yt-dlp
+is not viable today; --source-url (catbox) is the working cut path. 720p cap
+kept for the local path; pod path is 1080p-ready. Cost: ~$0.03 across 7 pod runs.
+5B (report): B2 archive designed (boto3 already installed, no S3 code yet,
+~1.5-2.5h to build; archive only finals + publish-log ~100-200MB, not the 2.9G
+renders; pod->B2 possible without touching laptop; .env key handling proposed).
+5C.1: --help smoke test on 27 STANDALONE — 26/27 launch; luminance_pod crashes
+(IndexError), runpod_stage1 hangs; rule 3 not closed per-tool.
+5C.2: 4 DEAD tools retired (deleted, in git history); tool count 46 -> 42.
+5C.3: runpod_annotate e2e costed (~$0.01-0.02), not run per brief.
+DECISIONS.md doctrine gap + TOOLS.md updated. LANE_PLAN.md Stage 5 appended.
+Pushed: 0fb4e96..80adff9.
+
 
 ---
 
@@ -1823,51 +1859,47 @@ secrets/yt_cookies.txt, fails loudly. Verified: source is now 1920x1080
    may exist. Everything is wired, tested, or retired.
 4. Every brief carries this doctrine as a footer.
 
-### Gap: what does NOT yet meet the doctrine (truthful list, not fixed this run)
+### Gap: what does NOT yet meet the doctrine (updated 2026-09-09, Stage 5)
 
-**Rule 1 (nothing local) — VIOLATED by the whole pipeline today.** produce_v2
-downloads and processes locally; only step4b (tracking) runs on RunPod. Verified
-by grep (`yt-dlp`, `subprocess.run([FFMPEG,...])`, `shutil.copy2` to `/mnt/c`):
+**Rule 1 (nothing local) — VIOLATED by every stage EXCEPT step3 (pod) and step4b
+(pod), not by the whole pipeline.** Stage 5A built `runpod_download.py` and wired
+it into produce_v2 as `--pod-download`: the clip download + excerpt cut now run
+on a RunPod pod, and only small guarded excerpts come home. The full-resolution
+source never touches ~ (proven, LANE_PLAN 5A.3). step4b (tracking) was
+already on RunPod. The remaining local violators:
 
-```
-$ grep -nE "yt-dlp|/mnt/c|subprocess.run\(\[FFMPEG|shutil.copy2" tools/produce_v2.py
-122: search_cmd yt-dlp   175: dl_cmd yt-dlp   404/413/437/448: ffmpeg assemble
-618: shutil.copy2 -> /mnt/c/Users/muads/Downloads
-```
+- step1 match_data (local ESPN API), step2 boards (local matplotlib),
+  step5 assemble (local ffmpeg), step6 voice (local ElevenLabs API),
+  step6b ambience (local ffmpeg), step7 merge (local ffmpeg),
+  step8 shorts (local ffmpeg crop), and the final `shutil.copy2` to
+  /mnt/c/Downloads (the one permitted local hand-off of the finished file).
+- cut-list GENERATION (`scoreboard_scan.py` + `broadcast_filler.py` +
+  `cut_list_gen.py` + PySceneDetect) runs locally and needs the clip — the
+  architectural gap: until cut-list generation moves to the pod, the pod-download
+  path needs pre-known windows. Blocked by scoreboard_scan's local-vision
+  dependency (gemma4 via localhost:11434; switch to GEMINI_API_KEY cloud vision).
+- `produce_episode.py`, `assemble_words_match.py` (separate local pipelines).
+- `cloud_produce.py` still downloads raw clips locally (`cloud_produce.py:223`).
+- Caveat: the pod yt-dlp path is bot-blocked by YouTube today (datacenter IP,
+  LANE_PLAN 5A.3), so the working rule-1 path is local-download → catbox → pod
+  cut, or a residential proxy to unblock pod yt-dlp (future work).
 
-Local-download / local-compute / local-storage violators (WIRED + STANDALONE):
-`produce_v2.py` (download + ffmpeg assemble/merge + shorts + /mnt/c copy),
-`produce_episode.py`, `assemble_words_match.py`, `scoreboard_scan.py`,
-`broadcast_filler.py`, `segment_scorer.py`, `tactical_render.py`,
-`tactical_boards.py`, `match_data.py`, `generate_voice.py`,
-`generate_ambience.py`, `merge_voice.py`, `shorts_crop.py`,
-`gemini_inventory_test.py` (reads local clip), `trim_tracking.py`,
-`validate_script.py`, `assemble_video.py`, `enhance_clips.py`,
-`generate_captions.py`, `thumbnail_generator.py`, `sharpness_check.py`,
-`render_video.py`, `tactical_overlay.py`, `check_and_download.py`. The cloud
-tools (`runpod_fulltrack`, `runpod_annotate`, `runpod_shorts`, `runpod_superres`,
-`runpod_stage1`, `gpu_superres`, `vastai_shorts`, `cloud_produce`,
-`luminance_pod`) are compute-compliant (pod) but `cloud_produce` still downloads
-raw clips locally (`cloud_produce.py:223`). Rule 1 cannot be met until the
-pod-side download path (LANE_PLAN 3B.5, ~2-3h) is built.
+**Rule 3 (no orphaned/untested) — 4 DEAD RETIRED (Stage 5C.2); smoke test done.**
+- DEAD, RETIRED 2026-09-09 (deleted, in git history): `tactical_overlay.py`,
+  `pitch_radar.py`, `render_video.py`, `check_and_download.py`. Tool count 46→42.
+- STANDALONE `--help` smoke test run (5C.1, $0): 26/27 LAUNCH. 10 have proper
+  argparse; 15 treat `--help` as a positional arg (no `-h`); `luminance_pod.py`
+  crashes (IndexError on argv[2]); `runpod_stage1.py` hangs (starts side effects
+  with no arg parsing). `--help` proves "launches," not "works end-to-end"
+  (4E.3 falsifier) — so rule 3 is NOT closed per-tool; e2e runs are still owed.
+  luminance_pod + runpod_stage1 are now fix-or-retire candidates.
+- `runpod_annotate.py` end-to-end: COSTED (~$0.01-0.02, ~5-8 min, same shape as
+  the verified runpod_fulltrack), NOT run (5C.3 per brief).
+- `runpod_fulltrack.py` + `runpod_download.py` are WIRED + tested (the compliant tools).
 
-**Rule 3 (no orphaned/untested) — VIOLATED by 4 DEAD + ~18 untested STANDALONE.**
-- DEAD (must retire): `tactical_overlay.py`, `pitch_radar.py`, `render_video.py`,
-  `check_and_download.py` (RECONCILIATION 1.1).
-- STANDALONE, never run end-to-end (import OK per 3D.1, execution unverified):
-  `produce_episode.py`, `cloud_produce.py`, `runpod_annotate.py`,
-  `runpod_shorts.py`, `runpod_superres.py`, `gpu_superres.py`,
-  `luminance_pod.py`, `sharpness_check.py`, `assemble_video.py`,
-  `validate_script.py`, `generate_captions.py`, `thumbnail_generator.py`,
-  `enhance_clips.py`, `viral_angle.py`, `agent_reach_research.py`,
-  `fresh_fetch.py`, `oauth_setup.py`, `ltx_enhance.py`.
-- Hand-run (tested by execution, not wired): `scoreboard_scan.py`,
-  `broadcast_filler.py`, `segment_scorer.py`, `assemble_words_match.py`,
-  `trim_tracking.py`, `gemini_inventory_test.py`, `youtube_upload.py`,
-  `runpod_stage1.py`. These meet "tested" but not "wired."
-- `runpod_fulltrack.py` is WIRED + tested (the only fully-compliant tool).
-
-This list is the work queue for rules 1 and 3. It is not fixed in this run.
+This list is the work queue for rules 1 and 3. Stage 5 closed the download
+violation (rule 1) and the 4 DEAD (rule 3); the CPU/storage stages and the
+untested-STANDALONE e2e runs remain.
 
 ---
 
@@ -1886,19 +1918,21 @@ tactical_overlay.
 
 ## Classification (from RECONCILIATION.md 1.1)
 
-- **WIRED** = reachable from produce_v2.py (12 tools).
+- **WIRED** = reachable from produce_v2.py (13 tools, +runpod_download via --pod-download).
 - **STANDALONE** = CLI entry point or hand-run utility, or wired only into
   another standalone entry point (27 tools).
-- **DEAD** = no caller anywhere (4 tools).
+- **DEAD** = no caller anywhere (4 tools) — RETIRED 2026-09-09 (Stage 5C.2),
+  deleted from the tree; in git history.
 
-## The 43 tools
+## The 40 tools (was 43; +runpod_download, -4 DEAD retired)
 
 | File | Class | Called by (file:line) | Last modified | Works? |
 |---|---|---|---|---|
-| `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-08 | works (liverpool-forest 720x1280 62.3s Sep 7) |
+| `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-09 | works (liverpool-forest 720x1280 62.3s Sep 7); --pod-download routes step3 to runpod_download (5A) |
 | `match_data.py` | WIRED | `produce_v2.py:69` | 2026-09-01 | works |
 | `tactical_boards.py` | WIRED | `produce_v2.py:78` | 2026-09-08 | works |
-| `runpod_fulltrack.py` | WIRED | `produce_v2.py:235` | 2026-09-08 | works (146s full-clip, $0.011, STATUS) |
+| `runpod_fulltrack.py` | WIRED | `produce_v2.py:235` | 2026-09-09 | works (146s full-clip, $0.011, STATUS); pitch_radar removed from ship list (5C.2) |
+| `runpod_download.py` | WIRED (--pod-download) | `produce_v2.py` step3_download_clips_pod | 2026-09-09 | built 5A; pod-side yt-dlp bot-blocked by YouTube (runs #1-3); excerpt-cut+guard proven via --source-url (2/3 windows, 4MB each, $0.005, LANE_PLAN 5A.3) |
 | `tactical_render.py` | WIRED | `produce_v2.py:285` | 2026-09-06 | works (Opus 8/8.5, STATUS) |
 | `generate_voice.py` | WIRED | `produce_v2.py:474` | 2026-09-08 | works |
 | `generate_ambience.py` | WIRED | `produce_v2.py:493` | 2026-08-22 | works (wired 2026-09-08, STATUS Part 6) |
@@ -1935,12 +1969,12 @@ tactical_overlay.
 | `gemini_inventory_test.py` | STANDALONE | no caller | 2026-09-08 | works (hand-run, STATUS Gemini section) |
 | `runpod_stage1.py` | STANDALONE (one-off) | no caller; docstring = one-off | 2026-09-05 | works (one-off, $0.05, STATUS) |
 | `ltx_enhance.py` | STANDALONE | no caller | 2026-08-23 | untested |
-| `tactical_overlay.py` | DEAD | no caller anywhere (`grep -rn` → only self) | 2026-09-01 | retire (superseded by tactical_render; LLM-guess-coords was the clipart root cause) |
-| `pitch_radar.py` | DEAD | shipped to pod by 3 runpod tools but never imported/run | 2026-08-23 | wire or retire (2D radar library, unused) |
-| `render_video.py` | DEAD | no caller; docstring says DEPRECATED | 2026-08-25 | retire |
-| `check_and_download.py` | DEAD | no caller; RunPod-webhook downloader, superseded by runpod_fulltrack | 2026-08-23 | retire |
+| `tactical_overlay.py` | RETIRED (5C.2) | was DEAD | 2026-09-09 | DELETED 2026-09-09; in git history (superseded by tactical_render) |
+| `pitch_radar.py` | RETIRED (5C.2) | was DEAD (shipped but never run) | 2026-09-09 | DELETED 2026-09-09; ship-list refs removed from runpod_fulltrack/stage1/annotate |
+| `render_video.py` | RETIRED (5C.2) | was DEAD (DEPRECATED) | 2026-09-09 | DELETED 2026-09-09; in git history |
+| `check_and_download.py` | RETIRED (5C.2) | was DEAD (superseded by runpod_fulltrack) | 2026-09-09 | DELETED 2026-09-09; in git history |
 
-Counts: **12 WIRED, 27 STANDALONE, 4 DEAD** = 43.
+Counts: **13 WIRED, 27 STANDALONE, 0 DEAD (4 retired)** = 40 (+2 libs = 42 .py files).
 
 ## Wired set (reachable from produce_v2.py)
 

@@ -11,19 +11,21 @@ tactical_overlay.
 
 ## Classification (from RECONCILIATION.md 1.1)
 
-- **WIRED** = reachable from produce_v2.py (12 tools).
+- **WIRED** = reachable from produce_v2.py (13 tools, +runpod_download via --pod-download).
 - **STANDALONE** = CLI entry point or hand-run utility, or wired only into
   another standalone entry point (27 tools).
-- **DEAD** = no caller anywhere (4 tools).
+- **DEAD** = no caller anywhere (4 tools) — RETIRED 2026-09-09 (Stage 5C.2),
+  deleted from the tree; in git history.
 
-## The 43 tools
+## The 40 tools (was 43; +runpod_download, -4 DEAD retired)
 
 | File | Class | Called by (file:line) | Last modified | Works? |
 |---|---|---|---|---|
-| `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-08 | works (liverpool-forest 720x1280 62.3s Sep 7) |
+| `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-09 | works (liverpool-forest 720x1280 62.3s Sep 7); --pod-download routes step3 to runpod_download (5A) |
 | `match_data.py` | WIRED | `produce_v2.py:69` | 2026-09-01 | works |
 | `tactical_boards.py` | WIRED | `produce_v2.py:78` | 2026-09-08 | works |
-| `runpod_fulltrack.py` | WIRED | `produce_v2.py:235` | 2026-09-08 | works (146s full-clip, $0.011, STATUS) |
+| `runpod_fulltrack.py` | WIRED | `produce_v2.py:235` | 2026-09-09 | works (146s full-clip, $0.011, STATUS); pitch_radar removed from ship list (5C.2) |
+| `runpod_download.py` | WIRED (--pod-download) | `produce_v2.py` step3_download_clips_pod | 2026-09-09 | built 5A; pod-side yt-dlp bot-blocked by YouTube (runs #1-3); excerpt-cut+guard proven via --source-url (2/3 windows, 4MB each, $0.005, LANE_PLAN 5A.3) |
 | `tactical_render.py` | WIRED | `produce_v2.py:285` | 2026-09-06 | works (Opus 8/8.5, STATUS) |
 | `generate_voice.py` | WIRED | `produce_v2.py:474` | 2026-09-08 | works |
 | `generate_ambience.py` | WIRED | `produce_v2.py:493` | 2026-08-22 | works (wired 2026-09-08, STATUS Part 6) |
@@ -60,12 +62,12 @@ tactical_overlay.
 | `gemini_inventory_test.py` | STANDALONE | no caller | 2026-09-08 | works (hand-run, STATUS Gemini section) |
 | `runpod_stage1.py` | STANDALONE (one-off) | no caller; docstring = one-off | 2026-09-05 | works (one-off, $0.05, STATUS) |
 | `ltx_enhance.py` | STANDALONE | no caller | 2026-08-23 | untested |
-| `tactical_overlay.py` | DEAD | no caller anywhere (`grep -rn` → only self) | 2026-09-01 | retire (superseded by tactical_render; LLM-guess-coords was the clipart root cause) |
-| `pitch_radar.py` | DEAD | shipped to pod by 3 runpod tools but never imported/run | 2026-08-23 | wire or retire (2D radar library, unused) |
-| `render_video.py` | DEAD | no caller; docstring says DEPRECATED | 2026-08-25 | retire |
-| `check_and_download.py` | DEAD | no caller; RunPod-webhook downloader, superseded by runpod_fulltrack | 2026-08-23 | retire |
+| `tactical_overlay.py` | RETIRED (5C.2) | was DEAD | 2026-09-09 | DELETED 2026-09-09; in git history (superseded by tactical_render) |
+| `pitch_radar.py` | RETIRED (5C.2) | was DEAD (shipped but never run) | 2026-09-09 | DELETED 2026-09-09; ship-list refs removed from runpod_fulltrack/stage1/annotate |
+| `render_video.py` | RETIRED (5C.2) | was DEAD (DEPRECATED) | 2026-09-09 | DELETED 2026-09-09; in git history |
+| `check_and_download.py` | RETIRED (5C.2) | was DEAD (superseded by runpod_fulltrack) | 2026-09-09 | DELETED 2026-09-09; in git history |
 
-Counts: **12 WIRED, 27 STANDALONE, 4 DEAD** = 43.
+Counts: **13 WIRED, 27 STANDALONE, 0 DEAD (4 retired)** = 40 (+2 libs = 42 .py files).
 
 ## Wired set (reachable from produce_v2.py)
 

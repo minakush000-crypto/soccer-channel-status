@@ -1185,3 +1185,23 @@ episode.
 Cost Part 6: ~$0.02 (1 ambience sound-gen + 3 short TTS samples; all tiny).
 TOTAL session cost (all 6 parts): ~$0.27 (Part 1 Opus ~0.02, Part 4 ~0.10,
 Part 5 ~0.10, Part 6 ~0.02; Parts 2-3 free).
+
+## Stage 5 — pod-side download path + rule-3 debt, 2026-09-09
+
+5A (built): tools/runpod_download.py — pod-side yt-dlp + excerpt cut; only
+guarded excerpts come home, full source stays on pod. Wired into produce_v2 as
+--pod-download. PROVEN with real runs: 2/3 goal-window excerpts (4MB each) came
+home under the 200MB guard; 128MB source never written locally; $0.005/run.
+YouTube bot-blocks the RunPod datacenter IP on every player client (web_safari,
+ios, android, default) — "Sign in to confirm you're not a bot" — so pod yt-dlp
+is not viable today; --source-url (catbox) is the working cut path. 720p cap
+kept for the local path; pod path is 1080p-ready. Cost: ~$0.03 across 7 pod runs.
+5B (report): B2 archive designed (boto3 already installed, no S3 code yet,
+~1.5-2.5h to build; archive only finals + publish-log ~100-200MB, not the 2.9G
+renders; pod->B2 possible without touching laptop; .env key handling proposed).
+5C.1: --help smoke test on 27 STANDALONE — 26/27 launch; luminance_pod crashes
+(IndexError), runpod_stage1 hangs; rule 3 not closed per-tool.
+5C.2: 4 DEAD tools retired (deleted, in git history); tool count 46 -> 42.
+5C.3: runpod_annotate e2e costed (~$0.01-0.02), not run per brief.
+DECISIONS.md doctrine gap + TOOLS.md updated. LANE_PLAN.md Stage 5 appended.
+Pushed: 0fb4e96..80adff9.

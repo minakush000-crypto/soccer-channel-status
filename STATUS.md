@@ -209,3 +209,18 @@ for Mayo to pick. Current .env VOICE_ID = 1stSYyl7ZVPJk2ECrNlo.
 The old STATE.md's 7/10, 8/10, 9/10 vision quality scores were typed by hand.
 No code produces a score. Do not cite them. `sharpness_check.py` exists and
 could produce a real number but is not in produce_v2.py.
+## Stage 5 — pod-side download path + rule-3 debt, 2026-09-09
+
+- NEW: tools/runpod_download.py (WIRED via --pod-download). Pod downloads +
+  cuts excerpts; only guarded excerpts come home. Proven: 2/3 windows, 4MB each,
+  128MB source never local, $0.005/run. YouTube bot-blocks pod yt-dlp (all
+  clients) — --source-url (catbox) is the working path today.
+- 4 DEAD RETIRED: tactical_overlay, pitch_radar, render_video, check_and_download
+  deleted (git history); pitch_radar ship-list refs removed. Tool count 46 -> 42.
+- 27 STANDALONE smoke test: 26/27 launch; luminance_pod crashes, runpod_stage1
+  hangs. Rule 3 not closed per-tool (e2e owed).
+- Rule 1: step3 (download) + step4b (tracking) now have pod paths; the CPU/storage
+  stages (boards, assemble, voice, ambience, merge, shorts) + cut-list generation
+  still run locally (DECISIONS.md gap list updated).
+- 5A.5: 720p cap KEPT for the local path (pod yt-dlp bot-blocked, so 1080p-on-pod
+  untested); pod path is 1080p-ready for when a proxy unblocks it.
