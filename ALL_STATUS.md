@@ -221,6 +221,20 @@ relay-verified search) — no wired tool generates them today (RECONCILIATION
 the lane expansion and the cut-list generator.
 See PROGRESS.md and STATUS.md for full detail.
 
+## STANDING OPERATING DOCTRINE
+1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads. No local GPU work.
+   All compute and all storage go to the cloud GPU providers.
+2. No tasking without calling the available tools, skills, connectors, web
+   fetch, research or MCPs where they apply.
+3. No orphaned, standalone or untested item, tool or aspect of the pipeline
+   may exist. Everything is wired, tested, or retired.
+4. Every brief carries this doctrine as a footer.
+
+The truthful gap list (which tools violate rules 1 and 3 today) lives in
+DECISIONS.md under this same heading. Rule 1 is violated by the whole pipeline
+(produce_v2 downloads + processes locally); rule 3 by 4 DEAD + ~18 untested
+STANDALONE tools. Not yet fixed.
+
 ---
 
 # FILE: STATUS.md
@@ -1799,6 +1813,62 @@ loops up to 5 candidates, ffprobes each, rejects <720p, uses cookies from
 secrets/yt_cookies.txt, fails loudly. Verified: source is now 1920x1080
 (CONTEXT.md). Backup at tools/produce_v2.py.bak.
 
+## STANDING OPERATING DOCTRINE (added 2026-09-09, Stage 4A)
+
+1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads. No local GPU work.
+   All compute and all storage go to the cloud GPU providers.
+2. No tasking without calling the available tools, skills, connectors, web
+   fetch, research or MCPs where they apply.
+3. No orphaned, standalone or untested item, tool or aspect of the pipeline
+   may exist. Everything is wired, tested, or retired.
+4. Every brief carries this doctrine as a footer.
+
+### Gap: what does NOT yet meet the doctrine (truthful list, not fixed this run)
+
+**Rule 1 (nothing local) — VIOLATED by the whole pipeline today.** produce_v2
+downloads and processes locally; only step4b (tracking) runs on RunPod. Verified
+by grep (`yt-dlp`, `subprocess.run([FFMPEG,...])`, `shutil.copy2` to `/mnt/c`):
+
+```
+$ grep -nE "yt-dlp|/mnt/c|subprocess.run\(\[FFMPEG|shutil.copy2" tools/produce_v2.py
+122: search_cmd yt-dlp   175: dl_cmd yt-dlp   404/413/437/448: ffmpeg assemble
+618: shutil.copy2 -> /mnt/c/Users/muads/Downloads
+```
+
+Local-download / local-compute / local-storage violators (WIRED + STANDALONE):
+`produce_v2.py` (download + ffmpeg assemble/merge + shorts + /mnt/c copy),
+`produce_episode.py`, `assemble_words_match.py`, `scoreboard_scan.py`,
+`broadcast_filler.py`, `segment_scorer.py`, `tactical_render.py`,
+`tactical_boards.py`, `match_data.py`, `generate_voice.py`,
+`generate_ambience.py`, `merge_voice.py`, `shorts_crop.py`,
+`gemini_inventory_test.py` (reads local clip), `trim_tracking.py`,
+`validate_script.py`, `assemble_video.py`, `enhance_clips.py`,
+`generate_captions.py`, `thumbnail_generator.py`, `sharpness_check.py`,
+`render_video.py`, `tactical_overlay.py`, `check_and_download.py`. The cloud
+tools (`runpod_fulltrack`, `runpod_annotate`, `runpod_shorts`, `runpod_superres`,
+`runpod_stage1`, `gpu_superres`, `vastai_shorts`, `cloud_produce`,
+`luminance_pod`) are compute-compliant (pod) but `cloud_produce` still downloads
+raw clips locally (`cloud_produce.py:223`). Rule 1 cannot be met until the
+pod-side download path (LANE_PLAN 3B.5, ~2-3h) is built.
+
+**Rule 3 (no orphaned/untested) — VIOLATED by 4 DEAD + ~18 untested STANDALONE.**
+- DEAD (must retire): `tactical_overlay.py`, `pitch_radar.py`, `render_video.py`,
+  `check_and_download.py` (RECONCILIATION 1.1).
+- STANDALONE, never run end-to-end (import OK per 3D.1, execution unverified):
+  `produce_episode.py`, `cloud_produce.py`, `runpod_annotate.py`,
+  `runpod_shorts.py`, `runpod_superres.py`, `gpu_superres.py`,
+  `luminance_pod.py`, `sharpness_check.py`, `assemble_video.py`,
+  `validate_script.py`, `generate_captions.py`, `thumbnail_generator.py`,
+  `enhance_clips.py`, `viral_angle.py`, `agent_reach_research.py`,
+  `fresh_fetch.py`, `oauth_setup.py`, `ltx_enhance.py`.
+- Hand-run (tested by execution, not wired): `scoreboard_scan.py`,
+  `broadcast_filler.py`, `segment_scorer.py`, `assemble_words_match.py`,
+  `trim_tracking.py`, `gemini_inventory_test.py`, `youtube_upload.py`,
+  `runpod_stage1.py`. These meet "tested" but not "wired."
+- `runpod_fulltrack.py` is WIRED + tested (the only fully-compliant tool).
+
+This list is the work queue for rules 1 and 3. It is not fixed in this run.
+
 ---
 
 # FILE: TOOLS.md
@@ -1841,7 +1911,7 @@ tactical_overlay.
 | `cloud_produce.py` | STANDALONE | entry point; no caller | 2026-09-08 | untested (pod-side yt-dlp + download_url guarded) |
 | `runpod_annotate.py` | STANDALONE | entry point; no caller | 2026-08-23 | untested (GAPS) |
 | `runpod_shorts.py` | STANDALONE | entry point; no caller; uploads `luminance_pod.py:254` | 2026-08-29 | untested |
-| `vastai_shorts.py` | STANDALONE | entry point; no caller; uploads `luminance_pod.py:334` | 2026-08-30 | untested |
+| `vastai_shorts.py` | RETIRED (4B.4) | was STANDALONE; end-to-end run 2026-09-09: Vast key works, pod creates, but encoding_failed (size 0) deterministically — encode script broken on the pod | 2026-09-09 | retired (rule 3) |
 | `runpod_superres.py` | STANDALONE | entry point; no caller | 2026-08-30 | untested |
 | `gpu_superres.py` | STANDALONE | entry point; no caller | 2026-08-30 | untested |
 | `luminance_pod.py` | STANDALONE (transitive) | `runpod_shorts.py:254`, `vastai_shorts.py:334` (uploaded to pod) | 2026-08-29 | untested |
@@ -1854,6 +1924,7 @@ tactical_overlay.
 | `segment_scorer.py` | STANDALONE | no caller; `cv_annotate.py:332` is a comment only | 2026-09-05 | works (hand-run on full-clip data, STATUS) |
 | `scoreboard_scan.py` | STANDALONE | no caller | 2026-09-08 | works (3/3 goals, STATUS) |
 | `broadcast_filler.py` | STANDALONE | no caller | 2026-09-09 | works; FIXED 3A.1 (phantom-segment bug: --clip/--duration bounds); yields 43s/8min, 192s/13.5min, 373s/18.7min |
+| `cut_list_gen.py` | STANDALONE (prerequisite) | no caller; run by hand before produce_v2 to write footage=START-END tags | 2026-09-09 | works (4C); PySceneDetect + broadcast_filler -> scripts/<slug>.md; proven on 18.7min (cuts at 26.6/214.7/222.1/245.4) |
 | `assemble_words_match.py` | STANDALONE | no caller | 2026-09-08 | works (arsenal-chelsea 45.2s, STATUS) |
 | `trim_tracking.py` | STANDALONE | no caller; has `main()` CLI; output in `artifacts/tracking_summary/` | 2026-09-08 | works (hand-run) |
 | `viral_angle.py` | STANDALONE | no caller | 2026-08-25 | untested |
@@ -2023,3 +2094,17 @@ The 2026-09-06_arsenal-chelsea dir was built with `assemble_words_match.py`
 15.0MB, Sep 8. `_fullmatch_arsenal-chelsea-carabao` is an incomplete manual
 download (only match_data.json; the .part was deleted 2026-09-08, see
 RECONCILIATION 1.5/1.6).
+
+## STANDING OPERATING DOCTRINE
+1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads. No local GPU work.
+   All compute and all storage go to the cloud GPU providers.
+2. No tasking without calling the available tools, skills, connectors, web
+   fetch, research or MCPs where they apply.
+3. No orphaned, standalone or untested item, tool or aspect of the pipeline
+   may exist. Everything is wired, tested, or retired.
+4. Every brief carries this doctrine as a footer.
+
+The truthful gap list (which tools violate rules 1 and 3 today) lives in
+DECISIONS.md under this same heading. The current pipeline violates rule 1
+(produce_v2 runs locally except step4b); rule 3 (4 DEAD + ~18 untested
+STANDALONE). Not yet fixed.

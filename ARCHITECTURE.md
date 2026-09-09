@@ -132,3 +132,17 @@ The 2026-09-06_arsenal-chelsea dir was built with `assemble_words_match.py`
 15.0MB, Sep 8. `_fullmatch_arsenal-chelsea-carabao` is an incomplete manual
 download (only match_data.json; the .part was deleted 2026-09-08, see
 RECONCILIATION 1.5/1.6).
+
+## STANDING OPERATING DOCTRINE
+1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads. No local GPU work.
+   All compute and all storage go to the cloud GPU providers.
+2. No tasking without calling the available tools, skills, connectors, web
+   fetch, research or MCPs where they apply.
+3. No orphaned, standalone or untested item, tool or aspect of the pipeline
+   may exist. Everything is wired, tested, or retired.
+4. Every brief carries this doctrine as a footer.
+
+The truthful gap list (which tools violate rules 1 and 3 today) lives in
+DECISIONS.md under this same heading. The current pipeline violates rule 1
+(produce_v2 runs locally except step4b); rule 3 (4 DEAD + ~18 untested
+STANDALONE). Not yet fixed.

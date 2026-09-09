@@ -89,3 +89,59 @@ Why: produce_v2.py was silently accepting 360p downloads and upscaling. Now
 loops up to 5 candidates, ffprobes each, rejects <720p, uses cookies from
 secrets/yt_cookies.txt, fails loudly. Verified: source is now 1920x1080
 (CONTEXT.md). Backup at tools/produce_v2.py.bak.
+
+## STANDING OPERATING DOCTRINE (added 2026-09-09, Stage 4A)
+
+1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads. No local GPU work.
+   All compute and all storage go to the cloud GPU providers.
+2. No tasking without calling the available tools, skills, connectors, web
+   fetch, research or MCPs where they apply.
+3. No orphaned, standalone or untested item, tool or aspect of the pipeline
+   may exist. Everything is wired, tested, or retired.
+4. Every brief carries this doctrine as a footer.
+
+### Gap: what does NOT yet meet the doctrine (truthful list, not fixed this run)
+
+**Rule 1 (nothing local) — VIOLATED by the whole pipeline today.** produce_v2
+downloads and processes locally; only step4b (tracking) runs on RunPod. Verified
+by grep (`yt-dlp`, `subprocess.run([FFMPEG,...])`, `shutil.copy2` to `/mnt/c`):
+
+```
+$ grep -nE "yt-dlp|/mnt/c|subprocess.run\(\[FFMPEG|shutil.copy2" tools/produce_v2.py
+122: search_cmd yt-dlp   175: dl_cmd yt-dlp   404/413/437/448: ffmpeg assemble
+618: shutil.copy2 -> /mnt/c/Users/muads/Downloads
+```
+
+Local-download / local-compute / local-storage violators (WIRED + STANDALONE):
+`produce_v2.py` (download + ffmpeg assemble/merge + shorts + /mnt/c copy),
+`produce_episode.py`, `assemble_words_match.py`, `scoreboard_scan.py`,
+`broadcast_filler.py`, `segment_scorer.py`, `tactical_render.py`,
+`tactical_boards.py`, `match_data.py`, `generate_voice.py`,
+`generate_ambience.py`, `merge_voice.py`, `shorts_crop.py`,
+`gemini_inventory_test.py` (reads local clip), `trim_tracking.py`,
+`validate_script.py`, `assemble_video.py`, `enhance_clips.py`,
+`generate_captions.py`, `thumbnail_generator.py`, `sharpness_check.py`,
+`render_video.py`, `tactical_overlay.py`, `check_and_download.py`. The cloud
+tools (`runpod_fulltrack`, `runpod_annotate`, `runpod_shorts`, `runpod_superres`,
+`runpod_stage1`, `gpu_superres`, `vastai_shorts`, `cloud_produce`,
+`luminance_pod`) are compute-compliant (pod) but `cloud_produce` still downloads
+raw clips locally (`cloud_produce.py:223`). Rule 1 cannot be met until the
+pod-side download path (LANE_PLAN 3B.5, ~2-3h) is built.
+
+**Rule 3 (no orphaned/untested) — VIOLATED by 4 DEAD + ~18 untested STANDALONE.**
+- DEAD (must retire): `tactical_overlay.py`, `pitch_radar.py`, `render_video.py`,
+  `check_and_download.py` (RECONCILIATION 1.1).
+- STANDALONE, never run end-to-end (import OK per 3D.1, execution unverified):
+  `produce_episode.py`, `cloud_produce.py`, `runpod_annotate.py`,
+  `runpod_shorts.py`, `runpod_superres.py`, `gpu_superres.py`,
+  `luminance_pod.py`, `sharpness_check.py`, `assemble_video.py`,
+  `validate_script.py`, `generate_captions.py`, `thumbnail_generator.py`,
+  `enhance_clips.py`, `viral_angle.py`, `agent_reach_research.py`,
+  `fresh_fetch.py`, `oauth_setup.py`, `ltx_enhance.py`.
+- Hand-run (tested by execution, not wired): `scoreboard_scan.py`,
+  `broadcast_filler.py`, `segment_scorer.py`, `assemble_words_match.py`,
+  `trim_tracking.py`, `gemini_inventory_test.py`, `youtube_upload.py`,
+  `runpod_stage1.py`. These meet "tested" but not "wired."
+- `runpod_fulltrack.py` is WIRED + tested (the only fully-compliant tool).
+
+This list is the work queue for rules 1 and 3. It is not fixed in this run.

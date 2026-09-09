@@ -209,3 +209,17 @@ relay-verified search) — no wired tool generates them today (RECONCILIATION
 1.2). E iteration priorities from Opus remain open but are now lower than
 the lane expansion and the cut-list generator.
 See PROGRESS.md and STATUS.md for full detail.
+
+## STANDING OPERATING DOCTRINE
+1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads. No local GPU work.
+   All compute and all storage go to the cloud GPU providers.
+2. No tasking without calling the available tools, skills, connectors, web
+   fetch, research or MCPs where they apply.
+3. No orphaned, standalone or untested item, tool or aspect of the pipeline
+   may exist. Everything is wired, tested, or retired.
+4. Every brief carries this doctrine as a footer.
+
+The truthful gap list (which tools violate rules 1 and 3 today) lives in
+DECISIONS.md under this same heading. Rule 1 is violated by the whole pipeline
+(produce_v2 downloads + processes locally); rule 3 by 4 DEAD + ~18 untested
+STANDALONE tools. Not yet fixed.
