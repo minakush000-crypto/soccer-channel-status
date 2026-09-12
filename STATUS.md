@@ -242,3 +242,23 @@ could produce a real number but is not in produce_v2.py.
 - Open: 6A.2/6E.1 real /mnt/f proofs (pending mount: sudo mount -t drvfs F: /mnt/f),
   6E.2 real B2 upload (pending key), 6D.1 3/3 (pending non-throttled pod), cut-list
   on pod (6D.4), SCRIPT_TEMPLATE 4-template blocker.
+
+## Stage 9 — benchmark spec + three fixes, 2026-09-12
+
+- NEW: EPISODE_SPEC.md — measurable definition of a finished episode, every
+  MUST traced to a 9A measurement of 6 reference videos. Production freeze
+  gate until approved. Full 9A data + 9D in LANE_PLAN.md §Stage 9.
+- 9C.1 FIXED (was: tactical_boards fabricates 0 stats + shows 0-0 for
+  previews): stat_card skips unavailable rows + outcome stats for previews;
+  possession board refuses when absent; formation hides scoreline for
+  previews. Proven. match_data.json "preview": true (render artifact, gitignored).
+- 9C.2 FIXED (was: pillarboxed 1920x1080): boards normalize to 1920x1080
+  (fit + pitch-bg pad). Edge check before black 14/14 -> after 0/14. All
+  board PNGs/MP4s now 1920x1080.
+- 9C.3 diagnosed: 41s is the script (~140 words). Need 1100-1900 words for
+  8-14 min. Word budget not yet in SCRIPT_TEMPLATE.
+- 9D: boards-only lane B resembles none of the 6 references; recommend drop
+  as publishable format (OK as sub-60s preview Short). Footage acquisition
+  still blocked by rule 1 + YouTube datacenter block + /mnt/f unmounted.
+- /dev/shm used for 9A under a one-time rule-1 exception (RAM, no vhdx bloat);
+  cleaned up. /mnt/f still unmounted.
