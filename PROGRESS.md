@@ -1266,3 +1266,33 @@ unchanged by 7B (report only, not built).
 New fragile: runpod_download/runpod_fulltrack leak the pod on timeout/crash
 (manual termination required until a finally/signal-handler cleanup is added).
 Committed 6b349f8, pushed to master.
+
+## 2026-09-12 session: Stage 8 — fix the pod leak, produce a lane B episode
+
+8A (pod leak FIXED): runpod_download.py + runpod_fulltrack.py already had a
+try/finally that terminated the pod on normal exit; the leak was SIGTERM/SIGINT
+(`timeout`/Ctrl-C) killing the process before the finally ran. Added a module-
+level _pod_state + idempotent _cleanup_pod() + SIGTERM/SIGINT signal handler to
+both files; every exit path now terminates the pod. Proven at mechanism level
+(6/6 cases PASS both modules, incl. real os.kill SIGTERM); live-pod 3-way BLOCKED
+on RunPod zero GPU capacity (0/48 types today) — ◑ pending availability. New
+tools/pod_check.py (warn / --terminate) + .claude/hooks/check_pods.sh SessionStart
+hook + project .claude/settings.json + CLAUDE.md rule 11: leaked pods surfaced at
+session start. 8A.4: RunPod API has pod.uptimeSeconds (live pods only) +
+billing(input) (introspection disabled); terminated pods gone → the two leftover
+pods' spend NOT API-recoverable; web console is the only path.
+
+8B (lane B episode PRODUCED): Man Utd vs Man City derby preview (2026-09-13).
+fresh_fetch (54 items) → hand-written lane B script → validate_script --lane B
+PASS → tactical_boards (3 boards, after hand-adding a `score` field it required)
+→ generate_voice (ElevenLabs, 41.0s) → manual ffmpeg assemble (no wired board-
+only assembler). Output: renders/2026-09-12_preview-manc-derby/final_video.mp4,
+1920x1080, 41.02s, 975KB, h264+aac. No pod, no upload. 12-item break list
+recorded (8B.4): no script generator, hand-built match_data, tactical_boards
+crashed on missing score / shows 0-0 + zero stats for a preview, no board-only
+assembler, no shorts crop, 41s vs 6-10min target, etc.
+
+8C (report only): lane C needs ~0h beyond B for a boards-only episode (same
+path; ~2-3h if the stills fetcher is wanted). Gemini-cloud cut-list switch
+confirmed still 1.5-2.5h and still the last rule-1 work not blocked on external
+input. Not built.
