@@ -27,10 +27,10 @@ tactical_overlay.
 |---|---|---|---|---|
 | `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-09 | works (liverpool-forest 720x1280 62.3s Sep 7); --pod-download routes step3 to runpod_download (5A) |
 | `match_data.py` | WIRED | `produce_v2.py:69` | 2026-09-01 | works |
-| `tactical_boards.py` | WIRED | `produce_v2.py:78` | 2026-09-08 | works |
+| `tactical_boards.py` | WIRED | `produce_v2.py:78` | 2026-09-08 | works. 10C: 2D matplotlib board renderer; slated for replacement by scripted 3D (10C). NOT deleted — runs until a 3D replacement is proven at/above spec. 10C.4 deletion HELD: GPU capacity 0/48 on 2026-09-12, no 3D frame rendered yet. |
 | `runpod_fulltrack.py` | WIRED | `produce_v2.py:235` | 2026-09-09 | works (146s full-clip, $0.011, STATUS); pitch_radar removed from ship list (5C.2) |
 | `runpod_download.py` | WIRED (--pod-download) | `produce_v2.py` step3_download_clips_pod | 2026-09-09 | built 5A; pod-side yt-dlp bot-blocked by YouTube (runs #1-3); excerpt-cut+guard proven via --source-url (2/3 windows, 4MB each, $0.005, LANE_PLAN 5A.3) |
-| `tactical_render.py` | WIRED | `produce_v2.py:285` | 2026-09-06 | works (Opus 8/8.5, STATUS) |
+| `tactical_render.py` | WIRED | `produce_v2.py:285` | 2026-09-06 | works (Opus 8/8.5, STATUS). 10C: 2D top-down matplotlib renderer; slated for replacement by scripted 3D (10C). NOT deleted — runs until a 3D replacement is proven at/above spec. 10C.4 deletion HELD: GPU 0/48 on 2026-09-12. |
 | `generate_voice.py` | WIRED | `produce_v2.py:474` | 2026-09-08 | works |
 | `generate_ambience.py` | WIRED | `produce_v2.py:493` | 2026-08-22 | works (wired 2026-09-08, STATUS Part 6) |
 | `merge_voice.py` | WIRED | `produce_v2.py:514` | 2026-08-25 | works |

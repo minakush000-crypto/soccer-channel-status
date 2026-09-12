@@ -1321,3 +1321,38 @@ Footage conflict stated: references need broadcast footage; rule 1 + YouTube
 datacenter block + /mnt/f unmounted block doctrine-clean acquisition.
 
 Committed + pushed this stage.
+
+### Stage 10 — amendments + script budget + opening gate + 3D scope (2026-09-12)
+
+10A: applied 3 approved amendments to EPISODE_SPEC.md (talking-head -> format
+decision; 3D -> build target; footage removed from impossible) and amended
+doctrine Rule 1 in all 4 canonical docs (CLAUDE/CONTEXT/DECISIONS/ARCHITECTURE)
+to "raw footage via residential -> /mnt/f -> pod -> delete locally." 9D.2
+updated: footage conflict resolved by the amendment; residual constraint is
+/mnt/f mount (physical).
+
+10B (biggest gap, script length): SCRIPT_TEMPLATE.md §WORD BUDGET per lane
+(A/D 1400-2100, B/C 1050-1750) with per-section targets. validate_script.py
+enforces the lane minimum (FAIL if under) — proven: 17-word script FAILs
+"1383 short". tools/script_gen.py built (the missing 8B.4 generator): glm-
+5.2:cloud via Ollama, per-section calls, reads match_data + fresh brief,
+emits a draft + human-intervention notes. Proven: 1439-word lane B draft
+(passes 1050 min). Honest: LLM hallucinates; human must fact-check, resolve
+[SRC], confirm [VISUAL], edit, validate.
+
+10D (opening hook): validate_script.py check_opening_hook rejects a static
+formation-board open (spec §6) before assembly. Proven: formation open FAILs,
+footage open PASSes (full CLI). Lane B template Hook board=formation ->
+board=stat_card (data visual) so lane B stays passable.
+
+10C (3D, scope + one PoC only): Blender confirmed as the right tool (Manim/
+pyrender/Unreal rejected). Scope: bpy scene_gen.py on a RunPod GPU pod
+headless, ~$0.05-0.10/episode, ~15-30min wall, 1-3 days to BUILD. 2D today
+= flat top-down matplotlib; 3D target = perspective pitch + camera moves +
+animated arrows (matches DK FALCON). PoC BLOCKED: GPU 0/48 on 2026-09-12
+(runpod.get_gpus re-checked twice). 10C.4 deletion HELD per both 10C versions
+— tactical_render.py + tactical_boards.py stay until a 3D replacement is
+proven at/above spec. TOOLS.md annotated. Downstream breakage list in
+LANE_PLAN.md §Stage 10C.6.
+
+Production freeze stays until an episode scores >= 7/10. Committed + pushed.

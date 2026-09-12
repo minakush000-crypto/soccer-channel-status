@@ -226,11 +226,14 @@ the lane expansion and the cut-list generator.
 See PROGRESS.md and STATUS.md for full detail.
 
 ## STANDING OPERATING DOCTRINE
-1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads, except raw source
-   staging on the USB flash drive at /mnt/f (staging area ONLY: download lands
-   there, ships to the pod, gets deleted; never a working directory, because the
-   vhdx never shrinks and /mnt/f frees normally). No local GPU work.
-   All compute and all storage go to the cloud GPU providers.
+1. Raw footage is acquired over the residential connection, staged on /mnt/f,
+   shipped to the pod, and deleted locally. Nothing raw is written inside
+   ~. No local GPU work. All heavy compute and all archival storage
+   go to the cloud. The purpose of this rule is that the ext4.vhdx never grows
+   and no GPU work runs on the N150; staging on /mnt/f satisfies both.
+   (Amended 2026-09-12, Stage 10A.3: residential YouTube download works —
+   proven on 6 reference videos Stage 9A; the obstacle was the old rule-1
+   wording, not YouTube.)
 2. No tasking without calling the available tools, skills, connectors, web
    fetch, research or MCPs where they apply.
 3. No orphaned, standalone or untested item, tool or aspect of the pipeline
@@ -510,6 +513,26 @@ could produce a real number but is not in produce_v2.py.
   still blocked by rule 1 + YouTube datacenter block + /mnt/f unmounted.
 - /dev/shm used for 9A under a one-time rule-1 exception (RAM, no vhdx bloat);
   cleaned up. /mnt/f still unmounted.
+
+## Stage 10 — amendments + script budget + opening gate + 3D scope, 2026-09-12
+
+- EPISODE_SPEC.md APPROVED with 3 amendments applied: talking-head is a
+  format decision (voiceover-only); 3D renders promoted to a build target;
+  footage acquisition removed from impossible.
+- Doctrine Rule 1 amended in all 4 canonical docs (CLAUDE/CONTEXT/DECISIONS/
+  ARCHITECTURE): raw footage via residential -> /mnt/f -> pod -> delete
+  locally. Verified: old rule-1 text 0 remaining, new text 1 in each doc.
+- 10B: SCRIPT_TEMPLATE.md §WORD BUDGET (A/D 1400-2100, B/C 1050-1750).
+  validate_script.py enforces the lane min (proven: 17w FAIL). tools/
+  script_gen.py built (glm-5.2:cloud, per-section, reads match_data + fresh
+  brief; 1439w draft proven). Human must fact-check + resolve [SRC].
+- 10D: validate_script.py check_opening_hook rejects a static formation-board
+  open (spec §6) before assembly. Proven: formation FAIL, footage PASS.
+- 10C: Blender confirmed right tool. PoC BLOCKED on 0/48 GPU (2026-09-12,
+  re-checked twice). 10C.4 deletion HELD — tactical_render.py +
+  tactical_boards.py stay until a 3D replacement is proven at/above spec.
+  TOOLS.md annotated. Scope + downstream list in LANE_PLAN.md §Stage 10.
+- Production freeze stays until an episode scores >= 7/10.
 
 
 ---
@@ -1840,6 +1863,41 @@ datacenter block + /mnt/f unmounted block doctrine-clean acquisition.
 
 Committed + pushed this stage.
 
+### Stage 10 — amendments + script budget + opening gate + 3D scope (2026-09-12)
+
+10A: applied 3 approved amendments to EPISODE_SPEC.md (talking-head -> format
+decision; 3D -> build target; footage removed from impossible) and amended
+doctrine Rule 1 in all 4 canonical docs (CLAUDE/CONTEXT/DECISIONS/ARCHITECTURE)
+to "raw footage via residential -> /mnt/f -> pod -> delete locally." 9D.2
+updated: footage conflict resolved by the amendment; residual constraint is
+/mnt/f mount (physical).
+
+10B (biggest gap, script length): SCRIPT_TEMPLATE.md §WORD BUDGET per lane
+(A/D 1400-2100, B/C 1050-1750) with per-section targets. validate_script.py
+enforces the lane minimum (FAIL if under) — proven: 17-word script FAILs
+"1383 short". tools/script_gen.py built (the missing 8B.4 generator): glm-
+5.2:cloud via Ollama, per-section calls, reads match_data + fresh brief,
+emits a draft + human-intervention notes. Proven: 1439-word lane B draft
+(passes 1050 min). Honest: LLM hallucinates; human must fact-check, resolve
+[SRC], confirm [VISUAL], edit, validate.
+
+10D (opening hook): validate_script.py check_opening_hook rejects a static
+formation-board open (spec §6) before assembly. Proven: formation open FAILs,
+footage open PASSes (full CLI). Lane B template Hook board=formation ->
+board=stat_card (data visual) so lane B stays passable.
+
+10C (3D, scope + one PoC only): Blender confirmed as the right tool (Manim/
+pyrender/Unreal rejected). Scope: bpy scene_gen.py on a RunPod GPU pod
+headless, ~$0.05-0.10/episode, ~15-30min wall, 1-3 days to BUILD. 2D today
+= flat top-down matplotlib; 3D target = perspective pitch + camera moves +
+animated arrows (matches DK FALCON). PoC BLOCKED: GPU 0/48 on 2026-09-12
+(runpod.get_gpus re-checked twice). 10C.4 deletion HELD per both 10C versions
+— tactical_render.py + tactical_boards.py stay until a 3D replacement is
+proven at/above spec. TOOLS.md annotated. Downstream breakage list in
+LANE_PLAN.md §Stage 10C.6.
+
+Production freeze stays until an episode scores >= 7/10. Committed + pushed.
+
 
 ---
 
@@ -2020,10 +2078,14 @@ secrets/yt_cookies.txt, fails loudly. Verified: source is now 1920x1080
 
 ## STANDING OPERATING DOCTRINE (added 2026-09-09, Stage 4A)
 
-1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads, except raw source
-   staging on the USB flash drive at /mnt/f (staging area ONLY: download lands
-   there, ships to the pod, gets deleted; never a working directory). No local GPU work.
-   All compute and all storage go to the cloud GPU providers.
+1. Raw footage is acquired over the residential connection, staged on /mnt/f,
+   shipped to the pod, and deleted locally. Nothing raw is written inside
+   ~. No local GPU work. All heavy compute and all archival storage
+   go to the cloud. The purpose of this rule is that the ext4.vhdx never grows
+   and no GPU work runs on the N150; staging on /mnt/f satisfies both.
+   (Amended 2026-09-12, Stage 10A.3: residential YouTube download works —
+   proven on 6 reference videos Stage 9A; the obstacle was the old rule-1
+   wording, not YouTube.)
 2. No tasking without calling the available tools, skills, connectors, web
    fetch, research or MCPs where they apply.
 3. No orphaned, standalone or untested item, tool or aspect of the pipeline
@@ -2155,10 +2217,10 @@ tactical_overlay.
 |---|---|---|---|---|
 | `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-09 | works (liverpool-forest 720x1280 62.3s Sep 7); --pod-download routes step3 to runpod_download (5A) |
 | `match_data.py` | WIRED | `produce_v2.py:69` | 2026-09-01 | works |
-| `tactical_boards.py` | WIRED | `produce_v2.py:78` | 2026-09-08 | works |
+| `tactical_boards.py` | WIRED | `produce_v2.py:78` | 2026-09-08 | works. 10C: 2D matplotlib board renderer; slated for replacement by scripted 3D (10C). NOT deleted — runs until a 3D replacement is proven at/above spec. 10C.4 deletion HELD: GPU capacity 0/48 on 2026-09-12, no 3D frame rendered yet. |
 | `runpod_fulltrack.py` | WIRED | `produce_v2.py:235` | 2026-09-09 | works (146s full-clip, $0.011, STATUS); pitch_radar removed from ship list (5C.2) |
 | `runpod_download.py` | WIRED (--pod-download) | `produce_v2.py` step3_download_clips_pod | 2026-09-09 | built 5A; pod-side yt-dlp bot-blocked by YouTube (runs #1-3); excerpt-cut+guard proven via --source-url (2/3 windows, 4MB each, $0.005, LANE_PLAN 5A.3) |
-| `tactical_render.py` | WIRED | `produce_v2.py:285` | 2026-09-06 | works (Opus 8/8.5, STATUS) |
+| `tactical_render.py` | WIRED | `produce_v2.py:285` | 2026-09-06 | works (Opus 8/8.5, STATUS). 10C: 2D top-down matplotlib renderer; slated for replacement by scripted 3D (10C). NOT deleted — runs until a 3D replacement is proven at/above spec. 10C.4 deletion HELD: GPU 0/48 on 2026-09-12. |
 | `generate_voice.py` | WIRED | `produce_v2.py:474` | 2026-09-08 | works |
 | `generate_ambience.py` | WIRED | `produce_v2.py:493` | 2026-08-22 | works (wired 2026-09-08, STATUS Part 6) |
 | `merge_voice.py` | WIRED | `produce_v2.py:514` | 2026-08-25 | works |
@@ -2359,10 +2421,14 @@ download (only match_data.json; the .part was deleted 2026-09-08, see
 RECONCILIATION 1.5/1.6).
 
 ## STANDING OPERATING DOCTRINE
-1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads, except raw source
-   staging on the USB flash drive at /mnt/f (staging area ONLY: download lands
-   there, ships to the pod, gets deleted; never a working directory). No local GPU work.
-   All compute and all storage go to the cloud GPU providers.
+1. Raw footage is acquired over the residential connection, staged on /mnt/f,
+   shipped to the pod, and deleted locally. Nothing raw is written inside
+   ~. No local GPU work. All heavy compute and all archival storage
+   go to the cloud. The purpose of this rule is that the ext4.vhdx never grows
+   and no GPU work runs on the N150; staging on /mnt/f satisfies both.
+   (Amended 2026-09-12, Stage 10A.3: residential YouTube download works —
+   proven on 6 reference videos Stage 9A; the obstacle was the old rule-1
+   wording, not YouTube.)
 2. No tasking without calling the available tools, skills, connectors, web
    fetch, research or MCPs where they apply.
 3. No orphaned, standalone or untested item, tool or aspect of the pipeline

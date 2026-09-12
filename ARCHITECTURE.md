@@ -138,10 +138,14 @@ download (only match_data.json; the .part was deleted 2026-09-08, see
 RECONCILIATION 1.5/1.6).
 
 ## STANDING OPERATING DOCTRINE
-1. NOTHING RUNS ON THE LOCAL MACHINE. No local downloads, except raw source
-   staging on the USB flash drive at /mnt/f (staging area ONLY: download lands
-   there, ships to the pod, gets deleted; never a working directory). No local GPU work.
-   All compute and all storage go to the cloud GPU providers.
+1. Raw footage is acquired over the residential connection, staged on /mnt/f,
+   shipped to the pod, and deleted locally. Nothing raw is written inside
+   ~. No local GPU work. All heavy compute and all archival storage
+   go to the cloud. The purpose of this rule is that the ext4.vhdx never grows
+   and no GPU work runs on the N150; staging on /mnt/f satisfies both.
+   (Amended 2026-09-12, Stage 10A.3: residential YouTube download works —
+   proven on 6 reference videos Stage 9A; the obstacle was the old rule-1
+   wording, not YouTube.)
 2. No tasking without calling the available tools, skills, connectors, web
    fetch, research or MCPs where they apply.
 3. No orphaned, standalone or untested item, tool or aspect of the pipeline

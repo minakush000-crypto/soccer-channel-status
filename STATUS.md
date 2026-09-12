@@ -262,3 +262,23 @@ could produce a real number but is not in produce_v2.py.
   still blocked by rule 1 + YouTube datacenter block + /mnt/f unmounted.
 - /dev/shm used for 9A under a one-time rule-1 exception (RAM, no vhdx bloat);
   cleaned up. /mnt/f still unmounted.
+
+## Stage 10 — amendments + script budget + opening gate + 3D scope, 2026-09-12
+
+- EPISODE_SPEC.md APPROVED with 3 amendments applied: talking-head is a
+  format decision (voiceover-only); 3D renders promoted to a build target;
+  footage acquisition removed from impossible.
+- Doctrine Rule 1 amended in all 4 canonical docs (CLAUDE/CONTEXT/DECISIONS/
+  ARCHITECTURE): raw footage via residential -> /mnt/f -> pod -> delete
+  locally. Verified: old rule-1 text 0 remaining, new text 1 in each doc.
+- 10B: SCRIPT_TEMPLATE.md §WORD BUDGET (A/D 1400-2100, B/C 1050-1750).
+  validate_script.py enforces the lane min (proven: 17w FAIL). tools/
+  script_gen.py built (glm-5.2:cloud, per-section, reads match_data + fresh
+  brief; 1439w draft proven). Human must fact-check + resolve [SRC].
+- 10D: validate_script.py check_opening_hook rejects a static formation-board
+  open (spec §6) before assembly. Proven: formation FAIL, footage PASS.
+- 10C: Blender confirmed right tool. PoC BLOCKED on 0/48 GPU (2026-09-12,
+  re-checked twice). 10C.4 deletion HELD — tactical_render.py +
+  tactical_boards.py stay until a 3D replacement is proven at/above spec.
+  TOOLS.md annotated. Scope + downstream list in LANE_PLAN.md §Stage 10.
+- Production freeze stays until an episode scores >= 7/10.
