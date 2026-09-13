@@ -96,6 +96,31 @@ content ratios from 18 vision-classified frames per video (gemma4:cloud).
 - **MUST NOT:** black pillarbox or letterbox bars inside the container.
 - Reference basis: all six are 16:9 (1.78 DAR); opening-frame edge-pixel checks are 0 % black on five of six (full-frame). DK FALCON showed black at one opening frame (a dark graphic frame, not a persistent bar). No reference is persistently letterboxed.
 
+## 9. Source-footage provenance and branding  (trace: Stage 14, 2026-09-13)
+
+- **MUST:** before any clip enters the pipeline, extract three frames (early,
+  middle, late — e.g. 5 s, 50 % of duration, duration minus 5 s) and judge each
+  through Gemini (`tools/gemini_judge.py`, the authoritative judge) for burned-in
+  third-party branding: channel logos, reuploader watermarks, betting/sponsor
+  overlays, or overlaid text that is not official broadcast graphics.
+- **MUST:** reject the clip if third-party branding appears in more than an
+  occasional frame. "Occasional" = at most one of the three sampled frames, and
+  only incidental (e.g. a passing advertising hoarding caught mid-frame), not a
+  persistent burned-in logo or watermark.
+- **MUST NOT:** accept a clip whose middle or late frame carries a persistent
+  third-party logo or watermark (e.g. a casino sponsor burned into a corner, a
+  reuploader's channel bug). These break the channel's own look.
+- **SHOULD:** prefer official league/club sources (clean broadcast graphics, no
+  third-party watermarks) over reuploads. Official broadcast score bugs and
+  league logos are NOT third-party branding for this rule.
+- Reference basis: the 12B episode carried an uploader's burned-in "ARSENAL" +
+  emoji watermark in the footage (a reupload signal). The Bournemouth-Brentford
+  Sofascore-sourced test clip (2026-09-13) carried a MrQ casino watermark
+  (top-left) + AFCBTV logo (top-right), Gemini branding-intrusion 5/10 — a
+  reject under this rule. The check is Gemini-judged because the main model is
+  text-only and cannot read frames directly; every visual claim must paste
+  verbatim `gemini_judge.py` output.
+
 ---
 
 ## 9B.2 — Score the rejected lane B episode against this spec
