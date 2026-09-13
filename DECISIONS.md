@@ -269,3 +269,24 @@ t=4.5s frame is 0/10, fully broken. The manc-derby match_data is complete
 (Man Utd 4-2-3-1 vs Man City 4-3-3, 11-v-11), so the scene should have had 22
 tokens. Report said success; artifact says broken. Artifact wins. The 3D
 renderer is not reliably reproducible (one run produced a broken render).
+
+### CONDITIONAL — Gemini may generate cut timestamps only if it beats the scanner head-to-head (Mayo, 2026-09-13, binding)
+The mechanical rule (Gemini judges what it sees; it does NOT generate
+timestamps, pitch coordinates, or cut decisions — those stay mechanical, per
+the Gemini-authoritative decision above) can be relaxed ONLY through this
+litmus test. If an episode built under the current mechanical-only rule still
+fails to reach 7/10, run a head-to-head BEFORE delegating cut-timestamp
+generation to Gemini:
+1. Gemini proposes cut timestamps for one episode.
+2. The scoreboard scanner (tools/scoreboard_scan.py) proposes cut timestamps
+   for the SAME episode.
+3. Compare both against match_data.json (ground truth for events).
+4. Report which is more accurate.
+Delegate cut-timestamp generation to Gemini ONLY if Gemini wins that
+comparison. The scoreboard scanner has already beaten Gemini on this job once
+(Gemini video inventory: timestamps 1-2s early, bloated goal windows, wrong
+team in open play, found 2/3 real goals, missed the winner, invented 1
+phantom; the scanner matched match_data.json exactly on 3/3 scoreline changes
+— Rogers 2', Havertz 25', Odegaard 50'). The comparison is therefore NOT a
+formality. This is binding and the ONLY route by which the mechanical rule can
+be relaxed. Recorded 2026-09-13 per Mayo's directive. PROCEED note attached.
