@@ -324,3 +324,23 @@ tools/produce_v2.py.bak (both deleted 2026-09-08). These are records of state
 at decision time; current code state lives in STATUS.md/ARCHITECTURE.md (which
 carry their own drift, flagged separately, stamps NOT advanced this pass). The
 "Newest first" header was wrong (the file is chronological) — corrected.
+
+### PARTIAL 2D retirement — open debt (2026-09-13, confirmed by Mayo)
+Decision: wire the 3D formation board (scene_gen.py via modal_render3d.py) into
+produce_v2 as the formation board source; KEEP tactical_boards.py for the
+possession and stat_card boards; RETIRE tactical_render.py + step4b (its
+top-down tracking view is unused by the assembler — no hole). Rationale: the 3D
+path covers ONLY the formation board (verified by reading scene_gen.py +
+modal_render3d.py); deleting tactical_boards.py now would leave possession and
+stat_card as holes, which the no-hole rule forbids. The "zero matplotlib" grep
+cannot pass under partial retirement and is NOT claimed to.
+OPEN DEBT: the 2026-09-09 "scrap 2D / build 3D" decision remains unfulfilled
+for the possession and stat_card boards. This debt closes when 3D versions of
+BOTH exist and pass Gemini (authoritative) at or above the 2D baseline (current
+2D: possession 4/10, stat_card 5/10 per Opus — re-baseline with Gemini before
+retiring).
+Backlog (closes this debt): (1) build a 3D possession board in scene_gen.py /
+modal_render3d.py; (2) build a 3D stat_card board. Both must Gemini-judge at or
+above the 2D baseline before tactical_boards.py is retired.
+Status: tactical_render.py retirement + 3D formation wiring — Stage 14 (in
+progress). Possession/stat_card 3D — backlog, not started.

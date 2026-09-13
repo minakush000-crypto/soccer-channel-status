@@ -1,7 +1,7 @@
 # SKILLS.md — what installed skills are, where they live, why most never fire
 
 > **Purpose:** one-time analysis of installed skills and why most never fire (2026-09-05). A completed-stage working artifact.
-> **Reader:** historical reference; not read by any pipeline tool, not mirrored.
+> **Reader:** historical reference; not read by any pipeline tool; mirrored (in both allowlists — push_status.sh copies it to the status mirror, verified 2026-09-13).
 > **Last verified against code:** 2026-09-09.
 
 Built 2026-09-05. Evidence is pasted from commands run today.

@@ -1,7 +1,7 @@
 # LANE_PLAN.md — four-lane channel expansion + storage plan
 
 > **Purpose:** the four-lane (A/B/C/D) expansion build ledger; each stage appends its findings here.
-> **Reader:** every session (the brief appends to it); not mirrored (internal plan, not public status).
+> **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Stamp 2026-09-09; 27 line-drift claims unverified (Stage-12B rewrite of produce_v2.py shifted cited line numbers) — STAMP RULE option (b), not re-stamped this pass.
 > **Last verified against code:** 2026-09-09.
 
 Verified against code on 2026-09-08. Tool classifications cite
