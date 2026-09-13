@@ -2,11 +2,11 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-09.
+> **Last verified against code:** 2026-09-13.
 
-Newest first. Each entry is dated. "Why" is the actual reason, not a
-retcon. If a decision is reversed, add a new entry above, do not edit the old
-one.
+Chronological order (oldest first); append new entries at the end. Each
+entry is dated. "Why" is the actual reason, not a retcon. If a decision is
+reversed, add a new entry, do not edit the old one.
 
 ## 2026-09-05 (session 2)
 
@@ -256,8 +256,9 @@ Modal T4 rate $0.000164/s (modal.com/pricing, from commit b1ab579). Total
 provider spend across RunPod, Vast, Modal has never been measured and remains
 an open unknown. Known point estimates: 12A 3D render 408.9s ~ $0.067;
 arsenal-chelsea 3D re-run 2026-09-12 ~ same code/cached image (not separately
-timed). Modal workspace minakush000-crypto, Starter plan, $29.15 credit as of
-2026-09-13.
+timed). Modal workspace minakush000-crypto (verified in ~/.modal.toml); plan
+tier and credit balance are NOT checkable from the filesystem and require the
+Modal API/dashboard (last seen $29.15 Starter, 2026-09-13, unverified).
 
 ### 12A "5/10 reproducible" does not reproduce (artifact vs report)
 The 12A commit reports "Opus scored the t=2.5s frame 5/10, reproducible,
@@ -290,3 +291,36 @@ phantom; the scanner matched match_data.json exactly on 3/3 scoreline changes
 — Rogers 2', Havertz 25', Odegaard 50'). The comparison is therefore NOT a
 formality. This is binding and the ONLY route by which the mechanical rule can
 be relaxed. Recorded 2026-09-13 per Mayo's directive. PROCEED note attached.
+
+### STAMP RULE + known weakness + 2026-09-13 reconciliation (binding)
+STAMP RULE (also in CLAUDE.md, verbatim): any task that edits a canonical
+document must, in the same task, either (a) update its "Last verified against
+code" stamp to today having actually checked its claims against the code, or
+(b) state in the task report which specific claims could not be verified and
+leave the stamp unchanged. Never set a stamp you did not earn. The SessionStart
+check (tools/doc_stamp_check.py, hooked via .claude/hooks/check_doc_stamps.sh)
+is the backstop, not the process; if it fires, the stamp rule was skipped on a
+previous task.
+
+Known weakness (recorded so a future reader sees it as a known limitation,
+not an oversight): this rule depends on being remembered — the same shape as
+the status mirror that only updated when a push was remembered, which produced
+a three-day silent gap (2026-09-09 to 2026-09-12). The SessionStart check makes
+the failure visible rather than invisible, but it does not prevent it. A stale
+stamp at next session start means someone edited a canonical doc without
+applying the rule.
+
+2026-09-13 reconciliation (this entry earns the 2026-09-13 stamp by checking
+DECISIONS.md against the code, per PRECEDENCE). Verified this pass: Gemini is
+the authoritative judge (gemini_judge.py, gemini-3.1-pro-preview); the
+scrap-2D/build-3D execution order; the 12A git-rm hold (nothing removed);
+spend tracking rule; reproducibility failure. Historical drift acknowledged,
+NOT fixed per the don't-edit-old-entries convention: the Stage 5/6 era entries
+contain stale line-number citations and file references — produce_episode.py:288
+(actual :298), cloud_produce.py:223 (actual :228-229), "29 of tools/*.py
+hard-code soccer-channel" (actual 33), the "27 STANDALONE = 10+15+5" arithmetic
+(10+15+5=30, not 27), and the .bak references at tools/cv_annotate.py.bak and
+tools/produce_v2.py.bak (both deleted 2026-09-08). These are records of state
+at decision time; current code state lives in STATUS.md/ARCHITECTURE.md (which
+carry their own drift, flagged separately, stamps NOT advanced this pass). The
+"Newest first" header was wrong (the file is chronological) — corrected.

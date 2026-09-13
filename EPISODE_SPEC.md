@@ -6,7 +6,10 @@
 > be traced to a reference. Production is frozen against this spec until
 > approved.
 > **Derived:** 2026-09-12, from 6 reference videos (5 tactical/explainer + 1 highlights).
-> **Last verified against code:** 2026-09-12.
+> **Last verified against code:** 2026-09-13 (§9 source-footage provenance added
+> and verified this pass — gemini_judge.py exists, the 12B/Sofascore findings are
+> real; §1-8, 9B.x trace to LANE_PLAN.md §Stage 9A reference measurements, not
+> re-derived this pass).
 
 The project goal (CONTEXT.md) is the Coaches' Voice style: dark pitch, orange
 accents, data-driven graphics, functional arrows, deliberate pace. The spec
