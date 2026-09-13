@@ -348,3 +348,28 @@ artifacts/frames/3dpoc_arsenal-chelsea_t2500.png.
   broken.
 - Full verdict: artifacts/frames/synthesis_verdict.md. Freeze holds (no
   episode >= 7/10).
+
+## Stage 12 re-run (cont.) — Gemini authoritative + bug-fix re-renders, 2026-09-13
+
+Mayo brief: Modal funded ($29.15). Gemini AUTHORITATIVE visual judge
+(supersedes Opus in CLAUDE.md/CONTEXT.md; DECISIONS.md updated). Scrap 2D,
+build 3D (relay Part 5, final). 12A held the git rm (nothing removed; git log
+--diff-filter=D empty). The 5/10 3D frame was buggy; fixed and re-rendered,
+one change per run.
+
+- tools/gemini_judge.py built (gemini-3.1-pro-preview) + wired as AUTHORITATIVE
+  in CLAUDE.md tool routing. Gemini judged both: 3D buggy=5/10, 2D control=4/10
+  (matches Opus).
+- CHANGE 1 camera framing: keyframes (0,-90,160)->(0,-55,150) replace the
+  cropped (55,-68,72). Render 1 wall 707.61s. Gemini 4/10, all 22 tokens visible.
+- CHANGE 2 pitch lines: torus rotation (90,0,0)->(0,0,0) fixes the centre
+  circle; six-yard offset 4.125->2.75. Render 2 wall 555.34s. Gemini 6/10,
+  centre circle clean flat ring YES, penalty + six-yard complete YES.
+- SETTLED: non-buggy 3D = 6/10 (Gemini=Opus=gemma4 agree). 2D control 4/10.
+  Non-buggy 3D beats 2D by +2 (depth). Cap is DESIGN (narrative furniture,
+  dead void, typography), dimension-independent. Opus flagged compressed
+  formation layout + flat tokens as 3D-build items.
+- Spend: render 1 707.61s, render 2 555.34s (Modal T4 $0.000164/s). Running
+  total 3D ~$0.27-0.34. Modal credit $29.15. Cross-provider total unknown.
+- Next: scrap 2D / build 3D, build-then-retire order (wire 3D into produce_v2
+  first, verify, then retire 2D) so the pipeline is never broken.

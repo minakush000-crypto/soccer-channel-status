@@ -143,6 +143,13 @@ real tracking, Opus 8/8.5). tactical_overlay.py is DEAD.
   typed by hand. No code produces them. They are not a benchmark.
 - Working vision check: /home/muads/tools/vision_analyze.py, ~2.75s per
   frame. Use it to judge output instead of asserting quality.
+- JUDGE RULE (decided 2026-09-13, supersedes the prior Opus-authoritative
+  rule in CLAUDE.md): Gemini (tools/gemini_judge.py, gemini-3.1-pro-preview)
+  is the AUTHORITATIVE visual judge. Opus (ask_claude.py --image) and gemma4
+  (vision_analyze.py) are cross-checks. On disagreement, record the Gemini
+  score as authority and flag it; never write the more flattering number.
+  Boundary: Gemini judges what it can see; it does NOT generate timestamps,
+  pitch coordinates, or cut decisions (those stay mechanical).
 
 ## CONTENT RESEARCH
 Three tools exist for topic research and freshness checks. None were

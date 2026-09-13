@@ -1444,3 +1444,41 @@ vision workflow (4 Opus authoritative + 1 gemma4 cross-check) + synthesis.
   says broken). The 3D renderer is not reliably reproducible.
 - Files: artifacts/frames/opus_3d_verdict.txt, opus_2d_control_verdict.txt,
   synthesis_verdict.md (full verdict + recommendation).
+
+## Stage 12 re-run (cont.) — Gemini authoritative + bug-fix re-renders, 2026-09-13
+
+Mayo brief (2026-09-13): Modal funded ($29.15, Starter, workspace
+minakush000-crypto). Gemini is the AUTHORITATIVE visual judge (supersedes
+CLAUDE.md/CONTEXT.md Opus rule; both + DECISIONS.md updated). Scrap 2D, build
+3D (relay Part 5, final). The 5/10 frame was buggy (broken pitch lines, cropped
+camera); fix and re-render before the comparison is settled, one change per
+run. 12A held the git rm (nothing removed; verified git log --diff-filter=D).
+
+- Built tools/gemini_judge.py (gemini-3.1-pro-preview, fallback
+  gemini-3.6-flash, GEMINI_API_KEY from ~/yt-digest/.env). Tested + wired into
+  CLAUDE.md tool routing as AUTHORITATIVE. Boundary honoured: judges what it
+  sees, no timestamps/coordinates/cuts.
+- Gemini judged both current frames (control not optional):
+  3D buggy=5/10 (DESIGN, well-designed 2D beats it yes); 2D control=4/10.
+  Matches Opus. gemini_3d_verdict.txt, gemini_2d_control_verdict.txt.
+- CHANGE 1 (camera framing): end keyframe (55,-68,72) too close (half-width
+  ~35 vs pitch +/-52.5) -> cropped players + dead void. New keyframes
+  (0,-90,160)->(0,-55,150), centered+high, gentle dolly. Render 1 wall
+  707.61s (/usr/bin/time -v), exit 0. Gemini: 4/10, framing successful, all
+  22 tokens visible YES, centre circle still broken.
+- CHANGE 2 (pitch-line geometry): centre-circle torus rotation=(90,0,0)
+  stood it vertical (the "two intersecting arcs") -> (0,0,0) flat; six-yard
+  top/bot offset 4.125 -> 2.75 (=5.5/2). Render 2 wall 555.34s, exit 0. Gemini:
+  6/10, centre circle clean flat ring YES, penalty + six-yard complete + placed
+  YES, all 22 tokens visible YES.
+- SETTLED comparison (non-buggy 3D): 6/10 Gemini = 6/10 Opus = 6/10 gemma4
+  (all agree). 2D control 4/10. Non-buggy 3D beats 2D by +2 (depth). Remaining
+  cap is DESIGN (narrative furniture, dead-void composition, basic typography),
+  dimension-independent. Opus flagged secondary 3D-build items: compressed
+  formation layout (4-2-3-1 doesn't read), tokens flat from high angle.
+- Spend (Modal T4 $0.000164/s): render 1 wall 707.61s, render 2 wall 555.34s.
+  Running total 3D renders ~$0.27 (render-time) / ~$0.34 (full-wall). Modal
+  credit $29.15. Total RunPod+Vast+Modal spend unknown.
+- Next: scrap 2D / build 3D per relay Part 5, build-then-retire order (build
+  and wire the 3D path into produce_v2 first, verify, THEN retire the 2D
+  tools) so the pipeline is never broken (doctrine #5).

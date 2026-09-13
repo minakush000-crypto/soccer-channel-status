@@ -206,3 +206,66 @@ history): GATES (Stage 5 gates), RECONCILIATION (2026-09-08 audit),
 REPORT_AUDIT (the audit that proved PROJECT_REPORT wrong), SKILLS (2026-09-05
 skill analysis), VISUAL_QUALITY_ASSESSMENT (2026-08-25 snapshot, superseded by
 STATUS for current state).
+
+## 2026-09-13 — Gemini authoritative + scrap-2D/build-3D + spend tracking
+
+### Gemini is the authoritative visual judge (supersedes Opus)
+Decided by Mayo 2026-09-13 mid-task, now binding. Gemini
+(tools/gemini_judge.py, gemini-3.1-pro-preview, fallback gemini-3.6-flash,
+GEMINI_API_KEY in ~/yt-digest/.env) is the AUTHORITATIVE visual judge. Opus
+(ask_claude.py --image) and gemma4 (vision_analyze.py) are cross-checks. On
+disagreement, record the Gemini score as authority and flag it; never write
+the more flattering (higher) number. This supersedes the prior Opus
+authoritative rule that lived in CLAUDE.md (Judge rule) and was referenced in
+CONTEXT.md. CLAUDE.md, CONTEXT.md, and this file updated 2026-09-13. Boundary
+(doctrine): Gemini judges what it can see; it does NOT generate timestamps,
+pitch coordinates, or cut decisions, those stay mechanical.
+Proof of authority switch: a 5-lens Opus/gemma4 workflow scored the
+arsenal-chelsea 3D frame 5/10 (Opus) / 3/10 (gemma4); Gemini (authoritative)
+scored it 5/10 with verdict DESIGN and "a well-designed 2D board would beat
+it" (yes). Gemini confirmed Opus on this frame.
+
+### Scrap 2D, build 3D (relay Part 5, final)
+Decided by Mayo 2026-09-13, final. Scrap the 2D matplotlib/tactical_render
+renderers and build the 3D path (scene_gen.py via modal_render3d.py) next.
+This contradicts the Stage 12A hold (12A.3 HELD the git rm; verdict "design
+not dimension, prove design on 2D first") and contradicts the re-run evidence
+(both Gemini and Opus say a well-designed 2D board beats the 3D frame).
+Mayo reviewed the contradiction and chose relay Part 5 anyway. Mayo's call.
+Execution order (doctrine #5, no dead ends): build and fix the 3D path first
+(fix scene_gen camera + pitch-line bugs, re-render, verify), wire it into
+produce_v2 as the board source, THEN retire the 2D tools. Deleting the wired
+2D tools before the 3D replacement exists would break produce_v2 step2_boards
+(:93), step4b (:364), produce_episode (:180), and the 12B assembler (step5,
+:489+). That dead end is forbidden.
+
+### 12A git rm hold: nothing was removed (recorded, no contradiction)
+The brief asked: if 12A held a git rm, what was removed, when, by which
+decision. Answer (verified `git log --diff-filter=D -- tools/tactical_boards.py
+tools/tactical_render.py` -> no output): NOTHING was removed. Stage 12A
+(commit b1ab579, 2026-09-12) recorded "12A.3 HOLDS the git rm of
+tactical_render.py + tactical_boards.py" and did not execute it. Both files
+remain on disk and wired (tactical_boards.py mtime 2026-09-12 17:38;
+tactical_render.py mtime 2026-09-06 00:57). No removal contradicts a recorded
+decision. The 12A hold stood, which is why the relay's 2026-09-09 "scrap
+matplotlib" decision never reached the code.
+
+### Spend tracking (new rule, this stage)
+Report actual spend per render and a running total after each cloud run.
+Modal T4 rate $0.000164/s (modal.com/pricing, from commit b1ab579). Total
+provider spend across RunPod, Vast, Modal has never been measured and remains
+an open unknown. Known point estimates: 12A 3D render 408.9s ~ $0.067;
+arsenal-chelsea 3D re-run 2026-09-12 ~ same code/cached image (not separately
+timed). Modal workspace minakush000-crypto, Starter plan, $29.15 credit as of
+2026-09-13.
+
+### 12A "5/10 reproducible" does not reproduce (artifact vs report)
+The 12A commit reports "Opus scored the t=2.5s frame 5/10, reproducible,
+encoding variance only." The surviving artifact
+(3dpoc_2026-09-12_preview-manc-derby.mp4, run 2, 522523 bytes) does NOT
+reproduce this: re-judged at t=2.5s by Gemini-authoritative + gemma4 + Opus,
+all score 1/10 (camera clipped inside the scene, 0 players visible); the
+t=4.5s frame is 0/10, fully broken. The manc-derby match_data is complete
+(Man Utd 4-2-3-1 vs Man City 4-3-3, 11-v-11), so the scene should have had 22
+tokens. Report said success; artifact says broken. Artifact wins. The 3D
+renderer is not reliably reproducible (one run produced a broken render).
