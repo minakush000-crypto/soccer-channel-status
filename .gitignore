@@ -33,3 +33,4 @@
 *.pt
 *.bak
 *.cookies.txt
+.push.log
