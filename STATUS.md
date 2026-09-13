@@ -286,11 +286,17 @@ could produce a real number but is not in produce_v2.py.
 ## Stage 11 (part 1) — Rule 5 + mirror retirement, 2026-09-12
 
 - Doctrine Rule 5 (NO DEAD ENDS) added to all 4 canonical docs.
-- Public status mirror RETIRED (rule 3): redundant (GitHub connector syncs
-  private repo; raw.githubusercontent not fetchable by Claude) + fragile
+- Public status mirror RETIRED 2026-09-12 (rule 3): redundant (GitHub connector
+  syncs private repo; raw.githubusercontent not fetchable by Claude) + fragile
   (Stop-hook-only, 3-day gap 2026-09-09 to 2026-09-12). git rm push_status.sh;
   removed its global Stop-hook entry (kept unlazy); stripped mirror claims
   from 6 doc headers + CONTEXT.md. artifacts/ + frames/ stay local.
+  **RE-ENABLED 2026-09-12 ~22:39 (same day):** push_status.sh re-created on
+  disk, re-registered as a PROJECT Stop hook (settings.json, additive per rule
+  12), and `git add`'d back (un-retired). Mirror resumed pushing (last push
+  22:42). CONTEXT.md updated to "active." The Stop-hook fragility is accepted
+  (the mirror is a convenience; the private repo is canonical). See CONTEXT.md
+  "STATUS MIRROR (public, active)."
 - Correction on record: push_status.sh WAS registered (global Stop hook, not
   project settings); mirror WAS pushed today. The 3-day gap was the real
   issue, not "not registered." Stage 8 did not replace a hook registration

@@ -26,21 +26,48 @@ confusion. Only the one inside yt-digest is real.
 The .env is at ~/yt-digest/.env. yolov8s.pt is at ~/yolov8s.pt, outside
 the project folder.
 
-## STATUS MIRROR — RETIRED 2026-09-12 (Stage 11, rule 3)
-The public docs mirror at github.com/minakush000-crypto/soccer-channel-status
-and the push_status.sh Stop hook that maintained it are RETIRED. Reason: the
-mirror's purpose was to be fetchable by Claude via raw.githubusercontent, but
-Claude cannot fetch those URLs outside web-search results, and the private
-yt-digest repo is synced directly via the GitHub connector — so the mirror was
-redundant and fragile (Stop-hook-only; a 3-day gap occurred 2026-09-09 to
-2026-09-12 when crashed sessions did not fire the hook). push_status.sh is in
-git history if ever needed. The artifacts/ and frames/ subtrees remain in this
-project (gitignored, local) for Claude's own use; they are just no longer
-pushed to a public mirror.
+## STATUS MIRROR (public, active)
+Current project state is mirrored to a PUBLIC docs-only repo so any session
+(or the coordinator) can read it via web fetch instead of pasting fragments.
+Repo: https://github.com/minakush000-crypto/soccer-channel-status
+A Stop hook (.claude/hooks/push_status.sh) re-pushes an ALLOWLIST of safe doc
+files (CONTEXT/STATUS/PROGRESS/GAPS/DECISIONS/TOOLS/ARCHITECTURE/EPISODE_SPEC/
+LANE_PLAN/GATES/SKILLS + a ~/claude/vault dir) after any session end. No code,
+no keys, no renders, no .env (the script deletes any .env it finds). The mirror
+repo lives at ~/soccer-channel-status (a separate working clone).
 
-Prior claims that the mirror was "always current" and "auto-pushed after any
-change" are removed — that was the second automated-behaviour claim that
-quietly stopped being true (the first was the old STATE.md hand-typed scores).
+HISTORY: the mirror was RETIRED 2026-09-12 (Stage 11, rule 3) as redundant +
+fragile (Stop-hook-only; a 3-day gap 2026-09-09 to 2026-09-12 when crashed
+sessions did not fire the hook), and push_status.sh was git-rm'd. It was
+RE-ENABLED the same day (2026-09-12 ~22:39): push_status.sh re-created on disk,
+re-registered as a project Stop hook, and `git add`'d back (un-retired). The
+docs were updated to match (this section). The artifacts/ and frames/ subtrees
+remain in this project (gitignored, local) for Claude's own use and are NOT in
+the mirror allowlist.
+
+DUAL ALLOWLIST CONSTRAINT (standing — a file must pass BOTH or it vanishes
+silently with no error):
+1. push_status.sh carries an ALLOWLIST of files it copies into the mirror
+   (CONTEXT/STATUS/PROGRESS/GAPS/DECISIONS/TOOLS/ARCHITECTURE/EPISODE_SPEC/
+   LANE_PLAN/GATES/SKILLS + the ~/claude/vault dir). A file not in this list
+   is never copied.
+2. The mirror repo's own .gitignore carries a SECOND allowlist: it default-
+   denies everything (`*`) then un-ignores specific files/dirs (!CONTEXT.md,
+   !STATUS.md, ... !artifacts/**, !frames/**, !vault, !vault/**, etc.). A file
+   that IS copied but is NOT un-ignored by the mirror .gitignore is gitignored
+   → `git add` silently skips it → it never reaches the remote, with NO error.
+So: to add a new doc to the mirror, add it to BOTH push_status.sh's
+ALLOW_PROJECT list AND the mirror .gitignore's un-ignore list. Do NOT remove
+the `!vault` or `!vault/**` lines (the vault dir is un-ignored by name; if
+either is dropped, vault contents stop syncing). Defense-in-depth: the mirror
+.gitignore also blocks *.mp4/*.mov/*.env/*.key/*.pt/*.pth/*.bak/*.cookies.txt
+even inside allowed dirs.
+
+The known fragility (Stop-hook-only, gap on crashed sessions) is accepted: the
+mirror is a convenience, not a source of truth — the private yt-digest repo
+(synced via the GitHub connector) is canonical, and this project's own files
+are the live state. A crashed session simply means the mirror may lag until the
+next clean Stop; it never means the mirror is wrong about what it does contain.
 
 ## THE PIPELINE
 Entry point: tools/produce_v2.py
