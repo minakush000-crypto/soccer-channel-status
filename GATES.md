@@ -1,59 +1,35 @@
-# Gates: Stage 5 (pod-side path + rule-3 debt)
+# Gates: 3D formation board re-run + multi-lens judge (design vs dimension)
 
-> **Purpose:** the unlazy gate file for Stage 5 (completed). A working artifact of that stage, kept for history.
-> **Reader:** historical reference; the unlazy Stop hook that consumed it has finished. Not read by any pipeline tool.
-> **Last verified against code:** 2026-09-09.
+OWNS: artifacts/frames/**, renders/2026-09-06_arsenal-chelsea/**, PROGRESS.md, STATUS.md, LANE_PLAN.md
 
-OWNS: tools/runpod_download.py, tools/produce_v2.py, tools/runpod_fulltrack.py, tools/runpod_stage1.py, tools/runpod_annotate.py, LANE_PLAN.md
+Scope: re-run scene_gen.py on Modal against arsenal-chelsea match_data.json (as written, no edits), extract one frame, judge it against the 2D possession.png control through multiple independent vision lenses, and record a design-vs-dimension verdict plus the contradiction with the relay.
 
-Scope: build the pod-side download path (5A), retire the 4 dead tools and run the standalone smoke test (5C), report on storage (5B), append Stage 5 to LANE_PLAN.md and push.
+- [x] G1: arsenal-chelsea 3D MP4 rendered and valid
+  CHECK: ffprobe -v error -show_entries stream=width,height,codec_name -show_entries format=duration -of default=noprint_wrappers=1 /mnt/f/soccer-staging/3dpoc_2026-09-06_arsenal-chelsea.mp4 | tr '\n' ' '
+  EXPECT: codec_name=h264 width=1280 height=720 duration=5.000000
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=38bcba114a2d66890d83be5cc37a4408674d474f7503f9ae43c14d55ba67ac2e; output-bytes=56
 
-- [x] G1: runpod_download.py launches with a usage line
-  CHECK: ~/yt-digest/.venv/bin/python tools/runpod_download.py --help 2>&1 | grep -m1 -c "usage: runpod_download.py"
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
+- [x] G2: arsenal-chelsea 3D frame extracted at t=2.5s
+  CHECK: test -s artifacts/frames/3dpoc_arsenal-chelsea_t2500.png && ffprobe -v error -show_entries stream=width,height -of csv=p=0:s=x artifacts/frames/3dpoc_arsenal-chelsea_t2500.png
+  EXPECT: 1280x720
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=3cbae94edfc4034591954cc8ed588e2db0b4ee4f34f53eeeba9d9076443c1c28; output-bytes=9
 
-- [x] G2: produce_v2 routes step3 through the pod path
-  CHECK: n=$(grep -c "runpod_download" tools/produce_v2.py); [ "$n" -ge 1 ] && echo OK_POD_WIRED
-  EXPECT: OK_POD_WIRED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=a2efeb0d315cb197d4e31a552e33ea8ef7947e2840fa15bb46e6b56c23e6e340; output-bytes=13
+- [x] G3: Opus (authoritative) scored the 3D frame on the 2D-board scale
+  CHECK: test -s artifacts/frames/opus_3d_verdict.txt && grep -qE '[0-9]+/10' artifacts/frames/opus_3d_verdict.txt && echo opus_3d_scored
+  EXPECT: opus_3d_scored
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=1b5bfba2604966de08b5d6e81c4c5167470e5c8d7007dd0421ad8c8aecd63495; output-bytes=15
 
-- [x] G3: the pod path uses 1080p, not the old 720p cap
-  CHECK: n=$(grep -cE "height<=1080|POD_MAX_HEIGHT" tools/runpod_download.py); [ "$n" -ge 1 ] && echo OK_1080
-  EXPECT: OK_1080
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=296f2dfc3d5a03237823a32f69e5c2f922ffd3f6062d07ccf7144b655f3ef652; output-bytes=8
+- [x] G4: Opus (authoritative) scored the 2D possession.png control on the same scale
+  CHECK: test -s artifacts/frames/opus_2d_control_verdict.txt && grep -qE '[0-9]+/10' artifacts/frames/opus_2d_control_verdict.txt && echo opus_2d_scored
+  EXPECT: opus_2d_scored
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=53506ca0df7eda75d5adae69bbfbc9a49652286422af7ad5a0e54e43adaff5b9; output-bytes=15
 
-- [x] G4: the real pod run outcome is recorded in LANE_PLAN.md
-  CHECK: n=$(grep -c "5A.3" LANE_PLAN.md); [ "$n" -ge 1 ] && echo OK_PROOF_RECORDED
-  EXPECT: OK_PROOF_RECORDED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=04070b27f98dabdbdc1533101439f675fda458e766e3267bfe98245130095a93; output-bytes=18
+- [x] G5: multi-lens synthesis verdict written (design vs dimension, with the relay contradiction)
+  CHECK: test -s artifacts/frames/synthesis_verdict.md && grep -qi 'design' artifacts/frames/synthesis_verdict.md && grep -qi 'dimension\|3d' artifacts/frames/synthesis_verdict.md && grep -qi 'contradict' artifacts/frames/synthesis_verdict.md && echo synthesis_written
+  EXPECT: synthesis_written
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=e3e72846126d77be278e7519c2663b6cb083caca385c5b4eb82afb60b35c8dac; output-bytes=18
 
-- [x] G5: no local file over the 200MB guard was written during the run
-  CHECK: n=$(find renders -newermt "2026-09-09 00:00" -size +200M -type f 2>/dev/null | wc -l); [ "$n" -eq 0 ] && echo OK_NO_OVERSIZE
-  EXPECT: OK_NO_OVERSIZE
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=11cf125a5f9509007bc2632479d326380739f305e4d4082a9bab265d1d287488; output-bytes=15
-
-- [x] G6: the 4 DEAD tools are deleted from the tree
-  CHECK: for t in tactical_overlay pitch_radar render_video check_and_download; do [ ! -f tools/$t.py ] && echo gone; done | wc -l | tr -d ' '
-  EXPECT: 4
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d; output-bytes=2
-
-- [x] G7: no remaining pitch_radar references in tools
-  CHECK: n=$(grep -rl "pitch_radar" tools/ --include="*.py" 2>/dev/null | wc -l); [ "$n" -eq 0 ] && echo OK_NO_PITCH_RADAR
-  EXPECT: OK_NO_PITCH_RADAR
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=795d69c5cb04aeff441ef4153733f601f1ad340f869072f25e87abc62021b725; output-bytes=18
-
-- [x] G8: the 27-tool standalone smoke test completed
-  CHECK: grep -c "SMOKE DONE" /tmp/smoke_results.txt
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
-
-- [x] G9: Stage 5 appended to LANE_PLAN.md
-  CHECK: grep -c "STAGE 5" LANE_PLAN.md
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
-
-- [x] G10: Stage 5 committed and pushed
-  CHECK: git log --oneline -1 | grep -c "Stage 5"
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=11abdf0c0c5d/34 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
+- [x] G6: PROGRESS.md records this run (provider, cost, wall time, output path, frame path)
+  CHECK: grep -q '3dpoc_2026-09-06_arsenal-chelsea' PROGRESS.md && grep -qi 'modal' PROGRESS.md && echo progress_updated
+  EXPECT: progress_updated
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=70b3a7e57858ffd7be87d9f243b91662a0e3c63420851b2828c9e83a45218520; output-bytes=17

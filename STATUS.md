@@ -323,3 +323,28 @@ could produce a real number but is not in produce_v2.py.
   + footage + assembler. Assembler-first beats 3D on score-per-hour and is a
   prerequisite for 3D. Build the assembler next.
 - No episode has scored >= 7/10; freeze holds.
+
+## Stage 12 re-run — 3D board on Modal, design vs dimension, 2026-09-12
+
+Relay (2026-09-12/13) next action executed: scene_gen.py as-written on Modal
+against arsenal-chelsea match_data.json, frame extracted, judged vs the 2D
+possession.png control through a 5-lens vision workflow (4 Opus + 1 gemma4) +
+synthesis. Provider Modal T4; output /mnt/f/soccer-staging/3dpoc_2026-09-06_arsenal-chelsea.mp4
+(1280x720, h264, 5.0s, 534892 bytes; ffprobe verified); wall ~408.9s, cost
+~$0.08 (12A same-code baseline; not re-timed). Frame
+artifacts/frames/3dpoc_arsenal-chelsea_t2500.png.
+
+- Authoritative (Opus): 3D frame 5/10; 2D possession control 4/10 (confirms
+  prior). gemma4 cross-check 3/10 (disagreement flagged, Opus retained).
+- VERDICT: DESIGN not DIMENSION. A well-designed 2D board would beat this 3D
+  frame. CONFIRMS Stage 12A. CONTRADICTS the relay's Part 5 "scrap 2D, build
+  3D" decision (overruled 12A without new evidence; this is the new evidence
+  and it confirms 12A). Do NOT scrap 2D; build the design layer on 2D first.
+- 12A "5/10" does not reproduce from the surviving manc-derby artifact:
+  re-judged by Opus (1/10) + gemma4 (1/10) at t=2.5s, camera clipped inside
+  the scene, 0 players; t=4.5s = 0/10. The 3D renderer is not reliably
+  reproducible (one run produced a broken render despite the commit claiming
+  "reproducible, encoding variance only"). Report says success, artifact says
+  broken.
+- Full verdict: artifacts/frames/synthesis_verdict.md. Freeze holds (no
+  episode >= 7/10).

@@ -1409,3 +1409,38 @@ with 2D boards + 1400w script + real footage + assembler: ~6.9/10 (just under
 7/10; typography + shot rhythm drag). Assembler beats 3D on score-per-hour
 (0.58 vs 0.21) AND is a prerequisite for 3D to count. RECOMMEND: assembler
 first, then 3D.
+
+## Stage 12 re-run — 3D formation board on Modal, multi-lens judge, 2026-09-12
+
+Relay (2026-09-12/13) immediate next action: run scene_gen.py as-written on
+Modal against arsenal-chelsea match_data.json, extract a frame, judge vs the
+2D possession.png control, report design-vs-dimension. Done via a 5-lens
+vision workflow (4 Opus authoritative + 1 gemma4 cross-check) + synthesis.
+
+- Provider: Modal (modal_render3d.py, T4, scene_gen.py NO edits).
+- Output: /mnt/f/soccer-staging/3dpoc_2026-09-06_arsenal-chelsea.mp4
+  (1280x720, h264, 5.0s, 534892 bytes; ffprobe verified).
+- Wall ~408.9s, cost ~$0.08 (Stage 12A same-code cached-image baseline via
+  /usr/bin/time -v; this run not separately re-timed).
+- Frame: artifacts/frames/3dpoc_arsenal-chelsea_t2500.png (t=2.5s, 1280x720).
+- Authoritative scores (Opus): 3D frame 5/10; 2D possession control 4/10
+  (confirms prior). gemma4 3D cross-check 3/10 (disagreement flagged, Opus
+  retained per Judge rule).
+- VERDICT: DESIGN, not DIMENSION. opus-diagnostic: a well-designed 2D board
+  would outright BEAT this 3D frame. CONFIRMS Stage 12A (design not dimension,
+  3D is a multiplier not a substitute). The 3D frame's +1 over 2D is depth
+  alone, paid for in readability.
+- CONTRADICTS the relay's Part 5 decision ("scrap 2D matplotlib completely,
+  build 3D"). That decision overruled 12A without new evidence; this re-run is
+  the new evidence and it confirms 12A. Do NOT scrap 2D; build the design layer
+  (condensed font, narrative furniture, fixed composition/geometry) on 2D
+  first, target 7-8/10, then port to 3D as a multiplier.
+- Second finding: the 12A "5/10" does NOT reproduce from the surviving
+  artifact. Re-judged 3dpoc_2026-09-12_preview-manc-derby.mp4 at t=2.5s by TWO
+  independent models: Opus 1/10 + gemma4 1/10 (camera clipped inside the scene,
+  0 players, 2 cylinders, a "23" chip). Late frame t=4.5s = 0/10, fully
+  broken. The 12A commit claimed "reproducible, encoding variance only"; the
+  surviving run-2 artifact is a broken render (report says success, artifact
+  says broken). The 3D renderer is not reliably reproducible.
+- Files: artifacts/frames/opus_3d_verdict.txt, opus_2d_control_verdict.txt,
+  synthesis_verdict.md (full verdict + recommendation).
