@@ -1,7 +1,7 @@
 # ARCHITECTURE.md — soccer-channel code map
 
 > **Purpose:** code map — which tool calls which, the 9-step produce_v2 pipeline.
-> **Reader:** every session (CLAUDE.md loads it); mirrored to the public status repo by `.claude/hooks/push_status.sh`.
+> **Reader:** every session (CLAUDE.md loads it).
 > **Last verified against code:** 2026-09-09.
 
 Verified against code on 2026-09-09 (Stage 2: 720p cap + 180-1200s filter on produce_v2.py). Every line number is from `wc -l` /
@@ -140,7 +140,7 @@ RECONCILIATION 1.5/1.6).
 ## STANDING OPERATING DOCTRINE
 1. Raw footage is acquired over the residential connection, staged on /mnt/f,
    shipped to the pod, and deleted locally. Nothing raw is written inside
-   ~. No local GPU work. All heavy compute and all archival storage
+   /home/muads. No local GPU work. All heavy compute and all archival storage
    go to the cloud. The purpose of this rule is that the ext4.vhdx never grows
    and no GPU work runs on the N150; staging on /mnt/f satisfies both.
    (Amended 2026-09-12, Stage 10A.3: residential YouTube download works —
@@ -151,8 +151,48 @@ RECONCILIATION 1.5/1.6).
 3. No orphaned, standalone or untested item, tool or aspect of the pipeline
    may exist. Everything is wired, tested, or retired.
 4. Every brief carries this doctrine as a footer.
+5. NO DEAD ENDS. When a tool, path, provider or piece of infrastructure blocks
+   the work, do not stop and report it blocked. Find the next best available
+   option and take it. Report the block, the alternatives considered, and which
+   you chose. Stopping at the first wall is only acceptable when every
+   alternative has been named and priced.
 
 The truthful gap list (which tools violate rules 1 and 3 today) lives in
 DECISIONS.md under this same heading. The current pipeline violates rule 1
-(produce_v2 runs locally except step4b); rule 3 (4 DEAD + ~18 untested
-STANDALONE). Not yet fixed.
+(produce_v2 runs locally except step4b). Rule 3 improved Stage 12B: 5 tools
+wired (script_gen, validate_script, broadcast_filler, cut_list_gen,
+transformation_gate) → 14 WIRED, 22 STANDALONE remaining (was 27). The 22
+STANDALONE tools are the remaining rule-3 debt.
+## Skill auto-activation (Stage 12C)
+
+A skill-activation layer sits in the project's `.claude/` (installed from
+diet103/claude-code-infrastructure-showcase, regex-only mode). It is NOT part of
+the video pipeline (produce_v2.py); it is Claude-Code-session infrastructure
+that suggests skills when a prompt matches a keyword/intentPattern in
+`.claude/skills/skill-rules.json`.
+
+- **UserPromptSubmit** → `skill-activation-prompt.sh`: regex-matches the prompt
+  against skill-rules.json, suggests matching skills. (mode=disabled = regex
+  only, no AI provider.)
+- **PreToolUse (Edit|MultiEdit|Write)** → `skill-verification-guard.sh`: blocks
+  an edit if a mandatory (block-enforcement) skill is pending. No-op here (no
+  block-enforcement skills installed).
+- **PostToolUse (Edit|MultiEdit|Write)** → `post-tool-use-tracker.sh`: logs
+  edited files (bash+jq).
+- **PostToolUse (Skill)** → `skill-activation-tracker.sh`: records skill
+  activations (session intel, better-sqlite3).
+- **SessionStart** (pre-existing): check_pods.sh + check_mnt_f.sh (unchanged).
+- **Stop** (global, pre-existing): unlazy stop-hook.mjs (unchanged).
+- **PreToolUse** (global, pre-existing): block-retired, block-image-read,
+  warn-local-gpu (unchanged).
+
+settings.json is merged additively (showcase pattern: extract + merge, never
+overwrite). The 6 pre-existing hooks (2 project SessionStart + 1 global Stop +
+3 global PreToolUse) are preserved; the 4 new hooks are added.
+
+Only `skill-developer` is in skill-rules.json. The showcase's React/Express/Sentry
+skills were not installed (wrong stack). The ~130 user marketing skills
+(~/.claude/skills) are not in skill-rules.json → not auto-suggested, but
+manually invokable. dev-docs commands not adopted (project has its own doc
+spine). Verified: verify-setup.sh 8/8 PASS + a real trigger test (skill-developer
+suggested via regex). See TOOLS.md and LANE_PLAN.md §Stage 12C.

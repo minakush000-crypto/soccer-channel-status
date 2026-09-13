@@ -71,18 +71,73 @@ tactical_overlay.
 | `render_video.py` | RETIRED (5C.2) | was DEAD (DEPRECATED) | 2026-09-09 | DELETED 2026-09-09; in git history |
 | `check_and_download.py` | RETIRED (5C.2) | was DEAD (superseded by runpod_fulltrack) | 2026-09-09 | DELETED 2026-09-09; in git history |
 
-Counts: **13 WIRED, 27 STANDALONE, 0 DEAD (4 retired)** = 40 (+2 libs = 42 .py files).
+Counts: **14 WIRED, 22 STANDALONE, 0 DEAD (4 retired)** = 36 (+2 libs = 38 .py files). Stage 12B wired 5 more (script_gen, validate_script, broadcast_filler, cut_list_gen, transformation_gate).
 
 ## Wired set (reachable from produce_v2.py)
 
-8 direct subprocess calls + 2 shared libs + 1 pod-shipped tracker:
+14 direct subprocess calls + 2 shared libs + 1 pod-shipped tracker:
 
 ```
-$ grep -nE "cmd = \[PYTHON|str\(TOOLS / \"" tools/produce_v2.py
-69:  match_data.py       78:  tactical_boards.py   235: runpod_fulltrack.py
-285: tactical_render.py  474: generate_voice.py    493: generate_ambience.py
-514: merge_voice.py      524: shorts_crop.py
+$ grep -oE 'TOOLS / "[a-z_]+\.py"' tools/produce_v2.py | sort -u
+broadcast_filler.py  cut_list_gen.py  generate_ambience.py  generate_voice.py
+match_data.py  merge_voice.py  runpod_download.py  runpod_fulltrack.py
+script_gen.py  shorts_crop.py  tactical_boards.py  tactical_render.py
+transformation_gate.py  validate_script.py
 ```
 Transitive libs: `ffmpeg_utils.py` (imported by generate_voice/merge_voice/shorts_crop),
 `script_utils.py` (imported by generate_voice). Pod: `cv_annotate.py`
 (shipped+run by runpod_fulltrack). `pitch_radar.py` is shipped but never run.
+## Skill auto-activation infrastructure (Stage 12C)
+
+Installed from github.com/diet103/claude-code-infrastructure-showcase.
+Regex-only mode (skill-rules.json `skill_activation_mode: disabled` — no AI
+provider, free, offline). Verified: `bash .claude/scripts/verify-setup.sh` →
+8/8 PASS.
+
+**4 hooks (project .claude/settings.json, additive to the existing SessionStart):**
+- `skill-activation-prompt.sh` (UserPromptSubmit) — suggests skills from
+  skill-rules.json by keyword/intentPattern regex match. Confirmed: a
+  "create a new skill" prompt → recommends skill-developer via regex.
+- `skill-verification-guard.sh` (PreToolUse Edit|MultiEdit|Write) — blocks an
+  edit if a mandatory skill is pending (two-try model). No-op when no skills
+  are block-enforcement (this project has none).
+- `post-tool-use-tracker.sh` (PostToolUse Edit|MultiEdit|Write) — logs edited
+  files + their repo to .claude/tsc-cache/. Pure bash (jq). Designed for the
+  monorepo tsc/build workflow; logs "unknown" repos here (no package.json) but
+  is harmless.
+- `skill-activation-tracker.sh` (PostToolUse Skill) — records when a skill is
+  activated (session intelligence / better-sqlite3).
+NOT installed (per brief): tsc-check, trigger-build-resolver,
+stop-build-check-enhanced (monorepo build hooks, wrong stack), and
+session-doc-updater (Stop, not in the 4).
+
+The 3 skill-* hooks run via `_run-node-hook.sh` → tsx (.ts in .claude/hooks/).
+Deps: .claude/hooks/node_modules (tsx, better-sqlite3, minimatch; npm install).
+`.claude/hooks/.env` sets SESSION_DOCS_ENABLED=false (suppresses the dev-doc
+reminder — this project uses its own doc spine, not /dev/active/ + /dev-docs).
+
+**skill-rules.json** (.claude/skills/): mode=disabled, conservativeness=balanced.
+Only `skill-developer` registered (the showcase's backend-dev-guidelines
+Express/Prisma, frontend-dev-guidelines React/MUI, error-tracking Sentry skills
+were NOT installed — wrong stack for a Python/ffmpeg soccer pipeline).
+
+**8 agents** (.claude/agents/, all clean — no hardcoded paths): auto-error-resolver
+(TS), code-architecture-reviewer, code-refactor-master, documentation-architect,
+frontend-error-fixer (no frontend here — stack-mismatched but harmless, on-demand),
+plan-reviewer, refactor-planner, web-research-specialist. Invokable via
+subagent_type. 6 are generic-relevant; 2 are stack-specific (auto-error-resolver
+TS, frontend-error-fixer frontend).
+
+**dev-docs pattern: NOT adopted.** The showcase's dev-docs commands reference a
+/dev/active/ task-dir structure. This project already has a doc spine
+(CONTEXT/STATUS/PROGRESS/DECISIONS/ARCHITECTURE/TOOLS/GAPS + LANE_PLAN + the
+public status mirror) + the unlazy GATES.md pattern. Adding dev-docs would create
+a competing second doc system (rule 3). Skipped.
+
+**~130 skill folders audit (rule 3):** 127 marketing/design skills in
+~/.claude/skills (126 valid SKILL.md), 125 mirrored in the parent
+yt-digest/.claude/skills (duplicates). They are a deliberate user library
+(marketing work), manually invokable via /<skill-name>, NOT in skill-rules.json
+so NOT auto-suggested. They are not pipeline orphans (not pipeline tools). To
+auto-suggest them, add entries to skill-rules.json. 1 global skill folder lacks
+SKILL.md (minor invalid entry). No action taken beyond documenting.

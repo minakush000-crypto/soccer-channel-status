@@ -1,7 +1,7 @@
 # DECISIONS.md — running log of choices and why
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
-> **Reader:** every session; mirrored to the public status repo.
+> **Reader:** every session.
 > **Last verified against code:** 2026-09-09.
 
 Newest first. Each entry is dated. "Why" is the actual reason, not a
@@ -83,7 +83,7 @@ generic COCO (CONTEXT.md). Not a meaningful gain. PLAYER_DETECTION exceeded
 
 ### Retired ~/soccer-pipeline and ~/retired/soccer-*
 Why: two folders named soccer-channel caused weeks of confusion (CONTEXT.md).
-The only real project is ~/yt-digest/soccer-channel. ~/retired/ is
+The only real project is /home/muads/yt-digest/soccer-channel. ~/retired/ is
 dead, never read or run. The soccer-channel SKILL.md (both global and parent)
 still points at ~/soccer-pipeline/ and is DEPRECATED — do not follow it for
 new work (see SKILLS.md).
@@ -98,7 +98,7 @@ secrets/yt_cookies.txt, fails loudly. Verified: source is now 1920x1080
 
 1. Raw footage is acquired over the residential connection, staged on /mnt/f,
    shipped to the pod, and deleted locally. Nothing raw is written inside
-   ~. No local GPU work. All heavy compute and all archival storage
+   /home/muads. No local GPU work. All heavy compute and all archival storage
    go to the cloud. The purpose of this rule is that the ext4.vhdx never grows
    and no GPU work runs on the N150; staging on /mnt/f satisfies both.
    (Amended 2026-09-12, Stage 10A.3: residential YouTube download works —
@@ -109,13 +109,18 @@ secrets/yt_cookies.txt, fails loudly. Verified: source is now 1920x1080
 3. No orphaned, standalone or untested item, tool or aspect of the pipeline
    may exist. Everything is wired, tested, or retired.
 4. Every brief carries this doctrine as a footer.
+5. NO DEAD ENDS. When a tool, path, provider or piece of infrastructure blocks
+   the work, do not stop and report it blocked. Find the next best available
+   option and take it. Report the block, the alternatives considered, and which
+   you chose. Stopping at the first wall is only acceptable when every
+   alternative has been named and priced.
 
 ### Gap: what does NOT yet meet the doctrine (updated 2026-09-09, Stage 6)
 
 **Rule 1 (nothing local) — VIOLATED by the CPU/storage stages, not by the
 download.** Stage 5A put step3 (download+cut) and step4b (tracking) on the pod.
 Stage 6A moved the RAW DOWNLOAD to /mnt/f USB staging (`tools/staging.py`,
-fail-loudly if /mnt/f not mounted, no ~ fallback), so a local download
+fail-loudly if /mnt/f not mounted, no /home/muads fallback), so a local download
 no longer permanently grows the vhdx. The remaining local violators:
 
 - step1 match_data (local ESPN API), step2 boards (local matplotlib),

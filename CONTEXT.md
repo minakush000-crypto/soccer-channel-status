@@ -1,7 +1,7 @@
 # CONTEXT.md — soccer-channel session brief
 
 > **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
-> **Reader:** every session (CLAUDE.md @CONTEXT.md); mirrored to the public status repo.
+> **Reader:** every session (CLAUDE.md @CONTEXT.md).
 > **Last verified against code:** 2026-09-09.
 
 Verified against code on 2026-09-09 (Stage 2: produce_v2 capped at 720p, duration filter 180-1200s; Stage 3: broadcast_filler + produce_episode fixed). Drifted sections (the tactical_overlay
@@ -9,7 +9,7 @@ wiring, "no upload", the 8-step list, the cv_annotate export list) were
 regenerated from grep; see ARCHITECTURE.md / STATUS.md / RECONCILIATION.md.
 
 Read this at the start of every session instead of pasting the brief.
-The project is ~/yt-digest/soccer-channel. Nothing else.
+The project is /home/muads/yt-digest/soccer-channel. Nothing else.
 
 ## THE GOAL
 Produce soccer tactical analysis videos for a YouTube channel, matching
@@ -17,7 +17,7 @@ the quality of Coaches' Voice (dark pitch, orange accents, data-driven
 graphics, functional arrows). Not Tifo, which needs a human illustrator.
 
 ## WHERE THINGS LIVE
-The project is ~/yt-digest/soccer-channel. Nothing else.
+The project is /home/muads/yt-digest/soccer-channel. Nothing else.
 ~/retired/ holds two dead folders (soccer-pipeline, soccer-channel).
 Never read or run anything in ~/retired/.
 There used to be two folders named soccer-channel. That caused weeks of
@@ -26,49 +26,21 @@ confusion. Only the one inside yt-digest is real.
 The .env is at ~/yt-digest/.env. yolov8s.pt is at ~/yolov8s.pt, outside
 the project folder.
 
-## STATUS MIRROR (public)
-Current project state is mirrored to a PUBLIC docs-only repo so any
-session (or the coordinator) can read it via web fetch instead of
-pasting fragments.
-Repo: https://github.com/minakush000-crypto/soccer-channel-status
-Contains only: the seven docs (CONTEXT.md, STATUS.md, PROGRESS.md, GAPS.md,
-DECISIONS.md, TOOLS.md, ARCHITECTURE.md) plus README.md and ALL_STATUS.md.
-No code, no keys, no renders. A Stop hook (.claude/hooks/push_status.sh)
-re-pushes these after any change, so the mirror is always current.
+## STATUS MIRROR — RETIRED 2026-09-12 (Stage 11, rule 3)
+The public docs mirror at github.com/minakush000-crypto/soccer-channel-status
+and the push_status.sh Stop hook that maintained it are RETIRED. Reason: the
+mirror's purpose was to be fetchable by Claude via raw.githubusercontent, but
+Claude cannot fetch those URLs outside web-search results, and the private
+yt-digest repo is synced directly via the GitHub connector — so the mirror was
+redundant and fragile (Stop-hook-only; a 3-day gap occurred 2026-09-09 to
+2026-09-12 when crashed sessions did not fire the hook). push_status.sh is in
+git history if ever needed. The artifacts/ and frames/ subtrees remain in this
+project (gitignored, local) for Claude's own use; they are just no longer
+pushed to a public mirror.
 
-HOW TO READ IT (important — the github.com URL does NOT work for fetchers):
-GitHub's github.com/.../blob/... HTML view is not reliably fetchable; it
-returns the page chrome, not the content. Use the RAW host instead:
-  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/<FILE>
-One-fetch full state (all seven docs concatenated):
-  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/ALL_STATUS.md
-Index of every raw URL:
-  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/README.md
-Caveat: WebFetch summarizes through a small model and can rewrite
-headings, so it understands the state but is NOT a verbatim source. For
-exact text or numbers, pull the raw bytes with curl (no auth needed).
-Real Claude (Opus 5) confirmed all these URLs return HTTP 200 unauthenticated.
-
-## ARTIFACTS and FRAMES (public, in the mirror repo)
-The mirror repo also carries the results themselves, not just the doc
-descriptions, so Claude can recompute and check the arithmetic:
-  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/artifacts/<type>/<file>
-  https://raw.githubusercontent.com/minakush000-crypto/soccer-channel-status/main/frames/<file>
-- artifacts/ — small machine-readable JSON: scoreboard scan timeline + changes
-  (artifacts/scoreboard/), Gemini footage inventory (artifacts/gemini_inventory/),
-  YouTube publish-log entries (artifacts/publish-log/), and trimmed per-tracker
-  tracking summaries (artifacts/tracking_summary/, NOT the 8MB per-frame files).
-- frames/ — downscaled 640px-wide PNGs behind every visual claim, named by
-  timestamp (e.g. frame_0253.png). Claude reads these directly; the relay's word
-  is not needed when the frame is in the repo.
-Both are staged in this project under artifacts/ and frames/ (gitignored here),
-redacted (~ -> ~), secret-scanned, and synced to the mirror by the
-same push_status.sh Stop hook. The mirror .gitignore allows only the two
-subtrees plus the docs, and blocks renders/clips/.env/keys. Never put a
-render, clip, or secret in artifacts/ or frames/. NOTE on the scoreboard
-artifact: count goals from timeline[] (first occurrence of each new
-scoreline), NOT from len(changes) — changes[] misses the first goal when the
-bug was absent before it (see artifacts/scoreboard/README.md in the mirror).
+Prior claims that the mirror was "always current" and "auto-pushed after any
+change" are removed — that was the second automated-behaviour claim that
+quietly stopped being true (the first was the old STATE.md hand-typed scores).
 
 ## THE PIPELINE
 Entry point: tools/produce_v2.py
@@ -142,7 +114,7 @@ real tracking, Opus 8/8.5). tactical_overlay.py is DEAD.
   automatically. Roughly $0.15 and 5 minutes per episode on an L4.
 - The vision quality scores in the old STATE.md (7/10, 8/10, 9/10) were
   typed by hand. No code produces them. They are not a benchmark.
-- Working vision check: ~/tools/vision_analyze.py, ~2.75s per
+- Working vision check: /home/muads/tools/vision_analyze.py, ~2.75s per
   frame. Use it to judge output instead of asserting quality.
 
 ## CONTENT RESEARCH
@@ -174,7 +146,7 @@ documented before 2026-09-05, which is why they stopped being used.
 Current output violates 1, 3, 4, and 5.
 
 ## STANDING RULES
-1. Work only in ~/yt-digest/soccer-channel. Print pwd at the
+1. Work only in /home/muads/yt-digest/soccer-channel. Print pwd at the
    start of every response.
 2. CLOUD ONLY. This is an Intel N150 with no GPU. Any GPU work goes to
    RunPod. Local is allowed only for ls, grep, ffprobe, single-frame
@@ -182,7 +154,7 @@ Current output violates 1, 3, 4, and 5.
    stop and ask me first.
 3. Every factual claim names the command you ran and pastes its output.
    If you did not run a command, write "not checked."
-4. Never print full API keys. Mask them (<masked>).
+4. Never print full API keys. Mask them (rpa_J40...RGT8).
 5. Git is the backup. The .bak files were deleted 2026-09-08 (superseded by
    git, RECONCILIATION Amendment 2). Do not recreate .bak; commit first if you
    want a rollback point.
@@ -217,7 +189,7 @@ See PROGRESS.md and STATUS.md for full detail.
 ## STANDING OPERATING DOCTRINE
 1. Raw footage is acquired over the residential connection, staged on /mnt/f,
    shipped to the pod, and deleted locally. Nothing raw is written inside
-   ~. No local GPU work. All heavy compute and all archival storage
+   /home/muads. No local GPU work. All heavy compute and all archival storage
    go to the cloud. The purpose of this rule is that the ext4.vhdx never grows
    and no GPU work runs on the N150; staging on /mnt/f satisfies both.
    (Amended 2026-09-12, Stage 10A.3: residential YouTube download works —
@@ -228,6 +200,11 @@ See PROGRESS.md and STATUS.md for full detail.
 3. No orphaned, standalone or untested item, tool or aspect of the pipeline
    may exist. Everything is wired, tested, or retired.
 4. Every brief carries this doctrine as a footer.
+5. NO DEAD ENDS. When a tool, path, provider or piece of infrastructure blocks
+   the work, do not stop and report it blocked. Find the next best available
+   option and take it. Report the block, the alternatives considered, and which
+   you chose. Stopping at the first wall is only acceptable when every
+   alternative has been named and priced.
 
 The truthful gap list (which tools violate rules 1 and 3 today) lives in
 DECISIONS.md under this same heading. Rule 1 is violated by the whole pipeline

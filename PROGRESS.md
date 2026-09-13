@@ -1,7 +1,7 @@
 # PROGRESS.md — chronological log
 
 > **Purpose:** dated chronological log of what was done when.
-> **Reader:** every session; mirrored to the public status repo.
+> **Reader:** every session.
 > **Last verified against code:** 2026-09-09.
 
 ## 2026-09-05 session 1: documentation spine + skill fix
@@ -9,7 +9,7 @@
 - Built CONTEXT.md, ARCHITECTURE.md, TOOLS.md, STATUS.md, DECISIONS.md,
   GAPS.md, SKILLS.md from code reading and command output, not intent.
 - Neutralized the soccer-channel skill (both copies): frontmatter now says
-  RETIRED, body redirects to ~/yt-digest/soccer-channel, all
+  RETIRED, body redirects to /home/muads/yt-digest/soccer-channel, all
   references to ~/soccer-pipeline deleted. Backups at *.bak.
 - Added GAPS.md note: skill firing is model judgment, CONTEXT.md is the
   only reliable primer.
@@ -183,7 +183,7 @@ Already on, not touched:
 
 ### Hooks: all 3 proven to fire live
 1. block-retired.sh (matcher: Read|Edit|Write|Bash)
-   - PROVEN: blocked a Bash command containing ~/retired/test.py.
+   - PROVEN: blocked a Bash command containing /home/muads/retired/test.py.
    - Exit 2, error: "BLOCKED: ~/retired/ is off limits."
 2. block-image-read.sh (matcher: Read)
    - PROVEN: blocked Read of /tmp/nonexistent-test.png.
@@ -229,7 +229,7 @@ Already on, not touched:
 2. brave-search: brave_web_search "soccer tactical analysis video pipeline"
    → Nature paper on Tactiformer/StratGaze + Catapult MatchTracker.
    Use: research tactical analysis methods and benchmark tools.
-3. filesystem: list_allowed_directories → ~/yt-digest/soccer-channel.
+3. filesystem: list_allowed_directories → /home/muads/yt-digest/soccer-channel.
    Use: file operations within project scope. Redundant with Read/Write
    tools but available if needed.
 4. sequential-thinking: single thought returned successfully.
@@ -814,8 +814,8 @@ PART 1 — status mirror (public docs repo):
   repo; the 7 docs were untracked (never in any remote).
 - Created PUBLIC repo minakush000-crypto/soccer-channel-status, docs only
   (7 files + .gitignore). Scanned all 7 for secrets BEFORE push: only
-  ~ paths + masked-key example; redacted on copy (~->~,
-  <masked>-><masked>). Verified clean on remote.
+  /home/muads paths + masked-key example; redacted on copy (/home/muads->~,
+  rpa_J40...RGT8-><masked>). Verified clean on remote.
 - Automated: .claude/hooks/push_status.sh (idempotent, redacts, no-ops,
   exit 0) wired as 2nd Stop hook in ~/.claude/settings.json. Proven: manual
   run committed + pushed. URL written into CONTEXT.md.
@@ -960,7 +960,7 @@ Cost Part 1: ~$0.02 (one Opus 5 WebFetch confirmation).
 
 PART 3 (push artifacts/ + frames/ to mirror) — DONE.
 Staged in soccer-channel under artifacts/ and frames/ (gitignored here, synced
-to the public mirror by push_status.sh). Redacted (~ -> ~),
+to the public mirror by push_status.sh). Redacted (/home/muads -> ~),
 secret-scanned (no keys, tokens, /home paths), .gitignore allows only the two
 subtrees + docs and blocks renders/clips/.env/keys.
 
@@ -1213,7 +1213,7 @@ Pushed: 0fb4e96..80adff9.
 ## Stage 6 — /mnt/f staging, name overlap, beliefs closed, keys, 2026-09-09
 
 6A: tools/staging.py — raw downloads stage on /mnt/f (fail-loudly if not mounted,
-no ~ fallback). produce_v2 step3 downloads to /mnt/f + cleanup at end.
+no /home/muads fallback). produce_v2 step3 downloads to /mnt/f + cleanup at end.
 Doctrine rule 1 updated in 4 docs. 6A.2 real proof pending /mnt/f mount (mechanics proven).
 6B: name overlap resolved — canonical path proven (6B.1), retired fenced by hook
 (6B.2), yt_digest live (6B.3), canonical-path assertion in produce_v2 fires from
@@ -1356,3 +1356,56 @@ proven at/above spec. TOOLS.md annotated. Downstream breakage list in
 LANE_PLAN.md §Stage 10C.6.
 
 Production freeze stays until an episode scores >= 7/10. Committed + pushed.
+
+### Stage 11 (part 1) — Rule 5 + mirror retirement (2026-09-12)
+
+Doctrine Rule 5 (NO DEAD ENDS) added to all 4 canonical docs. Applies
+retroactively to the 10C.3 RunPod-only dead-end (Vast.ai was authenticated
+and unused).
+
+Mirror retired (A1-A5). The finding's premise was partly wrong: push_status.sh
+WAS registered (global ~/.claude/settings.json Stop hook, not project
+settings); the mirror WAS pushed today (3 pushes) and IS public. The real
+issue was a 3-day gap (2026-09-09 07:56 -> 2026-09-12 22:05 UTC) from
+Stop-hook fragility (crashed sessions don't fire it) + the global settings
+being modified today (mtime 16:44 CDT). Stage 8 did NOT replace a hook
+registration — the project settings.json was new in Stage 8 with no prior
+hooks. Decision (b) retire under rule 3: mirror redundant (GitHub connector
+syncs the private repo; raw.githubusercontent not fetchable by Claude) +
+fragile. git rm push_status.sh; removed its Stop-hook entry from global
+settings (kept unlazy; JSON verified valid); stripped "mirrored to public
+status repo" from 6 doc headers; replaced CONTEXT.md mirror sections with a
+RETIRED note. artifacts/ + frames/ stay local (gitignored).
+
+A4 audit: check_pods.sh (fires, verified session start), block-retired.sh
+(fires, blocked a retired-folder read mid-session), block-image-read +
+warn-local-gpu (registered), unlazy Stop (registered), youtube_upload OAuth
+auto-refresh (TRUE, lines 118-120) — all hold. Only push_status was false
+(retired). A5: CLAUDE.md rule 12 — settings.json writes are additive.
+
+### Stage 11 (part 2) — GPU unblock + 3D PoC attempt + assembler scope (2026-09-12)
+
+11A: persistent /mnt/f — check_mnt_f.sh SessionStart hook (committed, fires);
+fstab entry `F: /mnt/f drvfs defaults,noatime,nofail 0 0` is the durable fix
+(one-time sudo, user). Registered additively in .claude/settings.json (A5).
+
+11B: Vast.ai has capacity now (RTX 3090 $0.17/h, L4 $0.32/h; RunPod 0/48).
+Survey: RunPod/Vast/Modal/Lambda/Paperspace (LANE_PLAN §11B.2). Primary=Vast,
+fallback=Modal. render3d_vast.py built (provider-agnostic layer, Vast backend).
+vastai_shorts fault was provider auth (classic api.vast.ai dead), not the tool;
+Vast works now via the new cloud.vast.ai SDK.
+
+11C: 3D PoC ATTEMPTED on Vast, BLOCKED on retrieval. scene_gen.py (Blender bpy,
+Cycles) + render3d_vast.py + modal_render3d.py built. Vast instance created +
+destroyed cleanly (capacity + credit confirmed). But the Vast SDK has no
+SSH/logs, the env-drop is broken (env-test: no gist), catbox/webhook POSTs are
+blocked from the Bash sandbox, and the SDK has no port-exposure. 10C.4 HELD
+(2D renderers stay; no 3D frame produced). Block is a one-time user action:
+Modal `modal token new` (recommended; modal_render3d.py ready) or a Vast SSH
+key. Re-asked the user; awaiting authorization.
+
+11D: wired boards+footage assembler scoped (~1-2 days). Estimated spec score
+with 2D boards + 1400w script + real footage + assembler: ~6.9/10 (just under
+7/10; typography + shot rhythm drag). Assembler beats 3D on score-per-hour
+(0.58 vs 0.21) AND is a prerequisite for 3D to count. RECOMMEND: assembler
+first, then 3D.

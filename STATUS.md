@@ -1,7 +1,7 @@
 # STATUS.md — verified current state
 
 > **Purpose:** verified current state of the pipeline (the status spine).
-> **Reader:** every session (CLAUDE.md @STATUS.md); mirrored to the public status repo.
+> **Reader:** every session (CLAUDE.md @STATUS.md).
 > **Last verified against code:** 2026-09-09.
 
 Verified against code on 2026-09-09 (Stage 3: broadcast_filler phantom bug fixed 3A.1, produce_episode 800M guard 3A.4; Stage 2: 720p cap + 180-1200s filter on produce_v2.py). This rebuild supersedes the 2026-09-05
@@ -282,3 +282,38 @@ could produce a real number but is not in produce_v2.py.
   tactical_boards.py stay until a 3D replacement is proven at/above spec.
   TOOLS.md annotated. Scope + downstream list in LANE_PLAN.md §Stage 10.
 - Production freeze stays until an episode scores >= 7/10.
+
+## Stage 11 (part 1) — Rule 5 + mirror retirement, 2026-09-12
+
+- Doctrine Rule 5 (NO DEAD ENDS) added to all 4 canonical docs.
+- Public status mirror RETIRED (rule 3): redundant (GitHub connector syncs
+  private repo; raw.githubusercontent not fetchable by Claude) + fragile
+  (Stop-hook-only, 3-day gap 2026-09-09 to 2026-09-12). git rm push_status.sh;
+  removed its global Stop-hook entry (kept unlazy); stripped mirror claims
+  from 6 doc headers + CONTEXT.md. artifacts/ + frames/ stay local.
+- Correction on record: push_status.sh WAS registered (global Stop hook, not
+  project settings); mirror WAS pushed today. The 3-day gap was the real
+  issue, not "not registered." Stage 8 did not replace a hook registration
+  (project settings.json was new, no prior hooks).
+- A4 audit: all other "automatic" claims hold (check_pods, block-retired,
+  block-image-read, warn-local-gpu, unlazy Stop, OAuth auto-refresh). Only
+  the mirror claim was false.
+- A5: CLAUDE.md rule 12 — settings.json hook writes are additive.
+
+## Stage 11 (part 2) — GPU unblock, 3D PoC attempt, assembler scope, 2026-09-12
+
+- 11A: check_mnt_f.sh SessionStart hook (fires); fstab `F: /mnt/f drvfs
+  defaults,noatime,nofail 0 0` is the durable reboot-surviving fix (one-time
+  sudo). settings.json now has 2 SessionStart hooks (additive, rule 12).
+- 11B: Vast.ai has capacity (RTX 3090 $0.17/h); RunPod 0/48. Primary=Vast,
+  fallback=Modal. render3d_vast.py = provider-agnostic layer (Vast backend).
+  vastai_shorts fault was stale classic-API auth; Vast works now.
+- 11C: 3D PoC BLOCKED on retrieval. Vast instance created/destroyed cleanly
+  (capacity+credit OK) but the SDK has no SSH/logs, env-drop is broken,
+  catbox/webhook are blocked from the sandbox, no port-exposure. 10C.4 HELD
+  (tactical_render.py + tactical_boards.py stay). Block = one-time user action:
+  Modal token (modal_render3d.py ready) or Vast SSH key. Awaiting user.
+- 11D: assembler scoped (~1-2 days); est. score ~6.9/10 with 2D boards + 1400w
+  + footage + assembler. Assembler-first beats 3D on score-per-hour and is a
+  prerequisite for 3D. Build the assembler next.
+- No episode has scored >= 7/10; freeze holds.

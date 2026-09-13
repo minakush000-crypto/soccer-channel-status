@@ -1,7 +1,7 @@
 # GAPS.md — what nobody has verified
 
 > **Purpose:** registry of unverified claims and open uncertainties.
-> **Reader:** every session; mirrored to the public status repo.
+> **Reader:** every session.
 > **Last verified against code:** 2026-09-09.
 
 This file existing and being short is a warning sign, not a success. Each
