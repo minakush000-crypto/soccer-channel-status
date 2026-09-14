@@ -3482,3 +3482,132 @@ lockup, title/formation/team labels, accent hierarchy, surnames — ideally prov
 on a 2D board first (Opus: a well-designed 2D board would hit 7-8/10), then
 layer 3D on top of that proven design. 3D is a multiplier on good design, not a
 substitute for it.
+
+---
+
+## STAGE 13 — board build order (channel-expansion decision, 2026-09-13)
+
+> **Source:** the reference-viz extraction (20 videos, Gemini-authoritative
+> visual verdicts) at `~/claude/40-lessons/viz-design-findings.md` (49238 B,
+> verified `ls -la`). The extraction surveyed every viz type seen in 10
+> design-focused tutorials + 5 coding-only + 5 breadth sources, cross-
+> referenced each against the project's Sofascore data-scope, and produced a
+> ranked build order. This stage records that order as a channel-expansion
+> decision: which boards to build, in what order, and why all are 2D.
+
+### 13A — the 3D-vs-2D question, RESOLVED AS 2D
+
+Stage 12A settled this: the 3D frame scored 5/10 (Opus), the 2D control 4/10,
+and Opus's verdict was "DESIGN not DIMENSION" (a well-designed 2D board would
+hit 7-8/10 without a single polygon of 3D). The extraction's Part 1 then
+confirmed the mechanism: **3D perspective distorts 2D positional data** (Opus:
+"perspective is the wrong tool for positional data"). Timelines (xG flow,
+momentum) are inherently 2D. Positional charts (shot map, average-positions)
+are 2D top-down. The 3D renderer (tools/scene_gen.py, tools/modal_render3d.py)
+is KEPT for future use on the formation board (where perspective adds depth),
+but the four new boards below are ALL 2D. 3D is not the bottleneck; design is.
+
+### 13B — the four design properties (the standard boards are judged against)
+
+From the extraction's Gemini verdicts across 20 videos. Every board built
+must satisfy these:
+
+1. **Direct labels, not legends.** Labelling jumps 2-4/10 to 7-9/10 when the
+   analyst adds direct labels on data marks instead of a separate legend
+   (Gemini, verbatim). The single biggest labelling failure across the
+   sample: the y-axis on the xG flow chart, which is NEVER labeled.
+2. **Three-colour discipline on a dark background.** Background (#0C0D0E or
+   similar) + ONE accent for focal data + white for text/lines. Exactly
+   three colours per board. McKay Johns states this as "concept 2"; Gemini
+   confirmed with 9/10 colour scores. When analysts use 4+ default
+   matplotlib colours, discipline drops to 4/10.
+3. **Full-frame use of space.** Boards fill the 1920x1080 frame. Space scores
+   7-9/10 when the viz fills the frame, 3-6/10 when notebook chrome or
+   margins steal real estate.
+4. **Brightest/most-clustered marks lead the eye; title-as-message, not
+   label.** The eye goes to (1) the brightest/most-saturated colour block,
+   (2) the largest text, (3) the densest cluster. Make the focal data the
+   brightest and most clustered thing; make the title the largest text and
+   state the argument ("Haaland's goals cluster inside the box"), not the
+   metric name.
+
+### 13C — the board build order
+
+Four boards, all 2D, in priority order. Each is data-supported by Sofascore
+today (verified: `tools/sofascore_client.py` exists, 12949 B, references
+shotmap/momentum/average-positions at lines 11, 241, 290). The existing
+pipeline boards (formation, possession, stat_card in `tactical_boards.py`,
+verified at lines 205, 340, 447) are unaffected; these four are ADDITIONS.
+
+| # | Board | Dimension | Tool | ~Lines | Data source | Narrative |
+|---|---|---|---|---|---|---|
+| 1 | xG flow chart | 2D timeline | matplotlib steps-post | ~50 | shotmap (per-shot minute + xG + team) | HIGH (match arc: who deserved to win) |
+| 2 | Shot map | 2D top-down pitch | mplsoccer VerticalPitch | ~150 | shotmap (per-shot x/y/xg/outcome + team) | HIGH (where the danger came from) |
+| 3 | Momentum chart | 2D timeline | filled area chart | ~30 | momentum (per-minute -100..+100) | MED-HIGH (when the match turned) |
+| 4 | Average-positions scatter | 2D top-down pitch | scatter on pitch | ~70 | average-positions (x/y per player) | MED (actual vs nominal shape) |
+
+**Why this order:**
+- #1 xG flow chart first: highest narrative-per-build-hour. A 30-60s board
+  that tells the whole match arc in one image, from data already fetched,
+  in ~50 lines. Answers the question every tactical video must answer:
+  "who deserved to win?"
+- #2 shot map second: the strongest single-frame spatial narrative. Most-
+  featured board across the sample (4 of 10 videos built one). ~150 lines
+  because the pitch-drawing + design layer is the work, not the data.
+- #3 momentum chart third: cheapest to build (~30 lines, data is a 90-
+  element array, plot is a filled area). Fills a temporal gap the xG flow
+  does not cover (territorial/pressure dominance, not chance quality).
+- #4 average-positions fourth: most directly improves what we already have
+  (the formation board shows nominal; this shows actual). Stepping stone to
+  a pass network (same node locations, add edges when pairwise pass data
+  arrives).
+
+**Combined:** ~300 lines of plotting code + a shared design layer (dark
+pitch, 3-colour rule, Bebas Neue / Barlow Condensed typography, title-as-
+message). The design layer is the hard part and is shared across all four.
+Estimated 120-240s of watchable narratively-loaded graphics per episode
+(30-60s each), from data already fetched via Sofascore.
+
+### 13D — what NOT to build first (and why)
+
+- **Pass network:** HIGH narrative but PARTIAL data (no pairwise pass
+  counts from Sofascore). Build when StatsBomb or a pass-event source is
+  integrated. Average-positions is the foundation.
+- **Radar / pizza chart:** worst readability in the sample (1-4/10
+  labelling, 1/10 colour). Design execution is hard, payoff lower than
+  spatial boards.
+- **Heatmap:** PARTIAL data for non-shot heatmaps, most voiceover-dependent
+  board. Build after the top 4, only as a shot-location heatmap.
+- **3D boards for any of the above:** 3D perspective distorts 2D positional
+  data (Stage 12A + extraction Part 1). All four boards are 2D. 3D is not
+  the bottleneck; design is.
+
+### 13E — wiring into produce_v2
+
+These boards are additions to `step2_boards` (`produce_v2.py:91`), not
+replacements. The current step2 calls `tactical_boards.py` (formation,
+possession, stat_card) and `modal_render3d.py` (3D formation board, Stage
+14). The four new boards would be generated from Sofascore data already
+fetched in step1 (`match_data.py`), rendered as 1920x1080 PNG/MP4 via
+the `_normalize_board` helper (Stage 9C.2, verified in `tactical_boards.py`),
+and selected via `[VISUAL: board=xg_flow]` / `board=shot_map` /
+`board=momentum` / `board=avg_positions` tags in the script. No new
+pipeline step; they slot into the existing board step. The
+`validate_script.py` visual vocabulary (Stage 7B, `--lane` per-lane tag
+allow-list) would need these four board types added to the allowed list
+for lanes A/D.
+
+**Not built this stage.** This is a decision recording the build order and
+the 2D resolution, not the implementation. The implementation is a
+subsequent stage once the design layer (typography, colour, title lockup)
+is proven on one board first (per Stage 12A: prove the design system on a
+2D board, then replicate across all four).
+
+### Stage 13 carry-forward
+- Board build order decided: xG flow → shot map → momentum → avg-positions
+  (all 2D, all Sofascore-data-supported).
+- 3D-vs-2D RESOLVED AS 2D for positional/timeline boards (3D kept for
+  formation board only).
+- Four design properties recorded as the standard boards are judged against.
+- Findings doc: `~/claude/40-lessons/viz-design-findings.md`.
+- Implementation deferred: design layer must be proven on one board first.

@@ -6,17 +6,19 @@
 
 Verified against code on 2026-09-13 (Stage 14: step4b RETIRED, 3D formation
 board wired into step2_boards, .script_verified voice gate, step5_assemble
-rewritten with footage <=20% cap, 3rd SessionStart hook). Every line number is
-from `wc -l` / `grep -n` against the file on disk today. If a line moved,
-re-read. This rebuild supersedes the 2026-09-05 and 2026-09-09 versions; the
-2026-09-05 step-4 wiring (`tactical_overlay` at `produce_v2.py:232`) and the
-2026-09-09 step4b_tactical_render (at `produce_v2.py:211`) are both gone.
+rewritten with footage <=20% cap, 3rd SessionStart hook; B2 archive path
+added, all step line numbers re-grepped against the current 867-line file).
+Every line number is from `wc -l` / `grep -n` against the file on disk today.
+If a line moved, re-read. This rebuild supersedes the 2026-09-05 and
+2026-09-09 versions; the 2026-09-05 step-4 wiring (`tactical_overlay` at
+`produce_v2.py:232`) and the 2026-09-09 step4b_tactical_render (at
+`produce_v2.py:211`) are both gone.
 
 ## Entry points (two)
 
 | Entry point | Status | Evidence |
 |---|---|---|
-| `tools/produce_v2.py` (858 lines) | Authoritative | `grep -n "^def main"` → `715:def main():`; nothing calls it |
+| `tools/produce_v2.py` (867 lines) | Authoritative | `grep -n "^def main"` → `724:def main():`; nothing calls it. `RENDERS = SCRIPT_DIR / "renders"` (line 38) is the local working-copy dir; B2 is the archive of record (see "B2 archive of record" below). |
 | `tools/produce_episode.py` (529 lines) | Older, separate | calls `cv_annotate.py:298`, `assemble_video.py:313`, `validate_script.py:162`, `tactical_boards.py:180`, `generate_ambience.py:334`, `generate_voice.py:349`, `merge_voice.py:346`. NOT reachable from produce_v2 |
 
 Run command (matches `produce_v2.py:10`):
@@ -24,7 +26,7 @@ Run command (matches `produce_v2.py:10`):
 
 ## produce_v2.py — the steps, in actual execution order
 
-Execution order is from `main()` (line 715), read directly:
+Execution order is from `main()` (line 724), read directly:
 
 ```
 $ grep -nE "^def step|^def main" tools/produce_v2.py
@@ -36,19 +38,19 @@ $ grep -nE "^def step|^def main" tools/produce_v2.py
 353:def step1c_validate(slug, lane):
 371:def step4a_cutlist(slug, clip_path, render_dir):
 430:def step5_assemble(slug, render_dir, boards_dir, clip_path, match_data, lane,
-617:def step5b_transformation_gate(slug, render_dir, lane):
-639:def step6_voice(slug, render_dir):
-665:def step6b_ambience(slug, render_dir):
-684:def step7_merge(slug, render_dir):
-708:def step8_shorts(slug, render_dir):
-715:def main():
+626:def step5b_transformation_gate(slug, render_dir, lane):
+648:def step6_voice(slug, render_dir):
+674:def step6b_ambience(slug, render_dir):
+693:def step7_merge(slug, render_dir):
+717:def step8_shorts(slug, render_dir):
+724:def main():
 ```
 
-`main()` calls (lines 749-822): step1 (749) → step1b_script_gen (756) →
-step1c_validate (758) → step2 (761) → step3 (772/774, local or --pod-download)
-→ step4a_cutlist (787) → step4b RETIRED (791 comment) → step6_voice (794) →
-step6b_ambience (799) → step5_assemble (803) → step5b_transformation_gate
-(808) → step7_merge (813) → step8_shorts (818) → staging.cleanup_staging (822).
+`main()` calls (lines 758-831): step1 (758) → step1b_script_gen (765) →
+step1c_validate (767) → step2 (770) → step3 (781/783, local or --pod-download)
+→ step4a_cutlist (796) → step4b RETIRED (800 comment) → step6_voice (803) →
+step6b_ambience (808) → step5_assemble (812) → step5b_transformation_gate
+(817) → step7_merge (822) → step8_shorts (827) → staging.cleanup_staging (831).
 
 | # | Function (line) | What it runs | Output |
 |---|---|---|---|
@@ -60,14 +62,14 @@ step6b_ambience (799) → step5_assemble (803) → step5b_transformation_gate
 | 4a | `step4a_cutlist` (371) | `broadcast_filler.py` (line 404) + `cut_list_gen.py` (line 414). Stage 12B. | `renders/<slug>/cut_list.json` |
 | 4b | RETIRED Stage 14 | `step4b_tactical_render` removed. `tactical_render.py` git-rm'd. `runpod_fulltrack.py` no longer called by produce_v2. `pitch_radar.py` deleted (was never shipped; `runpod_fulltrack.py:101` ships only `cv_annotate.py` + `ffmpeg_utils.py`). | — |
 | 5 | `step5_assemble` (430) | inline ffmpeg concat, sub-cut into 40-80 shots. Footage capped at **20% of runtime** (`footage_budget = 0.20 * total_duration`, line 512). Stage 12B rewrite; the old `clip_idx*5` fixed-offset bug is gone. | `renders/<slug>/clips/video_footage.mp4` |
-| 5b | `step5b_transformation_gate` (617) | `transformation_gate.py <manifest>` (line 634). Lane D floor. Stage 12B. | pass/fail |
-| 6 | `step6_voice` (639) | `generate_voice.py <slug> --tts-only` (line 660). Gated by `.script_verified` marker (line 648): no voice render until a human creates `renders/<slug>/.script_verified`. Stage 14. | `renders/<slug>/voice_elevenlabs.mp3` |
-| 6b | `step6b_ambience` (665) | `generate_ambience.py <slug> 30` (line 679). Non-fatal. | `renders/<slug>/crowd_ambience.mp3` |
-| 7 | `step7_merge` (684) | `merge_voice.py <slug> <voice.mp3>` (line 700) mixes crowd ambience under voice at 30% | `renders/<slug>/final_video.mp4` |
-| 8 | `step8_shorts` (708) | `shorts_crop.py <slug>` (line 710). Non-fatal (16:9 final is primary). | `renders/<slug>/shorts/final_video_shorts.mp4` |
+| 5b | `step5b_transformation_gate` (626) | `transformation_gate.py <manifest>` (line 643). Lane D floor. Stage 12B. | pass/fail |
+| 6 | `step6_voice` (648) | `generate_voice.py <slug> --tts-only` (line 669). Gated by `.script_verified` marker (line 657): no voice render until a human creates `renders/<slug>/.script_verified`. Stage 14. | `renders/<slug>/voice_elevenlabs.mp3` |
+| 6b | `step6b_ambience` (674) | `generate_ambience.py <slug> 30` (line 688). Non-fatal. | `renders/<slug>/crowd_ambience.mp3` |
+| 7 | `step7_merge` (693) | `merge_voice.py <slug> <voice.mp3>` (line 709) mixes crowd ambience under voice at 30% | `renders/<slug>/final_video.mp4` |
+| 8 | `step8_shorts` (717) | `shorts_crop.py <slug>` (line 719). Non-fatal (16:9 final is primary). | `renders/<slug>/shorts/final_video_shorts.mp4` |
 
 Final step cleans up the /mnt/f-staged raw source via `staging.cleanup_staging`
-(line 822) and deletes a `--clip`-provided file if it was on /mnt/f. No copy to
+(line 831) and deletes a `--clip`-provided file if it was on /mnt/f. No copy to
 /mnt/c/Downloads (removed Stage 12B).
 
 ## What produce_v2.py does NOT call (verified by grep)
@@ -82,7 +84,7 @@ runpod_fulltrack: 0 mention(s)
 ```
 - `tactical_overlay.py` — NOT called (the old 2026-09-05 doc said line 232; that wiring is gone). DELETED.
 - `validate_script.py` — IS now wired (step1c, line 362). Stage 12B reversed the old "0 mentions."
-- `generate_ambience.py` — IS now called (step6b, line 679). (The 2026-09-05 doc said NOT called; that is reversed.)
+- `generate_ambience.py` — IS now called (step6b, line 688). (The 2026-09-05 doc said NOT called; that is reversed.)
 - `broadcast_filler.py`, `cut_list_gen.py`, `script_gen.py`, `transformation_gate.py` — IS now wired (step4a/step1b/step5b). Stage 12B.
 - `modal_render3d.py` — IS now wired (step2_boards, line 110). Stage 14.
 - `youtube_upload.py` — no upload step in produce_v2. Uploads happen by hand (2 entries in `artifacts/publish-log/`).
@@ -138,6 +140,37 @@ renders/<slug>/
   final_video.mp4            # step 7 merged (16:9, primary output)
   shorts/final_video_shorts.mp4  # step 8 (vertical, non-fatal)
 ```
+
+## B2 archive of record (Stage 14 / B2 migration, 2026-09-13)
+
+`RENDERS = SCRIPT_DIR / "renders"` (`produce_v2.py:38`) is the **local
+working-copy** directory. The **archive of record** is B2
+(`b2:mendymax-archive`, bucket verified `rclone lsd b2:`). Every output the
+pipeline produces — boards, renders, frames, transcripts, artifacts, backups
+— has a B2 destination under `b2:mendymax-archive/yt-digest/...`. Local copies
+are working copies, not the record.
+
+This extends doctrine rule 1 (raw footage -> /mnt/f -> pod -> delete locally)
+to generated outputs: the local `renders/` tree is ephemeral, B2 is durable.
+
+B2 path mapping (the local path maps to the same relative path under the B2
+`yt-digest/` prefix):
+
+| Local (working copy) | B2 (archive of record) |
+|---|---|
+| `renders/<slug>/` | `b2:mendymax-archive/yt-digest/renders/<slug>/` |
+| `renders/<slug>/boards/*.png + *.mp4` | `b2:mendymax-archive/yt-digest/renders/<slug>/boards/` |
+| `renders/<slug>/clips/*.mp4` | `b2:mendymax-archive/yt-digest/renders/<slug>/clips/` |
+| `renders/<slug>/voice_elevenlabs.mp3` | `b2:mendymax-archive/yt-digest/renders/<slug>/` |
+| `renders/<slug>/final_video.mp4` | `b2:mendymax-archive/yt-digest/renders/<slug>/` |
+| `renders/<slug>/shorts/final_video_shorts.mp4` | `b2:mendymax-archive/yt-digest/renders/<slug>/shorts/` |
+| `scripts/<slug>.md` | `b2:mendymax-archive/yt-digest/scripts/` |
+| `artifacts/` (frames, transcripts, publish logs) | `b2:mendymax-archive/yt-digest/artifacts/` |
+
+B2 is not yet wired into produce_v2.py as an automatic upload step (no
+`step9_archive` exists today). Archiving is a manual `rclone copy` until it is
+wired. CLOSING PASS: confirm which tool, if any, auto-uploads to B2 after this
+migration, and whether a `step9_archive` function has been added.
 
 ## Known render directories (ls renders/)
 

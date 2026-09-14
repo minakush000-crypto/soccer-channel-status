@@ -1506,3 +1506,87 @@ run. 12A held the git rm (nothing removed; verified git log --diff-filter=D).
 - Next: scrap 2D / build 3D per relay Part 5, build-then-retire order (build
   and wire the 3D path into produce_v2 first, verify, THEN retire the 2D
   tools) so the pipeline is never broken (doctrine #5).
+
+## Stage 13 — B2 archive migration + Ubuntu reclamation + board build order, 2026-09-13
+
+### 13A: B2 archive of record established
+
+rclone v1.75.1 installed (`rclone version` → `rclone v1.75.1`). B2 remote "b2"
+configured, bucket "mendymax-archive" verified (`rclone lsd b2:` →
+`mendymax-archive`). NEW STANDING RULE adopted: everything produced by any
+task (renders, frames, transcripts, artifacts, backups) is archived to B2;
+local copies are working copies, not the record. Doctrine rule 1 (raw footage
+-> /mnt/f -> pod -> delete locally) is unchanged; this extends it to generated
+outputs. The archive-then-delete process (sep5 backups 2.6G + ~/retired 1.4G +
+old render folders ~3.4G, keeping 2026-09-12_bournemouth-brentford) is IN
+PROGRESS; local deletions happen AFTER the docs are amended + uploads verified.
+
+CLOSING PASS: B2 bucket size after archive, list of files actually uploaded,
+and confirmation that archive-then-delete completed for each item.
+
+### 13B: Ubuntu disk reclamation (regenerable caches)
+
+Disk reality: ext4.vhdx is 36.82 GB at
+C:\Users\muads\AppData\Local\wsl\{f2ea779f-...}\ext4.vhdx; it grows and never
+shrinks on its own (deleting inside Ubuntu does not shrink it); compaction
+requires WSL fully stopped (a separate operation Mayo runs). C: has ~15 GB
+free of 119 GB; / showed ~35 GB used before cache clearing.
+
+Regenerable caches cleared (no archive needed): ~/.cache 3.3G + ~/.npm cache
++ ~/.cargo/registry + ~/.nvm/.cache + ~/.bun/install/cache + ~/.rustup/downloads
++ __pycache__ 388M + ~/.linkedin-mcp/patchright-browsers 394M. Result: /
+went from ~35G to ~29G used (~6G freed). Verified post-clearing:
+`df -h /` → `/dev/sdd 1007G 29G 927G 4%`.
+
+CLOSING PASS: free space after the archive-then-delete deletions complete
+(should drop further below 29G), and what was actually deleted vs archived.
+
+### 13C: Board build order approved (all 2D, from reference-viz extraction)
+
+Reference-viz extraction completed 2026-09-13 (text-only main model; all
+visual judgment is pasted Gemini output, gemini-3.1-pro-preview, AUTHORITATIVE
+per project judge rule). Extracted from 10 design-focused YouTube tutorials
+(McKay Johns, Friends of Tracking, John Burn-Murdoch/FT) + 5 coding-only
+tutorials. Findings doc: ~/claude/40-lessons/viz-design-findings.md (49238
+bytes, verified `ls -la`).
+
+The 3D-vs-2D question is RESOLVED AS 2D: Part 1 found 3D perspective distorts
+2D positional data (Opus: "perspective is the wrong tool for positional data"),
+and timelines are inherently 2D. This overrules the relay's "scrap 2D / build
+3D" decision from the Stage 12 re-run (cont.) entry above.
+
+Approved board build order (all 2D, data already available from Sofascore):
+1. xG flow chart (~50 lines, 2D timeline, HIGH narrative, data=shotmap)
+2. Shot map (~150 lines, 2D top-down pitch, HIGH, data=shotmap)
+3. Momentum chart (~30 lines, 2D timeline, MED-HIGH, data=momentum)
+4. Average-positions scatter (~70 lines, 2D top-down, MED, data=avg-positions)
+
+Combined: ~300 lines of plotting code + shared design layer, adding ~120-240s
+of watchable narratively-loaded graphics per episode. The design layer is the
+hard part and it is shared across all four.
+
+### 13D: Four design properties adopted as the judged standard
+
+From the extraction's Gemini verdicts (sections 4a-4e of the findings doc),
+four recurring design properties surfaced. These are the standard all boards
+are judged against:
+
+1. **Direct labels not legends.** Labelling jumps from 2-4/10 to 7-9/10 when
+   the analyst adds a title that states the argument, direct labels on data
+   marks instead of a separate legend, and a subtitle identifying
+   player/match/metric.
+2. **Three-colour discipline on a dark background.** Background + one accent
+   for focal data + white for text/lines. McKay Johns states this as
+   "concept 2"; Gemini confirmed with 9/10 colour scores.
+3. **Full-frame use of space.** Space scores 7-9/10 when the viz fills the
+   frame; 3-6/10 when notebook chrome, webcam insets, or margins steal real
+   estate. Boards must render as full-frame 1920x1080 images.
+4. **Brightest/most-clustered marks lead the eye; title-as-message, not
+   label.** The eye goes to the brightest/most-saturated block, the largest
+   text, the densest cluster. A title that says "Cumulative xG" wastes the
+   most-read pixels; a title that says "Liverpool dominated chances but Real
+   Madrid won" is a message the viewer carries away.
+
+These are design principles, not designs. They are the intersection of what
+every high-scoring viz in the sample did and what every low-scoring viz did
+not do.

@@ -9,6 +9,53 @@ entry is something that could be true or false and nobody has run the command
 to find out. If you verify one, move it to STATUS.md or DECISIONS.md and date
 it.
 
+## Disk / B2 archive migration (2026-09-13)
+
+Standing rule added this date: everything produced by any task (renders,
+frames, transcripts, artifacts, backups) is archived to B2 (rclone v1.75.1,
+remote "b2", bucket "mendymax-archive", verified `rclone lsd b2:` →
+`mendymax-archive`). Local copies are working copies, not the record. Doctrine
+rule 1 (raw footage -> /mnt/f -> pod -> delete locally) is unchanged; this
+extends it to generated outputs. Open items from this migration:
+
+- **Doctrine rule 1 not followed for renders**: produce_v2.py writes renders
+  inside /home/muads (`grep -n 'RENDERS' tools/produce_v2.py` → line 38
+  `RENDERS = SCRIPT_DIR / "renders"`, with callers at lines 101 and 743).
+  SCRIPT_DIR is the project folder under /home/muads, so every render lands
+  on the ext4.vhdx and it grows. Being fixed via the B2 archive +
+  delete-old-keep-working-copy pattern: archive the render to B2, keep only
+  the latest working copy locally, delete the rest after the upload verifies.
+  Not yet proven end-to-end; the rule is standing but the cleanup has not been
+  run on the full renders/ tree. CLOSING PASS: free-space-after on / after
+  the renders/ cleanup runs.
+
+- **ext4.vhdx compaction pending**: `ls -la` on the vhdx reports
+  39530266624 bytes (36.82 GB) at
+  `/mnt/c/Users/muads/AppData/Local/wsl/{f2ea779f-e5f1-4c82-a1b2-0608e6ab4883}/ext4.vhdx`.
+  The vhdx grows and never shrinks on its own; deleting inside Ubuntu frees
+  blocks inside the image but the file on C: stays the same size. Compaction
+  requires WSL fully stopped (a separate operation Mayo runs outside WSL).
+  `df -h /` shows 29G used of 1007G on /, so inode pressure is not the issue;
+  the issue is the C: host file (see Context). CLOSING PASS: vhdx size after
+  compaction (whenever Mayo runs it).
+
+- **Other-project folders awaiting Mayo's decision**: five non-soccer folders
+  under /home/muads are candidates for archive-then-delete. Verified sizes
+  (`du -sh`): cv-test 2.7G, mcp-servers 1.3G, quant-solana-gate2 517M,
+  skills-lab 474M, .claude-mem 396M. These are archived to B2, NOT deleted;
+  Mayo decides whether to delete the local copies. CLOSING PASS: which folders
+  were actually deleted and free-space-after.
+
+- **/mnt/f EINVAL write issue**: fresh file creation in /mnt/f fails with
+  EINVAL on every tested path — `touch /mnt/f/__w` → "Invalid argument";
+  `echo > /mnt/f/__w` → "Invalid argument"; `cp <src> /mnt/f/__new` →
+  "Invalid argument"; `mv /tmp/__x /mnt/f/__y` (cross-filesystem) →
+  "Invalid argument". Rename of an existing file *within* /mnt/f DOES work
+  (`mv /mnt/f/.dropbox.device /mnt/f/__r` → exit 0, rename back → exit 0), so
+  a durable-clip-via-rename pattern is the workaround: create via a path
+  that yields an existing file, then rename in place. Not yet wired into any
+  tool. Falsifier: a tool that relies on `open(..., 'w')` to /mnt/f will fail.
+
 ## Cloud / GPU
 
 - **runpod_annotate.py end-to-end run**: RETIRED Stage 6 (deleted). The tool
@@ -63,9 +110,9 @@ it.
   The liverpool-forest shorts file (referenced below) has mtime Sep 7 (not
   "Sep 5" as previously claimed). It is no longer the latest output: the
   latest produce_v2 output is
-  `renders/2026-09-12_bournemouth-brentford/final_video.mp4` (mtime Sep 13,
-  1920x1080, 718.6s, 365MB). ffprobe confirms dimensions and duration, not
-  quality. Run `~/tools/vision_analyze.py` on a frame from either file before
+  `renders/2026-09-12_bournemouth-brentford/final_video.mp4` (mtime Sep 13
+  21:27, 1920x1080, 718.0s, 143MB per `stat -c '%s'` = 149425972). ffprobe
+  confirms dimensions and duration, not quality. Run `~/tools/vision_analyze.py` on a frame from either file before
   claiming the pipeline produces good video.
 
 ## Skill reliability

@@ -5,64 +5,76 @@
 > **Reader:** every session; the unlazy Stop hook blocks session end while gates
 > remain unmet.
 > **Last verified against code:** 2026-09-13.
-> **Mirrored:** yes (in push_status.sh ALLOW_PROJECT and the mirror .gitignore
-> un-ignore list — verified 2026-09-13).
+> **Mirrored:** yes (in push_status.sh ALLOW_PROJECT line 13 and the mirror
+> .gitignore line 18 `!GATES.md` — both verified 2026-09-13).
 
-Scope: document reconciliation (Stage 14 interlude) — make the "Last verified
-against code" stamp real. PRECEDENCE + STAMP RULE in CLAUDE.md; re-verify or
-re-date stamps across canonical docs; self-maintaining SessionStart stamp hook;
-GATES.md header; mirror allowlist reconciliation; archive historical files.
-The 7 docs with heavy Stage-12B line-drift (CONTEXT/STATUS/PROGRESS/TOOLS/
-ARCHITECTURE/LANE_PLAN/GAPS) are reported-with-unverified-claims (STAMP RULE
-option b), NOT re-stamped this pass; their stamps stay 2026-09-09 and the hook
-flags them. That is the honest end state, not a gap to close silently.
+Scope: B2 migration + disk reclamation + board #1 (xG flow chart) build.
+Everything produced by any task is archived to B2 (rclone remote "b2", bucket
+"mendymax-archive", verified `rclone lsd b2:` → mendymax-archive). Local copies
+are working copies, not the record. Doctrine rule 1 (raw footage -> /mnt/f ->
+pod -> delete locally) is unchanged; this extends it to generated outputs.
 
-- [x] G1: PRECEDENCE + STAMP RULE blocks present in CLAUDE.md
-  CHECK: grep -qF "PRECEDENCE. When two sources disagree" CLAUDE.md && grep -qF "STAMP RULE. Any task that edits" CLAUDE.md && echo precedence_stamp_present
-  EXPECT: precedence_stamp_present
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=f281a7609afea7fbbcf8a50760ced69be91e88dda30e0b23113b3a66ea3125a6; output-bytes=25
+B2 archive state verified 2026-09-13:
+- backups/: soccer-pipeline-backup-sep5.tar.gz, yt-digest-backup-sep5.tar.gz
+  (already uploaded; `rclone lsf b2:mendymax-archive/backups/` confirmed).
+- retired-archive/: soccer-channel/, soccer-pipeline/ (already uploaded;
+  `rclone lsf b2:mendymax-archive/retired-archive/` confirmed).
+- yt-digest/: full repo snapshot incl .venv/ fragments (5 entries: .gitignore,
+  bin/, lib/, pyvenv.cfg, share/) — these are the G4 cleanup target.
+- Bucket size: 8.154 GiB / 29037 objects (`rclone size b2:mendymax-archive/`,
+  verified 2026-09-13; growing as uploads continue).
+- Old renders NOT yet uploaded (local: 2026-08-18_iraola-liverpool 1.3G,
+  2026-09-06_arsenal-chelsea 753M, 2026-08-30_liverpool-forest_sep1 538M,
+  2026-08-30_liverpool-forest 457M, _20min_test 245M, _real_soccer_test 169M,
+  _sharp_test 39M, 2026-09-12_preview-manc-derby 1.7M,
+  _fullmatch_arsenal-chelsea-carabao 20K; KEEP 2026-09-12_bournemouth-brentford).
 
-- [x] G2: CLAUDE.md stamp 2026-09-13 and runpod_annotate row removed
-  CHECK: grep -qF "Last verified against code:** 2026-09-13" CLAUDE.md && ! grep -q runpod_annotate CLAUDE.md && echo claude_clean
-  EXPECT: claude_clean
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=7dedd6861da6b32b59b7b80d54c50b23e00904104949acc34966d2dc5fde8391; output-bytes=13
+Control scores for G5 (verified from STATUS.md line 396, Gemini authoritative):
+- 2D possession control: 4/10 (Gemini, line 389/396).
+- 3D formation non-buggy: 6/10 (Gemini, line 394/396).
+- The amendment's original numbers (5/10 and 4/10) do not match STATUS.md and
+  were NOT used; the verified numbers are used instead.
 
-- [x] G3: doc-stamp SessionStart hook wired (3 hooks, additive)
-  CHECK: python3 -c "import json;d=json.load(open('.claude/settings.json'));ss=[h for blk in d['hooks']['SessionStart'] for h in blk['hooks']];print(len(ss),'check_doc_stamps' in ''.join(h['command'] for h in ss))"
-  EXPECT: 3 True
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=1df8186257801f3a0247af7e7af157a615ccc69553182939919be5295e9b75ca; output-bytes=7
+CLOSING PASS placeholders (after-numbers, filled after file moves):
+- Free space after deletions (df -h /).
+- Exact list of local dirs/files deleted.
+- Bucket size after render upload + .venv cleanup (rclone size).
+- Exact B2 path for the old-renders archive.
 
-- [x] G4: doc_stamp_check.py runs and reports
-  CHECK: ~/yt-digest/.venv/bin/python tools/doc_stamp_check.py | grep -q "^doc-stamp-check:" && echo hook_reports
-  EXPECT: hook_reports
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=10de85f091ad5bb97e6832b286d8484af213b3a3c7919a32139c601b01cf64f1; output-bytes=13
+- [ ] G1: regenerable caches cleared
+  CHECK: test "$(du -s ~/.cache 2>/dev/null | cut -f1)" -lt 51200 && echo caches_cleared
+  EXPECT: caches_cleared
+  NOTE: ~/.cache was 3.3G, now 44K (verified `du -sh ~/.cache`). Other regenerable
+  caches (npm 330M, bun 5.6M) accepted; they rebuild on demand.
 
-- [x] G5: DECISIONS.md stamp 2026-09-13 + STAMP RULE entry
-  CHECK: grep -qF "Last verified against code:** 2026-09-13" DECISIONS.md && grep -qF "STAMP RULE + known weakness" DECISIONS.md && echo decisions_stamped
-  EXPECT: decisions_stamped
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=d16b749d6d882374fa29f65d13bc6fae0f94fbd89cb0720fab5d9a830e455aaf; output-bytes=18
+- [ ] G2: sep5 backups + retired + old renders archived to B2 and verified
+  CHECK: rclone lsf b2:mendymax-archive/backups/ 2>/dev/null | grep -q "yt-digest-backup-sep5" && rclone lsf b2:mendymax-archive/retired-archive/ 2>/dev/null | grep -q "soccer-channel" && rclone lsf b2:mendymax-archive/ 2>/dev/null | grep -q "renders" && echo b2_archived
+  EXPECT: b2_archived
+  CLOSING PASS: record exact render archive path + object count + bucket size after upload.
 
-- [x] G6: GATES.md has Purpose/Reader/stamp header
-  CHECK: head -12 GATES.md | grep -q "Purpose:" && head -12 GATES.md | grep -q "Last verified against code" && echo gates_header
-  EXPECT: gates_header
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=99812583488df9224d4627b4c9ce9a1d9b4be8942f95b922c622497b2d42e053; output-bytes=13
+- [ ] G3: local deletions done (after docs amended + B2 uploads verified)
+  CHECK: test ! -f /home/muads/yt-digest-backup-sep5.tar.gz && test ! -f /home/muads/soccer-pipeline-backup-sep5.tar.gz && test ! -d /home/muads/retired && test ! -d renders/_20min_test && test ! -d renders/_real_soccer_test && test ! -d renders/_sharp_test && test ! -d renders/_fullmatch_arsenal-chelsea-carabao && test -d renders/2026-09-12_bournemouth-brentford && echo local_deleted
+  EXPECT: local_deleted
+  CLOSING PASS: record df -h / free space after deletions + confirm ~/retired removed.
 
-- [x] G7: 3 historical files archived, SKILLS.md kept
-  CHECK: test -f archive/RECONCILIATION.md && test -f archive/REPORT_AUDIT.md && test -f archive/VISUAL_QUALITY_ASSESSMENT.md && test -f SKILLS.md && ! test -f RECONCILIATION.md && echo archived
-  EXPECT: archived
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=3eb992486b31ee03214bd2688612fb599daaafad29d99081849788a696a9df1d; output-bytes=9
+- [ ] G4: bucket .venv fragments cleaned (b2:mendymax-archive/yt-digest/.venv/)
+  CHECK: test "$(rclone lsf b2:mendymax-archive/yt-digest/.venv/ 2>/dev/null | wc -l | tr -d ' ')" -eq 0 && echo venv_cleaned
+  EXPECT: venv_cleaned
+  CLOSING PASS: record how many objects were purged from the .venv path.
 
-- [x] G8: no .bak files in project (excluding .git and archive)
-  CHECK: test -z "$(find . -name '*.bak' -not -path './.git/*' -not -path './archive/*')" && echo no_bak
-  EXPECT: no_bak
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=ba02a31e1f95efda21cd29d51197b480eaf239eb1c920e2cda099aaa521c74ea; output-bytes=7
+- [ ] G5: board #1 (xG flow chart) built and Gemini-judged >= 2D control (4/10) and >= 3D formation (6/10)
+  CHECK: test -f artifacts/frames/xg_flow_judgment.txt && grep -qE '([6-9]|10)/10' artifacts/frames/xg_flow_judgment.txt && echo board1_passed
+  EXPECT: board1_passed
+  NOTE: the judgment file is written by gemini_judge.py --out. Board #1 is an
+  xG flow chart (~50 lines, 2D timeline, data=shotmap from sofascore_client).
+  Control thresholds verified from STATUS.md: 2D possession control = 4/10,
+  3D formation non-buggy = 6/10 (Gemini authoritative). Board must score >= 6/10
+  (the higher control) to beat both. CLOSING PASS: record exact board path,
+  Gemini score, and judgment text.
 
-- [x] G9: EPISODE_SPEC + SCRIPT_TEMPLATE stamps 2026-09-13
-  CHECK: grep -qF "Last verified against code:** 2026-09-13" EPISODE_SPEC.md && grep -qF "Last verified against code:** 2026-09-13" SCRIPT_TEMPLATE.md && echo specs_stamped
-  EXPECT: specs_stamped
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=322860f24f18aafebae3ef37e76b7df6e1acd902d9fa53b6b4b4f091becdfaa8; output-bytes=14
-
-- [x] G10: the 5 re-stamped docs no longer flagged stale by the hook
-  CHECK: ~/yt-digest/.venv/bin/python tools/doc_stamp_check.py | grep -E "STALE (CLAUDE|DECISIONS|GATES|EPISODE_SPEC|SCRIPT_TEMPLATE)\.md" >/tmp/g10.txt 2>&1; if [ -s /tmp/g10.txt ]; then echo STALE_REMAINS; else echo none_stale; fi
-  EXPECT: none_stale
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=671408d498b4/21 entries; EXPECT=matched; output-sha256=5d7eafc220ff22441a6e2b148dd216d499714b5c7e9ff87a228c159356ed0085; output-bytes=11
+- [ ] G6: doc_stamp_check clean on every touched doc
+  CHECK: ~/yt-digest/.venv/bin/python tools/doc_stamp_check.py 2>&1 | grep -E "STALE (GATES|CONTEXT|STATUS|DECISIONS|ARCHITECTURE|TOOLS|LANE_PLAN|GAPS|PROGRESS|EPISODE_SPEC|SCRIPT_TEMPLATE)\.md" >/tmp/g6_stale.txt 2>&1; if [ -s /tmp/g6_stale.txt ]; then cat /tmp/g6_stale.txt; else echo no_stale_touched; fi
+  EXPECT: no_stale_touched
+  NOTE: SKILLS.md is currently stale (stamp 2026-09-09) but is NOT touched in
+  this task, so it does not block G6. Only docs touched in this task must be
+  clean. Verified: `doc_stamp_check.py` reports 1 stale (SKILLS.md) at write time.

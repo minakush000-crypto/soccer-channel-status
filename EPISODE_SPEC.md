@@ -7,10 +7,12 @@
 > approved.
 > **Derived:** 2026-09-12, from 6 reference videos (5 tactical/explainer + 1 highlights).
 > **Last verified against code:** 2026-09-13 (§9 source-footage provenance + §10
-> narration source-of-truth added and verified this pass — gemini_judge.py exists,
-> the .script_verified gate + script_gen constraint + sources.json are wired, the
-> 12B/Sofascore findings are real; §1-8, 9B.x trace to LANE_PLAN.md §Stage 9A
-> reference measurements, not re-derived this pass).
+> narration source-of-truth + §11 board design properties added and verified this
+> pass — gemini_judge.py exists and is the AUTHORITATIVE judge, the .script_verified
+> gate + script_gen constraint + sources.json are wired, the 12B/Sofascore findings
+> are real, the four design properties trace to ~/claude/40-lessons/viz-design-
+> findings.md §4 which exists; §1-8, 9B.x trace to LANE_PLAN.md §Stage 9A reference
+> measurements, not re-derived this pass).
 
 The project goal (CONTEXT.md) is the Coaches' Voice style: dark pitch, orange
 accents, data-driven graphics, functional arrows, deliberate pace. The spec
@@ -143,6 +145,44 @@ content ratios from 18 vision-classified frames per video (gemma4:cloud).
   ("Igor Thiago needed just one big chance to score" — both Brentford goals were
   Kevin Schade's) from an un-fact-checked draft. This section + the gate + the
   generator constraint + `sources.json` prevent a repeat. See DECISIONS.md.
+
+## 11. Board design properties  (trace: 2026-09-13, viz-design-findings.md §4)
+
+- **MUST:** direct labels on data marks, not a separate legend. The viewer
+  must not hunt a legend to decode a mark. (findings §4a: labelling jumps from
+  2-4/10 to 7-9/10 when labels are placed on the marks and the title states
+  the argument; the single biggest failure across 10 extracted videos was the
+  unlabelled xG-flow y-axis.)
+- **MUST:** three-colour discipline on a dark background — background + one
+  accent + white. No fourth default colour. (findings §4b: the best colour
+  scores, 8-9/10, all follow this rule — a dark/neutral background, ONE
+  accent for focal data, muted/grey for the rest. McKay Johns states it
+  explicitly: "concept 2, exactly three colours — background + red + white.")
+- **MUST:** full-frame use of space. The board fills 1920x1080; no notebook
+  chrome, no webcam inset, no excessive margin stealing real estate.
+  (findings §4c: space scores 7-9/10 when the viz fills the frame, 3-6/10
+  when notebook UI or margins shrink the visual.)
+- **MUST:** the brightest/most-clustered marks lead the eye, and the title
+  is a message, not a label. The focal data is the brightest and most
+  clustered thing on the canvas; the title is the largest text and states
+  the argument (e.g. "Liverpool dominated chances but Real Madrid won", not
+  "Cumulative xG"). (findings §4d + §4e: the eye goes to the brightest
+  colour block, the largest text, then the densest mark cluster; Burn-Murdoch
+  scored 9-10/10 on eye-attraction with declarative titles.)
+- These four properties are what the standard boards are judged against.
+  Gemini (`tools/gemini_judge.py`, gemini-3.1-pro-preview) is the
+  AUTHORITATIVE judge for board design (decided 2026-09-13, supersedes the
+  prior Opus-authoritative rule in CLAUDE.md/CONTEXT.md). Opus and gemma4
+  are cross-checks. On disagreement, the Gemini score is recorded as
+  authority and the disagreement is flagged; the more flattering number is
+  never written as authoritative.
+- Reference basis: the four properties were extracted from Gemini verdicts
+  on 10 design-focused YouTube tutorials (McKay Johns, Friends of Tracking,
+  Burn-Murdoch/FT). No frame is reproduced; design principles only. Full
+  extraction: `~/claude/40-lessons/viz-design-findings.md` §4. The current
+  standard boards (formation 3/10, possession 4/10, stat_card 5/10, Opus
+  cross-check per 9B.2) violate all four: matplotlib defaults, no Bebas/
+  Barlow, flat, legend-style or absent labels, no narrative furniture.
 
 ---
 

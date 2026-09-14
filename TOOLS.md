@@ -11,7 +11,9 @@ download), not docstring/test mentions. "ORPHANED" = no caller anywhere.
 Line numbers are where the tool is invoked or imported; re-read before relying.
 This rebuild supersedes the 2026-09-05 version (33 tools, tactical_overlay
 wiring): the repo now has 47 tools on disk and produce_v2 no longer calls
-tactical_overlay or tactical_render (Stage 14 retirement).
+tactical_overlay or tactical_render (Stage 14 retirement). Archive tooling
+(rclone v1.75.1 + B2 bucket mendymax-archive) verified this pass; see the
+"Archive tooling" section below.
 
 ## Classification (from RECONCILIATION.md 1.1)
 
@@ -66,7 +68,7 @@ tactical_overlay or tactical_render (Stage 14 retirement).
 | `ltx_enhance.py` | STANDALONE | no caller | 2026-08-23 | untested |
 | `gemini_judge.py` | STANDALONE | no caller; invoked by hand (AUTHORITATIVE visual judge, Stage 12) | 2026-09-13 | works (gemini-3.1-pro-preview, Stage 12) |
 | `pod_check.py` | STANDALONE | SessionStart hook `.claude/hooks/check_pods.sh`; no pipeline caller | 2026-09-12 | works (leak check, STATUS) |
-| `b2_upload.py` | STANDALONE | no caller | 2026-09-09 | untested (pending B2 key, 6E.2) |
+| `b2_upload.py` | STANDALONE | no caller | 2026-09-09 | untested via boto3 (B2_KEY_ID absent from .env, 6E.2); B2 itself IS reachable via rclone (see Archive tooling below) |
 | `backup_env.py` | STANDALONE | no caller | 2026-09-09 | works (encrypted .env backup, Stage 6) |
 | `render3d_vast.py` | STANDALONE | no caller | 2026-09-12 | untested (Vast SSH key blocked, Stage 11C) |
 | `sofascore_client.py` | STANDALONE | no caller | 2026-09-13 | untested (Stage 14; SofaScore lineup fetch) |
@@ -154,3 +156,32 @@ yt-digest/.claude/skills (duplicates). They are a deliberate user library
 so NOT auto-suggested. They are not pipeline orphans (not pipeline tools). To
 auto-suggest them, add entries to skill-rules.json. 1 global skill folder lacks
 SKILL.md (minor invalid entry). No action taken beyond documenting.
+
+## Archive tooling (rclone + B2) — Stage B2 migration, 2026-09-13
+
+**rclone is the archive of record.** Not a tools/ .py file — a system binary at
+`/usr/bin/rclone` (v1.75.1, verified `rclone version`). Remote `b2` configured
+via `rclone config` (type=b2, account+key in rclone's own config, NOT in .env).
+Bucket `mendymax-archive` verified: `rclone lsd b2:` prints it; `rclone lsf
+b2:mendymax-archive` lists 3 items (CLOSING PASS: bucket size in bytes +
+itemized listing after the archive-then-delete pass completes).
+
+**NEW STANDING RULE (extends doctrine rule 1 to generated outputs):**
+everything produced by any task (renders, frames, transcripts, artifacts,
+backups) is archived to B2; local copies are working copies, not the record.
+Archive-then-delete IN PROGRESS (sep5 backups 2.6G + ~/retired 1.4G + old
+render folders ~3.4G); local deletions happen AFTER docs are amended + uploads
+verified. CLOSING PASS: free space after deletions, what was deleted, bucket
+size after upload.
+
+Status: **WIRED** (verified `rclone lsd b2:` → mendymax-archive bucket
+reachable). rclone is not called from produce_v2.py (archive is a manual /
+post-session step, not a pipeline stage). To archive a render:
+`rclone copy renders/<slug>/shorts/final_video_shorts.mp4 b2:mendymax-archive/<slug>/`
+
+**b2_upload.py** (tools/, STANDALONE) is the Python/boto3 alternative path. It
+reads B2_KEY_ID + B2_APPLICATION_KEY from ~/yt-digest/.env — those keys are
+ABSENT (grep `^B2_` .env → 0 matches), so b2_upload.py itself is untested. B2
+is reachable through rclone's own config regardless. b2_upload.py is NOT the
+archive of record; rclone is. CLOSING PASS: whether b2_upload.py gets retired
+or wired once the .env key question is settled.

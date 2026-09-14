@@ -401,3 +401,43 @@ one change per run.
   total 3D ~$0.27-0.34. Modal credit $29.15. Cross-provider total unknown.
 - Next: scrap 2D / build 3D, build-then-retire order (wire 3D into produce_v2
   first, verify, then retire 2D) so the pipeline is never broken.
+
+## Stage B2 — archive of record + cache clearing, 2026-09-13
+
+B2 archive of record established: rclone v1.75.1, remote "b2", bucket
+"mendymax-archive" (verified `rclone lsd b2:` → mendymax-archive). Bucket
+already holds `backups/`, `retired-archive/`, `yt-digest/` dirs. NEW STANDING
+RULE: everything produced by any task (renders, frames, transcripts, artifacts,
+backups) is archived to B2; local copies are working copies, not the record.
+Doctrine rule 1 (raw footage -> /mnt/f -> pod -> delete locally) is unchanged;
+this extends it to generated outputs.
+
+Disk reality (verified 2026-09-13): ext4.vhdx is 37G at
+`/mnt/c/Users/muads/AppData/Local/wsl/{f2ea779f-e5f1-4c82-a1b2-0608e6ab4883}/ext4.vhdx`
+(`ls -lh` verified); it grows and never shrinks on its own (deleting inside
+Ubuntu does not shrink it; compaction needs WSL fully stopped). C: has ~15 GB
+free of 119 GB; `/` shows 29G used of 1007G after cache clearing (`df -h /`
+verified).
+
+Regenerable caches CLEARED (2026-09-13): ~/.cache (was 3.3G, now 40K),
+~/.npm, ~/.cargo/registry, ~/.nvm/.cache, ~/.bun/install/cache,
+~/.rustup/downloads, __pycache__ 388M, ~/.linkedin-mcp/patchright-browsers
+394M. `/` went 35G -> 29G used (~6G freed). Caches are regenerable, no archive
+needed.
+
+Archive-then-delete IN PROGRESS to B2 (local deletions happen AFTER docs
+amended + uploads verified):
+- sep5 backups (~2.6G) — archive to B2, then delete local.
+- ~/retired (1.4G, `du -sh` verified) — archive to B2, then delete local.
+- Old render folders (~3.5G total, `du -sh` per dir verified):
+  2026-08-18_iraola-liverpool (1.3G), 2026-08-30_liverpool-forest (457M),
+  2026-08-30_liverpool-forest_sep1 (538M), 2026-09-06_arsenal-chelsea (753M),
+  _20min_test (245M), _real_soccer_test (169M), _sharp_test (39M),
+  _fullmatch_arsenal-chelsea-carabao (20K), 2026-09-12_preview-manc-derby
+  (1.7M). KEEPING 2026-09-12_bournemouth-brentford (416M) local.
+
+CLOSING PASS: after-numbers still owed — (1) free space on `/` after local
+deletions complete, (2) confirmed-deleted list, (3) B2 bucket size after
+uploads. These are not fabricated; placeholders until the closing pass fills
+them. /mnt/f writes are currently EINVAL, so /dev/shm is the volatile fallback
+for staging.

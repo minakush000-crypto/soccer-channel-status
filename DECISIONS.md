@@ -419,3 +419,70 @@ filled anyway. Fix: archive old renders to B2 + delete locally, keep only the
 current working render; the vhdx is compacted separately (Mayo, with WSL
 stopped). Nothing is permanently deleted without either a B2 archive or a
 one-line command that regenerates it.
+
+### B2 provenance manifests (2026-09-13, binding)
+Every artifact archived to B2 carries a manifest (who made it, when, with what,
+for which task). An artifact without provenance is not archived. Bucket layout:
+mendymax-archive/<project>/<yyyy-mm-dd>/<tagged-artifact> + .manifest.json.
+produced_by names the AGENT (glm-5.2:cloud via Claude Code / claude.ai / gemini /
+human), not the person; inputs carry dates so stale-input reuse is visible in
+the archive. Enforcement tool: tools/b2_archive.py (built + tested 2026-09-13);
+nothing goes to B2 by bare rclone copy after it. Backfilled manifests for the
+pre-provenance uploads (~/yt-digest code snapshot, sep5 tar.gz backups, old
+render folders) with produced_by="unknown (pre-provenance)" where genuinely
+unknown — not guessed. Recorded in the global ~/.claude/CLAUDE.md (machine-wide)
++ here. The 3D-vs-2D question is RESOLVED AS 2D by the reference-viz extraction
+(3D distorts 2D positional data; timelines inherently 2D); board build order:
+#1 xG flow chart (2D timeline), #2 shot map (2D top-down), #3 momentum chart
+(2D timeline), #4 average-positions scatter (2D top-down) — all 2D, all from
+Sofascore data we have. Four design properties adopted as the standard boards
+are judged against: direct labels not legends; three-colour discipline on a
+dark background; full-frame use of space; brightest marks lead the eye +
+title-as-message (trace: ~/claude/40-lessons/viz-design-findings.md §4).
+
+### Board build order + 3D-vs-2D resolved as 2D + four design properties (2026-09-13, binding)
+Source: the reference-viz extraction (~/claude/40-lessons/viz-design-findings.md,
+49238 bytes, verified `ls -la`). Gemini (authoritative) judged 10 design-focused
+tutorial videos frame-by-frame; the four recurring design properties and the
+build order below are taken from those verdicts, not re-derived here.
+
+(1) BOARD BUILD ORDER (APPROVED). Four boards, all 2D, in this order:
+- #1 xG flow chart (~50 lines, 2D timeline, HIGH narrative value, data=shotmap).
+- #2 shot map (~150 lines, 2D top-down pitch, HIGH, data=shotmap).
+- #3 momentum chart (~30 lines, 2D timeline, MED-HIGH, data=momentum).
+- #4 average-positions scatter (~70 lines, 2D top-down, MED, data=avg-positions).
+All four are fully supported by Sofascore data (shotmap, momentum,
+average-positions endpoints documented in tools/sofascore_client.py:11;
+average-positions is the only one currently fetched, at sofascore_client.py:290).
+The extraction confirmed the shotmap and momentum endpoints exist in the
+Sofascore API; wiring the fetches is build work, not a data-availability risk.
+
+(2) 3D-vs-2D RESOLVED AS 2D. Part 1 of the extraction found 3D perspective
+distorts 2D positional data (Opus: "perspective is the wrong tool for positional
+data; foreshortening makes vertical spacing non-comparable"). Timelines (xG
+flow, momentum) are inherently 2D. Positional charts (shot map,
+average-positions) are 2D top-down. This confirms the Stage 12 "design not
+dimension" verdict from the opposite direction: the extraction's evidence
+(10 reference videos, Gemini-judged) says 2D is the right dimension for every
+board on the build list. 3D is not the bottleneck; design is. This does not
+edit the scrap-2D/build-3D decision above (don't-edit-old-entries convention);
+it records the new evidence and the resolved direction for the build order.
+
+(3) FOUR DESIGN PROPERTIES (the standard boards are judged against, from the
+extraction's Gemini verdicts):
+- (a) Direct labels on data marks, not a separate legend.
+- (b) Three-colour discipline on a dark background: background + one accent +
+  white. (McKay Johns: "exactly three colours — background + red + white";
+  colour discipline scores 8-9/10 with this rule, 4/10 with 4+ default
+  matplotlib colours, 1/10 when the accent matches the background.)
+- (c) Full-frame use of space: the board fills 1920x1080, not a notebook or
+  surrounded by UI chrome (space scores 7-9/10 full-frame, 3-6/10 when margins
+  steal real estate).
+- (d) Brightest/most-clustered marks lead the eye; the title is the largest
+  text and states the argument (title-as-message, not a label). The eye goes
+  to (1) the brightest/most-saturated colour block, (2) the largest text,
+  (3) the densest cluster of marks. Make the focal data the brightest and most
+  clustered thing, and the title the largest text.
+
+CLOSING PASS: after-numbers not needed for this entry (no deletion or disk
+claims here). The B2 entry above carries the after-numbers debt.
