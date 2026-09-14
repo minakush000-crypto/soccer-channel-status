@@ -4,7 +4,10 @@
 > **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Line-drift corrections applied 2026-09-13 (Stage-12B rewrite of produce_v2.py + Stage-14 retirement of step4b/tactical_render.py shifted cited line numbers; all re-grep'd against current code).
 > **Last verified against code:** 2026-09-13.
 
-Verified against code on 2026-09-08. Tool classifications cite
+Originally verified against code on 2026-09-08; line-drift corrections applied
+2026-09-13 (all produce_v2.py/validate_script.py/tactical_boards.py/runpod_fulltrack.py
+line citations re-grep'd against current code after Stage 12B rewrite + Stage 14
+retirement of step4b/tactical_render.py). Tool classifications cite
 RECONCILIATION.md (1.1) rather than repeating its greps. Cost figures cite
 STATUS.md measured data. Nothing here is run; lanes B/C/D are planned, not
 built (except `transformation_gate.py`, built and verified this stage).
@@ -487,7 +490,8 @@ match (3-5GB), only the 600s highlight case.
 
 **b. Lower the duration filter so accepted clips fit under 200MB.** At the
 worst observed 1080p bitrate, `200MB / 29.1 MB/min = 412s`. Change
-`produce_v2.py:141` to `60 <= dur_sec <= 412`. Cost: zero build time. What it
+`produce_v2.py:179` to `60 <= dur_sec <= 412` (was `:141` before Stage 12B
+rewrite, was `60 <= dur_sec <= 600` before Stage 2). Cost: zero build time. What it
 excludes: 1080p highlight reels longer than ~412s (~6.9 min) — the extended-
 highlight tier (7-10 min reels). 720p reels could safely run longer but the
 filter is duration-based, so it excludes them at 412s too. This keeps the
@@ -640,7 +644,7 @@ them). The pipeline's 720p+ reject-and-retry loop **still passes**: 720p ==
 rejected, same as today. Zero build time, no disk exposure, no guard change.
 
 **c. Build the pod-side download path (2.4) so clips never land locally.**
-`cloud_produce.py:387-398` already builds pod-side yt-dlp commands;
+`cloud_produce.py:384-410` already builds pod-side yt-dlp commands;
 `runpod_fulltrack.py` already ships tools + runs cv_annotate on the pod +
 returns URLs (proven, STATUS). New work: a produce_v2 branch that runs yt-dlp
 on the pod, cuts on the pod, returns only small derived outputs. Honest build
@@ -665,7 +669,7 @@ one-line change itself breaks no dependent code. What it changes:
 - **Excludes 60-179s** (1-3 min short highlights). Intended by the new rule,
   but any existing workflow relying on sub-3-min clips loses them.
 - **Includes 600-1200s** (10-20 min). These are larger and **hit the 1.1
-  conflict**: at produce_v2's current 1080p request, a 1200s clip is ~596 MB,
+  conflict**: at produce_v2's pre-Stage-2 1080p request, a 1200s clip is ~596 MB,
   over the 200 MB guard → refused. So raising the upper bound to 1200s
   WITHOUT resolving 1.1 (option a or b) makes produce_v2 accept 10-20-min
   clips that the guard then deletes — the conflict worsens. At 720p
@@ -782,8 +786,6 @@ unchanged. The reject loop still passes: `MIN_HEIGHT = 720` (line 50), gate
   writes. The pod-side path is deferred (decision). Not capped. (Line numbers
   shifted: was `:391,402` before Stage 12B; now at `:390,401` in the
   ytdlp_cmds block at `:384-410`.)
-  (`/workspace/...`), not local. The 200MB guard does not apply to pod-side
-  writes. The pod-side path is deferred (decision). Not capped.
 
 Real download proof (18.7min / 1120s clip, produce_v2's exact 720p format +
 `--max-filesize 200M`):
@@ -955,7 +957,7 @@ phantom (2.4).
   in 2.1.
 - 27 STANDALONE tools' execution unverified.
 - crash-damaged files beyond .part — not re-checked this stage.
-- tactical_boards:74 test bug — unfixed.
+- tactical_boards:74 test bug — unfixed. (Line shifted: parse_visual_tags now at :131.)
 - SCRIPT_TEMPLATE / validate_script four-template blocker — untouched.
 
 ---
@@ -1020,7 +1022,7 @@ no other tool has the missing-bounds bug.** Closed.
 
 ### 3A.4 — produce_episode guard bypass CLOSED (built)
 
-The 1080p+ anti-blur exception STAYS (its comment, `produce_episode.py:206-212`,
+The 1080p+ anti-blur exception STAYS (its comment, `produce_episode.py:210-218`,
 documents a real blur fix: 360p→1080x1920 upscale was the dominant blur cause).
 But the no-guard bypass is closed: an 800M guard is added (matching its
 `--max-filesize 800M`):
@@ -1249,7 +1251,7 @@ gitignored (renders/), safe to delete.
   (3B.6).
 - SCRIPT_TEMPLATE / validate_script four-template blocker — scoped (3C, ~4-6h),
   not built.
-- tactical_boards:74 test bug — unfixed.
+- tactical_boards:74 test bug — unfixed. (Line shifted: parse_visual_tags now at :131.)
 - 3 HTML-stub mp4s in iraola clips — found (3D.2), not deleted.
 - a true 1200s source yield — still extrapolated (~7% over 373s); 18.7min is
   the closest measured.
@@ -1305,7 +1307,7 @@ guard).
 
 ### 4B — Vast.ai key (built: vastai_shorts RETIRED)
 
-4B.1 — the code reads `VAST_API_KEY` (`vastai_shorts.py:40`,
+4B.1 — the code reads `VAST_API_KEY` (`vastai_shorts.py:40` — RETIRED Stage 4B/6, deleted,
 `gpu_superres.py:38`, `cloud_produce.py:46`), which matches the .env variable.
 No .env change needed.
 
@@ -1320,7 +1322,7 @@ $ python -c "from vastai import VastAI; v=VastAI(api_key=...); print(v.list_mach
 `list_machines(ids=[])` → `[]` (like RunPod's `{"pods":[]}`). The key WORKS via
 the SDK; my curl used the wrong header.
 
-4B.3 — ran vastai_shorts.py end-to-end on arsenal-chelsea. The key works (pod
+4B.3 — ran vastai_shorts.py end-to-end on arsenal-chelsea (tool now RETIRED Stage 4B/6, deleted). The key works (pod
 created: Quadro P2000, $0.028/hr, instance 50349310), but the pod encoding
 FAILS deterministically:
 
@@ -1450,7 +1452,7 @@ the ~10 cloud/network tools. Not run this stage. Rule 3 is not closed by
 - cut-list generator — BUILT + folded into produce_v2; 5s cut retired; proven
   with a real run (4C).
 - 3 HTML-stub mp4s — deleted (4D.1).
-- tactical_boards:74 test failure — CLOSED (4D.2, 23/23 pass).
+- tactical_boards:74 test failure — CLOSED (4D.2, 23/23 pass). (Line shifted: parse_visual_tags now at :131.)
 - four rebuilt docs — re-dated 2026-09-09 (4A).
 
 ### Carry-forward still open
