@@ -406,3 +406,16 @@ correctly flagged as NOT Brentford's manager, removed); (4) EPISODE_SPEC §10 ma
 the source-of-truth rule a spec MUST. The fabricated-scorer class of failure
 needs all four: a gate catches a bad script, but the constraint stops it being
 written.
+
+### B2 is the record, local is the working copy (2026-09-13, binding)
+rclone v1.75.1, remote `b2`, bucket `mendymax-archive` (verified `rclone lsd b2:`).
+Standing rule: everything produced by any task — renders, frames, transcripts,
+artifacts, backups — is archived to B2. Local copies are working copies, not the
+record. Doctrine rule 1 (raw footage → /mnt/f → pod → delete locally) is
+unchanged; this rule extends it to generated outputs. Renders were landing
+inside /home/muads because produce_v2.py:38 `RENDERS = SCRIPT_DIR/"renders"` —
+generated outputs, not raw footage, so rule 1 did not cover them; the disk
+filled anyway. Fix: archive old renders to B2 + delete locally, keep only the
+current working render; the vhdx is compacted separately (Mayo, with WSL
+stopped). Nothing is permanently deleted without either a B2 archive or a
+one-line command that regenerates it.

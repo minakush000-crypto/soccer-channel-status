@@ -4,7 +4,7 @@
 > **Reader:** every session (CLAUDE.md @CONTEXT.md).
 > **Last verified against code:** 2026-09-13.
 
-Verified against code on 2026-09-13 (Stage 12B: produce_v2.py rewritten 858 lines, cut-list + assembler wired, validate_script wired; Stage 14: tactical_render.py + step4b RETIRED, 3D formation board wired into step2_boards, .script_verified voice gate, step5_assemble caps footage at 20%, 3rd SessionStart hook check_doc_stamps.sh, tools/sofascore_client.py + tools/doc_stamp_check.py added). Earlier verification 2026-09-09 (Stage 2: 720p cap, duration filter; Stage 3: broadcast_filler + produce_episode fixed). See ARCHITECTURE.md / STATUS.md.
+Verified against code on 2026-09-13 (Stage 12B: produce_v2.py rewritten 858 lines, cut-list + assembler wired, validate_script wired; Stage 14: tactical_render.py + step4b RETIRED, 3D formation board wired into step2_boards, .script_verified voice gate, step5_assemble caps footage at 20%, 3rd SessionStart hook check_doc_stamps.sh, tools/sofascore_client.py + tools/doc_stamp_check.py added; B2 migration: rclone v1.75.1 verified, b2:mendymax-archive verified, ext4.vhdx 36.82 GB verified, /mnt/f EINVAL verified, vault ~/claude verified, .env + yolov8s.pt paths verified). Earlier verification 2026-09-09 (Stage 2: 720p cap, duration filter; Stage 3: broadcast_filler + produce_episode fixed). See ARCHITECTURE.md / STATUS.md.
 
 Read this at the start of every session instead of pasting the brief.
 The project is /home/muads/yt-digest/soccer-channel. Nothing else.
@@ -23,6 +23,33 @@ confusion. Only the one inside yt-digest is real.
 
 The .env is at ~/yt-digest/.env. yolov8s.pt is at ~/yolov8s.pt, outside
 the project folder.
+
+B2 archive of record: rclone v1.75.1, remote "b2", bucket
+"mendymax-archive" (verified `rclone lsd b2:`). NEW STANDING RULE:
+everything produced by any task (renders, frames, transcripts, artifacts,
+backups) is archived to B2; local copies are working copies, not the
+record. Doctrine rule 1 (raw footage -> /mnt/f -> pod -> delete locally)
+is unchanged; this extends it to generated outputs.
+
+/mnt/f = raw-footage staging. Writes are currently EINVAL (`touch /mnt/f/x`
+fails with "Invalid input"), so /dev/shm is the volatile fallback (RAM,
+no vhdx bloat, cleared on reboot).
+
+The vault at ~/claude (mirrored to the public status mirror by push_status.sh
+via the $VAULT/10-projects..40-lessons dirs; see STATUS MIRROR below).
+
+Public status mirror: github.com/minakush000-crypto/soccer-channel-status
+(see STATUS MIRROR section below for the dual-allowlist constraint).
+
+## DISK REALITY
+ext4.vhdx is 36.82 GB (39530266624 bytes at
+C:\Users\muads\AppData\Local\wsl\{f2ea779f-e5f1-4c82-a1b2-0608e6ab4883}\
+ext4.vhdx). It grows and never shrinks on its own (deleting inside Ubuntu
+does not shrink it); compaction requires WSL fully stopped (a separate
+operation Mayo runs). C: has ~15 GB free of 119 GB; / shows ~29 GB used of
+1007 GB after cache clearing. CLOSING PASS: free-space-after-deletions,
+what was deleted, and bucket size (the archive-then-delete in progress
+fills these).
 
 ## STATUS MIRROR (public, active)
 Current project state is mirrored to a PUBLIC docs-only repo so any session
