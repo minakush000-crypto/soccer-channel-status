@@ -2,61 +2,60 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / STANDALONE / DEAD).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-09-09.
+> **Last verified against code:** 2026-09-13.
 
-Verified against code on 2026-09-08. Caller column is from
+Verified against code on 2026-09-13. Caller column is from
 `grep -rnE "import <mod>|TOOLS / \"<name>\"|\"<name>.py\"" tools/ --include="*.py"`
 limited to real call sites (subprocess `cmd=[PYTHON,...]`, `import`, or curl
 download), not docstring/test mentions. "ORPHANED" = no caller anywhere.
 Line numbers are where the tool is invoked or imported; re-read before relying.
 This rebuild supersedes the 2026-09-05 version (33 tools, tactical_overlay
-wiring): the repo now has 43 tools and produce_v2 no longer calls
-tactical_overlay.
+wiring): the repo now has 47 tools on disk and produce_v2 no longer calls
+tactical_overlay or tactical_render (Stage 14 retirement).
 
 ## Classification (from RECONCILIATION.md 1.1)
 
-- **WIRED** = reachable from produce_v2.py (13 tools, +runpod_download via --pod-download).
+- **WIRED** = reachable from produce_v2.py (14 direct calls + 4 transitive libs + 1 transitive pod script).
 - **STANDALONE** = CLI entry point or hand-run utility, or wired only into
-  another standalone entry point (27 tools).
-- **DEAD** = no caller anywhere (4 tools) — RETIRED 2026-09-09 (Stage 5C.2),
-  deleted from the tree; in git history.
+  another standalone entry point (29 tools).
+- **DEAD** = no caller anywhere — RETIRED (10 tools deleted from the tree; in git history).
 
-## The 40 tools (was 43; +runpod_download, -4 DEAD retired)
+## The 47 tools (was 40; +10 new, -10 retired deleted)
 
 | File | Class | Called by (file:line) | Last modified | Works? |
 |---|---|---|---|---|
-| `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-09 | works (liverpool-forest 720x1280 62.3s Sep 7); --pod-download routes step3 to runpod_download (5A) |
-| `match_data.py` | WIRED | `produce_v2.py:69` | 2026-09-01 | works |
-| `tactical_boards.py` | WIRED | `produce_v2.py:78` | 2026-09-08 | works. 10C: 2D matplotlib board renderer; slated for replacement by scripted 3D (10C). NOT deleted — runs until a 3D replacement is proven at/above spec. 10C.4 deletion HELD: GPU capacity 0/48 on 2026-09-12, no 3D frame rendered yet. |
-| `runpod_fulltrack.py` | WIRED | `produce_v2.py:235` | 2026-09-09 | works (146s full-clip, $0.011, STATUS); pitch_radar removed from ship list (5C.2) |
-| `runpod_download.py` | WIRED (--pod-download) | `produce_v2.py` step3_download_clips_pod | 2026-09-09 | built 5A; pod-side yt-dlp bot-blocked by YouTube (runs #1-3); excerpt-cut+guard proven via --source-url (2/3 windows, 4MB each, $0.005, LANE_PLAN 5A.3) |
-| `tactical_render.py` | WIRED | `produce_v2.py:285` | 2026-09-06 | works (Opus 8/8.5, STATUS). 10C: 2D top-down matplotlib renderer; slated for replacement by scripted 3D (10C). NOT deleted — runs until a 3D replacement is proven at/above spec. 10C.4 deletion HELD: GPU 0/48 on 2026-09-12. |
-| `generate_voice.py` | WIRED | `produce_v2.py:474` | 2026-09-08 | works |
-| `generate_ambience.py` | WIRED | `produce_v2.py:493` | 2026-08-22 | works (wired 2026-09-08, STATUS Part 6) |
-| `merge_voice.py` | WIRED | `produce_v2.py:514` | 2026-08-25 | works |
-| `shorts_crop.py` | WIRED | `produce_v2.py:524` | 2026-08-30 | works (outputs 720x1280) |
-| `ffmpeg_utils.py` | WIRED (lib) | imported by `generate_voice.py:24`, `merge_voice.py:25`, `shorts_crop.py:31`; shipped to pod by `runpod_fulltrack.py:72` | 2026-09-08 | works (now holds the 200MB guard) |
+| `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-13 | works (liverpool-forest 720x1280 62.3s Sep 7); --pod-download routes step3 to runpod_download (5A); step4b_tactical_render RETIRED Stage 14 |
+| `match_data.py` | WIRED | `produce_v2.py:84` | 2026-09-01 | works |
+| `tactical_boards.py` | WIRED | `produce_v2.py:97` | 2026-09-12 | works. Stage 14: 3D formation board (scene_gen via modal_render3d) overwrites formation.mp4 in step2_boards; tactical_boards still produces possession/stat_card boards. |
+| `modal_render3d.py` | WIRED | `produce_v2.py:110` | 2026-09-13 | works (Modal T4, 3D formation board, Stage 12/14); ships scene_gen.py to pod and runs it via Blender |
+| `runpod_download.py` | WIRED (--pod-download) | `produce_v2.py:288` (step3_download_clips_pod) | 2026-09-12 | built 5A; pod-side yt-dlp bot-blocked by YouTube (runs #1-3); excerpt-cut+guard proven via --source-url (2/3 windows, 4MB each, $0.005, LANE_PLAN 5A.3) |
+| `script_gen.py` | WIRED | `produce_v2.py:348` (step1b) | 2026-09-13 | works (Stage 12B; glm-5.2:cloud per-section, 1439w draft proven) |
+| `validate_script.py` | WIRED | `produce_v2.py:362` (step1c); also `produce_episode.py:162` | 2026-09-12 | works (Stage 12B; enforces lane word-budget minimum; opening-hook check 10D) |
+| `broadcast_filler.py` | WIRED | `produce_v2.py:404` (step4a) | 2026-09-08 | works; FIXED 3A.1 (phantom-segment bug: --clip/--duration bounds); yields 43s/8min, 192s/13.5min, 373s/18.7min |
+| `cut_list_gen.py` | WIRED | `produce_v2.py:414` (step4a) | 2026-09-09 | works (4C); PySceneDetect + broadcast_filler -> scripts/<slug>.md; proven on 18.7min (cuts at 26.6/214.7/222.1/245.4) |
+| `transformation_gate.py` | WIRED | `produce_v2.py:634` (step5b) | 2026-09-08 | works (Stage 12B; lane D floor gate) |
+| `generate_voice.py` | WIRED | `produce_v2.py:660` | 2026-09-12 | works; Stage 14 .script_verified voice gate (produce_v2.py:648 checks renders/<slug>/.script_verified before TTS) |
+| `generate_ambience.py` | WIRED | `produce_v2.py:679` | 2026-08-22 | works (wired 2026-09-08, STATUS Part 6) |
+| `merge_voice.py` | WIRED | `produce_v2.py:700` | 2026-08-25 | works |
+| `shorts_crop.py` | WIRED | `produce_v2.py:710` | 2026-08-30 | works (outputs 720x1280) |
+| `ffmpeg_utils.py` | WIRED (lib) | imported by `produce_v2.py:46`, `generate_voice.py:24`, `merge_voice.py:25`, `shorts_crop.py:31`; shipped to pod by `runpod_fulltrack.py:101` | 2026-09-08 | works (now holds the 200MB guard) |
 | `script_utils.py` | WIRED (lib) | imported by `generate_voice.py:25` | 2026-08-25 | works |
-| `cv_annotate.py` | WIRED (pod) | shipped+run on pod by `runpod_fulltrack.py:72,91` | 2026-09-07 | works (per-frame positions export, STATUS) |
+| `staging.py` | WIRED (lib) | imported by `produce_v2.py:47` | 2026-09-09 | works (/mnt/f USB staging for raw downloads, 6A) |
+| `scene_gen.py` | WIRED (transitive) | shipped+run on pod by `modal_render3d.py:45` (Blender -P) | 2026-09-13 | works (3D formation board, Stage 12/14) |
+| `cv_annotate.py` | STANDALONE (transitive) | shipped+run on pod by `runpod_fulltrack.py:101` (STANDALONE since step4b retired Stage 14) | 2026-09-07 | works (per-frame positions export, STATUS); no longer reachable from produce_v2 |
+| `runpod_fulltrack.py` | STANDALONE (was WIRED) | was `produce_v2.py` step4b; step4b RETIRED Stage 14 (tactical_render.py git-rm'd) | 2026-09-12 | works (146s full-clip, $0.011, STATUS); no longer called from produce_v2; hand-run only |
 | `produce_episode.py` | STANDALONE | entry point; no caller | 2026-09-09 | untested (no verified output); 800M guard added (3A.4), keeps 1080p anti-blur source |
 | `cloud_produce.py` | STANDALONE | entry point; no caller | 2026-09-08 | untested (pod-side yt-dlp + download_url guarded) |
-| `runpod_annotate.py` | STANDALONE | entry point; no caller | 2026-08-23 | untested (GAPS) |
-| `runpod_shorts.py` | STANDALONE | entry point; no caller; uploads `luminance_pod.py:254` | 2026-08-29 | untested |
-| `vastai_shorts.py` | RETIRED (4B.4) | was STANDALONE; end-to-end run 2026-09-09: Vast key works, pod creates, but encoding_failed (size 0) deterministically — encode script broken on the pod | 2026-09-09 | retired (rule 3) |
 | `runpod_superres.py` | STANDALONE | entry point; no caller | 2026-08-30 | untested |
 | `gpu_superres.py` | STANDALONE | entry point; no caller | 2026-08-30 | untested |
-| `luminance_pod.py` | STANDALONE (transitive) | `runpod_shorts.py:254`, `vastai_shorts.py:334` (uploaded to pod) | 2026-08-29 | untested |
-| `sharpness_check.py` | STANDALONE (transitive) | `cloud_produce.py:984` | 2026-08-30 | untested |
-| `assemble_video.py` | STANDALONE (legacy) | `produce_episode.py:303`, `cloud_produce.py:564`; NOT produce_v2 | 2026-08-30 | untested |
-| `validate_script.py` | STANDALONE (legacy) | `produce_episode.py:155`; NOT produce_v2 | 2026-08-25 | untested |
+| `sharpness_check.py` | STANDALONE (transitive) | `cloud_produce.py:989` | 2026-08-30 | untested |
+| `assemble_video.py` | STANDALONE (legacy) | `produce_episode.py:313`, `cloud_produce.py:569`; NOT produce_v2 | 2026-08-30 | untested |
 | `generate_captions.py` | STANDALONE | no caller (only `tests/`) | 2026-08-25 | untested |
 | `thumbnail_generator.py` | STANDALONE | no caller | 2026-08-25 | untested |
 | `enhance_clips.py` | STANDALONE | no caller (only `tests/`) | 2026-08-23 | untested |
 | `segment_scorer.py` | STANDALONE | no caller; `cv_annotate.py:332` is a comment only | 2026-09-05 | works (hand-run on full-clip data, STATUS) |
 | `scoreboard_scan.py` | STANDALONE | no caller | 2026-09-08 | works (3/3 goals, STATUS) |
-| `broadcast_filler.py` | STANDALONE | no caller | 2026-09-09 | works; FIXED 3A.1 (phantom-segment bug: --clip/--duration bounds); yields 43s/8min, 192s/13.5min, 373s/18.7min |
-| `cut_list_gen.py` | STANDALONE (prerequisite) | no caller; run by hand before produce_v2 to write footage=START-END tags | 2026-09-09 | works (4C); PySceneDetect + broadcast_filler -> scripts/<slug>.md; proven on 18.7min (cuts at 26.6/214.7/222.1/245.4) |
-| `assemble_words_match.py` | STANDALONE | no caller | 2026-09-08 | works (arsenal-chelsea 45.2s, STATUS) |
+| `assemble_words_match.py` | STANDALONE | no caller | 2026-09-08 | works (arsenal-chelsea 45.2s 1280x720 15MB Sep 8; file overwritten 2026-09-12; now 1920x1080 724s 210MB) |
 | `trim_tracking.py` | STANDALONE | no caller; has `main()` CLI; output in `artifacts/tracking_summary/` | 2026-09-08 | works (hand-run) |
 | `viral_angle.py` | STANDALONE | no caller | 2026-08-25 | untested |
 | `agent_reach_research.py` | STANDALONE | no caller | 2026-08-30 | untested |
@@ -64,29 +63,43 @@ tactical_overlay.
 | `youtube_upload.py` | STANDALONE | no code caller; invoked by hand | 2026-09-07 | works (2 publish-log entries, Sep 6) |
 | `oauth_setup.py` | STANDALONE | one-time; no caller | 2026-08-23 | ran once |
 | `gemini_inventory_test.py` | STANDALONE | no caller | 2026-09-08 | works (hand-run, STATUS Gemini section) |
-| `runpod_stage1.py` | STANDALONE (one-off) | no caller; docstring = one-off | 2026-09-05 | works (one-off, $0.05, STATUS) |
 | `ltx_enhance.py` | STANDALONE | no caller | 2026-08-23 | untested |
-| `tactical_overlay.py` | RETIRED (5C.2) | was DEAD | 2026-09-09 | DELETED 2026-09-09; in git history (superseded by tactical_render) |
+| `gemini_judge.py` | STANDALONE | no caller; invoked by hand (AUTHORITATIVE visual judge, Stage 12) | 2026-09-13 | works (gemini-3.1-pro-preview, Stage 12) |
+| `pod_check.py` | STANDALONE | SessionStart hook `.claude/hooks/check_pods.sh`; no pipeline caller | 2026-09-12 | works (leak check, STATUS) |
+| `b2_upload.py` | STANDALONE | no caller | 2026-09-09 | untested (pending B2 key, 6E.2) |
+| `backup_env.py` | STANDALONE | no caller | 2026-09-09 | works (encrypted .env backup, Stage 6) |
+| `render3d_vast.py` | STANDALONE | no caller | 2026-09-12 | untested (Vast SSH key blocked, Stage 11C) |
+| `sofascore_client.py` | STANDALONE | no caller | 2026-09-13 | untested (Stage 14; SofaScore lineup fetch) |
+| `doc_stamp_check.py` | STANDALONE | SessionStart hook `.claude/hooks/check_doc_stamps.sh` | 2026-09-13 | works (Stage 14; flags stale doc stamps) |
+| `tactical_render.py` | RETIRED (Stage 14) | was `produce_v2.py:285` (step4b) | 2026-09-06 | DELETED Stage 14; git-rm'd; in git history (superseded by 3D formation board via modal_render3d) |
+| `tactical_overlay.py` | RETIRED (5C.2) | was DEAD | 2026-09-09 | DELETED 2026-09-09; in git history (superseded by tactical_render, then tactical_render retired) |
 | `pitch_radar.py` | RETIRED (5C.2) | was DEAD (shipped but never run) | 2026-09-09 | DELETED 2026-09-09; ship-list refs removed from runpod_fulltrack/stage1/annotate |
 | `render_video.py` | RETIRED (5C.2) | was DEAD (DEPRECATED) | 2026-09-09 | DELETED 2026-09-09; in git history |
 | `check_and_download.py` | RETIRED (5C.2) | was DEAD (superseded by runpod_fulltrack) | 2026-09-09 | DELETED 2026-09-09; in git history |
+| `runpod_annotate.py` | RETIRED (6B) | was STANDALONE | 2026-08-23 | DELETED Stage 6B; in git history (superseded by runpod_fulltrack) |
+| `runpod_shorts.py` | RETIRED (6B) | was STANDALONE | 2026-08-29 | DELETED Stage 6B; in git history |
+| `vastai_shorts.py` | RETIRED (4B.4/6B) | was STANDALONE | 2026-09-09 | DELETED Stage 6B; in git history (encoding_failed deterministically) |
+| `luminance_pod.py` | RETIRED (6B) | was STANDALONE (transitive, uploaded by runpod_shorts/vastai_shorts) | 2026-08-29 | DELETED Stage 6B; in git history |
+| `runpod_stage1.py` | RETIRED (6B) | was STANDALONE (one-off) | 2026-09-05 | DELETED Stage 6B; in git history (one-off, $0.05, STATUS) |
 
-Counts: **14 WIRED, 22 STANDALONE, 0 DEAD (4 retired)** = 36 (+2 libs = 38 .py files). Stage 12B wired 5 more (script_gen, validate_script, broadcast_filler, cut_list_gen, transformation_gate).
+Counts: **14 WIRED direct + 4 transitive (ffmpeg_utils, script_utils, staging, scene_gen) + 29 STANDALONE, 0 DEAD (10 retired deleted)** = 47 .py files on disk. Stage 12B wired 5 more (script_gen, validate_script, broadcast_filler, cut_list_gen, transformation_gate). Stage 14 retired tactical_render + step4b, wired modal_render3d + scene_gen.
 
 ## Wired set (reachable from produce_v2.py)
 
-14 direct subprocess calls + 2 shared libs + 1 pod-shipped tracker:
+13 direct subprocess TOOLS/ calls + 1 root (produce_v2 itself) + 4 transitive libs + 1 transitive pod script:
 
 ```
-$ grep -oE 'TOOLS / "[a-z_]+\.py"' tools/produce_v2.py | sort -u
+$ grep -oE 'TOOLS / "[a-z_0-9]+\.py"' tools/produce_v2.py | sort -u
 broadcast_filler.py  cut_list_gen.py  generate_ambience.py  generate_voice.py
-match_data.py  merge_voice.py  runpod_download.py  runpod_fulltrack.py
-script_gen.py  shorts_crop.py  tactical_boards.py  tactical_render.py
-transformation_gate.py  validate_script.py
+match_data.py  merge_voice.py  modal_render3d.py  runpod_download.py
+script_gen.py  shorts_crop.py  tactical_boards.py  transformation_gate.py
+validate_script.py
 ```
-Transitive libs: `ffmpeg_utils.py` (imported by generate_voice/merge_voice/shorts_crop),
-`script_utils.py` (imported by generate_voice). Pod: `cv_annotate.py`
-(shipped+run by runpod_fulltrack). `pitch_radar.py` is shipped but never run.
+Transitive libs: `ffmpeg_utils.py` (imported by produce_v2/generate_voice/merge_voice/shorts_crop),
+`script_utils.py` (imported by generate_voice), `staging.py` (imported by produce_v2).
+Pod: `scene_gen.py` (shipped+run by modal_render3d via Blender). `cv_annotate.py`
+was shipped by runpod_fulltrack (now STANDALONE — step4b retired Stage 14).
+
 ## Skill auto-activation infrastructure (Stage 12C)
 
 Installed from github.com/diet103/claude-code-infrastructure-showcase.
@@ -123,10 +136,10 @@ were NOT installed — wrong stack for a Python/ffmpeg soccer pipeline).
 
 **8 agents** (.claude/agents/, all clean — no hardcoded paths): auto-error-resolver
 (TS), code-architecture-reviewer, code-refactor-master, documentation-architect,
-frontend-error-fixer (no frontend here — stack-mismatched but harmless, on-demand),
+frontend-error-resolver (no frontend here — stack-mismatched but harmless, on-demand),
 plan-reviewer, refactor-planner, web-research-specialist. Invokable via
 subagent_type. 6 are generic-relevant; 2 are stack-specific (auto-error-resolver
-TS, frontend-error-fixer frontend).
+TS, frontend-error-resolver frontend).
 
 **dev-docs pattern: NOT adopted.** The showcase's dev-docs commands reference a
 /dev/active/ task-dir structure. This project already has a doc spine

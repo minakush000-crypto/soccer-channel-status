@@ -2,7 +2,7 @@
 
 > **Purpose:** dated chronological log of what was done when.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-09.
+> **Last verified against code:** 2026-09-13.
 
 ## 2026-09-05 session 1: documentation spine + skill fix
 
@@ -21,13 +21,14 @@
   frame, each with {frame, players: [{id, bbox, team}]}. Existing exports
   (team_assignment, ball_positions) intact. Syntax checked.
 - Created tools/runpod_stage1.py: one-off RunPod runner for a single 10s clip.
+  RETIRED Stage 6C (deleted).
   Uploads clip + tools to catbox.moe, creates webhook, runs cv_annotate.py
   --max-frames 300, uploads tracking JSON + annotated MP4, terminates pod.
   Known bug: webhook parser fails on unescaped newlines in track_preview.
 - Ran on RunPod L4: 300 frames, 129 tracker IDs, 23s inference, $0.05 cost.
   Output: renders/2026-08-30_liverpool-forest/clips/clip_nxPNT4TU5_Q_annotated.tracking.json
   (1.16MB) + clip_nxPNT4TU5_Q_annotated.mp4 (1.5MB, 1920x1080, 10s).
-- Confirmed: produce_episode.py:288 call to cv_annotate.py is NOT broken
+- Confirmed: produce_episode.py:298 call to cv_annotate.py is NOT broken
   by the change (signature and CLI unchanged).
 - Confirmed: NO path from tracker ID to player name exists in the repo.
   match_data.py has jersey numbers but nothing reads them from video frames.
@@ -59,8 +60,10 @@
   on the 10s tracking data: 4/10 segments recommended, correctly flags
   camera cuts and close-up shots as low-quality.
 - pitch_radar.py confirmed dead code: shipped to RunPod but never imported
-  by cv_annotate.py. Only mention is a comment on line 370. It is a
-  starting point for option E but needs major expansion.
+  by cv_annotate.py. Only mention is a comment on line 370 (comment since
+  removed; grep pitch_radar tools/cv_annotate.py now exit 1). It is a
+  starting point for option E but needs major expansion. RETIRED Stage 5C.2
+  (deleted; no longer in tools/).
 - Next: run cv_annotate on the full 146s clip on RunPod to score all
   segments, then prototype the top-down tactical renderer.
 
@@ -77,7 +80,8 @@
 - Built tools/tactical_render.py: full-frame top-down tactical renderer.
   Reads tracking JSON, renders dark pitch with mowing stripes, player
   dots in team colors, movement trails, and Bezier arrows. Outputs PNG
-  or MP4. Screen-space projection (no homography model needed).
+  or MP4. Screen-space projection (no homography model needed). RETIRED
+  Stage 14 (deleted; step4b_tactical_render removed from produce_v2.py).
 - Vision assessment: Claude Opus 5 rates 5.5/10 (authoritative). All
   elements visible: stripes, arrows with arrowheads, team-colored dots,
   trails. Local gemma4:cloud rated higher but is not the judge of record.
@@ -89,7 +93,7 @@
 - Deliverables this session:
   - tools/segment_scorer.py (C: segment quality scorer)
   - tools/runpod_fulltrack.py (RunPod runner for full-clip tracking)
-  - tools/tactical_render.py (E: top-down tactical renderer prototype)
+  - tools/tactical_render.py (E: top-down tactical renderer prototype; RETIRED Stage 14, deleted)
   - renders/2026-08-30_liverpool-forest/clips/clip_nxPNT4TU5_Q_full.tracking.json
   - /tmp/tactical_seg1_8s_v2.png (proof-of-concept image, Opus 5.5/10)
   - /tmp/tactical_seg1_5s.mp4 (proof-of-concept video, 1280x720, 5s)
@@ -108,7 +112,7 @@
 - Removed 8/10 gemma4 score from STATUS.md and PROGRESS.md. Only 5.5/10
   (Claude Opus 5, authoritative) remains as the current assessment.
   Backups at STATUS.md.bak and PROGRESS.md.bak.
-- Risk 1 DIAGNOSED: K-means fits once on first 60 frames (line 258,
+- Risk 1 DIAGNOSED: K-means fits once on first 60 frames (line 270,
   classification_threshold=60, confirmed by grep). classified=True after
   fitting, never re-fits. team_assignment has 38 entries (shot 1 only).
   1020 unique tracker IDs in full 146s clip. 982 IDs (96%) unclassified,
@@ -122,7 +126,9 @@
 - produce_v2.py confirmed: syntax OK (ast.parse), imports all standard
   library, no references to new files (segment_scorer, tactical_render,
   runpod_fulltrack, runpod_stage1). The four new files are standalone and
-  do not affect produce_v2.py.
+  do not affect produce_v2.py. (Historical; runpod_fulltrack later wired
+  into produce_v2, tactical_render wired then RETIRED Stage 14, runpod_stage1
+  RETIRED Stage 6C, all deleted.)
 - MCP memory server graph is empty (read_graph returned no entities).
 - Auto memory is DISABLED (CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 in settings.json).
 
@@ -240,10 +246,10 @@ Already on, not touched:
    fallback (assessed below).
 
 ### Puppeteer and YouTube upload assessment
-- youtube_upload.py uses YouTube Data API v3 with OAuth2 (line 133:
+- youtube_upload.py uses YouTube Data API v3 with OAuth2 (line 139:
   build("youtube", "v3", credentials=creds)). Token file:
   secrets/youtube_token.json (Aug 23, 13 days old). Code checks for
-  expired credentials and refreshes via refresh_token (line 117).
+  expired credentials and refreshes via refresh_token (line 118).
 - client_secret.json: Aug 23. yt_cookies.txt: Sep 5 (fresh).
 - API path assessment: likely functional. Google OAuth refresh tokens
   are long-lived (don't expire unless revoked). The code handles token
@@ -263,7 +269,7 @@ Already on, not touched:
   #2 Add context layer to tactical renderer
   #3 Fix pitch layout: centre, complete markings, lower stripe contrast
   #4 Rebuild movement encoding with hierarchy
-  #5 Wire tactical_render into produce_v2.py (blocked by #1-#4)
+  #5 Wire tactical_render into produce_v2.py (blocked by #1-#4; later RETIRED Stage 14)
   #6 First YouTube upload (blocked by #5)
 - Task tracking is worth using: the project has multiple sequential
   workstreams with dependencies. Tasks give the user visibility into
@@ -368,6 +374,8 @@ files re-syntax-checked. Re-running on RunPod (task bhm4anz4p).
 
 ### Bug fix: axis parameter in extract_jersey_color
 Second RunPod run crashed at line 117 (cv2.cvtColor channel error).
+(historical; code fixed in this session, current cv_annotate.py:117 is a
+different cv2.cvtColor call.)
 Root cause: region[mask] has shape (N, 3) but I used mean(axis=(0,1))
 which collapses to a scalar, not a 3-element array. The original code
 used region.mean(axis=(0,1)) on the full (H,W,3) region which correctly
@@ -406,6 +414,8 @@ TASK 1 COMPLETE. Backup: tools/cv_annotate.py.bak2.
 ## 2026-09-06 session 5 (continued): task 2 — context layer
 
 ### Changes to tools/tactical_render.py (backup: tools/tactical_render.py.bak)
+(tactical_render.py RETIRED Stage 14, deleted; changes preserved as
+historical record.)
 1. TEAM_COLORS updated to match cv_annotate.py BGR values (team 0 = red
    (50,50,255), team 1 = light blue (255,200,100)).
 2. New function draw_context_layer: top bar with team names, color dots,
@@ -509,6 +519,8 @@ Key design decisions from Opus feedback:
 TASK 4 COMPLETE.
 
 ## 2026-09-06 session 5 (continued): task 5 — wire tactical_render into produce_v2.py
+(step4b_tactical_render RETIRED Stage 14; tactical_render.py deleted; this
+wiring was later removed from produce_v2.py. Historical record below.)
 
 ### Changes to tools/produce_v2.py (backup: tools/produce_v2.py.bak3)
 1. New step4b_tactical_render function: checks for existing tracking JSON
@@ -536,6 +548,11 @@ The C+E pipeline is now wired into produce_v2.py:
   step3 (download) → step4 (overlay) → step4b (tactical render) →
   step5 (voice) → step6 (assemble, includes tactical segments) →
   step7 (merge) → step8 (shorts crop)
+  (Historical; step4 later removed, step4b RETIRED Stage 14 —
+  tactical_render.py deleted, step4b_tactical_render removed from
+  produce_v2.py. Pipeline now: step1-2 (data+boards) → step3 (download)
+  → step4a (cut list) → step5 (voice) → step5a (assemble) → step6
+  (merge) → step7 (shorts).)
 
 TASK 5 COMPLETE.
 
@@ -544,7 +561,7 @@ TASK 5 COMPLETE.
 ### Assessment (no upload attempted, per user instruction)
 - Token: secrets/youtube_token.json has refresh_token (✅). Access token
   expired 2026-08-24 but refresh tokens are long-lived (don't expire
-  unless revoked). Code auto-refreshes at line 117.
+  unless revoked). Code auto-refreshes at line 118.
 - Script: tools/youtube_upload.py syntax ok (ast.parse).
 - Packages: google-auth-oauthlib, google-auth, google-api-python-client
   all installed in ~/yt-digest/.venv.
@@ -658,7 +675,7 @@ is 8.7s of a 62.3s video. The other 53.6s is step4's LLM-guessed arrows
    - Changed step5_assemble to receive clip_path (raw) not annotated_clip.
    - grep confirms: no step4_overlay, annotated_clip, or tactical_overlay
      references remain in produce_v2.py.
-   - tactical_overlay.py now orphaned (no pipeline caller).
+   - tactical_overlay.py now orphaned (no pipeline caller). RETIRED (deleted).
 
 2. **RE-BALANCE** (produce_v2.py):
    - step4b: --duration "3" → dynamic min(45.0, clip_dur - start_sec).
@@ -700,7 +717,7 @@ is 8.7s of a 62.3s video. The other 53.6s is step4's LLM-guessed arrows
    before falling back to other formats.
    Verification: pending re-run.
 
-2. **OUT_DIR hardcoded**: runpod_fulltrack.py line 18 had OUT_DIR hardcoded
+2. **OUT_DIR hardcoded**: runpod_fulltrack.py line 19 had OUT_DIR hardcoded
    to the Liverpool-Forest clips directory. Tracking JSON downloaded to
    the wrong render folder. Fix: OUT_DIR = clip_path.parent (derive from
    the --clip argument). Backup: runpod_fulltrack.py.bak2.
@@ -714,7 +731,8 @@ Pipeline: 2026-09-06_arsenal-chelsea --query "Arsenal Chelsea"
 --date-range 20260901-20260930
 
 **Output verified:**
-- final_video.mp4: 1920x1080, h264+aac, 65.17s, 12MB
+- final_video.mp4: 1920x1080, h264+aac, 65.17s, 12MB (file overwritten
+  2026-09-12; now 1920x1080, 724s, 210MB)
 - shorts: 720x1280, h264+aac, 65.18s, 8.2MB
 - tactical_view.mp4: 1280x720, 45.0s, 1350 frames
 - step4_overlay references in produce_v2.py: 0 (fully removed)
@@ -899,6 +917,7 @@ Step 5 assemble: tools/assemble_words_match.py (new) cuts footage at exact
 [VISUAL: footage=START-END] timestamps (replaces produce_v2 fixed-5s-offset
 bug), allocates time by narration word-count, scales to 1280x720, tpad-holds
 shortfall, merges ElevenLabs voice. final_video.mp4 45.2s, 1280x720, 15MB.
+(file overwritten 2026-09-12; now 1920x1080, 724s, 210MB.)
 (First run had a hold-last-frame bug producing a 0.04s segment; fixed with
 tpad.)
 
@@ -1204,9 +1223,10 @@ kept for the local path; pod path is 1080p-ready. Cost: ~$0.03 across 7 pod runs
 ~1.5-2.5h to build; archive only finals + publish-log ~100-200MB, not the 2.9G
 renders; pod->B2 possible without touching laptop; .env key handling proposed).
 5C.1: --help smoke test on 27 STANDALONE — 26/27 launch; luminance_pod crashes
-(IndexError), runpod_stage1 hangs; rule 3 not closed per-tool.
+(IndexError; RETIRED Stage 6C, deleted), runpod_stage1 hangs (RETIRED Stage
+6C, deleted); rule 3 not closed per-tool.
 5C.2: 4 DEAD tools retired (deleted, in git history); tool count 46 -> 42.
-5C.3: runpod_annotate e2e costed (~$0.01-0.02), not run per brief.
+5C.3: runpod_annotate e2e costed (~$0.01-0.02), not run per brief. (RETIRED Stage 6C, deleted.)
 DECISIONS.md doctrine gap + TOOLS.md updated. LANE_PLAN.md Stage 5 appended.
 Pushed: 0fb4e96..80adff9.
 
@@ -1287,7 +1307,8 @@ fresh_fetch (54 items) → hand-written lane B script → validate_script --lane
 PASS → tactical_boards (3 boards, after hand-adding a `score` field it required)
 → generate_voice (ElevenLabs, 41.0s) → manual ffmpeg assemble (no wired board-
 only assembler). Output: renders/2026-09-12_preview-manc-derby/final_video.mp4,
-1920x1080, 41.02s, 975KB, h264+aac. No pod, no upload. 12-item break list
+1920x1080, 41.02s, 975KB, h264+aac (file overwritten 2026-09-12; now
+968304 bytes). No pod, no upload. 12-item break list
 recorded (8B.4): no script generator, hand-built match_data, tactical_boards
 crashed on missing score / shows 0-0 + zero stats for a preview, no board-only
 assembler, no shorts crop, 41s vs 6-10min target, etc.
@@ -1352,7 +1373,8 @@ headless, ~$0.05-0.10/episode, ~15-30min wall, 1-3 days to BUILD. 2D today
 animated arrows (matches DK FALCON). PoC BLOCKED: GPU 0/48 on 2026-09-12
 (runpod.get_gpus re-checked twice). 10C.4 deletion HELD per both 10C versions
 — tactical_render.py + tactical_boards.py stay until a 3D replacement is
-proven at/above spec. TOOLS.md annotated. Downstream breakage list in
+proven at/above spec. (tactical_render.py RETIRED Stage 14, deleted;
+tactical_boards.py still active.) TOOLS.md annotated. Downstream breakage list in
 LANE_PLAN.md §Stage 10C.6.
 
 Production freeze stays until an episode scores >= 7/10. Committed + pushed.
@@ -1393,7 +1415,8 @@ fstab entry `F: /mnt/f drvfs defaults,noatime,nofail 0 0` is the durable fix
 Survey: RunPod/Vast/Modal/Lambda/Paperspace (LANE_PLAN §11B.2). Primary=Vast,
 fallback=Modal. render3d_vast.py built (provider-agnostic layer, Vast backend).
 vastai_shorts fault was provider auth (classic api.vast.ai dead), not the tool;
-Vast works now via the new cloud.vast.ai SDK.
+Vast works now via the new cloud.vast.ai SDK. (vastai_shorts.py RETIRED Stage
+6C, deleted.)
 
 11C: 3D PoC ATTEMPTED on Vast, BLOCKED on retrieval. scene_gen.py (Blender bpy,
 Cycles) + render3d_vast.py + modal_render3d.py built. Vast instance created +
@@ -1419,7 +1442,8 @@ vision workflow (4 Opus authoritative + 1 gemma4 cross-check) + synthesis.
 
 - Provider: Modal (modal_render3d.py, T4, scene_gen.py NO edits).
 - Output: /mnt/f/soccer-staging/3dpoc_2026-09-06_arsenal-chelsea.mp4
-  (1280x720, h264, 5.0s, 534892 bytes; ffprobe verified).
+  (1280x720, h264, 5.0s, 534892 bytes; ffprobe verified; file overwritten
+  2026-09-13, now 442966 bytes).
 - Wall ~408.9s, cost ~$0.08 (Stage 12A same-code cached-image baseline via
   /usr/bin/time -v; this run not separately re-timed).
 - Frame: artifacts/frames/3dpoc_arsenal-chelsea_t2500.png (t=2.5s, 1280x720).

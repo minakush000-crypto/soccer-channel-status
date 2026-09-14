@@ -2,13 +2,18 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-09.
+> **Last verified against code:** 2026-09-13.
 
-Verified against code on 2026-09-09 (Stage 3: broadcast_filler phantom bug fixed 3A.1, produce_episode 800M guard 3A.4; Stage 2: 720p cap + 180-1200s filter on produce_v2.py). This rebuild supersedes the 2026-09-05
-version: the tactical_overlay wiring it described (`produce_v2.py:232`) no
-longer exists, and the "no upload" claim is reversed (2 uploads happened
-2026-09-06). No plans, no hopes, no hand-typed quality scores. Every claim has
-the command that proved it.
+Verified against code on 2026-09-13. Re-verified all line citations against
+the current produce_v2.py (858 lines, post-Stage-12B rewrite). Stage 14
+changes retired tactical_render.py + step4b, wired the 3D formation board into
+step2_boards, added a .script_verified voice gate, rewrote step5_assemble to
+cap footage at 20%, and added a 3rd SessionStart hook (check_doc_stamps.sh).
+This rebuild supersedes the 2026-09-05 version: the tactical_overlay wiring
+it described (pre-Stage-12B `produce_v2.py:232`, line number from the old
+code) no longer exists, and the "no upload" claim is reversed (2 uploads
+happened 2026-09-06). No plans, no hopes, no hand-typed quality scores. Every
+claim has the command that proved it.
 
 ## What runs today
 
@@ -37,6 +42,9 @@ $ ffprobe -v error -show_entries format=duration -of csv=p=0 renders/2026-09-06_
 $ stat -c '%s %n' renders/2026-09-06_arsenal-chelsea/final_video.mp4
 15034830 ... Sep  8 19:33
 ```
+
+NOTE: file overwritten Sep 12 by a later run. Current state (verified
+2026-09-13): 1920x1080, 724.000000s, 210477037 bytes, Sep 12 21:43.
 PRIVATE upload: https://www.youtube.com/watch?v=WFi2LBwXINU (and a second
 PsEz5ITTIpM). `artifacts/publish-log/` has 2 entries:
 
@@ -54,36 +62,43 @@ cloud_produce download_url). See ARCHITECTURE.md "200MB guard".
 
 ## What is broken, worst first
 
-### 1. Footage cuts ignore narration (broken logic)
-`produce_v2.py:433`:
-```
-start = (seg.get("clip_idx", 0) * 5) % max(1, int(clip_total) - 5)
-```
-Fixed 5-second offsets indexed by `clip_idx`. The script's `[VISUAL: footage=]`
-tags only select board-vs-footage (line 361 `has_footage = "footage=" in
-tag.lower()`), not which part of the clip. `assemble_words_match.py` holds the
-content-matched fix (parses `footage=START-END` windows) but is NOT folded in
-— blocked by missing timestamp-window data + schema mismatch, see
-RECONCILIATION 1.2.
+### 1. Footage cuts via cut_list_gen (was: fixed 5s offsets, FIXED Stage 12B)
+The old `clip_idx*5` fixed-offset logic (pre-Stage-12B `produce_v2.py:433`)
+is REMOVED. Footage cutting now uses `cut_list_gen.py` wired into
+`step4a_cutlist` (`produce_v2.py:371`), which calls `broadcast_filler.py`
+(line 404) then `cut_list_gen.py` (line 414) to produce timestamp windows.
+`step5_assemble` (`produce_v2.py:430`) reads `cut_list.json` and caps footage
+at 20% of runtime (line 512: `footage_budget = 0.20 * total_duration`).
+The script's `[VISUAL: footage=]` tags select board-vs-footage (line 472
+`is_footage = tag.startswith("footage=")`, was `has_footage` at pre-rewrite
+line 361). `assemble_words_match.py` still exists as a standalone tool; its
+content-matched cut logic is now folded into produce_v2 via cut_list_gen
+(step4a, line 371).
 
-### 2. Script is not validated against match data (broken correctness)
-No call to `validate_script.py` in produce_v2.py (`grep -c validate_script
-tools/produce_v2.py` → 0). CONTEXT example: script said "Gravenberch receives"
-but match data has him as a 71st-minute sub.
+### 2. Script IS validated against match data (was broken, FIXED Stage 10B+14)
+validate_script.py is now wired into produce_v2.py (`grep -c validate_script
+tools/produce_v2.py` → 6). Called at `produce_v2.py:362` as STEP 1c.
+A `.script_verified` gate (`produce_v2.py:648`) blocks voice generation until
+a human fact-checks the script (Stage 14). CONTEXT example from the old
+broken state: script said "Gravenberch receives" but match data has him as a
+71st-minute sub.
 
 ### 3. Output is 720x1280, not 1080x1920 (broken format)
 `shorts_crop.py:64` `OUT_W, OUT_H = 720, 1280`. Deliberate downscale to avoid a
 soft 1.78x upscale. produce_v2 now caps the source at **720p** (`height<=720`,
-`produce_v2.py:176`, Stage 2), so the 1080p/2160p source path is gone —
+`produce_v2.py:218`, Stage 2), so the 1080p/2160p source path is gone —
 `shorts_crop`'s 4K→1080x1920 downscale branch (comment, line 78) is now
 unreachable through produce_v2. Output stays 720x1280.
 
-### 4. OVERLAYS ARE GONE (was broken, now resolved)
+### 4. OVERLAYS ARE GONE; step4b RETIRED (was broken, then resolved, then retired)
 The 2026-09-05 STATUS said `tactical_overlay.py` guesses coords via
-`produce_v2.py:232`. That wiring is GONE (`grep -n tactical_overlay
-tools/produce_v2.py` → exit 1). The step is now `step4b_tactical_render`
-(line 202) → `runpod_fulltrack.py` + `tactical_render.py` (real tracking data,
-top-down renderer, Opus 8/8.5). `tactical_overlay.py` is DEAD.
+pre-Stage-12B `produce_v2.py:232`. That wiring is GONE (`grep -n tactical_overlay
+tools/produce_v2.py` → exit 1). The step was then `step4b_tactical_render`
+(pre-rewrite line 202) → `runpod_fulltrack.py` + `tactical_render.py`. As of
+Stage 14, step4b_tactical_render is RETIRED (`produce_v2.py:313`,
+`tactical_render.py` DELETED, `produce_v2.py:791` sets `tactical_path = None`).
+The 3D formation board (scene_gen via modal_render3d) now covers the formation
+render in `step2_boards` (`produce_v2.py:91`). `tactical_overlay.py` is DEAD.
 
 ## Option C Stage 1: per-frame player positions — DONE (2026-09-05)
 
@@ -107,11 +122,12 @@ No path from tracker ID to player name exists (DECISIONS 2026-09-05, question A)
 - **C (segment selection)**: DONE. `segment_scorer.py` scores 1-second windows
   by detection, persistence, stability, team classification. Full 146s: 15/146
   segments score >=65 (15s usable). Best sec 1 (85.6), worst sec 45 (7.5).
-- **E (top-down tactical renderer)**: `tactical_render.py` renders dark pitch
-  with mowing stripes, player dots in team colors, movement trails, Bezier
-  arrows. Outputs PNG or MP4. Screen-space projection (no homography). Opus
-  assessment: 8/10 then 8.5/10 across tasks 2-4 (authoritative). All elements
-  visible.
+- **E (top-down tactical renderer)**: `tactical_render.py` (RETIRED Stage 14,
+  DELETED) rendered dark pitch with mowing stripes, player dots in team colors,
+  movement trails, Bezier arrows. Outputs PNG or MP4. Screen-space projection
+  (no homography). Opus assessment: 8/10 then 8.5/10 across tasks 2-4
+  (authoritative). All elements visible. Superseded by the 3D formation board
+  (scene_gen via modal_render3d, wired into step2_boards).
 - Known gaps for E (from Opus): no context layer (title, team names, ball
   marker, attacking direction); pitch layout off-centre, missing 6-yard
   boxes/penalty spots/arcs/corner arcs/goals, stripe contrast too high;
@@ -202,7 +218,7 @@ strike-implying narration plays over mostly-celebration.
 
 Crowd ambience: `generate_ambience.py` was an orphan (produce_episode/cloud_produce
 called it, produce_v2 did not). FIXED: produce_v2.py `step6b_ambience` (line
-479) generates `crowd_ambience.mp3`; `merge_voice.py` mixes it under voice at
+665) generates `crowd_ambience.mp3`; `merge_voice.py` mixes it under voice at
 30% volume with fade. Verified on a temp slug.
 Narrator voice: VOICE_ID is per-episode config. `generate_voice.py` accepts
 `--voice-id <id>`. 3 candidate samples saved LOCAL at experiments/voice-test/audio/
@@ -221,9 +237,11 @@ could produce a real number but is not in produce_v2.py.
   clients) — --source-url (catbox) is the working path today.
 - 4 DEAD RETIRED: tactical_overlay, pitch_radar, render_video, check_and_download
   deleted (git history); pitch_radar ship-list refs removed. Tool count 46 -> 42.
-- 27 STANDALONE smoke test: 26/27 launch; luminance_pod crashes, runpod_stage1
-  hangs. Rule 3 not closed per-tool (e2e owed).
-- Rule 1: step3 (download) + step4b (tracking) now have pod paths; the CPU/storage
+- 27 STANDALONE smoke test: 26/27 launch; luminance_pod crashes (RETIRED
+  Stage 6, deleted), runpod_stage1 hangs (RETIRED Stage 6, deleted).
+  Rule 3 not closed per-tool (e2e owed).
+- Rule 1: step3 (download) + step4b (tracking) now have pod paths (NOTE:
+  step4b is RETIRED Stage 14, tactical_render.py deleted); the CPU/storage
   stages (boards, assemble, voice, ambience, merge, shorts) + cut-list generation
   still run locally (DECISIONS.md gap list updated).
 - 5A.5: 720p cap KEPT for the local path (pod yt-dlp bot-blocked, so 1080p-on-pod
@@ -234,6 +252,7 @@ could produce a real number but is not in produce_v2.py.
 - NEW tools: staging.py (/mnt/f staging), backup_env.py (encrypted .env backup),
   b2_upload.py (B2 archive, pending key). RETIRED 5: luminance_pod, runpod_stage1,
   runpod_annotate, vastai_shorts, runpod_shorts. Tool count 46 -> 37.
+  Current tool count (2026-09-13): 47 (`ls tools/*.py | wc -l`).
 - Doctrine rule 1: +/mnt/f staging exception (4 docs).
 - produce_v2: canonical-path assertion (6B.4) + step3 downloads to /mnt/f (6A).
 - runpod_download: keyframe fix (stream-copy + re-encode fallback, timeout-bounded).
@@ -259,9 +278,10 @@ could produce a real number but is not in produce_v2.py.
   8-14 min. Word budget not yet in SCRIPT_TEMPLATE.
 - 9D: boards-only lane B resembles none of the 6 references; recommend drop
   as publishable format (OK as sub-60s preview Short). Footage acquisition
-  still blocked by rule 1 + YouTube datacenter block + /mnt/f unmounted.
+  still blocked by rule 1 + YouTube datacenter block + /mnt/f unmounted
+  (NOTE: /mnt/f is now MOUNTED since Stage 11A, fstab `F: /mnt/f drvfs`).
 - /dev/shm used for 9A under a one-time rule-1 exception (RAM, no vhdx bloat);
-  cleaned up. /mnt/f still unmounted.
+  cleaned up. /mnt/f now mounted (Stage 11A fstab fix).
 
 ## Stage 10 — amendments + script budget + opening gate + 3D scope, 2026-09-12
 
@@ -278,9 +298,11 @@ could produce a real number but is not in produce_v2.py.
 - 10D: validate_script.py check_opening_hook rejects a static formation-board
   open (spec §6) before assembly. Proven: formation FAIL, footage PASS.
 - 10C: Blender confirmed right tool. PoC BLOCKED on 0/48 GPU (2026-09-12,
-  re-checked twice). 10C.4 deletion HELD — tactical_render.py +
+  re-checked twice). 10C.4 deletion HELD at the time — tactical_render.py +
   tactical_boards.py stay until a 3D replacement is proven at/above spec.
-  TOOLS.md annotated. Scope + downstream list in LANE_PLAN.md §Stage 10.
+  UPDATE Stage 14: tactical_render.py is now DELETED (RETIRED); step4b
+  retired. tactical_boards.py still exists. TOOLS.md annotated. Scope +
+  downstream list in LANE_PLAN.md §Stage 10.
 - Production freeze stays until an episode scores >= 7/10.
 
 ## Stage 11 (part 1) — Rule 5 + mirror retirement, 2026-09-12
@@ -310,14 +332,18 @@ could produce a real number but is not in produce_v2.py.
 
 - 11A: check_mnt_f.sh SessionStart hook (fires); fstab `F: /mnt/f drvfs
   defaults,noatime,nofail 0 0` is the durable reboot-surviving fix (one-time
-  sudo). settings.json now has 2 SessionStart hooks (additive, rule 12).
+  sudo). settings.json now has 3 SessionStart hooks (check_pods.sh,
+  check_mnt_f.sh, check_doc_stamps.sh added Stage 14; additive, rule 12).
 - 11B: Vast.ai has capacity (RTX 3090 $0.17/h); RunPod 0/48. Primary=Vast,
   fallback=Modal. render3d_vast.py = provider-agnostic layer (Vast backend).
   vastai_shorts fault was stale classic-API auth; Vast works now.
+  (NOTE: vastai_shorts.py is RETIRED Stage 6, deleted.)
 - 11C: 3D PoC BLOCKED on retrieval. Vast instance created/destroyed cleanly
   (capacity+credit OK) but the SDK has no SSH/logs, env-drop is broken,
   catbox/webhook are blocked from the sandbox, no port-exposure. 10C.4 HELD
-  (tactical_render.py + tactical_boards.py stay). Block = one-time user action:
+  (tactical_render.py + tactical_boards.py stay). UPDATE Stage 14:
+  tactical_render.py is now DELETED (RETIRED); tactical_boards.py still
+  exists. Block = one-time user action:
   Modal token (modal_render3d.py ready) or Vast SSH key. Awaiting user.
 - 11D: assembler scoped (~1-2 days); est. score ~6.9/10 with 2D boards + 1400w
   + footage + assembler. Assembler-first beats 3D on score-per-hour and is a
@@ -330,7 +356,9 @@ Relay (2026-09-12/13) next action executed: scene_gen.py as-written on Modal
 against arsenal-chelsea match_data.json, frame extracted, judged vs the 2D
 possession.png control through a 5-lens vision workflow (4 Opus + 1 gemma4) +
 synthesis. Provider Modal T4; output /mnt/f/soccer-staging/3dpoc_2026-09-06_arsenal-chelsea.mp4
-(1280x720, h264, 5.0s, 534892 bytes; ffprobe verified); wall ~408.9s, cost
+(1280x720, h264, 5.0s, 534892 bytes; ffprobe verified). NOTE: file
+overwritten Sep 13; current size 442966 bytes (stat -c '%s' verified
+2026-09-13). Wall ~408.9s, cost
 ~$0.08 (12A same-code baseline; not re-timed). Frame
 artifacts/frames/3dpoc_arsenal-chelsea_t2500.png.
 
