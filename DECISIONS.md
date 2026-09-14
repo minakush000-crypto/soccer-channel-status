@@ -377,3 +377,12 @@ been fact-checked. The gate is a marker file renders/<slug>/.script_verified
 + sources.json); absence = hard stop, not a warning. The check runs before the
 voice-exists short-circuit so an unverified-existing voice is not reused. A
 warning that does not stop is not a check.
+Prevention wired 2026-09-13 (multi-layer, not just the gate): (1) the
+.script_verified gate in step6_voice; (2) script_gen.py SYSTEM prompt constrained
+to facts in its facts block, and the goal events (scorers + minutes) are now
+included in facts_blob so the generator cannot invent a scorer; (3) sources.json
+built for the episode (managers, nationalities, former clubs cited — Thomas Frank
+correctly flagged as NOT Brentford's manager, removed); (4) EPISODE_SPEC §10 makes
+the source-of-truth rule a spec MUST. The fabricated-scorer class of failure
+needs all four: a gate catches a bad script, but the constraint stops it being
+written.

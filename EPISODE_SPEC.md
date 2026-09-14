@@ -6,10 +6,11 @@
 > be traced to a reference. Production is frozen against this spec until
 > approved.
 > **Derived:** 2026-09-12, from 6 reference videos (5 tactical/explainer + 1 highlights).
-> **Last verified against code:** 2026-09-13 (§9 source-footage provenance added
-> and verified this pass — gemini_judge.py exists, the 12B/Sofascore findings are
-> real; §1-8, 9B.x trace to LANE_PLAN.md §Stage 9A reference measurements, not
-> re-derived this pass).
+> **Last verified against code:** 2026-09-13 (§9 source-footage provenance + §10
+> narration source-of-truth added and verified this pass — gemini_judge.py exists,
+> the .script_verified gate + script_gen constraint + sources.json are wired, the
+> 12B/Sofascore findings are real; §1-8, 9B.x trace to LANE_PLAN.md §Stage 9A
+> reference measurements, not re-derived this pass).
 
 The project goal (CONTEXT.md) is the Coaches' Voice style: dark pitch, orange
 accents, data-driven graphics, functional arrows, deliberate pace. The spec
@@ -123,6 +124,25 @@ content ratios from 18 vision-classified frames per video (gemma4:cloud).
   reject under this rule. The check is Gemini-judged because the main model is
   text-only and cannot read frames directly; every visual claim must paste
   verbatim `gemini_judge.py` output.
+
+## 10. Source-of-truth for narration  (trace: Stage 14, 2026-09-13)
+
+- **MUST:** every factual claim in the narration traces to `match_data.json` or
+  `sources.json`. No untraced claim ships.
+- **MUST:** an untraced claim is removed, not softened. If a colour claim
+  (manager, nationality, former club) cannot be cited in `sources.json`, it does
+  not go in the script.
+- **MUST:** `produce_v2` refuses the voice step (`step6_voice`) unless a human has
+  fact-checked the script and created `renders/<slug>/.script_verified`. A warning
+  that does not stop is not a check.
+- **MUST:** `script_gen.py` is constrained to facts present in its facts block
+  (which now includes the goal events with scorers + minutes); it must not invent
+  managers, nationalities, former clubs, tactical roles, marking assignments, or
+  match-ups.
+- Reference basis: the 2026-09-12 episode narrated a fabricated goal scorer
+  ("Igor Thiago needed just one big chance to score" — both Brentford goals were
+  Kevin Schade's) from an un-fact-checked draft. This section + the gate + the
+  generator constraint + `sources.json` prevent a repeat. See DECISIONS.md.
 
 ---
 
