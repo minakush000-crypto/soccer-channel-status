@@ -508,3 +508,79 @@ not the artefact (never reproduce a design/layout/frame); (5) report before
 building. Applies to visual design, script structure, pacing, sourcing,
 tooling, workflow. If nothing relevant exists, say so explicitly + proceed.
 Skipping the step is not valid. Recorded in CLAUDE.md + here as binding.
+### 2026-09-14 — close stale-voice hole + settle 2D-vs-3D + Gemini litmus (brief 0610)
+
+Task briefed: ~/claude/30-briefs/2026-09-14-0610-close-stale-voice-and-settle-two-questions.md
+Three pieces, in order: (1) re-render voice from the fixed, .script_verified
+script and prove the audio no longer names a fabricated scorer; fix the
+step6_voice skip logic so "voice file exists" is not a valid skip condition
+(compare the script hash recorded at voice-gen time vs the current script
+hash, regenerate on mismatch). (2) Research what medium real practitioners
+use for each football tactical board type, and settle the 2D-vs-3D
+contradiction on record (STATUS.md 09-13: non-buggy 3D 6/10 vs 2D control
+4/10, 3D ahead by 2; handoff: 2D beats 3D because momentum 9/10 beats
+formation 3D 6/10 — those are unlike board types). (3) Litmus head-to-head:
+Gemini vs scoreboard scanner on timestamps + pitch coordinates + cut
+decisions, vs match_data.json. Trigger met: episode scored 5.5/10 < 7.
+
+State at start (verified 2026-09-14):
+- STATUS.md stamp 2026-09-13 (predates the 5.5 verdict + voice failure;
+  must be updated to 2026-09-14 under the STAMP RULE as part of piece 1).
+- voice_elevenlabs.mp3 mtime 2026-09-13 02:16; .script_verified mtime
+  2026-09-13 20:33; scripts/<slug>.md mtime 2026-09-13 20:33. The voice
+  predates the fix + the gate by ~18h — it was TTS'd from the pre-fix
+  script, then reused on every re-run because step6_voice skips on
+  voice_path.exists() (produce_v2.py:691-694). The gate runs before the
+  short-circuit (:684-690) but only checks the marker exists, not that the
+  voice matches the current script.
+- Fixed script spoken word count (clean_script_for_tts): 1819 words (the
+  prior report's "1751" was approximate; 1819 is measured). Pre-fix was
+  ~1911. Old voice 719.1s @ ~159 WPM. New voice for 1819 words expected
+  ~560-705s.
+- match_data.json goals (ground truth for piece 3): Schade 34' (0-1),
+  Kluivert 38' (1-1), Tavernier 52' (2-1), Schade 56' (2-2). Both Brentford
+  goals = Schade. The fabricated pre-fix claim was "Igor Thiago needed just
+  one big chance to score"; the fixed script attributes both to Schade and
+  names Igor Thiago only as the striker.
+
+### 2026-09-14 — Stage 15 outcomes (brief 0610)
+
+Mid-task decisions (dated before work continued, per the brief):
+- **Fix-then-render order.** The brief listed re-render before fixing the skip
+  logic. I reversed it: fix the hash gate first, then render once. Reason: the
+  fix records the script hash at voice-gen time; render-then-fix would leave no
+  hash recorded and force a second ElevenLabs render on the next step6_voice
+  call (re-assemble calls step6_voice again). Fix-then-render = one render,
+  hash recorded, no wasted TTS cost. One change, one run.
+- **§7 WPM regression accepted as a finding, not silently "fixed."** The new
+  voice is 137 WPM (below the 155 MUST) because ElevenLabs paced the 1819-word
+  TTS slower than the 1911-word pre-fix voice (159 WPM). This is an ElevenLabs
+  pacing variance, not a script-content issue. The re-score reports it honestly
+  (§7 0.5/2). The §10 credibility disqualifier is resolved (the freeze's
+  reason is gone); the episode is 7.5/10 numerically. Recommendation: regenerate
+  at an ElevenLabs speed setting that hits 155+ WPM before declaring the freeze
+  lifted. Not done in this task (one change per run; the change was the hash
+  gate).
+- **Gemini delegation.** The litmus (Piece 3) is decisive: Gemini loses to the
+  mechanical tools on every mechanical output (timestamps 2/4 + 1 phantom vs
+  scanner 4/4 free; coordinates hallucinated with 3 wrong jerseys; cut
+  decisions wrong scorer + no filtering). Delegate to Gemini ONLY for content
+  classification (what kind of passage), not for when/where/what-numbers. The
+  2026-09-08 finding holds on a second clip.
+
+Outcomes (verified):
+- Voice: from the fixed script (sha256 a4a70df3... matches), 794.676s, gate
+  precedes voice. Skip logic fixed (hash gate, hashlib). Old voice moved to
+  voice_elevenlabs_pre_fix.mp3.
+- Re-score: 7.5/10 (16.5/22), §10 RESOLVED, §7 regressed (137 WPM).
+- 2D-vs-3D: neither on-record claim was like-for-like; "DESIGN not DIMENSION"
+  survives; industry standard for positional boards is 2D top-down (one
+  sponsored exception: Coaches' Voice + Football Manager). A like-for-like
+  same-board-same-data 2D-vs-3D test has never been run.
+- Gemini litmus: timestamps scanner 4/4 free vs Gemini 2/4 + 1 phantom paid;
+  coordinates Gemini hallucinated; cut decisions Gemini wrong scorer. Gemini
+  wins nowhere on mechanical output.
+
+STATUS.md updated to 2026-09-14 (STAMP RULE) with the 5.5 verdict, the voice
+failure, the fix, the re-score, and the litmus (Stage 15 section).
+Handoff: ~/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md.

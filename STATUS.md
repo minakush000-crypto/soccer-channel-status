@@ -2,9 +2,15 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-13.
+> **Last verified against code:** 2026-09-14.
 
-Verified against code on 2026-09-13. Re-verified all line citations against
+Verified against code on 2026-09-14 (brief 0610: stale-voice hole closed +
+re-score + 2D-vs-3D contradiction settled + Gemini litmus). See the new
+"Stage 15 — stale-voice hole + re-score + litmus" section below for the
+episode score, the voice failure, the skip-logic fix, and the Gemini
+vs scanner head-to-head. Earlier verification 2026-09-13 (Stage 12B:
+produce_v2.py rewritten 858 lines; Stage 14: tactical_render.py + step4b
+RETIRED, 3D formation board wired into step2_boards). Re-verified all line citations against
 the current produce_v2.py (858 lines, post-Stage-12B rewrite). Stage 14
 changes retired tactical_render.py + step4b, wired the 3D formation board into
 step2_boards, added a .script_verified voice gate, rewrote step5_assemble to
@@ -441,3 +447,135 @@ deletions complete, (2) confirmed-deleted list, (3) B2 bucket size after
 uploads. These are not fabricated; placeholders until the closing pass fills
 them. /mnt/f writes are currently EINVAL, so /dev/shm is the volatile fallback
 for staging.
+
+## Stage 15 — stale-voice hole + re-score + 2D-vs-3D litmus, 2026-09-14
+
+### The voice failure (closed)
+The 2026-09-12_bournemouth-brentford episode scored **5.5/10** (below the 7/10
+gate; freeze held). The single disqualifier was §10 (narration source-of-truth,
+MUST FAIL): the voice track named a fabricated scorer. Root cause verified:
+`voice_elevenlabs.mp3` mtime 2026-09-13 02:16 was TTS'd from the PRE-FIX script
+(1911 spoken words, containing "Igor Thiago needed just one big chance to
+score"). The script was fixed at 20:33 (Igor Thiago -> Kevin Schade, who scored
+both Brentford goals per match_data.json: Schade 34', 56'). The
+`.script_verified` gate was set at 20:33 — AFTER the voice was already
+generated. Every re-run reused the pre-fix voice because `step6_voice` skipped
+on `voice_path.exists()` alone (`produce_v2.py` line 691-694, pre-fix). The
+gate checked the marker existed but not that the voice matched the current
+script. ◑ the audio says Schade not Thiago (inferred from the hash + script
+content; no speech-to-text tool exists to prove it directly).
+
+### The fix (one code change, verified)
+`step6_voice` now records the sha256 of `scripts/<slug>.md` to
+`.voice_script_hash` at voice-generation time, and on the skip check compares
+the recorded hash to the current script hash. "Voice file exists" is no longer
+a valid skip condition; mismatch or missing hash -> regenerate. `import
+hashlib` added. Diff pasted in the handoff report (brief 0610). Parse OK.
+PROOF (all ●, commands run 2026-09-14):
+- script spoken words (clean_script_for_tts): **1819** (the prior "1751" was approximate)
+- old voice: **719.078s**; new voice: **794.676s** (ffprobe)
+- timestamps in order: script 09-13 20:33:27 -> .script_verified 20:33:38 -> voice 09-14 01:12:21 -> .voice_script_hash 01:12:21 (gate precedes voice)
+- hash match: recorded `a4a70df3...` = computed `a4a70df3...` (sha256sum) — voice provably from the fixed script
+
+### Re-score (same method as the 5.5 run, Gemini authoritative)
+Re-assembled final_video.mp4: 1920x1080, 794.76s (13.25 min), 77.7MB. 9 frames
+judged by gemini-3.1-pro-preview (raw responses in the handoff report):
+opening 3/10, footage 3/10, formation(3D) 4/10, stat_card 4/10, possession 5/10,
+xg_flow 7/10, shotmap 6/10, momentum 7/10, avgpositions 6/10. (xg_flow dropped
+10->7 vs the 5.5 run on the SAME board — Gemini judgment variance, same model.)
+
+EPISODE_SPEC section-by-section:
+| § | Section | Score | Verdict |
+|---|---|---|---|
+| 1 | Runtime 8-14min | 2/2 | 13.25 min. PASS |
+| 2 | Shot rhythm | 1.5/2 | 51 segments, mean 15.6s (PASS), longest 27s (below 30s min) |
+| 3 | Content mix | 2/2 | 87% graphics, 13% footage. PASS |
+| 4 | Graphic types | 1.5/2 | All 3 MUSTs + 4 new; SHOULD arrows/lower-third absent |
+| 5 | Typography/colour | 1/2 | 4 new 2D boards have Bebas/Barlow; 3D formation + stat_card + possession don't |
+| 6 | Opening | 1.5/2 | Footage-led hook (PASS); basic aerial, not dynamic action |
+| 7 | Audio | 0.5/2 | **137.3 WPM (BELOW 155-195 MUST)**; crowd ambience present; voice from fixed script |
+| 8 | Framing | 2/2 | 1920x1080, no pillarbox. PASS |
+| 9 | Source-footage provenance | 1.5/2 | Footage frames clean aerial (no watermark; the 5.5 "Google watermark" was a false positive) |
+| 10 | Narration source-of-truth | **2/2** | **RESOLVED.** Voice from fixed script (hash proven), no fabricated scorer |
+| 11 | Board design properties | 1/2 | 4 new 2D boards have the 4 properties; 3D formation + stat_card + possession don't |
+| **Total** | | **16.5/22 (7.5)** | §10 disqualifier RESOLVED |
+
+**Overall: 7.5/10.** The §10 credibility disqualifier is resolved (the freeze's
+reason is gone). BUT §7 regressed: the new voice is 137 WPM (below the 155
+MUST) because ElevenLabs paced the 1819-word TTS slower than the 1911-word
+pre-fix voice (159 WPM). The episode numerically clears the 7.0 gate, but §7
+is a MUST violation. **Recommendation: regenerate the voice with an ElevenLabs
+speed setting that hits 155+ WPM before declaring the freeze lifted.** If §7
+MUST-fail is treated as disqualifying (like §10 was), the freeze holds until
+the WPM is fixed; if only §10 credibility is disqualifying, the freeze lifts at
+7.5. Either way the fabricated-scorer hole is closed.
+
+### Piece 2 — what medium practitioners use (research workflow, 13 agents)
+~/claude/40-lessons/viz-design-findings.md was checked FIRST (covers the
+2D-vs-3D principle per board type). The workflow (7 named channels + 5 tooling
+sources) supplemented the per-practitioner medium table. Key findings:
+- **Positional 3D verdict:** ONE credible practitioner renders positional
+  boards in true 3D for analysis: Coaches' Voice (FM-powered Masterclass
+  series, sponsored by Football Manager). Broadcasters (Sky/BT/BBC) use 3D AR
+  on LED studio floors for reveals (spectacle, not analysis). EVERY other
+  practitioner keeps positional boards 2D: Football Meta (fmstadio, explicitly
+  2D), Football Made Simple (Once Video Analyzer, 2D top-down), mplsoccer
+  (2D-only by architecture), StatsBomb/Opta (2D for positional; 3D only for
+  single-shot reconstruction), Tableau (2D-only), After Effects (2D for
+  analysis, 3D for pre-match fly-throughs). The dominant industry standard is
+  2D top-down.
+- **Principle:** "2D for information, 3D for spectacle." Positional/tactical =
+  2D top-down; statistical timelines = 2D; shot maps = 2D (3D only for
+  single-shot reconstruction); broadcast pre-match = 3D (spectacle); studio
+  reveals = 3D AR (engagement).
+- **Contradiction verdict:** NEITHER on-record claim survives. STATUS 09-13's
+  "3D 6/10 vs 2D control 4/10, 3D ahead by 2" compares a 3D FORMATION vs a 2D
+  POSSESSION board (unlike types). The handoff's "2D beats 3D because momentum
+  9/10 beats formation 3D 6/10" compares a 2D MOMENTUM vs a 3D FORMATION board
+  (unlike types). The SAME board with the SAME data has NEVER been rendered
+  both 2D and 3D in this project. What survives: "DESIGN not DIMENSION" — score
+  variance is driven by design quality (typography, labels, colour discipline,
+  title-as-message), not dimension. A like-for-like test (same formation board,
+  same data, one 2D top-down + one 3D, both using the shared design layer) has
+  never been run and is the only test that would settle the dimension question.
+
+### Piece 3 — Gemini vs scoreboard scanner litmus (mechanical output)
+Same episode, same 718.04s footage. Model: gemini-3.1-pro-preview (47388 video
+tokens, ~$0.11). Scanner: gemma4:cloud via vision_analyze.py, free, 68.6s.
+
+**Timestamps (per-goal offset, misses, phantoms):**
+Scanner (ground truth via scoreboard, 4/4 found, 0 phantoms): 60s (0-1 Schade),
+102s (1-1 Kluivert), 117s (2-1 Tavernier), 162s (2-2 Schade). The blips
+(BRIG/BRU/2-0) are gemma4 OCR noise that reverts in 3-6s, not phantoms.
+Gemini found 3 goals (97s, 113s, 155s): called the real 60s goal a "saved
+shot" (MISS), invented a goal at 97s where no scoreline changed (PHANTOM),
+missed the 117s goal (MISS), and placed goal 2 at 113s (+11s vs scanner 102s)
+and goal 4 at 155s (-7s vs scanner 162s). **Gemini: 2/4 found, 2 misses, 1
+phantom. Scanner: 4/4 found, 0 misses, 0 phantoms, free.** This reproduces the
+2026-09-08 finding (Gemini invents phantoms, misses real goals) on a different
+clip with the same model family. Gemini does NOT win on timestamps.
+
+**Pitch coordinates (TASK2, never tested before):** Gemini "read" the
+avg-positions board graphic and produced 11 Brentford coordinates. It got the
+GK (jersey 1: 10,50 vs Sofascore 11,50.3) and striker (jersey 9: 60,50 vs
+60.7,52.2) right, but used 3 WRONG jersey numbers (5, 8, 11 — none exist;
+real are 44, 23, 7) and most coordinates were off by 30-60 y-units. Gemini
+produced a plausible "football-shaped" 4-2-3-1 from its own prior knowledge,
+NOT a reading of the board (the board shows away MIRRORED at 100-x, but Gemini
+reported RAW coords — it did not actually read the dots). **Verdict: Gemini
+cannot produce usable pitch coordinates; it hallucinates plausible-but-wrong
+data and confuses its own football knowledge for a reading.**
+
+**Cut decisions (TASK3):** Gemini picked the first goal, named the scorer
+"Mbeumo" (WRONG — Schade; Mbeumo is not in this match's lineup), and produced
+a cut list that just includes the whole 88-101s segment (no replay exclusion,
+no filler filtering, no editorial choice). The mechanical cut_list_gen produces
+±20s relay-verified windows with broadcast/filler classification. **Gemini's
+cut decision is inferior: wrong scorer, no editorial discrimination.**
+
+**Delegation verdict:** Delegate to Gemini ONLY where it wins on the pasted
+numbers. It wins NOWHERE here: timestamps (scanner 4/4 free vs Gemini 2/4
+paid), coordinates (Gemini hallucinates), cut decisions (Gemini wrong scorer,
+no filtering). The mechanical tools (scanner + Sofascore data + cut_list_gen)
+win on every mechanical output. Gemini's value is CONTENT CLASSIFICATION (what
+kind of passage), not WHEN/WHERE/WHAT-NUMBERS.
