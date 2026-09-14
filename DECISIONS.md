@@ -344,3 +344,36 @@ modal_render3d.py; (2) build a 3D stat_card board. Both must Gemini-judge at or
 above the 2D baseline before tactical_boards.py is retired.
 Status: tactical_render.py retirement + 3D formation wiring — Stage 14 (in
 progress). Possession/stat_card 3D — backlog, not started.
+
+### 3D formation board scored 4/10 vs 2D 5/10 — partial retirement made that board worse (2026-09-13, measured result)
+Result, not a setback. The Stage 14 episode (2026-09-12_bournemouth-brentford)
+3D formation board (scene_gen.py via modal_render3d) was Gemini-judged 4/10,
+cross-checked by Opus 4/10 and gemma4 4/10 (all three converge). The 2D
+possession board scored 5/10 and the 2D stat_card 5/10 (Gemini). So the 3D
+formation board, as wired, scored BELOW the 2D boards it replaced. This
+contradicts the Stage 12 finding (3D 6/10 vs 2D 4/10) — the Stage 12 6/10 did
+not reproduce in the actual episode. Opus diagnosis: "It isn't a formation.
+Players parked in rows… no shape, no units… 3D adds cost but no information.
+Would be stronger as clean 2D." The single biggest failure is
+formation_positions() placing tokens in a synthetic grid, not a real shape.
+Implication: the scrap-2D decision's payoff now depends ENTIRELY on (a) Sofascore
+average-positions replacing the synthetic grid (verified direct fit, wired this
+stage) + (b) design work (narrative furniture, bold condensed typography, arrows,
+zone shading). 3D alone does not earn its place. If the average-positions
+re-render is still at or below 5/10, scene_gen.py goes on the retirement list
+alongside the other retired renderers.
+
+### No voice render on an unverified script (2026-09-13, binding)
+An episode was rendered narrating 1911 words of un-fact-checked LLM draft;
+validate_script flagged it and it rendered anyway — a confident voice asserting
+unverified claims about a real match. The fact-check found one outright FALSE
+goal attribution ("Igor Thiago needed just one big chance to score" — both
+Brentford goals were Kevin Schade's, 34' and 56'), an unsupported "own-goal"
+claim, a wrong match date in the header, unfilled <competition> placeholder,
+untraceable manager/nationality/former-club colour, and no sources.json. Binding
+rule: produce_v2 MUST refuse the voice step (step6_voice) until the script has
+been fact-checked. The gate is a marker file renders/<slug>/.script_verified
+(created by a human after fact-checking scripts/<slug>.md against match_data.json
++ sources.json); absence = hard stop, not a warning. The check runs before the
+voice-exists short-circuit so an unverified-existing voice is not reused. A
+warning that does not stop is not a check.
