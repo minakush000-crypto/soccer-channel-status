@@ -363,6 +363,26 @@ zone shading). 3D alone does not earn its place. If the average-positions
 re-render is still at or below 5/10, scene_gen.py goes on the retirement list
 alongside the other retired renderers.
 
+### 3D formation board with real positions + distinct colours: 6/10 (Gemini), Opus disagrees (2026-09-13, measured)
+The clean re-render (Sofascore average positions replacing the synthetic grid, +
+kit-clash-distinct colours — both teams were red in the first attempt because a
+sofascore_client re-run reset the colours; a durable kit-clash override now
+prevents that) scored Gemini 6/10 (authoritative), up from 4/10 (synthetic grid).
+The real-positions fix worked. ABOVE the <=5/10 retire threshold, so scene_gen.py
+is NOT retired (per the standing instruction's literal condition). Opus cross-check
+disagrees qualitatively: "raw plot, not a Coaches' Voice graphic... perspective is
+the wrong tool for positional data: foreshortening makes vertical spacing
+non-comparable... Red team's shape is unreadable as a formation." Per the Judge
+rule, Gemini 6/10 is recorded as authority and the disagreement is flagged. Both
+judges converge on the cap being DESIGN (zero narrative furniture, no selective
+visibility, basic typography, label collisions) + a MEDIUM MISMATCH (3D perspective
+distorts the 2D average-position data; a 2D top-down would preserve measurement
+integrity — Opus: "flatten the perspective"). Still below the 7/10 gate. Path to
+7/10 = design furniture + selective visibility + bold condensed typography + label
+collision resolution, and consider a 2D top-down for the positions board. The
+scrap-2D payoff still depends on design work, not 3D dimension. Running 3D Modal
+spend: this re-render ~545s ~$0.09; running 3D total ~$0.45-0.52.
+
 ### No voice render on an unverified script (2026-09-13, binding)
 An episode was rendered narrating 1911 words of un-fact-checked LLM draft;
 validate_script flagged it and it rendered anyway — a confident voice asserting
