@@ -2,7 +2,7 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-13.
+> **Last verified against code:** 2026-09-14.
 
 Chronological order (oldest first); append new entries at the end. Each
 entry is dated. "Why" is the actual reason, not a retcon. If a decision is
@@ -497,3 +497,14 @@ extraction's Gemini verdicts):
 
 CLOSING PASS: after-numbers not needed for this entry (no deletion or disk
 claims here). The B2 entry above carries the after-numbers debt.
+
+### STANDING RULE — learn from the best before designing (2026-09-14, binding)
+Before executing any task that involves a design, a format, a structure or a
+method, first study how the people who do it best actually do it. Sequence:
+(1) check ~/claude/40-lessons/viz-design-findings.md (the reference-viz study);
+(2) if not covered, extract transcripts + frames from the best practitioners;
+(3) scour beyond given sources (cap 5, report why); (4) infer the principle,
+not the artefact (never reproduce a design/layout/frame); (5) report before
+building. Applies to visual design, script structure, pacing, sourcing,
+tooling, workflow. If nothing relevant exists, say so explicitly + proceed.
+Skipping the step is not valid. Recorded in CLAUDE.md + here as binding.
