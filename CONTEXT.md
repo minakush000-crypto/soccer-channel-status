@@ -68,9 +68,10 @@ RE-ENABLED the same day (2026-09-12 ~22:39): push_status.sh re-created on disk,
 re-registered as a project Stop hook, and `git add`'d back (un-retired). The
 docs were updated to match (this section). The artifacts/ and frames/ subtrees
 remain in this project (gitignored, local) for Claude's own use and are NOT in
-push_status.sh's ALLOW_PROJECT list (so never copied to the mirror). NOTE: the
-mirror .gitignore DOES un-ignore !artifacts/** and !frames/**, but since
-push_status.sh never copies them, they never reach the remote.
+push_status.sh's ALLOW_PROJECT list (so never copied to the mirror). The mirror
+.gitignore no longer un-ignores artifacts/ or frames/ (removed 2026-09-14);
+they were previously tracked from old pushes but have been git-rm'd from the
+mirror and the un-ignore lines removed.
 
 DUAL ALLOWLIST CONSTRAINT (standing — a file must pass BOTH or it vanishes
 silently with no error):
@@ -80,7 +81,7 @@ silently with no error):
    is never copied.
 2. The mirror repo's own .gitignore carries a SECOND allowlist: it default-
    denies everything (`*`) then un-ignores specific files/dirs (!CONTEXT.md,
-   !STATUS.md, ... !artifacts/**, !frames/**, !vault, !vault/**, etc.). A file
+   !STATUS.md, ... !vault, !vault/**, etc.). A file
    that IS copied but is NOT un-ignored by the mirror .gitignore is gitignored
    → `git add` silently skips it → it never reaches the remote, with NO error.
 So: to add a new doc to the mirror, add it to BOTH push_status.sh's
