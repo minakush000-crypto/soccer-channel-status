@@ -54,9 +54,10 @@ CLOSING PASS placeholders (after-numbers, filled after file moves):
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=20de6d98c54a7bbdbf6a8dad5867a53d87f774e2c42d27268bfc73e9c8f36bf0; output-bytes=12
   CLOSING PASS: record exact render archive path + object count + bucket size after upload.
 
-- [ ] G3: local deletions done (after docs amended + B2 uploads verified)
+- [x] G3: local deletions done (after docs amended + B2 uploads verified)
   CHECK: test ! -f /home/muads/yt-digest-backup-sep5.tar.gz && test ! -f /home/muads/soccer-pipeline-backup-sep5.tar.gz && test ! -d /home/muads/retired && test ! -d renders/_20min_test && test ! -d renders/_real_soccer_test && test ! -d renders/_sharp_test && test ! -d renders/_fullmatch_arsenal-chelsea-carabao && test -d renders/2026-09-12_bournemouth-brentford && echo local_deleted
   EXPECT: local_deleted
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=599d81355de68369aa4be87caccd4ba81e437a82ec2e56fd67a746fee4629979; output-bytes=14
   CLOSING PASS: record df -h / free space after deletions + confirm ~/retired removed.
 
 - [x] G4: bucket .venv fragments cleaned (b2:mendymax-archive/yt-digest/.venv/)
