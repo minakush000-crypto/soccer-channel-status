@@ -440,6 +440,17 @@ are judged against: direct labels not legends; three-colour discipline on a
 dark background; full-frame use of space; brightest marks lead the eye +
 title-as-message (trace: ~/claude/40-lessons/viz-design-findings.md §4).
 
+### Briefs and reports are files, not messages (2026-09-14, binding standing order)
+Every brief Mayo pastes is written verbatim (unedited, unsummarised) to
+~/claude/30-briefs/YYYY-MM-DD-HHMM-<slug>.md before work starts. Every report
+is written to ~/claude/20-handoffs/YYYY-MM-DD-HHMM-<slug>-report.md when work
+ends, naming the brief file it answers in its first line. push_status.sh is run
+explicitly after both (not relying on the Stop hook, which produced a 3-day
+silent gap before). Any decision Mayo makes mid-task goes into DECISIONS.md with
+the date before the work continues. Rationale: the coordinator reads the public
+mirror; when brief + report are files, the brief can be checked against the report
+by reading, not by trusting a pasted summary.
+
 ### Board build order + 3D-vs-2D resolved as 2D + four design properties (2026-09-13, binding)
 Source: the reference-viz extraction (~/claude/40-lessons/viz-design-findings.md,
 49238 bytes, verified `ls -la`). Gemini (authoritative) judged 10 design-focused
