@@ -1,8 +1,8 @@
 # LANE_PLAN.md — four-lane channel expansion + storage plan
 
 > **Purpose:** the four-lane (A/B/C/D) expansion build ledger; each stage appends its findings here.
-> **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Stamp 2026-09-09; 27 line-drift claims unverified (Stage-12B rewrite of produce_v2.py shifted cited line numbers) — STAMP RULE option (b), not re-stamped this pass.
-> **Last verified against code:** 2026-09-09.
+> **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Line-drift corrections applied 2026-09-13 (Stage-12B rewrite of produce_v2.py + Stage-14 retirement of step4b/tactical_render.py shifted cited line numbers; all re-grep'd against current code).
+> **Last verified against code:** 2026-09-13.
 
 Verified against code on 2026-09-08. Tool classifications cite
 RECONCILIATION.md (1.1) rather than repeating its greps. Cost figures cite
@@ -17,7 +17,7 @@ Today's flow (produce_v2.py): download raw clip LOCALLY
 (`renders/<slug>/clips/`, step3) → ship it to RunPod (`runpod_fulltrack.py`
 uploads the local clip to catbox, pod downloads it) → track on pod →
 download the annotated MP4 + tracking JSON back LOCAL
-(`runpod_fulltrack.py:170`) → cut + assemble locally (step5).
+(`runpod_fulltrack.py:194`) → cut + assemble locally (step5).
 
 A cloud-only footage pipeline keeps raw video off `/home/muads` entirely. The
 200MB guard (now in place) makes the current local-download flow illegal for
@@ -25,7 +25,7 @@ any source over 200MB, so this is not optional for full-match.
 
 Gaps (named, not built):
 
-1. **No pod-side download path in produce_v2.py.** `cloud_produce.py:387-398`
+1. **No pod-side download path in produce_v2.py.** `cloud_produce.py:384-410`
    already builds yt-dlp commands that run ON the pod (`/workspace/...`), but
    the authoritative entry point `produce_v2.py` has no such path — it always
    downloads locally then ships. Gap: produce_v2 needs a "download on pod"
@@ -45,7 +45,7 @@ Gaps (named, not built):
    serialization of a cut list to the pod; no pod-side cutter. produce_v2 cuts
    locally with ffmpeg on the full local clip (step5).
 
-4. **What comes home.** Today `runpod_fulltrack.py:170` returns the whole
+4. **What comes home.** Today `runpod_fulltrack.py:194` returns the whole
    annotated MP4 (guarded now — a full-match annotated MP4 would be refused).
    Cloud-only should return only: trimmed tracking summary (small),
    per-event excerpts (≤8s each), boards (small PNG/MP4), final assembled
@@ -74,8 +74,8 @@ refuses for large sources.
 ### 3.1 — 9 workflow stages × 4 lanes
 
 The 9 produce_v2 stages (ARCHITECTURE.md): 1 match_data, 2 boards, 3
-download_clip, 4b tactical_render, 5 voice, 6 ambience, 7 assemble, 8 merge,
-9 shorts.
+download_clip, 4b tactical_render (RETIRED Stage 14, tactical_render.py
+deleted), 5 voice, 6 ambience, 7 assemble, 8 merge, 9 shorts.
 
 | Stage | A tactical | B preview | C hot topic | D historical |
 |---|---|---|---|---|
@@ -83,7 +83,7 @@ download_clip, 4b tactical_render, 5 voice, 6 ambience, 7 assemble, 8 merge,
 | 1b fact source (fresh_fetch) | — | USE | USE | — |
 | 2 boards | USE | USE | USE | USE |
 | 3 download_clip | USE | SKIP | SKIP | USE (guarded, excerpts) |
-| 4b tactical_render | USE | SKIP | SKIP | optional |
+| 4b tactical_render | USE | SKIP | SKIP | optional — RETIRED Stage 14 (tactical_render.py deleted, step4b removed from produce_v2) |
 | 5 voice | USE | USE | USE | USE |
 | 6 ambience | USE | USE | USE | USE |
 | 7 assemble | USE | USE (board-only) | USE (board+stills) | USE (gated) |
@@ -92,11 +92,12 @@ download_clip, 4b tactical_render, 5 voice, 6 ambience, 7 assemble, 8 merge,
 | transformation_gate | — | — | — | USE (before assemble) |
 
 **B and C need no footage stage — confirmed against code.** produce_v2's
-footage stages are step3 (`download_clips`, line 95) and step4b
-(`tactical_render`, line 211); both are skipped for B/C. The assemble step
-(step5, line 301) already handles a missing clip: line 382
-`if has_footage or (sec_duration > 2 and clip_path and clip_path.exists())`
-falls through when `clip_path` is None, so board-only assembly works today.
+footage stages are step3 (`download_clips`, line 133) and step4b
+(`tactical_render`, RETIRED Stage 14 — tactical_render.py deleted, step4b
+removed from produce_v2); both are skipped for B/C. The assemble step
+(step5, line 430) already handles a missing clip: the footage window pool
+is empty when no cut_list exists (line 491, `windows = []`), so all shots
+fall to board-only and board-only assembly works today.
 So B/C run board-only (B) or board+stills (C) assemblies with no video
 download and no tracking. The new need is a NON-ESPN fact source (1b), not a
 footage stage.
@@ -104,13 +105,13 @@ footage stage.
 ### 3.2 — making the lane a parameter: honest answer
 
 Not a rewrite. The 9 steps are already discrete functions dispatched from
-`main()` (line 529) by a flat sequence of `if not stepN(...): sys.exit(1)`.
+`main()` (line 715) by a flat sequence of `if not stepN(...): sys.exit(1)`.
 Making the lane a parameter takes:
 
-1. A `--lane {A,B,C,D}` flag on `produce_v2.py` (argparse, line 530).
+1. A `--lane {A,B,C,D}` flag on `produce_v2.py` (argparse, line 716).
 2. A per-lane config block: which steps to run, which data source, which
    script template. This is a small dict, not new architecture.
-3. Conditional dispatch in `main()` (line 529): skip step3/step4b for B/C;
+3. Conditional dispatch in `main()` (line 715): skip step3/step4b for B/C;
    swap step1 (ESPN `match_data.py`) for step1b (`fresh_fetch`-based
    fixture/news fetch) for B/C; run `transformation_gate` before step5 for D.
 
@@ -167,10 +168,10 @@ the tool already does what 3.1 requires.
 
 ```
 $ ls -la SCRIPT_TEMPLATE.md
--rw-r--r-- ... 1708 ... Aug 23 15:30 SCRIPT_TEMPLATE.md
+-rw-r--r-- ... 8777 ... Sep 13 01:35 SCRIPT_TEMPLATE.md  (250 lines; was 1708 B / ~215 lines before Stage 7B rewrite)
 $ grep -nE "TAG_RE|SRC|RUMOR|sources|def validate|narration|structure|section" tools/validate_script.py | head
-34:TAG_RE = re.compile(r"\[\s*(SRC|RUMOR)\s*:\s*([a-z0-9_-]+)\s*\]", re.IGNORECASE)
-70:def validate(slug, render_date=None):
+44:TAG_RE = re.compile(r"\[\s*(SRC|RUMOR)\s*:\s*([a-z0-9_-]+)\s*\]", re.IGNORECASE)
+288:def validate(slug, render_date=None, lane="A"):
 ```
 
 No. `SCRIPT_TEMPLATE.md` is a single template (lane A's theory-then-footage
@@ -204,22 +205,22 @@ DOES NOT EXIST.
 **Lane A — tactical analysis (existing):**
 | Tool | Status |
 |---|---|
-| produce_v2 9 steps (match_data, boards, runpod_fulltrack, tactical_render, generate_voice, generate_ambience, merge_voice, shorts_crop) | EW |
+| produce_v2 9 steps (match_data, boards, runpod_fulltrack RETIRED Stage 14, tactical_render RETIRED Stage 14, generate_voice, generate_ambience, merge_voice, shorts_crop) | EW |
 | ffmpeg_utils, script_utils, cv_annotate (transitive) | EW |
-| fold assemble_words_match into step5 (replaces 5s cut) | DNX (the fold) |
-| validate_script wired into produce_v2 | DNX (the wire) |
+| fold assemble_words_match into step5 (replaces 5s cut) | DNX (the fold — Stage 12B rewrote step5 with its own cut-list-aware assembler) |
+| validate_script wired into produce_v2 | EW (Stage 12B: step1c_validate at produce_v2.py:353) |
 
 Build list (cheapest first): 1. cut-list generator (shared). 2. wire
-validate_script into produce_v2 (catch the Gravenberch-class bug). 3. fold
+validate_script into produce_v2 (catch the Gravenberch-class bug) — DONE Stage 12B (step1c_validate). 3. fold
 assemble_words_match into step5 (after cut-list exists; preserves tactical
-segment or explicitly drops it).
+segment or explicitly drops it) — Stage 12B rewrote step5 with its own assembler.
 
 **Lane B — match preview:**
 | Tool | Status |
 |---|---|
 | fresh_fetch.py (fixtures/form/news) | EO → wire as step1b |
 | tactical_boards, generate_voice, generate_ambience, merge_voice, shorts_crop | EW |
-| assemble board-only (step5 no-clip path) | EW (code supports it, line 383) |
+| assemble board-only (step5 no-clip path) | EW (code supports it, line 491 — windows pool empty when no cut_list) |
 | fresh_fetch → match_data-shaped JSON adapter | DNX |
 | B script generator (preview narration from fixtures/form) | DNX |
 | B script template | DNX |
@@ -248,7 +249,7 @@ footage, no tracking, no cut-list.
 | match_data (past match, ESPN) | EW |
 | download_clip (200MB-guarded) | EW (but needs pod-side download for long sources, see 4.1) |
 | tactical_boards, voice, ambience, merge, shorts | EW |
-| tactical_render (optional) | EW |
+| tactical_render (optional) | RETIRED Stage 14 (tactical_render.py deleted, step4b removed) |
 | cut-list generator (shared) | DNX |
 | transformation_gate.py | EW (built this stage, verified) |
 | per-excerpt source attribution from download record | DNX |
@@ -277,20 +278,20 @@ webhook-result downloader for annotated clips, NOT a source-footage selector.
 It scores nothing. Retire per 1.1.
 
 The actual source selector is `produce_v2.py`'s inline yt-dlp loop (step3,
-line 95). It DOES score candidates before download:
+line 133). It DOES score candidates before download:
 ```
-$ grep -nE "is_brand =|60 <= dur_sec|MIN_HEIGHT|MAX_CANDIDATES" tools/produce_v2.py | head
-137:            is_brand = any(brand.lower() in uploader.lower() for brand in BRAND_CHANNELS)
-141:                    if 60 <= dur_sec <= 600:  # 1-10 minutes
+$ grep -nE "is_brand =|180 <= dur_sec|MIN_HEIGHT|MAX_CANDIDATES" tools/produce_v2.py | head
+175:            is_brand = any(brand.lower() in uploader.lower() for brand in BRAND_CHANNELS)
+179:                    if 180 <= dur_sec <= 1200:  # 3-20 minutes (new sourcing rule)
 ```
-Scoring: excludes brand channels (line 137), filters duration 60-600s (line
-141), loops up to MAX_CANDIDATES=5, ffprobes each, rejects <720p (MIN_HEIGHT,
-line 193). It scores by **resolution, channel, and duration** — NOT by content
+Scoring: excludes brand channels (line 175), filters duration 180-1200s (line
+179), loops up to MAX_CANDIDATES=5, ffprobes each, rejects <720p (MIN_HEIGHT,
+line 205). It scores by **resolution, channel, and duration** — NOT by content
 (it does not know whether a candidate actually contains the match's goals).
 The scoreboard scan + relay verify happens much later, offline, by hand.
 
-What the 200MB guard means for lane D: `--max-filesize 200M` (line 177) +
-`assert_video_under_limit` (line 195) refuse any local download over 200MB.
+What the 200MB guard means for lane D: `--max-filesize 200M` (line 219) +
+`assert_video_under_limit` (line 237) refuse any local download over 200MB.
 A lane D historical source is often a long clip or full match (>200MB). So
 lane D cannot pull a long source locally — it must use the pod-side download
 path (2.4 gap) or download only short verified excerpts. For short-excerpt
@@ -307,10 +308,10 @@ blocks on failure. First, what produce_v2 already does:
 | Floor rule | produce_v2 today | Evidence |
 |---|---|---|
 | 1. narration ≥ 70% of runtime | NOT DONE (no gate) | step5 allocates section duration by word_count × voice_duration but never checks a coverage ratio |
-| 2. no excerpt > 8s | PARTLY | footage chunks capped at 4.0s (line 387), boards at 4.0s (line 371) — under 8s; BUT tactical capped at 45.0s (line 377), which violates 8s |
-| 3. source audio muted on every excerpt | DONE | `-an` on board (line 408), tactical (line 417), footage (line 438) — all segment types muted |
-| 4. ≥1 added visual layer per excerpt | PARTLY | board/tactical segments are layers; footage-only segments have only a zoom crop (`crop=iw*0.9...`, line 436) — zoom counts as a layer per the brief, so technically satisfied, but no board/annotation/title on footage |
-| 5. borrowed footage < 50% of runtime | NOT DONE (no gate) | no ratio check anywhere |
+| 2. no excerpt > 8s | PARTLY | old step5 capped footage at 4.0s and boards at 4.0s (REMOVED in Stage 12B rewrite — new step5 uses word-count-proportional allocation); old 45.0s tactical cap (line 377, REMOVED Stage 14 — tactical_render.py deleted) |
+| 3. source audio muted on every excerpt | DONE | `-an` on board (line 569), footage (line 582) — all segment types muted (tactical segment type REMOVED Stage 14) |
+| 4. ≥1 added visual layer per excerpt | PARTLY | board segments are layers; old zoom crop (`crop=iw*0.9...`, line 436) REMOVED in Stage 12B rewrite — new step5 alternates board/footage shots so every footage shot is paired with a board layer; no board/annotation/title overlaid on footage itself |
+| 5. borrowed footage < 50% of runtime | NOT DONE (no gate) | no ratio check anywhere (Stage 12B: footage_budget = 0.20 * total_duration at line 512 caps footage at 20%) |
 
 Then build it: done. `tools/transformation_gate.py` checks all five against a
 manifest (voice_duration, total_duration, segments with duration/
@@ -425,14 +426,16 @@ $ grep -nE "LOCAL_VIDEO_LIMIT_MB = |def assert_video_under_limit" tools/ffmpeg_u
 65:LOCAL_VIDEO_LIMIT_MB = 200
 68:def assert_video_under_limit(path, limit_mb=LOCAL_VIDEO_LIMIT_MB):
 
-$ grep -nE "60 <= dur_sec|--max-filesize|assert_video_under_limit\(clip" tools/produce_v2.py
-141:                    if 60 <= dur_sec <= 600:  # 1-10 minutes
-177:                  "--max-filesize", "200M",
-195:            assert_video_under_limit(clip_path)
+$ grep -nE "180 <= dur_sec|--max-filesize|assert_video_under_limit\(dl" tools/produce_v2.py
+179:                    if 180 <= dur_sec <= 1200:  # 3-20 minutes (new sourcing rule)
+219:                  "--max-filesize", "200M",
+237:            assert_video_under_limit(dl_path)
 ```
+(Line numbers shifted by Stage 12B rewrite; content updated by Stage 2:
+60-600s → 180-1200s, `clip_path` → `dl_path`.)
 
-So: `produce_v2.py:141` accepts clips of 60-600s; `produce_v2.py:177` tells
-yt-dlp to abort any download over 200M; `produce_v2.py:195` deletes + raises
+So: `produce_v2.py:179` accepts clips of 180-1200s; `produce_v2.py:219` tells
+yt-dlp to abort any download over 200M; `produce_v2.py:237` deletes + raises
 on any local video over 200MB. The conflict is that a 600s 1080p clip is
 bigger than 200MB.
 
@@ -491,7 +494,7 @@ filter is duration-based, so it excludes them at 412s too. This keeps the
 guard intact and the disk safe, at the cost of source variety.
 
 **c. Build the pod-side download path from 2.4.** The building blocks exist:
-`cloud_produce.py:387-398` already builds yt-dlp commands that run on the pod
+`cloud_produce.py:384-410` already builds yt-dlp commands that run on the pod
 (`/workspace/...`); `runpod_fulltrack.py` already ships tools, runs cv_annotate
 on the pod, and returns URLs (proven end-to-end, STATUS). The new work: a
 produce_v2 branch that runs yt-dlp ON the pod for sources over the local limit
@@ -521,10 +524,11 @@ scoping, not the floor itself, and is now fixed.
 
 The brief's floor rule 2 is "no single **excerpt** longer than 8 seconds" and
 rule 5 is "total **borrowed** footage under 50%." Both key on borrowed
-footage. produce_v2's 45s cap (`produce_v2.py:377`, `tac_dur =
-min(sec_duration, 45.0)`) applies to the **tactical** segment type — a
+footage. produce_v2's old 45s cap (`produce_v2.py:377`, `tac_dur =
+min(sec_duration, 45.0)`, REMOVED Stage 14 — tactical_render.py deleted,
+step4b removed from produce_v2) applied to the **tactical** segment type — a
 generated top-down graphic, not borrowed footage. So in principle the 8s
-excerpt rule governs borrowed footage and the 45s cap governs generated
+excerpt rule governs borrowed footage and the 45s cap governed generated
 tactical: no overlap.
 
 But `transformation_gate.py` as built last stage applied rule 2 (8s) and rule
@@ -539,9 +543,10 @@ segments only, matching rule 5. Verified against three cases:
 - borrowed footage with no layer → rule 4 flags it. ✓
 
 After the fix, produce_v2's own caps already satisfy the gate for lane D:
-footage is capped at 4.0s (`produce_v2.py:387`, under the 8s borrowed rule)
-with a zoom layer (satisfies rule 4); tactical can run to 45s (generated,
-exempt from rules 2 and 4). **The 45s-vs-8s carry-forward fragile item is
+old footage cap of 4.0s (`produce_v2.py:387`, REMOVED in Stage 12B rewrite)
+was under the 8s borrowed rule; old zoom layer (line 436, REMOVED in Stage
+12B) satisfied rule 4; tactical could run to 45s (generated, exempt from
+rules 2 and 4, RETIRED Stage 14). **The 45s-vs-8s carry-forward fragile item is
 closed.** The gate's `borrowed` scoping is the mechanism; if a future segment
 type is neither borrowed nor generated, re-check the scoping.
 
@@ -554,17 +559,18 @@ The full-match path is dropped. New sourcing rule: every YouTube clip is
 
 ### 1.1 — the conflict, measured not estimated
 
-produce_v2's format query (`produce_v2.py:175-176`) requests up to **2160p**:
+produce_v2's format query (`produce_v2.py:218-219`) requests up to **720p**
+(was 2160p before Stage 2 cap; line numbers shifted by Stage 12B rewrite):
 
 ```
-$ sed -n '175,179p' tools/produce_v2.py
+$ sed -n '218,222p' tools/produce_v2.py
         dl_cmd = ["yt-dlp", "-f",
-                  "bestvideo[vcodec^=avc1][height<=2160][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height<=2160][ext=mp4]+bestaudio[ext=m4a]/best[height<=2160]/best",
+                  "bestvideo[vcodec^=avc1][height<=720][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[height<=720]/best",
                   "--max-filesize", "200M",
 ```
 
 Guard limit: `LOCAL_VIDEO_LIMIT_MB = 200` (`ffmpeg_utils.py:65`), enforced at
-`produce_v2.py:177` (`--max-filesize 200M`) and `produce_v2.py:195`
+`produce_v2.py:219` (`--max-filesize 200M`) and `produce_v2.py:237`
 (`assert_video_under_limit`).
 
 To measure a ~20-min clip's filesize WITHOUT downloading, I ran `yt-dlp -F`
@@ -600,7 +606,7 @@ is recorded as failed, and the loop tries the next. At **720p**, a 20-min
 clip is ~179 MB — **under** the 200 MB guard by 21 MB.
 
 **Recommended format: 720p.** It is the floor of produce_v2's existing reject
-loop (`MIN_HEIGHT = 720`, `produce_v2.py:35` — a 720p download passes the
+loop (`MIN_HEIGHT = 720`, `produce_v2.py:50` — a 720p download passes the
 `>= MIN_HEIGHT` gate), and at 720p a 20-min clip fits the current 200 MB
 guard. **Smallest guard limit that clears a 20-min 720p clip: ~180 MB.**
 The current 200 MB guard already clears it (21 MB margin), so at 720p no
@@ -625,7 +631,8 @@ enlarge the vhdx by ~22 GB even after the clips are deleted — C: does not
 recover until the whole WSL distro is reset. Zero build time.
 
 **b. Cap the requested format at 720p so 20-min clips fit the 200 MB guard.**
-Change `produce_v2.py:176`'s `height<=2160` to `height<=720` (both video
+Change `produce_v2.py:218`'s `height<=720` (was `height<=2160` at old :176
+before Stage 2 applied this option — both video
 selector branches). 20-min 720p = 179 MB, under the 200 MB guard. Quality
 lost: 1080p→720p resolution (and 1440p/2160p entirely, if a source offers
 them). The pipeline's 720p+ reject-and-retry loop **still passes**: 720p ==
@@ -647,8 +654,8 @@ also future-proofs against any larger source.
 The filter lives in exactly one place:
 
 ```
-$ grep -rnE "60 <= dur_sec|dur_sec <= 600" tools/*.py | grep -v "\.bak"
-tools/produce_v2.py:141:                    if 60 <= dur_sec <= 600:  # 1-10 minutes
+$ grep -rnE "180 <= dur_sec|dur_sec <= 1200" tools/*.py | grep -v "\.bak"
+tools/produce_v2.py:179:                    if 180 <= dur_sec <= 1200:  # 3-20 minutes (new sourcing rule)
 ```
 
 No other code hardcodes 60 or 600 as a duration bound (the other 60/600 hits
@@ -716,7 +723,8 @@ Confirmed: they apply to **different segment types**; no conflict. Resolved
 last stage (commit c704816) and re-verified now. The gate's 8s excerpt rule
 (rule 2, `transformation_gate.py:80`) and its ≥1-layer rule (rule 4,
 `transformation_gate.py:96`) both scope to `borrowed` segments, matching
-rule 5 (`:110`). produce_v2's 45s tactical cap (`produce_v2.py:377`) applies
+rule 5 (`:110`). produce_v2's old 45s tactical cap (`produce_v2.py:377`,
+REMOVED Stage 14 — tactical_render.py deleted) applied
 to the generated tactical segment (non-borrowed), which is exempt from rules
 2 and 4. Re-verified:
 
@@ -729,9 +737,11 @@ $ grep -nE "if seg.get\(\"borrowed\", False\) and dur > EXCERPT_MAX_S|if seg.get
 45s tactical + 9s borrowed: ok= False -> 9s borrowed flagged: True | 45s tactical flagged: False
 ```
 
-produce_v2's own caps already satisfy the gate for lane D: footage capped at
-4.0s (`produce_v2.py:387`, under the 8s borrowed rule) with a zoom layer
-(rule 4 satisfied); tactical may run to 45s (generated, exempt). **The 8s-vs-45s
+produce_v2's own caps already satisfy the gate for lane D: old footage cap of
+4.0s (`produce_v2.py:387`, REMOVED in Stage 12B rewrite, was under the 8s
+borrowed rule) with a zoom layer (old line 436, REMOVED Stage 12B,
+rule 4 satisfied); tactical could run to 45s (generated, exempt,
+RETIRED Stage 14). **The 8s-vs-45s
 carry-forward fragile item stays closed.**
 
 ---
@@ -747,19 +757,20 @@ Exact lines changed in `produce_v2.py`:
 
 ```
 $ grep -nE "height<=720|180 <= dur_sec <= 1200|MIN_HEIGHT = 720" tools/produce_v2.py
-35:MIN_HEIGHT = 720          # reject clips below this resolution
-141:                    if 180 <= dur_sec <= 1200:  # 3-20 minutes (new sourcing rule)
-176:                  "bestvideo[vcodec^=avc1][height<=720][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[height<=720]/best",
+50:MIN_HEIGHT = 720          # reject clips below this resolution
+179:                    if 180 <= dur_sec <= 1200:  # 3-20 minutes (new sourcing rule)
+218:                  "bestvideo[vcodec^=avc1][height<=720][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[height<=720]/best",
 ```
 
-`produce_v2.py:176` — all three `height<=2160` → `height<=720`. The 200MB guard
-(`--max-filesize 200M` line 177, `assert_video_under_limit` line 195) is
-unchanged. The reject loop still passes: `MIN_HEIGHT = 720` (line 35), gate
-`if h >= MIN_HEIGHT` (lines 167, 193) — a 720p download is `720 >= 720`, accepted.
+`produce_v2.py:218` — all three `height<=2160` → `height<=720` (was at old
+:176 before Stage 12B rewrite shifted lines). The 200MB guard
+(`--max-filesize 200M` line 219, `assert_video_under_limit` line 237) is
+unchanged. The reject loop still passes: `MIN_HEIGHT = 720` (line 50), gate
+`if h >= MIN_HEIGHT` (lines 205, 235) — a 720p download is `720 >= 720`, accepted.
 
 **Two download paths NOT capped (codebase wins, flagged not changed):**
-- `produce_episode.py:213` uses `height<=2160` + `--max-filesize 800M`. Its
-  comment (lines 206-212) says the 1080p+ source is a **deliberate anti-blur
+- `produce_episode.py:220` uses `height<=2160` + `--max-filesize 800M`. Its
+  comment (lines 210-218) says the 1080p+ source is a **deliberate anti-blur
   fix** ("360p upscaled 3x... 1080p source fixes both"). It is NOT 200MB-guarded
   (800M limit, no `assert_video_under_limit`). Capping it at 720p would
   reintroduce the blur regression for zero guard benefit. **Flagged gap:**
@@ -767,6 +778,10 @@ unchanged. The reject loop still passes: `MIN_HEIGHT = 720` (line 35), gate
   (can write up to 800M locally). It should get the guard or be retired (it is
   the older, untested, non-authoritative entry point; TOOLS.md STANDALONE).
 - `cloud_produce.py:391,402` use `height<=2160` but run ON THE POD
+  (`/workspace/...`), not local. The 200MB guard does not apply to pod-side
+  writes. The pod-side path is deferred (decision). Not capped. (Line numbers
+  shifted: was `:391,402` before Stage 12B; now at `:390,401` in the
+  ytdlp_cmds block at `:384-410`.)
   (`/workspace/...`), not local. The 200MB guard does not apply to pod-side
   writes. The pod-side path is deferred (decision). Not capped.
 
@@ -799,12 +814,12 @@ A 15-20min 720p clip lands at ~168MB, 32MB under the guard. The conflict from
 ### 2.2 — duration filter 60-600s → 180-1200s
 
 ```
-$ grep -rnE "60 <= dur_sec|dur_sec <= 600|dur_sec <= 1200" tools/*.py | grep -v "\.bak"
-tools/produce_v2.py:141:                    if 180 <= dur_sec <= 1200:  # 3-20 minutes (new sourcing rule)
+$ grep -rnE "180 <= dur_sec|dur_sec <= 1200" tools/*.py | grep -v "\.bak"
+tools/produce_v2.py:179:                    if 180 <= dur_sec <= 1200:  # 3-20 minutes (new sourcing rule)
 ```
 
 The only duration-filter use of 60/600/1200 in the codebase is
-`produce_v2.py:141`. Nothing else depends on the old 60-600s range (the other
+`produce_v2.py:179` (was `:141` before Stage 12B rewrite). Nothing else depends on the old 60-600s range (the other
 60/600 hits are timeouts, frame counts, print formatting). The change excludes
 sub-3-min clips (intended) and admits 10-20-min clips (which now fit the guard
 at 720p, per 2.1). No dependent code breaks.
@@ -875,8 +890,9 @@ over-generates.
 
 ### 2.5 — cut-list generator scope (not built)
 
-The shared prerequisite for lanes A and D (and the 5-second cut at
-`produce_v2.py:433`). Nothing is built. Scope:
+The shared prerequisite for lanes A and D (and the old 5-second cut at
+`produce_v2.py:433`, REMOVED in Stage 4C/12B rewrite — new step5 uses
+cut-list windows). Nothing is built. Scope:
 
 **Reads:**
 - `match_data.json` — ESPN event list (goals, subs, times) — ground truth.
@@ -1084,16 +1100,17 @@ Vast.ai GET /users/current (ApiKey) -> auth_error        DOES NOT AUTH
 
 | tool | provider | class | ever run end-to-end? | what it returns | auth today |
 |---|---|---|---|---|---|
-| runpod_fulltrack | RunPod | WIRED (produce_v2:235) | YES (146s, $0.011, STATUS) | tracking JSON + annotated MP4 + log, downloaded local | yes |
-| runpod_stage1 | RunPod | STANDALONE one-off | YES (300 frames, $0.05, STATUS) | webhook URLs (one-off) | yes |
-| runpod_annotate | RunPod | STANDALONE | **NO — CONFIRMED never ran end-to-end** (GAPS: UNVERIFIED; no per-clip artifacts; runpod_fulltrack superseded it) | per-clip annotated MP4 + tracking JSON via webhook | yes |
-| runpod_shorts | RunPod | STANDALONE | never | NVENC-encoded short | yes |
+| runpod_fulltrack | RunPod | STANDALONE (was WIRED produce_v2:235, step4b RETIRED Stage 14) | YES (146s, $0.011, STATUS) | tracking JSON + annotated MP4 + log, downloaded local | yes |
+| runpod_stage1 | RunPod | STANDALONE one-off — RETIRED Stage 6 (deleted) | YES (300 frames, $0.05, STATUS) | webhook URLs (one-off) | yes |
+| runpod_annotate | RunPod | STANDALONE — RETIRED Stage 6 (deleted) | **NO — CONFIRMED never ran end-to-end** (GAPS: UNVERIFIED; no per-clip artifacts; runpod_fulltrack superseded it) | per-clip annotated MP4 + tracking JSON via webhook | yes |
+| runpod_shorts | RunPod | STANDALONE — RETIRED Stage 6 (deleted) | never | NVENC-encoded short | yes |
 | runpod_superres | RunPod | STANDALONE | never | Real-ESRGAN super-res video | yes |
-| vastai_shorts | Vast.ai | STANDALONE | never | NVENC short | **NO (provider won't auth) → DEAD in practice** |
+| vastai_shorts | Vast.ai | STANDALONE — RETIRED Stage 4B/6 (deleted) | never | NVENC short | **NO (provider won't auth) → DEAD in practice** |
 
 runpod_annotate never ran end-to-end: CONFIRMED (GAPS.md said UNVERIFIED; no
 artifacts exist from it; runpod_fulltrack is the one that actually completed).
-vastai_shorts is dead in practice — the Vast key is invalid/expired.
+vastai_shorts is dead in practice — the Vast key is invalid/expired. (Both
+RETIRED Stage 6 — deleted from tree, in git history.)
 
 ### 3B.4 — SoccerNet action-spotting on L4 (costed, not favoured)
 
@@ -1118,8 +1135,8 @@ setup + per-run cost. Do not favour it for being more capable.
 ### 3B.5 — pod-side download, re-scoped
 
 What exists (~60-70%): `runpod_fulltrack.py` already ships tools to a pod
-(tarball), runs cv_annotate on the pod, uploads results to catbox, and
-downloads them local. `cloud_produce.py:387-398` already builds pod-side
+(tarball, cv_annotate at :101), runs cv_annotate on the pod, uploads results to catbox, and
+downloads them local (`runpod_fulltrack.py:194`). `cloud_produce.py:384-410` already builds pod-side
 yt-dlp commands that download to `/workspace/...` (the pod, not local). The
 pod orchestration (ship code, run, return URLs) is proven end-to-end.
 
@@ -1252,30 +1269,35 @@ so every session inherits it. The truthful gap list (which tools violate rules
 
 ```
 $ grep -nE "yt-dlp|/mnt/c|subprocess.run\(\[FFMPEG|shutil.copy2" tools/produce_v2.py
-122: search_cmd yt-dlp   175: dl_cmd yt-dlp   404/413/437/448: ffmpeg assemble
-618: shutil.copy2 -> /mnt/c/Users/muads/Downloads
+163: search_cmd yt-dlp   218: dl_cmd yt-dlp   569/582: ffmpeg assemble
+107/114: shutil.copy2 (3D formation board copy, NOT /mnt/c/Downloads)
+# old :618 shutil.copy2 -> /mnt/c/Users/muads/Downloads REMOVED in Stage 12B rewrite
 ```
 
-produce_v2 downloads + assembles + merges + crops + copies locally; only step4b
-(tracking) runs on RunPod. Local-download/compute/storage violators (WIRED +
+produce_v2 downloads + assembles + merges + crops locally; step4b
+(tracking, runpod_fulltrack) RETIRED Stage 14 — no longer called from produce_v2.
+The old copy-to-/mnt/c/Downloads at :618 is REMOVED. Local-download/compute/storage violators (WIRED +
 STANDALONE): produce_v2, produce_episode, assemble_words_match, scoreboard_scan,
-broadcast_filler, segment_scorer, tactical_render, tactical_boards, match_data,
+broadcast_filler, segment_scorer, tactical_boards, match_data,
 generate_voice, generate_ambience, merge_voice, shorts_crop,
 gemini_inventory_test, trim_tracking, validate_script, assemble_video,
-enhance_clips, generate_captions, thumbnail_generator, sharpness_check,
-render_video, tactical_overlay, check_and_download. Rule 1 cannot be met until
+enhance_clips, generate_captions, thumbnail_generator, sharpness_check.
+tactical_render, tactical_overlay, render_video, check_and_download are
+RETIRED (deleted). Rule 1 cannot be met until
 the pod-side download path (3B.5) is built.
 
 **Rule 3 is violated by 4 DEAD + ~18 untested STANDALONE.** DEAD (must retire):
-tactical_overlay, pitch_radar, render_video, check_and_download. Untested
+tactical_overlay, pitch_radar, render_video, check_and_download — all RETIRED
+(deleted from tree, in git history). Untested
 STANDALONE (import OK per 3D.1, execution unverified): produce_episode,
-cloud_produce, runpod_annotate, runpod_shorts, runpod_superres, gpu_superres,
-luminance_pod, sharpness_check, assemble_video, validate_script,
+cloud_produce, runpod_annotate (RETIRED Stage 6), runpod_shorts (RETIRED Stage 6), runpod_superres, gpu_superres,
+luminance_pod (RETIRED Stage 6), sharpness_check, assemble_video, validate_script (NOW WIRED Stage 12B),
 generate_captions, thumbnail_generator, enhance_clips, viral_angle,
 agent_reach_research, fresh_fetch, oauth_setup, ltx_enhance. Hand-run (tested,
-not wired): scoreboard_scan, broadcast_filler, segment_scorer,
+not wired): scoreboard_scan (NOW WIRED Stage 12B via step4a_cutlist), broadcast_filler (NOW WIRED Stage 12B via step4a_cutlist), segment_scorer,
 assemble_words_match, trim_tracking, gemini_inventory_test, youtube_upload,
-runpod_stage1. Only runpod_fulltrack is WIRED + tested. Not fixed this run.
+runpod_stage1 (RETIRED Stage 6). runpod_fulltrack was WIRED + tested but is
+now STANDALONE (step4b RETIRED Stage 14). Not fixed this run.
 
 The four rebuilt docs were re-dated to 2026-09-09 (Stages 2 and 3 changed
 wiring: 720p cap, 180-1200s filter, broadcast_filler fix, produce_episode
@@ -1329,8 +1351,9 @@ boundary, writes `footage=START-END` tags into `scripts/<slug>.md` (replacing
 boolean `[VISUAL: footage]` tags) + a `cut_list.json`. No relay-verify.
 
 Folded into produce_v2: step5_assemble now parses `footage=START-END`
-(`produce_v2.py:357`) and cuts the EXACT window (`start = seg.get("fw_start")`,
-concat block). The fixed 5-second cut (`clip_idx*5` at the old :424/:433) is
+(`produce_v2.py:472`, `sec["is_footage"] = tag.startswith("footage=")`)
+and cuts the EXACT window (`start = seg.get("fw_start")`,
+concat block). The fixed 5-second cut (`clip_idx*5` at the old :424/:433, REMOVED) is
 RETIRED. Boolean footage tags with no window now skip with a warning ("run
 cut_list_gen.py").
 
@@ -1365,14 +1388,16 @@ removed '...bournemouth_mancity_highlights_annotated.mp4'
 removed '...benchmark_meta_full_annotated.mp4'
 ```
 
-4D.2 — fixed the tactical_boards:74 .md-append bug (parse_visual_tags now
+4D.2 — fixed the tactical_boards:74 .md-append bug (parse_visual_tags, now
+at `tactical_boards.py:131`, now
 accepts a slug OR a full `.md` path; the old code always appended `.md`,
 double-suffixed a full path). The fix exposed two more mismatches in the test
 (masked by the 0-tags return): the test called `.lower()` on the dicts
 parse_visual_tags returns (fixed to use `tag["raw"]`), and referenced a
 `tb.TEMPLATES` dispatch dict that does not exist in tactical_boards (the
-render_*_board functions are called directly from main, not via a TEMPLATES
-map — verified at `tactical_boards.py:485-487`). Per "codebase wins," the test
+render_*_board functions are called directly from main at `tactical_boards.py:551`,
+not via a TEMPLATES
+map — verified at `:574,:577,:580`). Per "codebase wins," the test
 was reframed to validate the real behaviour (parse_visual_tags returns ≥5 tags
 with a `raw` key; slug and path forms agree). Result:
 
@@ -1460,7 +1485,7 @@ pod.
 | 1 | match_data (ESPN API) | local | yes, low value | tiny JSON, no GPU; doctrinally compute but negligible |
 | 2 | boards (matplotlib) | local | yes | CPU + small files; should move for full compliance |
 | 3 | download (yt-dlp) | **POD (5A)** | yes — built | the big-file violation; this is 5A |
-| 4b | tactical_render | **POD already** | yes | runpod_fulltrack ships cv_annotate to RunPod |
+| 4b | tactical_render | **POD already** (RETIRED Stage 14) | yes | runpod_fulltrack ships cv_annotate to RunPod (step4b removed from produce_v2, tactical_render.py deleted) |
 | 5 | assemble (ffmpeg) | local | yes | CPU; operates on excerpts once 5A lands |
 | 6 | voice (ElevenLabs API) | local | yes, low value | tiny MP3; API call |
 | 6b | ambience (ffmpeg) | local | yes | tiny |
@@ -1492,7 +1517,8 @@ the doctrine, so full compliance moves them too.
 - produce_episode, assemble_words_match — separate local pipelines.
 5A closes the DOWNLOAD (the big-file violation). The CPU/storage stages still
 run locally. The doctrine gap list in DECISIONS.md is updated to match: rule 1
-is now violated by every stage EXCEPT step3 (pod) and step4b (pod), not by the
+is now violated by every stage EXCEPT step3 (pod) and step4b (pod, RETIRED
+Stage 14 — tactical_render.py deleted, step4b removed from produce_v2), not by the
 whole pipeline.
 
 5A.5 — is the 720p cap still needed? See "5A.5 ANSWER" below (empirical, from
@@ -2092,7 +2118,7 @@ OK (all 15; SCRIPT_TEMPLATE's header ships with its 7B rewrite)
 
 ### 7B — four-template blocker (BUILT + PROVEN)
 
-7B.1 — `SCRIPT_TEMPLATE.md` rewritten to four lane shapes (215 lines):
+7B.1 — `SCRIPT_TEMPLATE.md` rewritten to four lane shapes (250 lines, 8777 bytes):
 - A (tactical analysis, theory-then-footage): Hook/Setup/Body/Trade-off/Close;
   visuals board/footage/tactical; ESPN match_data + sources.json.
 - B (match preview, no footage): Hook/Setup/Form/Fixture-prediction/Close;
@@ -2725,8 +2751,10 @@ the 2D renderers + sweep references.
 
 10C.6 — downstream tools that break when the 2D renderers go, and what each
 needs to consume 3D output instead:
-- produce_v2.py — `step4b_tactical_render` (line ~290/364) calls
-  tactical_render.py; the board step (line ~93) calls tactical_boards.py.
+- produce_v2.py — `step4b_tactical_render` (RETIRED Stage 14, tactical_render.py
+  deleted; was at line ~290/364 before Stage 12B rewrite) called
+  tactical_render.py; the board step (line 91, `step2_boards`) calls tactical_boards.py
+  and now also calls modal_render3d.py for the 3D formation board (Stage 14).
   Needs to call the 3D renderer (blender headless on pod) and consume its MP4.
 - produce_episode.py — calls tactical boards / cv_annotate; needs the 3D path.
 - The lane B manual assembler (/tmp/s8_assemble.py) — consumes boards/*.png;
@@ -3313,7 +3341,9 @@ the 4). The 3 skill-* hooks run via _run-node-hook.sh → tsx; deps installed
 PreToolUse [block-retired, block-image-read, warn-local-gpu]. The 4 new hooks
 ADDED to the project settings; SessionStart commands aligned to the showcase
 format ($CLAUDE_PROJECT_DIR/.claude/hooks/<name>.sh, no `bash` prefix) so
-verify-setup.sh's path check passes. Total: 6 existing + 4 new = 10 hooks.
+verify-setup.sh's path check passes. Total at Stage 12C: 6 existing + 4 new = 10 hooks.
+(Stage 14 added a 3rd SessionStart hook check_doc_stamps.sh to the project
+settings, bringing the project to 8 hooks + 4 global = 12 total.)
 
 **Regex-only AI mode:** skill-rules.json `skill_activation_mode: disabled`
 (Classic, free, offline, no AI provider). conservativeness: balanced. No
@@ -3386,9 +3416,13 @@ Confirmed mounted this session: "mnt-f-check: /mnt/f mounted (OK)" at start.
 
 #### 12D.2 — Other Stop hooks + fragility
 
-The ONLY Stop hook now is the unlazy stop-hook.mjs (global). push_status.sh was
-retired Stage 11 (it had a 3-day push gap Sep 9→12 from Stop-hook fragility:
-if it errored, the mirror silently didn't push). Reviewed stop-hook.mjs (211
+The ONLY global Stop hook now is the unlazy stop-hook.mjs. push_status.sh was
+retired Stage 11 then RE-ENABLED 2026-09-12 ~22:39 (re-created on disk,
+re-registered as a PROJECT Stop hook in .claude/settings.json, git add'd back).
+It had a 3-day push gap Sep 9→12 from Stop-hook fragility:
+if it errored, the mirror silently didn't push. The re-enabled version accepts
+the same fragility (the mirror is a convenience, not source of truth — the
+private repo is canonical). Reviewed stop-hook.mjs (211
 lines): it FAILS SAFE by design —
 - top-level `catch { allow(null); }` (line 68): any error → allow, never block.
 - invalid --scope → "not blocking" (line 63).
