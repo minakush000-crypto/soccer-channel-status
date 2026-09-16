@@ -2,7 +2,7 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-14.
+> **Last verified against code:** 2026-09-16.
 
 Chronological order (oldest first); append new entries at the end. Each
 entry is dated. "Why" is the actual reason, not a retcon. If a decision is
@@ -584,3 +584,31 @@ Outcomes (verified):
 STATUS.md updated to 2026-09-14 (STAMP RULE) with the 5.5 verdict, the voice
 failure, the fix, the re-score, and the litmus (Stage 15 section).
 Handoff: ~/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md.
+
+### gemini-pro-latest is the authoritative judge (2026-09-16, binding)
+gemini-3.1-pro-preview was a PREVIEW endpoint. Replaced with gemini-pro-latest
+(stable alias, same Pro tier). 3-run spread on 9 unchanged boards: max 1.0 point
+(no board > 2). The 10/10 → 7/10 swing on xg_flow was BETWEEN models/sessions,
+not within the same model. A single gemini-pro-latest score is stable within 1
+point. DEFAULT_MODEL in tools/gemini_judge.py updated. gemini-2.5-pro and
+gemini-2.5-flash are DEPRECATED (404 for this key). gemini-pro-latest accepts
+both video and image input (verified).
+
+### Gemini on raw clip: 4/4 goals, correct scorers (2026-09-16)
+On the raw 792s Bournemouth-Brentford clip (360p h264 uploaded via Files API),
+gemini-pro-latest found all 4 goals, 0 phantoms, 0 misses, all scorers correct
+(Schade 274s, Kluivert 333s, Tavernier 477s, Schade 520s). Offset vs scanner:
++1 to +6s. The previous "Mbeumo" error was from the ASSEMBLED episode (which is
+all boards, no match footage), not from Gemini watching the raw clip. Gemini's
+value is content classification + video understanding on raw footage; it is NOT
+a timestamp/cut-decision tool (the scanner wins on precision, Gemini wins on
+scorer identification from on-screen captions).
+
+### 3D positional boards: replace scene_gen.py with Three.js (2026-09-16, recommendation)
+Decision taken by Mayo: positional boards go 3D. scene_gen.py (Blender on Modal)
+is NOT the right tool: it silently broke (Stage 12, cause unknown), costs ~$0.10
+and ~600s per render, is capped at 1280x720, and cannot use the shared design
+layer (board_design.py is matplotlib-only). RECOMMEND: replace with Three.js in
+headless Chromium (Puppeteer). Reason: deterministic (no silent breaks), $0 per
+render, 1920x1080 native, CSS @font-face for Bebas Neue / Barlow Condensed (same
+fonts as the 2D boards), ~5-10s render time. Build effort: ~150-200 lines JS.
