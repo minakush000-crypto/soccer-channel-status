@@ -58,6 +58,10 @@ extends it to generated outputs. Open items from this migration:
 
 ## Cloud / GPU
 
+- **3D Renderer**: The new local `three_scene.js`/`three_render3d.py` path is unverified beyond a single frame. It replaced the unverified Modal/Blender path.
+- **EINVAL fallback**: The staging `/mnt/f` EINVAL fallback to `/dev/shm` is untested and undocumented.
+- **Player Mapper**: `player_mapper.py` is present but completely untested, undocumented, and orphaned (violating Rule 3).
+
 - **runpod_annotate.py end-to-end run**: RETIRED Stage 6 (deleted). The tool
   no longer exists on disk (`ls tools/runpod_annotate.py` → No such file).
   Its function (ship cv_annotate.py to RunPod) is now handled by
@@ -90,6 +94,8 @@ extends it to generated outputs. Open items from this migration:
   (jersey OCR on the bbox → match to ESPN lineup) would be a separate stage.
 
 ## Upload
+
+- **Hooks/Sandboxing**: Gemini CLI currently runs with NO sandbox and NO automatic hooks. Tools like `push_status.sh` and `check_pods.sh` must be executed manually. This gap exposes the system to drift if the human operator forgets to run them.
 
 - **youtube_upload.py OAuth tokens are valid**: PARTIALLY VERIFIED 2026-09-06.
   `secrets/youtube_token.json` exists (mtime Sep 8, not Aug 23 as previously

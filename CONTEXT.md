@@ -4,10 +4,17 @@
 > **Reader:** every session (CLAUDE.md @CONTEXT.md).
 > **Last verified against code:** 2026-09-13.
 
-Verified against code on 2026-09-13 (Stage 12B: produce_v2.py rewritten 858 lines, cut-list + assembler wired, validate_script wired; Stage 14: tactical_render.py + step4b RETIRED, 3D formation board wired into step2_boards, .script_verified voice gate, step5_assemble caps footage at 20%, 3rd SessionStart hook check_doc_stamps.sh, tools/sofascore_client.py + tools/doc_stamp_check.py added; B2 migration: rclone v1.75.1 verified, b2:mendymax-archive verified, ext4.vhdx 36.82 GB verified, /mnt/f EINVAL verified, vault ~/claude verified, .env + yolov8s.pt paths verified). Earlier verification 2026-09-09 (Stage 2: 720p cap, duration filter; Stage 3: broadcast_filler + produce_episode fixed). See ARCHITECTURE.md / STATUS.md.
+Verified against code on 2026-09-13 (Stage 12B: produce_v2.py rewritten 858 lines, cut-list + assembler wired, validate_script wired; Stage 16: agent changed to Gemini CLI, no automatic hooks, no sandbox, EPISODE_SPEC under review, pinned gemini-2.5-pro, voice ElevenLabs Daniel; Stage 14: tactical_render.py + step4b RETIRED, 3D formation board wired into step2_boards, .script_verified voice gate, step5_assemble caps footage at 20%, 3rd SessionStart hook check_doc_stamps.sh, tools/sofascore_client.py + tools/doc_stamp_check.py added; B2 migration: rclone v1.75.1 verified, b2:mendymax-archive verified, ext4.vhdx 36.82 GB verified, /mnt/f EINVAL verified, vault ~/claude verified, .env + yolov8s.pt paths verified). Earlier verification 2026-09-09 (Stage 2: 720p cap, duration filter; Stage 3: broadcast_filler + produce_episode fixed). See ARCHITECTURE.md / STATUS.md.
 
 Read this at the start of every session instead of pasting the brief.
 The project is /home/muads/yt-digest/soccer-channel. Nothing else.
+
+**IMPORTANT STATE WARNINGS:**
+- `EPISODE_SPEC.md` is under review. Do not score episodes against it.
+- Hooks described below (like push_status.sh) do not fire automatically in Gemini CLI. You must invoke them manually.
+- The 3D renderer is now `three_scene.js`/`three_render3d.py` (unverified beyond one frame).
+- `player_mapper.py` exists but is orphaned, violating rule 3.
+- The `/mnt/f` EINVAL fallback to `/dev/shm` is untested and undocumented.
 
 ## THE GOAL
 Produce soccer tactical analysis videos for a YouTube channel, matching
@@ -16,6 +23,13 @@ graphics, functional arrows). Not Tifo, which needs a human illustrator.
 
 ## WHERE THINGS LIVE
 The project is /home/muads/yt-digest/soccer-channel. Nothing else.
+
+**IMPORTANT STATE WARNINGS:**
+- `EPISODE_SPEC.md` is under review. Do not score episodes against it.
+- Hooks described below (like push_status.sh) do not fire automatically in Gemini CLI. You must invoke them manually.
+- The 3D renderer is now `three_scene.js`/`three_render3d.py` (unverified beyond one frame).
+- `player_mapper.py` exists but is orphaned, violating rule 3.
+- The `/mnt/f` EINVAL fallback to `/dev/shm` is untested and undocumented.
 ~/retired/ holds two dead folders (soccer-pipeline, soccer-channel).
 Never read or run anything in ~/retired/.
 There used to be two folders named soccer-channel. That caused weeks of
@@ -105,7 +119,7 @@ Working example: 2026-08-30_liverpool-forest --query "Liverpool Forest"
   --date-range 20260801-20260831
 
 12 steps (verified 2026-09-13, see ARCHITECTURE.md): match data (ESPN)
--> script gen (glm-5.2:cloud) -> validate_script -> boards (2D + 3D formation
+-> script gen (Gemini CLI / LLM) -> validate_script -> boards (2D + 3D formation
 via Modal) -> download clip (720p cap + 200MB guard, 3-20min filter) -> cut
 list (broadcast_filler + cut_list_gen) -> assemble (footage capped at 20%)
 -> transformation gate -> voice (ElevenLabs) -> crowd ambience -> merge ->
@@ -149,7 +163,7 @@ RESOLVED (was #1): the tactical_overlay "PowerPoint clipart" problem is
 gone. produce_v2.py no longer calls tactical_overlay.py (grep exit 1).
 tactical_overlay.py is DEAD. step4b_tactical_render is also RETIRED
 Stage 14 (tactical_render.py deleted; the 3D formation board via
-scene_gen/modal_render3d in step2_boards now covers the visual layer).
+three_render3d.py/three_scene.js in step2_boards now covers the visual layer).
 runpod_fulltrack.py still exists for standalone tracking but is not
 called from produce_v2.py.
 
@@ -182,7 +196,7 @@ called from produce_v2.py.
 - Working vision check: /home/muads/tools/vision_analyze.py, ~2.75s per
   frame. Use it to judge output instead of asserting quality.
 - JUDGE RULE (decided 2026-09-13, supersedes the prior Opus-authoritative
-  rule in CLAUDE.md): Gemini (tools/gemini_judge.py, gemini-3.1-pro-preview)
+  rule in CLAUDE.md): Gemini (tools/gemini_judge.py, gemini-2.5-pro)
   is the AUTHORITATIVE visual judge. Opus (ask_claude.py --image) and gemma4
   (vision_analyze.py) are cross-checks. On disagreement, record the Gemini
   score as authority and flag it; never write the more flattering number.

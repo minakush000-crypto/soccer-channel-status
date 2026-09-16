@@ -621,3 +621,29 @@ Decision: A single MUST failure DISQUALIFIES an episode. The EPISODE_SPEC uses M
 
 ### Player Mapping Verification (2026-09-15)
 Decision: The claim that player mapping was fully wired and verified was false. `player_mapper.py` exists as a standalone tool but is not called in the pipeline (`produce_v2.py`), and no `mapping.json` is generated for the latest renders. The project must implement an explicit check (e.g., verifying mapped names against `match_data.json` team sheets) before enabling this feature to prevent confident but incorrect player tracking.
+
+## 2026-09-16 (Section 10 Updates)
+
+### Agent Identity
+The coding agent operating this workspace is **Gemini CLI** (not Claude Code, not `glm-5.2:cloud`). References in older documents to Claude Code hooks or glm models are historical artifacts and do not reflect the current execution environment. There are no automatic hooks or sandboxes.
+
+### Disqualification Rule
+A single MUST failure in the EPISODE_SPEC disqualifies an episode. This is a non-negotiable constraint.
+
+### Voice Choice
+The owner has explicitly chosen ElevenLabs "Daniel" (`onwK4e9ZLuTAKqWW03F9`) as the narrator. This is set as `VOICE_ID` in `~/yt-digest/.env`. The pace issue (currently ~137 WPM vs the 155 MUST) must be resolved without changing this voice.
+
+### Player Mapper
+`player_mapper.py` exists as a standalone file but is called by nothing in the pipeline. It violates doctrine rule 3. It is completely undocumented.
+
+### Judge Model Pinning
+The visual judge has been pinned to the stable model `gemini-2.5-pro` (via `gemini_judge.py`). The stability test confirmed a maximum spread of 1 point across 3 runs on unchanged boards. Any board scores recorded prior to this pinning (which used unpinned preview models) are superseded and unreliable, and should not be quoted.
+
+### 3D Renderer Swap
+The Blender/Modal 3D renderer (`scene_gen.py`) was replaced with `three_scene.js` and `three_render3d.py` running in headless Chromium. This was done to move to a deterministic, local, $0 cost, native 1920x1080 solution. However, this new path remains unverified beyond a single frame.
+
+### EPISODE_SPEC Under Review
+`EPISODE_SPEC.md` is currently under review pending the owner's decision on the target video format (Task B). It is no longer considered the settled, valid measuring instrument for an episode. Do not score episodes against it until the review is complete.
+
+### Staging Fallback
+The staging EINVAL fallback uses `/dev/shm` (untested/undocumented).

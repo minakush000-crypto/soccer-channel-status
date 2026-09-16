@@ -57,7 +57,7 @@ step6b_ambience (808) → step5_assemble (812) → step5b_transformation_gate
 | 1 | `step1_match_data` (82) | `match_data.py <slug> --query <q>` (line 84) | `renders/<slug>/match_data.json` |
 | 1b | `step1b_script_gen` (321) | `script_gen.py <slug> --lane <lane>` (line 348). DRAFT — human must fact-check. Stage 12B. | `scripts/<slug>.md` |
 | 1c | `step1c_validate` (353) | `validate_script.py <slug> --lane <lane>` (line 362). Non-fatal. Stage 12B. | prints errors |
-| 2 | `step2_boards` (91) | `tactical_boards.py <slug>` (line 97) for 2D possession + stat_card + 2D formation fallback, then `modal_render3d.py <slug>` (line 110, Modal T4) overwrites formation.mp4 with 3D. Stage 14. | `renders/<slug>/boards/*.png + *.mp4` |
+| 2 | `step2_boards` (91) | `tactical_boards.py <slug>` (line 97) for 2D possession + stat_card + 2D formation fallback, then `three_render3d.py <slug>` (line 110, Modal T4) overwrites formation.mp4 with 3D. Stage 14. | `renders/<slug>/boards/*.png + *.mp4` |
 | 3 | `step3_download_clips` (133) | `yt-dlp` inline (line 225), format capped at **720p** (`height<=720`, line 218), duration filter **180-1200s** (3-20min, line 179), `--max-filesize 200M` (line 219), 720p gate `MIN_HEIGHT=720` (line 50, reject at 208), 200MB guard (line 237), cookies at `secrets/yt_cookies.txt` (line 49/193). `--pod-download` uses `step3_download_clips_pod` (256) → `runpod_download.py` (line 288) | `renders/<slug>/clips/clip_<id>.mp4` |
 | 4a | `step4a_cutlist` (371) | `broadcast_filler.py` (line 404) + `cut_list_gen.py` (line 414). Stage 12B. | `renders/<slug>/cut_list.json` |
 | 4b | RETIRED Stage 14 | `step4b_tactical_render` removed. `tactical_render.py` git-rm'd. `runpod_fulltrack.py` no longer called by produce_v2. `pitch_radar.py` deleted (was never shipped; `runpod_fulltrack.py:101` ships only `cv_annotate.py` + `ffmpeg_utils.py`). | — |
@@ -86,7 +86,7 @@ runpod_fulltrack: 0 mention(s)
 - `validate_script.py` — IS now wired (step1c, line 362). Stage 12B reversed the old "0 mentions."
 - `generate_ambience.py` — IS now called (step6b, line 688). (The 2026-09-05 doc said NOT called; that is reversed.)
 - `broadcast_filler.py`, `cut_list_gen.py`, `script_gen.py`, `transformation_gate.py` — IS now wired (step4a/step1b/step5b). Stage 12B.
-- `modal_render3d.py` — IS now wired (step2_boards, line 110). Stage 14.
+- `three_render3d.py` — IS now wired (step2_boards, line 110). Stage 14.
 - `youtube_upload.py` — no upload step in produce_v2. Uploads happen by hand (2 entries in `artifacts/publish-log/`).
 - `cv_annotate.py` — not called locally; not shipped by produce_v2. `runpod_fulltrack.py:101` ships it to RunPod, but runpod_fulltrack is no longer called by produce_v2 (step4b RETIRED Stage 14).
 - `runpod_fulltrack.py` — 0 mentions in produce_v2 (step4b retired Stage 14). Still exists on disk; callable standalone.

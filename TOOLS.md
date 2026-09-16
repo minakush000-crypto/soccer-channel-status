@@ -29,7 +29,7 @@ tactical_overlay or tactical_render (Stage 14 retirement). Archive tooling
 | `produce_v2.py` | WIRED (root) | nothing (entry point) | 2026-09-13 | works (liverpool-forest 720x1280 62.3s Sep 7); --pod-download routes step3 to runpod_download (5A); step4b_tactical_render RETIRED Stage 14 |
 | `match_data.py` | WIRED | `produce_v2.py:84` | 2026-09-01 | works |
 | `tactical_boards.py` | WIRED | `produce_v2.py:97` | 2026-09-12 | works. Stage 14: 3D formation board (scene_gen via modal_render3d) overwrites formation.mp4 in step2_boards; tactical_boards still produces possession/stat_card boards. |
-| `modal_render3d.py` | WIRED | `produce_v2.py:110` | 2026-09-13 | works (Modal T4, 3D formation board, Stage 12/14); ships scene_gen.py to pod and runs it via Blender |
+| `three_render3d.py` | WIRED | `produce_v2.py:110` | 2026-09-16 | works (headless Chromium, 3D formation board); replaced modal_render3d |
 | `runpod_download.py` | WIRED (--pod-download) | `produce_v2.py:288` (step3_download_clips_pod) | 2026-09-12 | built 5A; pod-side yt-dlp bot-blocked by YouTube (runs #1-3); excerpt-cut+guard proven via --source-url (2/3 windows, 4MB each, $0.005, LANE_PLAN 5A.3) |
 | `script_gen.py` | WIRED | `produce_v2.py:348` (step1b) | 2026-09-13 | works (Stage 12B; glm-5.2:cloud per-section, 1439w draft proven) |
 | `validate_script.py` | WIRED | `produce_v2.py:362` (step1c); also `produce_episode.py:162` | 2026-09-12 | works (Stage 12B; enforces lane word-budget minimum; opening-hook check 10D) |
@@ -43,7 +43,7 @@ tactical_overlay or tactical_render (Stage 14 retirement). Archive tooling
 | `ffmpeg_utils.py` | WIRED (lib) | imported by `produce_v2.py:46`, `generate_voice.py:24`, `merge_voice.py:25`, `shorts_crop.py:31`; shipped to pod by `runpod_fulltrack.py:101` | 2026-09-08 | works (now holds the 200MB guard) |
 | `script_utils.py` | WIRED (lib) | imported by `generate_voice.py:25` | 2026-08-25 | works |
 | `staging.py` | WIRED (lib) | imported by `produce_v2.py:47` | 2026-09-09 | works (/mnt/f USB staging for raw downloads, 6A) |
-| `scene_gen.py` | WIRED (transitive) | shipped+run on pod by `modal_render3d.py:45` (Blender -P) | 2026-09-13 | works (3D formation board, Stage 12/14) |
+| `three_scene.js` | WIRED (transitive) | run locally by `three_render3d.py` | 2026-09-16 | works (3D formation board) |
 | `cv_annotate.py` | STANDALONE (transitive) | shipped+run on pod by `runpod_fulltrack.py:101` (STANDALONE since step4b retired Stage 14) | 2026-09-07 | works (per-frame positions export, STATUS); no longer reachable from produce_v2 |
 | `runpod_fulltrack.py` | STANDALONE (was WIRED) | was `produce_v2.py` step4b; step4b RETIRED Stage 14 (tactical_render.py git-rm'd) | 2026-09-12 | works (146s full-clip, $0.011, STATUS); no longer called from produce_v2; hand-run only |
 | `produce_episode.py` | STANDALONE | entry point; no caller | 2026-09-09 | untested (no verified output); 800M guard added (3A.4), keeps 1080p anti-blur source |
@@ -58,6 +58,7 @@ tactical_overlay or tactical_render (Stage 14 retirement). Archive tooling
 | `segment_scorer.py` | STANDALONE | no caller; `cv_annotate.py:332` is a comment only | 2026-09-05 | works (hand-run on full-clip data, STATUS) |
 | `scoreboard_scan.py` | STANDALONE | no caller | 2026-09-08 | works (3/3 goals, STATUS) |
 | `assemble_words_match.py` | STANDALONE | no caller | 2026-09-08 | works (arsenal-chelsea 45.2s 1280x720 15MB Sep 8; file overwritten 2026-09-12; now 1920x1080 724s 210MB) |
+| `player_mapper.py` | STANDALONE | no caller | 2026-09-15 | untested, undocumented (violates rule 3) |
 | `trim_tracking.py` | STANDALONE | no caller; has `main()` CLI; output in `artifacts/tracking_summary/` | 2026-09-08 | works (hand-run) |
 | `viral_angle.py` | STANDALONE | no caller | 2026-08-25 | untested |
 | `agent_reach_research.py` | STANDALONE | no caller | 2026-08-30 | untested |

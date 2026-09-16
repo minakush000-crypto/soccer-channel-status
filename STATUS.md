@@ -103,7 +103,7 @@ tools/produce_v2.py` → exit 1). The step was then `step4b_tactical_render`
 (pre-rewrite line 202) → `runpod_fulltrack.py` + `tactical_render.py`. As of
 Stage 14, step4b_tactical_render is RETIRED (`produce_v2.py:313`,
 `tactical_render.py` DELETED, `produce_v2.py:791` sets `tactical_path = None`).
-The 3D formation board (scene_gen via modal_render3d) now covers the formation
+The 3D formation board (three_scene.js via three_render3d) now covers the formation
 render in `step2_boards` (`produce_v2.py:91`). `tactical_overlay.py` is DEAD.
 
 ## Option C Stage 1: per-frame player positions — DONE (2026-09-05)
@@ -133,7 +133,7 @@ No path from tracker ID to player name exists (DECISIONS 2026-09-05, question A)
   movement trails, Bezier arrows. Outputs PNG or MP4. Screen-space projection
   (no homography). Opus assessment: 8/10 then 8.5/10 across tasks 2-4
   (authoritative). All elements visible. Superseded by the 3D formation board
-  (scene_gen via modal_render3d, wired into step2_boards).
+  (three_scene.js via three_render3d, wired into step2_boards).
 - Known gaps for E (from Opus): no context layer (title, team names, ball
   marker, attacking direction); pitch layout off-centre, missing 6-yard
   boxes/penalty spots/arcs/corner arcs/goals, stripe contrast too high;
@@ -147,7 +147,7 @@ Full-clip tracking: DONE. 146s on RunPod L4, 156s, $0.011.
 
 Tested whether Gemini can produce a timestamped footage inventory. Half-works;
 the half that's wrong is the half that matters for cutting.
-- GEMINI_API_KEY valid (prepaid AI Studio). ~$0.11/clip on gemini-3.1-pro-preview,
+- GEMINI_API_KEY valid (prepaid AI Studio). ~$0.11/clip on gemini-2.5-pro,
   ~$0.04 on gemini-3.6-flash. 91 video tokens/sec @720p.
 - Content classification accurate (goals/celebration/replay/crowd/subs).
 - Timestamps NOT cut-accurate: boundaries 1-2s early, goal windows bloated,
@@ -350,7 +350,7 @@ could produce a real number but is not in produce_v2.py.
   (tactical_render.py + tactical_boards.py stay). UPDATE Stage 14:
   tactical_render.py is now DELETED (RETIRED); tactical_boards.py still
   exists. Block = one-time user action:
-  Modal token (modal_render3d.py ready) or Vast SSH key. Awaiting user.
+  Modal token (three_render3d.py ready) or Vast SSH key. Awaiting user.
 - 11D: assembler scoped (~1-2 days); est. score ~6.9/10 with 2D boards + 1400w
   + footage + assembler. Assembler-first beats 3D on score-per-hour and is a
   prerequisite for 3D. Build the assembler next.
@@ -358,7 +358,7 @@ could produce a real number but is not in produce_v2.py.
 
 ## Stage 12 re-run — 3D board on Modal, design vs dimension, 2026-09-12
 
-Relay (2026-09-12/13) next action executed: scene_gen.py as-written on Modal
+Relay (2026-09-12/13) next action executed: three_render3d.py as-written on Modal
 against arsenal-chelsea match_data.json, frame extracted, judged vs the 2D
 possession.png control through a 5-lens vision workflow (4 Opus + 1 gemma4) +
 synthesis. Provider Modal T4; output /mnt/f/soccer-staging/3dpoc_2026-09-06_arsenal-chelsea.mp4
@@ -391,7 +391,7 @@ build 3D (relay Part 5, final). 12A held the git rm (nothing removed; git log
 --diff-filter=D empty). The 5/10 3D frame was buggy; fixed and re-rendered,
 one change per run.
 
-- tools/gemini_judge.py built (gemini-3.1-pro-preview) + wired as AUTHORITATIVE
+- tools/gemini_judge.py built (gemini-2.5-pro) + wired as AUTHORITATIVE
   in CLAUDE.md tool routing. Gemini judged both: 3D buggy=5/10, 2D control=4/10
   (matches Opus).
 - CHANGE 1 camera framing: keyframes (0,-90,160)->(0,-55,150) replace the
@@ -479,7 +479,7 @@ PROOF (all ●, commands run 2026-09-14):
 
 ### Re-score (same method as the 5.5 run, Gemini authoritative)
 Re-assembled final_video.mp4: 1920x1080, 794.76s (13.25 min), 77.7MB. 9 frames
-judged by gemini-3.1-pro-preview (raw responses in the handoff report):
+judged by gemini-2.5-pro (raw responses in the handoff report):
 opening 3/10, footage 3/10, formation(3D) 4/10, stat_card 4/10, possession 5/10,
 xg_flow 7/10, shotmap 6/10, momentum 7/10, avgpositions 6/10. (xg_flow dropped
 10->7 vs the 5.5 run on the SAME board — Gemini judgment variance, same model.)
@@ -540,7 +540,7 @@ sources) supplemented the per-practitioner medium table. Key findings:
   never been run and is the only test that would settle the dimension question.
 
 ### Piece 3 — Gemini vs scoreboard scanner litmus (mechanical output)
-Same episode, same 718.04s footage. Model: gemini-3.1-pro-preview (47388 video
+Same episode, same 718.04s footage. Model: gemini-2.5-pro (47388 video
 tokens, ~$0.11). Scanner: gemma4:cloud via vision_analyze.py, free, 68.6s.
 
 **Timestamps (per-goal offset, misses, phantoms):**
