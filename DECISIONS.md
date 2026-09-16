@@ -612,3 +612,12 @@ layer (board_design.py is matplotlib-only). RECOMMEND: replace with Three.js in
 headless Chromium (Puppeteer). Reason: deterministic (no silent breaks), $0 per
 render, 1920x1080 native, CSS @font-face for Bebas Neue / Barlow Condensed (same
 fonts as the 2D boards), ~5-10s render time. Build effort: ~150-200 lines JS.
+
+### Voice decision (2026-09-15)
+Decided by Mayo: ElevenLabs voice Daniel, ID onwK4e9ZLuTAKqWW03F9, a steady British broadcaster. Set as VOICE_ID in ~/yt-digest/.env. The pace issue (last measured 137 WPM vs 155-195 spec) must be solved without changing the voice, likely via ffmpeg atempo or similar post-processing.
+
+### Spec "MUST" failure disqualification (2026-09-15)
+Decision: A single MUST failure DISQUALIFIES an episode. The EPISODE_SPEC uses MUST for binary, non-negotiable requirements (e.g., 16:9 aspect ratio, no fabricated facts, minimum runtime). A numeric score of 7/10 evaluates the execution quality (the SHOULDs and design properties). An episode cannot be published if it violates a core constraint, regardless of how beautiful the graphics are.
+
+### Player Mapping Verification (2026-09-15)
+Decision: The claim that player mapping was fully wired and verified was false. `player_mapper.py` exists as a standalone tool but is not called in the pipeline (`produce_v2.py`), and no `mapping.json` is generated for the latest renders. The project must implement an explicit check (e.g., verifying mapped names against `match_data.json` team sheets) before enabling this feature to prevent confident but incorrect player tracking.
