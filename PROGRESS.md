@@ -4,6 +4,34 @@
 > **Reader:** every session.
 > **Last verified against code:** 2026-09-13.
 
+## 2026-09-20 Job 2 re-match: real nine EP001 moments (voids the 11/15)
+
+The real episode file (episodes/EP001_MOMENTS.md) and restructured script
+(episodes/EP001_SCRIPT.md) were committed after Job 2. The 11/15 number was
+measured against a reconstructed list and is VOID. Re-matched against the
+nine moments the script actually needs. Full report:
+renders/2026-09-08_real-madrid-inter/JOB2_REMATCH.md.
+
+- Re-examined 7 Madrid-possession mid-frames (moments 1,2,6,9,15) + 8
+  goal-action windows (moment 14) via Opus; dense 78-frame gesture hunt
+  for moment 3 across all 7 Madrid-possession windows.
+- Result: 8 of 9 covered. Only moment 3 (Dumfries gesturing Brahim) NOT
+  FOUND on camera (78 dense frames, 0 Dumfries gestures; 2 gesture hits
+  were a No.10 calling for ball and a defender pointing). Script fallback
+  holds on moment 2.
+- Two corrections to the workflow's own 6/9 synthesis: moment 1 reversed
+  by dense check (8 frames in scenes 19/23 show a wide-right attacker;
+  mid-frame sample missed it); moment 14 reversed by scorebug read (scene
+  10 start frames: MIN=13 1-0 Madrid celebrating = the 14' Mbappe goal;
+  the mid-frame goalmouth close-up misidentified the team).
+- Scene 34 (single point of failure): t=495.578-515.331s, 19.75s, NO
+  internal camera cut (single PySceneDetect shot). Carries moments 4 + 13.
+- Moment 1 identity caveat: wide-right player = Brahim by POSITION +
+  lineup, not jersey OCR (Opus read #7/#17, unreliable at 720p).
+- D3 fallback declared: dense frame extraction ran locally (ffmpeg on the
+  catbox-re-pulled 720p in /dev/shm); re-shipping to a pod for ~100 PNGs
+  was disproportionate. /dev/shm copy deleted after extraction.
+
 ## 2026-09-20 Job 2: cuttable-window measurement (CBS m-Er4N3eVpE)
 
 Three-job brief, Job 2: how many unbroken 8-15s build-up/off-ball windows
