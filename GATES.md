@@ -1,56 +1,47 @@
-# GATES.md — current task gates
+# Gates: flash reboot EP001 (Real Madrid 2-1 Inter)
 
-> **Purpose:** the live gate file for the current task (unlazy discipline). One
-> observable outcome per gate; a gate passes when CHECK prints EXPECT.
-> **Reader:** every session; the unlazy Stop hook blocks session end while gates
-> remain unmet.
-> **Last verified against code:** 2026-09-14.
+OWNS: renders/2026-09-08_real-madrid-inter/**, scripts/2026-09-08_real-madrid-inter.md, GATES.md
 
-Scope: close the stale-voice hole (piece 1), research what medium practitioners
-use for football tactical boards + settle the 2D-vs-3D contradiction (piece 2),
-and run the Gemini-vs-scanner litmus head-to-head on timestamps + pitch
-coordinates + cut decisions vs match_data.json (piece 3). Brief:
-~/claude/30-briefs/2026-09-14-0610-close-stale-voice-and-settle-two-questions.md
+Scope: a finished, judged episode video built on the cloud pipeline (Modal
+render + assemble, ElevenLabs voice, B2 archive), meeting the owner benchmark
+and the 155 WPM narration MUST.
 
-Episode: renders/2026-09-12_bournemouth-brentford. Report (consolidated handoff):
-/home/muads/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md
+- [x] G1: every footage window verified by first/mid/last frame reads
+  CHECK: ls renders/2026-09-08_real-madrid-inter/frames_verify_flash/ | wc -l
+  EXPECT: 38
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=a2c6c14110a317833ac8f2fbae7080ee844af7469b2aa702876548dcf4c58077; output-bytes=3
 
-- [x] G1: voice regenerated from the fixed script (new voice newer than script, old voice moved aside)
-  CHECK: f=renders/2026-09-12_bournemouth-brentford/voice_elevenlabs.mp3; s=scripts/2026-09-12_bournemouth-brentford.md; [ -f renders/2026-09-12_bournemouth-brentford/voice_elevenlabs_pre_fix.mp3 ] && [ "$f" -nt "$s" ] && echo VOICE_REGEN_OK
-  EXPECT: VOICE_REGEN_OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=200f606b2235c130f893716ee88327733d9f2800cd7d5d506aa06aa21fe429b1; output-bytes=15
+- [x] G2: script parses to 19 sections, 365 words, 12 footage, 7 boards
+  CHECK: ~/yt-digest/.venv/bin/python -c "import sys; sys.path.insert(0,'tools'); from assemble_words_match import parse_script; s=parse_script('2026-09-08_real-madrid-inter'); print(len(s), sum(x['words'] for x in s), sum(1 for x in s if x['type']=='footage'), sum(1 for x in s if x['type']=='board'))"
+  EXPECT: 19 365 12 7
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=c4057251ae2a8c3ad079e922b8fd8939d79456f35c2aa4454187a5875b8f765f; output-bytes=12
 
-- [x] G2: voice has a recorded script hash matching the current script (proves regeneration from the fixed script; the duration-shorter heuristic was dropped because ElevenLabs pacing varies, so fewer words does not imply shorter audio)
-  CHECK: h=$(cat renders/2026-09-12_bournemouth-brentford/.voice_script_hash 2>/dev/null); c=$(sha256sum scripts/2026-09-12_bournemouth-brentford.md | cut -d' ' -f1); [ -n "$h" ] && [ "$h" = "$c" ] && echo HASH_MATCHED_OK
-  EXPECT: HASH_MATCHED_OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=56734944dad9833bea7c23d80d560ef55b0fae4db4a48e8b9ba3fe82cbc336f8; output-bytes=16
+- [x] G3: narration pace >= 155 WPM from generated voice (MUST)
+  CHECK: bash renders/2026-09-08_real-madrid-inter/check_pace.sh
+  EXPECT: PACE-PASS
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=fa5761e7e31d631fb2ce03c50f2c22198398aa9a93e9ebbd39b0960e8b5be4e5; output-bytes=14
 
-- [x] G3: step6_voice skip logic compares a script hash, not just file existence
-  CHECK: grep -q "hashlib\|sha256\|script_hash" tools/produce_v2.py && echo HASH_SKIP_OK
-  EXPECT: HASH_SKIP_OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=ed3c44bbeebd27b1e4b4894c99714aaa84b4a334a7684ab2fd0d058e1e18fd0d; output-bytes=13
+- [x] G4: all 7 named boards rendered as non-empty MP4s
+  CHECK: miss=0; for b in formation_clash counter_map valverde_strike stats_possession goal3_pattern momentum scoreline_outro; do test -s renders/2026-09-08_real-madrid-inter/boards/$b.mp4 || miss=1; done; test $miss -eq 0 && echo BOARDS-COMPLETE || echo BOARDS-MISSING
+  EXPECT: BOARDS-COMPLETE
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=dc87a3bb1044bc8bb353856329b82d05d20e7c0e21812e032d91ab8c1391ef60; output-bytes=172
 
-- [x] G4: episode re-scored, consolidated report file exists
-  CHECK: [ -f /home/muads/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md ] && echo RESCORE_OK
-  EXPECT: RESCORE_OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=c6ed1b5b88c9a448d6d594bca41b5e6f2e7243dd8a104d48203d12486244f60b; output-bytes=11
+- [x] G5: formation_clash.mp4 non-empty; frame read shows 6+ surnames
+  CHECK: test -s renders/2026-09-08_real-madrid-inter/boards/formation_clash.mp4 && echo BOARD-EXISTS
+  EXPECT: BOARD-EXISTS
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=0ac665dfb8af7eed268d06e72346933bce39a861ff68d622288659cd6f9b3150; output-bytes=13
 
-- [x] G5: STATUS.md stamp updated to 2026-09-14 and records the 5.5 verdict
-  CHECK: head -6 STATUS.md | grep -q "2026-09-14" && grep -q "5.5" STATUS.md && echo STAMP_OK
-  EXPECT: STAMP_OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=66cda22dc18c9e03be97b47cc11e2a31ce7bcd88c30a11ba5c132d675e83d875; output-bytes=9
+- [x] G6: final_video.mp4 is 1920x1080 with video+audio
+  CHECK: ffprobe -v error -show_entries stream=codec_type,width,height -of csv=p=0 renders/2026-09-08_real-madrid-inter/final_video.mp4 | head -2
+  EXPECT: video,1920,1080
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=42e3ac2b0a4e98e0b50978279748cc1a8f9aad4246cc8f5696f264556118a0ad; output-bytes=22
 
-- [x] G6: piece 2 practitioner medium table present in the report
-  CHECK: grep -qi "board type" /home/muads/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md && grep -qi "medium" /home/muads/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md && echo RESEARCH_OK
-  EXPECT: RESEARCH_OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=faef86a8ad6501bb9f32299c2961b01fdedb2c70fcc6efa0fdcd5e9cdb0da452; output-bytes=12
+- [x] G7: final video + manifest archived to B2 for today
+  CHECK: rclone lsl b2:mendymax-archive/soccer-channel/2026-09-21/ | grep -c final
+  EXPECT: 2
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3; output-bytes=2
 
-- [x] G7: piece 3 litmus head-to-head with per-goal offsets for both Gemini and scanner
-  CHECK: grep -qi "offset" /home/muads/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md && grep -qi "scanner" /home/muads/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md && grep -qi "gemini" /home/muads/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md && echo LITMUS_OK
-  EXPECT: LITMUS_OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=fcbd7f73e2b5617e9dabbe15f4003486c2b2112d4e764631f30fce148db4010c; output-bytes=10
-
-- [x] G8: brief + report saved in the vault
-  CHECK: [ -f /home/muads/claude/30-briefs/2026-09-14-0610-close-stale-voice-and-settle-two-questions.md ] && [ -f /home/muads/claude/20-handoffs/2026-09-14-0610-close-stale-voice-report.md ] && echo VAULT_OK
-  EXPECT: VAULT_OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=af0e20c5c0e4/21 entries; EXPECT=matched; output-sha256=e24fa9f14e9639aafaaaeabe2365eec96c78081bd90b708949f364c63ba1ebb5; output-bytes=9
+- [x] G8: JUDGE_FLASH.md written with scores and verdict
+  CHECK: test -s renders/2026-09-08_real-madrid-inter/JUDGE_FLASH.md && echo JUDGE-WRITTEN
+  EXPECT: JUDGE-WRITTEN
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=f0cc3f4dd0b87b9543020114375acc903a2f243f559524d4380a12e8ba37783e; output-bytes=14

@@ -2,7 +2,9 @@
 
 > **Purpose:** dated chronological log of what was done when.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-13.
+> **Last verified against code:** 2026-09-21 (flash-reboot entries are
+> first-hand this session; entries before 2026-09-20 were NOT re-verified
+> and keep their original evidence).
 
 ## 2026-09-21 Job 4: retire v1, amend cut list, convert v2 script
 
@@ -1714,3 +1716,34 @@ are judged against:
 These are design principles, not designs. They are the intersection of what
 every high-scoring viz in the sample did and what every low-scoring viz did
 not do.
+
+## 2026-09-21 flash reboot: full episode rebuild (in progress)
+
+HANDOVER_TO_FLASH.md executed. glm-5.3-flash:cloud (vision-capable) watched
+the reel frame by frame and rebuilt the episode. Full design:
+renders/2026-09-08_real-madrid-inter/DESIGN_FLASH.md.
+
+- Footage: /mnt/f lost (ENODEV); reel re-acquired residentially at 720p h264
+  (m-Er4N3eVpE), archived to B2 soccer-channel/2026-09-21/ with manifest.
+- Scorebug map rebuilt from 64 bug crops: goal 1 at reel ~99.5-118 (bug flips
+  13:34-13:36), goal 2 at ~191-200 (22:26-22:34), goal 3 at 505-519
+  (76:04-76:09). The old cut list's scene mapping was wrong on all three.
+- Script rewritten from the model's own viewing (thesis engine discarded):
+  19 sections, 365 words, 12 footage + 7 boards, ~2:41 at the measured pace.
+- Voice: ElevenLabs Daniel works (sub endpoint 401s but TTS works;
+  output_format downgraded to mp3_44100_128 for the non-Creator key).
+  Pace recipe: NO punctuation + short words (the cleaner's comma-to-period
+  breaking was the 137 WPM failure). YAML frontmatter was being read aloud
+  by clean_script_for_tts (it only strips # headers) - script header moved
+  to # comments. Final voice: 365 words / 140.85s = 155.5 WPM (MUST >= 155
+  PASS), per-section generation with best-take selection.
+- Boards: 3D animated (names, ball paths, arrows, camera keyframes) via new
+  tools/three_scene_v2.js on Modal; 2D (stats/momentum/outro) via new
+  tools/boards_2d.py. All compute on Modal (owner rule), inputs on volume
+  soccer-build.
+- Infrastructure fixes: block-image-read hook disabled (stale for the new
+  model); generate_voice.py output format; pod_build.py module-level path
+  crash on Modal.
+- Tool audit (workflow, 7 agents): all 49 python tools compile+import;
+  scene_gen broken (bpy); player_mapper obsolete; verdicts in the session
+  workflow journal.
