@@ -4,6 +4,38 @@
 > **Reader:** every session.
 > **Last verified against code:** 2026-09-13.
 
+## 2026-09-20 Job 3: cut list + script conversion (EP001)
+
+Built the frozen cut list and converted EP001_SCRIPT.md to the assembler
+parser format. Full report: renders/2026-09-08_real-madrid-inter/JOB3_REPORT.md.
+
+- cut_list.json (FROZEN, dated): 8 entries — 7 footage clips + 1 board (M1).
+  Every clip's first/mid/last second verified by Opus 5. D3 fallback declared
+  (verification frames extracted locally from catbox-re-pulled 720p in
+  /dev/shm; deleted after).
+- Clean clips: M9 (scene 4, 35-47s, central midfielder 3/3), M14 (scene 10,
+  116-128s, scorebug 13' 1-0 Mbappe celebrating), M15 (scene 18, 328-336s,
+  transition 3/3).
+- Weak clips (claimed content brief inside the clip, boards carry the shape):
+  M4 (scene 34, 498.5-506.5s), M6 (scene 20, 384-392s, block is 1 frame),
+  M13 (scene 34, 495.58-504s, press is 1 frame).
+- ★ FLANK CONTRADICTIONS: M1 (Brahim high RIGHT) has NO footage — frames show
+  the LEFT flank (#7 Vinicius, #17 Cucurella, both left-side players). The
+  Job 2b "8 yes frames" were Opus mislabeling left as right. M1's script line
+  uses board=brahim_high_right. M2 (Dumfries holding RIGHT-back) — the holding
+  FB reads as the LEFT-back (#17 Cucurella); shape is present, player ID is
+  wrong-side (◑). Both flagged loudly per 3.6.
+- Script: scripts/2026-09-08_real-madrid-inter.md. Parser reads 24 sections,
+  0 skip. 593 words = 3.83 min at 155 WPM (original ~880/5:40 was an
+  over-estimate; spoken column is ~641 by plain split, 593 by parser).
+- Scene 34 weaker than thought: 19.75s mixed passage (Madrid attacking +
+  brief Inter possession + goalmouth), not a sustained Inter build-up. M4
+  and M13 overlap inside it (t=500-504). Boards carry the 3-5-2 / pressing
+  shape for Section 3.
+- Carry-forward: M1 flank contradiction confirmed (no footage); M9 player ID
+  still ◑; tracker survival still untested. STOP per brief — no tracking or
+  rendering started.
+
 ## 2026-09-20 Job 2 re-match: real nine EP001 moments (voids the 11/15)
 
 The real episode file (episodes/EP001_MOMENTS.md) and restructured script
