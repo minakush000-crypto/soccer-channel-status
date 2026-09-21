@@ -4,6 +4,41 @@
 > **Reader:** every session.
 > **Last verified against code:** 2026-09-13.
 
+## 2026-09-20 Job 2: cuttable-window measurement (CBS m-Er4N3eVpE)
+
+Three-job brief, Job 2: how many unbroken 8-15s build-up/off-ball windows
+exist in the CBS extended highlights (10m32s, verified real broadcast in
+Job 1). Full report: renders/2026-09-08_real-madrid-inter/JOB2_WINDOW_MEASUREMENT.md.
+
+- 2.1 Acquisition: 720p h264 720p60 (format 298, 164MB video-only).
+  First pick was av1 which the pod opencv could not decode (diagnosed from
+  pod.log). /mnt/f dropped to ENODEV mid-job; DECLARED /dev/shm fallback
+  (D3). Shipped to pod via catbox; pod terminated clean; local copy deleted.
+- 2.2 Shot boundaries on pod (PySceneDetect 0.7.1, 26s): 43 total shots in
+  631.8s, mean 14.7s, range 1.0-87.5s. New tool tools/runpod_scenedetect.py
+  (pod ship-and-run + log upload + leak guard).
+- 2.3 Filter >= 8s: 18 shots survive, 557.3s (88% of reel).
+- 2.4 Classify: gemma4 bulk (tools/bulk_classify.py) said 12 BUILDUP; Opus
+  re-verified via match-moments workflow (tools/match_moments.workflow.mjs,
+  13 agents, 0 errors) and reclassified 4 goal-adjacent frames to
+  GOAL_ACTION. Opus-verified: 8 BUILDUP, 8 GOAL_ACTION, 1 CELEBRATION,
+  1 GRAPHIC. Reproduces Job-1 finding that gemma4 mislabels goal-adjacent
+  frames.
+- 2.5 Match to 15 moments: the episode file with the 15 moments was NOT
+  found anywhere; reconstructed a provisional list
+  (renders/2026-09-08_real-madrid-inter/provisional_15_moments.md) from
+  confirmed match facts, pending user confirmation. 8 BUILDUP windows
+  cover 11 of 15 provisional moments. Uncovered: #2, #4, #10, #12.
+- 2.6 Verdict: 11/15 -> FULL episode possible (threshold >=9). Caveats:
+  scene 34 is the only Inter-possession build-up shot and alone covers 4
+  moments (single point of failure -> 7 without it); reel is
+  Madrid-possession-heavy; verdict is against the provisional moment list.
+- Settles the 59%-vs-43s disagreement: 59% was a frame-snapshot upper bound
+  (overcounts goal-adjacent frames); true long-shot build-up fraction is
+  8/18 = 44% (Opus). 8 unbroken build-up windows, 241.5s raw passage.
+- Carry-forward: "how many cuttable windows" ANSWERED; tracker-survival-
+  in-10-15s still untested (this job did not run the tracker).
+
 ## 2026-09-05 session 1: documentation spine + skill fix
 
 - Built CONTEXT.md, ARCHITECTURE.md, TOOLS.md, STATUS.md, DECISIONS.md,
