@@ -4,6 +4,35 @@
 > **Reader:** every session.
 > **Last verified against code:** 2026-09-13.
 
+## 2026-09-21 Job 4: retire v1, amend cut list, convert v2 script
+
+Thesis changed to "the extra man" (Alexander-Arnold, a right back, in central
+midfield) after Job 3 proved the reel shows Madrid's LEFT flank. Full report:
+renders/2026-09-08_real-madrid-inter/JOB4_REPORT.md.
+
+- 4.1 v1 retired to retired/EP001_SCRIPT.md (dated note). episodes/ now has
+  only EP001_MOMENTS.md + EP001_SCRIPT_v2.md. One source of truth.
+- 4.2 cut_list.json amended (not rebuilt): M1 dropped, 7 clips kept with
+  UNCHANGED in/out, v2_section added to each, M4/M13 overlap (t=500-504)
+  noted explicitly.
+- 4.3 boards: of the 8 tactical boards, only `formation` exists (partial,
+  generic); 7 have NO renderer (would fall back to stat_card). The overlay
+  renderer is unbuilt. No boards built this job.
+- 4.4 script converted: scripts/2026-09-08_real-madrid-inter.md (overwrote
+  v1 conversion). 0 skip sections.
+- 4.5 ACTUAL count (parser): 30 sections, 17 footage, 13 board, 638 words,
+  4.12 min. Coordinator claimed 18/14/4 (78%); actual is 30/17/13 (57%),
+  WORSE on every axis. The "17 footage" is 7 DISTINCT clips cut 17 times
+  (M9 x4, M4 x3, M2 x3, ...). v1 was 24/11/13 (46%); v2's higher footage
+  count is repeats of the same 7 clips, NOT new footage. Board count 13 in
+  both, NOT 4. The thesis change did NOT reverse the ratio — it inflated
+  footage appearances by repeating the same 7 clips.
+- 4.6 flags: Section 6 is 100% boards (no late footage exists); 7 of 8
+  boards have no renderer; footage repeats (7 clips cut 17x); M9 central
+  claim is ◑ (A-A by position only); M2 holding FB is Cucurella (LB) not
+  Dumfries (v2 claims "full backs generally").
+- STOP per brief — no tracking, rendering, or board building.
+
 ## 2026-09-20 Job 3: cut list + script conversion (EP001)
 
 Built the frozen cut list and converted EP001_SCRIPT.md to the assembler
