@@ -13,8 +13,6 @@
 !LANE_PLAN.md
 !GATES.md
 !SKILLS.md
-!vault
-!vault/**
 !.gitignore
 # Defense in depth: even inside allowed dirs, never ship these.
 *.mp4

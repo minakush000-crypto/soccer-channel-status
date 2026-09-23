@@ -2,7 +2,7 @@
 
 > **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
 > **Reader:** every session (CLAUDE.md @CONTEXT.md).
-> **Last verified against code:** 2026-09-22.
+> **Last verified against code:** 2026-09-23.
 
 Rewritten 2026-09-22 (brief 03) against the code on disk. Read STATUS.md for
 the verified state spine and DECISIONS.md for why things are the way they are.
@@ -28,13 +28,18 @@ The project is /home/muads/yt-digest/soccer-channel. Nothing else.
 - /mnt/f = raw-footage staging (mounted, fstab drvfs). Nothing raw or heavy
   is written inside /home/muads (ext4.vhdx grows and never shrinks).
 
-## THE PIPELINE (flash era)
-Entry: tools/pod_build.py (Modal). render3d <spec> = three_scene_v2.js;
-render2d <spec> = boards_2d.py; assemble = cut footage from /vol/in/reel.mp4
-+ loop boards + mix voice/ambience → /vol/out/final_video.mp4.
-tools/produce_v2.py remains the older end-to-end entry (ESPN → script →
-validate → boards → download → cut list → voice → assemble → merge →
-shorts). Both parse scripts/<slug>.md with the same [VISUAL:] contract.
+## THE PIPELINE (flash era, brief 04)
+Entry: tools/pod_build.py (Modal; episode slug is the --slug argument, never
+a constant). render3d <spec> = three_scene_v2.js; render2d <spec> =
+board_html.js driving board_page.html in headless Chromium (the ONE 2D board
+renderer — matplotlib deleted); assemble [--slug X] = cut footage from
+/vol/in/reel.mp4 + loop boards + mix voice/ambience → /vol/out/final_video.mp4,
+with a retime pass that caps footage at its verified window, and an automatic
+pull home when --slug is given. pull <slug> re-pulls without compute.
+tools/produce_v2.py remains the older end-to-end entry; its board step emits
+specs (stats_spec/momentum_board/xg_flow_board/shotmap_board/avgpositions_board)
+and renders through the same pod_build render2d. Both parse scripts/<slug>.md
+with the same [VISUAL:] contract.
 
 Footage windows are cut from the CBS reel at verified timestamps
 (cut_list_flash.json lineage). The reel's CBS Sports / @CBSSPORTSGOLAZO /
@@ -47,8 +52,9 @@ Paramount+ watermarks are accepted (CLAUDE.md §3).
 - Gemini is RETIRED (key 402 since 2026-09-21; gemini_judge.py is in
   retired/ as a record). Cross-checks if ever needed: ~/tools/ask_claude.py
   --image (paid) and ~/tools/vision_analyze.py (gemma4, free).
-- Judge wobble is ±1-2 on identical frames; judge load-bearing scores more
-  than once and report the spread.
+- Judge wobble is a model property (6,8,6,6,8 over 5 runs at temperature 0 +
+  seed 0, 2026-09-23). Judge load-bearing scores with --runs 5 and use the
+  median (glm_judge.py implements it).
 
 ## WHAT IS BROKEN, WORST FIRST
 See STATUS.md "What is broken" — judge wobble, footage-overrun freezes
@@ -89,7 +95,9 @@ disallowed goal at reel t=90, migration phases 5-8 unfinished.
    If you did not run a command, write "not checked."
 4. Never print full API keys. Mask them.
 5. Git is the backup. Commit (with push) before any cleanup; there is no
-   Trash (CLAUDE.md §2 gives standing approval).
+   Trash (CLAUDE.md §2 gives standing approval). Exception: scripts/ is
+   gitignored, so episode scripts exist only locally + on the Modal volume
+   (GAPS #4).
 6. One change, one run, one verification. Never batch changes.
 7. Ask before guessing on unclear paths, but do not stop when a path is
    blocked — name the alternatives, pick the best, keep going (CLAUDE.md §7).

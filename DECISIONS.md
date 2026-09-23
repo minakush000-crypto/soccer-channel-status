@@ -2,7 +2,7 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-22.
+> **Last verified against code:** 2026-09-23 (the 2026-09-23 entry re-verified the files it names; earlier entries are historical).
 
 Chronological order (oldest first); append new entries at the end. Each
 entry is dated. "Why" is the actual reason, not a retcon. If a decision is
@@ -749,3 +749,74 @@ longer collide; title no longer clipped by the figure top). Outro board:
 one-composition rise instead of four popped states. Both re-rendered,
 re-assembled on Modal, and verified by frames viewed in the new
 final_video.mp4 (140.92s).
+
+## 2026-09-23 — BRIEF 04 (prove brief 03, replace the board renderer, lock the mirror)
+
+Ran by glm-5.3-flash:cloud via Claude Code (tmux). Twelve jobs + addendum, all closed; report in reports/brief04/REPORT.md.
+
+- **HTML/Playwright-class renderer adopted; matplotlib deleted (Job 3).** One
+  2D board renderer: board_page.html (canvas, 6 kinds: stats, momentum,
+  outro, xgflow, shotmap, avgpos) driven by board_html.js (puppeteer-core +
+  system Chromium) on Modal — chromium/puppeteer-core were already in the
+  pod image. boards_2d.py, board_design.py, tactical_boards.py deleted;
+  matplotlib + mplsoccer removed from requirements.txt (0 importers left,
+  numpy kept — shorts_crop.py imports it). All board content moved into the
+  spec files (was hardcoded in boards_2d draw functions).
+- **The tpad "freeze" was never real (Job 2).** assemble reads the full reel
+  with input-side -ss only, so the input stream never ends during a segment
+  encode and tpad (pads an ended stream) never fires. The two output -t flags
+  resolve to the last, so overrunning footage sections played past their
+  verified windows into unverified footage. Fix: a retime pass caps footage at
+  the window and hands the surplus (2.12s) to board sections. Dense 0.1s frame
+  scan of the archived v3 found no frozen run anywhere.
+- **Mirror locked (Job 4).** push_status.sh: vault mirroring removed (the old
+  script copied every vault .md unfiltered), allowlist = 11 project docs with
+  an empty vault list, pre-push secret scan (tokens, key assignments, emails,
+  git user.email, phones, balance/credit amounts) blocks the push on any hit,
+  log moved outside the published repo. History audit of 126 commits: no
+  secrets; the personal gmail appears only in commit-author metadata.
+- **G2 gate restored to a strict form (addendum).** Brief 03's `-viE retired`
+  exemption was looser than needed; the strict import/call form passes with 0
+  hits across all tools, so no exemption is warranted. G7/G9/G11 were wrong
+  gates (unmeetable strings/stale paths), not loosened code — diffs reviewed,
+  verdicts in the report.
+- **Episode slug is an argument (Job 7).** The dead module constant SLUG is
+  gone; assemble takes --slug (auto-pulls home) and a pull <slug> subcommand
+  replaces the manual volume-get step. Demonstrated with a different slug.
+- **Gate evidence relocated (Job 8).** Gate runs append to
+  reports/gates/brief04.log (git-ignored), never to GATES.md; a gate run
+  leaves the tree clean.
+- **iraola-liverpool archived, not migrated (Job 9).** Its 6 free-text
+  [VISUAL:] tags name boards that were never built; migrating the grammar
+  would validate an unproducible script. Moved to scripts/archived/ with the
+  rationale in a header note.
+- **Judge stabilized by procedure, not by sampler (Job 10a).** reasoning_effort
+  is silently discarded by Ollama's OpenAI shim (demonstrated: unknown params
+  accepted, no effect). Fixed seed + temperature 0 does not stabilize the
+  cloud model (6,8,6,6,8 over 5 runs). glm_judge.py gained --seed and --runs N
+  with median reporting; the median is the operative rule.
+- **Reel t=90 resolved (Job 10b).** Saved Inter shot, not a disallowed goal:
+  score bug 0-0 throughout, ball never over the line, no signal (frames in
+  reports/brief04/goal90_*). DESIGN_FLASH.md corrected. The pipeline's 3-goal
+  count was already correct; no fix needed.
+- **Migration phases 5-8 retired (Job 10c).** Never defined in any recoverable
+  source (live docs, full git history, retired tarball, claude-mem searched);
+  the only named phase (5, zero-Gemini) is done. Superseded by the flash
+  pipeline.
+- **Cleanup (Job 11).** GEMINI.md (dead Gemini CLI harness instructions) →
+  retired/GEMINI.md with a note. LANE_PLAN.md deleted: PROGRESS.md was its
+  verbatim copy plus the brief-03 log; PROGRESS.md is the single source (its
+  inherited title fixed). q1-q4_new.txt (Exa research scratch) archived to B2
+  with a manifest, then deleted.
+- **Bugs fixed during the job (counted per the global CLAUDE.md):** stale
+  350-frame v1 leftovers in /vol/out/frames_* rode along a re-render
+  (_enc_frames now sweeps the dir before rendering — moved to the render
+  functions after a first draft swept them AFTER encoding); stats board %
+  label white-on-white; stats rows clipped off-frame with 4 rows (rows now
+  bottom-anchored); goal labels double-drawn kicker in chart kinds (header
+  kinds guard); emitter scorer parse failed on Sofascore text (regex on
+  parentheses); shotmap teams attacked the wrong goal (Sofascore x is
+  distance-from-attacked-goal; page remapped; the old renderer had it wrong
+  too); a /vol/specs namespace collision put a Bournemouth board into an
+  EP001 assemble (caught by frame check; spec restored; Modal volume
+  propagation lag noted — re-ran the assemble after the volume settled).

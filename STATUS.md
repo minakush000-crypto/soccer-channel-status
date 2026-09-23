@@ -2,94 +2,84 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-22.
+> **Last verified against code:** 2026-09-23.
 
-Rewritten 2026-09-22 (brief 03) against the code on disk. Pre-flash history
-(Gemini judge era, tactical render lane, 46-tool census, staged migration
-plan) lives in DECISIONS.md, PROGRESS.md, and LANE_PLAN.md. Every claim
-below carries the command that proved it.
+Rewritten 2026-09-23 (brief 04) against the code on disk. Brief 03 history and
+pre-flash history (Gemini judge era, tactical render lane, staged migration
+plan) live in DECISIONS.md, PROGRESS.md, and retired/. Every claim below
+carries the command that proved it.
 
 ## The two entry points
 
 1. **tools/pod_build.py** — the flash pipeline (what built EP001). Runs on
-   Modal, volume "soccer-build". Subcommands:
+   Modal, volume "soccer-build". The episode slug is the CLI argument
+   (`--slug` on assemble; `pull <slug>`), never a constant (brief 04 job 7).
+   Subcommands:
    - `render3d <spec>` — node three_scene_v2.js on Modal, frames → MP4.
-   - `render2d <spec>` — boards_2d.py (matplotlib) on Modal.
-   - `assemble` — parses scripts/<slug>.md ([VISUAL: board=/footage=]
-     contract), cuts footage from /vol/in/reel.mp4, loops boards from
-     /vol/out, concats, mixes voice (1.6x) + crowd ambience (0.3x),
-     writes /vol/out/final_video.mp4. Bring home with
-     `modal volume get --force soccer-build out/final_video.mp4 <local>`.
+   - `render2d <spec>` — board_html.js drives board_page.html in headless
+     Chromium on Modal (the ONE 2D board renderer; matplotlib deleted).
+   - `assemble [--slug X]` — parses scripts/<slug>.md ([VISUAL: board=/footage=]
+     contract), cuts footage from /vol/in/reel.mp4, loops boards from /vol/out,
+     mixes voice (1.6x) + ambience (0.3x), writes /vol/out/final_video.mp4.
+     A retime pass caps every footage section at its verified window and gives
+     the surplus to board sections (brief 04 job 2); with --slug the final is
+     pulled home to renders/<slug>/ automatically.
+   - `pull <slug>` — pull the finished final home without Modal compute.
 2. **tools/produce_v2.py** — the older full-pipeline entry (ESPN match data →
-   script_gen → validate_script → tactical_boards + 3-step 2D/3D boards →
+   script_gen → validate_script → board spec emitters + 3-step 2D/3D boards →
    yt-dlp download (local or --pod-download) → cut list → ElevenLabs voice →
-   assemble → merge → shorts crop). 910 lines. Still functional; the flash
-   pipeline superseded it for EP001's build.
+   assemble → merge → shorts crop). Its board step renders through the SAME
+   HTML renderer via pod_build render2d (brief 04 job 3).
 
 ## EP001 — 2026-09-08 Real Madrid 2-1 Inter (the flash reboot episode)
 
 $ ffprobe -v error -show_entries format=duration,size -of csv=p=0 \
     renders/2026-09-08_real-madrid-inter/final_video.mp4
-140.920000,76519745
+140.960000,75684053 (v5, brief 04 boards)
 
-- Third build (v3): original flash build → goal3 board fix (Inter sub numbers
-  from the CBS lineup graphic) → brief 03 board fixes (momentum labels,
-  outro card). Voice unchanged (155.5 WPM, ElevenLabs).
+- Five builds: flash v1 → goal3 board fix (v2) → brief 03 board fixes (v3) →
+  brief 04 retime (v4) → brief 04 HTML-renderer boards (v5). Voice unchanged
+  (155.5 WPM, ElevenLabs).
 - 19 sections, 365 words: 12 footage + 7 board. Boards: 4 render3d
   (formation_clash, counter_map, goal3_pattern, valverde_strike), 3 render2d
-  (stats_possession, momentum, scoreline_outro).
-- Judge (session model, JUDGE_FLASH.md): 6-8 per frame. Mayo's verdict on
-  v2: "an improvement from previous outputs, it's a step in the right
-  direction."
-- Brief 03 fixes verified by frames viewed in the re-assembled final:
-  momentum goal labels staggered on two lanes (no overlap, title unclipped);
-  outro rises as one composition and holds complete (no four-section stepping).
+  (stats_possession, momentum, scoreline_outro) — all 2D boards now come out
+  of board_page.html (proofs in reports/brief04/board_*_old.png vs
+  board_*_new.png).
+- The "tpad freezes" of GAPS.md #3 never existed: the tpad filter is dead in
+  this invocation (input stream never ends mid-segment); the real defect was
+  footage overrunning its verified window by 0.02-1.13s. Fixed by the retime
+  pass; verified by dense frame scan + the allocation table (brief 04 job 2).
+- Judge (session model): wobble is a model property — temperature 0 + fixed
+  seed still gave 6,8,6,6,8 on one board. Rule: judge with --runs 5 and use
+  the median (glm_judge.py implements it, brief 04 job 10a).
 
-## Tool census (after brief 03 retirement)
+## Tool census (after brief 04 job 3/11)
 
-$ ls tools/ | grep -v "__pycache__\|USAGE" | wc -l
-40
+$ ls tools/ | grep -v "__pycache__\|USAGE" | wc -l  →  39
 
-37 .py + 2 .js + watchlist.yaml. 25 files retired 2026-09-22 per call graph
-(tarball + manifest in b2:mendymax-archive/soccer-channel/2026-09-23/; git
-commit 3d31f0e). Live tool classes:
-- Pipeline (reachable): produce_v2, pod_build, match_data, script_gen,
-  validate_script, transformation_gate, tactical_boards, board_design,
-  xg_flow_board, shotmap_board, momentum_board, avgpositions_board,
-  boards_2d, three_render3d, three_scene.js, three_scene_v2.js,
-  broadcast_filler, cut_list_gen, ffmpeg_utils, staging, runpod_download,
-  generate_voice, generate_ambience, merge_voice, shorts_crop, script_utils.
-- Hand-run operating tools (kept deliberately, each import-smoke-tested):
-  glm_judge (the judge), scoreboard_scan (ground-truth goal finding),
-  viral_angle + agent_reach_research + fresh_fetch (topic research),
-  youtube_upload + oauth_setup (publishing), thumbnail_generator,
-  b2_archive (B2 + provenance), backup_env, pod_check + doc_stamp_check
-  (both wired into SessionStart hooks).
-- Models: glm-5.3-flash:cloud only (session model, judge, vision). Gemini is
-  RETIRED (API key 402 RESOURCE_EXHAUSTED since 2026-09-21; gemini_judge.py
-  sits in retired/ as a record). ElevenLabs: voice + ambience, working.
+35 .py + 3 .js (three_scene.js, three_scene_v2.js, board_html.js) +
+watchlist.yaml. 25 WIRED, 13 HAND-RUN (full table in TOOLS.md, computed by a
+transitive walk 2026-09-23). matplotlib is gone from requirements.txt and
+from every tool (grep: 0 importers).
 
 ## What is broken, worst first
 
-1. **Judge wobble.** The session judge scores ±1-2 on identical frames
-   (measured 2026-09-22: nine runs at temperature 0 gave 3-5 on one frame).
-   reasoning_effort does not reach the model through Ollama. Known, not
-   fixed; load-bearing scores need multiple judge runs with the spread
-   reported.
-2. **Footage overruns produce short freezes.** 4 of 12 footage sections get
-   a tpad last-frame clone (holds 0.1-1.1s; worst: "The save" seg12, 1.1s)
-   because allocated duration exceeds the verified window. Cosmetic but
-   visible. Fix would reallocate duration or trim windows; not done in
-   brief 03.
-3. **Public mirror content risk (flagged, not fixed).** push_status.sh
-   copies vault markdown to github.com/minakush000-crypto/
-   soccer-channel-status with no content filter (only files literally named
-   .env are deleted). Anything sensitive in a vault markdown file is
-   published. Needs an owner decision on a content filter.
-4. **Unclaimed possible disallowed goal at reel t=90.** Unresolved; would
-   change goal3 narration if confirmed.
-5. **Migration phases 5-8 unfinished.** Superseded in priority by the
-   benchmark-first approach; the flash pipeline is the working path.
+1. **Judge wobble is a model property.** ±2 across 5 runs at temperature 0 +
+   seed 0 (measured 2026-09-23). Median-of-N (--runs) is the mitigation;
+   single-shot scores are not load-bearing.
+2. **/vol/specs is a single-episode namespace.** Two episodes emitting the
+   same spec name (momentum.json) collide on the Modal volume; the collision
+   put a Bournemouth board into an EP001 assemble before it was caught
+   (2026-09-23). pod_build needs per-slug spec paths or a sync step that
+   puts only the current episode's specs.
+3. **Two 3D scene engines coexist.** three_scene.js (produce_v2 formation)
+   and three_scene_v2.js (flash named boards) overlap in capability. Both
+   are wired; consolidation is a candidate for a later brief.
+4. **scripts/ is gitignored** (soccer-channel/.gitignore:4). Episode scripts
+   exist only locally + on the Modal volume. A copy loss loses the pipeline
+   input of record.
+5. **Legacy vault files remain published** in the public mirror (17 files,
+   published before the brief 04 allowlist). Removal is Mayo's decision.
 
 ## Hand-run command reference
 
@@ -97,10 +87,11 @@ commit 3d31f0e). Live tool classes:
 |------|---------|
 | Render a 3D board (Modal) | ~/yt-digest/.venv/bin/python tools/pod_build.py render3d <spec> |
 | Render a 2D board (Modal) | ~/yt-digest/.venv/bin/python tools/pod_build.py render2d <spec> |
-| Assemble the episode (Modal) | ~/yt-digest/.venv/bin/python tools/pod_build.py assemble |
-| Pull the final home | ~/yt-digest/.venv/bin/modal volume get --force soccer-build out/final_video.mp4 renders/<slug>/final_video.mp4 |
-| Judge a frame | ~/yt-digest/.venv/bin/python tools/glm_judge.py --image <file> "prompt" |
-| Full pipeline (older path) | ~/yt-digest/.venv/bin/python tools/produce_v2.py <slug> --query "<match>" |
+| Assemble + pull home | ~/yt-digest/.venv/bin/python tools/pod_build.py assemble --slug <slug> |
+| Pull the final home | ~/yt-digest/.venv/bin/python tools/pod_build.py pull <slug> |
+| Judge a frame (stable) | ~/yt-digest/.venv/bin/python tools/glm_judge.py --image <file> --runs 5 "<prompt>" (use the median) |
+| Emit board specs from live data | tools/stats_spec.py / momentum_board.py / xg_flow_board.py / shotmap_board.py / avgpositions_board.py --slug <slug> |
+| Full pipeline (long lane) | ~/yt-digest/.venv/bin/python tools/produce_v2.py <slug> --query "<match>" |
 | Archive to B2 with manifest | ~/yt-digest/.venv/bin/python tools/b2_archive.py --file <f> --project soccer-channel --task "<t>" --produced-by "<model> via Claude Code" |
 | Upload to YouTube (private) | ~/yt-digest/.venv/bin/python tools/youtube_upload.py |
 | Topic research | tools/viral_angle.py, tools/agent_reach_research.py, tools/fresh_fetch.py |
@@ -108,14 +99,18 @@ commit 3d31f0e). Live tool classes:
 
 ## Facts that were measured, do not re-derive
 
-- Output is 1920x1080 (pod_build FOOT/SCALE filters). ffprobe verified.
-- Ball detection on compressed wide-shot reuploads is dead (8/12 frames no
-  ball). Anchor to players only. cv_annotate (retired 2026-09-22) was the
-  tracking implementation; git history holds it.
-- Scoreboard scanner beats LLM video reading on timestamps (Stage 15 litmus:
-  scanner 4/4 goals, 0 phantoms, free vs Gemini 2/4, 1 phantom, paid).
-  Gemini never returned for this; glm video reading has the same known
-  weakness on WHEN.
+- Output is 1920x1080. ffprobe verified every build.
+- Sofascore shotmap playerCoordinates: x measures distance from the goal the
+  team ATTACKS (bournemouth event: goals at x=11-15, per-side means ~13,
+  measured 2026-09-23). The board page maps home to (100-x) [right goal] and
+  away to x [left goal]. The old matplotlib renderer plotted raw x and showed
+  teams attacking the wrong end.
+- Scoreboard scanner beats LLM video reading on timestamps (Stage 15 litmus).
+  Use the scanner for WHEN; the session model for WHAT.
+- Modal costs (measured 2026-09-23 from `modal billing report --for today`):
+  14 runs = $0.1004; month-to-date metered $1.78, billed $0.00 (credits).
 - The B2 bucket is the archive of record: rclone remote "b2", bucket
   "mendymax-archive", per-project prefix, manifests written by
   tools/b2_archive.py at archive time.
+- The public mirror is allowlist+scan locked (brief 04 job 4): 11 project
+  docs, empty vault list, secret scan blocks the push on any hit.
