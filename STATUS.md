@@ -2,7 +2,7 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-23.
+> **Last verified against code:** 2026-09-23 (brief 05).
 
 Rewritten 2026-09-23 (brief 04) against the code on disk. Brief 03 history and
 pre-flash history (Gemini judge era, tactical render lane, staged migration
@@ -15,15 +15,18 @@ carries the command that proved it.
    Modal, volume "soccer-build". The episode slug is the CLI argument
    (`--slug` on assemble; `pull <slug>`), never a constant (brief 04 job 7).
    Subcommands:
-   - `render3d <spec>` — node three_scene_v2.js on Modal, frames → MP4.
-   - `render2d <spec>` — board_html.js drives board_page.html in headless
-     Chromium on Modal (the ONE 2D board renderer; matplotlib deleted).
+   - `render3d <spec> --slug <slug>` — node three_scene_v2.js on Modal;
+     specs at /vol/specs/<slug>/, output at /vol/out/<slug>/. A spec whose
+     slug field contradicts the episode is REFUSED (brief 05 job 8).
+   - `render2d <spec> --slug <slug>` — board_html.js drives board_page.html
+     in headless Chromium on Modal (the ONE 2D board renderer; matplotlib
+     deleted), same per-episode namespace and refusal.
    - `assemble [--slug X]` — parses scripts/<slug>.md ([VISUAL: board=/footage=]
-     contract), cuts footage from /vol/in/reel.mp4, loops boards from /vol/out,
-     mixes voice (1.6x) + ambience (0.3x), writes /vol/out/final_video.mp4.
-     A retime pass caps every footage section at its verified window and gives
-     the surplus to board sections (brief 04 job 2); with --slug the final is
-     pulled home to renders/<slug>/ automatically.
+     contract), cuts footage from /vol/in/reel.mp4, loops boards from
+     /vol/out/<slug>/ (verifying every board's spec slug), mixes voice (1.6x)
+     + ambience (0.3x), writes /vol/out/<slug>/final_video.mp4 and pulls it
+     home to renders/<slug>/ automatically. A retime pass caps every footage
+     section at its verified window (brief 04 job 2).
    - `pull <slug>` — pull the finished final home without Modal compute.
 2. **tools/produce_v2.py** — the older full-pipeline entry (ESPN match data →
    script_gen → validate_script → board spec emitters + 3-step 2D/3D boards →
@@ -35,11 +38,14 @@ carries the command that proved it.
 
 $ ffprobe -v error -show_entries format=duration,size -of csv=p=0 \
     renders/2026-09-08_real-madrid-inter/final_video.mp4
-140.960000,75684053 (v5, brief 04 boards)
+140.960000,<size> (v6, brief 05 boards — ffprobe at the Job 11 close)
 
-- Five builds: flash v1 → goal3 board fix (v2) → brief 03 board fixes (v3) →
-  brief 04 retime (v4) → brief 04 HTML-renderer boards (v5). Voice unchanged
-  (155.5 WPM, ElevenLabs).
+- Six builds: flash v1 → goal3 board fix (v2) → brief 03 board fixes (v3) →
+  brief 04 retime (v4) → brief 04 HTML-renderer boards (v5) → brief 05
+  data-fix + balanced outro boards (v6). Voice unchanged (155.5 WPM,
+  ElevenLabs). Facts file: renders/2026-09-08_real-madrid-inter/match_data.json
+  (tracked, Sofascore event 16938768, fetched_at inside; lineups + average
+  positions included).
 - 19 sections, 365 words: 12 footage + 7 board. Boards: 4 render3d
   (formation_clash, counter_map, goal3_pattern, valverde_strike), 3 render2d
   (stats_possession, momentum, scoreline_outro) — all 2D boards now come out
@@ -53,40 +59,34 @@ $ ffprobe -v error -show_entries format=duration,size -of csv=p=0 \
   seed still gave 6,8,6,6,8 on one board. Rule: judge with --runs 5 and use
   the median (glm_judge.py implements it, brief 04 job 10a).
 
-## Tool census (after brief 04 job 3/11)
+## Tool census (after brief 05 job 7)
 
-$ ls tools/ | grep -v "__pycache__\|USAGE" | wc -l  →  39
+$ ls tools/ | grep -v "__pycache__\|USAGE" | wc -l  →  38
 
-35 .py + 3 .js (three_scene.js, three_scene_v2.js, board_html.js) +
-watchlist.yaml. 25 WIRED, 13 HAND-RUN (full table in TOOLS.md, computed by a
-transitive walk 2026-09-23). matplotlib is gone from requirements.txt and
-from every tool (grep: 0 importers).
+35 .py + 2 .js (three_scene_v2.js, board_html.js) + watchlist.yaml.
+24 WIRED .py + 2 .js, 13 HAND-RUN (full table in TOOLS.md, computed by a
+transitive walk 2026-09-23). three_render3d.py + three_scene.js (the v1 3D
+engine) retired to retired/ — v1 required a full puppeteer install that
+exists nowhere in this environment; v2 is spec-driven and produced EP001's
+3D boards.
 
 ## What is broken, worst first
 
 1. **Judge wobble is a model property.** ±2 across 5 runs at temperature 0 +
    seed 0 (measured 2026-09-23). Median-of-N (--runs) is the mitigation;
    single-shot scores are not load-bearing.
-2. **/vol/specs is a single-episode namespace.** Two episodes emitting the
-   same spec name (momentum.json) collide on the Modal volume; the collision
-   put a Bournemouth board into an EP001 assemble before it was caught
-   (2026-09-23). pod_build needs per-slug spec paths or a sync step that
-   puts only the current episode's specs.
-3. **Two 3D scene engines coexist.** three_scene.js (produce_v2 formation)
-   and three_scene_v2.js (flash named boards) overlap in capability. Both
-   are wired; consolidation is a candidate for a later brief.
-4. **scripts/ is gitignored** (soccer-channel/.gitignore:4). Episode scripts
-   exist only locally + on the Modal volume. A copy loss loses the pipeline
-   input of record.
-5. **Legacy vault files remain published** in the public mirror (17 files,
-   published before the brief 04 allowlist). Removal is Mayo's decision.
+2. **Every number is now mechanically checked** (brief 05 job 3):
+   tools/board_data_check.py runs as produce_v2 step 1d and as gate B16; any
+   board number contradicting match_data.json fails the build. GAPS #1-#4 of
+   the brief-05 brief are closed: stats rows, momentum fill, facts file,
+   scripts/ tracked, vault removed, one 3D engine, spec namespaces.
 
 ## Hand-run command reference
 
 | Task | Command |
 |------|---------|
-| Render a 3D board (Modal) | ~/yt-digest/.venv/bin/python tools/pod_build.py render3d <spec> |
-| Render a 2D board (Modal) | ~/yt-digest/.venv/bin/python tools/pod_build.py render2d <spec> |
+| Render a 3D board (Modal) | ~/yt-digest/.venv/bin/python tools/pod_build.py render3d <spec> --slug <slug> |
+| Render a 2D board (Modal) | ~/yt-digest/.venv/bin/python tools/pod_build.py render2d <spec> --slug <slug> |
 | Assemble + pull home | ~/yt-digest/.venv/bin/python tools/pod_build.py assemble --slug <slug> |
 | Pull the final home | ~/yt-digest/.venv/bin/python tools/pod_build.py pull <slug> |
 | Judge a frame (stable) | ~/yt-digest/.venv/bin/python tools/glm_judge.py --image <file> --runs 5 "<prompt>" (use the median) |
@@ -113,4 +113,8 @@ from every tool (grep: 0 importers).
   "mendymax-archive", per-project prefix, manifests written by
   tools/b2_archive.py at archive time.
 - The public mirror is allowlist+scan locked (brief 04 job 4): 11 project
-  docs, empty vault list, secret scan blocks the push on any hit.
+  docs, empty vault list, secret scan blocks the push on any hit. The 16
+  legacy vault files were removed from the mirror HEAD on 2026-09-23
+  (scanned clean first; history kept, brief 05 job 5).
+- Sofascore average-positions averageX/averageY are 0-100 already (do NOT
+  scale); lineups give formation + 11 starters per side.

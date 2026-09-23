@@ -2,7 +2,7 @@
 
 > **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
 > **Reader:** every session (CLAUDE.md @CONTEXT.md).
-> **Last verified against code:** 2026-09-23.
+> **Last verified against code:** 2026-09-23 (brief 05).
 
 Rewritten 2026-09-22 (brief 03) against the code on disk. Read STATUS.md for
 the verified state spine and DECISIONS.md for why things are the way they are.
@@ -30,12 +30,17 @@ The project is /home/muads/yt-digest/soccer-channel. Nothing else.
 
 ## THE PIPELINE (flash era, brief 04)
 Entry: tools/pod_build.py (Modal; episode slug is the --slug argument, never
-a constant). render3d <spec> = three_scene_v2.js; render2d <spec> =
-board_html.js driving board_page.html in headless Chromium (the ONE 2D board
-renderer — matplotlib deleted); assemble [--slug X] = cut footage from
-/vol/in/reel.mp4 + loop boards + mix voice/ambience → /vol/out/final_video.mp4,
-with a retime pass that caps footage at its verified window, and an automatic
-pull home when --slug is given. pull <slug> re-pulls without compute.
+a constant). render3d/render2d take --slug: specs at /vol/specs/<slug>/,
+boards at /vol/out/<slug>/; a spec whose slug contradicts the episode is
+REFUSED (brief 05 job 8 — no more cross-episode board rides). render2d =
+board_html.js driving board_page.html in headless Chromium (the ONE 2D
+renderer — matplotlib deleted); render3d = three_scene_v2.js (the ONE 3D
+engine — three_scene.js/three_render3d.py retired in brief 05 job 7).
+assemble [--slug X] cuts footage + loops boards + mixes voice/ambience with
+a retime pass, and auto-pulls the final home. pull <slug> re-pulls without
+compute. FACTS: renders/<slug>/match_data.json is tracked (input of record)
+and tools/board_data_check.py (produce_v2 step 1d, gate B16) fails the build
+when any board number contradicts it for the same team.
 tools/produce_v2.py remains the older end-to-end entry; its board step emits
 specs (stats_spec/momentum_board/xg_flow_board/shotmap_board/avgpositions_board)
 and renders through the same pod_build render2d. Both parse scripts/<slug>.md
@@ -55,6 +60,8 @@ Paramount+ watermarks are accepted (CLAUDE.md §3).
 - Judge wobble is a model property (6,8,6,6,8 over 5 runs at temperature 0 +
   seed 0, 2026-09-23). Judge load-bearing scores with --runs 5 and use the
   median (glm_judge.py implements it).
+- Stats board team sides: home LEFT, away RIGHT everywhere (bar, header,
+  rows). GATE: reports/brief05/ board pairs prove the brief-05 fixes.
 
 ## WHAT IS BROKEN, WORST FIRST
 See STATUS.md "What is broken" — judge wobble, footage-overrun freezes

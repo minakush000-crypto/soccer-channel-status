@@ -127,3 +127,7 @@ commit leaves the tree clean.
   CHECK: git add -A >/dev/null 2>&1; test -z "$(git status --porcelain)" && echo CLEAN
   EXPECT: CLEAN
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=0b98843240a0b1a2384483206c02be8968dd809eb73838820be24cb7d6d6aeb9; output-bytes=6
+- [x] B16: board numbers mechanically match the facts file (brief 05 job 3)
+  CHECK: ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-08_real-madrid-inter
+  EXPECT: DATA-CHECK OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=cc249751c95ed748eee25c15b67208aa4ade368da898c3f2fc6538fc1e3d7d72; output-bytes=118

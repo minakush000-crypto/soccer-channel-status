@@ -2,26 +2,26 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-09-23.
+> **Last verified against code:** 2026-09-23 (brief 05).
 
-Rebuilt 2026-09-23 (brief 04 job 12) by command, not by hand: the census
-script below walks the two entry points over python imports and subprocess/
-argv invocations (including stem-name invocation without the .py suffix,
-which is how produce_v2.py calls the spec emitters). 25 files retired
-2026-09-22 (git 3d31f0e); boards_2d.py, board_design.py and tactical_boards.py
-retired 2026-09-23 (brief 04 job 3, matplotlib deletion). Full history of
-retired tools is in git and DECISIONS.md.
+Rebuilt 2026-09-23 (brief 05 job 12) by command, not by hand: the census
+script walks the two entry points over python imports and subprocess/argv
+invocations (including stem-name invocation without the .py suffix, which is
+how produce_v2.py calls the spec emitters). Retirements: 25 files (brief 03,
+git 3d31f0e), boards_2d/board_design/tactical_boards (brief 04 job 3,
+matplotlib deletion), three_scene.js + three_render3d.py (brief 05 job 7,
+the v1 3D engine that cannot run in this environment). Full history of
+retired tools is in git, DECISIONS.md and retired/RETIREMENT_NOTES.md.
 
 ## Census (computed 2026-09-23 by the transitive walk in the session log)
 
-$ ls tools/ | grep -v "__pycache__\|USAGE" | wc -l  →  39
+$ ls tools/ | grep -v "__pycache__\|USAGE" | wc -l  →  38
 
-35 .py + 3 .js + watchlist.yaml. 25 WIRED (22 .py reachable from an entry
-point + 3 .js driven by wired callers), 13 HAND-RUN (deliberately kept
-operating tools), 1 data file. No DEAD class exists — anything dead is
-deleted or in retired/.
+35 .py + 2 .js (three_scene_v2.js, board_html.js) + watchlist.yaml.
+24 WIRED .py + 2 .js, 13 HAND-RUN (deliberately kept operating tools),
+1 data file. No DEAD class exists — anything dead is deleted or in retired/.
 
-## The 39 files
+## The 38 files
 
 | File | Class | Called by (file:line) | Notes |
 |---|---|---|---|
@@ -29,15 +29,14 @@ deleted or in retired/.
 | `pod_build.py` | WIRED (entry) | nothing (entry point) | flash pipeline on Modal: render3d/render2d/assemble/pull; `--slug` is the episode argument (brief 04 job 7) |
 | `match_data.py` | WIRED | produce_v2.py:85 | ESPN facts (the only fact source) |
 | `stats_spec.py` | WIRED | produce_v2.py:102 | emits stat_card + possession specs from match_data (replaces tactical_boards, brief 04) |
-| `momentum_board.py` | WIRED | produce_v2.py:102 | emits momentum.json from Sofascore /graph (brief 04: spec emitter, not a renderer) |
+| `momentum_board.py` | WIRED | produce_v2.py:102 | emits momentum.json from Sofascore /graph (spec emitter; renders nothing — brief 04) |
 | `xg_flow_board.py` | WIRED | produce_v2.py:102 | emits xg_flow.json from Sofascore /shotmap |
 | `shotmap_board.py` | WIRED | produce_v2.py:102 | emits shotmap.json from Sofascore /shotmap |
 | `avgpositions_board.py` | WIRED | produce_v2.py:102 | emits avgpositions.json from match_data |
 | `board_html.js` | WIRED | pod_build.py:88 (Modal) | puppeteer-core driver: renders board_page.html frames in headless Chromium — THE 2D board renderer |
 | `board_page.html` | WIRED | board_html.js | the one HTML/CSS/canvas 2D board page (kinds: stats, momentum, outro, xgflow, shotmap, avgpos) |
-| `three_render3d.py` | WIRED | produce_v2.py:133 | drives three_scene.js via Puppeteer (formation board) |
-| `three_scene.js` | WIRED | three_render3d.py:29 | 3D formation renderer (produce_v2 path) |
-| `three_scene_v2.js` | WIRED | pod_build.py:63 (Modal) | spec-driven 3D board renderer (flash path) |
+| `three_scene_v2.js` | WIRED | pod_build.py:~71 (Modal) | spec-driven 3D board renderer — the ONE 3D engine (v1 retired brief 05 job 7) |
+| `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16 | every board number must match match_data.json by team NAME (brief 05 job 3) |
 | `script_gen.py` | WIRED | produce_v2.py:372 | lane script draft |
 | `validate_script.py` | WIRED | produce_v2.py:386; tests | grammar + source validation |
 | `transformation_gate.py` | WIRED | produce_v2.py:667 | lane D floor |

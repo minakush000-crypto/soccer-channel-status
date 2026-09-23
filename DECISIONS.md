@@ -2,7 +2,7 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-23 (the 2026-09-23 entry re-verified the files it names; earlier entries are historical).
+> **Last verified against code:** 2026-09-23 (brief 05 entries re-verify the files they name; earlier entries are historical).
 
 Chronological order (oldest first); append new entries at the end. Each
 entry is dated. "Why" is the actual reason, not a retcon. If a decision is
@@ -820,3 +820,47 @@ Ran by glm-5.3-flash:cloud via Claude Code (tmux). Twelve jobs + addendum, all c
   too); a /vol/specs namespace collision put a Bournemouth board into an
   EP001 assemble (caught by frame check; spec restored; Modal volume
   propagation lag noted — re-ran the assemble after the volume settled).
+
+
+## 2026-09-23 — BRIEF 05 (fix the board bugs, tie every number to data, close the leftovers)
+
+Ran by glm-5.3-flash:cloud via Claude Code (tmux). Twelve jobs in order; report
+in reports/brief05/REPORT.md.
+
+- **scripts/ tracked (job 4, Mayo decision).** soccer-channel/.gitignore line
+  removed; 17 episode + test scripts committed (108K, no secrets, nothing over
+  500k). Same fix as briefs/ at 6d2785d.
+- **17 legacy vault files removed from the mirror HEAD (job 5, Mayo
+  decision).** Scanned first with the push_status secret patterns: 0 hits.
+  History NOT rewritten. LANE_PLAN.md (deleted from source in brief 04)
+  removed from the mirror too; the mirror HEAD is now exactly the 12
+  allowlisted docs.
+- **GATES evidence committed after each run (job 6, Mayo decision).** Written
+  into CLAUDE.md section 13; demonstrated by the B16 cycle (gate run → commit
+  → clean git status). The unlazy runner's EVIDENCE lines in GATES.md are the
+  record; reports/gates/*.log stays the git-ignored human-readable log.
+- **Board data check added (job 3).** Every number on a board must match
+  match_data.json for the same team (matched by NAME, never position).
+  Wired as produce_v2 step 1d and gate B16. match_data.json is now a tracked
+  input of record (renders/*/match_data.json un-ignored). Sofascore confirmed
+  every EP001 spec number (coordinator's ◑ on Inter 21/7/11 is now ●).
+- **One 3D engine (job 7).** three_render3d.py + three_scene.js retired to
+  retired/ (v1 needs a full puppeteer install that exists nowhere in this
+  environment; Modal render attempt -> MODULE_NOT_FOUND). three_scene_v2.js
+  kept (spec-driven, produced EP001's four 3D boards). produce_v2's formation
+  step renders formation*.json specs through pod_build render3d --slug.
+- **Per-episode spec namespaces (job 8).** /vol/specs/<slug>/ and
+  /vol/out/<slug>/; render2d/render3d/assemble refuse a spec whose slug field
+  contradicts the episode. Demonstrated: a bournemouth spec in the EP001
+  namespace was refused. produce_v2 step2 put/render/get slug-keyed.
+- **Bugs fixed (counted per the global CLAUDE.md):** stats board rows were
+  mirrored (away values under the home name; job 1, all other kinds swept);
+  momentum fill was clamped to max/min(0,v) and departed from the line at
+  every zero crossing (rewritten as same-sign runs split at interpolated
+  crossings; y-scale restored; +MADRID/-INTER key moved inside the plot;
+  goal-label lanes moved to 1.58/1.16 after the key collided with the
+  MBAPPE label); outro layout rebalanced (everything centered on the frame
+  axis); stats source tag corrected ESPN -> Sofascore.
+- **Facts file enriched (job 3/7).** Sofascore lineups (formations 4-3-3 v
+  3-5-2, 11 starters each) and average positions (14+16 players,
+  averageX/averageY already 0-100 - do not scale) added to match_data.json.
