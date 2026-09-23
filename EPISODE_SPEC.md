@@ -1,5 +1,16 @@
 # EPISODE_SPEC.md — measurable definition of a finished episode
 
+> **UNDER REVIEW (2026-09-16 decision, unchanged).** Do not score episodes
+> against this spec. Brief 03 note (2026-09-22): every Gemini reference in
+> this document is historical (gemini_judge.py retired; the judge is the
+> session model via tools/glm_judge.py), the §9B tactical_render.py mention
+> describes a tool deleted in Stage 14, and the text-only-model premise of
+> §9 is void (the session model is multimodal). The spec content itself is
+> NOT re-verified or rewritten pending the owner's format review; the stamp
+> below is therefore left at its last full-verification date for the parts
+> that were verified then.
+>
+
 > **Purpose:** defines a finished soccer tactical-analysis episode in measurable
 > terms. Every number traces to a Stage 9A measurement of a real reference
 > video (raw data + commands in LANE_PLAN.md §Stage 9). No number that cannot

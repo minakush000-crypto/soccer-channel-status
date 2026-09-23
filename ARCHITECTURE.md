@@ -2,24 +2,23 @@
 
 > **Purpose:** code map — which tool calls which, the produce_v2 pipeline.
 > **Reader:** every session (CLAUDE.md loads it).
-> **Last verified against code:** 2026-09-13.
+> **Last verified against code:** 2026-09-22.
 
-Verified against code on 2026-09-13 (Stage 14: step4b RETIRED, 3D formation
-board wired into step2_boards, .script_verified voice gate, step5_assemble
-rewritten with footage <=20% cap, 3rd SessionStart hook; B2 archive path
-added, all step line numbers re-grepped against the current 867-line file).
-Every line number is from `wc -l` / `grep -n` against the file on disk today.
-If a line moved, re-read. This rebuild supersedes the 2026-09-05 and
-2026-09-09 versions; the 2026-09-05 step-4 wiring (`tactical_overlay` at
-`produce_v2.py:232`) and the 2026-09-09 step4b_tactical_render (at
-`produce_v2.py:211`) are both gone.
+Verified against code on 2026-09-22 (brief 03: 25 tools retired, entry points
+are produce_v2.py (910 lines) + pod_build.py (204 lines, the flash pipeline
+that built EP001); produce_episode.py and the whole tracking lane are
+retired; the dead tactical_path plumbing was removed). Line numbers re-grepped
+against the file on disk today; if a line moved, re-read. Older versions of
+this doc described the tactical_overlay (2026-09-05) and step4b (2026-09-09)
+wiring; both are long gone.
 
 ## Entry points (two)
 
 | Entry point | Status | Evidence |
 |---|---|---|
-| `tools/produce_v2.py` (867 lines) | Authoritative | `grep -n "^def main"` → `724:def main():`; nothing calls it. `RENDERS = SCRIPT_DIR / "renders"` (line 38) is the local working-copy dir; B2 is the archive of record (see "B2 archive of record" below). |
-| `tools/produce_episode.py` (529 lines) | Older, separate | calls `cv_annotate.py:298`, `assemble_video.py:313`, `validate_script.py:162`, `tactical_boards.py:180`, `generate_ambience.py:334`, `generate_voice.py:349`, `merge_voice.py:346`. NOT reachable from produce_v2 |
+| `tools/pod_build.py` (204 lines) | The flash pipeline (built EP001) | Modal app "soccer-flash-build"; `render3d <spec>` → node three_scene_v2.js; `render2d <spec>` → boards_2d.py; `assemble` → script parse + footage cuts + board loops + voice/ambience mix on volume "soccer-build". SLUG hardcoded at pod_build.py:25. |
+| `tools/produce_v2.py` (910 lines) | Older end-to-end entry | `grep -n "^def main"`; nothing calls it. `RENDERS` (line 39) is the local working-copy dir; B2 is the archive of record. |
+| `tools/produce_episode.py` | RETIRED 2026-09-22 | was the oldest entry point; deleted with the other 24 retired tools (git 3d31f0e). |
 
 Run command (matches `produce_v2.py:10`):
 `~/yt-digest/.venv/bin/python tools/produce_v2.py <slug> --query "<match>" --date-range YYYYMMDD-YYYYMMDD`
@@ -88,10 +87,10 @@ runpod_fulltrack: 0 mention(s)
 - `broadcast_filler.py`, `cut_list_gen.py`, `script_gen.py`, `transformation_gate.py` — IS now wired (step4a/step1b/step5b). Stage 12B.
 - `three_render3d.py` — IS now wired (step2_boards, line 110). Stage 14.
 - `youtube_upload.py` — no upload step in produce_v2. Uploads happen by hand (2 entries in `artifacts/publish-log/`).
-- `cv_annotate.py` — not called locally; not shipped by produce_v2. `runpod_fulltrack.py:101` ships it to RunPod, but runpod_fulltrack is no longer called by produce_v2 (step4b RETIRED Stage 14).
-- `runpod_fulltrack.py` — 0 mentions in produce_v2 (step4b retired Stage 14). Still exists on disk; callable standalone.
-- `tactical_render.py` — DELETED (git-rm'd Stage 14). RETIRED.
-- `pitch_radar.py` — DELETED. Never shipped by runpod_fulltrack (line 101 ships only cv_annotate.py + ffmpeg_utils.py).
+- `cv_annotate.py`, `runpod_fulltrack.py`, `segment_scorer.py` — RETIRED 2026-09-22 (tracking lane; nothing live reads tracking JSONs). Git + B2 hold them.
+- `tactical_render.py` — DELETED (git-rm'd Stage 14). `pitch_radar.py` — DELETED earlier.
+- `produce_episode.py`, `cloud_produce.py`, `assemble_video.py`, `assemble_words_match.py` — RETIRED 2026-09-22 (old entries/pipelines).
+- `youtube_upload.py` — no upload step in produce_v2. Uploads happen by hand (2 entries in `publish-log/`).
 
 ## 200MB local-video guard (new, 2026-09-08)
 
@@ -176,25 +175,17 @@ migration, and whether a `step9_archive` function has been added.
 
 ```
 $ ls -d renders/*/
-renders/2026-08-18_iraola-liverpool/
-renders/2026-08-30_liverpool-forest/
-renders/2026-08-30_liverpool-forest_sep1/
-renders/2026-09-06_arsenal-chelsea/
+renders/2026-09-08_real-madrid-inter/
+renders/2026-09-08_real-madrid-inter2/
 renders/2026-09-12_bournemouth-brentford/
-renders/2026-09-12_preview-manc-derby/
-renders/_20min_test/
-renders/_fullmatch_arsenal-chelsea-carabao/
-renders/_real_soccer_test/
-renders/_sharp_test/
+renders/2026-09-12_bournemouth-brentford-gemini/
 ```
 
-Latest produce_v2.py output (liverpool-forest shorts): 720x1280, 62.3s,
-24.8MB, Sep 7 (unchanged). The 2026-09-06_arsenal-chelsea dir was originally
-built with `assemble_words_match.py` (a standalone, words-match-pictures
-path), NOT produce_v2: 1280x720, 45.2s, 15.0MB, Sep 8. (File overwritten
-Stage 12B; now 1920x1080, 724.0s, 210.5MB.) `_fullmatch_arsenal-chelsea-carabao`
-is an incomplete manual download (only match_data.json; the .part was deleted
-2026-09-08, see RECONCILIATION 1.5/1.6).
+(The ten pre-flash render dirs were archived to B2 and deleted locally,
+2026-09-13.) Latest episode output: renders/2026-09-08_real-madrid-inter/
+final_video.mp4 — 140.92s, 76.5MB, 1920x1080 (EP001 v3, brief 03 board fixes;
+ffprobe verified 2026-09-22). `_fullmatch_arsenal-chelsea-carabao` and the
+other scratch dirs are gone.
 
 ## STANDING OPERATING DOCTRINE
 1. Raw footage is acquired over the residential connection, staged on /mnt/f,
@@ -216,15 +207,13 @@ is an incomplete manual download (only match_data.json; the .part was deleted
    you chose. Stopping at the first wall is only acceptable when every
    alternative has been named and priced.
 
-The truthful gap list (which tools violate rules 1 and 3 today) lives in
-DECISIONS.md under this same heading. The current pipeline violates rule 1
-(produce_v2 runs locally except step3 --pod-download). Rule 3 improved Stage
-12B: 5 tools wired (script_gen, validate_script, broadcast_filler,
-cut_list_gen, transformation_gate) → 14 WIRED, 22 STANDALONE remaining (was
-27). Stage 14: runpod_fulltrack unwired (step4b retired), modal_render3d
-wired (step2_boards) — net unchanged, 14 WIRED, 22 STANDALONE. Verified: 13
-tools called via `TOOLS /` in produce_v2.py + `staging` import = 14 wired; 47
-total tools. The 22 STANDALONE tools are the remaining rule-3 debt.
+Rule 3 status after brief 03 (2026-09-22): the census is 26 WIRED + 13
+HAND-RUN (each a deliberate operating tool: judge, research, publishing,
+archive, hook checks) + 1 data file; 25 files retired. No DEAD class exists.
+The full census lives in TOOLS.md. Rule 1 (nothing heavy on the local N150)
+is satisfied for the flash pipeline (pod_build runs on Modal); produce_v2's
+local download path remains the exception (--pod-download is the compliant
+path).
 ## Skill auto-activation (Stage 12C)
 
 A skill-activation layer sits in the project's `.claude/` (installed from

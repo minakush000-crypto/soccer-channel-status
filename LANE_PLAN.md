@@ -2,7 +2,12 @@
 
 > **Purpose:** the four-lane (A/B/C/D) expansion build ledger; each stage appends its findings here.
 > **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Line-drift corrections applied 2026-09-13 (Stage-12B rewrite of produce_v2.py + Stage-14 retirement of step4b/tactical_render.py shifted cited line numbers; all re-grep'd against current code).
-> **Last verified against code:** 2026-09-13.
+> **Last verified against code:** 2026-09-22 (historical stage log; nothing
+> in it is wired at runtime, so no claims were re-verified against code this
+> pass. The lane word budgets are enforced by validate_script.py, the lane
+> table by produce_v2.py main(); both re-verified via tests/test_pipeline.py
+> and the brief 03 census. The migration phases it plans are superseded by
+> the flash pipeline, see DECISIONS.md 2026-09-21/22.)
 
 Originally verified against code on 2026-09-08; line-drift corrections applied
 2026-09-13 (all produce_v2.py/validate_script.py/tactical_boards.py/runpod_fulltrack.py

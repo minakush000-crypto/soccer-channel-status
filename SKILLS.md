@@ -2,7 +2,9 @@
 
 > **Purpose:** one-time analysis of installed skills and why most never fire (2026-09-05). A completed-stage working artifact.
 > **Reader:** historical reference; not read by any pipeline tool; mirrored (in both allowlists — push_status.sh copies it to the status mirror, verified 2026-09-13).
-> **Last verified against code:** 2026-09-09.
+> **Last verified against code:** 2026-09-22 (historical analysis; the two
+> present-tense claims that had gone stale were corrected below; the 2026
+> skill counts are historical, not re-counted).
 
 Built 2026-09-05. Evidence is pasted from commands run today.
 
@@ -15,11 +17,12 @@ $ ls -d ../.claude/skills/*/ | wc -l      # = ~/yt-digest/.claude/skills/
 125
 $ ls -d .claude/skills/*/ | wc -l         # project-level
 0
-$ ls -la .claude/
-no .claude in project
+$ ls .claude/
+settings.json  skills/   (added by later stages; 2026-09-22 note)
 ```
 
-Two real skill trees, no project-level skills:
+Two real skill trees, no project-level skills (a project .claude/skills/
+skill-rules.json was added by a later stage; it is config, not a skill tree):
 - `~/.claude/skills/` — global, 127 directories (user-installed).
 - `~/yt-digest/.claude/skills/` — parent repo, 125 directories.
 - `/home/muads/yt-digest/soccer-channel/.claude/skills/` — does not exist.

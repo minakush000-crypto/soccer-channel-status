@@ -2,7 +2,7 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-16.
+> **Last verified against code:** 2026-09-22.
 
 Chronological order (oldest first); append new entries at the end. Each
 entry is dated. "Why" is the actual reason, not a retcon. If a decision is
@@ -647,3 +647,105 @@ The Blender/Modal 3D renderer (`scene_gen.py`) was replaced with `three_scene.js
 
 ### Staging Fallback
 The staging EINVAL fallback uses `/dev/shm` (untested/undocumented).
+
+## 2026-09-21/22 (flash reboot — glm-5.3-flash era)
+
+### Agent identity (reverses 2026-09-16 "Gemini CLI")
+The harness is Claude Code again, model glm-5.3-flash:cloud via Ollama,
+multimodal. Project hooks fire again (SessionStart pod/mnt-f/doc-stamp
+checks). The 2026-09-16 entry described a Gemini CLI window that has since
+ended.
+
+### Gemini fully retired; session model is the judge
+The Gemini API key returns 402 RESOURCE_EXHAUSTED (verified 2026-09-21).
+gemini-2.5-pro judging is void. The judge is the session model itself via
+tools/glm_judge.py, which writes the model name into every saved score
+record. Known limit: judge wobble ±1-2 on identical frames (nine runs at
+temperature 0 scored 3-5 on one frame, measured 2026-09-22). Judge
+load-bearing numbers more than once and report the spread. Reverses the
+2026-09-16 "Judge Model Pinning" entry.
+
+### Image rule: model-dependent, session reads frames
+The session model is multimodal and reads frames directly with the Read
+tool. The blanket image block (written for text-only glm-5.2:cloud) was
+disabled 2026-09-21 and deleted 2026-09-22 (see brief 03 below). If a
+future session runs a text-only model, the platform's 400 on image content
+is the backstop; route visual claims through vision_analyze.py or
+ask_claude.py --image.
+
+### The flash pipeline (pod_build.py) built EP001
+Real Madrid 2-1 Inter (2026-09-08) was rebuilt as EP001 entirely on Modal:
+three_scene_v2.js (3D boards), boards_2d.py (2D boards), ElevenLabs voice at
+155.5 WPM, pod_build.py assemble. produce_v2.py remains as the older
+end-to-end entry. Mayo's verdict on the rebuild: "an improvement from
+previous outputs, it's a step in the right direction."
+
+## 2026-09-22 (brief 03 — cleanup, two fixes, canonical sync)
+
+### 25 tools retired per call graph
+Mayo: "retire all of them." Reachability was computed from the two entry
+points (produce_v2.py, pod_build.py) by import + subprocess BFS: 26 of 64
+code files reachable. Retired (git commit 3d31f0e; tarball + manifest at
+b2:mendymax-archive/soccer-channel/2026-09-23/): old entry points/pipelines
+(produce_episode, cloud_produce, assemble_video, assemble_words_match),
+the tracking lane (cv_annotate, runpod_fulltrack, segment_scorer — step4b
+was retired Stage 14 and nothing live reads tracking JSONs), dead renderers
+(scene_gen, modal_render3d, render3d_vast, render_goal_clip), dead
+enhancement (ltx_enhance, gpu_superres, runpod_superres, enhance_clips),
+helpers (parse_feed, player_mapper, sharpness_check, trim_tracking,
+bulk_classify, generate_captions, runpod_scenedetect, b2_upload —
+superseded by b2_archive), and the invented-architecture workflow scripts
+(match_moments, rematch_ep001). Census after: 37 .py + 2 .js + watchlist.yaml.
+12 hand-run operating tools were kept deliberately (glm_judge,
+scoreboard_scan, viral_angle, agent_reach_research, fresh_fetch,
+youtube_upload, oauth_setup, thumbnail_generator, b2_archive, backup_env,
+pod_check, doc_stamp_check — the last two are wired into SessionStart hooks).
+
+### parse_feed.py judgment (asked in brief 03)
+Retired. The pipeline gets its facts from ESPN via match_data.py; nothing
+consumes a pasted Sofascore feed. The one proof run (31 events, 0
+unparsed, correct 2-1) is in git history.
+
+### produce_v2.py:341-346 and :846 resolved
+The :341-346 comment described the deleted scene_gen/modal_render3d as the
+live board path; it now names three_render3d.py + three_scene.js and notes
+the pod_build/three_scene_v2.js flash path. The dead `tactical_path = None`
+plumbing (:846 + an unused step5_assemble parameter) was removed — resolved,
+not documented.
+
+### Invented architecture deleted (owner decision: delete entirely)
+Deleted: episodes/EP001_MOMENTS.md (the moments list), episodes/
+EP001_SCRIPT_v2.md, HANDOVER_TO_FLASH.md (carried the thesis engine, the
+falsifiability rule, the 6-to-8 moments target, and the ratio targets),
+tools/match_moments.workflow.mjs + tools/rematch_ep001.workflow.mjs, the
+superseded EP001_SCRIPT_v2 copies in retired/, renders/.../
+provisional_15_moments.md, and the thesis-frame placeholder in
+SCRIPT_TEMPLATE.md. NOT deleted (documented overlap, load-bearing in code):
+the 20% footage cap at produce_v2.py:540 — it implements EPISODE_SPEC §3
+(owner-approved Stage 10) and the assembler enforces it at runtime. Removing
+it would be an owner call, not a cleanup side effect.
+
+### block-image-read.sh hook deleted (★ global change)
+It was registered (PreToolUse Read) but permanently disabled (exit 0) since
+2026-09-21 — a registered hook that does nothing, written for a text-only
+model. Deleted from ~/.claude/hooks/ and unregistered from global
+settings.json (additive merge; the other 3 global hooks untouched, verified
+by JSON parse: 2 PreToolUse groups + 1 Stop). The model-dependent image
+policy lives in the rewritten CLAUDE.md files; the platform's own 400 error
+is the text-only backstop.
+
+### Canonical docs rewritten
+Project CLAUDE.md replaced with the owner-delivered file (benchmark-first).
+Global ~/.claude/CLAUDE.md rewritten to machine-wide truth only (no soccer
+specifics, no Gemini, no text-only-model vision rules). STATUS.md and
+CONTEXT.md rewritten against the code on disk. TOOLS.md/SKILLS.md/GAPS.md
+stamps advanced after verification. EPISODE_SPEC.md remains under review
+(2026-09-16 decision unchanged): it is not the scoring instrument; scoring
+follows CLAUDE.md §8.
+
+### Two board fixes (verified by frames, not gates)
+Momentum board: goal labels now stagger on two lanes (minutes 13 and 23 no
+longer collide; title no longer clipped by the figure top). Outro board:
+one-composition rise instead of four popped states. Both re-rendered,
+re-assembled on Modal, and verified by frames viewed in the new
+final_video.mp4 (140.92s).
