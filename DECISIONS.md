@@ -864,3 +864,78 @@ in reports/brief05/REPORT.md.
 - **Facts file enriched (job 3/7).** Sofascore lineups (formations 4-3-3 v
   3-5-2, 11 starters each) and average positions (14+16 players,
   averageX/averageY already 0-100 - do not scale) added to match_data.json.
+
+## 2026-09-26 — BRIEF 06 (one fact source, no unsourced numbers, check the rendered frame)
+
+Ran by glm-5.3-flash:cloud via Claude Code (tmux). Ten jobs in order; report
+in reports/brief06/REPORT.md.
+
+- **Sofascore is the only fact source, for every competition (job 1, Mayo
+  decision).** produce_v2 step 1 now calls sofascore_client.py only; ESPN
+  match_data.py (hardcoded to eng.1 — it could not fetch a Champions League
+  match) is retired to retired/. Sofascore's search + calendar APIs return
+  empty from this IP (measured 2026-09-26), so the client resolves events by
+  --event-id, or by sweeping the accumulated team-id registry
+  (tools/sofascore_team_ids.json), and demands --event-id when neither route
+  can see the match.
+- **The raw response is cached and tracked (job 1).** Every spec number is
+  verified against renders/<slug>/sofascore_raw.json — the actual API
+  responses — not against match_data.json (which the specs were shaped
+  from; that check was circular). Fallbacks to the facts file are reported
+  per endpoint. Measured the hard way: Sofascore RETIRES old events'
+  sub-endpoints (event 16363640, played 2026-09-12, serves empty bodies 15
+  days later while 16938768, played 2026-09-08, serves everything) — the
+  cache filled at fetch time is the only durable copy of raw facts.
+- **Second-half stats must never pose as the match (job 1, caught by the
+  job-1 diff).** The /statistics response carries ALL/1ST/2ND periods; the
+  old mapping loop let 2ND overwrite ALL (possession 36%→42%, shots 16→10
+  on a straight refetch). ALL is now preferred in both the client and the
+  checker.
+- **3D v1 retirement recorded honestly (job 6, Mayo decision).** v1
+  (three_scene.js + three_render3d.py) was retired because it cannot run on
+  Modal (puppeteer-core only ships puppeteer; no local chromium exists); NO
+  side-by-side comparison of v1 vs v2 output was ever done — the
+  "comparison" brief 05 reported was one file under two names (md5
+  2ef1613e... equal, verified again 2026-09-26). The duplicate
+  reports/brief05/3d_formation_clash.png is deleted; the v2 render
+  (3d_formation_clash_v2.png) remains the only artifact.
+- **Every spec names its source; every number checks against the raw data
+  (job 3, Mayo decision).** board_data_check.py rewritten: source +
+  fetched_at REQUIRED (a spec with no source is a fact nobody fetched); a
+  numeric-leaf walk fails any number not covered by a raw-data check and not
+  on the documented render-parameter exemption list; 3D customs check goal
+  identity, pre/post scores, clocks, players vs lineups (substitutions
+  in scope after their minute), formations; layout coordinates are bound
+  structurally (0-100 pitch box), documented as drawing instructions, not
+  facts. Specs + raw cache tracked in git. stats_possession.json's
+  possession fixed 35.6/64.4 → 36.0/64.0 (the fetched values; 35.6 was
+  invented precision that the old ±0.6 tolerance let pass).
+- **The check is no longer circular (job 3).** The brief-05 check compared
+  specs to match_data.json — the same file the specs were shaped from. The
+  check now reads the RAW responses (sofascore_raw.json); match_data.json
+  is only a reported fallback for endpoints Sofascore has retired.
+- **The renderer audits the drawn page (job 4, Mayo decision).** Brief 05's
+  wrong-side bug passed every spec-level check. Now board_page.html records
+  every fillText and board_html.js compares the finished page's numbers to
+  the facts file BY TEAM SIDE before any frame is written; any mismatch
+  fails the render; an episode render with no facts file is refused.
+  Proof: the reintroduced mirror bug fails with all 8 swapped numbers
+  named; the real boards pass (reports/brief06/pagecheck_*).
+- **Census by script (job 5, Mayo decision).** TOOLS.md hand-census had
+  drifted (no sofascore_client row; 24+13=37 vs "35 .py"; board_page.html
+  never counted). tools/census.py enforces file↔row equality and class
+  totals; gate B20. Current truth: 41 files on disk, 40 rows, 26 WIRED +
+  14 HAND-RUN.
+- **The flash lane is one wired command (job 8).** produce_v2 --flash:
+  facts → data check → script-referenced boards → Modal assemble + pull.
+  Two bugs caught by running it: (1) the old word-minimum logic
+  REGENERATED EP001's fact-checked script mid-pipeline (365 < 1400) —
+  scripts are keep-if-exists now; (2) fetch_all was called without the
+  slug, so every pipeline fetch clobbered the raw cache (graph vanished
+  mid-run) — the merge is slug-keyed now. Also fixed: the assemble's final
+  output was root-level on the volume (cross-episode collision) and the
+  pull block pulled twice.
+- **The page audit caught its own bug before shipping (job 8).** Its goal
+  label check compared labels to the FINAL score instead of the running
+  score at each goal — the mirror test never exercised goal labels. Fixed,
+  then the real momentum render passed (19 draws audited).

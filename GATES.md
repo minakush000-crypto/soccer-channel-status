@@ -131,3 +131,35 @@ commit leaves the tree clean.
   CHECK: ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-08_real-madrid-inter
   EXPECT: DATA-CHECK OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=cc249751c95ed748eee25c15b67208aa4ade368da898c3f2fc6538fc1e3d7d72; output-bytes=118
+
+---
+
+# Gates: brief 06 (one fact source, no unsourced numbers, check the rendered frame)
+
+Scope: brief 06 — Sofascore wired as the only facts step for every
+competition; the Madrid momentum board regenerated from real /graph data;
+every spec carries source + fetched_at and every number checks against the
+RAW fetched responses; the renderer audits the drawn page against the facts
+file; a script-driven census; brief 05 loose ends answered with commands;
+full re-render verified frame by frame.
+
+- [x] B17: facts come from Sofascore only; match_data.py retired, no caller left
+  CHECK: grep -q "sofascore_client.py" tools/produce_v2.py && test ! -e tools/match_data.py && test -e retired/match_data.py && n=$(grep -nE "^\s*(from|import) match_data\b|match_data\.py\"" tools/*.py 2>/dev/null | wc -l); echo "FACTS-SOFA callers-left=$n"
+  EXPECT: FACTS-SOFA callers-left=0
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=511e49a316d32ff4fa75a256daefcef6c58f8f9e1348f9014e3d83a410ce1d6d; output-bytes=26
+- [x] B18: extended data check passes on BOTH episodes against the raw fetch
+  CHECK: ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-08_real-madrid-inter >/dev/null && ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-12_bournemouth-brentford >/dev/null && echo DATACHECK-BOTH-OK
+  EXPECT: DATACHECK-BOTH-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=6cef1fb7a6b8b10146dca828916831750f1706b1796b9ff5aea14b4e1c6e96a1; output-bytes=18
+- [x] B19: the renderer audits the drawn page against the facts file (mirror proof + real pass)
+  CHECK: grep -q "drawnNumbers" tools/board_page.html && grep -q "pageCheck" tools/board_html.js && test -s reports/brief06/pagecheck_mirror_fail.log && test -s reports/brief06/pagecheck_real_pass.log && echo PAGE-CHECK-WIRED
+  EXPECT: PAGE-CHECK-WIRED
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=e2115bd42306d2d866e6e9ac28cc271d4870d3c143db49986157289798698b5b; output-bytes=17
+- [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
+  CHECK: ~/yt-digest/.venv/bin/python tools/census.py
+  EXPECT: CENSUS OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=ee53863f8ac2c9140e997abf85294c51d8c65295d6b0cd328f89b77500a9817f; output-bytes=1225
+- [x] B21: episode rebuilt from the facts step, every board segment frame checked
+  CHECK: d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 renders/2026-09-08_real-madrid-inter/final_video.mp4 | cut -d. -f1); n=$(ls reports/brief06/final_boards/*.png 2>/dev/null | wc -l); echo "FINAL-REBUILT dur=${d}s frames=$n"
+  EXPECT: FINAL-REBUILT dur=140s frames=7
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=37cea1a994d472a1394f1d007ceec2f36cd628a43fbd18c175ee1654021aaa83; output-bytes=32

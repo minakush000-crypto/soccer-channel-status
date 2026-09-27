@@ -1,0 +1,6 @@
+  DATA-CHECK 2026-09-08_real-madrid-inter (source: RAW Sofascore responses / cached copies)
+  DATA-CHECK OK (9 specs + script) for 2026-09-08_real-madrid-inter: every number matches the raw fetched data
+  EMITTED /home/muads/yt-digest/soccer-channel/renders/2026-09-08_real-madrid-inter/board_specs/momentum.json (92 points, peak 45.5min, 3 goals from raw incidents)
+  OK /vol/out/2026-09-08_real-madrid-inter/scoreline_outro.mp4 524810 PAGE-CHECK OK scoreline_outro: every drawn number matches the facts file by team side (10 draws audited)
+  OK /vol/out/2026-09-08_real-madrid-inter/stats_possession.mp4 452140 PAGE-CHECK OK stats_possession: every drawn number matches the facts file by team side (19 draws audited)
+PAGE-CHECK OK momentum: every drawn number matches the facts file by team side (19 draws audited)

@@ -2,7 +2,7 @@
 
 > **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
 > **Reader:** every session (CLAUDE.md @CONTEXT.md).
-> **Last verified against code:** 2026-09-23 (brief 05).
+> **Last verified against code:** 2026-09-27 (brief 06).
 
 Rewritten 2026-09-22 (brief 03) against the code on disk. Read STATUS.md for
 the verified state spine and DECISIONS.md for why things are the way they are.
@@ -28,23 +28,29 @@ The project is /home/muads/yt-digest/soccer-channel. Nothing else.
 - /mnt/f = raw-footage staging (mounted, fstab drvfs). Nothing raw or heavy
   is written inside /home/muads (ext4.vhdx grows and never shrinks).
 
-## THE PIPELINE (flash era, brief 04)
-Entry: tools/pod_build.py (Modal; episode slug is the --slug argument, never
-a constant). render3d/render2d take --slug: specs at /vol/specs/<slug>/,
-boards at /vol/out/<slug>/; a spec whose slug contradicts the episode is
-REFUSED (brief 05 job 8 — no more cross-episode board rides). render2d =
-board_html.js driving board_page.html in headless Chromium (the ONE 2D
-renderer — matplotlib deleted); render3d = three_scene_v2.js (the ONE 3D
-engine — three_scene.js/three_render3d.py retired in brief 05 job 7).
-assemble [--slug X] cuts footage + loops boards + mixes voice/ambience with
-a retime pass, and auto-pulls the final home. pull <slug> re-pulls without
-compute. FACTS: renders/<slug>/match_data.json is tracked (input of record)
-and tools/board_data_check.py (produce_v2 step 1d, gate B16) fails the build
-when any board number contradicts it for the same team.
-tools/produce_v2.py remains the older end-to-end entry; its board step emits
-specs (stats_spec/momentum_board/xg_flow_board/shotmap_board/avgpositions_board)
-and renders through the same pod_build render2d. Both parse scripts/<slug>.md
-with the same [VISUAL:] contract.
+## THE PIPELINE (flash era, brief 06)
+Entry: tools/produce_v2.py — `--flash` runs the flash lane in one command
+(facts → data check → script-referenced boards → Modal assemble + pull);
+tools/pod_build.py is the Modal build it drives. render2d/render3d take
+--slug: specs at /vol/specs/<slug>/, boards AND the final at
+/vol/out/<slug>/; a spec whose slug contradicts the episode is REFUSED.
+render2d = board_html.js driving board_page.html in headless Chromium (the
+ONE 2D renderer) and it AUDITS the drawn page against
+/vol/specs/<slug>/match_data.json before writing frames — a wrong number or
+a wrong side fails the render (brief 06 job 4); an episode render with no
+facts file is refused. render3d = three_scene_v2.js (the ONE 3D engine).
+assemble cuts footage + loops boards + mixes voice/ambience with a retime
+pass, writes /vol/out/<slug>/assemble_manifest.json (the actual cut list),
+and auto-pulls the final home. FACTS: renders/<slug>/match_data.json is
+tracked (input of record) and tools/board_data_check.py (produce_v2 step 1d,
+gates B16/B18) checks EVERY number in EVERY spec against the RAW Sofascore
+responses cached at renders/<slug>/sofascore_raw.json (also tracked) — every
+spec carries source + fetched_at; a spec with no source is a fact nobody
+fetched. Sofascore (via tools/sofascore_client.py) is the only fact source,
+for every competition; ESPN match_data.py is retired.
+The long lane (produce_v2 without --flash) keeps the local
+download/assemble/merge/shorts steps; scripts are keep-if-exists (a tracked
+script is never regenerated).
 
 Footage windows are cut from the CBS reel at verified timestamps
 (cut_list_flash.json lineage). The reel's CBS Sports / @CBSSPORTSGOLAZO /
@@ -69,11 +75,16 @@ See STATUS.md "What is broken" — judge wobble, footage-overrun freezes
 disallowed goal at reel t=90, migration phases 5-8 unfinished.
 
 ## MEASURED FACTS, DO NOT RE-DERIVE
-- EP001 (Real Madrid 2-1 Inter, 2026-09-08) final: 140.92s, 76.5MB,
-  1920x1080 (ffprobe verified 2026-09-22). Voice 155.5 WPM (ElevenLabs).
+- EP001 (Real Madrid 2-1 Inter, 2026-09-08) final: 140.96s, 75.6MB,
+  1920x1080 (ffprobe verified 2026-09-27, v7). Voice 155.5 WPM (ElevenLabs).
+- Sofascore retires old events' sub-endpoints (event 16363640 served empty
+  bodies 15 days post-match; 16938768, older, served everything). Cache the
+  raw responses at fetch time — renders/<slug>/sofascore_raw.json is the
+  only durable copy. /statistics has ALL/1ST/2ND periods; 2ND must never
+  overwrite ALL.
 - Output boards: render3d for formation/counter/goal-pattern/strike boards,
-  render2d (matplotlib) for stats/possession, momentum, outro. All specs in
-  renders/<slug>/board_specs/.
+  render2d (audited) for stats/possession, momentum, outro. All specs in
+  renders/<slug>/board_specs/, tracked, each with source + fetched_at.
 - Scoreboard scanner (gemma4 OCR of the score bug) is the ground truth for
   goal timestamps; LLM video reading invents phantoms and misses goals
   (measured Stage 15). Use the scanner for WHEN; use the session model for

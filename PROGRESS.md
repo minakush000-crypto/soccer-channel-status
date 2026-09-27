@@ -3650,3 +3650,20 @@ Ran by glm-5.3-flash:cloud in Claude Code (tmux). Four jobs, all closed.
   plumbing removed.
 - Episode: EP001 v3 re-assembled (140.92s, 76.5MB, 1920x1080) with both fixed
   boards; archived to B2 with manifest.
+
+## 2026-09-27 — BRIEF 06 (one fact source, no unsourced numbers, check the rendered frame)
+
+Ten jobs closed (report: reports/brief06/REPORT.md, commits 0f108b7..0e615fa).
+Sofascore wired as the only fact source (ESPN match_data.py retired); raw API
+responses cached + tracked per episode; every spec carries source + fetched_at
+and every numeric leaf checks against the raw data (numeric-leaf walk, gates
+B16/B18); the renderer audits the drawn page against the facts file before
+writing frames (gate B19, mirror proof fails / real renders pass); census is
+a script + gate (B20); the Madrid momentum board regenerated from real
+Sofascore /graph (the old one was hand-typed 2026-09-21, authorship found in
+session 50fa196e); EP001 rebuilt as v7 (140.96s, 75.6MB) through the new
+flash lane with all 7 board mid-frames opened; all 33 gates pass. Caught
+en route: the ALL/2ND statistics-period trap, Sofascore's old-event endpoint
+retirement, a script-regeneration bug that overwrote EP001's tracked script
+(fixed keep-if-exists), a raw-cache clobber on pipeline fetches, and a
+root-level final output collision on the volume.

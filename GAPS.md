@@ -2,17 +2,12 @@
 
 > **Purpose:** registry of unverified claims and open uncertainties.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-23 (brief 05).
+> **Last verified against code:** 2026-09-27 (brief 06).
 
 This file existing and being short is a warning sign, not a success. Each
 entry is something that could be true or false and nobody has run the command
 to find out. If you verify one, move it to STATUS.md or DECISIONS.md and date
 it.
-
-Rewritten 2026-09-23 (brief 05): the brief-04 gap list closed (tpad holds were
-a doc-level model — the real defect was window overrun, fixed; mirror filter
-shipped; reasoning_effort drop demonstrated; migration phases 5-8 retired as
-never-defined; reel t=90 resolved as a saved shot).
 
 ## Open gaps (current)
 
@@ -25,45 +20,36 @@ never-defined; reel t=90 resolved as a saved shot).
    benchmark episode; EP001's 140s format is current. Owner decision.
 3. **Shotmap board polish:** the team-name side labels overlap shot dots near
    the goalmouths. Cosmetic.
-4. **"3 POINTS" outro chip is a league-table fact** no match-data file can
-   adjudicate; the data check verifies only goals chips and scorelines. If a
-   league-table facts source ever matters, it needs its own file.
+4. **Bournemouth's raw graph/shotmap/average-positions are gone forever**
+   (Sofascore retired the event's sub-endpoints, measured 2026-09-26): the
+   momentum curve, shot positions and xG series on its boards can never be
+   re-verified against raw data (checker reports them UNVERIFIABLE). Any
+   Bournemouth re-render must reuse the existing specs; the emitters will
+   refuse to regenerate them without raw data.
+5. **The Sofascore event-id resolver is IP-limited.** Search + calendar APIs
+   return empty from this machine; new episodes resolve through the
+   accumulated team-id sweep or need --event-id by hand. Whether the search
+   API works from a different network is untested (○).
+6. **3D board label collisions** (formation_clash/valverde_strike name
+   labels overlap in the opened frames, 2026-09-27). Cosmetic design debt,
+   same class as the shotmap one.
 
 ## Closed this pass (moved to STATUS/DECISIONS, dated)
 
-- Stats rows mirrored (brief 05 job 1): rows drew away values under the home
-  name; fixed home-left/away-right; every other board kind swept for the
-  same inversion (bar, scorebug, momentum, xgflow, shotmap, avgpos, outro —
-  correct; stat_card/possession shared the bug and were re-rendered).
-- Momentum fill off the line (brief 05 job 2): clamped max/min(0,v) fill
-  replaced with same-sign runs split at interpolated crossings; y-scale
-  restored; key placed inside the plot; brief 03 label fix kept.
-- No facts file (brief 05 job 3): match_data.json fetched from Sofascore
-  (tracked, source_url + fetched_at) and tools/board_data_check.py added as
-  produce_v2 step 1d + gate B16. The spec numbers all matched the real data.
-- scripts/ untracked (brief 05 job 4): tracked, 17 files, no secrets.
-- Legacy vault files in the mirror (brief 05 job 5): 16 files scanned clean,
-  removed from HEAD, history kept.
-- Spec namespace collisions (brief 05 job 8): per-slug /vol/specs and
-  /vol/out folders + slug refusal in render2d/render3d/assemble.
-- Two 3D engines (brief 05 job 7): three_scene.js + three_render3d.py
-  retired (v1 needs a puppeteer install that exists nowhere); v2 kept.
-
-## Closed in brief 04 (moved to STATUS/DECISIONS, dated)
-
-- tpad holds (was #3): the tpad filter was DEAD CODE in this invocation; the
-  real defect (footage overrunning verified windows by 0.02-1.13s) is fixed
-  by the retime pass (brief 04 job 2, verified by dense frame scan).
-- reasoning_effort drop (was #2): demonstrated — Ollama's OpenAI shim accepts
-  the parameter and silently discards it (200 OK, no effect, 2026-09-23).
-  Mitigation shipped: judge --seed + --runs N with the median reported.
-- Public mirror content filter (was #5): allowlist + secret scan shipped and
-  block-tested (brief 04 job 4).
-- Migration phases 5-8 (was #6): RETIRED — the plan is not defined in any
-  recoverable source (live docs, full git history, retired tarball, claude-mem
-  all searched 2026-09-23); the only named phase ("Phase 5 zero-Gemini") is
-  complete. Superseded by the flash pipeline.
-- Reel t=90 possible disallowed goal (was #4): resolved as a SAVED Inter shot
-  (score bug 0-0 throughout, ball never over the line, no referee signal;
-  frames reports/brief04/goal90_*). The pipeline counts 3 goals — correct.
-  DESIGN_FLASH.md corrected 2026-09-23.
+- Invented momentum board (brief 06 job 2): the EP001 momentum spec was
+  hand-typed in a bash heredoc (session 50fa196e, 2026-09-21T05:08:38Z) —
+  25 invented points, goal at min 13 labelled "MBAPPE 14'". Regenerated from
+  the real Sofascore /graph (92 points) with goal markers from raw incidents.
+- Unverifiable spec numbers (brief 06 job 3): every numeric leaf of every
+  spec now checks against the RAW responses; specs without source +
+  fetched_at fail; specs and the raw cache are tracked in git.
+- Right-numbers-wrong-side passing checks (brief 06 job 4): the renderer
+  now audits the drawn page against the facts file before writing frames
+  (mirror proof fails, real renders pass).
+- Hand-written TOOLS.md drift (brief 06 job 5): census is a script + gate
+  (B20); the drift it caught included a missing sofascore_client row and a
+  never-counted board_page.html.
+- The "14 specs" data-check count (brief 06 job 7d): the old checker counted
+  every spec twice (checked += 1 twice in its loop); Madrid has 7.
+- ESPN as the fact source (brief 06 job 1): eng.1-only, could not fetch a
+  Champions League match; Sofascore wired for every competition.

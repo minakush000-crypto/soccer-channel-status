@@ -2,41 +2,44 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-09-23 (brief 05).
+> **Last verified against code:** 2026-09-27 (brief 06).
 
-Rebuilt 2026-09-23 (brief 05 job 12) by command, not by hand: the census
-script walks the two entry points over python imports and subprocess/argv
-invocations (including stem-name invocation without the .py suffix, which is
-how produce_v2.py calls the spec emitters). Retirements: 25 files (brief 03,
-git 3d31f0e), boards_2d/board_design/tactical_boards (brief 04 job 3,
-matplotlib deletion), three_scene.js + three_render3d.py (brief 05 job 7,
-the v1 3D engine that cannot run in this environment). Full history of
-retired tools is in git, DECISIONS.md and retired/RETIREMENT_NOTES.md.
+Rebuilt 2026-09-23 (brief 05 job 12) by command; **now enforced by command**
+(brief 06 job 5): tools/census.py compares this table against `ls tools/`
+and gate B20 fails on any drift — a file with no row, a row naming a missing
+file, or class totals that do not equal the file count. Retirements: 25
+files (brief 03, git 3d31f0e), boards_2d/board_design/tactical_boards (brief
+04 job 3, matplotlib deletion), three_scene.js + three_render3d.py (brief 05
+job 7), match_data.py (brief 06 job 1 — ESPN eng.1-only, superseded by
+sofascore_client.py as the one fact source). Full history in git,
+DECISIONS.md and retired/RETIREMENT_NOTES.md.
 
-## Census (computed 2026-09-23 by the transitive walk in the session log)
+## Census (computed by tools/census.py, brief 06 job 5)
 
-$ ls tools/ | grep -v "__pycache__\|USAGE" | wc -l  →  38
+$ ls -p tools/ | grep -v / | wc -l  →  41  (USAGE.md exempt from rows)
 
-35 .py + 2 .js (three_scene_v2.js, board_html.js) + watchlist.yaml.
-24 WIRED .py + 2 .js, 13 HAND-RUN (deliberately kept operating tools),
-1 data file. No DEAD class exists — anything dead is deleted or in retired/.
+35 .py + 2 .js + board_page.html + watchlist.yaml + sofascore_team_ids.json.
+26 WIRED, 14 HAND-RUN (deliberately kept operating tools/data). No DEAD class
+exists — anything dead is deleted or in retired/.
 
-## The 38 files
+## The 40 rows
 
 | File | Class | Called by (file:line) | Notes |
 |---|---|---|---|
-| `produce_v2.py` | WIRED (entry) | nothing (entry point) | older end-to-end pipeline (long lane) |
-| `pod_build.py` | WIRED (entry) | nothing (entry point) | flash pipeline on Modal: render3d/render2d/assemble/pull; `--slug` is the episode argument (brief 04 job 7) |
-| `match_data.py` | WIRED | produce_v2.py:85 | ESPN facts (the only fact source) |
+| `produce_v2.py` | WIRED (entry) | nothing (entry point) | end-to-end pipeline; `--flash` runs the flash lane (facts→boards→Modal assemble) |
+| `pod_build.py` | WIRED (entry) | nothing (entry point) | flash pipeline on Modal: render3d/render2d/assemble/pull; `--slug` is the episode argument |
+| `sofascore_client.py` | WIRED | produce_v2.py step1 | THE fact source, every competition (brief 06 job 1): search resolver + retries, stats mapping, raw cache sofascore_raw.json, fetched_at/source_url stamps |
+| `sofascore_team_ids.json` | HAND-RUN | consumed by sofascore_client.py | team-id registry the search resolver sweeps (accumulated by every fetch) |
 | `stats_spec.py` | WIRED | produce_v2.py:102 | emits stat_card + possession specs from match_data (replaces tactical_boards, brief 04) |
-| `momentum_board.py` | WIRED | produce_v2.py:102 | emits momentum.json from Sofascore /graph (spec emitter; renders nothing — brief 04) |
-| `xg_flow_board.py` | WIRED | produce_v2.py:102 | emits xg_flow.json from Sofascore /shotmap |
-| `shotmap_board.py` | WIRED | produce_v2.py:102 | emits shotmap.json from Sofascore /shotmap |
+| `momentum_board.py` | WIRED | produce_v2.py:102 | emits momentum.json from the RAW Sofascore /graph cache (rewritten brief 06 job 2 — the old spec was hand-typed) |
+| `xg_flow_board.py` | WIRED | produce_v2.py:102 | emits xg_flow.json from the RAW /shotmap cache |
+| `shotmap_board.py` | WIRED | produce_v2.py:102 | emits shotmap.json from the RAW /shotmap cache |
 | `avgpositions_board.py` | WIRED | produce_v2.py:102 | emits avgpositions.json from match_data |
-| `board_html.js` | WIRED | pod_build.py:88 (Modal) | puppeteer-core driver: renders board_page.html frames in headless Chromium — THE 2D board renderer |
-| `board_page.html` | WIRED | board_html.js | the one HTML/CSS/canvas 2D board page (kinds: stats, momentum, outro, xgflow, shotmap, avgpos) |
-| `three_scene_v2.js` | WIRED | pod_build.py:~71 (Modal) | spec-driven 3D board renderer — the ONE 3D engine (v1 retired brief 05 job 7) |
-| `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16 | every board number must match match_data.json by team NAME (brief 05 job 3) |
+| `board_html.js` | WIRED | pod_build.py render_2d (Modal) | puppeteer-core driver: renders board_page.html frames in headless Chromium + the rendered-page audit vs the facts file (brief 06 job 4) |
+| `board_page.html` | WIRED | board_html.js | the one HTML/CSS/canvas 2D board page (kinds: stats, momentum, outro, xgflow, shotmap, avgpos) + the draw recorder the audit reads |
+| `three_scene_v2.js` | WIRED | pod_build.py render_3d (Modal) | spec-driven 3D board renderer — the ONE 3D engine (v1 retired brief 05 job 7) |
+| `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16/B18 | every spec number must match the RAW Sofascore responses by team NAME (extended brief 06 job 3) |
+| `census.py` | WIRED | GATES B20 | script-driven census: TOOLS.md must match tools/ exactly (brief 06 job 5) |
 | `script_gen.py` | WIRED | produce_v2.py:372 | lane script draft |
 | `validate_script.py` | WIRED | produce_v2.py:386; tests | grammar + source validation |
 | `transformation_gate.py` | WIRED | produce_v2.py:667 | lane D floor |

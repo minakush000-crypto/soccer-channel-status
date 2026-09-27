@@ -1,0 +1,10 @@
+RuntimeError: PAGE-CHECK FAIL for mirror_check (8):
+  page possession left=64% but facts Real Madrid=36
+  page possession right=36% but facts Inter=64
+  page row SHOTS left=21 != facts Real Madrid=16
+  page row SHOTS right=16 != facts Inter=21
+  page row ON TARGET left=7 != facts Real Madrid=8
+  page row ON TARGET right=8 != facts Inter=7
+  page row CORNERS left=11 != facts Real Madrid=4
+  page row CORNERS right=4 != facts Inter=11
+
