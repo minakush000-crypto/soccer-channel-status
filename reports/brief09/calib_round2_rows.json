@@ -1,0 +1,12 @@
+[
+  {"video": "A", "t": 0, "shot": "3D pitch", "elements": [], "colors": [], "note": "rendered dark 3D scene, white pitch lines in perspective with small 3D player figures, no real footage"},
+  {"video": "A", "t": 50, "shot": "other", "elements": [], "colors": [], "note": "near-black fading frame, faint team lineup photo with trophy above (transition/fade)"},
+  {"video": "A", "t": 100, "shot": "talking head or coach clip", "elements": [], "colors": [], "note": "player interview close-up with burned-in subtitles and 'Credit: The PFA' corner credit"},
+  {"video": "B", "t": 0, "shot": "live footage", "elements": [], "colors": [], "note": "match play mid-motion, burned-in yellow quote caption"},
+  {"video": "B", "t": 120, "shot": "2D diagram", "elements": ["player label", "line between players"], "colors": ["blue", "red", "gray"], "note": "white vector pitch card on dark grid background, dot players with name labels and dashed alignment lines"},
+  {"video": "B", "t": 180, "shot": "2D diagram", "elements": ["player label", "line between players"], "colors": ["yellow", "blue", "red", "gray"], "note": "same diagram style, yellow connecting lines between labelled player dots (3-1-6 structure narration)"},
+  {"video": "B", "t": 240, "shot": "live footage", "elements": [], "colors": [], "note": "wide match shot at Camp Nou"},
+  {"video": "B", "t": 300, "shot": "other", "elements": [], "colors": [], "note": "photo montage of cut-out Barcelona player photos on dark grid background"},
+  {"video": "C", "t": 60, "shot": "live footage", "elements": [], "colors": [], "note": "wide match shot near penalty area; white curves traced as standard pitch markings not drawn overlay"},
+  {"video": "C", "t": 200, "shot": "live footage", "elements": [], "colors": [], "note": "attacking move at goalmouth with ad boards and crowd, no overlay"}
+]

@@ -2,12 +2,10 @@
 
 > **Purpose:** the four-lane (A/B/C/D) expansion build ledger; each stage appends its findings here.
 > **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Line-drift corrections applied 2026-09-13 (Stage-12B rewrite of produce_v2.py + Stage-14 retirement of step4b/tactical_render.py shifted cited line numbers; all re-grep'd against current code).
-> **Last verified against code:** 2026-09-22 (historical stage log; nothing
-> in it is wired at runtime, so no claims were re-verified against code this
-> pass. The lane word budgets are enforced by validate_script.py, the lane
-> table by produce_v2.py main(); both re-verified via tests/test_pipeline.py
-> and the brief 03 census. The migration phases it plans are superseded by
-> the flash pipeline, see DECISIONS.md 2026-09-21/22.)
+> **Last verified against code:** 2026-09-27 (census line re-run via
+> tools/census.py; the brief 08 entry below was written from git log
+> 3c7a90b..b5dc799 and reports/brief08/reverify.txt, both read this pass.
+> Historical stage log: nothing in the earlier entries is wired at runtime.)
 
 Originally verified against code on 2026-09-08; line-drift corrections applied
 2026-09-13 (all produce_v2.py/validate_script.py/tactical_boards.py/runpod_fulltrack.py
@@ -3667,3 +3665,24 @@ en route: the ALL/2ND statistics-period trap, Sofascore's old-event endpoint
 retirement, a script-regeneration bug that overwrote EP001's tracked script
 (fixed keep-if-exists), a raw-cache clobber on pipeline fetches, and a
 root-level final output collision on the volume.
+
+## 2026-09-27 — BRIEF 08 (gate ledger reform, unlazy review, mirror repair, reverify discipline)
+
+Ten jobs closed across five commits (3c7a90b..b5dc799; report material:
+reports/brief08/). The brief-06 "33/33 gates pass" false-pass got its root
+cause and its fix: the ledger was split into LIVE (12 gates, re-runnable on
+every commit) and FROZEN (22 one-time proofs moved verbatim to per-brief
+archives, rationale in reports/brief08/gate_triage.md); every rewritten live
+gate carries a positive control; B22 CLEAN-PUSHED replaces G12+B15 (clean
+tree AND pushed, stages nothing). The public mirror was repaired (commit
+3c7a90b): allowlist-only publishing, MONEY secret-scan rule narrowed to
+account amounts (task-cost prose travels by design), MIRROR_SOURCE.txt
+provenance line added. The unlazy skill was audited
+(reports/brief08/unlazy_review.md): installed copy at ~/.agents/skills/unlazy
+is real and tested (8/8 contract tests, 15/15 self-checks), diverged from
+upstream (local 3 ahead / upstream 1 ahead). Doctrine rule 7 ("done" =
+re-verify + publish) went into CLAUDE.md rule 7 and CONTEXT.md. En route:
+the B8 grep -c exit-code fix and the B19 --audit-only flag (gate pagecheck
+4m14s to 2.4s, under the runner timeout). Final state: 12/12 live gates ALL
+MET under --approve, then ALL MET 12/12 under --reverify against HEAD
+9a6bb1a, reverify.txt committed (b5dc799) and published to the mirror.

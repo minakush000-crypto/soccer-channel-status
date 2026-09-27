@@ -1,0 +1,254 @@
+video,time,shot_type,elements,colors,transcript,motion,note
+A,0,3D pitch,,,"When you think of build up shapes, it usually looks something like this.",,"dark 3D rendered pitch, wide top-down view"
+A,2,3D pitch,line between players;zone,yellow,"When you think of build up shapes, it usually looks something like this. But now just think of a buildup where the actual center backs",11.4,"3D scene, yellow build-up shape discs and lines"
+A,4,3D pitch,,,But now just think of a buildup where the actual center backs,23.73,"3D rendered pitch, closer angle, no marks"
+A,6,3D pitch,highlight ring;player label,white;yellow;teal,"But now just think of a buildup where the actual center backs are running away from it. And if they stayed, then",17.23,CB label with pointer over disc-highlighted player
+A,8,3D pitch,zone,yellow,"are running away from it. And if they stayed, then everyone else disappeared, creating a strange 2008 structure.",23.04,yellow crescent mark near player in 3D scene
+A,10,3D pitch,,,"And if they stayed, then everyone else disappeared, creating a strange 2008 structure.",8.02,"3D rendered pitch, sparse dark scene, no marks"
+A,12,3D pitch,line between players;zone,yellow;green,"everyone else disappeared, creating a strange 2008 structure. This is the unique tactics",12.03,"build-up shape discs and lines, yellow back line green midfield"
+A,14,2D diagram,highlight ring;line between players,green;yellow;white,"This is the unique tactics of Cesc Fabregas, a man who took this small second division club",20.42,two angled tactical-diagram cards on black background
+A,16,other,,,"This is the unique tactics of Cesc Fabregas, a man who took this small second division club",25.5,cutout photo of coach Fabregas over designed background
+A,18,other,,,"of Cesc Fabregas, a man who took this small second division club and turned them into challenging some of the biggest clubs in Italy.",28.06,"logo infographic, dashed path linking Serie A and Como badges"
+A,20,stats card,,,and turned them into challenging some of the biggest clubs in Italy.,23.13,"Serie A results wall score chips, Como badge linked to Fabregas photo"
+A,22,stats card,,,"and turned them into challenging some of the biggest clubs in Italy. And the reason? Just like a chameleon, his system keeps on changing its shape",20.8,"same results wall, slight camera drift"
+A,24,other,,,"And the reason? Just like a chameleon, his system keeps on changing its shape",69.74,cartoon chameleon metaphor animation
+A,26,2D diagram,,,"Just like a chameleon, his system keeps on changing its shape and patterns depending on the opposition's weaknesses.",56.49,"white-card pitch diagram, badge players on dark grid"
+A,28,2D diagram,,,"and patterns depending on the opposition's weaknesses. And on top of that, his strange build ups are becoming a new way",13.79,"same white-card diagram, badges motion-blurred"
+A,30,footage+overlay,highlight ring,yellow,"And on top of that, his strange build ups are becoming a new way",77.01,"real match footage, yellow discs under two players"
+A,32,footage+overlay,highlight ring;line between players;zone,green;yellow;red,"And on top of that, his strange build ups are becoming a new way to break the dominant Man-To-Man press that has taken over modern football.",36.91,"green zone, yellow and red discs, red dashed line on real footage"
+A,34,2D diagram,zone,red;yellow;blue,to break the dominant Man-To-Man press that has taken over modern football.,61.0,"full-bleed teal pitch diagram, red pressure blobs on dots"
+A,36,footage+overlay,highlight ring;line between players;zone,orange,So how exactly does Fabregas this build up works?,56.2,glowing orange network polygon over real footage
+A,38,3D pitch,line between players;zone,yellow;green,So how exactly does Fabregas this build up works? And how does he combines control and freedom to make his team so unpredictable?,73.81,"3D scene, build-up shape discs and lines"
+A,40,other,,,And how does he combines control and freedom to make his team so unpredictable?,34.07,"designed infographic, brain and heart icons linked to Fabregas photo"
+A,42,other,,,And how does he combines control and freedom to make his team so unpredictable? Too much.,32.56,"same infographic, question marks flank Como badge"
+A,44,talking head or coach clip,,,"Too much. Listening to the coach sometimes can create many, many doubts and take away many things from your game.",78.2,"archive clip of Fabregas seated, burned-in subtitle"
+A,46,talking head or coach clip,,,"Too much. Listening to the coach sometimes can create many, many doubts and take away many things from your game.",67.05,"Fabregas on pitch with crowd flags, burned-in subtitle"
+A,48,live footage,,,"sometimes can create many, many doubts and take away many things from your game.",71.65,"trophy celebration footage, fireworks and confetti"
+A,50,other,,,,88.71,near-black fade-out of celebration shot
+A,52,other,,,,4.75,full black transition frame
+A,54,text card,,,,26.14,chapter title 'The Complete Disciple' over photo-badge graphic (read directly off sheet_A_1.jpg during job 6 review)
+A,56,other,,,"When you look at the playing days of Fabregas,",28.57,"near-black zoom-out of timeline graphic, tiny badge"
+A,58,other,,,"When you look at the playing days of Fabregas, he was managed by many greats who had completely contrasting philosophies.",15.68,"cutout player name card, Fabregas badge with years text"
+A,60,other,,,he was managed by many greats who had completely contrasting philosophies.,27.09,"manager timeline infographic, brain-to-heart slider"
+A,62,other,,,So he understands both sides of the game really well,28.47,"same timeline infographic, Wenger badge visible"
+A,64,other,,,So he understands both sides of the game really well and he's not afraid to switch his style depending on the situation.,31.68,"designed manager graphic: photo badges linked by yellow lines under a gradient bar, not footage"
+A,66,other,,,and he's not afraid to switch his style depending on the situation.,30.18,"same manager graphic, zoomed and panned"
+A,68,other,,,"and he's not afraid to switch his style depending on the situation. For instance, when you look at his formation,",30.32,"same manager graphic, wider view with brain and heart icons"
+A,70,3D pitch,,,"For instance, when you look at his formation, sometimes it's a normal four two, three one.",26.59,"three rendered mini-pitches (purple, red, green) in perspective"
+A,72,3D pitch,highlight ring,yellow,"sometimes it's a normal four two, three one. Sometimes it's a back three.",27.02,"purple rendered pitch, yellow ellipses under players"
+A,74,3D pitch,highlight ring,green,"Sometimes it's a back three. And in rare cases, he even uses a classic Christmas tree formation.",18.0,"red rendered pitch, green ellipses under players"
+A,76,3D pitch,highlight ring,orange,"Sometimes it's a back three. And in rare cases, he even uses a classic Christmas tree formation.",34.09,"green rendered pitch, orange ellipses, red pitch edge top right"
+A,78,3D pitch,highlight ring;zone,green;pink;orange,"And within these, some players won't be seen nowhere close to their actual positions.",11.54,Christmas tree formation drawn as shaded tree shape on rendered pitch
+A,80,footage+overlay,highlight ring;player label,yellow;white;blue,"And within these, some players won't be seen nowhere close to their actual positions.",46.31,"live match, CB label plus yellow ellipse on player"
+A,82,footage+overlay,highlight ring;player label,yellow;white;blue,"some players won't be seen nowhere close to their actual positions. For instance, this was Como's left winger.",23.05,"live match, CB label plus yellow ellipse on player 4"
+A,84,2D diagram,highlight ring,yellow,"For instance, this was Como's left winger. And now look at his heatmap.",88.92,"badge formation on dark grid, yellow arc near winger badge"
+A,86,2D diagram,,,"For instance, this was Como's left winger. And now look at his heatmap. He actually played on the right for the entire match.",21.21,badge formation with player heatmap inset panel (green yellow red)
+A,88,footage+overlay,highlight ring;player label,yellow;white;blue,And now look at his heatmap. He actually played on the right for the entire match. And the reason Udinese were actually stronger on the left.,83.41,"live match, LW label plus yellow ellipse on player"
+A,90,live footage,,,And the reason Udinese were actually stronger on the left.,30.86,"open play, no overlay"
+A,92,live footage,,,"And the reason Udinese were actually stronger on the left. So fab sent this winger on the right,",27.76,"ball in the air, open play, no overlay"
+A,94,footage+overlay,highlight ring,yellow,"So fab sent this winger on the right, creating an extra overload to protect that side.",29.68,yellow ellipse under player in live play
+A,96,footage+overlay,highlight ring;player label,yellow;white;blue,creating an extra overload to protect that side. But football is so complex.,34.49,LW label plus three yellow ellipses on players
+A,98,talking head or coach clip,,,But football is so complex. Football takes you into so many different aspects in a in a game.,52.99,"coach interview clip, PFA credit, narration subtitle only"
+A,100,talking head or coach clip,,,But football is so complex. Football takes you into so many different aspects in a in a game.,17.47,same interview shot
+A,102,talking head or coach clip,,,Football takes you into so many different aspects in a in a game.,21.1,same interview shot
+A,104,talking head or coach clip,,,"If you tell a player all the time,",13.34,same interview shot
+A,106,live footage,,,"If you tell a player all the time, oh, this is your zone, this is where you have to move.",69.23,"training session, players jogging, no overlay"
+A,108,live footage,,,"oh, this is your zone, this is where you have to move. Football is not like that.",52.0,"training drill close-up, no overlay"
+A,110,talking head or coach clip,,,Football is not like that. The game will demand the you go a little bit more into the right.,94.69,"interview clip, gesturing"
+A,112,talking head or coach clip,,,Football is not like that. The game will demand the you go a little bit more into the right.,14.56,interview continues
+A,114,talking head or coach clip,,,"Into the left. And just like that, his systems are tailor made based on each opponent's",15.32,interview continues
+A,116,2D diagram,,,"Into the left. And just like that, his systems are tailor made based on each opponent's",71.18,club-crest badges in formation on dark pitch diagram
+A,118,2D diagram,,,"And just like that, his systems are tailor made based on each opponent's strengths and weaknesses.",10.47,"badges clustered in rotation demo, tiny pink diamond near center circle likely animation artifact"
+A,120,footage+overlay,highlight ring,yellow,strengths and weaknesses. And this is the reason why he uses certain rotations and buildups against specific oppositions.,79.25,"Juventus buildup, yellow ellipse on receiving player"
+A,122,footage+overlay,highlight ring;line between players,yellow,And this is the reason why he uses certain rotations and buildups against specific oppositions.,22.66,yellow ellipse plus yellow pass/run line on Juventus clip
+A,124,footage+overlay,highlight ring;line between players,yellow,"certain rotations and buildups against specific oppositions. As before 2019, most build ups used to look like this,",26.25,two yellow ellipses joined by yellow line in live play
+A,126,2D diagram,,,"As before 2019, most build ups used to look like this,",67.59,"blue vector pitch, striped circle player badges, pink badge in goal mouth"
+A,128,2D diagram,,,"As before 2019, most build ups used to look like this, where the pressing teams were happy to send only their front line higher while the midfield stayed deep.",9.31,"plain dark-blue pitch diagram, build-up from keeper"
+A,130,2D diagram,highlight ring,green,where the pressing teams were happy to send only their front line higher while the midfield stayed deep.,13.51,green circles around midfield dots
+A,132,2D diagram,highlight ring,red,"were happy to send only their front line higher while the midfield stayed deep. But after FIFA allowed more players inside the box for the first pass,",14.21,red rings mark two pressed midfielders
+A,134,2D diagram,,,"But after FIFA allowed more players inside the box for the first pass,",23.62,"full-bleed pink pitch diagram, plain"
+A,136,2D diagram,,,"But after FIFA allowed more players inside the box for the first pass, this naturally made the frontline to press even higher,",15.1,"full-bleed red pitch diagram, plain"
+A,138,2D diagram,highlight ring,cyan,"this naturally made the frontline to press even higher,",18.32,cyan circles around front-line dots
+A,140,2D diagram,zone,green,"this naturally made the frontline to press even higher, leaving a huge central space.",13.96,green lens shape marks open central space
+A,142,live footage,,,leaving a huge central space. And as we know how managers like to be targeted that space with their famous third man passing.,46.42,"Liverpool match, midfield circulation"
+A,144,live footage,,,And as we know how managers like to be targeted that space with their famous third man passing.,18.99,"red team pressing, keeper in black"
+A,146,2D diagram,,,like to be targeted that space with their famous third man passing. But to counter that team started sending more men higher up,38.98,zoomed red-pitch diagram at the box
+A,148,2D diagram,,,But to counter that team started sending more men higher up,16.13,small marker dots paired to each player
+A,150,2D diagram,,,But to counter that team started sending more men higher up who would mark each build up players no matter where the ball is.,78.43,"teal pitch, man-marking pairs"
+A,152,2D diagram,,,who would mark each build up players no matter where the ball is. This way they blocked every free man in the build up.,5.17,"teal pitch, markers stay with men"
+A,154,2D diagram,highlight ring,red,"This way they blocked every free man in the build up. So if you are a strict positional team, you either have to take the risk",11.96,red rings on pressing midfielders
+A,156,2D diagram,highlight ring,red,"This way they blocked every free man in the build up. So if you are a strict positional team, you either have to take the risk",15.03,red rings on pressers near box
+A,158,2D diagram,highlight ring,red,"So if you are a strict positional team, you either have to take the risk or go long, which is something we are seeing with teams like Arsenal.",14.78,"full pitch, red rings on man-markers"
+A,160,live footage,,,"or go long, which is something we are seeing with teams like Arsenal.",64.46,"night match, long ball forward"
+A,162,live footage,,,"or go long, which is something we are seeing with teams like Arsenal. But if you lean more towards a relationship side like Fabregas,",16.04,"same match, ball to edge of box"
+A,164,other,,,"But if you lean more towards a relationship side like Fabregas,",76.42,brain-vs-heart gradient slider metaphor on black
+A,166,footage+overlay,highlight ring,green,they have found ways to use chaos to break these men to man pressing systems,84.15,faint dark ellipse under bottom-left player
+A,168,footage+overlay,highlight ring,yellow,they have found ways to use chaos to break these men to man pressing systems,22.92,yellow ellipse under on-ball player
+A,170,footage+overlay,highlight ring,yellow,like this one. The player you're seeing is actually comes full back next to the keeper,23.97,yellow ellipse under on-ball fullback
+A,172,footage+overlay,arrow,yellow,like this one. The player you're seeing is actually comes full back next to the keeper,34.8,curved yellow arc under dropping fullback
+A,174,footage+overlay,player label,white,The player you're seeing is actually comes full back next to the keeper instead of going direct. The keeper plays it to him.,29.31,white FB tag beside fullback at goal
+A,176,footage+overlay,arrow;player label,white;yellow,instead of going direct. The keeper plays it to him.,0.99,"GK and CB tags plus small yellow pointer, held still"
+A,178,footage+overlay,player label,white,instead of going direct. The keeper plays it to him. Who then lays it off to the center back and moves back into position.,19.46,white FB tag near keeper
+A,180,footage+overlay,player label,white,"Who then lays it off to the center back and moves back into position. So by adding this middle man who moves away,",21.29,white CB and FB tags as lay-off happens
+A,182,2D diagram,,,"So by adding this middle man who moves away, it creates a distraction for the markers, which then creates more space",84.62,"dark-grid diagram, keeper-corner build-up"
+A,184,2D diagram,highlight ring;line between players,white;yellow,"So by adding this middle man who moves away, it creates a distraction for the markers, which then creates more space",17.89,"dotted pass line, yellow glow on carrier"
+A,186,2D diagram,highlight ring;line between players,white;green,"it creates a distraction for the markers, which then creates more space and time for the center back to make the next move.",20.29,"dotted pass line, green ring on receiver"
+A,188,2D diagram,highlight ring;line between players,white;green,and time for the center back to make the next move.,15.4,"dotted line, filled green circle around player"
+A,190,footage+overlay,highlight ring,yellow,and time for the center back to make the next move.,85.55,"yellow ellipse under receiving CB, wide shot"
+A,192,footage+overlay,arrow;highlight ring;text,yellow;white,,24.32,"yellow arrow, glow ellipse and ??? callout over Juventus match footage"
+A,194,footage+overlay,highlight ring,yellow,,19.0,yellow glow ellipse under receiving player
+A,196,footage+overlay,highlight ring,yellow,"This way, Fabregas uses several techniques where the defenders",30.75,yellow glow ellipse under deep player
+A,198,3D pitch,,,"This way, Fabregas uses several techniques where the defenders",85.99,"rendered mannequin scene, no marks"
+A,200,3D pitch,highlight ring;player label,yellow;teal;white,makes forward runs and drag the front markers into unfamiliar places.,17.48,"CB label with teal marker, yellow ellipse under player"
+A,202,3D pitch,highlight ring;player label,yellow;red;teal;white,makes forward runs and drag the front markers into unfamiliar places. And with the ball often traveling through the air,21.58,"CB label, yellow and red ellipses under duel"
+A,204,3D pitch,highlight ring,yellow,"And with the ball often traveling through the air rather than on the ground, it becomes easier",25.35,yellow crescent mark around airborne ball
+A,206,3D pitch,,,"And with the ball often traveling through the air rather than on the ground, it becomes easier for these physical defenders to beat the forward pressers.",7.13,"rendered scene, ball in air, no marks"
+A,208,3D pitch,highlight ring,white,"rather than on the ground, it becomes easier for these physical defenders to beat the forward pressers.",18.89,faint white circle glow around contested pair
+A,210,3D pitch,highlight ring,white,for these physical defenders to beat the forward pressers. But this only works if your opposition's pressing is moderate,4.51,faint white circle glow around contested pair
+A,212,2D diagram,,,But this only works if your opposition's pressing is moderate against extreme pressing,27.04,"badges and yellow discs on dark grid pitch, no callouts"
+A,214,2D diagram,,,"against extreme pressing teams, you need even more distractions to make the buildup less risky.",54.3,same diagram now on red pitch background
+A,216,2D diagram,,,"against extreme pressing teams, you need even more distractions to make the buildup less risky.",15.88,"badges and yellow discs on red pitch, no callouts"
+A,218,2D diagram,text,white,And this is the reason you will know why Fabregas pushes everyone forward,16.21,?!! callout beside ball-carrying badge
+A,220,2D diagram,,,And this is the reason you will know why Fabregas pushes everyone forward,15.78,full-pitch formation of badges and yellow discs
+A,222,2D diagram,highlight ring,teal,except the center backs. And when you compare this,11.95,teal rings around center back badges
+A,224,3D pitch,highlight ring,red,"except the center backs. And when you compare this with a deep buildup due to the close proximity of pressers,",42.42,red ellipses under pressing players
+A,226,3D pitch,highlight ring,yellow,"And when you compare this with a deep buildup due to the close proximity of pressers, you have very little space to receive the ball comfortably",17.97,yellow crescent mark in midfield
+A,228,3D pitch,,,you have very little space to receive the ball comfortably,23.14,"duel close-up, no marks"
+A,230,3D pitch,,,"you have very little space to receive the ball comfortably as the marker is right next to you, giving you almost no time to react.",25.86,"duel close-up, no marks"
+A,232,3D pitch,text,yellow,"as the marker is right next to you, giving you almost no time to react. But with this buildup, if you are here, you can run into this space",12.42,?!! callout above duel close-up
+A,234,3D pitch,,,"But with this buildup, if you are here, you can run into this space",26.01,"wide rendered pitch, no marks"
+A,236,3D pitch,zone,green,"But with this buildup, if you are here, you can run into this space while your marker is still chasing you from behind.",24.17,green shaded band across midfield
+A,238,3D pitch,arrow,red;yellow,while your marker is still chasing you from behind. This gives you more space and time to react where you can pause and even turn.,19.26,red curved and yellow straight arrows in center circle
+A,240,3D pitch,,,while your marker is still chasing you from behind. This gives you more space and time to react where you can pause and even turn.,13.43,"rendered scene, no marks"
+A,242,3D pitch,,,This gives you more space and time to react where you can pause and even turn.,9.3,"rendered scene, no marks"
+A,244,footage+overlay,arrow;highlight ring;zone,green;yellow;red,,45.32,"green zone, yellow and red ellipses, red dashed arcs on Hamburg footage"
+A,246,footage+overlay,arrow;highlight ring;zone,green;yellow;red,,25.46,"green zone, ellipses and red dashed arc on match footage"
+A,248,footage+overlay,highlight ring,yellow;red,"Also, with the center back already",31.2,"yellow and red ellipses under player, no zone"
+A,250,2D diagram,highlight ring;line between players,red;white,"Also, with the center back already staying deep, they can act as safe support options for a back pass.",63.32,"red glow ring on back-pass badge, dotted pass line"
+A,252,2D diagram,highlight ring;line between players,red;white,"staying deep, they can act as safe support options for a back pass. This then naturally pulls the opposition's deeper players in a forward momentum,",14.16,red glow ring and dashed pass line on dark grid diagram
+A,254,2D diagram,highlight ring;line between players,green;white,"This then naturally pulls the opposition's deeper players in a forward momentum,",14.79,green glow rings and dashed pass line
+A,256,2D diagram,highlight ring;line between players,white;green,"This then naturally pulls the opposition's deeper players in a forward momentum, creating space at the back to play a third pass to the running forward.",17.44,dashed pass path plus green player glows on drawn pitch
+A,258,2D diagram,zone,green,creating space at the back to play a third pass to the running forward.,17.82,green shaded box zone over drawn pitch
+A,260,2D diagram,zone,green,"creating space at the back to play a third pass to the running forward. However, this doesn't always work.",15.86,bright green rectangle zone with ball carrier inside
+A,262,2D diagram,,,"However, this doesn't always work. Sometimes the opposition stays in a low block and doesn't step up.",19.13,"plain badge diagram, no drawn marks"
+A,264,2D diagram,line between players,red,"However, this doesn't always work. Sometimes the opposition stays in a low block and doesn't step up.",14.04,two thick red bars marking defensive rows
+A,266,2D diagram,line between players,red,"So in that case, you are forced to carry the ball forward.",9.96,red bar marking a defensive row
+A,268,2D diagram,line between players,red,"So in that case, you are forced to carry the ball forward. But unlike the build up here, the density of defenders are much higher.",17.09,"zoomed diagram, two red row bars"
+A,270,live footage,,,"But unlike the build up here, the density of defenders are much higher.",76.03,"clean broadcast wide shot, no marks"
+A,272,live footage,,,"But unlike the build up here, the density of defenders are much higher. As a result, this shape may have a low risk",18.1,"clean broadcast shot, no marks"
+A,274,3D pitch,,,"As a result, this shape may have a low risk when building up from deep, but it also comes with a lower reward",45.86,"purple 3D render with mannequin figures, no marks"
+A,276,3D pitch,,,"when building up from deep, but it also comes with a lower reward if you want to actually break the opposition's backline.",22.53,"3D render wide view, no marks"
+A,278,3D pitch,zone,red,"if you want to actually break the opposition's backline. But on the other hand, the deeper buildup is really risky at the start,",6.75,red shaded ellipses under the defensive block in 3D render
+A,280,live footage,,,"if you want to actually break the opposition's backline. But on the other hand, the deeper buildup is really risky at the start,",65.6,"clean broadcast shot near box, no marks"
+A,282,footage+overlay,line between players,white,"But on the other hand, the deeper buildup is really risky at the start, but if you manage to progress through it, the reward is much higher due",21.33,glowing white pass streak drawn over live play
+A,284,live footage,,,"but if you manage to progress through it, the reward is much higher due",16.47,"clean broadcast shot, no marks"
+A,286,live footage,,,"but if you manage to progress through it, the reward is much higher due to less numbers at the back. So to solve this, Fabregas tried to find a balance of both where he lets",15.15,"clean broadcast shot, no marks"
+A,288,3D pitch,,,"to less numbers at the back. So to solve this, Fabregas tried to find a balance of both where he lets",80.23,"full purple 3D pitch render, no marks"
+A,290,3D pitch,arrow,green;yellow,"So to solve this, Fabregas tried to find a balance of both where he lets his keeper step up as a third center back while also dropping his both pivots deep.",3.6,green and yellow glowing wedge arrows on 3D pitch
+A,292,3D pitch,highlight ring,yellow,his keeper step up as a third center back while also dropping his both pivots deep.,23.25,yellow glow ellipse under keeper in 3D render
+A,294,3D pitch,highlight ring;line between players,yellow,his keeper step up as a third center back while also dropping his both pivots deep.,21.1,yellow ellipses under back three joined by thick yellow line
+A,296,3D pitch,arrow;highlight ring;line between players,yellow;green,"This way you still have enough numbers to attract the opposition,",6.11,yellow back line plus green glows and dashed lanes in 3D render
+A,298,2D diagram,highlight ring;player label,green;blue;white,"This way you still have enough numbers to attract the opposition,",30.43,headshot badges with CB/CM tags and faint green glow
+A,300,2D diagram,player label,blue;white,and at the same time you can create a numerical advantage,13.03,headshot badges with position tags
+A,302,2D diagram,line between players;player label,green;blue;white,and at the same time you can create a numerical advantage further up the pitch with your full backs are now free to join the front line.,14.18,green glowing zigzag through front-line badges
+A,304,2D diagram,line between players;player label,green;white;blue,further up the pitch with your full backs are now free to join the front line.,14.5,green zigzag plus white dotted lanes on badge diagram
+A,306,2D diagram,line between players;player label,green;white;blue,,14.93,green zigzag plus white dotted lanes on badge diagram
+A,308,footage+overlay,highlight ring;line between players,yellow;red,"Of. But as Como progresses through the buildup,",69.68,yellow/red player glows joined by thick yellow link line on footage
+A,310,footage+overlay,highlight ring,green,"Of. But as Como progresses through the buildup,",24.82,green glow ellipses under players on footage
+A,312,footage+overlay,highlight ring,green,"Of. But as Como progresses through the buildup,",21.79,green glow ellipses under players on footage
+A,314,2D diagram,,,this is where their shape slowly starts to blur and become harder to read.,69.39,"blue badge diagram, no drawn marks"
+A,316,2D diagram,,,this is where their shape slowly starts to blur and become harder to read.,15.22,"blurry zoom on blue badges, no marks"
+A,318,2D diagram,line between players,yellow,"this is where their shape slowly starts to blur and become harder to read. For instance, they often form an unusual box midfield",22.59,yellow connection web between box-midfield badges
+A,320,footage+overlay,highlight ring;line between players,yellow,"For instance, they often form an unusual box midfield where instead of a fullback or center back, a winger drifts inside",70.88,match footage with yellow triangle linking three players
+A,322,2D diagram,highlight ring,teal,"where instead of a fullback or center back, a winger drifts inside",49.71,"red pitch diagram, teal ring marks the winger drifting inside"
+A,324,2D diagram,highlight ring,yellow,"where instead of a fullback or center back, a winger drifts inside to complete that box,",10.1,yellow ellipse around the winger badge
+A,326,2D diagram,shape outline,yellow,"to complete that box, and unlike normal box, it doesn't rotate within a fixed structure.",10.93,yellow hollow box drawn around midfield four
+A,328,2D diagram,shape outline,yellow,"to complete that box, and unlike normal box, it doesn't rotate within a fixed structure. Rather, it keeps moving constantly without holding its shape,",9.93,yellow thick band around tilted box shape
+A,330,2D diagram,shape outline,yellow,"Rather, it keeps moving constantly without holding its shape,",8.97,yellow band now diamond shaped
+A,332,2D diagram,shape outline,yellow,"Rather, it keeps moving constantly without holding its shape, as the main objective of this is to prevent the opposition's lines",9.96,yellow band now triangle shaped
+A,334,footage+overlay,highlight ring;line between players,yellow;teal;red,as the main objective of this is to prevent the opposition's lines from staying stable and create spaces in between.,46.58,footage with colored player ellipses and yellow links
+A,336,footage+overlay,highlight ring;line between players,yellow;teal;red,from staying stable and create spaces in between.,21.65,same colored-ellipse overlay on footage
+A,338,live footage,,,from staying stable and create spaces in between. And these movements are so quick that it becomes almost impossible,32.64,"open play, no overlay"
+A,340,live footage,,,And these movements are so quick that it becomes almost impossible to predict them beforehand.,19.01,"open play, no overlay"
+A,342,live footage,,,"to predict them beforehand. But even with all this chaos, Como still have one of the best defenses",22.01,"open play, no overlay"
+A,344,stats card,shape outline,yellow,"to predict them beforehand. But even with all this chaos, Como still have one of the best defenses",94.02,"goals-conceded table, yellow bracket points at Como 30.0"
+A,346,stats card,shape outline,yellow,"in the league. And the secret behind this is Fabregas is hybrid roles,",9.98,table with yellow box around Como row
+A,348,2D diagram,highlight ring,green;red,"in the league. And the secret behind this is Fabregas is hybrid roles, where one half of the players are free to roam across the pitch,",49.85,"blue diagram, green vs red rings split player groups"
+A,350,2D diagram,highlight ring,green;red,"where one half of the players are free to roam across the pitch,",14.33,same badge diagram
+A,352,2D diagram,highlight ring,green;red,"where one half of the players are free to roam across the pitch, while the other half are strictly instructed to stay in a resting position.",14.37,same badge diagram near own box
+A,354,2D diagram,highlight ring,green;red,while the other half are strictly instructed to stay in a resting position.,15.9,"same badge diagram, green pivots advanced"
+A,356,live footage,,,"And these resting position mostly looks like a two plus three shape,",64.42,"open play, no overlay"
+A,358,footage+overlay,highlight ring;line between players,yellow,"And these resting position mostly looks like a two plus three shape, where the pivots tilt to one side, with the full back stepping higher.",25.22,two yellow ellipses joined by a yellow line
+A,360,2D diagram,highlight ring,yellow,"where the pivots tilt to one side, with the full back stepping higher.",92.96,"dark diagram, yellow crescents on two CMs"
+A,362,2D diagram,highlight ring,teal,"where the pivots tilt to one side, with the full back stepping higher. And the special thing about this is it can easily turn into a four plus one shape while moving back.",16.18,"dark diagram, teal crescent near FB"
+A,364,2D diagram,,,And the special thing about this is it can easily turn into a four plus one shape while moving back.,12.52,"formation view, no marks"
+A,366,2D diagram,highlight ring;zone,yellow,"this is it can easily turn into a four plus one shape while moving back. So if they lose the ball high up the pitch, these resting players",23.39,yellow ellipse on CM plus thick yellow arc under back line
+A,368,3D pitch,highlight ring,yellow,"So if they lose the ball high up the pitch, these resting players",49.39,"red 3D render, yellow ellipse under ball carrier"
+A,370,3D pitch,highlight ring;line between players,yellow;teal,"So if they lose the ball high up the pitch, these resting players use their preserved energy to aggressively counter,",27.89,yellow and teal pressing lines in 3D render
+A,372,3D pitch,highlight ring;line between players,yellow;teal,"use their preserved energy to aggressively counter, press and block all available space for the opposition to counter.",6.25,"same lines, near-static frame"
+A,374,3D pitch,highlight ring;line between players,yellow;teal;white,"use their preserved energy to aggressively counter, press and block all available space for the opposition to counter.",33.37,same lines plus white crescent at top edge
+A,376,3D pitch,highlight ring;line between players,yellow;teal,press and block all available space for the opposition to counter. And this explains exactly,3.9,"same lines, static frame"
+A,378,footage+overlay,highlight ring,yellow,And this explains exactly why Como have scored so many goals from counter-pressing situations.,33.95,yellow circle over a duel in real footage
+A,380,live footage,,,why Como have scored so many goals from counter-pressing situations.,51.77,"open play, no overlay"
+A,382,live footage,,,But these tactics can only be understood even better when we apply them practically,26.74,"open play, no overlay"
+A,384,2D diagram,highlight ring,green;red,But these tactics can only be understood even better when we apply them practically,62.96,"Como badge formation graphic on blue-grid pitch, green rings on front players, red rings on the rest"
+A,386,game simulation,,,in a simulation.,39.19,"FM tactics screen, 4231 with role tags (F9, PW, W, DLP)"
+A,388,game simulation,text,white;yellow,in a simulation.,52.87,"sim match view, NEW 0-0 AVL scoreboard, The Experiment title box over it"
+A,390,game simulation,text,white;yellow,With Fabregas keeps changing his formation,7.51,sim match kickoff view with The Experiment title box
+A,392,2D diagram,,,"With Fabregas keeps changing his formation based on the oppositions, but his most common shape is the 4231.",52.82,"white pitch outline on dark grid with blue Como badges, small pointer near centre badge"
+A,394,game simulation,,,"With Fabregas keeps changing his formation based on the oppositions, but his most common shape is the 4231.",23.28,"FM tactics screen, same 4231 role layout"
+A,396,game simulation,,,"based on the oppositions, but his most common shape is the 4231. And within this the front four are the most flexible ones in the squad,",9.41,FM tactics screen slightly zoomed
+A,398,game simulation,highlight ring,yellow,"And within this the front four are the most flexible ones in the squad,",20.33,FM tactics screen with drawn yellow crescents around the front players
+A,400,game simulation,,,"And within this the front four are the most flexible ones in the squad, so the striker in ten could act as a false nine and free roamers respectively,",18.02,FM striker role selection panel
+A,402,game simulation,,,"so the striker in ten could act as a false nine and free roamers respectively,",22.28,"FM role list, False Nine selected"
+A,404,game simulation,,,while one of the winger plays as a playmaker,20.04,"FM role list, Free Role selected"
+A,406,game simulation,,,while one of the winger plays as a playmaker who drift inside as a second tend to fill that box midfield.,18.92,"FM role list, Playmaking Winger selected"
+A,408,2D diagram,shape outline,yellow,"who drift inside as a second tend to fill that box midfield. While in team instructions, since Fabregas uses both deep and high buildup,",38.24,"formation diagram with player-photo badges, yellow U outline around the central midfielders"
+A,410,game simulation,,,"While in team instructions, since Fabregas uses both deep and high buildup,",30.72,FM In Possession instructions tiles
+A,412,live footage,,,"While in team instructions, since Fabregas uses both deep and high buildup, it's not uncommon to see them playing wide ranges of passing.",48.94,"Como match footage, play in central midfield"
+A,414,2D diagram,arrow,green;yellow,it's not uncommon to see them playing wide ranges of passing.,61.93,"dark-grid pitch, dashed pass arrows from green and blue Como badges"
+A,416,2D diagram,arrow,green;yellow;purple,it's not uncommon to see them playing wide ranges of passing. So we will keep it standard,20.39,five dashed arrows fanning out from the keeper badge to teammates
+A,418,game simulation,,,So we will keep it standard while the creative freedom will be set to expressive as Fabregas gives his players,22.93,FM In Possession instructions tiles again
+A,420,game simulation,,,while the creative freedom will be set to expressive as Fabregas gives his players,19.87,"FM Creative Freedom options, More Expressive selected"
+A,422,2D diagram,shape outline,green;yellow,the freedom to think and move based on what they see on the pitch.,30.04,"green V-shaped run line, yellow ball-marker dots and lightbulb icon on dark-grid pitch"
+A,424,2D diagram,,,the freedom to think and move based on what they see on the pitch. Rather than relying only on fixed instructions.,23.84,"only yellow ball-marker dots and a lightbulb icon, no arrows or lines drawn"
+A,426,2D diagram,line between players,red;yellow,"Rather than relying only on fixed instructions. And just like company, Fabregas likes to have a balance of both extremes,",18.14,"red V lines linking badges, yellow ball-marker dots on dark-grid pitch"
+A,428,game simulation,,,"Rather than relying only on fixed instructions. And just like company, Fabregas likes to have a balance of both extremes,",18.8,FM instruction tile grid mid-scroll
+A,430,game simulation,,,"And just like company, Fabregas likes to have a balance of both extremes, so most of the settings can remain balanced while out of possession.",13.49,FM Out of Possession instruction tile grid
+A,432,game simulation,,,so most of the settings can remain balanced while out of possession.,12.46,FM Out of Possession instruction tile grid
+A,434,game simulation,,,"so most of the settings can remain balanced while out of possession. Como are known for their aggressive gegen pressing style,",20.28,"FM defensive transition tiles close-up, Counter-Press shown"
+A,436,footage+overlay,highlight ring,yellow,"Como are known for their aggressive gegen pressing style, so we will keep a high press and turn Counter-Pressing on.",32.4,"match footage of a tackle, translucent yellow circle ringed on the player"
+A,438,game simulation,,,"Como are known for their aggressive gegen pressing style, so we will keep a high press and turn Counter-Pressing on.",40.45,"FM Out of Possession screen, High Press tile selected"
+A,440,game simulation,,,so we will keep a high press and turn Counter-Pressing on. But against opposition's buildup you won't see them pressing straight away.,24.03,"FM defensive tiles close-up, Trigger Press and Counter-Press shown"
+A,442,live footage,,,But against opposition's buildup you won't see them pressing straight away.,78.99,"Como match footage, opponent building up with keeper on the ball"
+A,444,footage+overlay,highlight ring,red,"Instead, they defend in a narrow three plus two,",12.55,"match footage, red ellipses marking the front three shadow-marking"
+A,446,footage+overlay,highlight ring;line between players,yellow;red,"Instead, they defend in a narrow three plus two, where the front three stay back and shadow mark the central players",14.94,"match footage, red ellipses under players joined by yellow lines outlining the narrow block"
+A,448,footage+overlay,zone,red;yellow,where the front three stay back and shadow mark the central players,15.66,"live match footage, red ellipses under players and yellow pressing-cone zones"
+A,450,footage+overlay,zone,red;yellow,where the front three stay back and shadow mark the central players so the pressing trap should be set as outside.,15.5,"same trap overlay as 448, players slightly moved"
+A,452,game simulation,,,"so the pressing trap should be set as outside. So overall, like many modern managers, Fabregas showed us how valuable",83.34,"Football Manager tactics planner menu, Trap Outside selected"
+A,454,other,,,"So overall, like many modern managers, Fabregas showed us how valuable",45.16,cutout player photo (Kompany) in yellow octagon frame on black
+A,456,other,,,"So overall, like many modern managers, Fabregas showed us how valuable it is to stay flexible and adapt when one plan isn't working.",51.27,"infographic montage, manager portraits joined by yellow lines to central player photo"
+A,458,other,,,it is to stay flexible and adapt when one plan isn't working.,26.01,"same manager-connection infographic, central photo blurred mid-animation"
+A,460,footage+overlay,line between players;text;zone,yellow;white,it is to stay flexible and adapt when one plan isn't working. And his innovative buildups may have opened doors to be more creative at the back to counter the high presses.,92.36,"Juventus box footage, yellow ground ellipse, yellow line and ??? callout"
+A,462,footage+overlay,zone,yellow;red,And his innovative buildups may have opened doors to be more creative at the back to counter the high presses.,50.51,"vintage match clip, small yellow and red ellipses under a player"
+A,464,2D diagram,highlight ring,red,may have opened doors to be more creative at the back to counter the high presses. And this is the reason why,71.03,"tactics-board pitch with token players, red rings marking two yellow tokens"
+A,466,other,,,"And this is the reason why they are considered one of the most unpredictable sides in Europe, pensively.",118.01,"infographic, brain icon linked by line to coach portrait"
+A,468,other,text,white,"And this is the reason why they are considered one of the most unpredictable sides in Europe, pensively.",35.72,"brain, coach photo and heart icons over Como badge with question marks"
+A,470,other,text,white,"they are considered one of the most unpredictable sides in Europe, pensively. And I think sometimes we just making players so robotic,",13.88,same brain-heart infographic with timeline line and Como badge
+A,472,talking head or coach clip,,,"And I think sometimes we just making players so robotic,",76.97,"Fabregas interview b-roll, burned-in subtitle only"
+A,474,talking head or coach clip,,,,53.55,"same interview shot, subject covers face"
+A,476,talking head or coach clip,,,"just looking at one way, when there is so many other things",21.73,"same interview shot, subject gestures"
+A,478,talking head or coach clip,,,"just looking at one way, when there is so many other things",21.91,"same interview shot, subject looks aside"
+A,480,talking head or coach clip,,,"happening in the game, you know.",17.32,"same interview shot, subject speaking"
+A,482,talking head or coach clip,,,"happening in the game, you know.",78.76,"same interview shot fading to black, heavily darkened"
+A,484,other,,,"But speaking of other things,",26.4,near-black transition frame
+A,486,text card,text,white;yellow,"But speaking of other things, there is one team in England who has taken this idea and turned football corners",8.41,"transition card, But speaking of other things..."
+A,488,3D pitch,arrow,yellow,"But speaking of other things, there is one team in England who has taken this idea and turned football corners",34.13,"3D animated abstract scene, two stylized figures, small yellow arrow marker"
+A,490,footage+overlay,highlight ring,white,"into deadly goal machines, using tactics from completely different sports.",31.94,goal-mouth footage with translucent white circle on players
+A,492,live footage,,,"into deadly goal machines, using tactics from completely different sports.",77.35,"NFL american football play, cross-sport cutaway"
+A,494,footage+overlay,highlight ring,white,So what exactly is this new corner trick and why rivals are calling it,69.34,NBA basketball clip with translucent white circle highlight
+A,496,3D pitch,zone,teal,So what exactly is this new corner trick and why rivals are calling it,45.62,"3D-rendered corner scenario, teal ellipses under players"
+A,498,other,,,to be banned? Let's check it out in this video.,37.05,social-media comment screenshots wall on black
+A,500,other,,,to be banned? Let's check it out in this video.,13.09,black transition frame
+A,502,other,,,,,fully black frame
+A,504,other,,,,,fully black frame

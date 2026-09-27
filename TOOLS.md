@@ -2,7 +2,8 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-09-27 (brief 06).
+> **Last verified against code:** 2026-09-27 (brief 06; census prose line
+> re-run brief 09 job 0).
 
 Rebuilt 2026-09-23 (brief 05 job 12) by command; **now enforced by command**
 (brief 06 job 5): tools/census.py compares this table against `ls tools/`
@@ -18,11 +19,12 @@ DECISIONS.md and retired/RETIREMENT_NOTES.md.
 
 $ ls -p tools/ | grep -v / | wc -l  →  41  (USAGE.md exempt from rows)
 
-35 .py + 2 .js + board_page.html + watchlist.yaml + sofascore_team_ids.json.
-26 WIRED, 14 HAND-RUN (deliberately kept operating tools/data). No DEAD class
+37 .py + 2 .js + pagecheck_proof.sh + board_page.html + watchlist.yaml +
+sofascore_team_ids.json.
+28 WIRED, 15 HAND-RUN (deliberately kept operating tools/data). No DEAD class
 exists — anything dead is deleted or in retired/.
 
-## The 40 rows
+## The 43 rows
 
 | File | Class | Called by (file:line) | Notes |
 |---|---|---|---|
@@ -41,6 +43,8 @@ exists — anything dead is deleted or in retired/.
 | `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16/B18 | every spec number must match the RAW Sofascore responses by team NAME (extended brief 06 job 3) |
 | `census.py` | WIRED | GATES B20 | script-driven census: TOOLS.md must match tools/ exactly (brief 06 job 5) |
 | `pagecheck_proof.sh` | WIRED | GATES B19 | runs the rendered-page audit on a deliberately mirrored spec (must FAIL) then the real spec (must PASS), locally via the cached Chrome (brief 08 job 3) |
+| `pod_frames.py` | HAND-RUN | brief 09 jobs 1-2 (bench study) | Modal ship/extract/pull for benchmark frames: 2s frames + scene-cut frames (threshold printed) + scdet score sweep; reuses volume soccer-build |
+| `brief09_check.py` | WIRED | GATES B24 | gate oracle: frames_<L>.csv row counts vs duration/2 within 1 (brief 09 job 8) |
 | `script_gen.py` | WIRED | produce_v2.py:372 | lane script draft |
 | `validate_script.py` | WIRED | produce_v2.py:386; tests | grammar + source validation |
 | `transformation_gate.py` | WIRED | produce_v2.py:667 | lane D floor |

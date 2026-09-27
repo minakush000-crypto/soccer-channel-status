@@ -85,8 +85,9 @@ $ ffprobe -v error -show_entries format=duration,size -of csv=p=0 \
 
 $ ls -p tools/ | grep -v / | wc -l  →  41  (USAGE.md exempt)
 
-35 .py + 2 .js + board_page.html + watchlist.yaml + sofascore_team_ids.json
-= 40 rows: 26 WIRED + 14 HAND-RUN. TOOLS.md is now command-enforced: a file
+37 .py + 2 .js + pagecheck_proof.sh + board_page.html + watchlist.yaml +
+sofascore_team_ids.json = 43 rows: 28 WIRED + 15 HAND-RUN (census.py
+2026-09-27, brief 09 job 2). TOOLS.md is now command-enforced: a file
 without a row, a row without a file, or wrong class totals fails gate B20.
 
 ## What is broken, worst first
