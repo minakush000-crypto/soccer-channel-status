@@ -3686,3 +3686,32 @@ the B8 grep -c exit-code fix and the B19 --audit-only flag (gate pagecheck
 4m14s to 2.4s, under the runner timeout). Final state: 12/12 live gates ALL
 MET under --approve, then ALL MET 12/12 under --reverify against HEAD
 9a6bb1a, reverify.txt committed (b5dc799) and published to the mirror.
+
+## 2026-09-27 — BRIEF 09 (benchmark frame study: three videos, 645 frames, no production builds)
+
+Nine jobs closed across eight commits (8b2b9a7..dac1e7c; report:
+reports/brief09/). The three benchmark tactical explainers were downloaded
+over the home connection (720p h264 + English subs; DEVIATION: staged in
+/mnt/c/Users/muads/Downloads/benchmark because every write to /mnt/f fails
+Errno 22 at the drvfs layer since session start — needs a manual remount),
+shipped to the Modal volume, and extracted there (2s frames + scene-cut
+frames at threshold 0.3 + a full scdet score sweep; local videos deleted
+after the pull). All 645 studied frames were classified (shot type, overlay
+elements, colors, transcript context) by a 21-agent workflow over frames
+stamped with their identity, then verified: 0 unknown keys, 0 missing, 0
+duplicates, 0 motion conflicts after cut-entry exemptions, and a personal
+grid re-view of 30+ sheets plus 10 sequential-read calibration anchors. The
+method lesson of the brief: never map multi-image Read batches by call
+order — burn the identity into the image and key rows by the stamp. Numbers
+(job 4, measurements.md): A overlays hit 52.6% of frames (15.7/min), B
+39.6%, C 38.7%; A hard-cuts every ~6.7s, C ~8.3s, B has essentially no hard
+cuts (gradual morph transitions — a deliberate style, caveat recorded). The
+overlay catalog (job 5) names 15 styles with 45 example frames; the gap
+list (job 7) records 10 capabilities the pipeline lacks, led by
+overlays-drawn-on-footage and animated replay boards. Four live gates added
+(B23-B26): artifacts exist, row counts vs duration/2 within 1, sheets <= 12,
+local videos deleted (positive control). Final: ALL MET 16/16 under
+--reverify against HEAD dad8560, proof committed and published to the
+mirror. Grid JPGs are regenerable analysis artifacts (gitignored, rebuilt by
+reports/brief09/make_grids.py); the frame pool lives on the staging drive
+and goes to B2 with the rest of the brief's outputs.
