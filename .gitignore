@@ -14,6 +14,10 @@
 !GATES.md
 !SKILLS.md
 !.gitignore
+!MIRROR_SOURCE.txt
+!reports/
+!reports/*/
+!reports/*/**
 # Defense in depth: even inside allowed dirs, never ship these.
 *.mp4
 *.mov
