@@ -65,7 +65,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=2963bee56a3748bcc4d6d3fc68a151d0d41aae797148aa6c1f2d05a20907a876; output-bytes=1311
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=ca53858eec5910f6dc2e05983ce1c953f48d57886cc87a269e4973d722b3e577; output-bytes=1422
 - [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
@@ -86,3 +86,23 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: mkdir -p /tmp/b09_pc && printf x > /tmp/b09_pc/pc.mp4 && n=$(find /tmp/b09_pc -name "*.mp4" 2>/dev/null | wc -l) && rm -rf /tmp/b09_pc && [ "$n" -eq 1 ] && real=$(find /mnt/f/benchmark /mnt/c/Users/muads/Downloads/benchmark -maxdepth 1 -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.webm" \) 2>/dev/null | wc -l) && [ "$real" -eq 0 ] && echo BENCH-LOCAL-DELETED
   EXPECT: BENCH-LOCAL-DELETED
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=86f9fd29599306b77941b2361713b79fd810bd35cc6b9062547a414fdae7348c; output-bytes=20
+- [x] B27: the disk guard exists and is wired to every entry point (5+ callers grepped, not counted by memory)
+  CHECK: test -x tools/disk_guard.sh && n=$(grep -rlE "disk_guard\.sh" tools/ .claude/hooks/ 2>/dev/null | grep -v "disk_guard.sh$" | wc -l) && [ "$n" -ge 5 ] && echo GUARD-WIRED callers=$n
+  EXPECT: GUARD-WIRED
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=b784b78d958ced207308d63c2ef966414513164ac01f938602eb103b7b5cb867; output-bytes=23
+- [x] B28: the guard's positive controls FAIL on faked states (100000G floor; unmounted-F target) and the cleanup exemption PASSES
+  CHECK: bash tools/disk_guard.sh --selftest
+  EXPECT: GUARD-SELFTEST-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=1096bead3681d9db3c9157d52a4fcb207f9b44c270911a3f5a70dcaedeebdfe3; output-bytes=18
+- [x] B29: /mnt/f is mounted AND passes a real write probe (brief 10 job 2, post chkdsk repair)
+  CHECK: bash tools/f_mount.sh --check
+  EXPECT: F-MOUNT-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=77df0adb69a16d87387dfc448d327ffd7ea447ffc358113ccb305b0658e1c1ec; output-bytes=11
+- [x] B30: the four cache env vars resolve to /mnt/f in the sourced env file (XDG_CACHE_HOME deliberately absent: Chrome stays off the flash drive)
+  CHECK: s=$HOME/.config/soccer/env.sh && test -f "$s" && [ "$(grep -cE '^(export )?(PIP_CACHE_DIR|UV_CACHE_DIR|npm_config_cache|HF_HOME)=/mnt/f' "$s")" -eq 4 ] && echo CACHES-ON-F
+  EXPECT: CACHES-ON-F
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=9815489de0d2971471393e6d10eaecb363cfab04b3be1a056114c06d3226abb8; output-bytes=12
+- [x] B31: .wslconfig carries the memory cap (half of RAM minus 1 GB, min 4 GB)
+  CHECK: grep -qE '^memory=[0-9]+MB' /mnt/c/Users/muads/.wslconfig && echo WSLCONFIG-CAPPED
+  EXPECT: WSLCONFIG-CAPPED
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=cf10f7c3d0f3cdb388fcf7974ea6e39ba0cd17d76a912efd4182c89338c4b5d5; output-bytes=17

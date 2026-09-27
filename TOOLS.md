@@ -2,8 +2,8 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-09-27 (brief 06; census prose line
-> re-run brief 09 job 0).
+> **Last verified against code:** 2026-09-27 (brief 10 job 9: census.py at
+> 47 files / 30 WIRED / 17 HAND-RUN; four new rows added this brief).
 
 Rebuilt 2026-09-23 (brief 05 job 12) by command; **now enforced by command**
 (brief 06 job 5): tools/census.py compares this table against `ls tools/`
@@ -17,14 +17,14 @@ DECISIONS.md and retired/RETIREMENT_NOTES.md.
 
 ## Census (computed by tools/census.py, brief 06 job 5)
 
-$ ls -p tools/ | grep -v / | wc -l  →  41  (USAGE.md exempt from rows)
+$ ls -p tools/ | grep -v / | wc -l  →  47  (USAGE.md exempt from rows)
 
-37 .py + 2 .js + pagecheck_proof.sh + board_page.html + watchlist.yaml +
+37 .py + 2 .js + 5 .sh + board_page.html + watchlist.yaml +
 sofascore_team_ids.json.
-28 WIRED, 15 HAND-RUN (deliberately kept operating tools/data). No DEAD class
+30 WIRED, 17 HAND-RUN (deliberately kept operating tools/data). No DEAD class
 exists — anything dead is deleted or in retired/.
 
-## The 43 rows
+## The 47 rows
 
 | File | Class | Called by (file:line) | Notes |
 |---|---|---|---|
@@ -45,6 +45,10 @@ exists — anything dead is deleted or in retired/.
 | `pagecheck_proof.sh` | WIRED | GATES B19 | runs the rendered-page audit on a deliberately mirrored spec (must FAIL) then the real spec (must PASS), locally via the cached Chrome (brief 08 job 3) |
 | `pod_frames.py` | HAND-RUN | brief 09 jobs 1-2 (bench study) | Modal ship/extract/pull for benchmark frames: 2s frames + scene-cut frames (threshold printed) + scdet score sweep; reuses volume soccer-build |
 | `brief09_check.py` | WIRED | GATES B24 | gate oracle: frames_<L>.csv row counts vs duration/2 within 1 (brief 09 job 8) |
+| `f_mount.sh` | WIRED | b2_mount.sh; manual | /mnt/f mount+write-probe check and remount via the root-owned f-remount helper (brief 10 job 2) |
+| `disk_guard.sh` | WIRED | produce_v2.py, pod_build.py, pod_frames.py, runpod_download.py, check_mnt_f.sh hook | C: floor 15G + F:-paths write probe + vhdx growth log; --selftest positive controls (brief 10 job 3) |
+| `b2_mount.sh` | HAND-RUN | brief 10 job 7 (started by hand) | read-only rclone mount of b2: at ~/b2, VFS cache on /mnt/f capped 2G, refuses without healthy F: |
+| `brief10_elevated_setup.sh` | HAND-RUN | Mayo, one-time (sudo) | installs f-remount/f-trim/f-clean helpers + narrow sudoers, validates with visudo, remounts and trims |
 | `script_gen.py` | WIRED | produce_v2.py:372 | lane script draft |
 | `validate_script.py` | WIRED | produce_v2.py:386; tests | grammar + source validation |
 | `transformation_gate.py` | WIRED | produce_v2.py:667 | lane D floor |
@@ -75,7 +79,7 @@ exists — anything dead is deleted or in retired/.
 ## Project hooks (8 registered in .claude/settings.json, read 2026-09-23)
 
 1. check_pods.sh (SessionStart) — surfaces leaked RunPod pods. Still matters (memory: pod leaks bill).
-2. check_mnt_f.sh (SessionStart) — warns if /mnt/f is unmounted. Still matters (footage staging).
+2. check_mnt_f.sh (SessionStart) — runs tools/disk_guard.sh --report (write-probes /mnt/f, C: floor, vhdx log; brief 10 job 3). Still matters.
 3. check_doc_stamps.sh (SessionStart) — flags canonical docs with stale stamps. Still matters.
 4. skill-activation-prompt.sh (UserPromptSubmit) — Node skill suggestions + session intelligence (claude-mem). Matters (active).
 5. skill-verification-guard.sh (PreToolUse Edit|MultiEdit|Write) — Node skill enforcement. Matters (active).

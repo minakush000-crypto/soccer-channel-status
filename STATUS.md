@@ -2,7 +2,9 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-27 (brief 06).
+> **Last verified against code:** 2026-09-27 (brief 10: census lines
+> re-run via tools/census.py at 47 files; guard wiring grepped in the four
+> entry points).
 
 Rewritten 2026-09-27 (brief 06) against the code on disk. Brief 03-05 history
 lives in DECISIONS.md, PROGRESS.md, and retired/. Every claim below carries
@@ -83,11 +85,11 @@ $ ffprobe -v error -show_entries format=duration,size -of csv=p=0 \
 
 ## Tool census (enforced by tools/census.py, gate B20)
 
-$ ls -p tools/ | grep -v / | wc -l  →  41  (USAGE.md exempt)
+$ ls -p tools/ | grep -v / | wc -l  →  47  (USAGE.md exempt)
 
-37 .py + 2 .js + pagecheck_proof.sh + board_page.html + watchlist.yaml +
-sofascore_team_ids.json = 43 rows: 28 WIRED + 15 HAND-RUN (census.py
-2026-09-27, brief 09 job 2). TOOLS.md is now command-enforced: a file
+37 .py + 2 .js + 5 .sh + board_page.html + watchlist.yaml +
+sofascore_team_ids.json = 47 rows: 30 WIRED + 17 HAND-RUN (census.py
+2026-09-27, brief 10 job 9). TOOLS.md is now command-enforced: a file
 without a row, a row without a file, or wrong class totals fails gate B20.
 
 ## What is broken, worst first

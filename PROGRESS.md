@@ -3715,3 +3715,44 @@ local videos deleted (positive control). Final: ALL MET 16/16 under
 mirror. Grid JPGs are regenerable analysis artifacts (gitignored, rebuilt by
 reports/brief09/make_grids.py); the frame pool lives on the staging drive
 and goes to B2 with the rest of the brief's outputs.
+
+## 2026-09-27 — BRIEF 10 (stop C: from growing: guard, F: repair truth, memory cap, B2 mount)
+
+Nine jobs closed across eight commits (1113bf9..; report:
+reports/brief10/). The headline facts, all measured: C: sat at 12G free
+(under the new 15G floor) and fell to 7.4G mid-session WITHOUT the Ubuntu
+disk changing (ext4.vhdx byte-identical at 30,586,961,920; swap.vhdx 36MB)
+— the growth is Windows-side (the out-of-scope Claude Desktop Cowork VM is
+a 10.8GB resident there). /mnt/f's real enemy was never the drvfs mount:
+Windows reports the F: NTFS volume "Full Repair Needed" (a Windows-side
+write fails "corrupted and unreadable"), and Mayo's `chkdsk F: /f` fixed it
+(security-descriptor index + MFT bitmap corrections, 0 KB bad sectors);
+after the repair the helper remount passes a real write probe (F-MOUNT-OK).
+The one-time elevated setup installed f-remount/f-trim/f-clean helpers
+behind a narrow passwordless sudoers rule (visudo-validated), which then
+let the session run fstrim (980.4 GiB trimmed) and vacuum 728.5M of
+journals unattended. tools/disk_guard.sh (C: floor + F: write-probe + vhdx
+growth log, --selftest with three positive controls) is wired into
+produce_v2.py, pod_build.py, pod_frames.py, runpod_download.py and the
+session-start hook (check_mnt_f.sh upgraded — the old hook reported
+"mounted (OK)" on the dead mount because it only read the mount table).
+Caches now live on F: (~/.config/soccer/env.sh sourced from ~/.bashrc:
+PIP/UV/npm/HF + SOCCER_STAGING_ROOT; yt-dlp via its own config), and
+staging.py's silent /dev/shm downgrade was deleted per rule 8. The WSL
+memory cap went into .wslconfig (12GB -> 4957MB, swap kept per decision
+4). The B2 archive of record is browsable read-only at ~/b2 (cache on
+/mnt/f capped 2G; refuses without healthy F:; write attempt fails
+read-only; unmount/remount proven). Cleanup freed a MEASURED 2 GiB inside
+the vhdx (26G -> 24G used: 657M bournemouth+gemini render media archived
+to B2 and deleted, 989M regenerable caches, 728M journals) plus the v7
+final archived to B2 (it was missing). delete_plan.md carries the
+MAYO-YES list (cv-test 2.7G, .rustup 1.4G, mcp-servers 1.3G, and more);
+windows_steps.md carries the compact/sparse runbook with the repair step
+that worked. Five live gates added (B27-B31): guard wired (6 callers),
+controls, F: write probe, cache env vars, wslconfig cap. En route: the
+gate runner exposed a selftest that passed vacuously under `bash "$0"`
+($0 is "bash" under the runner) and failed once the real env file existed
+— both fixed by repo-relative invocation and env-file isolation. Pending
+Mayo: the Windows compact (windows_steps.md steps 1-4) is what turns the
+freed 2 GiB into real C: space; downloads/renders stay blocked by the
+guard until C: is back above 15G.
