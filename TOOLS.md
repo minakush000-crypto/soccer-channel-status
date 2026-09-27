@@ -40,6 +40,7 @@ exists — anything dead is deleted or in retired/.
 | `three_scene_v2.js` | WIRED | pod_build.py render_3d (Modal) | spec-driven 3D board renderer — the ONE 3D engine (v1 retired brief 05 job 7) |
 | `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16/B18 | every spec number must match the RAW Sofascore responses by team NAME (extended brief 06 job 3) |
 | `census.py` | WIRED | GATES B20 | script-driven census: TOOLS.md must match tools/ exactly (brief 06 job 5) |
+| `pagecheck_proof.sh` | WIRED | GATES B19 | runs the rendered-page audit on a deliberately mirrored spec (must FAIL) then the real spec (must PASS), locally via the cached Chrome (brief 08 job 3) |
 | `script_gen.py` | WIRED | produce_v2.py:372 | lane script draft |
 | `validate_script.py` | WIRED | produce_v2.py:386; tests | grammar + source validation |
 | `transformation_gate.py` | WIRED | produce_v2.py:667 | lane D floor |

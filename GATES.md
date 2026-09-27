@@ -1,148 +1,55 @@
-# Gates: brief 03 (retire dead tools, board fixes, canonical sync)
+# Gates: the LIVE ledger (rewritten brief 08, jobs 2-4)
 
-OWNS: tools/**, GATES.md, canonical docs, episodes/, ~/.claude/CLAUDE.md, reports/brief04/, .claude/hooks/push_status.sh
+What happened (why this file was rewritten): brief 06 reported "33/33 gates
+pass" from a default `gate-check` run, which only EXECUTES gates whose boxes
+are unchecked; the 28 pre-checked gates were trusted from stored evidence.
+The coordinator re-ran four by hand on 2026-09-27 and all four FAIL today
+(G1 py=37 vs 35, G4 140.920000 vs 140.960000, G7 stamp 2026-09-22 vs docs
+restamped 2026-09-27, B14 5 stamps vs 1). The brief-06 work itself checked
+out where tested; the ledger was the failure.
 
-Scope: brief 03 — retire every tool not reachable from produce_v2.py/pod_build.py
-(24 files), fix momentum label overlap + four-section outro freeze (verified by
-viewed frames), replace project CLAUDE.md, rewrite global CLAUDE.md, rewrite
-STATUS/CONTEXT/DECISIONS, delete invented architecture, resolve the disabled
-image-block hook.
+Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
+- LIVE = an invariant that must hold on every future commit. Everything that
+  snapshots a past state (durations, dates, copied counts, one-time
+  deletions/proofs) is FROZEN: moved verbatim with its evidence to
+  reports/<its brief>/GATES_frozen.md, headed "historical, not run" (22
+  gates: brief03 10, brief04 11, brief06 1 — table with one-line reasons in
+  reports/brief08/gate_triage.md).
+- No CHECK may modify the repo: no `git add`, no writes outside /tmp.
+- Every absence check carries a positive control (a planted file the matcher
+  must catch) — an absence check without one proves nothing.
+- `--status` reads stored evidence and is NEVER proof. Only `--reverify`
+  output that post-dates the last code commit, published to the mirror,
+  counts (doctrine rule 7).
 
-- [x] G1: dead tools retired — 37 .py files remain, none of the 25 retired names exist
-  CHECK: n=$(ls tools/*.py | wc -l); miss=0; for t in scene_gen player_mapper render_goal_clip ltx_enhance modal_render3d parse_feed assemble_video assemble_words_match bulk_classify cloud_produce cv_annotate enhance_clips generate_captions gpu_superres runpod_fulltrack runpod_scenedetect runpod_superres render3d_vast segment_scorer sharpness_check trim_tracking produce_episode b2_upload; do test -e "tools/$t.py" && miss=1; done; test -e tools/match_moments.workflow.mjs -o -e tools/rematch_ep001.workflow.mjs && miss=1; echo "py=$n miss=$miss"
-  EXPECT: py=37 miss=0
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=a32edeaaa1ada82adb0f77fb26e27da614fd393249254e600cce2d9a89e39084; output-bytes=13
-- [x] G2: no kept/reachable tool still names a retired tool as live (present-tense refs gone; RESTORED to strict form 2026-09-23 per brief 04 addendum — the brief-03 `-viE retired` exemption was looser than needed; the strict import/call form passes with 0 hits, so no gate exemption is warranted)
-  CHECK: n=$(grep -rnE "(import (scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match)\b|from (scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match) import)|\b(scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match)\(" tools/*.py | wc -l); test "$n" -eq 0 && echo REFS-CLEAN
-  EXPECT: REFS-CLEAN
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=2845579af1cf407e8b0e8b82dfb12b29f975b3e880a251f36e803b2e8ba6e226; output-bytes=11
-- [x] G3: fixed momentum board rendered and deployed (deployed on Modal volume + local)
-  CHECK: test -s renders/2026-09-08_real-madrid-inter/boards_job2/momentum.mp4 && ~/yt-digest/.venv/bin/modal volume ls soccer-build out 2>/dev/null | grep -c "out/momentum.mp4"
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
-- [x] G4: final_video.mp4 re-assembled after board fixes (140.92s)
-  CHECK: ffprobe -v error -show_entries format=duration -of csv=p=0 renders/2026-09-08_real-madrid-inter/final_video.mp4
-  EXPECT: 140.920000
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=7c5f5ded5b88531f291861ed88028dfdb8ab89316853d8a8cffc1f0c83cf4b68; output-bytes=11
-- [x] G5: project CLAUDE.md replaced with the delivered file
-  CHECK: grep -c "You are the engineer on this project" CLAUDE.md
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
-- [x] G6: global CLAUDE.md rewrite carries no soccer/Gemini/glm-5.2 text-only rules
-  CHECK: n=$(grep -ciE "soccer|gemini|glm-5\.2" /home/muads/.claude/CLAUDE.md); test "$n" -eq 0 && echo GLOBAL-CLEAN
-  EXPECT: GLOBAL-CLEAN
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=97f8d45765862d67590548e55214ed520c0dc1b985801e6f04a49e6f30461b09; output-bytes=13
-- [x] G7: STATUS.md, CONTEXT.md, DECISIONS.md rewritten with a current stamp
-  CHECK: grep -l "Last verified against code:\*\* 2026-09-22" STATUS.md CONTEXT.md DECISIONS.md | wc -l
-  EXPECT: 3
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2; output-bytes=2
-- [x] G8: invented architecture deleted (moments list, script v2, workflow .mjs, thesis handover)
-  CHECK: test ! -f episodes/EP001_MOMENTS.md && test ! -f episodes/EP001_SCRIPT_v2.md && test ! -f tools/match_moments.workflow.mjs && test ! -f tools/rematch_ep001.workflow.mjs && test ! -f HANDOVER_TO_FLASH.md && echo GONE
-  EXPECT: GONE
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=7977cc353752450c625a1b80d72b79e781fe750cc047aed08aa01f4563e962f1; output-bytes=5
-- [x] G9: block-image-read hook deleted and unregistered; other global hooks intact
-  CHECK: test ! -f /home/muads/.claude/hooks/block-image-read.sh && python3 -c "import json; d=json.load(open('/home/muads/.claude/settings.json')); hs=[hh for g in d['hooks']['PreToolUse'] for hh in g['hooks']]; assert not any('block-image-read' in h['command'] for h in hs); assert len(hs)==2" && echo HOOK-CLEAN
-  EXPECT: HOOK-CLEAN
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=1fc74a8f8491d0f8f6a907476fc93928085b18eb1e26aab5576764c830582141; output-bytes=11
-- [x] G10: pipeline smoke: produce_v2 and pod_build still importable
+- [x] G2: no kept tool references a retired tool as live (positive control included)
+  CHECK: printf 'import scene_gen\nscene_gen("x")\n' > /tmp/b08_pc_g2.py && grep -qE "(import scene_gen\b)|(\bscene_gen\()" /tmp/b08_pc_g2.py && rm -f /tmp/b08_pc_g2.py && n=$(grep -rnE "(import (scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match)\b|from (scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match) import)|\b(scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match)\(" tools/*.py | wc -l) && echo "REFS-CLEAN live-refs=$n"
+  EXPECT: REFS-CLEAN live-refs=0
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=6d5a70ee0f93080d5c9a2278202b66e9c6932fb75a086949dbade57268a9b472; output-bytes=23
+- [x] G10: pipeline smoke: produce_v2 and pod_build still parse
   CHECK: ~/yt-digest/.venv/bin/python -c "import ast; ast.parse(open('tools/produce_v2.py').read()); ast.parse(open('tools/pod_build.py').read()); print('PIPE-OK')"
   EXPECT: PIPE-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=afdbfb412303fe91a9d1e181aec00cdb4cc744f9c34ed876804c71475f5d59d9; output-bytes=8
-- [x] G11: new final + proof frames + retired tools archived to B2 with manifests (soccer-channel/2026-09-23/)
-  CHECK: rclone lsf b2:mendymax-archive/soccer-channel/2026-09-23/ | grep -cE "final_video.mp4$|proof_frames.tar.gz$|retired-tools"
-  EXPECT: 4
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d; output-bytes=2
-- [x] G12: all work committed and pushed
-  CHECK: git add -A >/dev/null 2>&1; test -z "$(git status --porcelain)" && echo CLEAN
-  EXPECT: CLEAN
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=0b98843240a0b1a2384483206c02be8968dd809eb73838820be24cb7d6d6aeb9; output-bytes=6
-
----
-
-# Gates: brief 04 (prove brief 03, replace the board renderer, lock the mirror)
-
-Evidence rule (brief 04 job 8, reconciled with the unlazy runner): the
-human-readable CHECK/EXPECT/GOT record lives in reports/gates/brief04.log
-(git-ignored); the unlazy runner additionally appends its own one-line
-EVIDENCE per gate here, which is committed with the close-out. A gate run +
-commit leaves the tree clean.
-
-- [x] B1: momentum boards proven clean on both code paths, images committed
-  CHECK: ls reports/brief04/momentum_boards2d_after.png reports/brief04/momentum_boardpy_after.png reports/brief04/brief03_proof/boards_job2/mom_before_last.png 2>/dev/null | wc -l
-  EXPECT: 3
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=1121cfccd5913f0a63fec40a6ffd44ea64f9dc135c66634ba001d10bcf4302a2; output-bytes=2
-- [x] B2: retime pass caps footage at its verified window (no tpad overrun)
-  CHECK: grep -c "Retime pass" tools/pod_build.py
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
-- [x] B3: one 2D board renderer (HTML/Chromium); zero matplotlib imports in tools/
-  CHECK: test -f tools/board_page.html && test -f tools/board_html.js && test ! -f tools/boards_2d.py && test ! -f tools/board_design.py && test ! -f tools/tactical_boards.py; n=$(grep -rlE "^\s*import matplotlib|^\s*from matplotlib" tools/*.py | wc -l); echo "files-ok matplotlib-importers=$n"
-  EXPECT: files-ok matplotlib-importers=0
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=56621677ef212981fbb72252b2d78163e695bf86f86f9f7700b34f283178e76e; output-bytes=32
-- [x] B4: produce_v2 board step goes through the emitters + pod_build render2d
-  CHECK: grep -c "stats_spec" tools/produce_v2.py
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
-- [x] B5: mirror publisher scans staged content and blocks secrets
-  CHECK: n=$(cat .claude/hooks/push_status.sh | grep -c "scan_staged"); echo "scan_staged-refs=$n"
-  EXPECT: scan_staged-refs=2
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=4b3f3c86716276dbaf5dfd9bc84df35cb14f6378a25d778e7e3d6e39e5f83893; output-bytes=19
+- [x] B3: one 2D renderer; zero matplotlib importers in tools/ (positive control included)
+  CHECK: test -f tools/board_page.html && test -f tools/board_html.js && printf 'import matplotlib\n' > /tmp/b08_pc_b3.py && grep -qE "^\s*(import matplotlib|from matplotlib)" /tmp/b08_pc_b3.py && rm -f /tmp/b08_pc_b3.py && n=$(grep -rlE "^\s*import matplotlib|^\s*from matplotlib" tools/*.py | wc -l) && echo "ONE-RENDERER matplotlib-importers=$n"
+  EXPECT: ONE-RENDERER matplotlib-importers=0
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=075f6c4fda1e62134063d83ea711df518f3738048209a044746cc4fd72f1edb1; output-bytes=36
 - [x] B6: main repo confirmed private via gh
-  CHECK: gh repo view minakush000-crypto/yt-digest --json isPrivate --jq .isPrivate
-  EXPECT: true
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=a17fcf0a2f50e2d495e4f90ce263410edc183add6c62699a2facbccf60410f74; output-bytes=5
-- [x] B7: Modal cost measured from billing API, not estimated
-  CHECK: grep -c "billing report" reports/brief04/REPORT.md 2>/dev/null
-  EXPECT: 1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865; output-bytes=2
-- [x] B8: episode slug is a CLI argument in pod_build (no module constant)
-  CHECK: n=$(grep -c "^SLUG" tools/pod_build.py); echo "slug-consts=$n"; test "$n" -eq 0
-  EXPECT: slug-consts=0
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=d1015759d48be78fa01d8da33d799b0253279b444858a0f77486ef509da4b3ea; output-bytes=14
-- [x] B9: gate evidence lands outside tracked files; a gate run keeps the tree clean
-  CHECK: git check-ignore -q reports/gates/brief04.log && echo IGNORED
-  EXPECT: IGNORED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=da22823c363df25f50e61852800914dc78a4eccc19c54e0723e0bf2811a9f3a8; output-bytes=8
-- [x] B10: iraola-liverpool script archived out of validation reach
-  CHECK: test ! -f scripts/2026-08-18_iraola-liverpool.md && test -f scripts/archived/2026-08-18_iraola-liverpool.md && echo ARCHIVED
-  EXPECT: ARCHIVED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=16499648e7e6a7fd767f9c1f9ec233d412cfc307ee04ebdbf2ee5ece7d5eea5e; output-bytes=9
-- [x] B11: judge supports seed + median-of-N; 5-run spread recorded in REPORT.md
-  CHECK: n=$(grep -c '"--runs"' tools/glm_judge.py); echo "runs-flag=$n"
-  EXPECT: runs-flag=1
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=33ea9dea5448e61e4b7ffdcee1dfcc5e9a9262577b44430934069ea013fe93ff; output-bytes=12
-- [x] B12: reel t=90 verdict documented with committed proof frames
-  CHECK: ls reports/brief04/goal90_t90_full.png reports/brief04/goal90_sheet_85-100.png 2>/dev/null | wc -l
-  EXPECT: 2
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3; output-bytes=2
-- [x] B13: cleanup retired GEMINI.md, LANE_PLAN.md duplicate, q files
-  CHECK: test ! -f GEMINI.md && test ! -f LANE_PLAN.md && test ! -f q1_new.txt && test -f retired/GEMINI.md && echo CLEANED
-  EXPECT: CLEANED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=9fee4a40e6d7d8e41ba04af164feb854563a6f6bba396b3d2eb9686dd0a4066e; output-bytes=8
-- [x] B14: canonical docs stamped 2026-09-23 after brief 04
-  CHECK: grep -l "Last verified against code:\*\* 2026-09-23" STATUS.md CONTEXT.md TOOLS.md GAPS.md DECISIONS.md | wc -l
-  EXPECT: 5
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=f0b5c2c2211c8d67ed15e75e656c7862d086e9245420892a7de62cd9ec582a06; output-bytes=2
-- [x] B15: all brief 04 work committed and pushed
-  CHECK: git add -A >/dev/null 2>&1; test -z "$(git status --porcelain)" && echo CLEAN
-  EXPECT: CLEAN
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=0b98843240a0b1a2384483206c02be8968dd809eb73838820be24cb7d6d6aeb9; output-bytes=6
-- [x] B16: board numbers mechanically match the facts file (brief 05 job 3)
+  CHECK: gh repo view minakush000-crypto/yt-digest --json isPrivate --jq .isPrivate | grep -q true && echo REPO-PRIVATE
+  EXPECT: REPO-PRIVATE
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=9712f53ee30824421e58a3d15d13728d6681cdf6ab6f492faa9d76a02a593bf8; output-bytes=13
+- [x] B8: the episode slug is a CLI argument, never a module constant (positive control included)
+  CHECK: printf 'SLUG = "x"\n' > /tmp/b08_pc_b8.py && grep -q "^SLUG" /tmp/b08_pc_b8.py && rm -f /tmp/b08_pc_b8.py && n=$(grep -c "^SLUG" tools/pod_build.py || true) && echo "SLUG-ARG consts=$n"
+  EXPECT: SLUG-ARG consts=0
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=aebafe882af44eefd50370f71a8351607d9c7818d8bfb7efa8c9e4d5167613b0; output-bytes=18
+- [x] B9: gate evidence logs stay git-ignored; the ignore matcher itself is proven (positive control: a tracked file is NOT ignored)
+  CHECK: git check-ignore -q reports/gates/brief04.log && ! git check-ignore -q CLAUDE.md && echo GATELOG-IGNORED
+  EXPECT: GATELOG-IGNORED
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=b804a7d20b957368e047fdf4eecaf59ea9da56967937149b4fa57e7fe64ee7d0; output-bytes=16
+- [x] B16: Madrid board numbers match the RAW fetched data (brief 05 job 3, extended brief 06 job 3)
   CHECK: ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-08_real-madrid-inter
   EXPECT: DATA-CHECK OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=cc249751c95ed748eee25c15b67208aa4ade368da898c3f2fc6538fc1e3d7d72; output-bytes=118
-
----
-
-# Gates: brief 06 (one fact source, no unsourced numbers, check the rendered frame)
-
-Scope: brief 06 — Sofascore wired as the only facts step for every
-competition; the Madrid momentum board regenerated from real /graph data;
-every spec carries source + fetched_at and every number checks against the
-RAW fetched responses; the renderer audits the drawn page against the facts
-file; a script-driven census; brief 05 loose ends answered with commands;
-full re-render verified frame by frame.
-
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=998f8436a0863edcfaa2f1f9e13d6cda3fb70885510e49ebab5221e5d31cd3bd; output-bytes=407
 - [x] B17: facts come from Sofascore only; match_data.py retired, no caller left
   CHECK: grep -q "sofascore_client.py" tools/produce_v2.py && test ! -e tools/match_data.py && test -e retired/match_data.py && n=$(grep -nE "^\s*(from|import) match_data\b|match_data\.py\"" tools/*.py 2>/dev/null | wc -l); echo "FACTS-SOFA callers-left=$n"
   EXPECT: FACTS-SOFA callers-left=0
@@ -151,15 +58,15 @@ full re-render verified frame by frame.
   CHECK: ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-08_real-madrid-inter >/dev/null && ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-12_bournemouth-brentford >/dev/null && echo DATACHECK-BOTH-OK
   EXPECT: DATACHECK-BOTH-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=6cef1fb7a6b8b10146dca828916831750f1706b1796b9ff5aea14b4e1c6e96a1; output-bytes=18
-- [x] B19: the renderer audits the drawn page against the facts file (mirror proof + real pass)
-  CHECK: grep -q "drawnNumbers" tools/board_page.html && grep -q "pageCheck" tools/board_html.js && test -s reports/brief06/pagecheck_mirror_fail.log && test -s reports/brief06/pagecheck_real_pass.log && echo PAGE-CHECK-WIRED
-  EXPECT: PAGE-CHECK-WIRED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=e2115bd42306d2d866e6e9ac28cc271d4870d3c143db49986157289798698b5b; output-bytes=17
+- [x] B19: the rendered-page audit RUNS and enforces: a deliberately mirrored input must FAIL, the real input must PASS
+  CHECK: bash tools/pagecheck_proof.sh
+  EXPECT: PAGECHECK-PROOF OK mirrored-fail=1 real-pass=1
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=737acfa4b7ded0d2b0cf86f1919063a1067a4f51537cc507205d477cadb17739; output-bytes=47
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=ee53863f8ac2c9140e997abf85294c51d8c65295d6b0cd328f89b77500a9817f; output-bytes=1225
-- [x] B21: episode rebuilt from the facts step, every board segment frame checked
-  CHECK: d=$(ffprobe -v error -show_entries format=duration -of csv=p=0 renders/2026-09-08_real-madrid-inter/final_video.mp4 | cut -d. -f1); n=$(ls reports/brief06/final_boards/*.png 2>/dev/null | wc -l); echo "FINAL-REBUILT dur=${d}s frames=$n"
-  EXPECT: FINAL-REBUILT dur=140s frames=7
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=37cea1a994d472a1394f1d007ceec2f36cd628a43fbd18c175ee1654021aaa83; output-bytes=32
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=e885578505f69c2c1a920c651ae4f326d9633fc794022d8b153eeb9347712638; output-bytes=1256
+- [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
+  CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
+  EXPECT: CLEAN-PUSHED
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=7e11f8b60ada90f702114686f4c992332a3c591b6458f432fa3aa551c69067a0; output-bytes=13

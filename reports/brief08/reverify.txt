@@ -1,0 +1,50 @@
+# reverify proof — brief 08 job 8c (re-recorded after the DECISIONS.md scan-self-match fix)
+# H=9a6bb1a14a336e81c679fb29ff11ef816e69aa83
+# date -u: 2026-09-27T04:00:14Z
+# the commit after H touches only reports/brief08/reverify.txt (verified at job 8d)
+
+## COMMAND 1: node ~/.agents/skills/unlazy/scripts/gate-check.mjs --approve GATES.md
+
+GATES.md: 12 gates
+ALL MET (12 met)
+
+## COMMAND 2: node ~/.agents/skills/unlazy/scripts/gate-check.mjs --reverify GATES.md
+
+  RUN  GATES:G2 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:G10 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B3 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B6 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B8 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B9 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B16 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B17 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B18 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B19 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B20 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  RUN  GATES:B22 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/home/muads/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin:/home/muads/.claude/plugins/cache/thedotmack/claude-mem/13.25.2/bin
+  PASS GATES:G2: no kept tool references a retired tool as live (positive control included)
+       exit=0; EXPECT=matched; output=sha256=6d5a70ee0f93080d5c9a2278202b66e9c6932fb75a086949dbade57268a9b472; bytes=23
+  PASS GATES:G10: pipeline smoke: produce_v2 and pod_build still parse
+       exit=0; EXPECT=matched; output=sha256=afdbfb412303fe91a9d1e181aec00cdb4cc744f9c34ed876804c71475f5d59d9; bytes=8
+  PASS GATES:B3: one 2D renderer; zero matplotlib importers in tools/ (positive control included)
+       exit=0; EXPECT=matched; output=sha256=075f6c4fda1e62134063d83ea711df518f3738048209a044746cc4fd72f1edb1; bytes=36
+  PASS GATES:B6: main repo confirmed private via gh
+       exit=0; EXPECT=matched; output=sha256=9712f53ee30824421e58a3d15d13728d6681cdf6ab6f492faa9d76a02a593bf8; bytes=13
+  PASS GATES:B8: the episode slug is a CLI argument, never a module constant (positive control included)
+       exit=0; EXPECT=matched; output=sha256=aebafe882af44eefd50370f71a8351607d9c7818d8bfb7efa8c9e4d5167613b0; bytes=18
+  PASS GATES:B9: gate evidence logs stay git-ignored; the ignore matcher itself is proven (positive control: a tracked file is NOT ignored)
+       exit=0; EXPECT=matched; output=sha256=b804a7d20b957368e047fdf4eecaf59ea9da56967937149b4fa57e7fe64ee7d0; bytes=16
+  PASS GATES:B16: Madrid board numbers match the RAW fetched data (brief 05 job 3, extended brief 06 job 3)
+       exit=0; EXPECT=matched; output=sha256=998f8436a0863edcfaa2f1f9e13d6cda3fb70885510e49ebab5221e5d31cd3bd; bytes=407
+  PASS GATES:B17: facts come from Sofascore only; match_data.py retired, no caller left
+       exit=0; EXPECT=matched; output=sha256=511e49a316d32ff4fa75a256daefcef6c58f8f9e1348f9014e3d83a410ce1d6d; bytes=26
+  PASS GATES:B18: extended data check passes on BOTH episodes against the raw fetch
+       exit=0; EXPECT=matched; output=sha256=6cef1fb7a6b8b10146dca828916831750f1706b1796b9ff5aea14b4e1c6e96a1; bytes=18
+  PASS GATES:B19: the rendered-page audit RUNS and enforces: a deliberately mirrored input must FAIL, the real input must PASS
+       exit=0; EXPECT=matched; output=sha256=737acfa4b7ded0d2b0cf86f1919063a1067a4f51537cc507205d477cadb17739; bytes=47
+  PASS GATES:B20: census is script-driven and TOOLS.md matches tools/ exactly
+       exit=0; EXPECT=matched; output=sha256=e885578505f69c2c1a920c651ae4f326d9633fc794022d8b153eeb9347712638; bytes=1256
+  PASS GATES:B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
+       exit=0; EXPECT=matched; output=sha256=7e11f8b60ada90f702114686f4c992332a3c591b6458f432fa3aa551c69067a0; bytes=13
+GATES.md: 12 gates
+ALL MET (12 met, reran: 12, previously met reverified: 12)

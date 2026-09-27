@@ -939,3 +939,62 @@ in reports/brief06/REPORT.md.
   label check compared labels to the FINAL score instead of the running
   score at each goal — the mirror test never exercised goal labels. Fixed,
   then the real momentum render passed (19 draws audited).
+
+## 2026-09-27 — BRIEF 08 (ledger cleanup, unlazy review, mirror repair)
+
+Ran by glm-5.3-flash:cloud via Claude Code (tmux). Report:
+reports/brief08/ (report.md, gate_triage.md, unlazy_review.md, lint.txt,
+reverify.txt).
+
+### The brief 06 false-pass (Mayo's finding, confirmed)
+Brief 06 reported "33/33 gates pass". That run used gate-check's default
+mode, which only EXECUTES gates whose boxes are unchecked; the 28
+pre-checked gates were trusted from stored evidence written by briefs 03-05.
+The coordinator re-ran four gates by hand on 2026-09-27 and all four FAIL
+today (G1 py=37 vs 35, G4 140.920000 vs 140.960000, G7 stamp 2026-09-22 vs
+docs now 2026-09-27, B14 5 stamps vs 1). The brief 06 work itself checked
+out where it was tested (pod renderer md5 = git md5, 7 distinct frame md5s,
+census exit 0). The LEDGER was the failure, and "ALL MET" from stored
+evidence must never again be reported as a pass.
+
+### Mayo's decisions recorded (2026-09-27, binding)
+1. Flash verifies its own gates and publishes the raw results to the mirror.
+2. Past-brief snapshot gates move to frozen history
+   (reports/<brief>/GATES_frozen.md, headed "historical, not run"); the live
+   GATES.md keeps only invariants that must hold on every future commit.
+   22 frozen (brief03 10, brief04 11, brief06 1), 12 live — table with
+   one-line reasons in reports/brief08/gate_triage.md.
+3. Word-only gates that stay live are rewritten to run the thing; otherwise
+   retired with a line here. B19 now executes the rendered-page audit via
+   tools/pagecheck_proof.sh (mirrored input must FAIL, real input must
+   PASS — runs locally on the cached Chrome, no Modal cost).
+4. No CHECK line may modify the repo (no git add, no writes outside /tmp).
+   G12 and B15 (both ran `git add -A` inside CHECK) are replaced by B22
+   CLEAN-PUSHED (clean tree + HEAD == upstream, stages nothing).
+5. Doctrine rule 7 goes in every brief footer from now on: "Done" requires
+   --reverify output that post-dates the last code commit and is published
+   to the mirror; --status is never proof; never state an uncounted count.
+   Added to CLAUDE.md §12 and the CONTEXT.md doctrine footer.
+6. Brief 07 (ECC) runs only after this brief is verified.
+
+### Why the mirror stopped (job 1, diagnosed from the push log)
+The Stop hook was registered and firing the whole time. The secret scan's
+MONEY rule blocked every push since 2026-09-23 06:25 by matching TASK-COST
+prose ("~$1.50-2.60 | nothing left running" in PROGRESS.md's inherited
+August cost tables; "billed $0.00 (starter credits cover it)" in STATUS.md).
+One push succeeded at 08:18 (aab3f4c) when PROGRESS.md was not staged. The
+MONEY rule is narrowed to unambiguous account language — the four patterns
+documented in .claude/hooks/push_status.sh (a balance word followed by an
+amount, an amount followed by a left/remaining/available word, the
+in-credit phrase, a top-up followed by an amount); positive controls prove
+4/4 real account strings still block and the former false positives pass. The mirror's own .gitignore was default-deny (12 docs only) — extended
+for MIRROR_SOURCE.txt + reports/brief0[68]/. push_status.sh gained --dry-run
+and now writes MIRROR_SOURCE.txt (source HEAD at push time) into the mirror.
+
+### unlazy copies (job 5)
+Two real copies: /home/muads/unlazy (clean clone, 473d4b8) and
+/home/muads/.agents/skills/unlazy (byte-identical to it; the
+~/.claude/skills/unlazy path is a symlink). Both v2.1.0, no local
+modification, one upstream commit behind (1667149). The global Stop hook
+runs the REPO copy's stop-hook.mjs. npm test: exit 0 (8/8 + 15/15).
+Approvals cached: 135.

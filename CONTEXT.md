@@ -150,3 +150,7 @@ disallowed goal at reel t=90, migration phases 5-8 unfinished.
 4. Every brief carries this doctrine as a footer.
 5. NO DEAD ENDS. When a path blocks the work, name the alternatives, pick
    the best available, and keep going.
+6. "Done" requires --reverify output that post-dates the last code commit
+   and is published to the mirror. --status is never proof. Never state an
+   uncounted count. (Brief 08 rule 7; the brief 06 false-pass is the
+   standing example.)
