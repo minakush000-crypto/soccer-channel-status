@@ -1,0 +1,79 @@
+# brief 10 measure_after — 2026-09-27T23:30:08Z
+
+$ df -h / /mnt/c /mnt/f
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G   24G  933G   3% /
+C:\             119G  111G  7.4G  94% /mnt/c
+F:               58G  490M   58G   1% /mnt/f
+
+$ mount | grep -E " /mnt/(c|f) "
+C:\ on /mnt/c type 9p (rw,noatime,aname=drvfs;path=C:\;uid=1000;gid=1000;symlinkroot=/mnt/,cache=0x5,access=client,msize=65536,trans=fd,rfd=6,wfd=6)
+F: on /mnt/f type 9p (rw,noatime,aname=drvfs;path=F:;uid=1000;gid=1000;umask=22;symlinkroot=/mnt/,cache=0x5,access=client,msize=65536,trans=fd,rfd=3,wfd=3)
+
+$ du -xh --max-depth=2 / 2>/dev/null | sort -rh | head -15 (user du; sudo du unchanged from before: passwordless rule covers only f-remount/f-trim/f-clean)
+24G	/
+17G	/home/muads
+17G	/home
+6.3G	/usr
+2.4G	/usr/share
+2.1G	/usr/local
+1.4G	/usr/lib
+543M	/var
+422M	/var/lib
+242M	/usr/bin
+140M	/usr/libexec
+100M	/var/log
+34M	/usr/include
+20M	/var/cache
+12M	/usr/sbin
+
+$ du -sh ~/.cache/* ~/.npm ~/.cache/pip ~/.cache/huggingface ~/.cache/ms-playwright 2>/dev/null
+124K	/home/muads/.cache/Microsoft
+167M	/home/muads/.cache/chroma
+8.0K	/home/muads/.cache/claude
+628K	/home/muads/.cache/claude-cli-nodejs
+568K	/home/muads/.cache/fontconfig
+16K	/home/muads/.cache/gh
+40K	/home/muads/.cache/matplotlib
+0	/home/muads/.cache/motd.legal-displayed
+653M	/home/muads/.cache/puppeteer
+20K	/home/muads/.cache/ubuntu-insights
+12K	/home/muads/.cache/ubuntu-pro
+
+$ du -sh ~/.cache
+821M	/home/muads/.cache
+
+$ free -g
+               total        used        free      shared  buff/cache   available
+Mem:              11           5           1           0           6           6
+Swap:             16           0          15
+
+$ /mnt/c/Windows/System32/wsl.exe --version
+WSL version: 2.7.8.0
+Kernel version: 6.18.33.1-1
+WSLg version: 1.0.73.2
+
+$ cat /mnt/c/Users/muads/.wslconfig
+[wsl2]
+memory=4957MB
+swap=16GB
+
+$ bash tools/f_mount.sh --check
+F-MOUNT-OK
+
+$ bash tools/b2_mount.sh --check
+B2-MOUNT-OK
+
+$ source ~/.config/soccer/env.sh && echo cache vars
+PIP_CACHE_DIR=/mnt/f/caches/pip UV_CACHE_DIR=/mnt/f/caches/uv npm_config_cache=/mnt/f/caches/npm HF_HOME=/mnt/f/caches/huggingface SOCCER_STAGING_ROOT=/mnt/f/soccer-staging
+
+$ stat the ext4.vhdx
+/mnt/c/Users/muads/AppData/Local/wsl/{f2ea779f-e5f1-4c82-a1b2-0608e6ab4883}/ext4.vhdx 30586961920
+
+$ df of the F: caches
+0	/mnt/f/caches/huggingface
+0	/mnt/f/caches/npm
+0	/mnt/f/caches/pip
+0	/mnt/f/caches/uv
+0	/mnt/f/caches/yt-dlp
+0	/mnt/f/b2-cache
