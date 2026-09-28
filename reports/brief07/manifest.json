@@ -19,7 +19,7 @@
   "claude -p (headless context measure)"
  ],
  "cost": "~70 min wall clock, one paid headless session (~40k input + 162 output tokens), F: backup NOT done (drive flaps)",
- "note": "job 1 backup BLOCKED: Memorex F: stick disconnects under sustained write; B32/B33 abandoned; no install performed",
+ "note": "job 1 backup BLOCKED: Memorex F: stick disconnects under sustained write; B32/B33 abandoned; no install performed | continuation added: d_drive_speed.md (2026-09-27); keys+backup archived to B2 under keys/ and backups/ prefixes with their own manifests",
  "files": {
   "clashes.txt": {
    "bytes": 748,
@@ -32,6 +32,10 @@
   "counts.txt": {
    "bytes": 11039,
    "sha256": "f805ceced79cf7ad3eae2eb827f62fefbe4f3829a09ea0f45b67bffd5083292f"
+  },
+  "d_drive_speed.md": {
+   "bytes": 2437,
+   "sha256": "dbe680a352c35d4e5b58b1f7724def0214bc0f840aa5cf7739c94f447ce743e2"
   },
   "ecc_plan.json": {
    "bytes": 1180951,

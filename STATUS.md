@@ -106,15 +106,20 @@ without a row, a row without a file, or wrong class totals fails gate B20.
 4. **F: drive hardware flaps under sustained write** (measured 2026-09-27
    21:35-21:40 CDT, brief 07): the Memorex stick disconnects from Windows
    mid-write (NTFS event 140; 1.6 MB/s; 147 MB of a 1.7 GB tarball), volume
-   itself NTFS-Healthy. Job-1 backup for ECC install is BLOCKED until
-   Mayo re-plugs/replaces it; B32/B33 abandoned. soccer-channel-keys on F: has
-   no B2 copy (verified against the archive); whether its contents are duplicated
-   elsewhere was NOT examined. Details: reports/brief07/f_drive_failure.md.
-5. **ECC install analyzed, awaiting Mayo + healthy F:** (brief 07 jobs 1-4
-   done, jobs 5-8 gated on APPROVED ECC): 814 files/4.9 MB, one clash the
-   installer refuses to overwrite (design-system), settings merge appends 24
-   hooks and preserves the unlazy Stop hook, context-before 39837 tokens.
-   reports/brief07/summary.md is the decision document.
+   itself NTFS-Healthy. Details: reports/brief07/f_drive_failure.md.
+   Continuation (option A, 2026-09-27 ~22:10 CDT): soccer-channel-keys
+   RESCUED to B2 (1 file, .env.gpg, GPG-encrypted, stream verified 1==1);
+   pre-ECC ~/.claude backup ON B2 (592458956 bytes, 16545 entries verified
+   by full download+listing); gates B32/B33 rewritten to B2-object checks
+   and PASS; ledger ALL MET 28/28, zero abandons. Nothing ever fell back
+   to C:.
+5. **ECC install analyzed, backup secured, awaiting APPROVED ECC** (brief 07
+   jobs 1-4 done + continuation 1-2 done, jobs 5-8 gated on Mayo): 814
+   files/4.9 MB, one clash the installer refuses to overwrite
+   (design-system), settings merge appends 24 hooks and preserves the unlazy
+   Stop hook, context-before 39837 tokens. D: (Disk 1, separate from the
+   Memorex Disk 2) measured 12.3 MB/s write / 288.7 MB/s cached read on a
+   500 MB test, survived clean; reports/brief07/d_drive_speed.md.
 
 ## Hand-run command reference
 

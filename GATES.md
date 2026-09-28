@@ -106,12 +106,14 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: grep -qE '^memory=[0-9]+MB' /mnt/c/Users/muads/.wslconfig && echo WSLCONFIG-CAPPED
   EXPECT: WSLCONFIG-CAPPED
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=98aaefd8d840/21 entries; EXPECT=matched; output-sha256=cf10f7c3d0f3cdb388fcf7974ea6e39ba0cd17d76a912efd4182c89338c4b5d5; output-bytes=17
-- [ ] B32: the ~/.claude + ~/.claude.json backup tarball exists on F: and its entry list is counted (brief 07 job 1)
-  CHECK: t=/mnt/f/backups/claude-backup-2026-09-27.tar.gz && test -s "$t" && n=$(tar tzf "$t" | wc -l) && [ "$n" -gt 100 ] && echo BACKUP-ON-F entries=$n
-  EXPECT: BACKUP-ON-F
-- [ ] B33: the backup tarball is on B2 under soccer-channel/2026-09-27/ with a byte-identical size (brief 07 job 1)
-  CHECK: l=$(stat -c%s /mnt/f/backups/claude-backup-2026-09-27.tar.gz) && r=$(rclone lsl b2:mendymax-archive/soccer-channel/2026-09-27/claude-backup-2026-09-27.tar.gz | awk '{print $1}') && [ -n "$r" ] && [ "$l" = "$r" ] && echo B2-SIZE-MATCH bytes=$l
-  EXPECT: B2-SIZE-MATCH
+- [x] B32: the keys rescue tarball is on B2 and still lists exactly the file count recorded in its manifest (brief 07 continuation job 1, Mayo option A; reads B2 only, never prints key contents; rewritten 2026-09-27 from the F: version the flapping drive killed — ABANDON resolved by Mayo choosing B2 streaming)
+  CHECK: u=b2:mendymax-archive/keys/2026-09-27_soccer-channel-keys.tar.gz; n=$(rclone cat "$u" 2>/dev/null | tar tzf - 2>/dev/null | grep -vc '/$') && m=$(rclone cat b2:mendymax-archive/keys/2026-09-27_soccer-channel-keys.manifest.json 2>/dev/null | ~/yt-digest/.venv/bin/python -c "import json,sys; print(json.load(sys.stdin)['file_count'])") && [ -n "$n" ] && [ "$n" -gt 0 ] && [ "$n" = "$m" ] && echo KEYS-RESCUE-VERIFIED files=$n
+  EXPECT: KEYS-RESCUE-VERIFIED
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=bc53bc9661ec6008c08f26959e455a003bcc1e22939a5420f6051491d1343f3c; output-bytes=29
+- [x] B33: the pre-ECC ~/.claude backup tarball is on B2 with byte-exact size matching its manifest (brief 07 continuation job 2, Mayo option A; reads B2 only; the 16545-entry full listing was verified once at job time by rclone cat | tar tzf - | wc -l and is recorded in the manifest; B2 stores no SHA1 for this rcat large-file, so size-vs-manifest is the durable check)
+  CHECK: u=b2:mendymax-archive/backups/2026-09-27_claude_home_pre_ecc.tar.gz; s=$(rclone lsjson "$u" 2>/dev/null | ~/yt-digest/.venv/bin/python -c "import json,sys; print(json.load(sys.stdin)[0]['Size'])") && m=$(rclone cat b2:mendymax-archive/backups/2026-09-27_claude_home_pre_ecc.manifest.json 2>/dev/null | ~/yt-digest/.venv/bin/python -c "import json,sys; print(json.load(sys.stdin)['size_bytes'])") && [ -n "$s" ] && [ "$s" -gt 500000000 ] && [ "$s" = "$m" ] && echo BACKUP-ON-B2 size=$s
+  EXPECT: BACKUP-ON-B2
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=b68c9b0f1aaccbfeacef67743ffecb475fda874cd9d24b87fb0f6ad02659ce79; output-bytes=28
 - [x] B34: the ECC clone is checked out at tag v2.2.1 exactly (brief 07 job 2)
   CHECK: git -C ~/ECC describe --tags --exact-match 2>/dev/null | grep -qx v2.2.1 && echo ECC-PINNED-V221
   EXPECT: ECC-PINNED-V221
@@ -133,5 +135,3 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   EXPECT: HARD-STOP-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=342e3ccdbf3cb67c6dedda020e29f7f325c8dc33cbc29cd327dc15c724d8c6b9; output-bytes=13
 
-ABANDON: B32 F: drive (Memorex USB, serial 0A7710C44) disconnected from Windows twice under sustained write on 2026-09-27 (NTFS event 140, 21:35 CDT; 1.6 MB/s with readback failures); tarball reached only 147 MB of ~1.7 GB; rollback backup on a flapping drive risks silent corruption; handoff to Mayo in reports/brief07/f_drive_failure.md, gate reruns as-is once the drive is healthy
-ABANDON: B33 depends on B32's tarball, which does not exist because of the same F: hardware failure; handoff to Mayo in reports/brief07/f_drive_failure.md

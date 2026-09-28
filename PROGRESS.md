@@ -3782,3 +3782,26 @@ real v2.2.1 plan (125/122/57) — measured here, not trusted. Context BEFORE mea
 Gates B34-B38 PASS. Mirror pushed with brief07 added to ALLOW_REPORTS (same allowlist
 miss as brief 10, fixed first this time). NOTHING INSTALLED. Do not approve until the
 F: backup lands.
+
+## 2026-09-27 — BRIEF 07 continuation (option A: keys rescue + B2 backup + D: test)
+
+Mayo chose option A. Keys rescue: /mnt/f/soccer-channel-keys (one file,
+.env.gpg, 713 bytes, GPG-encrypted) streamed tar|rcat straight to
+b2:mendymax-archive/keys/2026-09-27_soccer-channel-keys.tar.gz; verified by
+rclone cat | tar tzf listing 1 file == find count 1 (tar also lists the dir
+entry; like-for-like count is files only). Contents never printed. Pre-ECC
+backup: ~/.claude + ~/.claude.json streamed to
+b2:mendymax-archive/backups/2026-09-27_claude_home_pre_ecc.tar.gz (592458956
+bytes); verified by full download: rclone cat | tar tzf - | wc -l = 16545 ==
+local stream count 16545, both tar streams exit 0. Manifests uploaded next to
+both objects (B2 stores no SHA1 for rcat large-files, so the durable B33 gate
+anchors on byte-exact size vs manifest). Gates B32/B33 REWRITTEN from the
+killed F: checks to B2-object checks, ABANDONs resolved, both PASS: ledger
+ALL MET 28/28. D: test (job 3): /mnt/d does not exist in WSL and mounting it
+needs a password the f-* sudoers rule does not cover, so the test ran
+Windows-side on the same physical drive: D: is Disk 1, a DIFFERENT device
+from the flapping Memorex (Disk 2; G: is a 0-byte leftover partition on the
+same stick): 500 MB write 40.7 s = 12.3 MB/s, readback+MD5 1.7 s = 288.7 MB/s
+(cache-inflated), file deleted, drive Healthy after. Hard numbers in
+reports/brief07/d_drive_speed.md. STOP again per brief: nothing installed,
+waiting for APPROVED ECC.
