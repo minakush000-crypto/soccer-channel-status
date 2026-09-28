@@ -3805,3 +3805,35 @@ same stick): 500 MB write 40.7 s = 12.3 MB/s, readback+MD5 1.7 s = 288.7 MB/s
 (cache-inflated), file deleted, drive Healthy after. Hard numbers in
 reports/brief07/d_drive_speed.md. STOP again per brief: nothing installed,
 waiting for APPROVED ECC.
+
+## 2026-09-27 — BRIEF 07 jobs 5-8 (APPROVED ECC: install, cap, verify, rollback, proof)
+
+Mayo typed APPROVED ECC. B38 frozen to reports/brief07/GATES_frozen.md
+(historical, not run) before job 5. Job 5: installed exactly the dry-run
+command minus --dry-run (exit 0, 816 paths per install-state, design-system
+skip held); context-transfer skill unzipped into ~/.claude/skills/
+(SKILL.md valid); precedence file at ~/.claude/rules/precedence.md + one
+line appended to ~/.claude/CLAUDE.md (decision 5); ECC observation/learning
+data found on five paths (ecc-homunculus 108K, skills/learned empty,
+session-data empty, ~/.claude/ecc 932K, ~/.gateguard 8K = 1,001,763 B total)
+and capped by disk-guard check 4 (10 MB combined budget, override
+DISK_GUARD_ECC_CAP_MB; ECC has no size cap of its own, only the 30-day
+archive purge); decision recorded in DECISIONS.md with the stamp refreshed.
+The install went live MID-SESSION: GateGuard fact-forcing gates fired on the
+next Bash/Write calls and were answered with the requested facts each time.
+Job 6: doctor clean (checked=1 ok=1 warnings=0 errors=0, source 2.2.1);
+list-installed matches plan; unlazy Stop + block-retired + warn-local-gpu
+present in settings.json (hooks: Stop 8, PreToolUse 11); disk guard selftest
+passes with the new control 4; context AFTER = 50652 first-turn input tokens
+vs 39837 BEFORE = +10815 (+27.1%), identical method. Job 7: uninstall
+--dry-run captured (would remove 816) + B2 restore command in rollback.md;
+neither run. Job 8: gates B39-B45 written and PASS; ledger ALL MET 34/34.
+Reverify initially reported 21 x "reverify not run": older gates' approvals
+were bound to earlier sessions' PATH, which ECC's install changed; resolved
+by --reverify --approve re-binding the same read-only oracles (root cause
+read from gate-check.mjs: approvalExists binds full PATH). One real finding
+during reverify: B29 (F: mount) failed once because the Memorex stick had
+flapped off the mount again with no write load at all; f-remount restored it
+and B29 passed. Final proof: reports/brief07/reverify.txt, ALL MET (34 met,
+reran: 34) at H=b43434a, generated in /tmp first per Mayo. Committed,
+pushed, mirrored, archived to B2.

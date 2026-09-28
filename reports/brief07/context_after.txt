@@ -1,0 +1,19 @@
+== 3f/6 SESSION-START CONTEXT AFTER (throwaway headless session, 2026-09-27 ~22:15 CDT) ==
+
+COMMAND (identical to the BEFORE run):
+  claude -p 'Say OK' --model glm-5.3-flash:cloud --output-format json --verbose --max-turns 1
+
+RAW OUTPUT EXCERPT (from the stream-json file /tmp/b07_ctx_after.json):
+  assistant#1 message.usage: input_tokens=50652 output_tokens=0 model=glm-5.3-flash
+  assistant#2 message.usage: input_tokens=50652 output_tokens=0 model=glm-5.3-flash
+  result.usage: input_tokens=47745 cache_read=0 cache_creation=0 output_tokens=53
+  result.subtype=success is_error=False num_turns=1
+
+COMPARISON (same extraction both times: first assistant message.usage.input_tokens):
+  BEFORE (jobs 1-4): 39837 per-message / 37826 result-aggregate
+  AFTER  (post-install): 50652 per-message / 47745 result-aggregate
+  DELTA: +10815 per-message (+27.1%) / +9919 result-aggregate
+  This delta is the session-start context cost of ECC (125 skill descriptions,
+  24 hook entries, rules). The AFTER run completed cleanly (subtype=success,
+  1 turn) where the BEFORE run hit error_max_turns on turn 2; turn-1 input is
+  the like-for-like figure and the first-turn methodology is unchanged.

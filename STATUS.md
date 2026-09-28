@@ -113,13 +113,15 @@ without a row, a row without a file, or wrong class totals fails gate B20.
    by full download+listing); gates B32/B33 rewritten to B2-object checks
    and PASS; ledger ALL MET 28/28, zero abandons. Nothing ever fell back
    to C:.
-5. **ECC install analyzed, backup secured, awaiting APPROVED ECC** (brief 07
-   jobs 1-4 done + continuation 1-2 done, jobs 5-8 gated on Mayo): 814
-   files/4.9 MB, one clash the installer refuses to overwrite
-   (design-system), settings merge appends 24 hooks and preserves the unlazy
-   Stop hook, context-before 39837 tokens. D: (Disk 1, separate from the
-   Memorex Disk 2) measured 12.3 MB/s write / 288.7 MB/s cached read on a
-   500 MB test, survived clean; reports/brief07/d_drive_speed.md.
+5. **ECC INSTALLED at v2.2.1** (brief 07 jobs 5-8 done, APPROVED ECC
+   2026-09-27): 814 files + 24 hooks merged (unlazy Stop hook preserved,
+   hooks now Stop 8 / PreToolUse 11), doctor clean, context cost +10815
+   tokens (39837 to 50652 first-turn input), ECC data capped by disk-guard
+   check 4 at 10 MB (1.0 MB used), rollback documented (uninstall dry-run
+   would remove 816; B2 pre-ECC backup verified). Proof: reports/brief07/
+   reverify.txt ALL MET 34/34 at H=b43434a. GateGuard fact-forcing gates are
+   LIVE on Bash and first-touch Edit/Write: answer the requested facts, do
+   not disable them.
 
 ## Hand-run command reference
 
