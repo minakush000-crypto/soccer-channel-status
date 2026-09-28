@@ -3765,8 +3765,9 @@ disconnected from Windows twice under sustained write (NTFS event 140 at 21:35 C
 "device does not exist"; 100MB write took 65 s at 1.6 MB/s; the rollback tarball died
 at 147 MB of ~1.7 GB; volume NTFS-Healthy — this is a NEW failure mode, not the
 morning's corruption). Gates B32/B33 ABANDONed with a handoff to Mayo
-(reports/brief07/f_drive_failure.md). soccer-channel-keys lives only on that stick;
-recommended: re-plug/replace, then job 1 reruns and the keys get a B2 copy. Jobs 2-4
+(reports/brief07/f_drive_failure.md). soccer-channel-keys on that stick has no B2 copy (verified; its other
+possible copies were not examined); recommended: re-plug/replace, then job 1
+reruns and the keys get a B2 copy. Jobs 2-4
 done: ~/ECC cloned at v2.2.1 (npm ci via /dev/shm cache to spare the flapping F:,
 266 MB with node_modules), dry-run plan captured (814 copy ops + 1 settings merge +
 1 installer skip; 4.9 MB), counts/clashes/hooks/settings-diff/size/context-before all

@@ -107,8 +107,9 @@ without a row, a row without a file, or wrong class totals fails gate B20.
    21:35-21:40 CDT, brief 07): the Memorex stick disconnects from Windows
    mid-write (NTFS event 140; 1.6 MB/s; 147 MB of a 1.7 GB tarball), volume
    itself NTFS-Healthy. Job-1 backup for ECC install is BLOCKED until
-   Mayo re-plugs/replaces it; B32/B33 abandoned. soccer-channel-keys has no
-   other copy. Details: reports/brief07/f_drive_failure.md.
+   Mayo re-plugs/replaces it; B32/B33 abandoned. soccer-channel-keys on F: has
+   no B2 copy (verified against the archive); whether its contents are duplicated
+   elsewhere was NOT examined. Details: reports/brief07/f_drive_failure.md.
 5. **ECC install analyzed, awaiting Mayo + healthy F:** (brief 07 jobs 1-4
    done, jobs 5-8 gated on APPROVED ECC): 814 files/4.9 MB, one clash the
    installer refuses to overwrite (design-system), settings merge appends 24
