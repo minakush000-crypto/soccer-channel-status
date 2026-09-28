@@ -24,7 +24,7 @@ sofascore_team_ids.json.
 30 WIRED, 17 HAND-RUN (deliberately kept operating tools/data). No DEAD class
 exists — anything dead is deleted or in retired/.
 
-## The 47 rows
+## The 49 rows
 
 | File | Class | Called by (file:line) | Notes |
 |---|---|---|---|
@@ -45,9 +45,11 @@ exists — anything dead is deleted or in retired/.
 | `pagecheck_proof.sh` | WIRED | GATES B19 | runs the rendered-page audit on a deliberately mirrored spec (must FAIL) then the real spec (must PASS), locally via the cached Chrome (brief 08 job 3) |
 | `pod_frames.py` | HAND-RUN | brief 09 jobs 1-2 (bench study) | Modal ship/extract/pull for benchmark frames: 2s frames + scene-cut frames (threshold printed) + scdet score sweep; reuses volume soccer-build |
 | `brief09_check.py` | WIRED | GATES B24 | gate oracle: frames_<L>.csv row counts vs duration/2 within 1 (brief 09 job 8) |
-| `f_mount.sh` | WIRED | b2_mount.sh; manual | /mnt/f mount+write-probe check and remount via the root-owned f-remount helper (brief 10 job 2) |
-| `disk_guard.sh` | WIRED | produce_v2.py, pod_build.py, pod_frames.py, runpod_download.py, check_mnt_f.sh hook | C: floor 15G + F:-paths write probe + vhdx growth log; --selftest positive controls (brief 10 job 3) |
-| `b2_mount.sh` | HAND-RUN | brief 10 job 7 (started by hand) | read-only rclone mount of b2: at ~/b2, VFS cache on /mnt/f capped 2G, refuses without healthy F: |
+| `f_mount.sh` | HAND-RUN (stub) | nothing (stub errors) | F: retired 2026-09-28 (brief 11 job 5): stick disconnects under sustained write; stub prints "F: retired 2026-09-28, use D:" and exits 1 |
+| `scratch_mount.sh` | WIRED | b2_mount.sh; check_scratch.sh docs; GATES.md B47 | scratch-drive (D: at /mnt/d) mount+write-probe check and remount via the root-owned d-remount helper; takes a drive letter, default D (brief 11 job 2) |
+| `brief11_elevated_setup.sh` | HAND-RUN | Mayo one-time elevated run | installs d-remount/d-trim/d-clean + /etc/sudoers.d/d-mount (visudo-validated), mounts D:, creates /mnt/d/scratch tree (brief 11 job 2) |
+| `disk_guard.sh` | WIRED | produce_v2.py, pod_build.py, pod_frames.py, runpod_download.py, check_scratch.sh hook | C: floor 15G + scratch(/mnt/d)-paths write probe + retired-F check + vhdx growth log + ECC 10MB cap; --selftest 5 controls (brief 10 job 3, brief 11 job 4/5) |
+| `b2_mount.sh` | HAND-RUN | brief 10 job 7 (started by hand) | read-only rclone mount of b2: at ~/b2, VFS cache on /mnt/d/scratch/b2-cache capped 2G, refuses without healthy scratch drive (cache moved from F: by brief 11) |
 | `brief10_elevated_setup.sh` | HAND-RUN | Mayo, one-time (sudo) | installs f-remount/f-trim/f-clean helpers + narrow sudoers, validates with visudo, remounts and trims |
 | `script_gen.py` | WIRED | produce_v2.py:372 | lane script draft |
 | `validate_script.py` | WIRED | produce_v2.py:386; tests | grammar + source validation |
@@ -79,7 +81,7 @@ exists — anything dead is deleted or in retired/.
 ## Project hooks (8 registered in .claude/settings.json, read 2026-09-23)
 
 1. check_pods.sh (SessionStart) — surfaces leaked RunPod pods. Still matters (memory: pod leaks bill).
-2. check_mnt_f.sh (SessionStart) — runs tools/disk_guard.sh --report (write-probes /mnt/f, C: floor, vhdx log; brief 10 job 3). Still matters.
+2. check_scratch.sh (SessionStart; renamed from check_mnt_f.sh, brief 11) — runs tools/disk_guard.sh --report (write-probes /mnt/d, C: floor, vhdx log, retired-F check). Still matters.
 3. check_doc_stamps.sh (SessionStart) — flags canonical docs with stale stamps. Still matters.
 4. skill-activation-prompt.sh (UserPromptSubmit) — Node skill suggestions + session intelligence (claude-mem). Matters (active).
 5. skill-verification-guard.sh (PreToolUse Edit|MultiEdit|Write) — Node skill enforcement. Matters (active).

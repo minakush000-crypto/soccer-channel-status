@@ -163,8 +163,8 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [ ] B48: the WSL-side 1 GB write and read speeds are recorded with MB/s figures (brief 11 job 3)
   CHECK: test -s reports/brief11/speed.txt && grep -q "WRITE-MBps=" reports/brief11/speed.txt && grep -q "READ-MBps=" reports/brief11/speed.txt && echo SPEED-RECORDED
   EXPECT: SPEED-RECORDED
-- [ ] B50: no live config or tool path names /mnt/f, while the history file still does (positive control that the grep works) (brief 11 job 6d)
-  CHECK: n=$(grep -rn "/mnt/f" ~/.config/soccer/env.sh ~/.config/yt-dlp/config tools/disk_guard.sh tools/b2_mount.sh tools/staging.py tools/scratch_mount.sh tools/f_mount.sh .claude/hooks/check_scratch.sh .claude/settings.json 2>/dev/null | grep -v "F: retired" | wc -l) && [ "$n" -eq 0 ] && h=$(grep -c "/mnt/f" tools/brief10_elevated_setup.sh) && [ "$h" -gt 0 ] && echo NO-LIVE-MNTF history-hits=$h
+- [ ] B50: no live config or tool VALUE names /mnt/f as a destination (comment lines documenting the retirement are excluded), while the history file still names it (positive control that the grep works); disk_guard.sh's retired-F detector is exempt by design (brief 11 job 6d)
+  CHECK: n=$(grep -rn "/mnt/f" ~/.config/soccer/env.sh ~/.config/yt-dlp/config tools/staging.py tools/scratch_mount.sh tools/b2_mount.sh tools/backup_env.py tools/produce_v2.py tools/f_mount.sh .claude/hooks/check_scratch.sh .claude/settings.json 2>/dev/null | grep -vE ':[0-9]+:#' | wc -l) && [ "$n" -eq 0 ] && h=$(grep -c "/mnt/f" tools/brief10_elevated_setup.sh) && [ "$h" -gt 0 ] && echo NO-LIVE-MNTF history-hits=$h
   EXPECT: NO-LIVE-MNTF
 - [ ] B51: the guard selftest output with the brief-11 controls is recorded (D: unmounted FAILS, /mnt/f path FAILS, real state PASSES) (brief 11 job 6a)
   CHECK: test -s reports/brief11/controls.txt && grep -q GUARD-SELFTEST-OK reports/brief11/controls.txt && echo CONTROLS-RECORDED
