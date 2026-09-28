@@ -1,7 +1,19 @@
 {
  "generated_at": "2026-09-28T08:47:00Z",
- "boards_resized": {"formation": 70.0, "runners": 70.6, "move": 58.7},
- "footage_overlays": {"sev_overload": 438.9, "sev_block": 361.9,
-                      "rac_farpost": 430.8, "rac_freekick": 475.6},
- "note": "wall times measured by `time` around pod_build.py calls; boards include volume put/get; footage renders include 121 ffmpeg frame extracts each"
+ "boards_resized": {
+  "formation": 70.0,
+  "runners": 70.6,
+  "move": 58.7
+ },
+ "footage_overlays": {
+  "sev_overload": 438.9,
+  "sev_block": 361.9,
+  "rac_farpost": 430.8,
+  "rac_freekick": 475.6
+ },
+ "note": "wall times measured by `time` around pod_build.py calls; boards include volume put/get; footage renders include 121 ffmpeg frame extracts each",
+ "modal_cost_usd": {
+  "brief13_window_estimate": 0.09,
+  "note": "billing report 2026-09-28 soccer-flash-build total $0.1082 minus brief-12's reported $0.0182 = $0.0900 for the brief 13 window (3 board re-renders + 4 footage renders + extraction calls + the 0-frame failed attempt)"
+ }
 }
