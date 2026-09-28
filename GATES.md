@@ -94,14 +94,9 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: bash tools/disk_guard.sh --selftest
   EXPECT: GUARD-SELFTEST-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=1096bead3681d9db3c9157d52a4fcb207f9b44c270911a3f5a70dcaedeebdfe3; output-bytes=18
-- [x] B29: /mnt/f is mounted AND passes a real write probe (brief 10 job 2, post chkdsk repair)
-  CHECK: bash tools/f_mount.sh --check
-  EXPECT: F-MOUNT-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=77df0adb69a16d87387dfc448d327ffd7ea447ffc358113ccb305b0658e1c1ec; output-bytes=11
-- [x] B30: the four cache env vars resolve to /mnt/f in the sourced env file (XDG_CACHE_HOME deliberately absent: Chrome stays off the flash drive)
-  CHECK: s=$HOME/.config/soccer/env.sh && test -f "$s" && [ "$(grep -cE '^(export )?(PIP_CACHE_DIR|UV_CACHE_DIR|npm_config_cache|HF_HOME)=/mnt/f' "$s")" -eq 4 ] && echo CACHES-ON-F
-  EXPECT: CACHES-ON-F
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=9815489de0d2971471393e6d10eaecb363cfab04b3be1a056114c06d3226abb8; output-bytes=12
+- [ ] B30: the five cache+staging env vars resolve to /mnt/d in the sourced env file (rewritten brief 11 job 4 from the brief-10 F: version; XDG_CACHE_HOME still deliberately absent)
+  CHECK: s=$HOME/.config/soccer/env.sh && test -f "$s" && [ "$(grep -cE '^export (PIP_CACHE_DIR|UV_CACHE_DIR|npm_config_cache|HF_HOME|SOCCER_STAGING_ROOT)=/mnt/d/scratch/' "$s")" -eq 5 ] && echo CACHES-ON-D
+  EXPECT: CACHES-ON-D
 - [x] B31: .wslconfig carries the memory cap (half of RAM minus 1 GB, min 4 GB)
   CHECK: grep -qE '^memory=[0-9]+MB' /mnt/c/Users/muads/.wslconfig && echo WSLCONFIG-CAPPED
   EXPECT: WSLCONFIG-CAPPED
@@ -159,3 +154,30 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: test -s reports/brief07/context_before.txt && grep -q "39837" reports/brief07/context_before.txt && test -s reports/brief07/context_after.txt && grep -q "50652" reports/brief07/context_after.txt && echo CTX-BEFORE-AFTER-RECORDED
   EXPECT: CTX-BEFORE-AFTER-RECORDED
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=ac2250ca18829020a7553ed272f26bc99e0d1ef55727b796535ef960d9afab6f; output-bytes=26
+- [ ] B46: the brief 11 inventory artifact exists with NTFS evidence for D: and the counted /mnt/f hit list (brief 11 job 1)
+  CHECK: test -s reports/brief11/inventory.txt && grep -q "NTFS" reports/brief11/inventory.txt && grep -q "MNTF-HITS=" reports/brief11/inventory.txt && echo INVENTORY-OK
+  EXPECT: INVENTORY-OK
+- [ ] B47: scratch_mount.sh exists and its write-probe check passes on D: (brief 11 job 2)
+  CHECK: test -x tools/scratch_mount.sh && bash tools/scratch_mount.sh --check 2>&1 | grep -q D-MOUNT-OK && echo SCRATCH-MOUNT-OK
+  EXPECT: SCRATCH-MOUNT-OK
+- [ ] B48: the WSL-side 1 GB write and read speeds are recorded with MB/s figures (brief 11 job 3)
+  CHECK: test -s reports/brief11/speed.txt && grep -q "WRITE-MBps=" reports/brief11/speed.txt && grep -q "READ-MBps=" reports/brief11/speed.txt && echo SPEED-RECORDED
+  EXPECT: SPEED-RECORDED
+- [ ] B50: no live config or tool path names /mnt/f, while the history file still does (positive control that the grep works) (brief 11 job 6d)
+  CHECK: n=$(grep -rn "/mnt/f" ~/.config/soccer/env.sh ~/.config/yt-dlp/config tools/disk_guard.sh tools/b2_mount.sh tools/staging.py tools/scratch_mount.sh tools/f_mount.sh .claude/hooks/check_scratch.sh .claude/settings.json 2>/dev/null | grep -v "F: retired" | wc -l) && [ "$n" -eq 0 ] && h=$(grep -c "/mnt/f" tools/brief10_elevated_setup.sh) && [ "$h" -gt 0 ] && echo NO-LIVE-MNTF history-hits=$h
+  EXPECT: NO-LIVE-MNTF
+- [ ] B51: the guard selftest output with the brief-11 controls is recorded (D: unmounted FAILS, /mnt/f path FAILS, real state PASSES) (brief 11 job 6a)
+  CHECK: test -s reports/brief11/controls.txt && grep -q GUARD-SELFTEST-OK reports/brief11/controls.txt && echo CONTROLS-RECORDED
+  EXPECT: CONTROLS-RECORDED
+- [ ] B52: the elevated-setup output proves visudo-validated d-* sudoers and the removed f-* rule (brief 11 jobs 2 and 5, Mayo-run script)
+  CHECK: test -s reports/brief11/elevated_setup_output.txt && grep -q "VISUDO-OK" reports/brief11/elevated_setup_output.txt && grep -q "F-SUDOERS-REMOVED" reports/brief11/elevated_setup_output.txt && echo SUDOERS-OK
+  EXPECT: SUDOERS-OK
+- [ ] B53: a real yt-dlp download landed in /mnt/d/scratch (path printed, file deleted after) (brief 11 job 6b)
+  CHECK: test -s reports/brief11/ytdlp_download.txt && grep -q "/mnt/d/scratch" reports/brief11/ytdlp_download.txt && echo YTDLP-ON-D
+  EXPECT: YTDLP-ON-D
+- [ ] B54: a Modal round trip staged its file through /mnt/d/scratch (smallest existing smoke: modal volume put + get) (brief 11 job 6c)
+  CHECK: test -s reports/brief11/modal_smoke.txt && grep -q "MODAL-SMOKE-OK" reports/brief11/modal_smoke.txt && grep -q "/mnt/d/scratch" reports/brief11/modal_smoke.txt && echo MODAL-THRU-D
+  EXPECT: MODAL-THRU-D
+- [ ] B55: the reverify proof ending ALL MET after the last code commit is published in reports/brief11/ (brief 11 job 8)
+  CHECK: test -s reports/brief11/reverify.txt && grep -q "ALL MET" reports/brief11/reverify.txt && echo REVERIFY-PUBLISHED
+  EXPECT: REVERIFY-PUBLISHED
