@@ -1,0 +1,187 @@
+== 3a COUNTS (from reports/brief07/ecc_plan.json, plan generated 2026-09-28T02:37Z from ~/ECC at tag v2.2.1) ==
+plannedOperations total: 816
+  copy-file ops: 815
+  update-claude-settings ops: 1
+  skippedOperations (installer refuses to touch): 1 -> skills/design-system/SKILL.md
+copy-file destination buckets under ~/.claude/: {'rules': 122, '.agents': 89, 'agents': 68, 'AGENTS.md': 1, 'commands': 94, 'scripts': 202, 'hooks': 4, 'PLUGIN_SCHEMA_NOTES.md': 1, 'README.md': 1, 'marketplace.json': 1, 'plugin.json': 1, '.pi': 3, 'mcp-configs': 1, 'skills': 227}
+skills: 125 skill directories, 227 files
+rules files: 122
+commands: 94 files
+agents: 68 files
+hooks dir files: 4
+other destination top-level dirs: ['.agents', '.pi', 'AGENTS.md', 'PLUGIN_SCHEMA_NOTES.md', 'README.md', 'marketplace.json', 'mcp-configs', 'plugin.json', 'scripts']
+
+skill directories planned (alphabetical):
+accessibility, agent-introspection-debugging, agent-self-evaluation, agent-sort, ai-regression-testing, android-clean-architecture, angular-developer, api-design, architecture-decision-records, backend-patterns, browser-qa, bun-runtime, ck, click-path-audit, clickhouse-io, code-tour, codebase-onboarding, codehealth-mcp, coding-standards, compose-multiplatform-patterns, config-gc, configure-ecc, context-budget, continuous-learning, continuous-learning-v2, contract-first, council, council-multi-model, cpp-coding-standards, cpp-testing, csharp-testing, dart-flutter-patterns, database-migrations, delivery-gate, design-system, dev-team, django-celery, django-patterns, django-tdd, django-verification, dmux-workflows, dotnet-patterns, e2e-testing, ecc-guide, ecc-recipes, error-handling, eval-harness, fastapi-patterns, flutter-dart-code-review, frontend-a11y, frontend-design-direction, frontend-patterns, frontend-slides, fsharp-testing, generating-python-installer, git-workflow, golang-patterns, golang-testing, growth-log, hexagonal-architecture, hookify-rules, inherit-legacy-style, intent-driven-development, iterative-retrieval, java-coding-standards, jpa-patterns, kotlin-coroutines-flows, kotlin-exposed-patterns, kotlin-ktor-patterns, kotlin-patterns, kotlin-testing, laravel-patterns, laravel-plugin-discovery, laravel-tdd, laravel-verification, living-docs-governance, loop-design-check, make-interfaces-feel-better, mcp-server-patterns, motion-advanced, motion-foundations, motion-patterns, motion-ui, mysql-patterns, nestjs-patterns, nextjs-turbopack, nuxt4-patterns, perl-patterns, perl-testing, plan-canvas, plankton-code-quality, postgres-patterns, prisma-patterns, product-lens, production-audit, python-patterns, python-testing, quarkus-patterns, quarkus-tdd, quarkus-verification, react-native-patterns, react-patterns, react-performance, react-testing, redis-patterns, repo-scan, rules-distill, rust-patterns, rust-testing, santa-method, skill-comply, skill-scout, skill-stocktake, springboot-patterns, springboot-tdd, springboot-verification, strategic-compact, tdd-workflow, tinystruct-patterns, ui-to-vue, unified-memory, verification-loop, vite-patterns, vue-patterns, windows-desktop-e2e
+
+command destinations (all printed):
+  /home/muads/.claude/commands/aside.md
+  /home/muads/.claude/commands/auto-update.md
+  /home/muads/.claude/commands/build-fix.md
+  /home/muads/.claude/commands/checkpoint.md
+  /home/muads/.claude/commands/code-review.md
+  /home/muads/.claude/commands/cost-report.md
+  /home/muads/.claude/commands/cpp-build.md
+  /home/muads/.claude/commands/cpp-review.md
+  /home/muads/.claude/commands/cpp-test.md
+  /home/muads/.claude/commands/ecc-guide.md
+  /home/muads/.claude/commands/epic-claim.md
+  /home/muads/.claude/commands/epic-decompose.md
+  /home/muads/.claude/commands/epic-publish.md
+  /home/muads/.claude/commands/epic-review.md
+  /home/muads/.claude/commands/epic-sync.md
+  /home/muads/.claude/commands/epic-unblock.md
+  /home/muads/.claude/commands/epic-validate.md
+  /home/muads/.claude/commands/evolve.md
+  /home/muads/.claude/commands/fastapi-review.md
+  /home/muads/.claude/commands/feature-dev.md
+  /home/muads/.claude/commands/flutter-build.md
+  /home/muads/.claude/commands/flutter-review.md
+  /home/muads/.claude/commands/flutter-test.md
+  /home/muads/.claude/commands/gan-build.md
+  /home/muads/.claude/commands/gan-design.md
+  /home/muads/.claude/commands/go-build.md
+  /home/muads/.claude/commands/go-review.md
+  /home/muads/.claude/commands/go-test.md
+  /home/muads/.claude/commands/gradle-build.md
+  /home/muads/.claude/commands/harness-audit.md
+  /home/muads/.claude/commands/hookify-configure.md
+  /home/muads/.claude/commands/hookify-help.md
+  /home/muads/.claude/commands/hookify-list.md
+  /home/muads/.claude/commands/hookify.md
+  /home/muads/.claude/commands/instinct-export.md
+  /home/muads/.claude/commands/instinct-import.md
+  /home/muads/.claude/commands/instinct-status.md
+  /home/muads/.claude/commands/jira.md
+  /home/muads/.claude/commands/kotlin-build.md
+  /home/muads/.claude/commands/kotlin-review.md
+  /home/muads/.claude/commands/kotlin-test.md
+  /home/muads/.claude/commands/learn-eval.md
+  /home/muads/.claude/commands/learn.md
+  /home/muads/.claude/commands/loop-start.md
+  /home/muads/.claude/commands/loop-status.md
+  /home/muads/.claude/commands/marketing-campaign.md
+  /home/muads/.claude/commands/model-route.md
+  /home/muads/.claude/commands/multi-backend.md
+  /home/muads/.claude/commands/multi-execute.md
+  /home/muads/.claude/commands/multi-frontend.md
+  /home/muads/.claude/commands/multi-plan.md
+  /home/muads/.claude/commands/multi-workflow.md
+  /home/muads/.claude/commands/orch-add-feature.md
+  /home/muads/.claude/commands/orch-build-mvp.md
+  /home/muads/.claude/commands/orch-change-feature.md
+  /home/muads/.claude/commands/orch-fix-defect.md
+  /home/muads/.claude/commands/orch-refine-code.md
+  /home/muads/.claude/commands/orch-review.md
+  /home/muads/.claude/commands/plan-canvas.md
+  /home/muads/.claude/commands/plan-prd.md
+  /home/muads/.claude/commands/plan.md
+  /home/muads/.claude/commands/pm2.md
+  /home/muads/.claude/commands/pr.md
+  /home/muads/.claude/commands/project-init.md
+  /home/muads/.claude/commands/projects.md
+  /home/muads/.claude/commands/promote.md
+  /home/muads/.claude/commands/prp-commit.md
+  /home/muads/.claude/commands/prp-implement.md
+  /home/muads/.claude/commands/prp-plan.md
+  /home/muads/.claude/commands/prp-pr.md
+  /home/muads/.claude/commands/prp-prd.md
+  /home/muads/.claude/commands/prune.md
+  /home/muads/.claude/commands/python-review.md
+  /home/muads/.claude/commands/quality-gate.md
+  /home/muads/.claude/commands/react-build.md
+  /home/muads/.claude/commands/react-review.md
+  /home/muads/.claude/commands/react-test.md
+  /home/muads/.claude/commands/refactor-clean.md
+  /home/muads/.claude/commands/resume-session.md
+  /home/muads/.claude/commands/review-pr.md
+  /home/muads/.claude/commands/rust-build.md
+  /home/muads/.claude/commands/rust-review.md
+  /home/muads/.claude/commands/rust-test.md
+  /home/muads/.claude/commands/santa-loop.md
+  /home/muads/.claude/commands/save-session.md
+  /home/muads/.claude/commands/security-scan.md
+  /home/muads/.claude/commands/sessions.md
+  /home/muads/.claude/commands/setup-pm.md
+  /home/muads/.claude/commands/skill-create.md
+  /home/muads/.claude/commands/skill-health.md
+  /home/muads/.claude/commands/test-coverage.md
+  /home/muads/.claude/commands/update-codemaps.md
+  /home/muads/.claude/commands/update-docs.md
+  /home/muads/.claude/commands/vue-review.md
+
+agent destinations (all printed):
+  /home/muads/.claude/agents/a11y-architect.md
+  /home/muads/.claude/agents/agent-evaluator.md
+  /home/muads/.claude/agents/architect.md
+  /home/muads/.claude/agents/build-error-resolver.md
+  /home/muads/.claude/agents/chief-of-staff.md
+  /home/muads/.claude/agents/code-architect.md
+  /home/muads/.claude/agents/code-explorer.md
+  /home/muads/.claude/agents/code-reviewer.md
+  /home/muads/.claude/agents/code-simplifier.md
+  /home/muads/.claude/agents/comment-analyzer.md
+  /home/muads/.claude/agents/conversation-analyzer.md
+  /home/muads/.claude/agents/cpp-build-resolver.md
+  /home/muads/.claude/agents/cpp-reviewer.md
+  /home/muads/.claude/agents/csharp-reviewer.md
+  /home/muads/.claude/agents/dart-build-resolver.md
+  /home/muads/.claude/agents/database-reviewer.md
+  /home/muads/.claude/agents/django-build-resolver.md
+  /home/muads/.claude/agents/django-reviewer.md
+  /home/muads/.claude/agents/doc-updater.md
+  /home/muads/.claude/agents/docs-lookup.md
+  /home/muads/.claude/agents/e2e-runner.md
+  /home/muads/.claude/agents/fastapi-reviewer.md
+  /home/muads/.claude/agents/flutter-reviewer.md
+  /home/muads/.claude/agents/fsharp-reviewer.md
+  /home/muads/.claude/agents/gan-evaluator.md
+  /home/muads/.claude/agents/gan-generator.md
+  /home/muads/.claude/agents/gan-planner.md
+  /home/muads/.claude/agents/go-build-resolver.md
+  /home/muads/.claude/agents/go-reviewer.md
+  /home/muads/.claude/agents/harmonyos-app-resolver.md
+  /home/muads/.claude/agents/harness-optimizer.md
+  /home/muads/.claude/agents/healthcare-reviewer.md
+  /home/muads/.claude/agents/homelab-architect.md
+  /home/muads/.claude/agents/java-build-resolver.md
+  /home/muads/.claude/agents/java-reviewer.md
+  /home/muads/.claude/agents/kotlin-build-resolver.md
+  /home/muads/.claude/agents/kotlin-reviewer.md
+  /home/muads/.claude/agents/loop-operator.md
+  /home/muads/.claude/agents/marketing-agent.md
+  /home/muads/.claude/agents/mle-reviewer.md
+  /home/muads/.claude/agents/network-architect.md
+  /home/muads/.claude/agents/network-config-reviewer.md
+  /home/muads/.claude/agents/network-troubleshooter.md
+  /home/muads/.claude/agents/opensource-forker.md
+  /home/muads/.claude/agents/opensource-packager.md
+  /home/muads/.claude/agents/opensource-sanitizer.md
+  /home/muads/.claude/agents/performance-optimizer.md
+  /home/muads/.claude/agents/php-reviewer.md
+  /home/muads/.claude/agents/planner.md
+  /home/muads/.claude/agents/pr-test-analyzer.md
+  /home/muads/.claude/agents/python-reviewer.md
+  /home/muads/.claude/agents/pytorch-build-resolver.md
+  /home/muads/.claude/agents/rag-pipeline-reviewer.md
+  /home/muads/.claude/agents/react-build-resolver.md
+  /home/muads/.claude/agents/react-reviewer.md
+  /home/muads/.claude/agents/refactor-cleaner.md
+  /home/muads/.claude/agents/rust-build-resolver.md
+  /home/muads/.claude/agents/rust-reviewer.md
+  /home/muads/.claude/agents/security-reviewer.md
+  /home/muads/.claude/agents/seo-specialist.md
+  /home/muads/.claude/agents/silent-failure-hunter.md
+  /home/muads/.claude/agents/spec-miner.md
+  /home/muads/.claude/agents/swift-build-resolver.md
+  /home/muads/.claude/agents/swift-reviewer.md
+  /home/muads/.claude/agents/tdd-guide.md
+  /home/muads/.claude/agents/type-design-analyzer.md
+  /home/muads/.claude/agents/typescript-reviewer.md
+  /home/muads/.claude/agents/vue-reviewer.md
+
+hooks-dir destinations (all printed):
+  /home/muads/.claude/hooks/README.md
+  /home/muads/.claude/hooks/codex-hooks.json
+  /home/muads/.claude/hooks/memory-persistence/README.md
+  /home/muads/.claude/hooks/memory-persistence/hooks.json

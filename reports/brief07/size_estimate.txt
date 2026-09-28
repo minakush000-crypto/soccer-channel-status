@@ -1,0 +1,13 @@
+== 3e INSTALLED SIZE ESTIMATE (sum of source file sizes for the 815 copy ops) ==
+total: 5113590 bytes = 4.9 MiB
+  hooks-runtime: 1.5 MB
+  framework-language: 1.0 MB
+  workflow-quality: 0.8 MB
+  agents-core: 0.7 MB
+  commands-core: 0.4 MB
+  rules-core: 0.3 MB
+  platform-configs: 0.1 MB
+  database: 0.1 MB
+  orchestration: 0.0 MB
+  skill-unified-memory: 0.0 MB
+note: file sizes measured at source (~/ECC), dry-run does not copy; skipped design-system SKILL.md excluded (installer skips it)

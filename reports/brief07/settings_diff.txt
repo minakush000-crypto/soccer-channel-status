@@ -1,0 +1,50 @@
+== 3d SETTINGS.JSON DIFF: what the install would change in ~/.claude/settings.json ==
+method: merge semantics read from ~/ECC/scripts/lib/install/claude-settings.js mergeManagedHooks
+  (merge-hook-ids): ONLY the "hooks" key is touched; ECC entries are appended per event; an entry
+  with an existing id is refused unless ECC itself wrote it before; every other settings key is
+  preserved byte-for-byte. Diff below computed from the plan JSON + the CURRENT file, not guessed.
+
+current settings.json top-level keys: ['askUserQuestionTimeout', 'autoCompactEnabled', 'autoMemoryEnabled', 'awaySummaryEnabled', 'editorMode', 'effortLevel', 'enableWorkflows', 'enabledPlugins', 'env', 'fastMode', 'hooks', 'permissions', 'skipDangerousModePermissionPrompt', 'skipWorkflowUsageWarning', 'switchModelsOnFlag', 'theme', 'tui', 'verbose', 'workflowKeywordTriggerEnabled', 'worktree']
+keys ECC can change: ["hooks"] only. Untouched: askUserQuestionTimeout, autoCompactEnabled, autoMemoryEnabled, awaySummaryEnabled, editorMode, effortLevel, enableWorkflows, enabledPlugins, env, fastMode, permissions, skipDangerousModePermissionPrompt, skipWorkflowUsageWarning, switchModelsOnFlag, theme, tui, verbose, workflowKeywordTriggerEnabled, worktree
+
+CURRENT hook entries (all preserved as-is):
+  PreToolUse | matcher=Read|Edit|Write|Bash | id=- | cmd=/home/muads/.claude/hooks/block-retired.sh...
+  PreToolUse | matcher=Bash | id=- | cmd=/home/muads/.claude/hooks/warn-local-gpu.sh...
+  Stop | matcher=None | id=- | cmd='/home/muads/.nvm/versions/node/v24.18.0/bin/node' '/home/muads/unlazy/scripts/stop-hook.m...
+
+ECC entries to APPEND (none replaces an existing entry):
+  PostToolUse: +2 entries
+  PostToolUseFailure: +2 entries
+  PreCompact: +1 entries
+  PreToolUse: +9 entries
+  SessionEnd: +1 entries
+  SessionStart: +2 entries
+  Stop: +7 entries
+  total appended: 24
+
+id collisions between current hooks and ECC ids: NONE
+
+AFTER INSTALL, hooks per event (current entries listed first, ECC appended):
+  PostToolUse: 2 entries total
+  PostToolUseFailure: 2 entries total
+  PreCompact: 1 entries total
+  PreToolUse: 11 entries total
+  SessionEnd: 1 entries total
+  SessionStart: 2 entries total
+  Stop: 8 entries total
+
+existing-hook preservation check against the harness to protect (brief 07 Why):
+  unlazy Stop hook present in current settings: True
+  claude-mem hooks present: False
+  disk-guard hook present: False
+
+== HOOK LOCATION MAP (where the harness-to-protect actually registers today) ==
+- unlazy Stop hook: GLOBAL ~/.claude/settings.json (the file ECC merges into) -> preserved by
+  mergeManagedHooks (appends only, id collision check: NONE).
+- disk-guard session-start (check_mnt_f.sh) + pod-check + doc-stamp: PROJECT
+  soccer-channel/.claude/settings.json -> a different file ECC never touches.
+- claude-mem hooks: PLUGIN (marketplaces/thedotmack/cowork/scripts/cmem-hook.mjs) -> plugin-managed,
+  not in any settings.json ECC touches.
+- agent-reach / other skills: skills dir files, not settings.
+=> The only settings file ECC modifies is the global one; the only existing entries there (unlazy
+   Stop + 2 PreToolUse) survive the merge unchanged, and 24 ECC entries are appended.

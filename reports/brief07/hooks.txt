@@ -1,0 +1,216 @@
+== 3c HOOKS: every hook ECC would register in ~/.claude/settings.json (plan JSON, hooks-runtime module) ==
+total entries: 24 across events: PreToolUse(9), PreCompact(1), SessionStart(2), PostToolUse(2), PostToolUseFailure(2), Stop(7), SessionEnd(1)
+every command is: node -e "<bootstrap resolving ECC root (base64 literal /home/muads/.claude)>" node scripts/hooks/plugin-hook-bootstrap.js node scripts/hooks/<script>.js [args]
+bootstrap source: ~/ECC/scripts/hooks/plugin-hook-bootstrap.js
+
+PER-EVENT TABLE (event | id | matcher | timeout | what it does)
+PreToolUse | pre:bash:dispatcher | Bash | - | Consolidated Bash preflight dispatcher for quality, tmux, push, and GateGuard checks -> pre-bash-dispatcher.js
+PreToolUse | pre:powershell:gateguard-fact-force | PowerShell | 5 | PowerShell fact-forcing gate: inspect destructive commands without running unrelated Bash-only preflight hooks -> run-with-flags.js
+PreToolUse | pre:write:doc-file-warning | Write | - | Doc file warning: warn about non-standard documentation files (exit code 0; warns only) -> run-with-flags.js
+PreToolUse | pre:edit-write:suggest-compact | Edit|Write | - | Suggest manual compaction at logical intervals -> run-with-flags.js
+PreToolUse | pre:observe:continuous-learning | .* | 10 | Capture tool use observations for continuous learning -> run-with-flags.js
+PreToolUse | pre:governance-capture | Bash|PowerShell|Write|Edit|MultiEdit | 10 | Capture governance events (secrets, policy violations, approval requests). Enable with ECC_GOVERNANCE_CAPTURE= -> run-with-flags.js
+PreToolUse | pre:config-protection | Write|Edit|MultiEdit | 5 | Block modifications to linter/formatter config files. Steers agent to fix code instead of weakening configs. -> run-with-flags.js
+PreToolUse | pre:mcp-health-check | .* | - | Check MCP server health before MCP tool execution and block unhealthy MCP calls -> run-with-flags.js
+PreToolUse | pre:edit-write:gateguard-fact-force | Edit|Write|MultiEdit | 5 | Fact-forcing gate: block first Edit/Write/MultiEdit per file and demand investigation (importers, data schemas -> run-with-flags.js
+PreCompact | pre:compact | .* | - | Save state before context compaction -> run-with-flags.js
+SessionStart | session:start | .* | - | Load previous context and detect package manager on new session -> session-start-bootstrap.js
+SessionStart | session-start:plan-canvas-sessions | .* | - | Surface open Plan Canvas review sessions so a fresh session can resume the loop -> run-with-flags.js
+PostToolUse | post:dispatcher:sync | .* | 30 | Run synchronous PostToolUse hooks in one process while preserving per-hook controls -> posttooluse-dispatcher.js
+PostToolUse | post:dispatcher:async | .* | 45 | Run background PostToolUse hooks in one process while preserving per-hook controls -> posttooluse-dispatcher.js
+PostToolUseFailure | post:mcp-health-check | .* | - | Track failed MCP tool calls, mark unhealthy servers, and attempt reconnect -> run-with-flags.js
+PostToolUseFailure | post:skill:track | Skill | - | Record hard Skill tool failures for skill-health telemetry -> run-with-flags.js
+Stop | stop:plan-canvas-pending | .* | - | Deliver undelivered Plan Canvas browser feedback before the agent stops -> plan-canvas-pending.js
+Stop | stop:format-typecheck | .* | 300 | Batch format (Biome/Prettier) and typecheck (tsc) all JS/TS files edited this response — runs once at Stop ins -> stop-format-typecheck.js
+Stop | stop:check-console-log | .* | - | Check for console.log in modified files after each response -> check-console-log.js
+Stop | stop:session-end | .* | 10 | Persist session state after each response (Stop carries transcript_path) -> session-end.js
+Stop | stop:evaluate-session | .* | 10 | Evaluate session for extractable patterns -> evaluate-session.js
+Stop | stop:cost-tracker | .* | 10 | Track token and cost metrics per session -> cost-tracker.js
+Stop | stop:desktop-notify | .* | 10 | Send desktop notification (macOS/WSL) with task summary when Claude responds -> desktop-notify.js
+SessionEnd | session:end:marker | .* | 10 | Session end lifecycle marker (non-blocking) -> session-end-marker.js
+
+== DISTINCT RUNTIME SCRIPTS IN THE HOOK GRAPH (after following dispatcher children): 32 ==
+
+--- scripts/hooks/check-console-log.js (2476 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/config-protection.js (5485 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/cost-tracker.js (9684 bytes)
+    network-libs/calls: ['https://p']
+    network-executables: NONE
+    fs-write calls: NONE
+      line 73: // Source: https://platform.claude.com/docs/en/about-claude/pricing
+--- scripts/hooks/design-quality-check.js (3859 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/desktop-notify.js (9034 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: ['writeFileSync']
+      line 182: fs.writeFileSync(tty, `\x1b]9;${message}\x07`);
+--- scripts/hooks/doc-file-warning.js (3694 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/ecc-context-monitor.js (10307 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: ['unlinkSync', 'writeFileSync']
+      line 86: fs.writeFileSync(tmp, JSON.stringify(state), 'utf8');
+      line 90: try { fs.unlinkSync(tmp); } catch { /* ignore */ }
+--- scripts/hooks/ecc-metrics-bridge.js (10211 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: ['renameSync', 'writeFileSync']
+      line 129: fs.writeFileSync(tmp, JSON.stringify(next), 'utf8');
+      line 130: fs.renameSync(tmp, cachePath);
+--- scripts/hooks/evaluate-session.js (2980 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/gateguard-fact-force.js (44922 bytes)
+    network-libs/calls: ['https://g']
+    network-executables: ['git push']
+    fs-write calls: ['mkdirSync', 'renameSync', 'unlinkSync', 'writeFileSync']
+      line 20: * Repo: https://github.com/zunoworks/gateguard
+      line 509: // A `+` refspec prefix (e.g. `git push origin +main`,
+      line 834: fs.unlinkSync(stateFile);
+      line 867: fs.mkdirSync(STATE_DIR, { recursive: true });
+      line 896: fs.writeFileSync(tmpFile, JSON.stringify(finalState, null, 2), 'utf8');
+      line 898: fs.renameSync(tmpFile, stateFile);
+      line 902: fs.unlinkSync(stateFile);
+      line 906: fs.renameSync(tmpFile, stateFile);
+--- scripts/hooks/governance-capture.js (10793 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/mcp-health-check.js (24266 bytes)
+    network-libs/calls: ["require('http')", "require('https')"]
+    network-executables: NONE
+    fs-write calls: ['mkdirSync', 'writeFileSync']
+      line 18: const http = require('http');
+      line 19: const https = require('https');
+      line 100: fs.mkdirSync(path.dirname(filePath), { recursive: true });
+      line 101: fs.writeFileSync(filePath, JSON.stringify(state, null, 2));
+--- scripts/hooks/observe-runner.js (5587 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/plan-canvas-pending.js (8036 bytes)
+    network-libs/calls: ["require('http')"]
+    network-executables: NONE
+    fs-write calls: ['renameSync', 'writeFileSync']
+      line 28: const http = require('http');
+      line 138: fs.writeFileSync(tmp, JSON.stringify(state, null, 2));
+      line 139: fs.renameSync(tmp, file);
+--- scripts/hooks/plan-canvas-sessions.js (1998 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/plugin-hook-bootstrap.js (10615 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/post-bash-dispatcher.js (557 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/post-edit-accumulator.js (2361 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: ['appendFileSync']
+      line 11: * appendFileSync is used so concurrent hook processes write atomically
+      line 42: fs.appendFileSync(getAccumFile(), filePath + '\n', 'utf8');
+--- scripts/hooks/post-edit-console-warn.js (1994 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/posttooluse-dispatcher.js (10300 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/pre-bash-dispatcher.js (555 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/pre-compact.js (6853 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/quality-gate.js (4912 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/run-with-flags.js (8983 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/session-activity-tracker.js (16360 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/session-end-marker.js (1815 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/session-end.js (14027 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/session-start-bootstrap.js (2936 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/session-start.js (28713 bytes)
+    network-libs/calls: ['https://g']
+    network-executables: NONE
+    fs-write calls: ['rmSync']
+      line 683: // https://github.com/affaan-m/everything-claude-code/issues/1534
+      line 240: fs.rmSync(fullPath, { force: true });
+--- scripts/hooks/skill-run-tracker.js (4929 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: NONE
+--- scripts/hooks/stop-format-typecheck.js (8872 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: ['unlinkSync']
+      line 169: try { fs.unlinkSync(accumFile); } catch { /* best-effort */ }
+--- scripts/hooks/suggest-compact.js (10510 bytes)
+    network-libs/calls: NONE
+    network-executables: NONE
+    fs-write calls: ['rmSync']
+      line 106: fs.rmSync(fullPath, { force: true });
+
+VERDICT RULES USED: network-libs/calls = node http/https/net/dgram/dns/tls requires, fetch(), curl/wget;
+fs-write = writeFileSync/mkdirSync/createWriteStream/appendFileSync/rmSync/unlink/rename/copyFile calls found in source.
+
+== CURATED VERDICTS (Flash, evidence = the grep lines above + source reads) ==
+NETWORK — REAL but loopback-only:
+  - mcp-health-check.js: requires http/https; probes ONLY servers with config.type=='http' or config.url
+    (line 518). All 6 current MCP servers are stdio (checked ~/.claude.json + settings.json), so the HTTP
+    probe path is DORMANT here; stdio servers are probed by spawning the command locally.
+  - plan-canvas-pending.js: localhost HTTP to its own Plan Canvas browser server; only when Plan Canvas
+    sessions exist. No Plan Canvas on this machine -> dormant.
+NETWORK — false positives (comment URLs / comment refs only): cost-tracker.js (pricing docs URL in
+  comment), gateguard-fact-force.js (repo URL comment; "git push" appears in a refspec comment),
+  session-start.js (github issue URL in comment).
+WRITES OUTSIDE ~/.claude:
+  - gateguard-fact-force.js -> ~/.gateguard/state-<session>.json (HOME-level; override via
+    GATEGUARD_STATE_DIR; line 33 of scripts/hooks/gateguard-fact-force.js).
+  - os.tmpdir()=/tmp state by: post-edit-accumulator, stop-format-typecheck, ecc-metrics-bridge,
+    suggest-compact, ecc-context-monitor, cost-tracker, session-bridge, claude-dry-run-sandbox (ephemeral).
+WRITES INSIDE USER PROJECTS (outside ~/.claude, in the repo you are editing):
+  - stop:format-typecheck (stop-format-typecheck.js) batch-runs Biome/Prettier and tsc on JS/TS files
+    edited in the response — modifies project files by design (formatting). soccer-channel is Python/bash,
+    so no JS/TS files exist for it to touch today.
+EVERYTHING ELSE: state under ~/.claude (ECC agent-data home resolves to ~/.claude: verified in
+  scripts/lib/agent-data-home.js getDefaultClaudeAgentDataHome), e.g. ~/.claude/mcp-health-cache.json,
+  ~/.claude/plan-canvas/sessions.json, ~/.claude/skills/learned, session state dirs.
+HARD-CODED PATH: every hook command embeds base64 "L2hvbWUvbXVhZHMvLmNsYXVkZQ==" = "/home/muads/.claude"
+  as the ECC root literal (falls back to homedir/.claude resolution). Fine on this machine; not portable.

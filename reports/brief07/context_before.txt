@@ -1,0 +1,21 @@
+== 3f SESSION-START CONTEXT BEFORE (throwaway headless session, 2026-09-27 ~21:55 CDT) ==
+
+COMMAND (run from ~/yt-digest/soccer-channel):
+  claude -p 'Say OK' --model glm-5.3-flash:cloud --output-format json --verbose --max-turns 1
+  (first attempt with the session default 'glm-5.3-flash:cloud[1m]' failed: claude-code:unrecognized_model;
+   rerun with the bare model name; stderr still prints one unrecognized_model line while the gateway
+   resolves it — the session itself ran: init + assistant turn + usage are all present)
+
+RAW OUTPUT EXCERPT (from the stream-json file /tmp/b07_ctx_before.json):
+  init event: cwd=/home/muads/yt-digest/soccer-channel, 24 tools + 6 claude-mem MCP tools listed
+  assistant#1 message.usage: input_tokens=39837 output_tokens=0 model=glm-5.3-flash
+  assistant#2 message.usage: input_tokens=39837 output_tokens=0 model=glm-5.3-flash
+  result.usage: input_tokens=37826 cache_read=0 cache_creation=0 output_tokens=162
+  result.subtype=error_max_turns is_error=True num_turns=2 duration_ms=9061
+
+MEASUREMENT: Claude Code does not expose a dedicated 'system context tokens' field. The closest
+reported figure is the FIRST model turn's input_tokens: 39837 (per-message API usage) / 37826
+(result aggregate; the 2011-token delta is gateway accounting, both printed verbatim).
+This is the BEFORE number; the AFTER run must use the exact same command and extraction.
+Note: exit code was 1 because max-turns hit 2 (a SessionStart/UserPromptSubmit hook re-prompted);
+turn 1 completed with the usage above, which is what this gate measures.

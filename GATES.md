@@ -112,21 +112,26 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [ ] B33: the backup tarball is on B2 under soccer-channel/2026-09-27/ with a byte-identical size (brief 07 job 1)
   CHECK: l=$(stat -c%s /mnt/f/backups/claude-backup-2026-09-27.tar.gz) && r=$(rclone lsl b2:mendymax-archive/soccer-channel/2026-09-27/claude-backup-2026-09-27.tar.gz | awk '{print $1}') && [ -n "$r" ] && [ "$l" = "$r" ] && echo B2-SIZE-MATCH bytes=$l
   EXPECT: B2-SIZE-MATCH
-- [ ] B34: the ECC clone is checked out at tag v2.2.1 exactly (brief 07 job 2)
+- [x] B34: the ECC clone is checked out at tag v2.2.1 exactly (brief 07 job 2)
   CHECK: git -C ~/ECC describe --tags --exact-match 2>/dev/null | grep -qx v2.2.1 && echo ECC-PINNED-V221
   EXPECT: ECC-PINNED-V221
-- [ ] B35: the dry-run plan files exist and the JSON one parses (brief 07 job 3)
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=d065a72298616d1a0095816c5667e30324999ca25fcd39fd200cdd70b5b14371; output-bytes=16
+- [x] B35: the dry-run plan files exist and the JSON one parses (brief 07 job 3)
   CHECK: ~/yt-digest/.venv/bin/python -c "import json; json.load(open('reports/brief07/ecc_plan.json')); print('PLAN-OK')" && test -s reports/brief07/ecc_plan.txt
   EXPECT: PLAN-OK
-- [ ] B36: the six analysis artifacts are non-empty (counts, clashes, hooks, settings diff, size estimate, context before) (brief 07 job 3)
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=edab1af7911171143f404e059437e3f2580c9477fbf5546f5723e780ab523c8d; output-bytes=8
+- [x] B36: the six analysis artifacts are non-empty (counts, clashes, hooks, settings diff, size estimate, context before) (brief 07 job 3)
   CHECK: for f in counts.txt clashes.txt hooks.txt settings_diff.txt size_estimate.txt context_before.txt; do test -s "reports/brief07/$f" || exit 1; done && echo BRIEF07-ANALYSIS-OK
   EXPECT: BRIEF07-ANALYSIS-OK
-- [ ] B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=f2c719f19f820f314bc8d6935b6c68c7d0c4a0fb514fae40876bf9750c676ad4; output-bytes=20
+- [x] B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
   CHECK: a=$(df -BG --output=avail /mnt/c | tail -1 | tr -dc '0-9') && [ "$a" -ge 15 ] && echo C-FLOOR-OK avail=${a}G
   EXPECT: C-FLOOR-OK
-- [ ] B38: HARD STOP honored: summary exists and ECC's rules dir is NOT installed, with a planted positive control proving the matcher (brief 07 job 4; FREEZE this gate once Mayo types APPROVED ECC — jobs 5-8 install into rules/)
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=f319052f28fd45e453c4d6dc2a05894750324b34089c2bbef6cd67569570178e; output-bytes=21
+- [x] B38: HARD STOP honored: summary exists and ECC's rules dir is NOT installed, with a planted positive control proving the matcher (brief 07 job 4; FREEZE this gate once Mayo types APPROVED ECC — jobs 5-8 install into rules/)
   CHECK: m=$(mktemp -d /tmp/b07pc.XXXXXX) && mkdir -p "$m/rules/ecc" && test -e "$m/rules/ecc" && rm -rf "$m" && test -s reports/brief07/summary.md && test ! -e ~/.claude/rules/ecc && echo HARD-STOP-OK
   EXPECT: HARD-STOP-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=342e3ccdbf3cb67c6dedda020e29f7f325c8dc33cbc29cd327dc15c724d8c6b9; output-bytes=13
 
 ABANDON: B32 F: drive (Memorex USB, serial 0A7710C44) disconnected from Windows twice under sustained write on 2026-09-27 (NTFS event 140, 21:35 CDT; 1.6 MB/s with readback failures); tarball reached only 147 MB of ~1.7 GB; rollback backup on a flapping drive risks silent corruption; handoff to Mayo in reports/brief07/f_drive_failure.md, gate reruns as-is once the drive is healthy
 ABANDON: B33 depends on B32's tarball, which does not exist because of the same F: hardware failure; handoff to Mayo in reports/brief07/f_drive_failure.md

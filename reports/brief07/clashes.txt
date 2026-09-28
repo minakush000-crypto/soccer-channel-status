@@ -1,0 +1,8 @@
+== 3b CLASHES: every planned destination path that already exists on disk (os.path.exists), with current owner ==
+CLASH: /home/muads/.claude/skills/design-system/SKILL.md
+   owner: existing user skill "design-system"
+   op: copy-file module=framework-language src=skills/design-system/SKILL.md
+INSTALLER-SKIP (ECC detected and will NOT overwrite): /home/muads/.claude/skills/design-system/SKILL.md (skills/design-system/SKILL.md)
+MERGE-TARGET (not a clash, existing file modified in place): /home/muads/.claude/settings.json
+   owner: current settings.json; strategy=merge-hook-ids appends only, existing entries preserved (verified in ECC scripts/lib/install/claude-settings.js mergeManagedHooks)
+TOTAL existing destinations among 815 copy ops: 1
