@@ -998,3 +998,18 @@ Two real copies: /home/muads/unlazy (clean clone, 473d4b8) and
 modification, one upstream commit behind (1667149). The global Stop hook
 runs the REPO copy's stop-hook.mjs. npm test: exit 0 (8/8 + 15/15).
 Approvals cached: 135.
+
+## 2026-09-27 — Solana/quant items deleted permanently, NO archive (Mayo, final)
+
+Mayo's decision overrides the archive-then-delete rule for exactly these
+items: ~/mcp-servers/solana-rpc (1.3G), ~/quant-solana-gate2 (517M),
+~/quant-backup (5.6M), the two quant ~/.claude/projects transcript dirs,
+the quant_solana_v2 + quant_repo_deploy SSH keys (and the ~/.ssh/config
+Host blocks referencing them: prod-hil and github.com), the solana
+knowledge JSON in yt-digest (git rm), and every solana-rpc / quant
+reference in MCP-or-harness configs (~/.claude.json project entries,
+~/.claude/settings.local.json permission entries). Rationale: the quant
+work is finished and dead weight on a disk that must not grow; NO archive
+and NO backup by explicit choice. ~/mcp-servers/loreconvo and dexscreener
+are explicitly kept. Nothing else touched. Measured before deletion:
+df / = 24G used; targets sum to ~1.85G.
