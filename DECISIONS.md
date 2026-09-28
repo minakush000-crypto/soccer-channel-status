@@ -1013,3 +1013,26 @@ work is finished and dead weight on a disk that must not grow; NO archive
 and NO backup by explicit choice. ~/mcp-servers/loreconvo and dexscreener
 are explicitly kept. Nothing else touched. Measured before deletion:
 df / = 24G used; targets sum to ~1.85G.
+
+## 2026-09-28 — All OTHER home entries wiped (Mayo, final)
+
+Following the read-only inventory of 2026-09-28, Mayo ordered every entry
+categorized OTHER deleted, leaving only PIPELINE and HARNESS in $HOME.
+Archive-then-delete (2026-09-28_glm_b10_other_projects.tar.gz, 12,706,596
+bytes, size-verified on B2) for: somali-portrait, somali-archive,
+gargaar-pos, footyLive, soccerdata, docs, general, and eight loose
+home-root notes. No archive (regenerable or junk): cv-test, yolov8s.pt,
+.rustup, .cargo, skills-lab, ~/.venv, .gemini, .linkedin-mcp, .dotnet,
+.pki, .gnupg, .copilot, scratch, downloaded_files, package-lock.json,
+qwen-code.Modelfile(+.bak), .bashrc.bak*, .qcode.sh, .qverify.sh,
+~/mcp-servers (loreconvo and dexscreener included — this supersedes the
+keep in the solana decision above), .anthropic_api_key, .cache/chroma,
+.cache/pip cleared. ~/.bashrc: removed the .cargo/env source, the
+qcode/qverify sources, the qgen alias, and the qnext/qpos functions (old
+file kept at /tmp/bashrc.pre-brief10-other-wipe only); claude5 kept (it
+reads the deleted .anthropic_api_key with a graceful empty fallback).
+~/.claude.json: two dead project entries removed. Measured: df / used
+22G -> 17G; du -sh ~ 17G -> 9.5G; bash -ic 'echo SHELL-OK' prints SHELL-OK
+(the two tty warnings appear with an empty config too, proven). LICENSE
+and README.md at the home root were not in either list and remain.
+Nothing categorized PIPELINE or HARNESS was touched.
