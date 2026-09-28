@@ -3888,3 +3888,71 @@ times 108/54/88 s; brief-12 Modal window cost $0.0182 (billing report).
 Job 8 (PROOF): gates B56-B61 written before implementation and all passing;
 reverify proof after the last code commit published to reports/brief12/ and
 the mirror.
+
+## Brief 13 — board sizing fixes + freeze-frame overlays (capability 2 of 4) — 2026-09-28
+
+Job 0a (HOUSEKEEPING): deleted stale auto-memory tactical-dominant-balance.md
+(retired tactical_render.py rule) and rewrote stop-adding-start-replacing.md
+to keep only the general principle; step4/4.8%-95.2% specifics removed;
+soccer-channel memory index updated. Job 0b: npm cache = /mnt/d/scratch/caches/npm
+(env var), yt-dlp cache = --cache-dir /mnt/d/scratch/caches/yt-dlp (user config);
+neither resolves to C:, no fix needed (printed in session). Job 0c: env.sh
+renamed to ~/.config/machine/env.sh, one-line shim left at ~/.config/soccer/env.sh,
+.bashrc:187 re-pointed, disk_guard.sh + f_mount.sh re-pointed, GATES.md B30/B50
+CHECKs re-pointed, SYSTEM.md lines 76-79 + 191 updated (streamed to B2
+system/2026-09-28_SYSTEM.md + manifest). Login shell resolves
+SOCCER_STAGING_ROOT=/mnt/d/scratch/soccer-staging; disk_guard --selftest
+GUARD-SELFTEST-OK. Untouched on purpose: briefs/*.md in both repos (coordinator
+briefs) and PROGRESS.md's dated brief-07 historical line; jiheeye files touched:
+none (its only hit is coordinator brief01.md).
+
+Job 1 (SIZING): card 200,236,1520x776 (79%) -> 80,192,1760x824 (91.7%),
+pitch 1240x616 -> 1692x692 (fills the card); minima TL_MIN disc r42 /
+chip r26 / label h36 audited per keyframe (480p floor: 2.25x downscale);
+chip-label + label-disc overlap audits added (two REAL collisions caught:
+runners jersey 10/11 labels, move jersey 10 own-disc via a sign bug in the
+label_dy escalation — both fixed, emitter escalates with label_dx/label_dy);
+half-pitch framing "frame" field (auto counts ACTIVE = jersey-targeted
+players + ball paths; runners -> right-half). Three proof boards re-emitted
++ re-rendered on Modal (70/71/59 s) with audits clean; before/after sheets
+(ba_sheet_*.jpg) + after sheets in reports/brief13/.
+Job 2 (FOOTAGE): official LALIGA RESUMEN uploads for both matches
+(ZJom79fRhv0 Sevilla 1-3, bo9g36xT5UA Barca 7-2 Racing), 1080p50 avc1,
+135.9/139.4 MB, downloaded on the home connection to
+/mnt/d/scratch/soccer-staging, shipped to the volume (in/brief13/), local
+copies deleted; footage_sources.md table.
+Job 3 (FREEZE-FRAME SPEC): kind "footage_overlay" in the SAME renderer —
+base {clip, freeze_at} + image-space steps ground_ellipse/chip/link/unit/
+arrow at 1920x1080 pixel coords; pod-side ffmpeg pre-extracts play frames
+(renderfootage), page draws them (no <video>, still f(spec,T)); identity
+gate: a chip naming a player needs source "lineup:<jersey>" + jersey in a
+facts XI (either team — jersey 14 is Adeyemi AND Gueye, both checkers match
+by name across both XIs); board_data_check gained check_footage + walk
+exemptions.
+Job 4 (MARKING): 78 stamped survey frames (every 5 s, both clips) + 18
+full-res stamped candidates extracted ON THE POD, tiled, viewed; 4 moments
+chosen (sev 92.0/127.0, rac 87.0/152.0 — three event-anchored to Raphinha
+goals, one to open play); foot points marked on 2x zoom grids, evidence =
+visible numbers matched to the raw XIs; marks.json holds marks + plans; a
+substitute's shirt (Racing 19) and an unreadable keeper get NO name (the
+no-evidence-no-name rule exercised); brief13_overlays.py emits the 4 specs;
+board_data_check + rendered-page audit pass.
+Job 5 (RENDER): 4 overlay clips on Modal (10.5 s each = 2 play-in + 6.5
+hold + 0.5 fade + 2 resume), 121 ffmpeg extracts each, 315 page frames,
+audits clean inside every render; FIXED IN PASSING: a `let frames` shadowed
+the frame count so the render loop ran zero times (0-frame MP4 encode
+fail on the first attempt); render times 439/362/431/476 s.
+Job 6 (CHECK): 32 stamped keyframes viewed (8 per clip x 4); every ellipse
+under the intended feet, every chip points at the right player, labels
+readable, fade/resume clean — visual_check.md PASS, no re-render; drift
+control: drawn ellipses vs marks all clean + a 150px-shifted spec FLAGGED
+(B65 positive control).
+Job 7 (PUBLISH): 4 overlay contact sheets + overlay_keyframes.jpg proof +
+after/ba board sheets in reports/brief13/; 7 MP4s + manifests archived to
+B2 soccer-channel/2026-09-28/ (verified 14 files); render times
+render_times.json; brief-13 pod window ~$0.09 (billing today 0.1082 minus
+brief-12's known 0.0182).
+Job 8 (PROOF): gates B62-B68 written before implementation and passing;
+TOOLS.md + census refreshed (56 rows, 35 WIRED + 21 HAND-RUN); STATUS/
+CONTEXT/PROGRESS/DECISIONS updated; formal --reverify published to
+reports/brief13/reverify.txt after the last code commit; mirror pushed.

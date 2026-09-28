@@ -1120,3 +1120,34 @@ Brief 12 (animated boards) decisions — 2026-09-28
   Levante and Feyenoord fetched but carry no lineups/avgpos (retired).
 - modal volume put remote paths are RELATIVE to the volume root; absolute
   /vol/... paths create a nested vol/ tree functions never see.
+
+## Brief 13 (2026-09-28): board sizing + freeze-frame overlays
+
+- Layout numbers (measured against the 480p readability requirement:
+  1080p/480p = 2.25x): card 1760x824 at (80,192) = 91.7% of 1920 (brief
+  floor 88%); pitch 1692x692 = the card minus 34px margins; disc r=42,
+  chip r=26, label h=36 are AUDITED MINIMA, not style choices — the
+  rendered-page audit fails a render under them.
+- Half-pitch framing counts ACTIVE players only (jersey-targeted by any
+  step) + schematic ball paths, not all spec players — a formation board
+  stays full-width while a runners board frames its half. The emitter
+  resolves the frame and WRITES it into the spec (self-documenting; the
+  page never re-decides).
+- Label placement escalation (label_dx/label_dy): when all four standard
+  spots are blocked, the emitter stacks the label away from the disc and
+  the page applies the additive page-space offsets. Two sign conventions
+  collided in the first pass (above/left moved TOWARD the disc) — the
+  rendered-page audit caught both; convention is now plain additive px.
+- Freeze-frame architecture: no <video> element. Pod-side ffmpeg
+  pre-extracts play-in/frozen/resume frames; the page draws them as images.
+  State stays a pure function of (spec, T) — deterministic capture, and
+  the audit-only mode runs without the play frames (frozen.png is enough).
+- Identity evidence is checked against BOTH teams' XIs (footage frames
+  are mixed); a jersey in both XIs (14 Adeyemi/Gueye) matches by name. A
+  chip naming a player without a visible number/name on that frame is a
+  spec-level REFUSAL — exercised on the number 19 substitute and the
+  stranded keeper.
+- Drift control compares what the page DREW (entity log at mid-hold) to
+  the marked foot points; the check is meaningful because the marks live
+  OUTSIDE the spec (reports/brief13/marks.json) — a spec mutated after
+  marking is caught, and the 150px positive control proves it.

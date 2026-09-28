@@ -65,7 +65,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=81c21172757bacecbfb2c86ad221572ac1fe9a19fa59480fd2bb447f60af9752; output-bytes=1616
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=cc85e10d1953171f063334d761b10ad26c5efdaacdc79d39a140634d25aecc66; output-bytes=1707
 - [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
@@ -94,8 +94,8 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: bash tools/disk_guard.sh --selftest
   EXPECT: GUARD-SELFTEST-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=1096bead3681d9db3c9157d52a4fcb207f9b44c270911a3f5a70dcaedeebdfe3; output-bytes=18
-- [x] B30: the five cache+staging env vars resolve to /mnt/d in the sourced env file (rewritten brief 11 job 4 from the brief-10 F: version; XDG_CACHE_HOME still deliberately absent)
-  CHECK: s=$HOME/.config/soccer/env.sh && test -f "$s" && [ "$(grep -cE '^export (PIP_CACHE_DIR|UV_CACHE_DIR|npm_config_cache|HF_HOME|SOCCER_STAGING_ROOT)=/mnt/d/scratch/' "$s")" -eq 5 ] && echo CACHES-ON-D
+- [x] B30: the five cache+staging env vars resolve to /mnt/d in the sourced env file (path re-pointed brief 13 job 0c to the machine/ rename; XDG_CACHE_HOME still deliberately absent)
+  CHECK: s=$HOME/.config/machine/env.sh && test -f "$s" && [ "$(grep -cE '^export (PIP_CACHE_DIR|UV_CACHE_DIR|npm_config_cache|HF_HOME|SOCCER_STAGING_ROOT)=/mnt/d/scratch/' "$s")" -eq 5 ] && echo CACHES-ON-D
   EXPECT: CACHES-ON-D
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=204874917ab8270f4d727a7a9f4347a604bd58d8d0dd626852bb90a603a59b4e; output-bytes=12
 - [x] B31: .wslconfig carries the memory cap (half of RAM minus 1 GB, min 4 GB)
@@ -125,7 +125,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
   CHECK: a=$(df -BG --output=avail /mnt/c | tail -1 | tr -dc '0-9') && [ "$a" -ge 15 ] && echo C-FLOOR-OK avail=${a}G
   EXPECT: C-FLOOR-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=8699099aa84003c2c68dc5a1411bf34cc5f1553aff61baf61d93db12493e3591; output-bytes=21
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=ab69df5213af48582ed19daabc3dbf7b9df66ef587218f0ed82969bb04d2be45; output-bytes=21
 
 - [x] B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
   CHECK: d=$(node ~/ECC/scripts/ecc.js doctor 2>&1) && echo "$d" | grep -q "errors=0" && l=$(node ~/ECC/scripts/ecc.js list-installed 2>&1) && echo "$l" | grep -q "Source version: 2.2.1" && echo ECC-DOCTOR-CLEAN-V221
@@ -168,7 +168,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   EXPECT: SPEED-RECORDED
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=56ba360414c87bc3b2c6fd74dd0ccc8d3de30107a2d3aec7e590b21c1e9ae391; output-bytes=15
 - [x] B50: no live config or tool VALUE names /mnt/f as a destination (comment lines documenting the retirement are excluded), while the history file still names it (positive control that the grep works); disk_guard.sh's retired-F detector is exempt by design (brief 11 job 6d)
-  CHECK: n=$(grep -rn "/mnt/f" ~/.config/soccer/env.sh ~/.config/yt-dlp/config tools/staging.py tools/scratch_mount.sh tools/b2_mount.sh tools/backup_env.py tools/produce_v2.py tools/f_mount.sh .claude/hooks/check_scratch.sh .claude/settings.json 2>/dev/null | grep -vE ':[0-9]+:#' | wc -l) && [ "$n" -eq 0 ] && h=$(grep -c "/mnt/f" tools/brief10_elevated_setup.sh) && [ "$h" -gt 0 ] && echo NO-LIVE-MNTF history-hits=$h
+  CHECK: n=$(grep -rn "/mnt/f" ~/.config/machine/env.sh ~/.config/yt-dlp/config tools/staging.py tools/scratch_mount.sh tools/b2_mount.sh tools/backup_env.py tools/produce_v2.py tools/f_mount.sh .claude/hooks/check_scratch.sh .claude/settings.json 2>/dev/null | grep -vE ':[0-9]+:#' | wc -l) && [ "$n" -eq 0 ] && h=$(grep -c "/mnt/f" tools/brief10_elevated_setup.sh) && [ "$h" -gt 0 ] && echo NO-LIVE-MNTF history-hits=$h
   EXPECT: NO-LIVE-MNTF
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=5ba68989a7062eade8a8c90c5f3c0910bd3b01b8d10e52185af0f3d3dba06de0; output-bytes=28
 - [x] B51: the guard selftest output with the brief-11 controls is recorded (D: unmounted FAILS, /mnt/f path FAILS, real state PASSES) (brief 11 job 6a)
@@ -221,3 +221,36 @@ touches nothing in the repo (writes only under /tmp).
   CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py numbers
   EXPECT: NUMBERS-TRACED-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=3d52719de57575995baae287c0ee0c1b6ecdeeaaf861acb35af7be211f2228df; output-bytes=474
+
+Brief 13 gates (board sizing + freeze-frame overlays; added 2026-09-28 before
+implementation, per unlazy). The oracle for B62-B68 is tools/brief13_check.py,
+which touches nothing in the repo (writes only under /tmp).
+
+- [x] B62: sizing minima hold on every rendered board at every step end: disc radius >= 42 px, number-chip radius >= 26 px, name-label height >= 36 px at 1080p (the 480p readability floor), and a planted sub-minimum entity FAILS the audit (positive control)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py sizing
+  EXPECT: SIZING-MINIMA-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=3ba82c33bc74dac50825f8f4f0c30a6588808a7a20a35cf709b184042aa14c7a; output-bytes=228
+- [x] B63: the chip-label overlap audit is live on every rendered keyframe and a planted chip-on-label case FAILS it (positive control)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py overlap
+  EXPECT: OVERLAP-CONTROL-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=beea3352d679167e63708ee3ad741b6389c1cddb2f9baa026cb6a3a33b77a8e7; output-bytes=65
+- [x] B64: every NAMED player in a brief-13 overlay spec carries identity evidence (source "lineup:<jersey>" matching a jersey in the facts XI); a spec naming a player without evidence is REFUSED (positive control)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py identity
+  EXPECT: IDENTITY-EVIDENCE-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=32df4151fe4ee13d3883db646f3c0f9fb8b52094b419e93ca4d2108dbba56171; output-bytes=131
+- [x] B65: the drift check compares rendered mark positions against the marked foot points and a spec with one ellipse shifted 150 px FAILS it (positive control, brief job 6)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py drift
+  EXPECT: DRIFT-CONTROL-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=d3d495d7a55162694751ed977edc1339f004349c69c0fae2404504e66f20aa42; output-bytes=278
+- [x] B66: neither npm nor yt-dlp cache resolves on C: in a login shell (npm env var and yt-dlp --cache-dir both point at /mnt/d or the WSL home, never /mnt/c)
+  CHECK: bash -lic 'c=$(npm config get cache 2>/dev/null); y=$(grep -oE "cache-dir [^ ]+" ~/.config/yt-dlp/config | head -1); case "$c$y" in */mnt/c/*) exit 1;; esac; echo "$c | $y" | grep -q "mnt/d" && echo CACHES-OFF-C' 2>/dev/null
+  EXPECT: CACHES-OFF-C
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=bf0bc11d94142cc1f26807c3be72fe2451aaecd0296fdfc8a33fe4b120582356; output-bytes=13
+- [x] B67: the machine env rename is live: bash -lic resolves the five scratch vars through the new path, the old path is a one-line shim, and .bashrc sources the new path
+  CHECK: bash -lic 'test -f ~/.config/machine/env.sh && test "$(grep -c . ~/.config/soccer/env.sh)" -eq 1 && grep -q "config/machine/env.sh" ~/.bashrc && [ "$SOCCER_STAGING_ROOT" = "/mnt/d/scratch/soccer-staging" ] && echo ENV-SHIM-OK' 2>/dev/null
+  EXPECT: ENV-SHIM-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=29a13918b1d57083acedcb291a49cfdb28c7c61d2e91071f546b8fab9b2e8f57; output-bytes=12
+- [x] B68: the stale auto-memory files are gone: tactical-dominant-balance.md deleted and stop-adding-start-replacing.md carries no tactical_render/step4 reference
+  CHECK: m=/home/muads/.claude/projects/-home-muads-yt-digest-soccer-channel/memory && test ! -f "$m/tactical-dominant-balance.md" && ! grep -qE "tactical_render|step4" "$m/stop-adding-start-replacing.md" && echo MEMORY-CLEAN
+  EXPECT: MEMORY-CLEAN
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=1b950285411cb4e78de19aadc8aa162e4aea1c26df2f061056836f8d1e8b16bc; output-bytes=13

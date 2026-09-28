@@ -86,11 +86,12 @@ $ ffprobe -v error -show_entries format=duration,size -of csv=p=0 \
 
 ## Tool census (enforced by tools/census.py, gate B20)
 
-$ ls -p tools/ | grep -v / | wc -l  →  50  (USAGE.md exempt)
+$ ls -p tools/ | grep -v / | wc -l  →  57  (USAGE.md exempt)
 
-37 .py + 2 .js + 7 .sh + board_page.html + watchlist.yaml +
-sofascore_team_ids.json = 49 rows: 30 WIRED + 19 HAND-RUN (census.py
-2026-09-28, brief 11 job 8: CENSUS OK files=49 wired=30 handrun=19).
+40 .py + 2 .js + 7 .sh + board_page.html + watchlist.yaml +
+sofascore_team_ids.json = 56 rows: 35 WIRED + 21 HAND-RUN (census.py
+2026-09-28, brief 13: CENSUS OK files=56 wired=35 handrun=21; brief 13 added
+brief13_check.py WIRED, brief13_overlays.py WIRED, brief13_frames.py HAND-RUN).
 TOOLS.md is now command-enforced: a file
 without a row, a row without a file, or wrong class totals fails gate B20.
 
@@ -213,3 +214,42 @@ without a row, a row without a file, or wrong class totals fails gate B20.
   Chromium answers: sofascore_client falls back per round to
   tools/sofascore_chrome_fetch.js. modal volume put remote paths are
   RELATIVE to the volume root ("/vol/..." creates an unmounted vol/ tree).
+
+## Board sizing + freeze-frame overlays (brief 13, 2026-09-28)
+
+- Boards fill the frame now (the brief-12 coordinator score was 5/10 for
+  look): card 1760 px wide = 91.7% of 1920 (floor 88%), pitch fills the card
+  (34 px margins), and the element minima are AUDITED PER KEYFRAME at
+  1080p: disc r>=42 (84 px disc), number chip r>=26, name label 36 px —
+  the 480p readability floor (1080p/480p = 2.25). Chip-vs-label and
+  label-vs-disc overlaps are audited too (a chip on a label hides text).
+- Half-pitch framing: spec field "frame" full|left-half|right-half|auto
+  (default auto) — auto counts only ACTIVE players (jersey-targeted by any
+  step) plus schematic ball paths; a board that reveals 6 of 11 players
+  frames the half they occupy. The runners board now frames the right half.
+- Freeze-frame overlays on footage (benchmark-A signature, decision 2): new
+  kind "footage_overlay" in the SAME renderer. base {clip, freeze_at} +
+  image-space steps (pixel coords on the 1920x1080 frozen frame):
+  ground_ellipse / chip / link / unit / arrow. Clip play-in, freeze, overlay
+  animate-in, hold, fade-out, resume — state still a pure function of
+  (spec, T): pod-side ffmpeg pre-extracts the play frames, the page draws
+  them (no <video>, no wall clock). pod_build.py renderfootage drives it.
+- Identity evidence rule (brief 13 job 3): a chip that names a player must
+  carry source "lineup:<jersey>" and that jersey must be in a facts XI
+  (either team — footage frames are mixed; a jersey can exist in BOTH XIs,
+  14 = Adeyemi AND Gueye, matched by name too). No evidence, no name:
+  editorial chip or unlabeled marker. Lived examples in the proof: the
+  number 19 wall shirt (a substitute) and the stranded keeper carry no name.
+- Marking (job 4): frames extracted ON THE POD, stamped with ids before
+  viewing (vision batch rule), foot points read off 100px/50px grids,
+  reports/brief13/marks.json holds marks + evidence + plans; the specs are
+  EMITTED from marks (brief13_overlays.py), never hand-typed.
+- Drift control (job 6): the rendered ellipse positions are compared
+  against the marked foot points; a doctored spec with one ellipse shifted
+  150 px FAILS (brief13_check.py drift, gate B65).
+- Proof: 3 re-sized boards + 4 overlay clips (all 10.5 s, 1080p H.264),
+  audits clean inside every render; visual_check.md PASS; 7 MP4s + manifests
+  archived to B2 under soccer-channel/2026-09-28/; render times + ~$0.09
+  brief-13 pod cost (billing report, minus brief-12's known $0.0182).
+- Gates B62-B68 written BEFORE implementation (unlazy); reverify ALL MET
+  55/55 after the last code commit (reports/brief13/reverify.txt).

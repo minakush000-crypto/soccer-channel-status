@@ -1,0 +1,527 @@
+{
+ "marked_at": "2026-09-28T08:12:17Z",
+ "marker": "glm-5.3-flash:cloud (Claude Code session, brief 13 job 4)",
+ "method": "frames extracted on the pod (brief13_frames.py, stamped ids), viewed at full res with 100px grid + 2x zoom crops (50px grid); foot points read off the grid; identity evidence = shirt number/name visible on THAT frame, matched against the raw XI caches",
+ "moments": [
+  {
+   "id": "sev_overload",
+   "match_slug": "2026-09-19_sevilla-fc-barcelona",
+   "clip": "brief13/sevilla_barca_laliga.mp4",
+   "freeze_at": 92.0,
+   "frame_id": "sev_0092p0s",
+   "side": "away",
+   "story": "Raphinha's 52' build-up: two Barcelona shirts converge on the single Sevilla presser at the edge of the box (a 2v1), while the far white defender is detached. Editorial labels only: no shirt number is readable on any of the four players at this zoom, so the evidence rule forbids names.",
+   "event_anchor": "goal 52' Raphinha (facts events; clock 51:31 on the scoreboard bug)",
+   "marks": {
+    "carrier": {
+     "x": 1266,
+     "y": 524,
+     "who": "Barcelona carrier, ball at his feet, number not visible"
+    },
+    "runner": {
+     "x": 1333,
+     "y": 541,
+     "who": "Barcelona runner arriving from the right, number not visible"
+    },
+    "presser": {
+     "x": 1217,
+     "y": 518,
+     "who": "Sevilla presser closing on the carrier, number not visible"
+    },
+    "far_def": {
+     "x": 1697,
+     "y": 527,
+     "who": "Sevilla far defender, detached from the trio, number not visible"
+    }
+   },
+   "plan": [
+    {
+     "t_start": 2.2,
+     "duration": 0.5,
+     "action": "ground_ellipse",
+     "mark": "carrier",
+     "params": {
+      "color": "#f2c744",
+      "source": "marked:sev_0092p0s/carrier"
+     }
+    },
+    {
+     "t_start": 2.35,
+     "duration": 0.5,
+     "action": "ground_ellipse",
+     "mark": "runner",
+     "params": {
+      "color": "#f2c744",
+      "source": "marked:sev_0092p0s/runner"
+     }
+    },
+    {
+     "t_start": 2.5,
+     "duration": 0.5,
+     "action": "ground_ellipse",
+     "mark": "presser",
+     "params": {
+      "color": "#e63946",
+      "source": "marked:sev_0092p0s/presser"
+     }
+    },
+    {
+     "t_start": 3.0,
+     "duration": 0.5,
+     "action": "link",
+     "from": "carrier",
+     "to": "runner",
+     "params": {
+      "color": "#f2c744",
+      "source": "marked:sev_0092p0s/carrier+runner"
+     }
+    },
+    {
+     "t_start": 3.4,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "2v1",
+      "x": 1300,
+      "y": 435,
+      "point_to": [
+       1272,
+       528
+      ],
+      "source": "editorial"
+     }
+    },
+    {
+     "t_start": 3.8,
+     "duration": 0.5,
+     "action": "arrow",
+     "from": "carrier",
+     "to_abs": [
+      980,
+      560
+     ],
+     "params": {
+      "color": "#f2c744",
+      "source": "schematic (open lane into the box, illustrative)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "sev_block",
+   "match_slug": "2026-09-19_sevilla-fc-barcelona",
+   "clip": "brief13/sevilla_barca_laliga.mp4",
+   "freeze_at": 127.0,
+   "frame_id": "sev_0127p0s",
+   "side": "home",
+   "story": "A Barcelona cutback pinballs through the six-yard box; Sevilla's retreating block (24 Y. Fofana, 5 A. Castrin, 12 A. Sangante) converges but the ball sits loose, and the keeper is stranded at the near post. Numbers AND names are visible on the white shirts, so identity chips are allowed.",
+   "event_anchor": "open play at 63:32 (1-2), between Raphinha's 52' and 69' goals",
+   "marks": {
+    "fofana24": {
+     "x": 520,
+     "y": 774,
+     "who": "Sevilla 24, name+number visible on shirt"
+    },
+    "ure9": {
+     "x": 341,
+     "y": 870,
+     "who": "Sevilla 9, number visible"
+    },
+    "castrin5": {
+     "x": 710,
+     "y": 686,
+     "who": "Sevilla 5, number visible (in the tangle)"
+    },
+    "sangante12": {
+     "x": 955,
+     "y": 776,
+     "who": "Sevilla 12, name+number visible"
+    },
+    "grounded": {
+     "x": 666,
+     "y": 545,
+     "who": "Sevilla player on the ground (number not readable)"
+    },
+    "keeper": {
+     "x": 454,
+     "y": 650,
+     "who": "Sevilla GK (yellow kit), number NOT visible -> editorial chip only"
+    },
+    "attacker": {
+     "x": 680,
+     "y": 620,
+     "who": "Barcelona attacker mid-air (bicycle attempt), number not visible"
+    },
+    "ball": {
+     "x": 569,
+     "y": 510,
+     "who": "the airborne cutback"
+    }
+   },
+   "plan": [
+    {
+     "t_start": 2.2,
+     "duration": 0.6,
+     "action": "unit",
+     "points": [
+      "fofana24",
+      "castrin5",
+      "grounded",
+      "sangante12"
+     ],
+     "params": {
+      "source": "marked:sev_0127p0s/block (retreating Sevilla block)"
+     }
+    },
+    {
+     "t_start": 2.3,
+     "duration": 0.5,
+     "action": "ground_ellipse",
+     "mark": "attacker",
+     "params": {
+      "color": "#f2c744",
+      "source": "marked:sev_0127p0s/attacker"
+     }
+    },
+    {
+     "t_start": 2.9,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "Y. FOFANA",
+      "jersey": 24,
+      "source": "lineup:24",
+      "x": 585,
+      "y": 695,
+      "point_to": [
+       520,
+       774
+      ]
+     }
+    },
+    {
+     "t_start": 3.05,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "A. SANGANTE",
+      "jersey": 12,
+      "source": "lineup:12",
+      "x": 1090,
+      "y": 690,
+      "point_to": [
+       955,
+       776
+      ]
+     }
+    },
+    {
+     "t_start": 3.2,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "R. URE",
+      "jersey": 9,
+      "source": "lineup:9",
+      "x": 360,
+      "y": 785,
+      "point_to": [
+       341,
+       870
+      ]
+     }
+    },
+    {
+     "t_start": 3.5,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "GK STRANDED",
+      "x": 640,
+      "y": 555,
+      "point_to": [
+       454,
+       650
+      ],
+      "source": "editorial (keeper number not visible)"
+     }
+    },
+    {
+     "t_start": 3.9,
+     "duration": 0.5,
+     "action": "arrow",
+     "from": "ball",
+     "to_abs": [
+      680,
+      620
+     ],
+     "params": {
+      "color": "#f2c744",
+      "source": "marked:sev_0127p0s/ball -> attacker"
+     }
+    }
+   ]
+  },
+  {
+   "id": "rac_farpost",
+   "match_slug": "2026-09-16_fc-barcelona-real-racing-club",
+   "clip": "brief13/barca_racing_laliga.mp4",
+   "freeze_at": 87.0,
+   "frame_id": "rac_0087p0s",
+   "side": "home",
+   "story": "Raphinha's 42' goal: the cutback flies across the box and RAPHINHA (11, number visible) is unmarked in the near-post channel while the covering white defender ball-watches. YAMAL (10, number+name visible) waits at the bottom of the frame.",
+   "event_anchor": "goal 42' Raphinha (facts events; clock 44:03, lower third RAPHINHA 11 MIN 42')",
+   "marks": {
+    "raphinha": {
+     "x": 1206,
+     "y": 479,
+     "who": "Barcelona 11 RAPHINHA, number visible on shirt"
+    },
+    "watcher": {
+     "x": 1146,
+     "y": 543,
+     "who": "Racing defender watching the ball, number not visible"
+    },
+    "yamal": {
+     "x": 1104,
+     "y": 968,
+     "who": "Barcelona 10 YAMAL, number+name visible"
+    },
+    "ball": {
+     "x": 1120,
+     "y": 296,
+     "who": "the cutback in flight"
+    }
+   },
+   "plan": [
+    {
+     "t_start": 2.2,
+     "duration": 0.5,
+     "action": "ground_ellipse",
+     "mark": "raphinha",
+     "params": {
+      "color": "#f2c744",
+      "source": "marked:rac_0087p0s/raphinha"
+     }
+    },
+    {
+     "t_start": 2.35,
+     "duration": 0.5,
+     "action": "ground_ellipse",
+     "mark": "watcher",
+     "params": {
+      "color": "#e63946",
+      "source": "marked:rac_0087p0s/watcher"
+     }
+    },
+    {
+     "t_start": 2.8,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "RAPHINHA",
+      "jersey": 11,
+      "source": "lineup:11",
+      "x": 1330,
+      "y": 390,
+      "point_to": [
+       1206,
+       479
+      ]
+     }
+    },
+    {
+     "t_start": 3.2,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "BALL-WATCHING",
+      "x": 990,
+      "y": 610,
+      "point_to": [
+       1146,
+       543
+      ],
+      "source": "editorial"
+     }
+    },
+    {
+     "t_start": 3.5,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "YAMAL",
+      "jersey": 10,
+      "source": "lineup:10",
+      "x": 1230,
+      "y": 1000,
+      "point_to": [
+       1104,
+       968
+      ]
+     }
+    },
+    {
+     "t_start": 3.9,
+     "duration": 0.5,
+     "action": "arrow",
+     "from": "ball",
+     "to_abs": [
+      1180,
+      430
+     ],
+     "params": {
+      "color": "#f2c744",
+      "source": "marked:rac_0087p0s/ball -> run line (schematic path)"
+     }
+    }
+   ]
+  },
+  {
+   "id": "rac_freekick",
+   "match_slug": "2026-09-16_fc-barcelona-real-racing-club",
+   "clip": "brief13/barca_racing_laliga.mp4",
+   "freeze_at": 152.0,
+   "frame_id": "rac_0152p0s",
+   "side": "away",
+   "story": "The free kick that becomes Raphinha's 67' goal: Racing set a wall of 20 S. Canales, 6 I. Sainz-Maza, 14 M. Gueye and the number 19 (a substitute, NOT in the XI, so no name), and Cancelo (2) fronts the wall as the second blocker. The shot path bends over the wall.",
+   "event_anchor": "goal 67' Raphinha (facts events; clock 66:38, lower third RAPHINHA 11 MIN 67')",
+   "marks": {
+    "canales20": {
+     "x": 1216,
+     "y": 748,
+     "who": "Racing 20, name+number visible"
+    },
+    "sainz6": {
+     "x": 1326,
+     "y": 756,
+     "who": "Racing 6, number visible"
+    },
+    "sub19": {
+     "x": 1376,
+     "y": 745,
+     "who": "Racing 19, number visible but NOT in the XI (substitute) -> no name"
+    },
+    "gueye14": {
+     "x": 1396,
+     "y": 728,
+     "who": "Racing 14, number visible"
+    },
+    "cancelo2": {
+     "x": 1290,
+     "y": 767,
+     "who": "Barcelona 2 (J. Cancelo), number visible, fronts the wall"
+    },
+    "ball": {
+     "x": 1093,
+     "y": 592,
+     "who": "the free kick, parked"
+    }
+   },
+   "plan": [
+    {
+     "t_start": 2.2,
+     "duration": 0.6,
+     "action": "unit",
+     "points": [
+      "canales20",
+      "sainz6",
+      "sub19",
+      "gueye14"
+     ],
+     "params": {
+      "source": "marked:rac_0152p0s/wall (Racing wall)"
+     }
+    },
+    {
+     "t_start": 2.3,
+     "duration": 0.5,
+     "action": "ground_ellipse",
+     "mark": "ball",
+     "params": {
+      "color": "#f2c744",
+      "source": "marked:rac_0152p0s/ball"
+     }
+    },
+    {
+     "t_start": 2.9,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "S. CANALES",
+      "jersey": 20,
+      "source": "lineup:20",
+      "x": 1040,
+      "y": 660,
+      "point_to": [
+       1216,
+       748
+      ]
+     }
+    },
+    {
+     "t_start": 3.05,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "I. SAINZ-MAZA",
+      "jersey": 6,
+      "source": "lineup:6",
+      "x": 1370,
+      "y": 650,
+      "point_to": [
+       1326,
+       756
+      ]
+     }
+    },
+    {
+     "t_start": 3.2,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "M. GUEYE",
+      "jersey": 14,
+      "source": "lineup:14",
+      "x": 1640,
+      "y": 640,
+      "point_to": [
+       1396,
+       728
+      ]
+     }
+    },
+    {
+     "t_start": 3.4,
+     "duration": 0.5,
+     "action": "chip",
+     "params": {
+      "text": "J. CANCELO",
+      "jersey": 2,
+      "source": "lineup:2",
+      "x": 1140,
+      "y": 880,
+      "point_to": [
+       1290,
+       767
+      ]
+     }
+    },
+    {
+     "t_start": 3.8,
+     "duration": 0.5,
+     "action": "arrow",
+     "from": "ball",
+     "to_abs": [
+      760,
+      540
+     ],
+     "params": {
+      "color": "#f2c744",
+      "source": "schematic (shot path over the wall, illustrative)"
+     }
+    }
+   ]
+  }
+ ]
+}

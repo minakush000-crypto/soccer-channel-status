@@ -2,8 +2,8 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-09-28 (brief 12: census.py at
-> 53 files / 33 WIRED / 20 HAND-RUN; four new rows added this brief).
+> **Last verified against code:** 2026-09-28 (brief 13: census.py at
+> 56 files / 35 WIRED / 21 HAND-RUN; three new rows added brief 13).
 
 Rebuilt 2026-09-23 (brief 05 job 12) by command; **now enforced by command**
 (brief 06 job 5): tools/census.py compares this table against `ls tools/`
@@ -21,7 +21,7 @@ $ ls -p tools/ | grep -v / | wc -l  →  53  (USAGE.md exempt from rows)
 
 40 .py + 3 .js + 7 .sh + board_page.html + watchlist.yaml +
 sofascore_team_ids.json.
-33 WIRED, 20 HAND-RUN (deliberately kept operating tools/data). No DEAD class
+35 WIRED, 21 HAND-RUN (deliberately kept operating tools/data). No DEAD class
 exists — anything dead is deleted or in retired/.
 
 ## The 53 rows
@@ -43,6 +43,9 @@ exists — anything dead is deleted or in retired/.
 | `three_scene_v2.js` | WIRED | pod_build.py render_3d (Modal) | spec-driven 3D board renderer — the ONE 3D engine (v1 retired brief 05 job 7) |
 | `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16/B18 | every spec number must match the RAW Sofascore responses by team NAME (extended brief 06 job 3); brief 12: kind timeline (name+jersey pairs vs raw XI, x/y vs raw average positions, step targets, schematic path bounds) |
 | `brief12_check.py` | WIRED | GATES B56-B61 | brief-12 gate oracle: specs/durations/keyframes/swap/sheets/numbers over reports/brief12/render_manifest.json (writes only under /tmp) |
+| `brief13_check.py` | WIRED | GATES B62-B65 | brief-13 gate oracle: sizing/overlap/identity/drift with positive controls (writes only under /tmp) |
+| `brief13_overlays.py` | WIRED | pod_build.py render_footage; brief 13 jobs 3-5 | freeze-frame overlay spec emitter from reports/brief13/marks.json (image-space steps, identity sources) |
+| `brief13_frames.py` | HAND-RUN | hand-invoked (brief 13 jobs 4-6) | pod-side stamped/clean/full-res frame extraction for marking + visual check (frames live on the volume) |
 | `brief12_timeline.py` | WIRED | brief 12 job 5 (proof boards); brief 16 assembly | timeline spec emitter (formation / runners / move) from match_data + raw cache, per docs/board_timeline.md |
 | `brief12_data.py` | HAND-RUN | hand-invoked (brief 12 job 1) | Barcelona team-id + 4 most recent completed matches driver; every fetch through sofascore_client.py; id verified against the payload events |
 | `census.py` | WIRED | GATES B20 | script-driven census: TOOLS.md must match tools/ exactly (brief 06 job 5) |

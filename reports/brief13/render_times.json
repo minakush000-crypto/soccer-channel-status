@@ -1,0 +1,7 @@
+{
+ "generated_at": "2026-09-28T08:47:00Z",
+ "boards_resized": {"formation": 70.0, "runners": 70.6, "move": 58.7},
+ "footage_overlays": {"sev_overload": 438.9, "sev_block": 361.9,
+                      "rac_farpost": 430.8, "rac_freekick": 475.6},
+ "note": "wall times measured by `time` around pod_build.py calls; boards include volume put/get; footage renders include 121 ffmpeg frame extracts each"
+}

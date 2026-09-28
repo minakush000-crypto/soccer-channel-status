@@ -117,6 +117,23 @@ disallowed goal at reel t=90, migration phases 5-8 unfinished.
 - modal volume put remote paths are RELATIVE to the volume root: an
   absolute "/vol/tools/x" lands in a nested vol/ tree the functions never
   mount (cost brief 12 two failed smoke renders).
+- Board sizing (brief 13, 2026-09-28): card 1760px = 91.7% of 1920 (floor
+  88%), pitch fills the card; per-keyframe AUDITED minima at 1080p: disc
+  r>=42, chip r>=26, label 36px (the 480p floor at 2.25x downscale); the
+  audit also enforces chip-vs-label and label-vs-disc non-overlap. Spec
+  field "frame" auto-frames the half the ACTIVE players occupy (jersey-
+  targeted by any step; runners board -> right-half).
+- Freeze-frame overlays (brief 13, 2026-09-28): kind "footage_overlay" —
+  base {clip, freeze_at} + image-space steps (ground_ellipse / chip / link /
+  unit / arrow at 1920x1080 pixel coords); play-in, freeze, animate, hold,
+  fade, resume as a pure function of (spec, T) with pod-side ffmpeg
+  pre-extracted frames (no <video>). Identity gate: a chip naming a player
+  needs source "lineup:<jersey>" and that jersey in a facts XI (either
+  team; a jersey can exist in BOTH XIs, 14 = Adeyemi AND Gueye). Marked
+  points + plans live in reports/brief13/marks.json; the specs are emitted
+  (brief13_overlays.py), never hand-typed. Drift control: drawn ellipses
+  are compared to the marks; a 150px shift FAILS (gate B65). Overlay render
+  on Modal: ~6-8 min wall each (121 ffmpeg extracts + 315 page frames).
 
 ## CONTENT RESEARCH (hand-run, kept in brief 03)
 - tools/viral_angle.py — trending topics with viral potential (YouTube API).
