@@ -1097,3 +1097,26 @@ TOOLS.md staging.py row; DECISIONS/PROGRESS history left as written.
 brief11 added to the mirror allowlist (push_status.sh); reverify proof
 ending ALL MET published to reports/brief11/ and the mirror. Residual
 risk unchanged: SD-card write endurance under daily cache churn.
+
+Brief 12 (animated boards) decisions — 2026-09-28
+- Frame capture: stepped-per-frame JS animation (window.render(t) per frame,
+  state = pure function of spec and time), NOT screencast. Evidence: ffprobe
+  duration equals spec duration exactly at 30 fps. The renderer contract was
+  already deterministic; the timeline kind reuses it.
+- A traveling ball is SCHEMATIC: Sofascore exposes no pass/possession
+  sequences (7 candidate endpoints probed 2026-09-28, all empty,
+  reports/brief12/probes.txt). The board says "SCHEMATIC MOVE (NOT EVENT
+  DATA)" on screen; the spec carries source "schematic".
+- Label placement is solved by the EMITTER (global box knowledge), not by a
+  page-side greedy fallback: the fallback exhausted its candidates and
+  shipped a BELLINGHAM/MBAPPE collision in the first smoke render. The audit
+  now FAILS on any overlapping name labels, so a bad solve cannot ship.
+- Fetch transport: when Akamai challenges every curl_cffi impersonation
+  (40+ min measured, residential + Modal egress), fetch_sofascore falls back
+  per round to the real cached Chromium (tools/sofascore_chrome_fetch.js) —
+  same endpoints, same raw cache, a transport not a second source.
+- Proof-board match choices: formation from Sevilla 1-3 (most recent,
+  all endpoints); runners + move from Racing Club 7-2 (attacking showcase).
+  Levante and Feyenoord fetched but carry no lineups/avgpos (retired).
+- modal volume put remote paths are RELATIVE to the volume root; absolute
+  /vol/... paths create a nested vol/ tree functions never see.

@@ -3855,3 +3855,36 @@ scripts/ecc.js repair restored it (doctor ok=1 errors=0; unlazy
 stop-hook.mjs survived); B41's grep updated to the job-4 hook rename.
 Final proof: reports/brief11/reverify.txt ends ALL MET (42 met, reran:
 42) at H=5d2fbd0aee9502470153ecfcdc5b2783d6756d99, generated in /tmp first per Mayo, published to the mirror.
+
+## Brief 12 — animated boards (capability 1 of 4) — 2026-09-28
+
+Job 1 (DATA): Barcelona id 2817 verified against the payload events; 4 most
+recent completed matches fetched through sofascore_client.py with raw caches
+(Sevilla 1-3, Racing Club 7-2 with all five endpoints; Levante 2-4, Feyenoord
+5-1 with lineups+avgpos retired by Sofascore). 2/4 have lineups+avgpos —
+above the stop rule. Akamai challenged every curl_cffi impersonation for
+40+ min (Modal egress too); fetch_sofascore gained a per-round Chromium
+fallback (tools/sofascore_chrome_fetch.js). Table: reports/brief12/match_table.md.
+Job 2 (TIMELINE FORMAT): spec = base board + steps (reveal/highlight/number/
+line/zone/ball_path/caption/hide), each asserting step carrying source
+"sofascore:<endpoint>" or "schematic"; docs/board_timeline.md + TOOLS.md row.
+Job 3 (RENDERER): kind "timeline" added to the ONE renderer (benchmark-B
+look); state = f(spec, T), 30 fps per-frame capture, ffmpeg H.264 1920x1080
+on Modal. Uncertainty resolved: stepped-per-frame JS animation, not screencast
+(mp4 duration == spec duration, ffprobe 8.500000 s).
+Job 4 (AUDIT PER KEYFRAME): step-end audits (names+jerseys paired vs facts XI
+by side, chips contiguous 1..N on visible players, line/zone endpoints
+visible, no label overlaps, VS caption vs facts opponent); swapped-name
+control FAILS (B59).
+Job 5 (PROOF BOARDS): formation (Sevilla match), runners + move (Racing Club
+match); all three rendered on Modal, MP4s within 1 frame of spec duration.
+Job 6 (VISUAL CHECK): every 1fps frame viewed; clean on the first pass —
+reports/brief12/visual_check.md. Fix made during the build: label placement
+solved in the emitter after the page-side greedy fallback shipped a
+BELLINGHAM/MBAPPE collision in the smoke render.
+Job 7 (PUBLISH): 4x4 640px-tile contact sheets + 640px GIFs in
+reports/brief12/; three full-res MP4s archived to B2 with manifests; render
+times 108/54/88 s; brief-12 Modal window cost $0.0182 (billing report).
+Job 8 (PROOF): gates B56-B61 written before implementation and all passing;
+reverify proof after the last code commit published to reports/brief12/ and
+the mirror.

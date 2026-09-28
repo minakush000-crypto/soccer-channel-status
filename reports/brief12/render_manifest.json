@@ -1,0 +1,35 @@
+{
+ "generated_at": "2026-09-28T05:26:50Z",
+ "boards": [
+  {
+   "slug": "2026-09-19_sevilla-fc-barcelona",
+   "board": "formation",
+   "spec": "renders/2026-09-19_sevilla-fc-barcelona/board_specs/timeline_formation.json",
+   "mp4": "renders/2026-09-19_sevilla-fc-barcelona/timeline_formation.mp4",
+   "duration_s": 8.5,
+   "fps": 30,
+   "mp4_duration_s": 8.5,
+   "render_seconds": 108.0
+  },
+  {
+   "slug": "2026-09-16_fc-barcelona-real-racing-club",
+   "board": "runners",
+   "spec": "renders/2026-09-16_fc-barcelona-real-racing-club/board_specs/timeline_runners.json",
+   "mp4": "renders/2026-09-16_fc-barcelona-real-racing-club/timeline_runners.mp4",
+   "duration_s": 9.0,
+   "fps": 30,
+   "mp4_duration_s": 9.0,
+   "render_seconds": 54.2
+  },
+  {
+   "slug": "2026-09-16_fc-barcelona-real-racing-club",
+   "board": "move",
+   "spec": "renders/2026-09-16_fc-barcelona-real-racing-club/board_specs/timeline_move.json",
+   "mp4": "renders/2026-09-16_fc-barcelona-real-racing-club/timeline_move.mp4",
+   "duration_s": 10.0,
+   "fps": 30,
+   "mp4_duration_s": 10.0,
+   "render_seconds": 87.7
+  }
+ ]
+}

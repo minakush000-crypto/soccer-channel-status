@@ -2,8 +2,8 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-09-27 (brief 10 job 9: census.py at
-> 47 files / 30 WIRED / 17 HAND-RUN; four new rows added this brief).
+> **Last verified against code:** 2026-09-28 (brief 12: census.py at
+> 53 files / 33 WIRED / 20 HAND-RUN; four new rows added this brief).
 
 Rebuilt 2026-09-23 (brief 05 job 12) by command; **now enforced by command**
 (brief 06 job 5): tools/census.py compares this table against `ls tools/`
@@ -17,20 +17,21 @@ DECISIONS.md and retired/RETIREMENT_NOTES.md.
 
 ## Census (computed by tools/census.py, brief 06 job 5)
 
-$ ls -p tools/ | grep -v / | wc -l  →  47  (USAGE.md exempt from rows)
+$ ls -p tools/ | grep -v / | wc -l  →  53  (USAGE.md exempt from rows)
 
-37 .py + 2 .js + 5 .sh + board_page.html + watchlist.yaml +
+40 .py + 3 .js + 7 .sh + board_page.html + watchlist.yaml +
 sofascore_team_ids.json.
-30 WIRED, 17 HAND-RUN (deliberately kept operating tools/data). No DEAD class
+33 WIRED, 20 HAND-RUN (deliberately kept operating tools/data). No DEAD class
 exists — anything dead is deleted or in retired/.
 
-## The 49 rows
+## The 53 rows
 
 | File | Class | Called by (file:line) | Notes |
 |---|---|---|---|
 | `produce_v2.py` | WIRED (entry) | nothing (entry point) | end-to-end pipeline; `--flash` runs the flash lane (facts→boards→Modal assemble) |
 | `pod_build.py` | WIRED (entry) | nothing (entry point) | flash pipeline on Modal: render3d/render2d/assemble/pull; `--slug` is the episode argument |
-| `sofascore_client.py` | WIRED | produce_v2.py step1 | THE fact source, every competition (brief 06 job 1): search resolver + retries, stats mapping, raw cache sofascore_raw.json, fetched_at/source_url stamps |
+| `sofascore_client.py` | WIRED | produce_v2.py step1 | THE fact source, every competition (brief 06 job 1): search resolver + retries, stats mapping, raw cache sofascore_raw.json, fetched_at/source_url stamps; brief 12: per-round Chromium fallback (`sofascore_chrome_fetch.js`) when Akamai challenges every impersonation |
+| `sofascore_chrome_fetch.js` | WIRED | sofascore_client.py `_chrome_fetch` | the SAME endpoints through the real cached Chromium (genuine TLS/JS stack) when curl_cffi impersonations are challenged 40+ min (measured 2026-09-28); a transport, not a second fact source (brief 12) |
 | `sofascore_team_ids.json` | HAND-RUN | consumed by sofascore_client.py | team-id registry the search resolver sweeps (accumulated by every fetch) |
 | `stats_spec.py` | WIRED | produce_v2.py:102 | emits stat_card + possession specs from match_data (replaces tactical_boards, brief 04) |
 | `momentum_board.py` | WIRED | produce_v2.py:102 | emits momentum.json from the RAW Sofascore /graph cache (rewritten brief 06 job 2 — the old spec was hand-typed) |
@@ -40,7 +41,10 @@ exists — anything dead is deleted or in retired/.
 | `board_html.js` | WIRED | pod_build.py render_2d (Modal) | puppeteer-core driver: renders board_page.html frames in headless Chromium + the rendered-page audit vs the facts file (brief 06 job 4) |
 | `board_page.html` | WIRED | board_html.js | the one HTML/CSS/canvas 2D board page (kinds: stats, momentum, outro, xgflow, shotmap, avgpos) + the draw recorder the audit reads |
 | `three_scene_v2.js` | WIRED | pod_build.py render_3d (Modal) | spec-driven 3D board renderer — the ONE 3D engine (v1 retired brief 05 job 7) |
-| `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16/B18 | every spec number must match the RAW Sofascore responses by team NAME (extended brief 06 job 3) |
+| `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16/B18 | every spec number must match the RAW Sofascore responses by team NAME (extended brief 06 job 3); brief 12: kind timeline (name+jersey pairs vs raw XI, x/y vs raw average positions, step targets, schematic path bounds) |
+| `brief12_check.py` | WIRED | GATES B56-B61 | brief-12 gate oracle: specs/durations/keyframes/swap/sheets/numbers over reports/brief12/render_manifest.json (writes only under /tmp) |
+| `brief12_timeline.py` | WIRED | brief 12 job 5 (proof boards); brief 16 assembly | timeline spec emitter (formation / runners / move) from match_data + raw cache, per docs/board_timeline.md |
+| `brief12_data.py` | HAND-RUN | hand-invoked (brief 12 job 1) | Barcelona team-id + 4 most recent completed matches driver; every fetch through sofascore_client.py; id verified against the payload events |
 | `census.py` | WIRED | GATES B20 | script-driven census: TOOLS.md must match tools/ exactly (brief 06 job 5) |
 | `pagecheck_proof.sh` | WIRED | GATES B19 | runs the rendered-page audit on a deliberately mirrored spec (must FAIL) then the real spec (must PASS), locally via the cached Chrome (brief 08 job 3) |
 | `pod_frames.py` | HAND-RUN | brief 09 jobs 1-2 (bench study) | Modal ship/extract/pull for benchmark frames: 2s frames + scene-cut frames (threshold printed) + scdet score sweep; reuses volume soccer-build |

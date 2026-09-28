@@ -65,7 +65,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=285211f19eed8d48bab91c2069ca86cd4fe75cb77fd7445fc954c00c6cf8ec83; output-bytes=1489
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=81c21172757bacecbfb2c86ad221572ac1fe9a19fa59480fd2bb447f60af9752; output-bytes=1616
 - [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
@@ -125,7 +125,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
   CHECK: a=$(df -BG --output=avail /mnt/c | tail -1 | tr -dc '0-9') && [ "$a" -ge 15 ] && echo C-FLOOR-OK avail=${a}G
   EXPECT: C-FLOOR-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=a28857ca979a2086e76fb8571ec55f2be078f0fcf4b886e0d6eba09b458a8f7f; output-bytes=21
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=8699099aa84003c2c68dc5a1411bf34cc5f1553aff61baf61d93db12493e3591; output-bytes=21
 
 - [x] B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
   CHECK: d=$(node ~/ECC/scripts/ecc.js doctor 2>&1) && echo "$d" | grep -q "errors=0" && l=$(node ~/ECC/scripts/ecc.js list-installed 2>&1) && echo "$l" | grep -q "Source version: 2.2.1" && echo ECC-DOCTOR-CLEAN-V221
@@ -191,3 +191,33 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: test -s reports/brief11/reverify.txt && grep -q "ALL MET" reports/brief11/reverify.txt && echo REVERIFY-PUBLISHED
   EXPECT: REVERIFY-PUBLISHED
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=8b4564b0ae760c286f32c8384039bff2a83d419f9ffdfbc945a8dc0c2766b4cf; output-bytes=19
+
+Brief 12 gates (animated boards; added 2026-09-28 before implementation,
+per unlazy). The oracle for B56-B61 is tools/brief12_check.py, which reads
+reports/brief12/render_manifest.json (the board list job 5 produces) and
+touches nothing in the repo (writes only under /tmp).
+
+- [x] B56: every brief-12 timeline spec validates: schema, targets, source stamps, and every player number/name/position traced to the cached raw responses (board_data_check kind timeline)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py specs
+  EXPECT: TIMELINE-SPECS-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=f96a911a48231b70a16714539fb4abf144370f30303ef18a9bf0c9f292237d59; output-bytes=22
+- [x] B57: each proof board MP4 lasts its spec duration within one frame (ffprobe vs duration_s at the spec fps)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py durations
+  EXPECT: DURATIONS-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=119ced4aa21b20eaaf9f3629decd22ee9f683739f8d94c111bfa89bd82999501; output-bytes=32
+- [x] B58: the per-step keyframe audit passes on every proof timeline (rendered-page audit re-run per step end, in audit-only mode)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py keyframes
+  EXPECT: KEYFRAME-AUDIT-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=b5a44e622bc27cc6e8cfd17ff300af979e6bfefa3a6a3ca5af5184fcd32cf15a; output-bytes=22
+- [x] B59: the swapped-name positive control FAILS the timeline audit and the real spec passes (brief 12 job 4)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py swap
+  EXPECT: SWAP-CONTROL-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=93afd519868995258b884d600eddf87979171ea0424782e1c74a12ef0a057e94; output-bytes=81
+- [x] B60: reports/brief12/ holds a 4x4 640px contact sheet per proof board and per board a 640px GIF or 2-3 keyframe PNGs
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py sheets
+  EXPECT: SHEETS-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=3e160115d73d9ecddeacef06825d215c34ae330c77c2f45a8d849dda98fd6bad; output-bytes=28
+- [x] B61: no invented numbers: the numeric-leaf walk accepts the timeline specs (every non-choreography number traced to a cached raw response) and a planted fake position FAILS the check (positive control)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py numbers
+  EXPECT: NUMBERS-TRACED-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=3d52719de57575995baae287c0ee0c1b6ecdeeaaf861acb35af7be211f2228df; output-bytes=474

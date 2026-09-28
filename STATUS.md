@@ -2,9 +2,10 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-28 (brief 11 job 8: census re-run
-> live — CENSUS OK files=49 wired=30 handrun=19; D: restart check, mount
-> write-probe, guard and selftest run live).
+> **Last verified against code:** 2026-09-28 (brief 12: census live —
+> CENSUS OK files=53 wired=33 handrun=20; three timeline proof boards
+> rendered on Modal, audited, archived to B2; gates B56-B61 written and
+> passed).
 
 Rewritten 2026-09-27 (brief 06) against the code on disk. Brief 03-05 history
 lives in DECISIONS.md, PROGRESS.md, and retired/. Every claim below carries
@@ -177,3 +178,38 @@ without a row, a row without a file, or wrong class totals fails gate B20.
   VOLUME: after editing either, `modal volume put` both to /tools/ or the
   pod silently runs the stale renderer (the first page-audit mirror test
   "passed" because of exactly this, 2026-09-26).
+## Animated boards (brief 12, 2026-09-28)
+
+- The ONE 2D renderer (board_page.html + board_html.js) gained kind
+  "timeline": a base board (white rounded card, thin dark pitch, player
+  discs with name labels, dark blue grid surround — benchmark-B look per
+  decision 1) plus an ordered step list (reveal / highlight / number / line
+  / zone / ball_path / caption / hide). The page state at time T is a pure
+  function of (spec, T): frame-accurate per-frame capture, 30 fps, H.264
+  1920x1080 on Modal. Format: docs/board_timeline.md; emitter:
+  tools/brief12_timeline.py; gate oracle: tools/brief12_check.py (GATES
+  B56-B61, all passing).
+- The rendered-page audit now runs at EVERY STEP END (not just the final
+  frame): drawn names must match the facts XI by jersey+name pair, number
+  chips must be a contiguous 1..N on visible players, line/zone endpoints
+  visible, name labels must not overlap, the "VS <opponent>" caption must
+  name the facts opponent. Positive control: a swapped name FAILS the audit
+  (B59). A planted fake position FAILS the data check (B61).
+- Label placement is solved in the emitter (global knowledge of all boxes,
+  label_dir per player); the page only draws what the spec says. A page-side
+  greedy fallback exhausted its candidates and shipped a BELLINGHAM/MBAPPE
+  label collision in the first smoke render — the solve lives with the
+  emitter and the audit enforces the result.
+- Sofascore exposes NO pass/possession sequences (7 candidate endpoints
+  probed, all empty — reports/brief12/probes.txt): a traveling ball is
+  SCHEMATIC, labeled on the board itself and in the spec.
+- Proof boards (full-res MP4s archived to B2, contact sheets + 640px GIFs +
+  visual_check.md in reports/brief12/): timeline_formation (Sevilla 1-3
+  Barcelona, 8.5 s), timeline_runners + timeline_move (Barcelona 7-2 Real
+  Racing Club, 9 s / 10 s). Render wall times 108/54/88 s; brief-12 Modal
+  window cost $0.0182 (billing report).
+- Fetch reliability: Akamai held a 403 challenge against every curl_cffi
+  impersonation for 40+ min (residential AND Modal egress). The real cached
+  Chromium answers: sofascore_client falls back per round to
+  tools/sofascore_chrome_fetch.js. modal volume put remote paths are
+  RELATIVE to the volume root ("/vol/..." creates an unmounted vol/ tree).

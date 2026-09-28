@@ -1,0 +1,10 @@
+Sofascore pass/possession-sequence endpoint probe, 2026-09-28
+(event 16938768, fetched via the cached Chromium; brief 12 uncertainty set)
+
+FAIL /event/16938768/passes: CHROME-FETCH-NOT-JSON head=
+FAIL /event/16938768/passmap: CHROME-FETCH-NOT-JSON head=
+FAIL /event/16938768/possession-chains: CHROME-FETCH-NOT-JSON head=
+FAIL /event/16938768/sequences: CHROME-FETCH-NOT-JSON head=
+FAIL /event/16938768/possession_sequences: CHROME-FETCH-NOT-JSON head=
+FAIL /event/16938768/pass-network: CHROME-FETCH-NOT-JSON head=
+FAIL /event/16938768/possession: CHROME-FETCH-NOT-JSON head=

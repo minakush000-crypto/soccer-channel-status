@@ -101,6 +101,22 @@ disallowed goal at reel t=90, migration phases 5-8 unfinished.
   ball). Anchor to players only.
 - Local speed: no GPU work on the N150. All heavy compute on Modal
   (assemble wall ~5-7 min; board renders ~2-12 min each).
+- Animated boards (brief 12, 2026-09-28): kind "timeline" in the ONE 2D
+  renderer — a spec of steps (reveal/highlight/number/line/zone/ball_path/
+  caption/hide) played deterministically (state = f(spec, T)), audited at
+  every step end vs the facts. Format doc: docs/board_timeline.md. Sofascore
+  has NO pass/possession sequences (7 candidate endpoints probed, all empty —
+  reports/brief12/probes.txt), so a traveling ball is SCHEMATIC and labeled
+  on the board. Timeline renders measured: 8.5s board = 108s Modal wall,
+  9s = 54s, 10s = 88s; brief-12 Modal window cost $0.0182 (billing report).
+- Akamai can 403-challenge every curl_cffi impersonation for 40+ min
+  (residential AND Modal egress, measured 2026-09-28). The real cached
+  Chromium passes: fetch_sofascore falls back per round to
+  tools/sofascore_chrome_fetch.js. /team/{id}/events/last/0 carries no
+  "team" key — verify a team id by the event payloads.
+- modal volume put remote paths are RELATIVE to the volume root: an
+  absolute "/vol/tools/x" lands in a nested vol/ tree the functions never
+  mount (cost brief 12 two failed smoke renders).
 
 ## CONTENT RESEARCH (hand-run, kept in brief 03)
 - tools/viral_angle.py — trending topics with viral potential (YouTube API).
