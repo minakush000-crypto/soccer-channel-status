@@ -3,7 +3,7 @@
  "project": "soccer-channel",
  "task": "brief 07 jobs 1-4 (ECC install analysis, HARD STOP)",
  "produced_by": "Flash (glm-5.3-flash:cloud) via Claude Code",
- "produced_at": "2026-09-28T02:44:09Z",
+ "produced_at": "2026-09-28T03:13:00Z",
  "inputs": [
   "briefs/brief07.md (2026-09-27, from /mnt/c/Users/muads/Downloads/brief07.md)",
   "~/ECC @ v2.2.1 (commit 5064474d)",
@@ -19,11 +19,19 @@
   "claude -p (headless context measure)"
  ],
  "cost": "~70 min wall clock, one paid headless session (~40k input + 162 output tokens), F: backup NOT done (drive flaps)",
- "note": "job 1 backup BLOCKED: Memorex F: stick disconnects under sustained write; B32/B33 abandoned; no install performed | continuation added: d_drive_speed.md (2026-09-27); keys+backup archived to B2 under keys/ and backups/ prefixes with their own manifests",
+ "note": "final: jobs 1-8 complete + continuation; ECC installed v2.2.1 (APPROVED ECC); reverify ALL MET 34/34 at H=b43434a in reverify.txt",
  "files": {
+  "GATES_frozen.md": {
+   "bytes": 1125,
+   "sha256": "2791629740e4bbd335cb8f1bb97e38a7e89081240e269d3c5ce07c04140ebdfd"
+  },
   "clashes.txt": {
    "bytes": 748,
    "sha256": "d3a814ad1c33cc4a1f75a77789e0997342ad815c706b23154f11ab4773738358"
+  },
+  "context_after.txt": {
+   "bytes": 1186,
+   "sha256": "c4ff3e5d9f0ea60b0473b32ac2ff3321592229edb1ba303cc4799d1847edeb39"
   },
   "context_before.txt": {
    "bytes": 1567,
@@ -36,6 +44,10 @@
   "d_drive_speed.md": {
    "bytes": 2437,
    "sha256": "dbe680a352c35d4e5b58b1f7724def0214bc0f840aa5cf7739c94f447ce743e2"
+  },
+  "doctor.txt": {
+   "bytes": 166,
+   "sha256": "f16143669d2ea7136f70e0f40a79d5f3e451f9ef1a76ccdafd0bd254c21c8d61"
   },
   "ecc_plan.json": {
    "bytes": 1180951,
@@ -52,6 +64,22 @@
   "hooks.txt": {
    "bytes": 12876,
    "sha256": "fb2d259b6c33701f54b7ffc29b2c8dadca531a7ef30e82eb319b2a2eb166f445"
+  },
+  "install_output.txt": {
+   "bytes": 78426,
+   "sha256": "ba81731585800f45174c74b96d2a5b21dc1367b30c6aaff69712e8c5a79f84c2"
+  },
+  "list_installed.txt": {
+   "bytes": 344,
+   "sha256": "e9dacc70f95d2b2206ae929feb86fcb5e47bdf484870f22db7ad5c9641cb3612"
+  },
+  "reverify.txt": {
+   "bytes": 23876,
+   "sha256": "fe60c68467cbb3e34d18f64b400727b172afb613321025ba855e1c259dcdc49d"
+  },
+  "rollback.md": {
+   "bytes": 1660,
+   "sha256": "6a0e33d6a2aecccb3606f2b4ee55820ccfee604231153a0ad766b601a7c6f218"
   },
   "settings_diff.txt": {
    "bytes": 3187,
