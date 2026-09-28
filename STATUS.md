@@ -103,16 +103,17 @@ without a row, a row without a file, or wrong class totals fails gate B20.
    regenerate those specs (the emitters will refuse without raw data).
 3. **Long-lane format future** (unchanged): no benchmark episode for the
    8-14 min lane.
-4. **F: drive hardware flaps under sustained write** (measured 2026-09-27
-   21:35-21:40 CDT, brief 07): the Memorex stick disconnects from Windows
-   mid-write (NTFS event 140; 1.6 MB/s; 147 MB of a 1.7 GB tarball), volume
-   itself NTFS-Healthy. Details: reports/brief07/f_drive_failure.md.
-   Continuation (option A, 2026-09-27 ~22:10 CDT): soccer-channel-keys
-   RESCUED to B2 (1 file, .env.gpg, GPG-encrypted, stream verified 1==1);
-   pre-ECC ~/.claude backup ON B2 (592458956 bytes, 16545 entries verified
-   by full download+listing); gates B32/B33 rewritten to B2-object checks
-   and PASS; ledger ALL MET 28/28, zero abandons. Nothing ever fell back
-   to C:.
+4. **F: RETIRED (brief 11, 2026-09-28)**: the Memorex stick (Disk 2)
+   disconnects under sustained write (brief 07 evidence: NTFS event 140,
+   1.6 MB/s, 147 MB of a 1.7 GB tarball). All caches + staging now live at
+   /mnt/d/scratch/ (SD card, Disk 1, NTFS, ~12 MB/s write, ~124 MB/s read;
+   brief 11 job 3); disk_guard FAILS on any configured /mnt/f path
+   (retired_f check, selftest control 5); f_mount.sh is a stub; the f-mount
+   sudoers rule is removed; nothing on F: needed rescuing (keys .env.gpg
+   already on B2, verified 1==1 in brief 07; leftovers listed read-only in
+   reports/brief11/f_leftovers.txt, ~586M regenerable debris + Mayo's two
+   own files). Proofs: cache_resolution.txt, ytdlp_download.txt,
+   modal_smoke.txt (volume round trip staged through D:), controls.txt.
 5. **ECC INSTALLED at v2.2.1** (brief 07 jobs 5-8 done, APPROVED ECC
    2026-09-27): 814 files + 24 hooks merged (unlazy Stop hook preserved,
    hooks now Stop 8 / PreToolUse 11), doctor clean, context cost +10815

@@ -1062,3 +1062,28 @@ for all disk growth on this machine. Trade-off recorded: the cap counts
 ECC's memory-vault state.db (~932K) too; if legitimate memory growth trips
 it, the fix is pruning, and raising the cap is a one-variable override.
 Gate: B44.
+
+## 2026-09-28 — Scratch drive moved to D:, F: retired (brief 11, Mayo decisions)
+
+Decision: D: (SD card, Disk 1, NTFS, 29.8 GB) is the scratch drive at
+/mnt/d/scratch/ for all caches (pip/uv/npm/HF/yt-dlp), raw-footage staging,
+the B2-mount VFS cache, and keys backup target. F: (Memorex USB stick,
+Disk 2) is RETIRED: any configured /mnt/f path is a disk-guard failure
+(retired_f_check, brief 11 decision 2). Why: the stick disconnects from
+Windows under sustained write (brief 07: NTFS event 140, 1.6 MB/s,
+147 MB of a 1.7 GB tarball) while D: survived a 500 MB Windows-side write
+(12.3 MB/s) and a 1 GB WSL write (12 MB/s, fsync-true; read 124 MB/s,
+cache-assisted upper bound). Design carried over from F: unchanged: write-
+probe mount check (tools/scratch_mount.sh, generalized from f_mount.sh),
+auto-remount at session start via a narrow passwordless sudoers rule
+(/etc/sudoers.d/d-mount: d-remount, d-trim, d-clean only; the f-mount rule
+was removed after the F: leftover listing was captured read-only), and
+scratch-failure stops work with no C: fallback (doctrine 8, now about D:).
+Trade-offs recorded: D: sustained write ~12 MB/s means a 5 GB raw download
+spends ~7 min of disk time (yt-dlp lands at network speed, so downloads are
+unaffected); SD-card write endurance under daily cache churn is the known
+risk and the card is NTFS so Windows-side repair paths (chkdsk) apply as
+they did for F:. Nothing on F: was deleted; ~586M of regenerable debris plus
+Mayo's two own files are listed in reports/brief11/f_leftovers.txt. Gate
+B29 (F: mount) frozen to reports/brief11/GATES_frozen.md; B30 rewritten to
+the five /mnt/d vars; B46-B55 added.

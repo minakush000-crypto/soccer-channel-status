@@ -2,7 +2,8 @@
 
 > **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
 > **Reader:** every session (CLAUDE.md @CONTEXT.md).
-> **Last verified against code:** 2026-09-27 (brief 06).
+> **Last verified against code:** 2026-09-28 (brief 11: staging/cache paths
+> grepped to /mnt/d, guard checks run live).
 
 Rewritten 2026-09-22 (brief 03) against the code on disk. Read STATUS.md for
 the verified state spine and DECISIONS.md for why things are the way they are.
@@ -25,8 +26,12 @@ The project is /home/muads/yt-digest/soccer-channel. Nothing else.
   prefix soccer-channel/<date>/, manifests via tools/b2_archive.py.
 - Modal volume "soccer-build" holds /vol/in (reel, voice, ambience, script),
   /vol/specs, /vol/out (boards + final), /vol/tools.
-- /mnt/f = raw-footage staging (mounted, fstab drvfs). Nothing raw or heavy
-  is written inside /home/muads (ext4.vhdx grows and never shrinks).
+- /mnt/d = raw-footage staging + all caches, at /mnt/d/scratch/ (scratch SD
+  card, Disk 1, NTFS; moved off the retired F: stick by brief 11 on
+  2026-09-28; remount helper tools/scratch_mount.sh via passwordless
+  /etc/sudoers.d/d-mount). F: (Memorex stick, Disk 2) is RETIRED: writing to
+  it is a disk-guard failure. Nothing raw or heavy is written inside
+  /home/muads (ext4.vhdx grows and never shrinks).
 
 ## THE PIPELINE (flash era, brief 06)
 Entry: tools/produce_v2.py — `--flash` runs the flash lane in one command
