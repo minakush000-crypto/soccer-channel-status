@@ -2,9 +2,9 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-27 (brief 10: census lines
-> re-run via tools/census.py at 47 files; guard wiring grepped in the four
-> entry points).
+> **Last verified against code:** 2026-09-28 (brief 11 job 8: census re-run
+> live — CENSUS OK files=49 wired=30 handrun=19; D: restart check, mount
+> write-probe, guard and selftest run live).
 
 Rewritten 2026-09-27 (brief 06) against the code on disk. Brief 03-05 history
 lives in DECISIONS.md, PROGRESS.md, and retired/. Every claim below carries
@@ -85,11 +85,12 @@ $ ffprobe -v error -show_entries format=duration,size -of csv=p=0 \
 
 ## Tool census (enforced by tools/census.py, gate B20)
 
-$ ls -p tools/ | grep -v / | wc -l  →  47  (USAGE.md exempt)
+$ ls -p tools/ | grep -v / | wc -l  →  50  (USAGE.md exempt)
 
-37 .py + 2 .js + 5 .sh + board_page.html + watchlist.yaml +
-sofascore_team_ids.json = 47 rows: 30 WIRED + 17 HAND-RUN (census.py
-2026-09-27, brief 10 job 9). TOOLS.md is now command-enforced: a file
+37 .py + 2 .js + 7 .sh + board_page.html + watchlist.yaml +
+sofascore_team_ids.json = 49 rows: 30 WIRED + 19 HAND-RUN (census.py
+2026-09-28, brief 11 job 8: CENSUS OK files=49 wired=30 handrun=19).
+TOOLS.md is now command-enforced: a file
 without a row, a row without a file, or wrong class totals fails gate B20.
 
 ## What is broken, worst first
@@ -114,6 +115,14 @@ without a row, a row without a file, or wrong class totals fails gate B20.
    reports/brief11/f_leftovers.txt, ~586M regenerable debris + Mayo's two
    own files). Proofs: cache_resolution.txt, ytdlp_download.txt,
    modal_smoke.txt (volume round trip staged through D:), controls.txt.
+   Job 7 closed on the SECOND restart check (2026-09-28): after Mayo's
+   `wsl --shutdown` the session-start hook auto-remounted D: unattended
+   (hook line: "guard reported a failure; remount attempted via
+   scratch_mount.sh --fix (passwordless d-remount), then re-checked");
+   scratch_mount --check printed D-MOUNT-OK, disk_guard passed 5/5, and
+   the scratch tree survived intact (reports/brief11/restart_check2.txt).
+   Job 8 closed: reverify.txt ends ALL MET and reports/brief11/ is
+   allowlisted on the mirror.
 5. **ECC INSTALLED at v2.2.1** (brief 07 jobs 5-8 done, APPROVED ECC
    2026-09-27): 814 files + 24 hooks merged (unlazy Stop hook preserved,
    hooks now Stop 8 / PreToolUse 11), doctor clean, context cost +10815

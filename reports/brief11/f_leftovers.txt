@@ -1,0 +1,70 @@
+== brief 11 job 5: what is left on F: (read-only listing, 2026-09-28T03:40:07Z) ==
+Captured after a fresh f-remount (the stick flaps off by itself; the mount
+channel dies Errno 19 without any write load). NOTHING was written to F:.
+
+== top level ==
+total 4
+drwxr-xr-x 1 muads muads  512 Sep 27 22:12 .
+drwxr-xr-x 8 root  root  4096 Sep 27 22:33 ..
+-rwxr-xr-x 1 muads muads    0 Sep 13 23:23 .dropbox.device
+-rwxr-xr-x 1 muads muads  259 May 31 00:40 New Text Document.txt
+d--x--x--x 1 muads muads  512 May 31 00:34 System Volume Information
+drwxr-xr-x 1 muads muads  512 Sep 27 18:27 b2-cache
+drwxr-xr-x 1 muads muads  512 Sep 27 21:30 backups
+drwxr-xr-x 1 muads muads  512 Sep 26 23:19 benchmark
+drwxr-xr-x 1 muads muads  512 Sep 27 18:23 caches
+drwxr-xr-x 1 muads muads  512 Sep  9 01:53 soccer-channel-keys
+drwxr-xr-x 1 muads muads  512 Sep 27 18:25 soccer-staging
+
+== sizes ==
+398M	/mnt/f/soccer-staging
+188M	/mnt/f/caches
+1.0K	/mnt/f/soccer-channel-keys
+0	/mnt/f/benchmark
+0	/mnt/f/backups
+0	/mnt/f/b2-cache
+0	/mnt/f/System Volume Information
+0	/mnt/f/New Text Document.txt
+0	/mnt/f/.dropbox.device
+
+== what each item is (from briefs 07/10/11) ==
+New Text Document.txt     - leftover Windows notepad stub (Mayo's, not touched)
+System Volume Information - NTFS metadata, always present
+b2-cache/                 - rclone VFS cache from brief 10's B2 mount; regenerable
+backups/                  - brief 07 partial tarball debris (cleaned); empty now if present
+benchmark/                - brief 09 benchmark videos (archived to B2 in brief 10; regenerable)
+caches/                   - brief 10 cache dirs (pip/uv/npm/HF/yt-dlp); regenerable, now repointed to D:
+soccer-channel-keys/      - .env.gpg (713 bytes); RESCUED to B2 keys/ 2026-09-27 (brief 07, verified 1==1)
+soccer-staging/           - raw-download staging; empty or brief-09 debris; regenerable
+
+== keys safety ==
+The only unique-content item is soccer-channel-keys/.env.gpg. A verified B2 copy
+exists at b2:mendymax-archive/keys/2026-09-27_soccer-channel-keys.tar.gz
+(rclone cat | tar tzf count 1 == find count 1, brief 07 continuation).
+Nothing on F: needs rescuing before retirement.
+
+== detail: soccer-staging (398M) ==
+2026-09-08_real-madrid-inter/  304M  CBS raw download debris (cbs_720p_h264
+                                     f140.m4a + f298.mp4 + .temp.mp4) from EP001
+                                     production; episode shipped, renders
+                                     archived to B2 in brief 10; regenerable
+clip_HfX417hSwPM.mp4            94M  downloaded clip debris; regenerable
+3dpoc_2026-09-06_arsenal-chelsea.mp4   436K  3D proof-of-concept clip
+3dpoc_2026-09-12_preview-manc-derby.mp4 512K  3D proof-of-concept clip
+stage7-verify/                  0    empty marker dir
+
+== detail: caches (188M) ==
+pip, uv, npm, huggingface, yt-dlp cache dirs from brief 10; ALL regenerable;
+every consumer now points at /mnt/d/scratch/caches (brief 11 job 4).
+
+== summary for Mayo ==
+Nothing on F: is unique or needs rescuing:
+- soccer-channel-keys/.env.gpg has a verified B2 copy (brief 07 continuation)
+- staging/caches/benchmark debris is regenerable
+- New Text Document.txt (259B) and .dropbox.device (0B) are Mayo's own files
+Total F: footprint: ~586M. The stick can be reformatted, repurposed, or
+discarded at will. Nothing was deleted by this brief (read-only listing only).
+
+== retirement commands Mayo has run / will run ==
+- DONE (job 2): sudo bash ~/yt-digest/soccer-channel/tools/brief11_elevated_setup.sh
+- PENDING (job 5): sudo rm /etc/sudoers.d/f-mount && echo F-SUDOERS-REMOVED

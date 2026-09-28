@@ -1,0 +1,8 @@
+== brief 11 job 6b: yt-dlp download on the scratch drive (2026-09-28T03:42:45Z) ==
+Command: python -m yt_dlp -o '/mnt/d/scratch/ytdlp_test/%(id)s.%(ext)s' --no-playlist https://www.youtube.com/watch?v=jNQXAC9IVRw
+  (yt-dlp auto-read ~/.config/yt-dlp/config, whose --cache-dir now points at
+   /mnt/d/scratch/caches/yt-dlp)
+Landed: /mnt/d/scratch/ytdlp_test/jNQXAC9IVRw.webm (474489 bytes)
+Intermediate streams also written+deleted under /mnt/d/scratch/ytdlp_test/
+  (yt-dlp's own 'Deleting original file /mnt/d/scratch/...' lines prove the path)
+Deleted after evidence: file and ytdlp_test/ dir removed; nothing kept.

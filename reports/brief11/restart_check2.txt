@@ -1,0 +1,38 @@
+# Brief 11 job 7 — SECOND restart check (after Mayo's wsl --shutdown)
+Date: 2026-09-28 (session 2026-09-27 ~22:54 CDT, first command batch 22:55)
+Fix under test: commit c13fb22 (session-start hook auto-remount on guard
+failure, passwordless d-remount, 2s 9p settle time).
+
+Session-start hook output (verbatim):
+  scratch-check: guard reported a failure; remount attempted via
+  scratch_mount.sh --fix (passwordless d-remount), then re-checked.
+
+The hook prints this wording only when the --fix remount returned
+D-MOUNT-OK and the re-run guard found no DISK-GUARD-FAIL (check_scratch.sh
+lines 21-23), so the remount branch fired AND the re-check passed.
+
+$ tools/scratch_mount.sh --check D   (check includes a write read back)
+  D-MOUNT-OK
+  exit=0
+
+$ df -h /mnt/d
+  Filesystem      Size  Used Avail Use% Mounted on
+  D:               30G  513M   30G   2% /mnt/d
+
+$ tools/disk_guard.sh
+  DISK-GUARD-PASS c_floor avail=18G >= 15G
+  DISK-GUARD-PASS d_paths mounted+writable at /mnt/d (5 configured paths)
+  DISK-GUARD-PASS retired_f no /mnt/f paths configured in /home/muads/.config/soccer/env.sh
+  DISK-GUARD-PASS vhdx logged to reports/disk_log.csv
+  DISK-GUARD-PASS ecc_data 1294389B <= 10485760B cap (ECC homunculus/learned/session/state/gateguard)
+  DISK-GUARD-PASS all
+  exit=0
+
+Scratch tree after the restart (find /mnt/d/scratch -maxdepth 2):
+  caches/{pip,uv,npm,huggingface,yt-dlp}, soccer-staging/, b2-cache/,
+  soccer-channel-keys/ all present. (An initial ls of "scratch/cache" and
+  "scratch/staging" missed because the real names are "caches" (plural) and
+  "soccer-staging" — checked with find before concluding anything.)
+
+VERDICT: D: came back without any manual mount (the hook's remount IS the
+designed automount fix, brief 11 job 7). Job 7 CLOSED. Proceeded to job 8.

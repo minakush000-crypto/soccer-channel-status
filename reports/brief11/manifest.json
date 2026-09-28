@@ -1,0 +1,60 @@
+{
+ "artifact": "reports/brief11/ (inventory, speed, cache_resolution, controls, ytdlp_download, modal_smoke, f_leftovers, elevated_setup_output, GATES_frozen, manifest)",
+ "project": "soccer-channel",
+ "task": "brief 11: scratch moved F:->D:, F: retired (jobs 1-6 + docs done; job 7 restart check + job 8 final reverify pending)",
+ "produced_by": "Flash (glm-5.3-flash:cloud) via Claude Code",
+ "produced_at": "2026-09-28T03:45:10Z",
+ "inputs": [
+  "briefs/brief11.md",
+  "reports/brief07/d_drive_speed.md (D: baseline)",
+  "/var/log/d-remount.log",
+  "Mayo elevated-run output (pasted)"
+ ],
+ "tools": [
+  "scratch_mount.sh",
+  "brief11_elevated_setup.sh (Mayo-run)",
+  "disk_guard.sh --selftest",
+  "yt-dlp",
+  "modal volume put/get",
+  "grep/du/dd"
+ ],
+ "cost": "~45 min wall clock; 2 Mayo elevated commands; 2GB transient speed-test writes deleted; nothing written to F:",
+ "files": {
+  "GATES_frozen.md": {
+   "bytes": 789,
+   "sha256": "2eb12c991f43f0566fa44472c93624a3b1ab615625bad0f2e2ab3e9810252d59"
+  },
+  "cache_resolution.txt": {
+   "bytes": 717,
+   "sha256": "b88c580514bc55ba24d389a4085bca2672e844f4be25b23b341aa91b4e88ed84"
+  },
+  "controls.txt": {
+   "bytes": 18,
+   "sha256": "1096bead3681d9db3c9157d52a4fcb207f9b44c270911a3f5a70dcaedeebdfe3"
+  },
+  "elevated_setup_output.txt": {
+   "bytes": 1752,
+   "sha256": "b6309611f6bb50a32806ef1b1d322ba6a1732a45780ef0470d9d8fd35554186f"
+  },
+  "f_leftovers.txt": {
+   "bytes": 3575,
+   "sha256": "b209b26f621023f93b706218c4ba748f1a8ef1d8edf35890f483c876094e6e47"
+  },
+  "inventory.txt": {
+   "bytes": 8359,
+   "sha256": "1d71ff1c9979398b6ee85de8fb4e1494e6b46865489fb689e1d1044fbddfeea6"
+  },
+  "modal_smoke.txt": {
+   "bytes": 706,
+   "sha256": "d5062c1755a7a4f466742e5d3aa945a101412f98e38ff10b8356499eb5e2a958"
+  },
+  "speed.txt": {
+   "bytes": 1721,
+   "sha256": "637918fd6e4bc27e5b4c58bfe9a35431dd4099277eaa2efb761e940c83740185"
+  },
+  "ytdlp_download.txt": {
+   "bytes": 618,
+   "sha256": "3bb59964702b41de25eda54ab3586e712d6f9d176628fd15377e3179902414a3"
+  }
+ }
+}

@@ -1,0 +1,127 @@
+== Brief 11 job 1 inventory (2026-09-28T03:24:54Z) ==
+
+== Get-Volume D (Windows) ==
+D: FileSystemType=NTFS Health=Healthy FreeGB=29.7 SizeGB=29.8  (NTFS confirmed, matches Mayo's report of the 2026-09-28 reformat)
+
+== /mnt/d mount state in WSL ==
+mountpoint: /mnt/d: No such file or directory
+not mounted
+
+== /mnt/f references, LIVE config/tool paths (grep -rn) ==
+/home/muads/.config/yt-dlp/config:1:--cache-dir /mnt/f/caches/yt-dlp
+tools/backup_env.py:6:This tool makes an encrypted backup to /mnt/f (the USB flash drive, which frees
+tools/backup_env.py:13:    # backup (encrypt .env -> /mnt/f/soccer-channel-keys/.env.gpg)
+tools/backup_env.py:17:    # --target-dir overrides /mnt/f (for testing when the USB is not mounted)
+tools/backup_env.py:29:DEFAULT_TARGET = Path("/mnt/f/soccer-channel-keys")
+tools/backup_env.py:41:    # /mnt/f must be mounted (fail loudly, no /home/muads fallback) unless overridden.
+tools/backup_env.py:42:    if str(target).startswith("/mnt/f"):
+tools/backup_env.py:43:        mounted = any(" /mnt/f " in line for line in open("/proc/mounts"))
+tools/backup_env.py:45:            print("FATAL: /mnt/f not mounted. Mount the USB, or use --target-dir for testing.", file=sys.stderr)
+tools/backup_env.py:46:            print("FATAL:   sudo mkdir -p /mnt/f && sudo mount -t drvfs F: /mnt/f", file=sys.stderr)
+tools/produce_v2.py:48:import staging  # noqa: E402  — /mnt/f USB staging for raw downloads (6A)
+tools/produce_v2.py:271:        # 6A: raw download lands on /mnt/f USB staging, not inside /home/muads
+tools/produce_v2.py:273:        # loudly if /mnt/f is not mounted — it never falls back to /home/muads.
+tools/produce_v2.py:296:            # Downstream (step4b/step5) reads from the /mnt/f staged path; the
+tools/produce_v2.py:299:            print(f"  Downloaded: {clip_path.name} ({h}p, {size_mb:.1f}MB, {elapsed:.1f}s) [staged on /mnt/f]")
+tools/produce_v2.py:824:                             "point this at a /mnt/f-staged copy and the pipeline cleans it up.")
+tools/produce_v2.py:905:    # --pod-download uses the pod path; else local yt-dlp to /mnt/f.
+tools/produce_v2.py:957:    # 6A: clean up the /mnt/f-staged raw source now that the pipeline is done.
+tools/produce_v2.py:959:    if args.clip and str(args.clip).startswith("/mnt/f"):
+tools/staging.py:2:"""staging.py — /mnt/f USB staging for raw downloads (6A).
+tools/staging.py:5:at /mnt/f, NEVER inside /home/muads. Reason: the ext4.vhdx grows and never
+tools/staging.py:7:while /mnt/f (a Windows drive via drvfs) frees normally.
+tools/staging.py:9:/mnt/f is a STAGING AREA ONLY: the download lands there, ships to the pod, and
+tools/staging.py:24:STAGING_ROOT = Path("/mnt/f/soccer-staging")
+tools/staging.py:27:    """Verify /mnt/f is mounted and writable. Brief 10 decision 2/8: when F:
+tools/staging.py:37:                if " /mnt/f " in line:
+tools/staging.py:45:    if mounted and os.access("/mnt/f", os.W_OK):
+tools/staging.py:56:        "STAGING STOPPED: /mnt/f is not mounted and writable. Brief 10 rule 8: "
+tools/staging.py:88:    print(f"OK: /mnt/f mounted and writable. Staging root: {STAGING_ROOT}")
+tools/disk_guard.sh:12:#                   configures any path under /mnt/f, /mnt/f must be mounted
+tools/disk_guard.sh:15:#                   /mnt/f paths passes this check.
+tools/disk_guard.sh:27:#                unmounted F: target with configured /mnt/f paths must FAIL;
+tools/disk_guard.sh:35:F_MNT="${DISK_GUARD_TEST_F_MNT:-/mnt/f}"
+tools/disk_guard.sh:67:  # discover configured /mnt/f paths from the env file (var=value lines only)
+tools/disk_guard.sh:76:        *"/mnt/f"*) fvars+=("${line%%=*}") ;;
+tools/disk_guard.sh:81:    pass "f_paths none configured (${ENV_FILE} absent or without /mnt/f paths)"
+tools/disk_guard.sh:149:  printf 'PIP_CACHE_DIR=/mnt/f/pip-cache\n' > /tmp/b10_selftest/env.sh
+tools/disk_guard.sh:154:  # control 2: configured /mnt/f paths against a non-mountpoint must FAIL
+tools/disk_guard.sh:162:  # (env file pointed at an empty override so the real /mnt/f config cannot
+tools/brief10_elevated_setup.sh:8:#      freshly mounts F: at /mnt/f (the fix for the dead 9p transport that
+tools/brief10_elevated_setup.sh:9:#      made every /mnt/f write fail Errno 22/19 on 2026-09-26/27)
+tools/brief10_elevated_setup.sh:16:#   5. runs the remount once and write-tests /mnt/f
+tools/brief10_elevated_setup.sh:28:  if umount /mnt/f 2>/dev/null; then echo "  umount ok"; else echo "  umount skipped (was not mounted)"; fi
+tools/brief10_elevated_setup.sh:29:  if mount -t drvfs 'F:' /mnt/f -o rw,noatime,uid=1000,gid=1000,umask=22; then
+tools/brief10_elevated_setup.sh:79:if echo "brief10 setup $(date -u +%s)" > /mnt/f/.setup_probe 2>/dev/null && [ -s /mnt/f/.setup_probe ]; then
+tools/brief10_elevated_setup.sh:80:  rm -f /mnt/f/.setup_probe
+tools/brief10_elevated_setup.sh:81:  echo "F: REMOUNTED AND WRITABLE at /mnt/f - done"
+/home/muads/.config/soccer/env.sh:2:# staging area lives on the USB drive (F: at /mnt/f), never on C:. Sourced by
+/home/muads/.config/soccer/env.sh:4:# Doctrine 8 (brief 10): if /mnt/f is not healthy, F:-dependent work STOPS —
+/home/muads/.config/soccer/env.sh:9:export PIP_CACHE_DIR=/mnt/f/caches/pip
+/home/muads/.config/soccer/env.sh:10:export UV_CACHE_DIR=/mnt/f/caches/uv
+/home/muads/.config/soccer/env.sh:11:export npm_config_cache=/mnt/f/caches/npm
+/home/muads/.config/soccer/env.sh:12:export HF_HOME=/mnt/f/caches/huggingface
+/home/muads/.config/soccer/env.sh:13:export SOCCER_STAGING_ROOT=/mnt/f/soccer-staging
+.claude/hooks/check_mnt_f.sh:3:# The old version checked only that /mnt/f APPEARED in the mount table, so a
+.claude/hooks/check_mnt_f.sh:7:# AND write-probes /mnt/f, checks the C: free-space floor (inform-only here;
+tools/f_mount.sh:2:# f_mount.sh — keep F: genuinely mounted and writable at /mnt/f (brief 10 job 2).
+tools/f_mount.sh:10:# DANGER the brief names: after a plain umount, /mnt/f is an ordinary empty
+tools/f_mount.sh:12:# This tool therefore never leaves /mnt/f unmounted: it remounts immediately
+tools/f_mount.sh:22:#   tools/f_mount.sh --check      exit 0 if /mnt/f is mounted AND writable
+tools/f_mount.sh:26:MNT=/mnt/f
+tools/f_mount.sh:77:      write_probe && echo "/mnt/f: mounted AND writable" \
+tools/f_mount.sh:78:                 || echo "/mnt/f: mounted but NOT writable (stale transport)"
+tools/f_mount.sh:80:      echo "/mnt/f: NOT mounted"
+CLAUDE.md:164:  WSL2. Raw footage stages on the flash drive at /mnt/f, never as a
+tools/b2_mount.sh:6:# cache lives on the USB drive (/mnt/f/b2-cache) capped at 2 GB — never on
+tools/b2_mount.sh:16:CACHE="/mnt/f/b2-cache"
+tools/b2_mount.sh:34:      echo "b2_mount: REFUSED - /mnt/f is not mounted and writable (the VFS cache must live on F:, never C:). Fix F: first: $HERE/f_mount.sh --fix" >&2
+
+== /mnt/f references elsewhere in ~/.config and ~/.bashrc/.profile ==
+/home/muads/.config/yt-dlp/config:1:--cache-dir /mnt/f/caches/yt-dlp
+/home/muads/.config/soccer/env.sh:2:# staging area lives on the USB drive (F: at /mnt/f), never on C:. Sourced by
+/home/muads/.config/soccer/env.sh:4:# Doctrine 8 (brief 10): if /mnt/f is not healthy, F:-dependent work STOPS —
+/home/muads/.config/soccer/env.sh:9:export PIP_CACHE_DIR=/mnt/f/caches/pip
+/home/muads/.config/soccer/env.sh:10:export UV_CACHE_DIR=/mnt/f/caches/uv
+/home/muads/.config/soccer/env.sh:11:export npm_config_cache=/mnt/f/caches/npm
+/home/muads/.config/soccer/env.sh:12:export HF_HOME=/mnt/f/caches/huggingface
+/home/muads/.config/soccer/env.sh:13:export SOCCER_STAGING_ROOT=/mnt/f/soccer-staging
+
+== wsl.conf (automount state) ==
+[interop]
+appendWindowsPath=false
+
+[boot]
+systemd=true
+
+== other repo hits excluding reports/ briefs/ history ==
+GATES.md
+CONTEXT.md
+EPISODE_SPEC.md
+ARCHITECTURE.md
+HANDOVER_REPORT_FLASH.md
+TOOLS.md
+PROGRESS.md
+CLAUDE.md
+DECISIONS.md
+briefs/brief11.md
+briefs/brief07.md
+briefs/brief10.md
+briefs/brief09.md
+briefs/CLAUDE_MD_for_flash.md
+tools/b2_mount.sh
+tools/disk_guard.sh
+tools/backup_env.py
+tools/staging.py
+tools/produce_v2.py
+tools/brief10_elevated_setup.sh
+.claude/hooks/check_mnt_f.sh
+tools/f_mount.sh
+reports/brief07/f_drive_failure.md
+reports/brief09/GATES_PLAN.md
+reports/brief10/GATES_PLAN.md
+reports/brief11/GATES_frozen.md
+reports/brief10/windows_steps.md
+retired/GEMINI.md
+
+MNTF-HITS= live-config-tool hits and every other file listed above; counts: env.sh=7 ytdlp=1 tools=7 files, hooks=1 files

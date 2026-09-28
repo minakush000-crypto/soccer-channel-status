@@ -1,0 +1,10 @@
+== brief 11 job 4: cache resolution after the switch (2026-09-28T03:39:49Z) ==
+PIP_CACHE_DIR=/mnt/d/scratch/caches/pip        (pip config: env.cache-dir confirms)
+UV_CACHE_DIR=/mnt/d/scratch/caches/uv
+npm_config_cache=/mnt/d/scratch/caches/npm     (npm config get cache confirms)
+HF_HOME=/mnt/d/scratch/caches/huggingface
+SOCCER_STAGING_ROOT=/mnt/d/scratch/soccer-staging
+yt-dlp: --cache-dir /mnt/d/scratch/caches/yt-dlp  (~/.config/yt-dlp/config)
+staging.py live run: 'OK: /mnt/d mounted and writable. Staging root: /mnt/d/scratch/soccer-staging'
+disk_guard --report: d_paths mounted+writable at /mnt/d (5 configured paths);
+  retired_f no /mnt/f paths configured; c_floor 19G; ecc_data 1212993B under cap; all PASS

@@ -1087,3 +1087,13 @@ they did for F:. Nothing on F: was deleted; ~586M of regenerable debris plus
 Mayo's two own files are listed in reports/brief11/f_leftovers.txt. Gate
 B29 (F: mount) frozen to reports/brief11/GATES_frozen.md; B30 rewritten to
 the five /mnt/d vars; B46-B55 added.
+
+Jobs 7-8 close (2026-09-28): the SECOND restart check passed unattended —
+after Mayo's wsl --shutdown the session-start hook auto-remounted D:
+(D-MOUNT-OK, disk-guard 5/5, scratch tree intact;
+reports/brief11/restart_check2.txt). Stale live-doc /mnt/f references
+cleaned in CLAUDE.md (one line), CONTEXT.md (three lines) and the
+TOOLS.md staging.py row; DECISIONS/PROGRESS history left as written.
+brief11 added to the mirror allowlist (push_status.sh); reverify proof
+ending ALL MET published to reports/brief11/ and the mirror. Residual
+risk unchanged: SD-card write endurance under daily cache churn.

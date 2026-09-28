@@ -1,0 +1,29 @@
+# Brief 11 job 3: D: sustained speed through WSL (2026-09-28 ~03:35 UTC)
+
+Method: two 1 GB dd writes with conv=fsync (so the write numbers are
+true on-media, not page-cache), then a full read of the FIRST-written file
+(page cache cannot be dropped in WSL, so the second file was read back for
+the read figure — the brief's own design; the read number may still be
+partly cached, the write numbers cannot be). Files deleted after.
+
+WRITE 1GB (conv=fsync):  1073741824 bytes copied, 88.23 s  -> WRITE-MBps=12
+WRITE 1GB (conv=fsync):  1073741824 bytes copied, 86.83 s  -> WRITE-MBps=12
+READ  1GB (full read):   1073741824 bytes copied, 8.69 s   -> READ-MBps=124
+md5 of the read-back file: cd573cfa... (read completed and hashed, so the
+read touched every byte)
+
+Cross-check: the Windows-side test in brief 07 (reports/brief07/d_drive_speed.md)
+measured 12.3 MB/s write on the same card — the 12 MB/s through WSL matches,
+so drvfs adds no meaningful write overhead and the card is honestly a
+~12 MB/s writer. Read: 124 MB/s through WSL is consistent with drvfs on NTFS
+plus possible cache assist; treat 124 as an upper bound, not a guarantee.
+
+Suitability notes (for the switch in job 4):
+- cache fills (pip/uv/npm/HF) write at ~12 MB/s: slower than C: but these are
+  regenerable and the point is keeping them OFF the vhdx.
+- yt-dlp downloads land at network speed (<12 MB/s on this connection), so
+  the card is not the bottleneck for raw downloads.
+- raw footage staging (multi-GB match downloads) writes at ~12 MB/s: a 5 GB
+  download takes ~7 minutes of pure disk time. Acceptable per Mayo's decision;
+  F: was slower still and unreliable.
+- Both test files deleted after the run (verified: no speedtest files left).

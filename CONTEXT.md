@@ -126,8 +126,10 @@ disallowed goal at reel t=90, migration phases 5-8 unfinished.
    blocked — name the alternatives, pick the best, keep going (CLAUDE.md §7).
 8. Batch independent tool calls in one response.
 9. Use run_in_background for any command expected to take >2 minutes.
-10. Session-start hooks: check_pods.sh (pod leaks), check_mnt_f.sh (mount),
-    check_doc_stamps.sh (stale canonical docs). If the pod check warns,
+10. Session-start hooks: check_pods.sh (pod leaks), check_scratch.sh (D:
+    mount; auto-remounts via scratch_mount.sh --fix on guard failure,
+    brief 11 job 7), check_doc_stamps.sh (stale canonical docs). If the
+    pod check warns,
     terminate with tools/pod_check.py --terminate.
 11. Canonical docs (CLAUDE.md, CONTEXT.md, STATUS.md, DECISIONS.md,
     PROGRESS.md, GAPS.md, TOOLS.md, ARCHITECTURE.md, EPISODE_SPEC.md,
@@ -145,7 +147,7 @@ disallowed goal at reel t=90, migration phases 5-8 unfinished.
 
 ## DOCTRINE FOOTER
 1. Raw footage is acquired over the residential connection, staged on
-   /mnt/f, shipped to the pod, and deleted locally. Nothing raw is written
+   /mnt/d, shipped to the pod, and deleted locally. Nothing raw is written
    inside /home/muads. No local GPU work.
 2. No tasking without calling the available tools, skills, connectors, web
    fetch, research or MCPs where they apply.

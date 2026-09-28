@@ -3837,3 +3837,21 @@ flapped off the mount again with no write load at all; f-remount restored it
 and B29 passed. Final proof: reports/brief07/reverify.txt, ALL MET (34 met,
 reran: 34) at H=b43434a, generated in /tmp first per Mayo. Committed,
 pushed, mirrored, archived to B2.
+
+## BRIEF 11 CLOSE — D: scratch drive live, F: retired, 2026-09-28 (2026-09-28T04:07:55Z)
+
+Jobs 1-6 done in the prior session. Job 7 closed on the SECOND restart
+check: after Mayo's wsl --shutdown the session-start hook auto-remounted
+D: unattended (D-MOUNT-OK write probe, disk-guard 5/5, scratch tree
+intact; reports/brief11/restart_check2.txt; hook fix committed at
+c13fb22). Job 8: five live gates printed (mount check, no live /mnt/f
+path, caches resolve to /mnt/d, guard selftest 5/5, sudoers d-* only);
+stale live-doc /mnt/f references cleaned (CLAUDE.md, CONTEXT.md x3,
+TOOLS.md staging row); STATUS census refreshed (49 rows, 30 WIRED +
+19 HAND-RUN); brief11 added to the mirror allowlist. During reverify,
+B39/40 failed on a 22:54 settings.json rewrite (claude-mem 13.25.3 ->
+13.28.0) that dropped ECC's pre:bash:dispatcher hook; node ~/ECC/
+scripts/ecc.js repair restored it (doctor ok=1 errors=0; unlazy
+stop-hook.mjs survived); B41's grep updated to the job-4 hook rename.
+Final proof: reports/brief11/reverify.txt ends ALL MET (42 met, reran:
+42) at H=5d2fbd0aee9502470153ecfcdc5b2783d6756d99, generated in /tmp first per Mayo, published to the mirror.

@@ -57,7 +57,7 @@ exists — anything dead is deleted or in retired/.
 | `broadcast_filler.py` | WIRED | produce_v2.py:428 | broadcast/filler classification |
 | `cut_list_gen.py` | WIRED | produce_v2.py:438 | footage windows (PySceneDetect snap) |
 | `ffmpeg_utils.py` | WIRED | produce_v2.py:47 + importers | 200MB guard, cleanup, get_duration |
-| `staging.py` | WIRED | produce_v2.py:48 | /mnt/f staging (fails loudly if unmounted) |
+| `staging.py` | WIRED | produce_v2.py:48 | /mnt/d/scratch staging (fails loudly if unmounted) |
 | `runpod_download.py` | WIRED | produce_v2.py:311 (--pod-download) | pod-side download |
 | `generate_voice.py` | WIRED | produce_v2.py:708 | ElevenLabs TTS |
 | `generate_ambience.py` | WIRED | produce_v2.py:730 | crowd ambience |

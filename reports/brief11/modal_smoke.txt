@@ -1,0 +1,10 @@
+== brief 11 job 6c: Modal round trip staged through /mnt/d (2026-09-28T03:43:02Z) ==
+Pattern: the SAME 'modal volume put' staging pod_build.py uses (pod_build.py:121).
+Staged from: /mnt/d/scratch/soccer-staging/.modal_smoke_input.txt
+  python -m modal volume put soccer-build /mnt/d/scratch/soccer-staging/.modal_smoke_input.txt /smoke/b11_smoke.txt
+  -> '/smoke/b11_smoke.txt' (upload confirmed)
+  python -m modal volume get soccer-build /smoke/b11_smoke.txt /mnt/d/scratch/soccer-staging/.modal_smoke_output.txt
+  -> 'Finished downloading files to local!' (download confirmed)
+Contents matched (diff clean) -> ROUNDTRIP-MATCH
+Both local files and the volume entry deleted after the proof.
+MODAL-SMOKE-OK

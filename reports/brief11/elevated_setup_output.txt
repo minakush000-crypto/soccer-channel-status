@@ -1,0 +1,33 @@
+== brief 11 elevated setup output (as run by Mayo, 2026-09-28) ==
+
+-- RUN 1, 2026-09-28T03:32:08Z (pre-fix script): failed at probe -
+   the d-remount helper did not create /mnt/d and /mnt is root-owned;
+   mount FAILED 'mount point does not exist' (see /var/log/d-remount.log)
+-- RUN 2, 2026-09-28T03:33:05Z (post-fix script, committed 4970472):
+
+== brief 11 elevated setup 2026-09-28T03:33:05Z ==
+installed /usr/local/bin/d-remount
+installed /usr/local/bin/d-trim
+installed /usr/local/bin/d-clean
+VISUDO-OK: /etc/sudoers.d/d-mount valid (d-remount, d-trim, d-clean only)
+D-PROBE-FAIL: /mnt/d not writable after install - check Get-Volume D
+
+-- post-run diagnosis (Flash, from /var/log/d-remount.log): run 2's mount
+   SUCCEEDED ('mount ok'); the probe failed because sleep 1 was shorter
+   than the 9p transport settle time. Verified minutes later WITHOUT any
+   re-run: touch+readback on /mnt/d passes (WRITE-OK) and
+   tools/scratch_mount.sh --check prints D-MOUNT-OK.
+-- SCRATCH-TREE was then created as user muads (mount uid=1000):
+   /mnt/d/scratch/{b2-cache,caches/{pip,uv,npm,huggingface,yt-dlp},soccer-channel-keys,soccer-staging}
+-- f-mount rule removal (brief 11 job 5, separate one-liner):
+   sudo rm /etc/sudoers.d/f-mount && echo F-SUDOERS-REMOVED
+
+VISUDO-OK: /etc/sudoers.d/d-mount valid (d-remount, d-trim, d-clean only)
+
+== f-mount rule removal (job 5, run by Mayo in his terminal 2026-09-28) ==
+F-SUDOERS-REMOVED
+Verification (Flash, 2026-09-28T03:5xZ): `sudo -n -l` lists ONLY
+/usr/local/bin/d-remount, /usr/local/bin/d-trim, /usr/local/bin/d-clean under
+NOPASSWD; `ls /etc/sudoers.d/f-mount` -> No such file or directory.
+The f-* helpers remain installed under /usr/local/bin but are no longer
+passwordless and nothing calls them.
