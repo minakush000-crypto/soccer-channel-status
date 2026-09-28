@@ -3756,3 +3756,28 @@ gate runner exposed a selftest that passed vacuously under `bash "$0"`
 Mayo: the Windows compact (windows_steps.md steps 1-4) is what turns the
 freed 2 GiB into real C: space; downloads/renders stay blocked by the
 guard until C: is back above 15G.
+
+## 2026-09-27 — BRIEF 07 jobs 1-4 (ECC install analysis, HARD STOP before install)
+
+Brief: install affaan-m/ECC into Claude Code, gated. Jobs 5-8 wait for Mayo's
+"APPROVED ECC". Job 1 (BACKUP) is BLOCKED at hardware: the Memorex USB stick on F:
+disconnected from Windows twice under sustained write (NTFS event 140 at 21:35 CDT,
+"device does not exist"; 100MB write took 65 s at 1.6 MB/s; the rollback tarball died
+at 147 MB of ~1.7 GB; volume NTFS-Healthy — this is a NEW failure mode, not the
+morning's corruption). Gates B32/B33 ABANDONed with a handoff to Mayo
+(reports/brief07/f_drive_failure.md). soccer-channel-keys lives only on that stick;
+recommended: re-plug/replace, then job 1 reruns and the keys get a B2 copy. Jobs 2-4
+done: ~/ECC cloned at v2.2.1 (npm ci via /dev/shm cache to spare the flapping F:,
+266 MB with node_modules), dry-run plan captured (814 copy ops + 1 settings merge +
+1 installer skip; 4.9 MB), counts/clashes/hooks/settings-diff/size/context-before all
+written to reports/brief07/. Key findings: ONE clash (design-system skill, installer
+refuses to overwrite it itself), 24 ECC hook entries appended to ~/.claude/settings.json
+with zero id collisions and the three existing entries (unlazy Stop, block-retired,
+warn-local-gpu) preserved; only two hooks use network, both loopback-local; gateguard
+writes ~/.gateguard; stop-format-typecheck batch-formats JS/TS files in the repo by
+design. Coordinator's plan numbers (146 skills/123 rules/83 hooks) did not match the
+real v2.2.1 plan (125/122/57) — measured here, not trusted. Context BEFORE measured
+39837 input tokens (headless session, command + raw output in context_before.txt).
+Gates B34-B38 PASS. Mirror pushed with brief07 added to ALLOW_REPORTS (same allowlist
+miss as brief 10, fixed first this time). NOTHING INSTALLED. Do not approve until the
+F: backup lands.

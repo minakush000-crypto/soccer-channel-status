@@ -1,0 +1,65 @@
+{
+ "artifact": "reports/brief07/ (11 files: ecc_plan.json, ecc_plan.txt, counts.txt, clashes.txt, hooks.txt, settings_diff.txt, size_estimate.txt, context_before.txt, f_drive_failure.md, summary.md, manifest)",
+ "project": "soccer-channel",
+ "task": "brief 07 jobs 1-4 (ECC install analysis, HARD STOP)",
+ "produced_by": "Flash (glm-5.3-flash:cloud) via Claude Code",
+ "produced_at": "2026-09-28T02:44:09Z",
+ "inputs": [
+  "briefs/brief07.md (2026-09-27, from /mnt/c/Users/muads/Downloads/brief07.md)",
+  "~/ECC @ v2.2.1 (commit 5064474d)",
+  "~/.claude/settings.json (current)",
+  "ecc_plan.json dry-run output"
+ ],
+ "tools": [
+  "git",
+  "npm ci",
+  "node scripts/ecc.js --dry-run",
+  "python (analysis)",
+  "rclone",
+  "claude -p (headless context measure)"
+ ],
+ "cost": "~70 min wall clock, one paid headless session (~40k input + 162 output tokens), F: backup NOT done (drive flaps)",
+ "note": "job 1 backup BLOCKED: Memorex F: stick disconnects under sustained write; B32/B33 abandoned; no install performed",
+ "files": {
+  "clashes.txt": {
+   "bytes": 748,
+   "sha256": "d3a814ad1c33cc4a1f75a77789e0997342ad815c706b23154f11ab4773738358"
+  },
+  "context_before.txt": {
+   "bytes": 1567,
+   "sha256": "071ebaf2a775336b814916838d709ff6c5bb0cc80bb418fc7474b795a6bf0e09"
+  },
+  "counts.txt": {
+   "bytes": 11039,
+   "sha256": "f805ceced79cf7ad3eae2eb827f62fefbe4f3829a09ea0f45b67bffd5083292f"
+  },
+  "ecc_plan.json": {
+   "bytes": 1180951,
+   "sha256": "8fe8c658be75e6f08aef9bca7f0b09e0e2faaa983ecfbc74bcceeaacb7d90757"
+  },
+  "ecc_plan.txt": {
+   "bytes": 78342,
+   "sha256": "3a4db0489005b2295ff4e35c847645f0e537dcc57ef8c8e746a9eba8feb3d76b"
+  },
+  "f_drive_failure.md": {
+   "bytes": 4272,
+   "sha256": "6a7405ee122b718c84378321cc5197bee3e7f13fcf0536bdebacf6aeac9621a2"
+  },
+  "hooks.txt": {
+   "bytes": 12876,
+   "sha256": "fb2d259b6c33701f54b7ffc29b2c8dadca531a7ef30e82eb319b2a2eb166f445"
+  },
+  "settings_diff.txt": {
+   "bytes": 3187,
+   "sha256": "c356d53328493a56173d21caff3522c7284f2cb7197376d6a4701bf4ea4e4189"
+  },
+  "size_estimate.txt": {
+   "bytes": 489,
+   "sha256": "14a5f887cf8df8f381d978a5a15a89b81b868172f3b02a089e935214a6c5ea08"
+  },
+  "summary.md": {
+   "bytes": 5238,
+   "sha256": "5d8ed17f2154edee2b66715afe111850edcfbca4d549e3a180ffd08b0965e8bc"
+  }
+ }
+}
