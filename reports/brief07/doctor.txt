@@ -1,0 +1,8 @@
+Doctor report:
+
+- claude-home
+  Status: OK
+  Install-state: /home/muads/.claude/ecc/install-state.json
+  Issues: none
+
+Summary: checked=1, ok=1, warnings=0, errors=0

@@ -2,7 +2,7 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-23 (brief 05 entries re-verify the files they name; earlier entries are historical).
+> **Last verified against code:** 2026-09-27 (brief 07 job 5: ECC data paths measured live in the new entry; earlier entries are historical).
 
 Chronological order (oldest first); append new entries at the end. Each
 entry is dated. "Why" is the actual reason, not a retcon. If a decision is
@@ -1036,3 +1036,29 @@ reads the deleted .anthropic_api_key with a graceful empty fallback).
 (the two tty warnings appear with an empty config too, proven). LICENSE
 and README.md at the home root were not in either list and remain.
 Nothing categorized PIPELINE or HARNESS was touched.
+
+## 2026-09-27 — ECC observation/learning data cap (brief 07 job 5, Mayo instruction)
+
+Decision: ECC's continuous-learning/observation data is capped by the disk
+guard, not by an ECC setting, because ECC v2.2.1 has no size cap of its own
+(only a 30-day mtime purge for archived observation files, verified by grep
+over continuous-learning-v2). tools/disk_guard.sh gained check 4
+(ecc_data_check): one combined 10 MB budget (DISK_GUARD_ECC_CAP_MB override)
+across the five paths the ECC hooks write on C::
+
+- ~/.local/share/ecc-homunculus  108K (7 files)  observations.jsonl + archive
+- ~/.claude/skills/learned       0 bytes (created empty by session-start hook)
+- ~/.claude/session-data         0 bytes (created empty)
+- ~/.claude/ecc                  932K (2 files: install-state.json, state.db)
+- ~/.gateguard                   8K (1 state file)
+
+Total at decision time: 1,001,763 B vs 10,485,760 B cap. The guard FAILs
+(default mode blocks entry points; report mode informs) when the total
+exceeds the cap; a faked 11 MB dir with a 5 MB cap is a positive control in
+disk_guard.sh --selftest (control 4), so the cap can fail honestly. Why: Mayo
+said "so it can never grow C: past a few MB"; the guard runs at session start
+and at every pipeline entry point, which is the existing enforcement point
+for all disk growth on this machine. Trade-off recorded: the cap counts
+ECC's memory-vault state.db (~932K) too; if legitimate memory growth trips
+it, the fix is pruning, and raising the cap is a one-variable override.
+Gate: B44.

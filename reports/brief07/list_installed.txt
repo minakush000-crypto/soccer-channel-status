@@ -1,0 +1,9 @@
+Installed ECC targets:
+
+- claude-home
+  Root: /home/muads/.claude
+  Installed: 2026-09-28T03:05:31.651Z
+  Profile: developer
+  Modules: rules-core, agents-core, commands-core, hooks-runtime, platform-configs, framework-language, database, skill-unified-memory, workflow-quality, orchestration
+  Legacy languages: (none)
+  Source version: 2.2.1

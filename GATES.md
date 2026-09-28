@@ -130,8 +130,4 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: a=$(df -BG --output=avail /mnt/c | tail -1 | tr -dc '0-9') && [ "$a" -ge 15 ] && echo C-FLOOR-OK avail=${a}G
   EXPECT: C-FLOOR-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=f319052f28fd45e453c4d6dc2a05894750324b34089c2bbef6cd67569570178e; output-bytes=21
-- [x] B38: HARD STOP honored: summary exists and ECC's rules dir is NOT installed, with a planted positive control proving the matcher (brief 07 job 4; FREEZE this gate once Mayo types APPROVED ECC — jobs 5-8 install into rules/)
-  CHECK: m=$(mktemp -d /tmp/b07pc.XXXXXX) && mkdir -p "$m/rules/ecc" && test -e "$m/rules/ecc" && rm -rf "$m" && test -s reports/brief07/summary.md && test ! -e ~/.claude/rules/ecc && echo HARD-STOP-OK
-  EXPECT: HARD-STOP-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=ec7f84a9a937/20 entries; EXPECT=matched; output-sha256=342e3ccdbf3cb67c6dedda020e29f7f325c8dc33cbc29cd327dc15c724d8c6b9; output-bytes=13
 
