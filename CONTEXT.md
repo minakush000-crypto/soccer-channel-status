@@ -112,7 +112,7 @@ disallowed goal at reel t=90, migration phases 5-8 unfinished.
 1. Work only in /home/muads/yt-digest/soccer-channel. Print pwd at the
    start of every response.
 2. Nothing heavy on the local N150; Modal (or RunPod) for >2min work.
-   Raw footage: residential download → /mnt/f staging → pod → delete
+   Raw footage: residential download → /mnt/d staging → pod → delete
    locally. Never raw footage to YouTube (CLAUDE.md §3).
 3. Every factual claim names the command you ran and pastes its output.
    If you did not run a command, write "not checked."

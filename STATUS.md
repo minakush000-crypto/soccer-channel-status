@@ -108,7 +108,7 @@ without a row, a row without a file, or wrong class totals fails gate B20.
    disconnects under sustained write (brief 07 evidence: NTFS event 140,
    1.6 MB/s, 147 MB of a 1.7 GB tarball). All caches + staging now live at
    /mnt/d/scratch/ (SD card, Disk 1, NTFS, ~12 MB/s write, ~124 MB/s read;
-   brief 11 job 3); disk_guard FAILS on any configured /mnt/f path
+   brief 11 job 3); disk_guard FAILS on any path on the retired F: stick
    (retired_f check, selftest control 5); f_mount.sh is a stub; the f-mount
    sudoers rule is removed; nothing on F: needed rescuing (keys .env.gpg
    already on B2, verified 1==1 in brief 07; leftovers listed read-only in
