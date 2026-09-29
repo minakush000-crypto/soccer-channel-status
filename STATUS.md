@@ -2,10 +2,10 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-28 (brief 12: census live —
-> CENSUS OK files=53 wired=33 handrun=20; three timeline proof boards
-> rendered on Modal, audited, archived to B2; gates B56-B61 written and
-> passed).
+> **Last verified against code:** 2026-09-28 (brief 14: census live —
+> CENSUS OK files=57 wired=36 handrun=21; hooks leaned 75 -> 23 global
+> entries, doctor clean; three timeline proof boards from brief 12 and
+> brief-13 sizing gates re-verified).
 
 Rewritten 2026-09-27 (brief 06) against the code on disk. Brief 03-05 history
 lives in DECISIONS.md, PROGRESS.md, and retired/. Every claim below carries
@@ -125,15 +125,24 @@ without a row, a row without a file, or wrong class totals fails gate B20.
    the scratch tree survived intact (reports/brief11/restart_check2.txt).
    Job 8 closed: reverify.txt ends ALL MET and reports/brief11/ is
    allowlisted on the mirror.
-5. **ECC INSTALLED at v2.2.1** (brief 07 jobs 5-8 done, APPROVED ECC
-   2026-09-27): 814 files + 24 hooks merged (unlazy Stop hook preserved,
-   hooks now Stop 8 / PreToolUse 11), doctor clean, context cost +10815
-   tokens (39837 to 50652 first-turn input), ECC data capped by disk-guard
-   check 4 at 10 MB (1.0 MB used), rollback documented (uninstall dry-run
-   would remove 816; B2 pre-ECC backup verified). Proof: reports/brief07/
-   reverify.txt ALL MET 34/34 at H=b43434a. GateGuard fact-forcing gates are
-   LIVE on Bash and first-touch Edit/Write: answer the requested facts, do
-   not disable them.
+5. **ECC INSTALLED at v2.2.1, then LEANED (brief 14, 2026-09-28)**: after
+   install (814 files, 24 hooks) the brief-14 lean pass found every ECC
+   hook command installed 3x. End state: global settings.json 23 hook
+   entries (was 75), Stop event 4 entries (unlazy, plan-canvas-pending,
+   ecc session-end, cost-tracker; removed desktop-notify,
+   evaluate-session, check-console-log, format-typecheck), 65 agents
+   (3 business removed), 3 MCP servers (filesystem/memory/
+   sequential-thinking out, no callers), 126 installed ECC skills (all
+   engineering), 127 foreign skills kept (owner unclear). ECC
+   install-state reconciled; doctor 0 warnings 0 errors. Session-start
+   wall 69.4s -> 51.8s; first-turn tokens 51,297 -> 51,151. GateGuard
+   fact-forcing stays LIVE (1-2 denials per benchmark run before and
+   after, identical counts). Rollback:
+   b2:mendymax-archive/backups/2026-09-28_claude_home_pre_lean.tar.gz
+   (md5 ee157ed3feed1876f7fbe7c0113cb0cd). Proof: reports/brief14/ +
+   reports/brief07/ history. GateGuard fact-forcing gates are LIVE on
+   Bash and first-touch Edit/Write: answer the requested facts, do not
+   disable them.
 
 ## Hand-run command reference
 

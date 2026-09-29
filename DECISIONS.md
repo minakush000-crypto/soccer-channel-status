@@ -1151,3 +1151,41 @@ Brief 12 (animated boards) decisions — 2026-09-28
   the marked foot points; the check is meaningful because the marks live
   OUTSIDE the spec (reports/brief13/marks.json) — a spec mutated after
   marking is caught, and the 150px positive control proves it.
+
+## Brief 14: lean harness (shared ~/.claude, both pipelines) — 2026-09-28
+
+Decisions taken while executing brief 14 (Mayo approved the brief's closed
+decisions; these are the Flash-level choices within them):
+
+1. Bench method (jobs 2/5): benchmarks run in a THROWAWAY git worktree with
+   the GATES.md filtered to evidenced gates only and the push_status
+   publisher stripped from the copy, so measurement sessions neither loop
+   on the brief's own unmet gates nor publish the mirror. Verified live:
+   a checked box without an EVIDENCE line still counts unmet in the unlazy
+   checker. Both before-runs and after-runs use the identical filter.
+   After-worktree used /mnt/d/scratch (D:) because /tmp tmpfs was 96% full.
+2. Hook dedupe keyed on (matcher, command set): the three install passes
+   stored the same command with different optional id/description fields,
+   so whole-group hashing could not see them. Final rule: identical
+   matcher + command = one entry; the retained copy must be the
+   ECC-managed one (id + description present) so ecc.js doctor stays clean.
+3. install-state.json was RECONCILED to the intentional end state (3 agent
+   copy-file operations dropped, 4 removed Stop hook ids dropped from
+   managedHooks). This is the honest re-baseline: doctor re-derives from
+   state and reports clean (0 warnings, 0 errors). Recorded here as the
+   documented way to trim ECC hooks, because ECC has no per-hook
+   uninstall; the full rollback is the job-1 B2 tarball.
+4. Agents removed per closed decision 1: chief-of-staff,
+   healthcare-reviewer, marketing-agent (ECC baseline:agents). Skills
+   removed: NONE (the brief's ECC examples were never installed; the
+   foreign 127-skill kit has an unclear owner and stays per the brief's
+   own rule). Recorded as a brief-15 lever.
+5. MCP servers removed from ~/.claude.json: filesystem, memory,
+   sequential-thinking (zero callers proven in
+   reports/brief14/mcp_callers.txt). Kept: github, brave-search,
+   puppeteer. claude-mem plugin tools untouched.
+6. push_status.sh allowlist extended with brief14 (same as brief13).
+7. Measurement caveat, recorded honestly: Stop-hook runtime was timed per
+   unique child with a synthetic b14probe payload (wrapper passes reject
+   the synthetic payload early and are not representative);
+   push_status excluded from timing on purpose (it publishes).

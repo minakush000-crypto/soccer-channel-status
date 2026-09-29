@@ -65,7 +65,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=cc85e10d1953171f063334d761b10ad26c5efdaacdc79d39a140634d25aecc66; output-bytes=1707
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=1bb49256a870cc23bd951cf34f16a1d29c3ff7d5646a3c0fb00e397fa76919cf; output-bytes=1736
 - [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
@@ -89,7 +89,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B27: the disk guard exists and is wired to every entry point (5+ callers grepped, not counted by memory)
   CHECK: test -x tools/disk_guard.sh && n=$(grep -rlE "disk_guard\.sh" tools/ .claude/hooks/ 2>/dev/null | grep -v "disk_guard.sh$" | wc -l) && [ "$n" -ge 5 ] && echo GUARD-WIRED callers=$n
   EXPECT: GUARD-WIRED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=b784b78d958ced207308d63c2ef966414513164ac01f938602eb103b7b5cb867; output-bytes=23
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=63a1455860d7da6aed83be200f505957a828ed7bed36d8032fc116b81046f595; output-bytes=23
 - [x] B28: the guard's positive controls FAIL on faked states (100000G floor; unmounted-F target) and the cleanup exemption PASSES
   CHECK: bash tools/disk_guard.sh --selftest
   EXPECT: GUARD-SELFTEST-OK
@@ -261,7 +261,8 @@ reports/brief14/plan.json, authored in job 3; the oracles read that file, so
 no gate hard-codes skill names. Oracle files under reports/brief14/ are
 committed alongside the proof.
 
-- [ ] B69: the pre-change harness backup exists at
+- [x] B69: the pre-change harness backup exists at
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=61ddeaa0dd8e171d5b692fcbcd3c485ecab261575e2aeb6f57f7ece74306f02d; output-bytes=16
       b2:mendymax-archive/backups/2026-09-28_claude_home_pre_lean.tar.gz and
       verifies: the downloaded tarball's md5 equals the md5 captured on the
       streamed upload (reports/brief14/backup_upload.md5) and its tar listing
@@ -269,7 +270,8 @@ committed alongside the proof.
       (reports/brief14/backup_listing.txt)
   CHECK: a=$(cut -d' ' -f1 reports/brief14/backup_upload.md5) && rclone copyto b2:mendymax-archive/backups/2026-09-28_claude_home_pre_lean.tar.gz /tmp/b14_backup_verify.tar.gz && b=$(md5sum /tmp/b14_backup_verify.tar.gz | cut -d' ' -f1) && n=$(tar tzf /tmp/b14_backup_verify.tar.gz | wc -l) && e=$(tail -1 reports/brief14/backup_listing.txt) && [ "$a" = "$b" ] && [ "$n" -eq "$e" ] && echo BACKUP-VERIFIED
   EXPECT: BACKUP-VERIFIED
-- [ ] B70: reports/brief14/before.md records the before measurements: the
+- [x] B70: reports/brief14/before.md records the before measurements: the
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=0e66a8d245d7fd486465e9e017e0c7a84de02e7d073ec374efdf69f2e2f1d4e8; output-bytes=16
       session-start token run with the brief-07 headless command (method, raw
       excerpt, first-turn and aggregate input tokens), benchmark run 1 and
       run 2 each with wall time, input tokens, turns and a correctness
@@ -277,62 +279,74 @@ committed alongside the proof.
       hook per event with owner and measured runtime
   CHECK: grep -q "SESSION-START-TOKENS" reports/brief14/before.md && grep -q "BENCH-RUN-1" reports/brief14/before.md && grep -q "BENCH-RUN-2" reports/brief14/before.md && grep -q "HOOKS-TABLE" reports/brief14/before.md && echo BEFORE-RECORDED
   EXPECT: BEFORE-RECORDED
-- [ ] B71: plan.md and plan.json are complete and mutually consistent: every
+- [x] B71: plan.md and plan.json are complete and mutually consistent: every
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=c42a7bce6ac2c131a5f55766770298ffaf806fc06f287854da58ff69efc5ca04; output-bytes=1089
       planned removal names an owner and a reason, all removal/keep keys are
       present, and the md carries the counts before/after block
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py plan
   EXPECT: PLAN-CONSISTENT
-- [ ] B72: the applied filesystem end state matches the plan: every
+- [x] B72: the applied filesystem end state matches the plan: every
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=54301e29f94272dcb9fa163df94351cdd31dfeb668762fa5dabc0e7ceab24940; output-bytes=630
       planned-removed skill/agent directory is gone, every planned-kept one
       is present, claude-mem is untouched, and live skills/agents counts
       equal the plan's after counts
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py applied
   EXPECT: APPLIED-MATCHES-PLAN
-- [ ] B73: the hook end state matches the plan across every settings file
+- [x] B73: the hook end state matches the plan across every settings file
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=d8bbf1233ca04d9a1f14a0478845de31a7f2e8d11749e5aca3aa5d9af6126e4d; output-bytes=529
       (global, soccer project, jiheeye project): every planned-removed hook
       snippet absent, every planned-kept snippet present (unlazy Stop, soccer
       push_status, disk guard, jiheeye hooks, claude-mem)
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py hooks
   EXPECT: HOOKS-STATE-OK
-- [ ] B74: the MCP end state matches the plan: filesystem, memory and
+- [x] B74: the MCP end state matches the plan: filesystem, memory and
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=f3d812d052c5f94293ae025d7742d5f7419eeddd5d47a8a553d75e281e6af14c; output-bytes=206
       sequential-thinking absent from ~/.claude.json, github, brave-search
       and puppeteer still present, and the no-caller grep evidence is saved
       (reports/brief14/mcp_callers.txt)
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py mcp
   EXPECT: MCP-STATE-OK
-- [ ] B75: the read-discipline rule is standing in ~/.claude/CLAUDE.md
+- [x] B75: the read-discipline rule is standing in ~/.claude/CLAUDE.md
   CHECK: grep -q "Read discipline" /home/muads/.claude/CLAUDE.md && grep -q "Grep first" /home/muads/.claude/CLAUDE.md && echo READ-RULE-PRESENT
   EXPECT: READ-RULE-PRESENT
-- [ ] B76: planned auto-memory files were merged into SYSTEM.md pointers
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=e235ecef97c424be071e22e3a4e12a8c181aa14bbc8e9f03a31a3457d1bed834; output-bytes=18
+- [x] B76: planned auto-memory files were merged into SYSTEM.md pointers
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=d781c4148e18ceeb92bb8f41be5a0259010997fae68aaa153eae7033ca558d89; output-bytes=258
       (short, name SYSTEM.md) and planned-kept memory files remain in place
       (both memory dirs: yt-digest and soccer-channel)
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py memory
   EXPECT: MEMORY-MERGED-OK
-- [ ] B77: ECC doctor reports zero warnings and zero errors for what remains
+- [x] B77: ECC doctor reports zero warnings and zero errors for what remains
   CHECK: node /home/muads/ECC/scripts/ecc.js doctor > /tmp/b14_doctor.txt 2>&1 && grep -q "warnings=0" /tmp/b14_doctor.txt && grep -q "errors=0" /tmp/b14_doctor.txt && echo DOCTOR-CLEAN
   EXPECT: DOCTOR-CLEAN
-- [ ] B78: reports/brief14/after.md carries the before/after table with all
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=dd49e82c3de041ea16e143bea972a11696d09ed16c56c2d33c20437f6f6b08dc; output-bytes=13
+- [x] B78: reports/brief14/after.md carries the before/after table with all
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=42fefc84b182780d3d17af9b3600c730b615eafbecbe59cdf851380b1f617f64; output-bytes=485
       seven done-means rows (session_start_tokens, bench_wall_ms,
       bench_input_tokens, skills, agents, stop_hooks, mcp_tools), each side
       numeric
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py after_table
   EXPECT: AFTER-TABLE-OK
-- [ ] B79: no regression bundle: soccer disk_guard selftest, scratch_mount
+- [x] B79: no regression bundle: soccer disk_guard selftest, scratch_mount
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=8929fb6a7804dcee3c7e8375e60d03cc90cbae587211f8e8305eece783612a3f; output-bytes=301
       --check, jiheeye disk_guard selftest (read-only), brief13 board-render
       identity gate re-run locally without Modal, and both after benchmark
       runs' answers equal the same-time locally counted truth
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py quality
   EXPECT: QUALITY-NO-REGRESSION
-- [ ] B80: ~/.claude/SYSTEM.md section 5 reflects the lean end state (new
+- [x] B80: ~/.claude/SYSTEM.md section 5 reflects the lean end state (new
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=073278c2b63223f056584b89d465acd56553a1c5fa4930fcb23e5a9273564a22; output-bytes=16
       counts, hooks list, MCP list, read rule, dated 2026-09-28) and a copy
       is streamed to b2:mendymax-archive/system/2026-09-28_SYSTEM.md
   CHECK: grep -q "2026-09-28" /home/muads/.claude/SYSTEM.md && grep -qi "brief 14" /home/muads/.claude/SYSTEM.md && rclone lsf b2:mendymax-archive/system/ 2>/dev/null | grep -q "2026-09-28_SYSTEM" && echo SYSTEM-STREAMED
   EXPECT: SYSTEM-STREAMED
-- [ ] B81: both repos' DECISIONS.md carry a dated brief-14 entry recording
+- [x] B81: both repos' DECISIONS.md carry a dated brief-14 entry recording
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=f2e9d355c9b873bb40d63304022fb83fe9bfe11e9ab4409c2328a5ba6a79ceb5; output-bytes=21
       what was removed and kept in the shared harness
   CHECK: grep -qi "brief 14" /home/muads/yt-digest/soccer-channel/DECISIONS.md && grep -qi "brief 14" /home/muads/jiheeye-ultra/DECISIONS.md && echo DECISIONS-BOTH-REPOS
   EXPECT: DECISIONS-BOTH-REPOS
-- [ ] B82: the reverify proof ending ALL MET, run after the last code commit,
+- [x] B82: the reverify proof ending ALL MET, run after the last code commit,
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=3be1501a5a88c1302475ed12070303ab4f36ed58c783765a8dc419e12e7c018e; output-bytes=13
       is published in reports/brief14/reverify.txt
   CHECK: test -s reports/brief14/reverify.txt && grep -q "ALL MET" reports/brief14/reverify.txt && echo REVERIFY-B14
   EXPECT: REVERIFY-B14

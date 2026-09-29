@@ -3956,3 +3956,45 @@ Job 8 (PROOF): gates B62-B68 written before implementation and passing;
 TOOLS.md + census refreshed (56 rows, 35 WIRED + 21 HAND-RUN); STATUS/
 CONTEXT/PROGRESS/DECISIONS updated; formal --reverify published to
 reports/brief13/reverify.txt after the last code commit; mirror pushed.
+
+## Brief 14 — lean harness (shared ~/.claude, both pipelines) — 2026-09-28
+
+Backup (job 1): ~/.claude + ~/.claude.json streamed to
+b2:mendymax-archive/backups/2026-09-28_claude_home_pre_lean.tar.gz, md5
+verified (upload-stream md5 ee157ed3feed1876f7fbe7c0113cb0cd = downloaded;
+tar listing 17843/17843). Before (job 2, reports/brief14/before.md):
+session-start first-turn input 51,297 (wall 69.4s); benchmark runs in a
+THROWAWAY worktree with the ledger filtered to evidenced gates + the
+publisher stripped (verified: checked box without EVIDENCE still counts
+unmet; contaminated repo-cwd runs recorded as observations): run1 wall
+118.37s aggregate input 109,455, run2 244.72s/90,049, both CORRECT (55
+gates on the filtered ledger; census 57/36/21). Hook inventory: 94
+entries; every ECC hook installed 3x (sha-verified). Per-child runtimes
+measured; desktop-notify 3,092ms per Stop x3. MCP: 6 configured, only
+brave-search + claude-mem expose tools in sessions.
+Plan (job 3, plan.md/plan.json): removable skill set EMPTY (the brief's
+ECC business examples were never installed; the 127-skill foreign kit
+stays, owner unclear); 3 agents (chief-of-staff, healthcare-reviewer,
+marketing-agent), 4 Stop children removed + dedupe, 3 MCP servers, 1
+memory merge, read-discipline rule.
+Apply (job 4): settings.json 75 -> 23 hook entries (dedupe keyed on
+matcher+commands; retained copies = the ECC-managed ones so doctor stays
+clean); Stop event 25 -> 7 total across all sources. MCP ~/.claude.json 6
+-> 3. Agents 68 -> 65. ECC install-state.json reconciled (3 agent ops +
+4 hook ids dropped; documented in DECISIONS.md); ecc.js doctor 0 warnings
+0 errors. Memory: soccer-channel-capability-enablement.md -> SYSTEM.md
+pointer + index line. CLAUDE.md: Read discipline section. Backup
+.settings.json.bak/bak2/bak3 + .claude.json.bak-mcp + install-state.bak
+kept beside originals; full rollback = job-1 B2 tarball.
+After (job 5, after.md): session-start 51,151 tokens (wall 51.83s,
+-25.6%); bench: 4 after-runs (2 max-turns no-answer, 2 answering BOTH
+CORRECT; fact-gate denial counts identical before/after), aggregate
+input mean 99,752 -> 76,912 (-23%); skills 253->253, agents 68->65,
+Stop entries 25->7, mcp tools 15->17 (brave connects now, 6->3 servers).
+Quality (job 6): QUALITY-NO-REGRESSION (soccer disk_guard selftest,
+scratch_mount --check, jiheeye disk_guard selftest, brief13 board-render
+identity gate, bench correctness vs same-time truth). SYSTEM.md section 5
+rewritten + streamed to B2 system/2026-09-28_SYSTEM.md.tar.gz (job 7).
+Proof (job 8): reverify two-pass per the brief-11 pattern in
+reports/brief14/reverify.txt. Both repos' DECISIONS.md record the change
+(jiheeye commit 6b8e0c7).
