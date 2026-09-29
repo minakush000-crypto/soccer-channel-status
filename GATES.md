@@ -350,3 +350,69 @@ committed alongside the proof.
       is published in reports/brief14/reverify.txt
   CHECK: test -s reports/brief14/reverify.txt && grep -q "ALL MET" reports/brief14/reverify.txt && echo REVERIFY-B14
   EXPECT: REVERIFY-B14
+
+Brief 15 gates (overlay styling pass + text, title and stat cards; added
+2026-09-29 before implementation, per unlazy). Oracle: tools/brief15_check.py
+(WIRED, TOOLS.md). The card-spec audits reuse the brief-12/13 page-audit
+mechanism (node tools/board_html.js --audit-only with the local cached
+chrome; writes only under /tmp).
+
+- [ ] B83: the 60-skill marketing kit is removed and verifiable: roster dirs
+      absent under ~/.claude/skills, skills dir count 193, the B2 backup's
+      upload/download md5s match (two lines in kit_removal.md), tar listing
+      count 413, ecc.js doctor clean, brief-07 session-start tokens recorded
+      before AND after, and both repos' DECISIONS.md carry the removal entry
+      (report: reports/brief15/kit_removal.md)
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py kit
+  EXPECT: KIT-REMOVAL-OK
+- [ ] B84: the overlay restyle is enforced by the page audit: ground
+      ellipses at least 2x previous size (rx floor 64, ry floor 24 at
+      1080p), link/arrow widths at least 3x previous (floor 12), chips
+      larger with a thin border (size floor 40, h floor 56), pressing discs
+      at least 2x (radius floor 24), polygon more opaque (alpha >= 0.28),
+      and the vignette darkening outside the marked area recorded in
+      0.25-0.35; a planted sub-minimum ellipse FAILS the audit (positive
+      control)
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py overlay
+  EXPECT: OVERLAY-STYLE-OK
+- [ ] B85: freeze points re-checked against broadcaster graphics: every
+      moment records either banner bboxes (hand-measured from the frame via
+      the vision report) or a clear verdict, the marked-area extents do not
+      intersect the banner bboxes, and a planted intersecting banner FAILS
+      the check (positive control); freeze shifts move by whole frame
+      counts at the clip fps with the new frozen frame stamped in marks.json
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py freeze
+  EXPECT: FREEZE-CLEAR-OK
+- [ ] B86: the five card types exist in the timeline renderer (same
+      renderer, no second one) and every card number traces to a cached raw
+      response (numeric-leaf walk with choreography exemptions); a planted
+      wrong number FAILS the walk (positive control)
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py cards
+  EXPECT: CARDS-FACTS-OK
+- [ ] B87: every brief-15 render is real: 4 restyled overlay clips and 5
+      card renders exist at 1080p H.264 (codec, fps, duration within one
+      frame of spec), with a render_manifest.json recording sha256, bytes,
+      duration and codec per render; sizes cross-checked against B2 sha1
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py renders
+  EXPECT: RENDERS-OK
+- [ ] B88: the visual check is recorded: reports/brief15/visual_check.md
+      covers every render with a keyframe verdict (480p readability, no
+      element hiding another, numbers match facts, names carry evidence)
+      and ends EVERY-RENDER-CHECKED
+  CHECK: test -s reports/brief15/visual_check.md && grep -q "EVERY-RENDER-CHECKED" reports/brief15/visual_check.md && echo VISUAL-CHECK-OK
+  EXPECT: VISUAL-CHECK-OK
+- [ ] B89: the publish artifacts exist: overlay before/after sheets and
+      per-card sheets at 640px width, photo_sources.md with a full row per
+      photo (url, owner/licence, claim-risk note), full-res MP4s archived to
+      B2 with a JSON manifest next to them
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py publish
+  EXPECT: PUBLISH-OK
+- [ ] B90: ~/.claude/SYSTEM.md carries the decision-1 change-log mapping
+      line, the kit outcome in section 5, and a dated copy is streamed to
+      b2:mendymax-archive/system/2026-09-29_SYSTEM.md
+  CHECK: grep -q "audit ledger" /home/muads/.claude/SYSTEM.md && grep -qi "kit" /home/muads/.claude/SYSTEM.md && rclone lsf b2:mendymax-archive/system/ 2>/dev/null | grep -q "2026-09-29_SYSTEM" && echo SYSTEM-B15-OK
+  EXPECT: SYSTEM-B15-OK
+- [ ] B91: the reverify proof ending ALL MET, run after the last code
+      commit, is published in reports/brief15/reverify.txt
+  CHECK: test -s reports/brief15/reverify.txt && grep -q "ALL MET" reports/brief15/reverify.txt && echo REVERIFY-B15
+  EXPECT: REVERIFY-B15

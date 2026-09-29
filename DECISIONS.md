@@ -1189,3 +1189,19 @@ decisions; these are the Flash-level choices within them):
    unique child with a synthetic b14probe payload (wrapper passes reject
    the synthetic payload early and are not representative);
    push_status excluded from timing on purpose (it publishes).
+
+## Brief 15 job 0: the marketing kit — traced, backed up, removed — 2026-09-29
+Traced the 127-skill block to a community marketing kit family
+(coreyhaines31/marketingskills on GitHub; our files are an older v2.2.0
+snapshot, installed 2026-08-26 00:07 CDT as plain dirs, no lock/plugin/ECC
+ownership). Machine roster: 49 skills carry the kit's product-marketing
+dependency marker + 11 same-family marketing skills read individually =
+60 removed. Use check: zero callers in either repo, hooks or rules (all
+hits were plain-word prose: "too many ads" in a prompt, "attribution" in a
+comment). Backup verified (md5 + listing). Removed 60 dirs; skills
+253 -> 193; ecc.js doctor clean; brief-07 session-start tokens 51,175 ->
+51,143 (-32; the headless first turn does not carry skill descriptions,
+so the kit's context share is not visible to that method). Kept
+deliberately: the 67 non-marketing members of the old 127 block
+(superpowers engineering pack, Anthropic document/creative skills, this
+repo's own skills, the design/UI kit, product-lens, growth-log).

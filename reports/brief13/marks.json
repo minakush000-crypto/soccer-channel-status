@@ -7,7 +7,7 @@
    "id": "sev_overload",
    "match_slug": "2026-09-19_sevilla-fc-barcelona",
    "clip": "brief13/sevilla_barca_laliga.mp4",
-   "freeze_at": 92.0,
+   "freeze_at": 92.133,
    "frame_id": "sev_0092p0s",
    "side": "away",
    "story": "Raphinha's 52' build-up: two Barcelona shirts converge on the single Sevilla presser at the edge of the box (a 2v1), while the far white defender is detached. Editorial labels only: no shirt number is readable on any of the four players at this zoom, so the evidence rule forbids names.",
@@ -105,7 +105,22 @@
       "source": "schematic (open lane into the box, illustrative)"
      }
     }
-   ]
+   ],
+   "banner_check": {
+    "clear": false,
+    "bboxes": [
+     [
+      60,
+      855,
+      1090,
+      1040
+     ]
+    ],
+    "evidence": "stamped frames sevb15_0090/0092/0094/0096 (640x360->x3): LALIGA scorebug + RAPHINHA lower-third bottom-left x60-1090 y855-1040; mark rects (pad 80) right of x1137 -> clear",
+    "checked_at": "2026-09-29T06:08:21Z",
+    "shift_frames": 4,
+    "previous_freeze_at": 92.0
+   }
   },
   {
    "id": "sev_block",
@@ -260,7 +275,13 @@
       "source": "marked:sev_0127p0s/ball -> attacker"
      }
     }
-   ]
+   ],
+   "banner_check": {
+    "clear": true,
+    "bboxes": [],
+    "evidence": "stamped frames sevb15_0125/0127/0129: bottom strip clean, no lower-third at the block moment",
+    "checked_at": "2026-09-29T06:08:21Z"
+   }
   },
   {
    "id": "rac_farpost",
@@ -375,7 +396,20 @@
       "source": "marked:rac_0087p0s/ball -> run line (schematic path)"
      }
     }
-   ]
+   ],
+   "banner_check": {
+    "clear": false,
+    "bboxes": [
+     [
+      0,
+      730,
+      1120,
+      810
+     ]
+    ],
+    "evidence": "stamped frames racb15_0085/0087: RAPHINHA lower-third x0-1120 y730-810; marks raphinha(1206,479)/watcher(1146,543)/ball(1120,296) above/right, yamal(1104,968) below the band -> all clear",
+    "checked_at": "2026-09-29T06:08:21Z"
+   }
   },
   {
    "id": "rac_freekick",
@@ -521,7 +555,20 @@
       "source": "schematic (shot path over the wall, illustrative)"
      }
     }
-   ]
+   ],
+   "banner_check": {
+    "clear": false,
+    "bboxes": [
+     [
+      0,
+      730,
+      1120,
+      810
+     ]
+    ],
+    "evidence": "stamped frames racb15_0150/0152/0154: RAPHINHA lower-third x0-1120 y730-810; wall marks x>=1216 (canales 16px pad-margin), ball above the band -> clear",
+    "checked_at": "2026-09-29T06:08:21Z"
+   }
   }
  ]
 }

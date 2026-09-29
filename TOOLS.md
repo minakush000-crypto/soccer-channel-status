@@ -45,6 +45,7 @@ exists — anything dead is deleted or in retired/.
 | `brief12_check.py` | WIRED | GATES B56-B61 | brief-12 gate oracle: specs/durations/keyframes/swap/sheets/numbers over reports/brief12/render_manifest.json (writes only under /tmp) |
 | `brief13_check.py` | WIRED | GATES B62-B65 | brief-13 gate oracle: sizing/overlap/identity/drift with positive controls (writes only under /tmp) |
 | `brief14_check.py` | WIRED | GATES B71-B79 | brief-14 gate oracle: plan/applied/hooks/mcp/memory/after_table/quality over reports/brief14/plan.json (reads settings and ~/.claude.json; writes only under /tmp) |
+| `brief15_check.py` | WIRED | GATES B83-B89 | brief-15 gate oracle: kit/overlay/freeze/cards/renders/publish (page audits via node board_html.js --audit-only, cached chrome; writes only under /tmp) |
 | `brief13_overlays.py` | WIRED | pod_build.py render_footage; brief 13 jobs 3-5 | freeze-frame overlay spec emitter from reports/brief13/marks.json (image-space steps, identity sources) |
 | `brief13_frames.py` | HAND-RUN | hand-invoked (brief 13 jobs 4-6) | pod-side stamped/clean/full-res frame extraction for marking + visual check (frames live on the volume) |
 | `brief12_timeline.py` | WIRED | brief 12 job 5 (proof boards); brief 16 assembly | timeline spec emitter (formation / runners / move) from match_data + raw cache, per docs/board_timeline.md |
