@@ -1,0 +1,9 @@
+--- PATTERN: mcp__filesystem
+--- PATTERN: mcp__memory
+--- PATTERN: mcp__sequential
+--- PATTERN: sequential-thinking
+/home/muads/yt-digest/soccer-channel/GATES.md
+/home/muads/yt-digest/soccer-channel/briefs/brief14.md
+--- PATTERN: mcp__puppeteer
+--- PATTERN: mcp__github
+NO-CALLER-EVIDENCE-COMPLETE

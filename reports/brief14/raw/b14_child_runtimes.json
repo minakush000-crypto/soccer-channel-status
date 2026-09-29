@@ -1,0 +1,170 @@
+[
+ {
+  "elapsed_ms": 91,
+  "event": "Stop",
+  "exit": 0,
+  "key": "plan-canvas-pending",
+  "out": "{\"hook_event_name\": \"Stop\", \"session_id\": \"b14probe\", \"transcript_path\": \"/tmp/b14probe.jsonl\", \"cwd\": \"/home/muads/yt-d",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 143,
+  "event": "Stop",
+  "exit": 0,
+  "key": "format-typecheck",
+  "out": "{\"hook_event_name\": \"Stop\", \"session_id\": \"b14probe\", \"transcript_path\": \"/tmp/b14probe.jsonl\", \"cwd\": \"/home/muads/yt-d",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 240,
+  "event": "Stop",
+  "exit": 0,
+  "key": "evaluate-session",
+  "out": "{\"hook_event_name\": \"Stop\", \"session_id\": \"b14probe\", \"transcript_path\": \"/tmp/b14probe.jsonl\", \"cwd\": \"/home/muads/yt-d",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 390,
+  "event": "Stop",
+  "exit": 0,
+  "key": "session-end",
+  "out": "{\"hook_event_name\": \"Stop\", \"session_id\": \"b14probe\", \"transcript_path\": \"/tmp/b14probe.jsonl\", \"cwd\": \"/home/muads/yt-d",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 613,
+  "event": "Stop",
+  "exit": 0,
+  "key": "check-console-log",
+  "out": "{\"hook_event_name\": \"Stop\", \"session_id\": \"b14probe\", \"transcript_path\": \"/tmp/b14probe.jsonl\", \"cwd\": \"/home/muads/yt-d",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 225,
+  "event": "PreToolUse",
+  "exit": 0,
+  "key": "gateguard-fact-force",
+  "out": "{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"deny\",\"permissionDecisionReason\":\"[Fact-Forcin",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 374,
+  "event": "PreToolUse",
+  "exit": 0,
+  "key": "pre-bash-dispatcher",
+  "out": "{\"hook_event_name\":\"PreToolUse\",\"session_id\":\"b14probe\",\"tool_name\":\"Bash\",\"tool_input\":{\"command\":\"rm -rf /tmp/b14probe",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 264,
+  "event": "PreToolUse",
+  "exit": 0,
+  "key": "doc-file-warning",
+  "out": "{\"hook_event_name\": \"PreToolUse\", \"session_id\": \"b14probe\", \"tool_name\": \"Bash\", \"tool_input\": {\"command\": \"rm -rf /tmp/",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 866,
+  "event": "Stop",
+  "exit": 0,
+  "key": "cost-tracker",
+  "out": "{\"hook_event_name\": \"Stop\", \"session_id\": \"b14probe\", \"transcript_path\": \"/tmp/b14probe.jsonl\", \"cwd\": \"/home/muads/yt-d",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 456,
+  "event": "PreToolUse",
+  "exit": 0,
+  "key": "suggest-compact",
+  "out": "{\"hook_event_name\": \"PreToolUse\", \"session_id\": \"b14probe\", \"tool_name\": \"Bash\", \"tool_input\": {\"command\": \"rm -rf /tmp/",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 209,
+  "event": "PreToolUse",
+  "exit": 0,
+  "key": "governance-capture",
+  "out": "{\"hook_event_name\": \"PreToolUse\", \"session_id\": \"b14probe\", \"tool_name\": \"Bash\", \"tool_input\": {\"command\": \"rm -rf /tmp/",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 148,
+  "event": "PreToolUse",
+  "exit": 0,
+  "key": "config-protection",
+  "out": "{\"hook_event_name\": \"PreToolUse\", \"session_id\": \"b14probe\", \"tool_name\": \"Bash\", \"tool_input\": {\"command\": \"rm -rf /tmp/",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 645,
+  "event": "PreToolUse",
+  "exit": 1,
+  "key": "observe-runner",
+  "out": "[ecc] HOME= is not absolute; cannot resolve homunculus dir|",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 167,
+  "event": "SessionStart",
+  "exit": 0,
+  "key": "plan-canvas-sessions",
+  "out": "{\"hook_event_name\": \"SessionStart\", \"session_id\": \"b14probe\", \"source\": \"startup\", \"cwd\": \"/home/muads/yt-digest/soccer-",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 395,
+  "event": "PreToolUse",
+  "exit": 0,
+  "key": "mcp-health-check-pre",
+  "out": "{\"hook_event_name\": \"PreToolUse\", \"session_id\": \"b14probe\", \"tool_name\": \"Bash\", \"tool_input\": {\"command\": \"rm -rf /tmp/",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 398,
+  "event": "PreCompact",
+  "exit": 0,
+  "key": "pre-compact",
+  "out": "{\"hook_event_name\": \"PreCompact\", \"session_id\": \"b14probe\", \"trigger\": \"manual\", \"cwd\": \"/home/muads/yt-digest/soccer-ch",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 220,
+  "event": "PostToolUseFailure",
+  "exit": 0,
+  "key": "skill-run-tracker",
+  "out": "{\"hook_event_name\": \"PostToolUseFailure\", \"session_id\": \"b14probe\", \"tool_name\": \"Bash\", \"cwd\": \"/home/muads/yt-digest/s",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 308,
+  "event": "PostToolUse",
+  "exit": 0,
+  "key": "posttooluse-dispatcher",
+  "out": "",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 665,
+  "event": "SessionStart",
+  "exit": 0,
+  "key": "session-start-bootstrap",
+  "out": "{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"Project type: {\\\"languages\\\":[\\\"python\\\",\\\"ja",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 336,
+  "event": "PostToolUseFailure",
+  "exit": 0,
+  "key": "mcp-health-check-post",
+  "out": "{\"hook_event_name\": \"PostToolUseFailure\", \"session_id\": \"b14probe\", \"tool_name\": \"Bash\", \"cwd\": \"/home/muads/yt-digest/s",
+  "timed_out": false
+ },
+ {
+  "elapsed_ms": 3092,
+  "event": "Stop",
+  "exit": 0,
+  "key": "desktop-notify",
+  "out": "{\"hook_event_name\": \"Stop\", \"session_id\": \"b14probe\", \"transcript_path\": \"/tmp/b14probe.jsonl\", \"cwd\": \"/home/muads/yt-d",
+  "timed_out": false
+ }
+]
