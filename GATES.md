@@ -254,3 +254,85 @@ which touches nothing in the repo (writes only under /tmp).
   CHECK: m=/home/muads/.claude/projects/-home-muads-yt-digest-soccer-channel/memory && test ! -f "$m/tactical-dominant-balance.md" && ! grep -qE "tactical_render|step4" "$m/stop-adding-start-replacing.md" && echo MEMORY-CLEAN
   EXPECT: MEMORY-CLEAN
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=5fb5264d6ab0/20 entries; EXPECT=matched; output-sha256=1b950285411cb4e78de19aadc8aa162e4aea1c26df2f061056836f8d1e8b16bc; output-bytes=13
+
+Brief 14 gates (lean harness on shared ~/.claude, both pipelines; added
+2026-09-28 before implementation, per unlazy). Removal sets live only in
+reports/brief14/plan.json, authored in job 3; the oracles read that file, so
+no gate hard-codes skill names. Oracle files under reports/brief14/ are
+committed alongside the proof.
+
+- [ ] B69: the pre-change harness backup exists at
+      b2:mendymax-archive/backups/2026-09-28_claude_home_pre_lean.tar.gz and
+      verifies: the downloaded tarball's md5 equals the md5 captured on the
+      streamed upload (reports/brief14/backup_upload.md5) and its tar listing
+      count equals the locally streamed listing count
+      (reports/brief14/backup_listing.txt)
+  CHECK: a=$(cut -d' ' -f1 reports/brief14/backup_upload.md5) && rclone copyto b2:mendymax-archive/backups/2026-09-28_claude_home_pre_lean.tar.gz /tmp/b14_backup_verify.tar.gz && b=$(md5sum /tmp/b14_backup_verify.tar.gz | cut -d' ' -f1) && n=$(tar tzf /tmp/b14_backup_verify.tar.gz | wc -l) && e=$(tail -1 reports/brief14/backup_listing.txt) && [ "$a" = "$b" ] && [ "$n" -eq "$e" ] && echo BACKUP-VERIFIED
+  EXPECT: BACKUP-VERIFIED
+- [ ] B70: reports/brief14/before.md records the before measurements: the
+      session-start token run with the brief-07 headless command (method, raw
+      excerpt, first-turn and aggregate input tokens), benchmark run 1 and
+      run 2 each with wall time, input tokens, turns and a correctness
+      verdict against locally counted truth, and a hooks table listing every
+      hook per event with owner and measured runtime
+  CHECK: grep -q "SESSION-START-TOKENS" reports/brief14/before.md && grep -q "BENCH-RUN-1" reports/brief14/before.md && grep -q "BENCH-RUN-2" reports/brief14/before.md && grep -q "HOOKS-TABLE" reports/brief14/before.md && echo BEFORE-RECORDED
+  EXPECT: BEFORE-RECORDED
+- [ ] B71: plan.md and plan.json are complete and mutually consistent: every
+      planned removal names an owner and a reason, all removal/keep keys are
+      present, and the md carries the counts before/after block
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py plan
+  EXPECT: PLAN-CONSISTENT
+- [ ] B72: the applied filesystem end state matches the plan: every
+      planned-removed skill/agent directory is gone, every planned-kept one
+      is present, claude-mem is untouched, and live skills/agents counts
+      equal the plan's after counts
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py applied
+  EXPECT: APPLIED-MATCHES-PLAN
+- [ ] B73: the hook end state matches the plan across every settings file
+      (global, soccer project, jiheeye project): every planned-removed hook
+      snippet absent, every planned-kept snippet present (unlazy Stop, soccer
+      push_status, disk guard, jiheeye hooks, claude-mem)
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py hooks
+  EXPECT: HOOKS-STATE-OK
+- [ ] B74: the MCP end state matches the plan: filesystem, memory and
+      sequential-thinking absent from ~/.claude.json, github, brave-search
+      and puppeteer still present, and the no-caller grep evidence is saved
+      (reports/brief14/mcp_callers.txt)
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py mcp
+  EXPECT: MCP-STATE-OK
+- [ ] B75: the read-discipline rule is standing in ~/.claude/CLAUDE.md
+  CHECK: grep -q "Read discipline" /home/muads/.claude/CLAUDE.md && grep -q "Grep first" /home/muads/.claude/CLAUDE.md && echo READ-RULE-PRESENT
+  EXPECT: READ-RULE-PRESENT
+- [ ] B76: planned auto-memory files were merged into SYSTEM.md pointers
+      (short, name SYSTEM.md) and planned-kept memory files remain in place
+      (both memory dirs: yt-digest and soccer-channel)
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py memory
+  EXPECT: MEMORY-MERGED-OK
+- [ ] B77: ECC doctor reports zero warnings and zero errors for what remains
+  CHECK: node /home/muads/ECC/scripts/ecc.js doctor > /tmp/b14_doctor.txt 2>&1 && grep -q "warnings=0" /tmp/b14_doctor.txt && grep -q "errors=0" /tmp/b14_doctor.txt && echo DOCTOR-CLEAN
+  EXPECT: DOCTOR-CLEAN
+- [ ] B78: reports/brief14/after.md carries the before/after table with all
+      seven done-means rows (session_start_tokens, bench_wall_ms,
+      bench_input_tokens, skills, agents, stop_hooks, mcp_tools), each side
+      numeric
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py after_table
+  EXPECT: AFTER-TABLE-OK
+- [ ] B79: no regression bundle: soccer disk_guard selftest, scratch_mount
+      --check, jiheeye disk_guard selftest (read-only), brief13 board-render
+      identity gate re-run locally without Modal, and both after benchmark
+      runs' answers equal the same-time locally counted truth
+  CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py quality
+  EXPECT: QUALITY-NO-REGRESSION
+- [ ] B80: ~/.claude/SYSTEM.md section 5 reflects the lean end state (new
+      counts, hooks list, MCP list, read rule, dated 2026-09-28) and a copy
+      is streamed to b2:mendymax-archive/system/2026-09-28_SYSTEM.md
+  CHECK: grep -q "2026-09-28" /home/muads/.claude/SYSTEM.md && grep -qi "brief 14" /home/muads/.claude/SYSTEM.md && rclone lsf b2:mendymax-archive/system/ 2>/dev/null | grep -q "2026-09-28_SYSTEM" && echo SYSTEM-STREAMED
+  EXPECT: SYSTEM-STREAMED
+- [ ] B81: both repos' DECISIONS.md carry a dated brief-14 entry recording
+      what was removed and kept in the shared harness
+  CHECK: grep -qi "brief 14" /home/muads/yt-digest/soccer-channel/DECISIONS.md && grep -qi "brief 14" /home/muads/jiheeye-ultra/DECISIONS.md && echo DECISIONS-BOTH-REPOS
+  EXPECT: DECISIONS-BOTH-REPOS
+- [ ] B82: the reverify proof ending ALL MET, run after the last code commit,
+      is published in reports/brief14/reverify.txt
+  CHECK: test -s reports/brief14/reverify.txt && grep -q "ALL MET" reports/brief14/reverify.txt && echo REVERIFY-B14
+  EXPECT: REVERIFY-B14

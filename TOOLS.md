@@ -44,6 +44,7 @@ exists — anything dead is deleted or in retired/.
 | `board_data_check.py` | WIRED | produce_v2.py step 1d; GATES B16/B18 | every spec number must match the RAW Sofascore responses by team NAME (extended brief 06 job 3); brief 12: kind timeline (name+jersey pairs vs raw XI, x/y vs raw average positions, step targets, schematic path bounds) |
 | `brief12_check.py` | WIRED | GATES B56-B61 | brief-12 gate oracle: specs/durations/keyframes/swap/sheets/numbers over reports/brief12/render_manifest.json (writes only under /tmp) |
 | `brief13_check.py` | WIRED | GATES B62-B65 | brief-13 gate oracle: sizing/overlap/identity/drift with positive controls (writes only under /tmp) |
+| `brief14_check.py` | WIRED | GATES B71-B79 | brief-14 gate oracle: plan/applied/hooks/mcp/memory/after_table/quality over reports/brief14/plan.json (reads settings and ~/.claude.json; writes only under /tmp) |
 | `brief13_overlays.py` | WIRED | pod_build.py render_footage; brief 13 jobs 3-5 | freeze-frame overlay spec emitter from reports/brief13/marks.json (image-space steps, identity sources) |
 | `brief13_frames.py` | HAND-RUN | hand-invoked (brief 13 jobs 4-6) | pod-side stamped/clean/full-res frame extraction for marking + visual check (frames live on the volume) |
 | `brief12_timeline.py` | WIRED | brief 12 job 5 (proof boards); brief 16 assembly | timeline spec emitter (formation / runners / move) from match_data + raw cache, per docs/board_timeline.md |
