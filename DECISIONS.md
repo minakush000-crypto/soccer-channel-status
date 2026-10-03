@@ -1205,3 +1205,18 @@ so the kit's context share is not visible to that method). Kept
 deliberately: the 67 non-marketing members of the old 127 block
 (superpowers engineering pack, Anthropic document/creative skills, this
 repo's own skills, the design/UI kit, product-lens, growth-log).
+
+## Brief 15 job 3 continuation: title-card photo swapped to a traced source - 2026-10-03
+The raw photo the prior (crashed) session had fetched carried no source URL
+and no EXIF, so it could not satisfy photo_sources.md decision 2 row. Swapped
+to a traced, licensed photo: Wikimedia Commons
+File:Lamine_Yamal_France_v_Spain_7.24.26-057.jpg, author Bryan Berlin, CC
+BY-SA 4.0 (own work), fetched 2026-10-03. Pod cutout re-run (5000x3333),
+title card re-rendered. The unrecorded raw survives in git history
+(7f1fa6d). Also fixed in job 3: the cards oracle's planted control caught a
+format-only score walk (a wrong "0-9" passed); the walk now traces every
+score to (barca-first score, opponent id) pairs of the cached events; card
+specs carry badge assets so the page preloader finds them; audit_T now
+computed per card from the page's real reveal math, and cardCheck draws
+each row's alpha and fails anything below 1 (the "audit reads the FINISHED
+page" rule, now enforced).
