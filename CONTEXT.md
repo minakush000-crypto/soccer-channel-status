@@ -2,8 +2,9 @@
 
 > **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
 > **Reader:** every session (CLAUDE.md @CONTEXT.md).
-> **Last verified against code:** 2026-09-28 (brief 11: staging/cache paths
-> grepped to /mnt/d, guard checks run live).
+> **Last verified against code:** 2026-10-03 (brief 15: card types + audits
+> grepped in board_page.html/board_html.js, oracle re-runs green; brief 11
+> staging/cache-path facts below unchanged and still true).
 
 Rewritten 2026-09-22 (brief 03) against the code on disk. Read STATUS.md for
 the verified state spine and DECISIONS.md for why things are the way they are.

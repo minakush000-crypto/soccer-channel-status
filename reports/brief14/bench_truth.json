@@ -1,19 +1,54 @@
 {
-  "worktree_gates": 55,
-  "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)",
-  "before": {
-    "session_start_first_turn_input": 51297,
-    "session_start_aggregate_input": 48552
-  },
-  "after": {
-    "session_start_first_turn_input": 51151,
-    "session_start_aggregate_input": 48227,
-    "runs": [
-      {"id": "run_1", "gates": 55, "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)", "answered": false, "no_answer_reason": "max-turns; GateGuard round-trips plus ledger/HEAD reconciliation consumed the budget; answer data had been reached mid-run", "wall_ms": 91630, "first_turn_input": 51840, "aggregate_input": 77372},
-      {"id": "run_2", "gates": 55, "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)", "answered": false, "no_answer_reason": "same max-turns shape as run_1; fact-gate denial counts equal (1-2) in all runs", "wall_ms": 123240, "first_turn_input": 51679, "aggregate_input": 86454},
-      {"id": "run_3", "gates": 55, "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)", "answered": true, "wall_ms": 137040, "first_turn_input": 51644, "aggregate_input": 90666},
-      {"id": "run_4", "gates": 55, "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)", "answered": true, "wall_ms": 167060, "first_turn_input": 51640, "aggregate_input": 52953}
-    ],
-    "verdict_basis": "runs 3 and 4 answered and are correct; runs 1 and 2 recorded verbatim as max-turns variance runs"
-  }
+ "worktree_gates": 55,
+ "census_full": "CENSUS OK files=61 wired=40 handrun=21 (exempt from rows: USAGE.md)",
+ "before": {
+  "session_start_first_turn_input": 51297,
+  "session_start_aggregate_input": 48552
+ },
+ "after": {
+  "session_start_first_turn_input": 51151,
+  "session_start_aggregate_input": 48227,
+  "runs": [
+   {
+    "id": "run_1",
+    "gates": 55,
+    "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)",
+    "answered": false,
+    "no_answer_reason": "max-turns; GateGuard round-trips plus ledger/HEAD reconciliation consumed the budget; answer data had been reached mid-run",
+    "wall_ms": 91630,
+    "first_turn_input": 51840,
+    "aggregate_input": 77372
+   },
+   {
+    "id": "run_2",
+    "gates": 55,
+    "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)",
+    "answered": false,
+    "no_answer_reason": "same max-turns shape as run_1; fact-gate denial counts equal (1-2) in all runs",
+    "wall_ms": 123240,
+    "first_turn_input": 51679,
+    "aggregate_input": 86454
+   },
+   {
+    "id": "run_3",
+    "gates": 55,
+    "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)",
+    "answered": true,
+    "wall_ms": 137040,
+    "first_turn_input": 51644,
+    "aggregate_input": 90666
+   },
+   {
+    "id": "run_4",
+    "gates": 55,
+    "census_full": "CENSUS OK files=57 wired=36 handrun=21 (exempt from rows: USAGE.md)",
+    "answered": true,
+    "wall_ms": 167060,
+    "first_turn_input": 51640,
+    "aggregate_input": 52953
+   }
+  ],
+  "verdict_basis": "runs 3 and 4 answered and are correct; runs 1 and 2 recorded verbatim as max-turns variance runs"
+ },
+ "census_rebase_note": "Rebased 2026-10-03 to the live line after brief 15 (brief15_cards.py, brief15_photo.py, brief15_sheets.py registered): CENSUS OK files=61 wired=40 handrun=21 (exempt from rows: USAGE.md). Historical run answers (run_3/run_4, files=57 wired=36) are the verified answers of their own date, not rewritten."
 }

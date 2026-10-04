@@ -1,0 +1,34 @@
+{
+ "slug": "2026-09-19_sevilla-fc-barcelona",
+ "kind": "timeline",
+ "name": "card_stat",
+ "duration_s": 8.0,
+ "fps": 30,
+ "side": "home",
+ "title": "Expected goals",
+ "kicker": "BARCELONA TACTICAL FILE",
+ "card": {
+  "type": "stat",
+  "title": "Expected goals",
+  "seed": 7,
+  "rows": [
+   {
+    "label": "SEVILLA (A) 2026-09-19",
+    "value": "3.47"
+   },
+   {
+    "label": "RACING (H) 2026-09-16",
+    "value": "6.74"
+   },
+   {
+    "label": "FEYENOORD (H) 2026-09-09",
+    "value": "2.10"
+   }
+  ],
+  "stag": 0.85,
+  "t0": 0.6,
+  "hold": 6.2,
+  "audit_T": 4.45
+ },
+ "source": "brief 15 job 3: card spec; every number stamped to the cached raw responses per row"
+}

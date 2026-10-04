@@ -2,7 +2,10 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-09-28 (brief 14: census live —
+> **Last verified against code:** 2026-10-03 (brief 15: nine renders' audit
+> lines verified in logs, oracle RENDERS-OK/PUBLISH-OK re-run,
+> render_manifest.json sha1s cross-checked on B2 with rclone hashsum; brief
+> 14 state below kept for lineage)
 > CENSUS OK files=57 wired=36 handrun=21; hooks leaned 75 -> 23 global
 > entries, doctor clean; three timeline proof boards from brief 12 and
 > brief-13 sizing gates re-verified).
@@ -262,3 +265,34 @@ without a row, a row without a file, or wrong class totals fails gate B20.
   brief-13 pod cost (billing report, minus brief-12's known $0.0182).
 - Gates B62-B68 written BEFORE implementation (unlazy); reverify ALL MET
   55/55 after the last code commit (reports/brief13/reverify.txt).
+- Card system (brief 15 job 3): FIVE card types in the ONE timeline renderer
+  (kind timeline + spec.card; no second renderer): title (headline + subject
+  cutout in a fixed left box, photo-rect audited clear of the text zone),
+  chapter (number + name), principle (lines build one by one), results
+  (Barcelona-first scores + real opponent badges, rows walked from the
+  cached Sofascore raws by tools/brief15_cards.py), stat (torn-paper panel
+  of one Sofascore stat across matches, paper follows the row count and
+  rows-inside-paper audited). cardCheck audits drawn rows == spec rows at
+  FULL alpha at spec card.audit_T (stale audit_T fails loudly); scores
+  trace to (score, opponent id) pairs of the cached events (a planted
+  wrong score FAILS the cards oracle).
+- Overlay restyle (brief 15 job 1): chips/ellipses/links/discs/polygon/
+  vignette floors enforced by the page audit (OVERLAY15-OK) at 2x/3x the
+  old minima.
+- Freeze moments re-surveyed (brief 15 job 2): no broadcaster lower-third
+  overlaps the marked pixels; rac_freekick's restyled wall chips un-overlapped
+  (marks.json single source, chip x 1640 -> 1690, 2026-10-03).
+- Renders (jobs 4): 9 renders (4 restyled overlay clips + 5 cards, 1080p
+  H.264) on Modal pods, audit-clean at render time; all 9 archived to B2
+  soccer-channel/2026-09-29/brief15/ with provenance manifests
+  (render_manifest.json with sha256 + b2 sha1 cross-checked, oracle
+  RENDERS-OK + PUBLISH-OK).
+- Photo provenance: title-card photo swapped to a traced CC BY-SA 4.0
+  source (Wikimedia Commons File:Lamine_Yamal...7.24.26-057.jpg, Bryan
+  Berlin) after the prior session's raw was found unrecorded; recorded in
+  reports/brief15/photo_sources.md; cutout re-run pod-side with a
+  transparent-border trim.
+- Publish artifacts (jobs 5-7): visual_check.md (EVERY-RENDER-CHECKED),
+  9 sheets (640px) + keyframes/ committed as proof, photo_sources.md,
+  SYSTEM.md section 5 kit outcome + section 7 mapping line + dated B2 copy
+  b2:mendymax-archive/system/2026-09-29_SYSTEM.md.

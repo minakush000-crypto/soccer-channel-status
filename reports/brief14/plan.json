@@ -1,101 +1,281 @@
 {
-  "created": "2026-09-28",
-  "brief": "brief14",
-  "counts": {
-    "before": {
-      "skills": 253,
-      "agents": 68,
-      "hook_entries": 94,
-      "global_hook_entries": 75,
-      "stop_event_entries": 25,
-      "mcp_servers": 6,
-      "mcp_tools_headless": 15
-    },
-    "after": {
-      "skills": 253,
-      "agents": 65,
-      "hook_entries": 40,
-      "global_hook_entries": 23,
-      "stop_event_entries": 7,
-      "mcp_servers": 3,
-      "mcp_tools_headless": 15
-    }
+ "created": "2026-09-28",
+ "brief": "brief14",
+ "counts": {
+  "before": {
+   "skills": 253,
+   "agents": 68,
+   "hook_entries": 94,
+   "global_hook_entries": 75,
+   "stop_event_entries": 25,
+   "mcp_servers": 6,
+   "mcp_tools_headless": 15
   },
-  "count_targets": {
-    "global_hook_entries": 23,
-    "stop_event_entries": 7
+  "after": {
+   "skills": 193,
+   "agents": 65,
+   "hook_entries": 40,
+   "global_hook_entries": 23,
+   "stop_event_entries": 7,
+   "mcp_servers": 3,
+   "mcp_tools_headless": 15
   },
-  "remove_skills": [],
-  "keep_skills": [
-    {"name": "unlazy", "owner": "unlazy", "note": "protected"},
-    {"name": "agent-reach", "owner": "foreign (untracked)", "note": "protected"},
-    {"name": "context-transfer", "owner": "foreign (untracked)", "note": "protected"},
-    {"name": "systematic-debugging", "owner": "foreign (untracked)", "note": "engineering, kept"},
-    {"name": "test-driven-development", "owner": "foreign (untracked)", "note": "engineering, kept"},
-    {"name": "verification-before-completion", "owner": "foreign (untracked)", "note": "engineering, kept"},
-    {"name": "accessibility", "owner": "ECC", "note": "engineering, kept"},
-    {"name": "api-design", "owner": "ECC", "note": "engineering, kept"}
-  ],
-  "remove_agents": [
-    {"name": "chief-of-staff", "owner": "ECC baseline:agents", "reason": "email/Slack/LINE/Messenger triage agent; non-engineering business domain, Mayo decision-1 class; unused by both pipelines"},
-    {"name": "healthcare-reviewer", "owner": "ECC baseline:agents", "reason": "healthcare-domain code reviewer; no healthcare codebase on this machine; domain specialist"},
-    {"name": "marketing-agent", "owner": "ECC baseline:agents", "reason": "marketing strategist/copywriter; non-engineering business domain, Mayo decision-1 class"}
-  ],
-  "keep_agents": [
-    {"name": "code-reviewer", "note": "engineering review, protected by decision 1"},
-    {"name": "security-reviewer", "note": "engineering, protected"},
-    {"name": "tdd-guide", "note": "testing discipline, protected"},
-    {"name": "architect", "note": "engineering, protected"},
-    {"name": "build-error-resolver", "note": "engineering, protected"}
-  ],
-  "remove_hooks": [
-    {"label": "stop:desktop-notify (3 copies)", "event": "Stop", "snippet": "stop:desktop-notify", "owner": "ECC hooks-runtime", "reason": "desktop notifications on turn end, 3,092ms measured x3 = 9.3s per turn end; no notification consumer on WSL2"},
-    {"label": "stop:evaluate-session (3 copies)", "event": "Stop", "snippet": "stop:evaluate-session", "owner": "ECC hooks-runtime", "reason": "ECC session self-evaluation; never read on either pipeline"},
-    {"label": "stop:check-console-log (3 copies)", "event": "Stop", "snippet": "stop:check-console-log", "owner": "ECC hooks-runtime", "reason": "console.log scanner; soccer is python, jiheeye has no dev loop"},
-    {"label": "stop:format-typecheck (3 copies)", "event": "Stop", "snippet": "stop:format-typecheck", "owner": "ECC hooks-runtime", "reason": "tsc/eslint at every stop with spawnSync timeout 30s; the plausible brief-13 ETIMEDOUT hook; no TS stop-gate on this machine"}
-  ],
-  "keep_hooks": [
-    {"label": "unlazy Stop", "event": "Stop", "snippet": "unlazy/scripts/stop-hook.mjs", "owner": "unlazy", "reason": "protected, decision 2"},
-    {"label": "soccer push_status", "event": "Stop", "snippet": ".claude/hooks/push_status.sh", "owner": "soccer project", "reason": "protected, publish mirror"},
-    {"label": "jiheeye push_status", "event": "Stop", "snippet": "tools/push_status.sh", "owner": "jiheeye project", "reason": "protected, publish mirror"},
-    {"label": "soccer disk guard scratch", "event": "SessionStart", "snippet": "check_scratch.sh", "owner": "soccer project", "reason": "protected disk-guard family"},
-    {"label": "soccer pods check", "event": "SessionStart", "snippet": "check_pods.sh", "owner": "soccer project", "reason": "protected disk-guard family"},
-    {"label": "soccer doc stamps", "event": "SessionStart", "snippet": "check_doc_stamps.sh", "owner": "soccer project", "reason": "project hook"},
-    {"label": "claude-mem Stop", "event": "Stop", "snippet": "claude-mem", "owner": "claude-mem plugin", "reason": "protected, session memory"}
-  ],
-  "dedupe": {
-    "rule": "identical ECC hook commands (same sha256) are listed exactly once in ~/.claude/settings.json",
-    "global_entries_before": 75,
-    "global_entries_after": 23,
-    "kept_unique_children": [
-      "plan-canvas-pending", "session-end(ecc)", "cost-tracker",
-      "pre-bash-dispatcher", "powershell:gateguard-fact-force",
-      "write:doc-file-warning", "edit-write:suggest-compact",
-      "observe-runner", "governance-capture", "config-protection",
-      "mcp-health-check(pre)", "posttooluse-dispatcher(sync)",
-      "posttooluse-dispatcher(async)", "mcp-health-check(post-fail)",
-      "skill-run-tracker", "session-start-bootstrap", "plan-canvas-sessions",
-      "pre-compact", "session-end-marker", "block-retired.sh",
-      "warn-local-gpu.sh", "unlazy stop-hook"
-    ]
+  "after_note": "brief 15 job 0 removed the 60-skill marketing kit on 2026-09-29 (skills 253 -> 193; DECISIONS.md + reports/brief15/kit_removal.md)"
+ },
+ "count_targets": {
+  "global_hook_entries": 23,
+  "stop_event_entries": 7
+ },
+ "remove_skills": [],
+ "keep_skills": [
+  {
+   "name": "unlazy",
+   "owner": "unlazy",
+   "note": "protected"
   },
-  "remove_mcp": [
-    {"server": "filesystem", "owner": "~/.claude.json", "reason": "zero callers in both repos, skills, hooks, rules (reports/brief14/mcp_callers.txt); contributes no live tools; its paths are reachable with plain shell tools"},
-    {"server": "memory", "owner": "~/.claude.json", "reason": "zero callers; knowledge memory of record is claude-mem + knowledge/ per CLAUDE.md; the graph file has been empty since 2026-09-06"},
-    {"server": "sequential-thinking", "owner": "~/.claude.json", "reason": "zero callers; never invoked by either pipeline"}
-  ],
-  "keep_mcp": [
-    {"server": "github", "owner": "~/.claude.json", "reason": "protected by brief scope"},
-    {"server": "brave-search", "owner": "~/.claude.json", "reason": "brave_web_search/brave_local_search used live in sessions"},
-    {"server": "puppeteer", "owner": "~/.claude.json", "reason": "protected by brief scope (browser checks)"}
-  ],
-  "merge_memory": [
-    {"name": "soccer-channel-capability-enablement.md", "store": "digest", "owner": "auto-memory", "reason": "2026-09-06 hook/MCP capability snapshot; superseded by ~/.claude/SYSTEM.md sections 5 and 9; duplicate"}
-  ],
-  "keep_memory": [
-    {"name": "ecc-gateguard-live.md", "store": "digest"},
-    {"name": "stop-adding-start-replacing.md", "store": "soccer"},
-    {"name": "claude-mem-update-drops-ecc-hooks.md", "store": "digest"},
-    {"name": "gate-check-approve-vs-reverify.md", "store": "digest"}
+  {
+   "name": "agent-reach",
+   "owner": "foreign (untracked)",
+   "note": "protected"
+  },
+  {
+   "name": "context-transfer",
+   "owner": "foreign (untracked)",
+   "note": "protected"
+  },
+  {
+   "name": "systematic-debugging",
+   "owner": "foreign (untracked)",
+   "note": "engineering, kept"
+  },
+  {
+   "name": "test-driven-development",
+   "owner": "foreign (untracked)",
+   "note": "engineering, kept"
+  },
+  {
+   "name": "verification-before-completion",
+   "owner": "foreign (untracked)",
+   "note": "engineering, kept"
+  },
+  {
+   "name": "accessibility",
+   "owner": "ECC",
+   "note": "engineering, kept"
+  },
+  {
+   "name": "api-design",
+   "owner": "ECC",
+   "note": "engineering, kept"
+  }
+ ],
+ "remove_agents": [
+  {
+   "name": "chief-of-staff",
+   "owner": "ECC baseline:agents",
+   "reason": "email/Slack/LINE/Messenger triage agent; non-engineering business domain, Mayo decision-1 class; unused by both pipelines"
+  },
+  {
+   "name": "healthcare-reviewer",
+   "owner": "ECC baseline:agents",
+   "reason": "healthcare-domain code reviewer; no healthcare codebase on this machine; domain specialist"
+  },
+  {
+   "name": "marketing-agent",
+   "owner": "ECC baseline:agents",
+   "reason": "marketing strategist/copywriter; non-engineering business domain, Mayo decision-1 class"
+  }
+ ],
+ "keep_agents": [
+  {
+   "name": "code-reviewer",
+   "note": "engineering review, protected by decision 1"
+  },
+  {
+   "name": "security-reviewer",
+   "note": "engineering, protected"
+  },
+  {
+   "name": "tdd-guide",
+   "note": "testing discipline, protected"
+  },
+  {
+   "name": "architect",
+   "note": "engineering, protected"
+  },
+  {
+   "name": "build-error-resolver",
+   "note": "engineering, protected"
+  }
+ ],
+ "remove_hooks": [
+  {
+   "label": "stop:desktop-notify (3 copies)",
+   "event": "Stop",
+   "snippet": "stop:desktop-notify",
+   "owner": "ECC hooks-runtime",
+   "reason": "desktop notifications on turn end, 3,092ms measured x3 = 9.3s per turn end; no notification consumer on WSL2"
+  },
+  {
+   "label": "stop:evaluate-session (3 copies)",
+   "event": "Stop",
+   "snippet": "stop:evaluate-session",
+   "owner": "ECC hooks-runtime",
+   "reason": "ECC session self-evaluation; never read on either pipeline"
+  },
+  {
+   "label": "stop:check-console-log (3 copies)",
+   "event": "Stop",
+   "snippet": "stop:check-console-log",
+   "owner": "ECC hooks-runtime",
+   "reason": "console.log scanner; soccer is python, jiheeye has no dev loop"
+  },
+  {
+   "label": "stop:format-typecheck (3 copies)",
+   "event": "Stop",
+   "snippet": "stop:format-typecheck",
+   "owner": "ECC hooks-runtime",
+   "reason": "tsc/eslint at every stop with spawnSync timeout 30s; the plausible brief-13 ETIMEDOUT hook; no TS stop-gate on this machine"
+  }
+ ],
+ "keep_hooks": [
+  {
+   "label": "unlazy Stop",
+   "event": "Stop",
+   "snippet": "unlazy/scripts/stop-hook.mjs",
+   "owner": "unlazy",
+   "reason": "protected, decision 2"
+  },
+  {
+   "label": "soccer push_status",
+   "event": "Stop",
+   "snippet": ".claude/hooks/push_status.sh",
+   "owner": "soccer project",
+   "reason": "protected, publish mirror"
+  },
+  {
+   "label": "jiheeye push_status",
+   "event": "Stop",
+   "snippet": "tools/push_status.sh",
+   "owner": "jiheeye project",
+   "reason": "protected, publish mirror"
+  },
+  {
+   "label": "soccer disk guard scratch",
+   "event": "SessionStart",
+   "snippet": "check_scratch.sh",
+   "owner": "soccer project",
+   "reason": "protected disk-guard family"
+  },
+  {
+   "label": "soccer pods check",
+   "event": "SessionStart",
+   "snippet": "check_pods.sh",
+   "owner": "soccer project",
+   "reason": "protected disk-guard family"
+  },
+  {
+   "label": "soccer doc stamps",
+   "event": "SessionStart",
+   "snippet": "check_doc_stamps.sh",
+   "owner": "soccer project",
+   "reason": "project hook"
+  },
+  {
+   "label": "claude-mem Stop",
+   "event": "Stop",
+   "snippet": "claude-mem",
+   "owner": "claude-mem plugin",
+   "reason": "protected, session memory"
+  }
+ ],
+ "dedupe": {
+  "rule": "identical ECC hook commands (same sha256) are listed exactly once in ~/.claude/settings.json",
+  "global_entries_before": 75,
+  "global_entries_after": 23,
+  "kept_unique_children": [
+   "plan-canvas-pending",
+   "session-end(ecc)",
+   "cost-tracker",
+   "pre-bash-dispatcher",
+   "powershell:gateguard-fact-force",
+   "write:doc-file-warning",
+   "edit-write:suggest-compact",
+   "observe-runner",
+   "governance-capture",
+   "config-protection",
+   "mcp-health-check(pre)",
+   "posttooluse-dispatcher(sync)",
+   "posttooluse-dispatcher(async)",
+   "mcp-health-check(post-fail)",
+   "skill-run-tracker",
+   "session-start-bootstrap",
+   "plan-canvas-sessions",
+   "pre-compact",
+   "session-end-marker",
+   "block-retired.sh",
+   "warn-local-gpu.sh",
+   "unlazy stop-hook"
   ]
+ },
+ "remove_mcp": [
+  {
+   "server": "filesystem",
+   "owner": "~/.claude.json",
+   "reason": "zero callers in both repos, skills, hooks, rules (reports/brief14/mcp_callers.txt); contributes no live tools; its paths are reachable with plain shell tools"
+  },
+  {
+   "server": "memory",
+   "owner": "~/.claude.json",
+   "reason": "zero callers; knowledge memory of record is claude-mem + knowledge/ per CLAUDE.md; the graph file has been empty since 2026-09-06"
+  },
+  {
+   "server": "sequential-thinking",
+   "owner": "~/.claude.json",
+   "reason": "zero callers; never invoked by either pipeline"
+  }
+ ],
+ "keep_mcp": [
+  {
+   "server": "github",
+   "owner": "~/.claude.json",
+   "reason": "protected by brief scope"
+  },
+  {
+   "server": "brave-search",
+   "owner": "~/.claude.json",
+   "reason": "brave_web_search/brave_local_search used live in sessions"
+  },
+  {
+   "server": "puppeteer",
+   "owner": "~/.claude.json",
+   "reason": "protected by brief scope (browser checks)"
+  }
+ ],
+ "merge_memory": [
+  {
+   "name": "soccer-channel-capability-enablement.md",
+   "store": "digest",
+   "owner": "auto-memory",
+   "reason": "2026-09-06 hook/MCP capability snapshot; superseded by ~/.claude/SYSTEM.md sections 5 and 9; duplicate"
+  }
+ ],
+ "keep_memory": [
+  {
+   "name": "ecc-gateguard-live.md",
+   "store": "digest"
+  },
+  {
+   "name": "stop-adding-start-replacing.md",
+   "store": "soccer"
+  },
+  {
+   "name": "claude-mem-update-drops-ecc-hooks.md",
+   "store": "digest"
+  },
+  {
+   "name": "gate-check-approve-vs-reverify.md",
+   "store": "digest"
+  }
+ ]
 }

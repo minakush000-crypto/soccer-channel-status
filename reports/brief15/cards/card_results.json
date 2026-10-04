@@ -1,0 +1,57 @@
+{
+ "slug": "2026-09-19_sevilla-fc-barcelona",
+ "kind": "timeline",
+ "name": "card_results",
+ "duration_s": 8.0,
+ "fps": 30,
+ "side": "home",
+ "title": "card_results",
+ "kicker": "BARCELONA TACTICAL FILE",
+ "card": {
+  "type": "results",
+  "rows": [
+   {
+    "score": "3-1",
+    "opponent": "Sevilla",
+    "badge": "2833.png",
+    "meta": "(A) LaLiga 2026-09-19"
+   },
+   {
+    "score": "7-2",
+    "opponent": "Real Racing Club",
+    "badge": "2835.png",
+    "meta": "(H) LaLiga 2026-09-16"
+   },
+   {
+    "score": "4-2",
+    "opponent": "Levante UD",
+    "badge": "2849.png",
+    "meta": "(A) LaLiga 2026-09-13"
+   },
+   {
+    "score": "5-1",
+    "opponent": "Feyenoord",
+    "badge": "2959.png",
+    "meta": "(H) UEFA Champions League 2026-09-09"
+   },
+   {
+    "score": "5-0",
+    "opponent": "Valencia",
+    "badge": "2828.png",
+    "meta": "(A) LaLiga 2026-09-06"
+   }
+  ],
+  "assets": [
+   "2833.png",
+   "2835.png",
+   "2849.png",
+   "2959.png",
+   "2828.png"
+  ],
+  "stag": 0.8,
+  "t0": 0.6,
+  "hold": 6.2,
+  "audit_T": 4.5
+ },
+ "source": "brief 15 job 3: card spec; every number stamped to the cached raw responses per row"
+}

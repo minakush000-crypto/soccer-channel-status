@@ -2,10 +2,11 @@
 
 > **Purpose:** the four-lane (A/B/C/D) expansion build ledger; each stage appends its findings here.
 > **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Line-drift corrections applied 2026-09-13 (Stage-12B rewrite of produce_v2.py + Stage-14 retirement of step4b/tactical_render.py shifted cited line numbers; all re-grep'd against current code).
-> **Last verified against code:** 2026-09-27 (census line re-run via
-> tools/census.py; the brief 08 entry below was written from git log
-> 3c7a90b..b5dc799 and reports/brief08/reverify.txt, both read this pass.
-> Historical stage log: nothing in the earlier entries is wired at runtime.)
+> **Last verified against code:** 2026-10-03 (brief 15 jobs 0-8 appended;
+> census re-run live this session: CENSUS OK files=60 wired=39 handrun=21.
+> The 2026-09-27 note below was written from git log 3c7a90b..b5dc799 and
+> reports/brief08/reverify.txt. Historical stage log: nothing in the
+> earlier entries is wired at runtime.)
 
 Originally verified against code on 2026-09-08; line-drift corrections applied
 2026-09-13 (all produce_v2.py/validate_script.py/tactical_boards.py/runpod_fulltrack.py
@@ -3998,3 +3999,19 @@ rewritten + streamed to B2 system/2026-09-28_SYSTEM.md.tar.gz (job 7).
 Proof (job 8): reverify two-pass per the brief-11 pattern in
 reports/brief14/reverify.txt. Both repos' DECISIONS.md record the change
 (jiheeye commit 6b8e0c7).
+
+## Brief 15 (2026-10-03): cards + overlay restyle, jobs 0-8
+Job 0: 60-skill marketing kit removed (B2 backup md5-verified, 253->193
+skills, session tokens 51,175 -> 51,143). Jobs 1-2: overlay restyle with
+audited minima (2x/3x) + banner-surveyed freeze moments (B85 oracle green).
+Job 3: five card types in the ONE renderer; the crashed session's work
+recovered and finished: badge assets wired, score walk now traces
+(score, opponent id) to cached events, per-card audit_T from the page's
+real reveal math, alpha-1 enforcement, title-card photo swapped to a
+traced CC BY-SA source (Commons, Bryan Berlin) + tight bbox cutout on the
+pod. Job 4: 9 renders on Modal pods, all audit-clean (rac_freekick's
+restyled chips overlapped -> fixed at marks.json, re-render OK). Jobs 5-6:
+9 sheets (640px) + keyframes + visual_check.md + photo_sources.md; 9 mp4s
+archived to B2 2026-09-29/brief15/ with manifests. Job 7: SYSTEM.md kit
+outcome + mapping line, B2 copy. Job 8: two-pass reverify
+(reports/brief15/reverify.txt), gates B83-B91.

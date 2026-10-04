@@ -1,0 +1,19 @@
+{
+ "slug": "2026-09-19_sevilla-fc-barcelona",
+ "kind": "timeline",
+ "name": "card_chapter",
+ "duration_s": 8.0,
+ "fps": 30,
+ "side": "home",
+ "title": "card_chapter",
+ "kicker": "BARCELONA TACTICAL FILE",
+ "card": {
+  "type": "chapter",
+  "number": "02",
+  "name": "The 6.74 xG night",
+  "t0": 0.6,
+  "hold": 6.2,
+  "audit_T": 1.3
+ },
+ "source": "brief 15 job 3: card spec; every number stamped to the cached raw responses per row"
+}

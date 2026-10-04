@@ -1,0 +1,490 @@
+# Brief 15 reverify proof (doctrine rule 7)
+Generated: 2026-10-03 (~19:10-19:35 CDT) by Flash (glm-5.3-flash:cloud) via gate-check.mjs --reverify --approve
+
+Method: full --reverify --approve run to /tmp first (brief 15 job 8 "proof in /tmp first"),
+matching the brief-11/brief-14 two-pass pattern: pass A re-verified all 78 gates
+(77 met, only the proof-file gate B91 itself unmet by construction), the file was
+then published, and pass B re-ran everything (appended below, ending ALL MET).
+Pass A transcript, verbatim:
+
+  RUN  GATES:G2 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:G10 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B3 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B6 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B8 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B9 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B16 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B17 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B18 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B19 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B20 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B22 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B23 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B24 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B25 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B26 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B27 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B28 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B30 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B31 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B32 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B33 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B34 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B35 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B36 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B37 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B39 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B40 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B41 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B42 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B43 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B44 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B45 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B46 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B47 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B48 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B50 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B51 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B52 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B53 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B54 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B55 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B56 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B57 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B58 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B59 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B60 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B61 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B62 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B63 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B64 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B65 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B66 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B67 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B68 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B69 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B70 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B71 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B72 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B73 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B74 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B75 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B76 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B77 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B78 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B79 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B80 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B81 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B82 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B83 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B84 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B85 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B86 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B87 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B88 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B89 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B90 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B91 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  PASS GATES:G2: no kept tool references a retired tool as live (positive control included)
+       exit=0; EXPECT=matched; output=sha256=6d5a70ee0f93080d5c9a2278202b66e9c6932fb75a086949dbade57268a9b472; bytes=23
+  PASS GATES:G10: pipeline smoke: produce_v2 and pod_build still parse
+       exit=0; EXPECT=matched; output=sha256=afdbfb412303fe91a9d1e181aec00cdb4cc744f9c34ed876804c71475f5d59d9; bytes=8
+  PASS GATES:B3: one 2D renderer; zero matplotlib importers in tools/ (positive control included)
+       exit=0; EXPECT=matched; output=sha256=075f6c4fda1e62134063d83ea711df518f3738048209a044746cc4fd72f1edb1; bytes=36
+  PASS GATES:B6: main repo confirmed private via gh
+       exit=0; EXPECT=matched; output=sha256=9712f53ee30824421e58a3d15d13728d6681cdf6ab6f492faa9d76a02a593bf8; bytes=13
+  PASS GATES:B8: the episode slug is a CLI argument, never a module constant (positive control included)
+       exit=0; EXPECT=matched; output=sha256=aebafe882af44eefd50370f71a8351607d9c7818d8bfb7efa8c9e4d5167613b0; bytes=18
+  PASS GATES:B9: gate evidence logs stay git-ignored; the ignore matcher itself is proven (positive control: a tracked file is NOT ignored)
+       exit=0; EXPECT=matched; output=sha256=b804a7d20b957368e047fdf4eecaf59ea9da56967937149b4fa57e7fe64ee7d0; bytes=16
+  PASS GATES:B16: Madrid board numbers match the RAW fetched data (brief 05 job 3, extended brief 06 job 3)
+       exit=0; EXPECT=matched; output=sha256=998f8436a0863edcfaa2f1f9e13d6cda3fb70885510e49ebab5221e5d31cd3bd; bytes=407
+  PASS GATES:B17: facts come from Sofascore only; match_data.py retired, no caller left
+       exit=0; EXPECT=matched; output=sha256=511e49a316d32ff4fa75a256daefcef6c58f8f9e1348f9014e3d83a410ce1d6d; bytes=26
+  PASS GATES:B18: extended data check passes on BOTH episodes against the raw fetch
+       exit=0; EXPECT=matched; output=sha256=6cef1fb7a6b8b10146dca828916831750f1706b1796b9ff5aea14b4e1c6e96a1; bytes=18
+  PASS GATES:B19: the rendered-page audit RUNS and enforces: a deliberately mirrored input must FAIL, the real input must PASS
+       exit=0; EXPECT=matched; output=sha256=737acfa4b7ded0d2b0cf86f1919063a1067a4f51537cc507205d477cadb17739; bytes=47
+  PASS GATES:B20: census is script-driven and TOOLS.md matches tools/ exactly
+       exit=0; EXPECT=matched; output=sha256=9d18d52332e3e020c472e909fe26eff25056de47560234c0641e1ad9fab03a65; bytes=1853
+  PASS GATES:B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
+       exit=0; EXPECT=matched; output=sha256=7e11f8b60ada90f702114686f4c992332a3c591b6458f432fa3aa551c69067a0; bytes=13
+  PASS GATES:B23: brief 09 research artifacts exist (3 CSVs, 3 transcripts, measurements, catalog, gaps, durations)
+       exit=0; EXPECT=matched; output=sha256=8725c126fb5712822dacf56972d1c276bd74b3a1000a7e1a4a4690f0b13ffc69; bytes=21
+  PASS GATES:B24: CSV row counts match the studied region duration/2 within 1 (reads durations.json recorded before the videos were deleted)
+       exit=0; EXPECT=matched; output=sha256=e09ffd77cfa3560d2be1c996aaf4d1fd9ac247f5e5f4fd0371a000c8fffa9755; bytes=143
+  PASS GATES:B25: brief 09 contact sheets exist and total at most 12
+       exit=0; EXPECT=matched; output=sha256=3565f3bd79550109917471627206ec673bbbf94f398bfc914da1708726fc8cae; bytes=10
+  PASS GATES:B26: local benchmark videos deleted after the pod pull (positive control: the planted /tmp .mp4 the matcher must catch)
+       exit=0; EXPECT=matched; output=sha256=86f9fd29599306b77941b2361713b79fd810bd35cc6b9062547a414fdae7348c; bytes=20
+  PASS GATES:B27: the disk guard exists and is wired to every entry point (5+ callers grepped, not counted by memory)
+       exit=0; EXPECT=matched; output=sha256=63a1455860d7da6aed83be200f505957a828ed7bed36d8032fc116b81046f595; bytes=23
+  PASS GATES:B28: the guard's positive controls FAIL on faked states (100000G floor; unmounted-F target) and the cleanup exemption PASSES
+       exit=0; EXPECT=matched; output=sha256=1096bead3681d9db3c9157d52a4fcb207f9b44c270911a3f5a70dcaedeebdfe3; bytes=18
+  PASS GATES:B30: the five cache+staging env vars resolve to /mnt/d in the sourced env file (path re-pointed brief 13 job 0c to the machine/ rename; XDG_CACHE_HOME still deliberately absent)
+       exit=0; EXPECT=matched; output=sha256=204874917ab8270f4d727a7a9f4347a604bd58d8d0dd626852bb90a603a59b4e; bytes=12
+  PASS GATES:B31: .wslconfig carries the memory cap (half of RAM minus 1 GB, min 4 GB)
+       exit=0; EXPECT=matched; output=sha256=cf10f7c3d0f3cdb388fcf7974ea6e39ba0cd17d76a912efd4182c89338c4b5d5; bytes=17
+  PASS GATES:B32: the keys rescue tarball is on B2 and still lists exactly the file count recorded in its manifest (brief 07 continuation job 1, Mayo option A; reads B2 only, never prints key contents; rewritten 2026-09-27 from the F: version the flapping drive killed — ABANDON resolved by Mayo choosing B2 streaming)
+       exit=0; EXPECT=matched; output=sha256=bc53bc9661ec6008c08f26959e455a003bcc1e22939a5420f6051491d1343f3c; bytes=29
+  PASS GATES:B33: the pre-ECC ~/.claude backup tarball is on B2 with byte-exact size matching its manifest (brief 07 continuation job 2, Mayo option A; reads B2 only; the 16545-entry full listing was verified once at job time by rclone cat | tar tzf - | wc -l and is recorded in the manifest; B2 stores no SHA1 for this rcat large-file, so size-vs-manifest is the durable check)
+       exit=0; EXPECT=matched; output=sha256=b68c9b0f1aaccbfeacef67743ffecb475fda874cd9d24b87fb0f6ad02659ce79; bytes=28
+  PASS GATES:B34: the ECC clone is checked out at tag v2.2.1 exactly (brief 07 job 2)
+       exit=0; EXPECT=matched; output=sha256=d065a72298616d1a0095816c5667e30324999ca25fcd39fd200cdd70b5b14371; bytes=16
+  PASS GATES:B35: the dry-run plan files exist and the JSON one parses (brief 07 job 3)
+       exit=0; EXPECT=matched; output=sha256=edab1af7911171143f404e059437e3f2580c9477fbf5546f5723e780ab523c8d; bytes=8
+  PASS GATES:B36: the six analysis artifacts are non-empty (counts, clashes, hooks, settings diff, size estimate, context before) (brief 07 job 3)
+       exit=0; EXPECT=matched; output=sha256=f2c719f19f820f314bc8d6935b6c68c7d0c4a0fb514fae40876bf9750c676ad4; bytes=20
+  PASS GATES:B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
+       exit=0; EXPECT=matched; output=sha256=68556db5991be6356a8f03cf788b375f159f1e57392fdf54382544d5a9ac9f21; bytes=21
+  PASS GATES:B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
+       exit=0; EXPECT=matched; output=sha256=255fae43e759ec80d73791dc86d43e2cc6cff650ec789ae380f5d7aef0ceab2b; bytes=22
+  PASS GATES:B40: the unlazy Stop hook AND ECC's dispatcher coexist in ~/.claude/settings.json post-install (brief 07 job 8)
+       exit=0; EXPECT=matched; output=sha256=40ad8a1dc2118c44aae5d4af2f45c59389b6e887049073ad1856d01ff1cba4e6; bytes=14
+  PASS GATES:B41: the disk-guard session-start hook is still wired in project settings and the guard selftest passes post-install (brief 07 job 8; hook renamed check_mnt_f.sh → check_scratch.sh by brief 11 job 4, so the grep follows the rename)
+       exit=0; EXPECT=matched; output=sha256=b102eaf1d7bb41f16a7394e9ef211c3d9b6c4253f7f69bfa40bfe6e194df198c; bytes=13
+  PASS GATES:B42: the precedence file exists and the global CLAUDE.md points to it (brief 07 decision 5)
+       exit=0; EXPECT=matched; output=sha256=897744703894031f0e70a9909076a2a876df7d761f4813314a2a65046662eefc; bytes=17
+  PASS GATES:B43: the context-transfer skill is installed with valid frontmatter (brief 07 decision 7)
+       exit=0; EXPECT=matched; output=sha256=0278fde26d143fe0d3f1d2c7c808cbfca3ac62e1d11adddd20caa7707f8dc6c2; bytes=17
+  PASS GATES:B44: the ECC data cap is wired: guard selftest (incl. oversized-ECC control 4) passes and the live report shows the ecc_data line under cap (brief 07 job 5, Mayo instruction)
+       exit=0; EXPECT=matched; output=sha256=4083c7d2c6597821ff2607367b9783836c8103b0643132360e44d11fe266d52e; bytes=14
+  PASS GATES:B45: before/after session-start context numbers are recorded in both artifacts (brief 07 job 3f + job 6)
+       exit=0; EXPECT=matched; output=sha256=ac2250ca18829020a7553ed272f26bc99e0d1ef55727b796535ef960d9afab6f; bytes=26
+  PASS GATES:B46: the brief 11 inventory artifact exists with NTFS evidence for D: and the counted /mnt/f hit list (brief 11 job 1)
+       exit=0; EXPECT=matched; output=sha256=eb00d203d03f0009faa610a5f3fb941b4f422f59994574396334c361b6607296; bytes=13
+  PASS GATES:B47: scratch_mount.sh exists and its write-probe check passes on D: (brief 11 job 2)
+       exit=0; EXPECT=matched; output=sha256=88649a6ebbe8cb5851f84c998cee105cc420fdc2c6df470a21e663162dcf81c0; bytes=17
+  PASS GATES:B48: the WSL-side 1 GB write and read speeds are recorded with MB/s figures (brief 11 job 3)
+       exit=0; EXPECT=matched; output=sha256=56ba360414c87bc3b2c6fd74dd0ccc8d3de30107a2d3aec7e590b21c1e9ae391; bytes=15
+  PASS GATES:B50: no live config or tool VALUE names /mnt/f as a destination (comment lines documenting the retirement are excluded), while the history file still names it (positive control that the grep works); disk_guard.sh's retired-F detector is exempt by design (brief 11 job 6d)
+       exit=0; EXPECT=matched; output=sha256=5ba68989a7062eade8a8c90c5f3c0910bd3b01b8d10e52185af0f3d3dba06de0; bytes=28
+  PASS GATES:B51: the guard selftest output with the brief-11 controls is recorded (D: unmounted FAILS, /mnt/f path FAILS, real state PASSES) (brief 11 job 6a)
+       exit=0; EXPECT=matched; output=sha256=99e82e34c013c3da0895b7dc590924eeac93314055243eaa2384b0918faf84ab; bytes=18
+  PASS GATES:B52: the elevated-setup output proves visudo-validated d-* sudoers and the removed f-* rule (brief 11 jobs 2 and 5, Mayo-run script)
+       exit=0; EXPECT=matched; output=sha256=d861d2b5586336a35c431b4708389e11511a87942e1464f5d91f84f65f80f81a; bytes=11
+  PASS GATES:B53: a real yt-dlp download landed in /mnt/d/scratch (path printed, file deleted after) (brief 11 job 6b)
+       exit=0; EXPECT=matched; output=sha256=fe98c7b4ab8df62d7afa11382cc7129926e93569e5d5d40b6aa0f2c70684122a; bytes=11
+  PASS GATES:B54: a Modal round trip staged its file through /mnt/d/scratch (smallest existing smoke: modal volume put + get) (brief 11 job 6c)
+       exit=0; EXPECT=matched; output=sha256=e4f430eccebbfcdfc8ad546e10d36b652c2f251cde12c7b525c04ae0fd3245bb; bytes=13
+  PASS GATES:B55: the reverify proof ending ALL MET after the last code commit is published in reports/brief11/ (brief 11 job 8)
+       exit=0; EXPECT=matched; output=sha256=8b4564b0ae760c286f32c8384039bff2a83d419f9ffdfbc945a8dc0c2766b4cf; bytes=19
+  PASS GATES:B56: every brief-12 timeline spec validates: schema, targets, source stamps, and every player number/name/position traced to the cached raw responses (board_data_check kind timeline)
+       exit=0; EXPECT=matched; output=sha256=f96a911a48231b70a16714539fb4abf144370f30303ef18a9bf0c9f292237d59; bytes=22
+  PASS GATES:B57: each proof board MP4 lasts its spec duration within one frame (ffprobe vs duration_s at the spec fps)
+       exit=0; EXPECT=matched; output=sha256=119ced4aa21b20eaaf9f3629decd22ee9f683739f8d94c111bfa89bd82999501; bytes=32
+  PASS GATES:B58: the per-step keyframe audit passes on every proof timeline (rendered-page audit re-run per step end, in audit-only mode)
+       exit=0; EXPECT=matched; output=sha256=b5a44e622bc27cc6e8cfd17ff300af979e6bfefa3a6a3ca5af5184fcd32cf15a; bytes=22
+  PASS GATES:B59: the swapped-name positive control FAILS the timeline audit and the real spec passes (brief 12 job 4)
+       exit=0; EXPECT=matched; output=sha256=93afd519868995258b884d600eddf87979171ea0424782e1c74a12ef0a057e94; bytes=81
+  PASS GATES:B60: reports/brief12/ holds a 4x4 640px contact sheet per proof board and per board a 640px GIF or 2-3 keyframe PNGs
+       exit=0; EXPECT=matched; output=sha256=3e160115d73d9ecddeacef06825d215c34ae330c77c2f45a8d849dda98fd6bad; bytes=28
+  PASS GATES:B61: no invented numbers: the numeric-leaf walk accepts the timeline specs (every non-choreography number traced to a cached raw response) and a planted fake position FAILS the check (positive control)
+       exit=0; EXPECT=matched; output=sha256=3d52719de57575995baae287c0ee0c1b6ecdeeaaf861acb35af7be211f2228df; bytes=474
+  PASS GATES:B62: sizing minima hold on every rendered board at every step end: disc radius >= 42 px, number-chip radius >= 26 px, name-label height >= 36 px at 1080p (the 480p readability floor), and a planted sub-minimum entity FAILS the audit (positive control)
+       exit=0; EXPECT=matched; output=sha256=3ba82c33bc74dac50825f8f4f0c30a6588808a7a20a35cf709b184042aa14c7a; bytes=228
+  PASS GATES:B63: the chip-label overlap audit is live on every rendered keyframe and a planted chip-on-label case FAILS it (positive control)
+       exit=0; EXPECT=matched; output=sha256=beea3352d679167e63708ee3ad741b6389c1cddb2f9baa026cb6a3a33b77a8e7; bytes=65
+  PASS GATES:B64: every NAMED player in a brief-13 overlay spec carries identity evidence (source "lineup:<jersey>" matching a jersey in the facts XI); a spec naming a player without evidence is REFUSED (positive control)
+       exit=0; EXPECT=matched; output=sha256=32df4151fe4ee13d3883db646f3c0f9fb8b52094b419e93ca4d2108dbba56171; bytes=131
+  PASS GATES:B65: the drift check compares rendered mark positions against the marked foot points and a spec with one ellipse shifted 150 px FAILS it (positive control, brief job 6)
+       exit=0; EXPECT=matched; output=sha256=d3d495d7a55162694751ed977edc1339f004349c69c0fae2404504e66f20aa42; bytes=278
+  PASS GATES:B66: neither npm nor yt-dlp cache resolves on C: in a login shell (npm env var and yt-dlp --cache-dir both point at /mnt/d or the WSL home, never /mnt/c)
+       exit=0; EXPECT=matched; output=sha256=bf0bc11d94142cc1f26807c3be72fe2451aaecd0296fdfc8a33fe4b120582356; bytes=13
+  PASS GATES:B67: the machine env rename is live: bash -lic resolves the five scratch vars through the new path, the old path is a one-line shim, and .bashrc sources the new path
+       exit=0; EXPECT=matched; output=sha256=29a13918b1d57083acedcb291a49cfdb28c7c61d2e91071f546b8fab9b2e8f57; bytes=12
+  PASS GATES:B68: the stale auto-memory files are gone: tactical-dominant-balance.md deleted and stop-adding-start-replacing.md carries no tactical_render/step4 reference
+       exit=0; EXPECT=matched; output=sha256=1b950285411cb4e78de19aadc8aa162e4aea1c26df2f061056836f8d1e8b16bc; bytes=13
+  PASS GATES:B69: the pre-change harness backup exists at
+       exit=0; EXPECT=matched; output=sha256=61ddeaa0dd8e171d5b692fcbcd3c485ecab261575e2aeb6f57f7ece74306f02d; bytes=16
+  PASS GATES:B70: reports/brief14/before.md records the before measurements: the
+       exit=0; EXPECT=matched; output=sha256=0e66a8d245d7fd486465e9e017e0c7a84de02e7d073ec374efdf69f2e2f1d4e8; bytes=16
+  PASS GATES:B71: plan.md and plan.json are complete and mutually consistent: every
+       exit=0; EXPECT=matched; output=sha256=c42a7bce6ac2c131a5f55766770298ffaf806fc06f287854da58ff69efc5ca04; bytes=1089
+  PASS GATES:B72: the applied filesystem end state matches the plan: every
+       exit=0; EXPECT=matched; output=sha256=ea77c8689e24252602c96aee2fefbebfe813b7d4874aa03c332f7b8624c188ce; bytes=630
+  PASS GATES:B73: the hook end state matches the plan across every settings file
+       exit=0; EXPECT=matched; output=sha256=d8bbf1233ca04d9a1f14a0478845de31a7f2e8d11749e5aca3aa5d9af6126e4d; bytes=529
+  PASS GATES:B74: the MCP end state matches the plan: filesystem, memory and
+       exit=0; EXPECT=matched; output=sha256=f3d812d052c5f94293ae025d7742d5f7419eeddd5d47a8a553d75e281e6af14c; bytes=206
+  PASS GATES:B75: the read-discipline rule is standing in ~/.claude/CLAUDE.md
+       exit=0; EXPECT=matched; output=sha256=e235ecef97c424be071e22e3a4e12a8c181aa14bbc8e9f03a31a3457d1bed834; bytes=18
+  PASS GATES:B76: planned auto-memory files were merged into SYSTEM.md pointers
+       exit=0; EXPECT=matched; output=sha256=d781c4148e18ceeb92bb8f41be5a0259010997fae68aaa153eae7033ca558d89; bytes=258
+  PASS GATES:B77: ECC doctor reports zero warnings and zero errors for what remains
+       exit=0; EXPECT=matched; output=sha256=dd49e82c3de041ea16e143bea972a11696d09ed16c56c2d33c20437f6f6b08dc; bytes=13
+  PASS GATES:B78: reports/brief14/after.md carries the before/after table with all
+       exit=0; EXPECT=matched; output=sha256=42fefc84b182780d3d17af9b3600c730b615eafbecbe59cdf851380b1f617f64; bytes=485
+  PASS GATES:B79: no regression bundle: soccer disk_guard selftest, scratch_mount
+       exit=0; EXPECT=matched; output=sha256=8929fb6a7804dcee3c7e8375e60d03cc90cbae587211f8e8305eece783612a3f; bytes=301
+  PASS GATES:B80: ~/.claude/SYSTEM.md section 5 reflects the lean end state (new
+       exit=0; EXPECT=matched; output=sha256=073278c2b63223f056584b89d465acd56553a1c5fa4930fcb23e5a9273564a22; bytes=16
+  PASS GATES:B81: both repos' DECISIONS.md carry a dated brief-14 entry recording
+       exit=0; EXPECT=matched; output=sha256=f2e9d355c9b873bb40d63304022fb83fe9bfe11e9ab4409c2328a5ba6a79ceb5; bytes=21
+  PASS GATES:B82: the reverify proof ending ALL MET, run after the last code commit,
+       exit=0; EXPECT=matched; output=sha256=3be1501a5a88c1302475ed12070303ab4f36ed58c783765a8dc419e12e7c018e; bytes=13
+  PASS GATES:B83: the 60-skill marketing kit is removed and verifiable: roster dirs
+       exit=0; EXPECT=matched; output=sha256=47991cd0aaf81e018e1a5acc81a1778625436ffbe15075bba504fff47bc6cd64; bytes=288
+  PASS GATES:B84: the overlay restyle is enforced by the page audit: ground
+       exit=0; EXPECT=matched; output=sha256=fef8e9d7a8d3f12afdc5d2bf7f22030dd21a0387ad22a14df2695c9d25231667; bytes=318
+  PASS GATES:B85: freeze points re-checked against broadcaster graphics: every
+       exit=0; EXPECT=matched; output=sha256=caa795606a61ee286bb1f3e1b6ab9639ca4e26400878cdeeb84c6c5a84fcaa8d; bytes=2851
+  PASS GATES:B86: the five card types exist in the timeline renderer (same
+       exit=0; EXPECT=matched; output=sha256=d9ef46d615afc6d7aaca6fee249091c5d17d6a575a06b8db8911c1eea7642060; bytes=891
+  PASS GATES:B87: every brief-15 render is real: 4 restyled overlay clips and 5
+       exit=0; EXPECT=matched; output=sha256=5abbfc376a2b191baf30ef80bd55cfe4bee52f7efeb683f9aa49bfb8cedff428; bytes=2052
+  PASS GATES:B88: the visual check is recorded: reports/brief15/visual_check.md
+       exit=0; EXPECT=matched; output=sha256=02831830911ffdaa827d54448e588f846c839c573a8e0e17618a9a514116292f; bytes=16
+  PASS GATES:B89: the publish artifacts exist: overlay before/after sheets and
+       exit=0; EXPECT=matched; output=sha256=21632d5713a06131c81e86528205da09cb31d18d37e439926b501d7f28bfc409; bytes=518
+  PASS GATES:B90: ~/.claude/SYSTEM.md carries the decision-1 change-log mapping
+       exit=0; EXPECT=matched; output=sha256=bc577f18223f774f4ff77684e8a86bb2b8ef31c44b9aafeb784156ef6ea39354; bytes=14
+  FAIL GATES:B91: the reverify proof ending ALL MET, run after the last code
+       exit=1; EXPECT=not matched; output=(no output)
+GATES.md: 78 gates
+UNMET: 1 (met: 77, reran: 78, previously met reverified: 75)
+  GATES:B91
+passA3 rc=1
+
+Summary of pass A: ALL MET for 77/78 gates; the only unmet gate is GATES:B91
+(the proof file itself, expected before publication); pass B follows.
+
+--- Pass B (the deciding pass), 2026-10-03, verbatim transcript ---
+
+  RUN  GATES:G2 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:G10 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B3 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B6 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B8 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B9 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B16 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B17 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B18 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B19 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B20 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B22 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B23 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B24 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B25 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B26 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B27 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B28 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B30 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B31 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B32 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B33 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B34 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B35 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B36 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B37 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B39 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B40 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B41 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B42 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B43 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B44 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B45 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B46 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B47 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B48 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B50 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B51 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B52 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B53 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B54 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B55 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B56 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B57 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B58 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B59 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B60 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B61 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B62 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B63 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B64 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B65 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B66 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B67 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B68 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B69 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B70 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B71 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B72 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B73 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B74 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B75 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B76 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B77 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B78 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B79 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B80 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B81 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B82 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B83 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B84 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B85 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B86 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B87 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B88 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B89 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B90 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  RUN  GATES:B91 shell=/bin/bash cwd=/home/muads/yt-digest/soccer-channel PATH=/home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+  PASS GATES:G2: no kept tool references a retired tool as live (positive control included)
+       exit=0; EXPECT=matched; output=sha256=6d5a70ee0f93080d5c9a2278202b66e9c6932fb75a086949dbade57268a9b472; bytes=23
+  PASS GATES:G10: pipeline smoke: produce_v2 and pod_build still parse
+       exit=0; EXPECT=matched; output=sha256=afdbfb412303fe91a9d1e181aec00cdb4cc744f9c34ed876804c71475f5d59d9; bytes=8
+  PASS GATES:B3: one 2D renderer; zero matplotlib importers in tools/ (positive control included)
+       exit=0; EXPECT=matched; output=sha256=075f6c4fda1e62134063d83ea711df518f3738048209a044746cc4fd72f1edb1; bytes=36
+  PASS GATES:B6: main repo confirmed private via gh
+       exit=0; EXPECT=matched; output=sha256=9712f53ee30824421e58a3d15d13728d6681cdf6ab6f492faa9d76a02a593bf8; bytes=13
+  PASS GATES:B8: the episode slug is a CLI argument, never a module constant (positive control included)
+       exit=0; EXPECT=matched; output=sha256=aebafe882af44eefd50370f71a8351607d9c7818d8bfb7efa8c9e4d5167613b0; bytes=18
+  PASS GATES:B9: gate evidence logs stay git-ignored; the ignore matcher itself is proven (positive control: a tracked file is NOT ignored)
+       exit=0; EXPECT=matched; output=sha256=b804a7d20b957368e047fdf4eecaf59ea9da56967937149b4fa57e7fe64ee7d0; bytes=16
+  PASS GATES:B16: Madrid board numbers match the RAW fetched data (brief 05 job 3, extended brief 06 job 3)
+       exit=0; EXPECT=matched; output=sha256=998f8436a0863edcfaa2f1f9e13d6cda3fb70885510e49ebab5221e5d31cd3bd; bytes=407
+  PASS GATES:B17: facts come from Sofascore only; match_data.py retired, no caller left
+       exit=0; EXPECT=matched; output=sha256=511e49a316d32ff4fa75a256daefcef6c58f8f9e1348f9014e3d83a410ce1d6d; bytes=26
+  PASS GATES:B18: extended data check passes on BOTH episodes against the raw fetch
+       exit=0; EXPECT=matched; output=sha256=6cef1fb7a6b8b10146dca828916831750f1706b1796b9ff5aea14b4e1c6e96a1; bytes=18
+  PASS GATES:B19: the rendered-page audit RUNS and enforces: a deliberately mirrored input must FAIL, the real input must PASS
+       exit=0; EXPECT=matched; output=sha256=737acfa4b7ded0d2b0cf86f1919063a1067a4f51537cc507205d477cadb17739; bytes=47
+  PASS GATES:B20: census is script-driven and TOOLS.md matches tools/ exactly
+       exit=0; EXPECT=matched; output=sha256=9d18d52332e3e020c472e909fe26eff25056de47560234c0641e1ad9fab03a65; bytes=1853
+  PASS GATES:B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
+       exit=0; EXPECT=matched; output=sha256=7e11f8b60ada90f702114686f4c992332a3c591b6458f432fa3aa551c69067a0; bytes=13
+  PASS GATES:B23: brief 09 research artifacts exist (3 CSVs, 3 transcripts, measurements, catalog, gaps, durations)
+       exit=0; EXPECT=matched; output=sha256=8725c126fb5712822dacf56972d1c276bd74b3a1000a7e1a4a4690f0b13ffc69; bytes=21
+  PASS GATES:B24: CSV row counts match the studied region duration/2 within 1 (reads durations.json recorded before the videos were deleted)
+       exit=0; EXPECT=matched; output=sha256=e09ffd77cfa3560d2be1c996aaf4d1fd9ac247f5e5f4fd0371a000c8fffa9755; bytes=143
+  PASS GATES:B25: brief 09 contact sheets exist and total at most 12
+       exit=0; EXPECT=matched; output=sha256=3565f3bd79550109917471627206ec673bbbf94f398bfc914da1708726fc8cae; bytes=10
+  PASS GATES:B26: local benchmark videos deleted after the pod pull (positive control: the planted /tmp .mp4 the matcher must catch)
+       exit=0; EXPECT=matched; output=sha256=86f9fd29599306b77941b2361713b79fd810bd35cc6b9062547a414fdae7348c; bytes=20
+  PASS GATES:B27: the disk guard exists and is wired to every entry point (5+ callers grepped, not counted by memory)
+       exit=0; EXPECT=matched; output=sha256=63a1455860d7da6aed83be200f505957a828ed7bed36d8032fc116b81046f595; bytes=23
+  PASS GATES:B28: the guard's positive controls FAIL on faked states (100000G floor; unmounted-F target) and the cleanup exemption PASSES
+       exit=0; EXPECT=matched; output=sha256=1096bead3681d9db3c9157d52a4fcb207f9b44c270911a3f5a70dcaedeebdfe3; bytes=18
+  PASS GATES:B30: the five cache+staging env vars resolve to /mnt/d in the sourced env file (path re-pointed brief 13 job 0c to the machine/ rename; XDG_CACHE_HOME still deliberately absent)
+       exit=0; EXPECT=matched; output=sha256=204874917ab8270f4d727a7a9f4347a604bd58d8d0dd626852bb90a603a59b4e; bytes=12
+  PASS GATES:B31: .wslconfig carries the memory cap (half of RAM minus 1 GB, min 4 GB)
+       exit=0; EXPECT=matched; output=sha256=cf10f7c3d0f3cdb388fcf7974ea6e39ba0cd17d76a912efd4182c89338c4b5d5; bytes=17
+  PASS GATES:B32: the keys rescue tarball is on B2 and still lists exactly the file count recorded in its manifest (brief 07 continuation job 1, Mayo option A; reads B2 only, never prints key contents; rewritten 2026-09-27 from the F: version the flapping drive killed — ABANDON resolved by Mayo choosing B2 streaming)
+       exit=0; EXPECT=matched; output=sha256=bc53bc9661ec6008c08f26959e455a003bcc1e22939a5420f6051491d1343f3c; bytes=29
+  PASS GATES:B33: the pre-ECC ~/.claude backup tarball is on B2 with byte-exact size matching its manifest (brief 07 continuation job 2, Mayo option A; reads B2 only; the 16545-entry full listing was verified once at job time by rclone cat | tar tzf - | wc -l and is recorded in the manifest; B2 stores no SHA1 for this rcat large-file, so size-vs-manifest is the durable check)
+       exit=0; EXPECT=matched; output=sha256=b68c9b0f1aaccbfeacef67743ffecb475fda874cd9d24b87fb0f6ad02659ce79; bytes=28
+  PASS GATES:B34: the ECC clone is checked out at tag v2.2.1 exactly (brief 07 job 2)
+       exit=0; EXPECT=matched; output=sha256=d065a72298616d1a0095816c5667e30324999ca25fcd39fd200cdd70b5b14371; bytes=16
+  PASS GATES:B35: the dry-run plan files exist and the JSON one parses (brief 07 job 3)
+       exit=0; EXPECT=matched; output=sha256=edab1af7911171143f404e059437e3f2580c9477fbf5546f5723e780ab523c8d; bytes=8
+  PASS GATES:B36: the six analysis artifacts are non-empty (counts, clashes, hooks, settings diff, size estimate, context before) (brief 07 job 3)
+       exit=0; EXPECT=matched; output=sha256=f2c719f19f820f314bc8d6935b6c68c7d0c4a0fb514fae40876bf9750c676ad4; bytes=20
+  PASS GATES:B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
+       exit=0; EXPECT=matched; output=sha256=68556db5991be6356a8f03cf788b375f159f1e57392fdf54382544d5a9ac9f21; bytes=21
+  PASS GATES:B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
+       exit=0; EXPECT=matched; output=sha256=255fae43e759ec80d73791dc86d43e2cc6cff650ec789ae380f5d7aef0ceab2b; bytes=22
+  PASS GATES:B40: the unlazy Stop hook AND ECC's dispatcher coexist in ~/.claude/settings.json post-install (brief 07 job 8)
+       exit=0; EXPECT=matched; output=sha256=40ad8a1dc2118c44aae5d4af2f45c59389b6e887049073ad1856d01ff1cba4e6; bytes=14
+  PASS GATES:B41: the disk-guard session-start hook is still wired in project settings and the guard selftest passes post-install (brief 07 job 8; hook renamed check_mnt_f.sh → check_scratch.sh by brief 11 job 4, so the grep follows the rename)
+       exit=0; EXPECT=matched; output=sha256=b102eaf1d7bb41f16a7394e9ef211c3d9b6c4253f7f69bfa40bfe6e194df198c; bytes=13
+  PASS GATES:B42: the precedence file exists and the global CLAUDE.md points to it (brief 07 decision 5)
+       exit=0; EXPECT=matched; output=sha256=897744703894031f0e70a9909076a2a876df7d761f4813314a2a65046662eefc; bytes=17
+  PASS GATES:B43: the context-transfer skill is installed with valid frontmatter (brief 07 decision 7)
+       exit=0; EXPECT=matched; output=sha256=0278fde26d143fe0d3f1d2c7c808cbfca3ac62e1d11adddd20caa7707f8dc6c2; bytes=17
+  PASS GATES:B44: the ECC data cap is wired: guard selftest (incl. oversized-ECC control 4) passes and the live report shows the ecc_data line under cap (brief 07 job 5, Mayo instruction)
+       exit=0; EXPECT=matched; output=sha256=4083c7d2c6597821ff2607367b9783836c8103b0643132360e44d11fe266d52e; bytes=14
+  PASS GATES:B45: before/after session-start context numbers are recorded in both artifacts (brief 07 job 3f + job 6)
+       exit=0; EXPECT=matched; output=sha256=ac2250ca18829020a7553ed272f26bc99e0d1ef55727b796535ef960d9afab6f; bytes=26
+  PASS GATES:B46: the brief 11 inventory artifact exists with NTFS evidence for D: and the counted /mnt/f hit list (brief 11 job 1)
+       exit=0; EXPECT=matched; output=sha256=eb00d203d03f0009faa610a5f3fb941b4f422f59994574396334c361b6607296; bytes=13
+  PASS GATES:B47: scratch_mount.sh exists and its write-probe check passes on D: (brief 11 job 2)
+       exit=0; EXPECT=matched; output=sha256=88649a6ebbe8cb5851f84c998cee105cc420fdc2c6df470a21e663162dcf81c0; bytes=17
+  PASS GATES:B48: the WSL-side 1 GB write and read speeds are recorded with MB/s figures (brief 11 job 3)
+       exit=0; EXPECT=matched; output=sha256=56ba360414c87bc3b2c6fd74dd0ccc8d3de30107a2d3aec7e590b21c1e9ae391; bytes=15
+  PASS GATES:B50: no live config or tool VALUE names /mnt/f as a destination (comment lines documenting the retirement are excluded), while the history file still names it (positive control that the grep works); disk_guard.sh's retired-F detector is exempt by design (brief 11 job 6d)
+       exit=0; EXPECT=matched; output=sha256=5ba68989a7062eade8a8c90c5f3c0910bd3b01b8d10e52185af0f3d3dba06de0; bytes=28
+  PASS GATES:B51: the guard selftest output with the brief-11 controls is recorded (D: unmounted FAILS, /mnt/f path FAILS, real state PASSES) (brief 11 job 6a)
+       exit=0; EXPECT=matched; output=sha256=99e82e34c013c3da0895b7dc590924eeac93314055243eaa2384b0918faf84ab; bytes=18
+  PASS GATES:B52: the elevated-setup output proves visudo-validated d-* sudoers and the removed f-* rule (brief 11 jobs 2 and 5, Mayo-run script)
+       exit=0; EXPECT=matched; output=sha256=d861d2b5586336a35c431b4708389e11511a87942e1464f5d91f84f65f80f81a; bytes=11
+  PASS GATES:B53: a real yt-dlp download landed in /mnt/d/scratch (path printed, file deleted after) (brief 11 job 6b)
+       exit=0; EXPECT=matched; output=sha256=fe98c7b4ab8df62d7afa11382cc7129926e93569e5d5d40b6aa0f2c70684122a; bytes=11
+  PASS GATES:B54: a Modal round trip staged its file through /mnt/d/scratch (smallest existing smoke: modal volume put + get) (brief 11 job 6c)
+       exit=0; EXPECT=matched; output=sha256=e4f430eccebbfcdfc8ad546e10d36b652c2f251cde12c7b525c04ae0fd3245bb; bytes=13
+  PASS GATES:B55: the reverify proof ending ALL MET after the last code commit is published in reports/brief11/ (brief 11 job 8)
+       exit=0; EXPECT=matched; output=sha256=8b4564b0ae760c286f32c8384039bff2a83d419f9ffdfbc945a8dc0c2766b4cf; bytes=19
+  PASS GATES:B56: every brief-12 timeline spec validates: schema, targets, source stamps, and every player number/name/position traced to the cached raw responses (board_data_check kind timeline)
+       exit=0; EXPECT=matched; output=sha256=f96a911a48231b70a16714539fb4abf144370f30303ef18a9bf0c9f292237d59; bytes=22
+  PASS GATES:B57: each proof board MP4 lasts its spec duration within one frame (ffprobe vs duration_s at the spec fps)
+       exit=0; EXPECT=matched; output=sha256=119ced4aa21b20eaaf9f3629decd22ee9f683739f8d94c111bfa89bd82999501; bytes=32
+  PASS GATES:B58: the per-step keyframe audit passes on every proof timeline (rendered-page audit re-run per step end, in audit-only mode)
+       exit=0; EXPECT=matched; output=sha256=b5a44e622bc27cc6e8cfd17ff300af979e6bfefa3a6a3ca5af5184fcd32cf15a; bytes=22
+  PASS GATES:B59: the swapped-name positive control FAILS the timeline audit and the real spec passes (brief 12 job 4)
+       exit=0; EXPECT=matched; output=sha256=93afd519868995258b884d600eddf87979171ea0424782e1c74a12ef0a057e94; bytes=81
+  PASS GATES:B60: reports/brief12/ holds a 4x4 640px contact sheet per proof board and per board a 640px GIF or 2-3 keyframe PNGs
+       exit=0; EXPECT=matched; output=sha256=3e160115d73d9ecddeacef06825d215c34ae330c77c2f45a8d849dda98fd6bad; bytes=28
+  PASS GATES:B61: no invented numbers: the numeric-leaf walk accepts the timeline specs (every non-choreography number traced to a cached raw response) and a planted fake position FAILS the check (positive control)
+       exit=0; EXPECT=matched; output=sha256=3d52719de57575995baae287c0ee0c1b6ecdeeaaf861acb35af7be211f2228df; bytes=474
+  PASS GATES:B62: sizing minima hold on every rendered board at every step end: disc radius >= 42 px, number-chip radius >= 26 px, name-label height >= 36 px at 1080p (the 480p readability floor), and a planted sub-minimum entity FAILS the audit (positive control)
+       exit=0; EXPECT=matched; output=sha256=3ba82c33bc74dac50825f8f4f0c30a6588808a7a20a35cf709b184042aa14c7a; bytes=228
+  PASS GATES:B63: the chip-label overlap audit is live on every rendered keyframe and a planted chip-on-label case FAILS it (positive control)
+       exit=0; EXPECT=matched; output=sha256=beea3352d679167e63708ee3ad741b6389c1cddb2f9baa026cb6a3a33b77a8e7; bytes=65
+  PASS GATES:B64: every NAMED player in a brief-13 overlay spec carries identity evidence (source "lineup:<jersey>" matching a jersey in the facts XI); a spec naming a player without evidence is REFUSED (positive control)
+       exit=0; EXPECT=matched; output=sha256=32df4151fe4ee13d3883db646f3c0f9fb8b52094b419e93ca4d2108dbba56171; bytes=131
+  PASS GATES:B65: the drift check compares rendered mark positions against the marked foot points and a spec with one ellipse shifted 150 px FAILS it (positive control, brief job 6)
+       exit=0; EXPECT=matched; output=sha256=d3d495d7a55162694751ed977edc1339f004349c69c0fae2404504e66f20aa42; bytes=278
+  PASS GATES:B66: neither npm nor yt-dlp cache resolves on C: in a login shell (npm env var and yt-dlp --cache-dir both point at /mnt/d or the WSL home, never /mnt/c)
+       exit=0; EXPECT=matched; output=sha256=bf0bc11d94142cc1f26807c3be72fe2451aaecd0296fdfc8a33fe4b120582356; bytes=13
+  PASS GATES:B67: the machine env rename is live: bash -lic resolves the five scratch vars through the new path, the old path is a one-line shim, and .bashrc sources the new path
+       exit=0; EXPECT=matched; output=sha256=29a13918b1d57083acedcb291a49cfdb28c7c61d2e91071f546b8fab9b2e8f57; bytes=12
+  PASS GATES:B68: the stale auto-memory files are gone: tactical-dominant-balance.md deleted and stop-adding-start-replacing.md carries no tactical_render/step4 reference
+       exit=0; EXPECT=matched; output=sha256=1b950285411cb4e78de19aadc8aa162e4aea1c26df2f061056836f8d1e8b16bc; bytes=13
+  PASS GATES:B69: the pre-change harness backup exists at
+       exit=0; EXPECT=matched; output=sha256=61ddeaa0dd8e171d5b692fcbcd3c485ecab261575e2aeb6f57f7ece74306f02d; bytes=16
+  PASS GATES:B70: reports/brief14/before.md records the before measurements: the
+       exit=0; EXPECT=matched; output=sha256=0e66a8d245d7fd486465e9e017e0c7a84de02e7d073ec374efdf69f2e2f1d4e8; bytes=16
+  PASS GATES:B71: plan.md and plan.json are complete and mutually consistent: every
+       exit=0; EXPECT=matched; output=sha256=c42a7bce6ac2c131a5f55766770298ffaf806fc06f287854da58ff69efc5ca04; bytes=1089
+  PASS GATES:B72: the applied filesystem end state matches the plan: every
+       exit=0; EXPECT=matched; output=sha256=ea77c8689e24252602c96aee2fefbebfe813b7d4874aa03c332f7b8624c188ce; bytes=630
+  PASS GATES:B73: the hook end state matches the plan across every settings file
+       exit=0; EXPECT=matched; output=sha256=d8bbf1233ca04d9a1f14a0478845de31a7f2e8d11749e5aca3aa5d9af6126e4d; bytes=529
+  PASS GATES:B74: the MCP end state matches the plan: filesystem, memory and
+       exit=0; EXPECT=matched; output=sha256=f3d812d052c5f94293ae025d7742d5f7419eeddd5d47a8a553d75e281e6af14c; bytes=206
+  PASS GATES:B75: the read-discipline rule is standing in ~/.claude/CLAUDE.md
+       exit=0; EXPECT=matched; output=sha256=e235ecef97c424be071e22e3a4e12a8c181aa14bbc8e9f03a31a3457d1bed834; bytes=18
+  PASS GATES:B76: planned auto-memory files were merged into SYSTEM.md pointers
+       exit=0; EXPECT=matched; output=sha256=d781c4148e18ceeb92bb8f41be5a0259010997fae68aaa153eae7033ca558d89; bytes=258
+  PASS GATES:B77: ECC doctor reports zero warnings and zero errors for what remains
+       exit=0; EXPECT=matched; output=sha256=dd49e82c3de041ea16e143bea972a11696d09ed16c56c2d33c20437f6f6b08dc; bytes=13
+  PASS GATES:B78: reports/brief14/after.md carries the before/after table with all
+       exit=0; EXPECT=matched; output=sha256=42fefc84b182780d3d17af9b3600c730b615eafbecbe59cdf851380b1f617f64; bytes=485
+  PASS GATES:B79: no regression bundle: soccer disk_guard selftest, scratch_mount
+       exit=0; EXPECT=matched; output=sha256=8929fb6a7804dcee3c7e8375e60d03cc90cbae587211f8e8305eece783612a3f; bytes=301
+  PASS GATES:B80: ~/.claude/SYSTEM.md section 5 reflects the lean end state (new
+       exit=0; EXPECT=matched; output=sha256=073278c2b63223f056584b89d465acd56553a1c5fa4930fcb23e5a9273564a22; bytes=16
+  PASS GATES:B81: both repos' DECISIONS.md carry a dated brief-14 entry recording
+       exit=0; EXPECT=matched; output=sha256=f2e9d355c9b873bb40d63304022fb83fe9bfe11e9ab4409c2328a5ba6a79ceb5; bytes=21
+  PASS GATES:B82: the reverify proof ending ALL MET, run after the last code commit,
+       exit=0; EXPECT=matched; output=sha256=3be1501a5a88c1302475ed12070303ab4f36ed58c783765a8dc419e12e7c018e; bytes=13
+  PASS GATES:B83: the 60-skill marketing kit is removed and verifiable: roster dirs
+       exit=0; EXPECT=matched; output=sha256=47991cd0aaf81e018e1a5acc81a1778625436ffbe15075bba504fff47bc6cd64; bytes=288
+  PASS GATES:B84: the overlay restyle is enforced by the page audit: ground
+       exit=0; EXPECT=matched; output=sha256=fef8e9d7a8d3f12afdc5d2bf7f22030dd21a0387ad22a14df2695c9d25231667; bytes=318
+  PASS GATES:B85: freeze points re-checked against broadcaster graphics: every
+       exit=0; EXPECT=matched; output=sha256=caa795606a61ee286bb1f3e1b6ab9639ca4e26400878cdeeb84c6c5a84fcaa8d; bytes=2851
+  PASS GATES:B86: the five card types exist in the timeline renderer (same
+       exit=0; EXPECT=matched; output=sha256=d9ef46d615afc6d7aaca6fee249091c5d17d6a575a06b8db8911c1eea7642060; bytes=891
+  PASS GATES:B87: every brief-15 render is real: 4 restyled overlay clips and 5
+       exit=0; EXPECT=matched; output=sha256=5abbfc376a2b191baf30ef80bd55cfe4bee52f7efeb683f9aa49bfb8cedff428; bytes=2052
+  PASS GATES:B88: the visual check is recorded: reports/brief15/visual_check.md
+       exit=0; EXPECT=matched; output=sha256=02831830911ffdaa827d54448e588f846c839c573a8e0e17618a9a514116292f; bytes=16
+  PASS GATES:B89: the publish artifacts exist: overlay before/after sheets and
+       exit=0; EXPECT=matched; output=sha256=21632d5713a06131c81e86528205da09cb31d18d37e439926b501d7f28bfc409; bytes=518
+  PASS GATES:B90: ~/.claude/SYSTEM.md carries the decision-1 change-log mapping
+       exit=0; EXPECT=matched; output=sha256=bc577f18223f774f4ff77684e8a86bb2b8ef31c44b9aafeb784156ef6ea39354; bytes=14
+  PASS GATES:B91: the reverify proof ending ALL MET, run after the last code
+       exit=0; EXPECT=matched; output=sha256=64c5b1d9c4e56779524496bf7977c58ade2d032c7125dcfe94088b6d82e11a08; bytes=13
+GATES.md: 78 gates
+ALL MET (78 met, reran: 78, previously met reverified: 77)
+passD rc=0

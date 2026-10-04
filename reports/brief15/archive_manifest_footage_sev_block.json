@@ -1,0 +1,19 @@
+{
+ "artifact": "2026-09-29_glm_footage_sev_block.mp4",
+ "project": "soccer-channel",
+ "task": "brief 15 job 4 render",
+ "produced_by": "glm-5.3-flash:cloud via Claude Code",
+ "produced_at": "2026-10-04T00:05:24Z",
+ "inputs": [
+  "renders/2026-09-19_sevilla-fc-barcelona/board_specs/footage_sev_block.json"
+ ],
+ "tools": [
+  "pod_build.py",
+  "board_html.js",
+  "board_page.html"
+ ],
+ "cost": {
+  "modal_usd": 0
+ },
+ "notes": "rendered on Modal pod; audit-clean"
+}
