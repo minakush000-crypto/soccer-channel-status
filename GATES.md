@@ -491,7 +491,8 @@ rendered from JSON sidecars next to them; the oracle checks the JSONs
       archived to B2 with a JSON manifest
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py overlay
   EXPECT: OVERLAY-OK
-- [ ] B101: the reverify proof is published after the last brief-16 code
+- [x] B101: the reverify proof is published after the last brief-16 code
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=4e77f5712b95036a28108818579a00f7bc9570b4d6e10ee9a045134281a24c10; output-bytes=398
       commit, in reports/brief16/reverify.txt AND at the mirror; the file
       documents the full pass-A rerun (reran=88, only the proof gate itself
       unmet by construction) and ENDS with a pass-B rerun verdict printed
