@@ -1238,3 +1238,40 @@ ladder per round, which kept the challenged IP hot (rounds now sleep
 caller. New tools (brief16_data.py driver + JSON sidecars,
 brief16_check.py oracle, brief16_frames.py/brief16_clips.py pod mechanics,
 brief16_sheets.py) serve only brief 16 until wired by its gates.
+
+## Brief 16 (2026-10-04): ECC state repair, homunculus prune, machine-state notes
+Today's session exposed and fixed three standing infra drifts (all touched
+~/.claude-shared state; backups to B2 before each fix):
+1. ~/.claude/settings.json was rewritten WITHOUT the ECC hook ids/descri-
+   ptions (mtime Oct 3 20:44, before this session; the /model persistence
+   or claude-mem is the likely writer; cause unconfirmed). That left the
+   ECC doctor in error state (missing-managed-files) and briefly broke
+   gates B39/B40/B77/B83. Fix: `ecc.js repair` restored the managed set,
+   then deduped (the repair had doubled the no-id copies: 47 entries ->
+   27 single-run), then reconciled BOTH files to the brief-14 lean end
+   state (the 4 removed hooks out of install-state.json's managedHooks +
+   settings.json: desktop-notify, evaluate-session, check-console-log,
+   format-typecheck) = 23 entries: 20 ECC-managed (with ids) + 3 orphans
+   (unlazy stop-hook, block-retired.sh, warn-local-gpu.sh). Doctor clean.
+   Backups: 2026-10-04_settings_pre_b16_repair.json,
+   2026-10-04_settings_post_repair_pre_dedupe.json,
+   2026-10-04_settings_pre_leanfix.json,
+   2026-10-04_install_state_pre_hookfix.json (all in b2:mendymax-archive/
+   system/).
+2. The ECC homunculus observation log (projects/72ed26e7cde9/
+   observations.jsonl) grew 4814 lines/6.76MB since 2026-09-28 and pushed
+   the 10MB ECC-data cap (disk guard FAIL). Pruned to the newest 1500
+   lines (kept from 2026-10-04T02:09:57Z); the FULL file was streamed to
+   b2:mendymax-archive/system/ecc-homunculus/2026-10-04_prune_backup.tar.gz
+   (readback-verified) first. Guard green at 6.0MB.
+3. The Sofascore re-fetch could NOT complete this session (Akamai 403 every
+   single-request attempt for ~2.5h, log fetch_attempts.log): the list
+   cache stays 2026-09-29; the latest-completed set was confirmed by two
+   independent web sources (ESPN season boards + fcbarcelona.com) in the
+   discovery sweep; per-match numbers come from the cached raws (brief 16
+   decision 4 explicitly allows cached raws). If a later session lands the
+   fresh list, refresh matches.json + re-run brief16_check (the oracles
+   re-verify everything mechanically).
+
+Also today: benchmark census rebased (61->68 files, dated note in
+reports/brief14/bench_truth.json) per the gate's own rebase procedure.
