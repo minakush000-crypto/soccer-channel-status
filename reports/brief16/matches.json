@@ -1,0 +1,213 @@
+{
+ "endpoint": "/api/v1/team/2817/events/last/0",
+ "fetched_at_utc": "2026-09-29T06:14:14Z",
+ "list_cache": "barca_last_events.json",
+ "list_cache_NOTE": "cached 2026-09-29; re-fetch challenged (Akamai 403, see logs/fetch_attempts.log); the same latest-completed set confirmed by two independent web sources in the discovery sweep",
+ "requested_n": 8,
+ "events": [
+  {
+   "event_id": 16416349,
+   "date": "2026-09-19",
+   "competition": "LaLiga",
+   "home": "Sevilla",
+   "away": "FC Barcelona",
+   "opponent": "Sevilla",
+   "score": "3-1"
+  },
+  {
+   "event_id": 16416346,
+   "date": "2026-09-16",
+   "competition": "LaLiga",
+   "home": "FC Barcelona",
+   "away": "Real Racing Club",
+   "opponent": "Real Racing Club",
+   "score": "7-2"
+  },
+  {
+   "event_id": 16416329,
+   "date": "2026-09-13",
+   "competition": "LaLiga",
+   "home": "Levante UD",
+   "away": "FC Barcelona",
+   "opponent": "Levante UD",
+   "score": "4-2"
+  },
+  {
+   "event_id": 16938784,
+   "date": "2026-09-09",
+   "competition": "UEFA Champions League",
+   "home": "FC Barcelona",
+   "away": "Feyenoord",
+   "opponent": "Feyenoord",
+   "score": "5-1"
+  },
+  {
+   "event_id": 16416325,
+   "date": "2026-09-06",
+   "competition": "LaLiga",
+   "home": "Valencia",
+   "away": "FC Barcelona",
+   "opponent": "Valencia",
+   "score": "5-0"
+  },
+  {
+   "event_id": 16416295,
+   "date": "2026-08-31",
+   "competition": "LaLiga",
+   "home": "FC Barcelona",
+   "away": "Rayo Vallecano",
+   "opponent": "Rayo Vallecano",
+   "score": "5-2"
+  },
+  {
+   "event_id": 16421059,
+   "date": "2026-08-27",
+   "competition": "LaLiga",
+   "home": "FC Barcelona",
+   "away": "Athletic Club",
+   "opponent": "Athletic Club",
+   "score": "2-0"
+  },
+  {
+   "event_id": 16416311,
+   "date": "2026-08-23",
+   "competition": "LaLiga",
+   "home": "Elche",
+   "away": "FC Barcelona",
+   "opponent": "Elche",
+   "score": "5-0"
+  }
+ ],
+ "chosen": [
+  {
+   "event_id": 16416349,
+   "date": "2026-09-19",
+   "competition": "LaLiga",
+   "opponent": "Sevilla",
+   "score": "3-1",
+   "slug": "2026-09-19_sevilla-fc-barcelona",
+   "raw_fetched_at": "2026-09-28T05:10:49Z",
+   "raw_cache": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json",
+   "highlights": {
+    "url": "https://www.youtube.com/watch?v=ZJom79fRhv0",
+    "video_id": "ZJom79fRhv0",
+    "uploader": "LALIGA (official league channel)",
+    "duration_text": "3:15",
+    "avc": "1080p50"
+   },
+   "already_on_pod": true,
+   "footage": {
+    "staged_rel": "brief16/2026-09-19_sevilla-fc-barcelona.mp4",
+    "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-19_sevilla-fc-barcelona.mp4",
+    "manifest": "manifests/archive_manifest_footage_2026-09-19_sevilla-fc-barcelona.json",
+    "pod_dir": "brief16",
+    "pod_file": "2026-09-19_sevilla-fc-barcelona.mp4",
+    "duration_s": 194.74576,
+    "vcodec": "h264",
+    "height": 1080
+   }
+  },
+  {
+   "event_id": 16416346,
+   "date": "2026-09-16",
+   "competition": "LaLiga",
+   "opponent": "Real Racing Club",
+   "score": "7-2",
+   "slug": "2026-09-16_fc-barcelona-real-racing-club",
+   "raw_fetched_at": "2026-09-28T05:11:15Z",
+   "raw_cache": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json",
+   "highlights": {
+    "url": "https://www.youtube.com/watch?v=bo9g36xT5UA",
+    "video_id": "bo9g36xT5UA",
+    "uploader": "LALIGA (official league channel)",
+    "duration_text": "3:14",
+    "avc": "1080p50"
+   },
+   "already_on_pod": true,
+   "footage": {
+    "staged_rel": "brief16/2026-09-16_fc-barcelona-real-racing-club.mp4",
+    "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-16_fc-barcelona-real-racing-club.mp4",
+    "manifest": "manifests/archive_manifest_footage_2026-09-16_fc-barcelona-real-racing-club.json",
+    "pod_dir": "brief16",
+    "pod_file": "2026-09-16_fc-barcelona-real-racing-club.mp4",
+    "duration_s": 194.49034,
+    "vcodec": "h264",
+    "height": 1080
+   }
+  },
+  {
+   "event_id": 16416329,
+   "date": "2026-09-13",
+   "competition": "LaLiga",
+   "opponent": "Levante UD",
+   "score": "4-2",
+   "slug": "2026-09-13_levante-ud-fc-barcelona",
+   "raw_fetched_at": "2026-09-28T05:11:34Z",
+   "raw_cache": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json",
+   "highlights": {
+    "url": "https://www.youtube.com/watch?v=te6eWlim9yU",
+    "video_id": "te6eWlim9yU",
+    "uploader": "LALIGA (official league channel)",
+    "duration_text": "3:14",
+    "avc": "1080p50"
+   },
+   "already_on_pod": false,
+   "footage": {
+    "staged_rel": "brief16/2026-09-13_levante-ud-fc-barcelona.mp4",
+    "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-13_levante-ud-fc-barcelona.mp4",
+    "manifest": "manifests/archive_manifest_footage_2026-09-13_levante-ud-fc-barcelona.json",
+    "pod_dir": "brief16",
+    "pod_file": "2026-09-13_levante-ud-fc-barcelona.mp4",
+    "duration_s": 194.39746,
+    "vcodec": "h264",
+    "height": 1080
+   }
+  },
+  {
+   "event_id": 16938784,
+   "date": "2026-09-09",
+   "competition": "UEFA Champions League",
+   "opponent": "Feyenoord",
+   "score": "5-1",
+   "slug": "2026-09-09_fc-barcelona-feyenoord",
+   "raw_fetched_at": "2026-09-28T05:14:34Z",
+   "raw_cache": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json",
+   "highlights": {
+    "url": "https://www.youtube.com/watch?v=XqSrz6MKVlk",
+    "video_id": "XqSrz6MKVlk",
+    "uploader": "FC Barcelona (official club channel)",
+    "duration_text": "3:39",
+    "avc": "1080p25"
+   },
+   "already_on_pod": false,
+   "footage": {
+    "staged_rel": "brief16/2026-09-09_fc-barcelona-feyenoord.mp4",
+    "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-09_fc-barcelona-feyenoord.mp4",
+    "manifest": "manifests/archive_manifest_footage_2026-09-09_fc-barcelona-feyenoord.json",
+    "pod_dir": "brief16",
+    "pod_file": "2026-09-09_fc-barcelona-feyenoord.mp4",
+    "duration_s": 218.917732,
+    "vcodec": "h264",
+    "height": 1080
+   }
+  }
+ ],
+ "footage_results": [
+  {
+   "stem": "2026-09-19_sevilla-fc-barcelona",
+   "ok": true
+  },
+  {
+   "stem": "2026-09-16_fc-barcelona-real-racing-club",
+   "ok": true
+  },
+  {
+   "stem": "2026-09-13_levante-ud-fc-barcelona",
+   "ok": true
+  },
+  {
+   "stem": "2026-09-09_fc-barcelona-feyenoord",
+   "ok": true
+  }
+ ]
+}

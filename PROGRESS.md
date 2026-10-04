@@ -4015,3 +4015,32 @@ restyled chips overlapped -> fixed at marks.json, re-render OK). Jobs 5-6:
 archived to B2 2026-09-29/brief15/ with manifests. Job 7: SYSTEM.md kit
 outcome + mapping line, B2 copy. Job 8: two-pass reverify
 (reports/brief15/reverify.txt), gates B83-B91.
+
+## Brief 16 (2026-10-03/04): thesis clip list + multi-match footage
+Job 0: title-card photo box 900px (46.9% of frame width, cutout 57.4% of
+height) + audit minima (0.45*1920 / 0.45*1080 enforced in cardCheck); the
+ellipse got a bold core (7px) + wider glow (16px/blur 48) + the FF16
+stroke floor in the page audit; before/after sheets for one card + one
+overlay clip (both already-audited specs re-rendered pod-side, brief-15
+files untouched). Job 1: Akamai hard-challenged every Sofascore route this
+session (403 on both api hosts + in-page + same-origin www; retries logged
+in reports/brief16/logs/fetch_attempts.log, ~2h of patience): the list
+cache stays the 2026-09-29 fetch and the latest-completed set was
+CONFIRMED by the discovery sweep against ESPN's season boards + the club
+schedule page (no Barcelona match 2026-09-25..10-03, next 2026-10-10 v
+Getafe). New transport: in-page fetch from the site origin (route 2 in
+sofascore_chrome_fetch.js) + SOFA_CHROME_FIRST single-request rounds.
+Matches chosen: Sevilla (A) 3-1 09-19, Racing (H) 7-2 09-16, Levante (A)
+4-2 09-13, Feyenoord (H) 5-1 09-09 UCL (the four latest; official league
+or club uploads; Levante + Feyenoord downloaded fresh 1080p avc1, Sevilla
++ Racing adopted pod-side from brief 13). Job 2: 138 fact rows from the
+cached raws (press_facts.md). Job 3: 9 claims + 4 dropped
+(press_facts.md/claims.md); a 9-skeptic adversarial pass killed 3
+wordings (C1 universal, C4 causal, C8 universal) -> reworded before the
+oracle. Job 4: 4/4 footage archived to B2 (sha1-verified), shipped to
+in/brief16/, local copies deleted. Job 5: 4s surveys + 1s/0.5s drills on
+the pod; 5 clips + CL06 mapped to claims. Job 6: 6 clips cut pod-side
+(durations exact) + the strongest press moment's freeze overlay
+(footage_presstrap, freeze 61.0 = the 21:42 trap; FOOTAGE-CHECK OK).
+Job 7: contact sheet (640px, 6 panels), manifests, visual_check.md.
+Job 8: gates B92-B101 + reverify published to the mirror.

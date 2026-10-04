@@ -1,0 +1,1460 @@
+{
+ "generated_at": "2026-10-04T03:45:41Z",
+ "team_id": 2817,
+ "matches": [
+  {
+   "event_id": 16416349,
+   "slug": "2026-09-19_sevilla-fc-barcelona",
+   "raw": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json",
+   "available_fields": [
+    "average_positions",
+    "event",
+    "incidents",
+    "lineups",
+    "statistics"
+   ],
+   "missing_press_labels": [
+    "Counter attacks",
+    "Progressive passes",
+    "Successful dribbles"
+   ],
+   "rows": [
+    {
+     "key": "16416349-01",
+     "label": "Ball possession",
+     "barca": "69%",
+     "opp": "31%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Ball possession'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "69%"
+    },
+    {
+     "key": "16416349-02",
+     "label": "Big chances",
+     "barca": "6",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "6"
+    },
+    {
+     "key": "16416349-03",
+     "label": "Big chances scored",
+     "barca": "2",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances scored'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "2"
+    },
+    {
+     "key": "16416349-04",
+     "label": "Big chances missed",
+     "barca": "4",
+     "opp": "0",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances missed'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "4"
+    },
+    {
+     "key": "16416349-05",
+     "label": "Expected goals",
+     "barca": "3.47",
+     "opp": "0.40",
+     "section": "statistics",
+     "where": "statistics period ALL 'Expected goals'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "3.47"
+    },
+    {
+     "key": "16416349-06",
+     "label": "Expected goals on target",
+     "barca": "1.62",
+     "opp": "0.81",
+     "section": "statistics",
+     "where": "statistics period ALL 'Expected goals on target'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "1.62"
+    },
+    {
+     "key": "16416349-07",
+     "label": "Total shots",
+     "barca": "24",
+     "opp": "7",
+     "section": "statistics",
+     "where": "statistics period ALL 'Total shots'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "24"
+    },
+    {
+     "key": "16416349-08",
+     "label": "Shots on target",
+     "barca": "7",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots on target'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "7"
+    },
+    {
+     "key": "16416349-09",
+     "label": "Shots inside box",
+     "barca": "12",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots inside box'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "12"
+    },
+    {
+     "key": "16416349-10",
+     "label": "Shots outside box",
+     "barca": "12",
+     "opp": "4",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots outside box'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "12"
+    },
+    {
+     "key": "16416349-11",
+     "label": "Blocked shots",
+     "barca": "5",
+     "opp": "0",
+     "section": "statistics",
+     "where": "statistics period ALL 'Blocked shots'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "5"
+    },
+    {
+     "key": "16416349-12",
+     "label": "Touches in penalty area",
+     "barca": "28",
+     "opp": "12",
+     "section": "statistics",
+     "where": "statistics period ALL 'Touches in penalty area'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "28"
+    },
+    {
+     "key": "16416349-13",
+     "label": "Final third entries",
+     "barca": "78",
+     "opp": "51",
+     "section": "statistics",
+     "where": "statistics period ALL 'Final third entries'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "78"
+    },
+    {
+     "key": "16416349-14",
+     "label": "Final third phase",
+     "barca": "142/169 (84%)",
+     "opp": "46/83 (55%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Final third phase'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "142/169 (84%)"
+    },
+    {
+     "key": "16416349-15",
+     "label": "Long balls",
+     "barca": "18/34 (53%)",
+     "opp": "27/58 (47%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Long balls'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "18/34 (53%)"
+    },
+    {
+     "key": "16416349-16",
+     "label": "Crosses",
+     "barca": "3/11 (27%)",
+     "opp": "4/8 (50%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Crosses'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "3/11 (27%)"
+    },
+    {
+     "key": "16416349-17",
+     "label": "Duels",
+     "barca": "51%",
+     "opp": "49%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Duels'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "51%"
+    },
+    {
+     "key": "16416349-18",
+     "label": "Ground duels",
+     "barca": "39/82 (48%)",
+     "opp": "43/82 (52%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Ground duels'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "39/82 (48%)"
+    },
+    {
+     "key": "16416349-19",
+     "label": "Aerial duels",
+     "barca": "17/27 (63%)",
+     "opp": "10/27 (37%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Aerial duels'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "17/27 (63%)"
+    },
+    {
+     "key": "16416349-20",
+     "label": "Dispossessed",
+     "barca": "12",
+     "opp": "8",
+     "section": "statistics",
+     "where": "statistics period ALL 'Dispossessed'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "12"
+    },
+    {
+     "key": "16416349-21",
+     "label": "Total tackles",
+     "barca": "15",
+     "opp": "21",
+     "section": "statistics",
+     "where": "statistics period ALL 'Total tackles'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "15"
+    },
+    {
+     "key": "16416349-22",
+     "label": "Tackles",
+     "barca": "15",
+     "opp": "21",
+     "section": "statistics",
+     "where": "statistics period ALL 'Tackles'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "15"
+    },
+    {
+     "key": "16416349-23",
+     "label": "Tackles won",
+     "barca": "73%",
+     "opp": "71%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Tackles won'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "73%"
+    },
+    {
+     "key": "16416349-24",
+     "label": "Interceptions",
+     "barca": "5",
+     "opp": "2",
+     "section": "statistics",
+     "where": "statistics period ALL 'Interceptions'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "5"
+    },
+    {
+     "key": "16416349-25",
+     "label": "Recoveries",
+     "barca": "45",
+     "opp": "45",
+     "section": "statistics",
+     "where": "statistics period ALL 'Recoveries'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "45"
+    },
+    {
+     "key": "16416349-26",
+     "label": "Clearances",
+     "barca": "26",
+     "opp": "11",
+     "section": "statistics",
+     "where": "statistics period ALL 'Clearances'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "26"
+    },
+    {
+     "key": "16416349-27",
+     "label": "Errors lead to a shot",
+     "barca": "0",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Errors lead to a shot'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "0"
+    },
+    {
+     "key": "16416349-28",
+     "label": "Offsides",
+     "barca": "2",
+     "opp": "5",
+     "section": "statistics",
+     "where": "statistics period ALL 'Offsides'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "2"
+    },
+    {
+     "key": "16416349-29",
+     "label": "Fouls",
+     "barca": "11",
+     "opp": "10",
+     "section": "statistics",
+     "where": "statistics period ALL 'Fouls'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "11"
+    },
+    {
+     "key": "16416349-30",
+     "label": "Fouled in final third",
+     "barca": "4",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Fouled in final third'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "4"
+    },
+    {
+     "key": "16416349-31",
+     "label": "Number of sprints",
+     "barca": "101",
+     "opp": "91",
+     "section": "statistics",
+     "where": "statistics period ALL 'Number of sprints'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "101"
+    },
+    {
+     "key": "16416349-32",
+     "label": "Distance covered",
+     "barca": "99.0 km",
+     "opp": "101.0 km",
+     "section": "statistics",
+     "where": "statistics period ALL 'Distance covered'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "99.0 km"
+    },
+    {
+     "key": "16416349-33",
+     "label": "Dribbles",
+     "barca": "16/25 (64%)",
+     "opp": "11/18 (61%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Dribbles'",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics",
+     "value": "16/25 (64%)"
+    },
+    {
+     "key": "16416349-g1",
+     "label": "Goals scored",
+     "barca": "3",
+     "opp": "1",
+     "section": "event",
+     "where": "event homeScore/awayScore current",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /event homeScore|awayScore",
+     "value": "3"
+    },
+    {
+     "key": "16416349-g2",
+     "label": "Goals conceded",
+     "barca": "1",
+     "opp": "3",
+     "section": "event",
+     "where": "event homeScore/awayScore current",
+     "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /event homeScore|awayScore",
+     "value": "1"
+    }
+   ]
+  },
+  {
+   "event_id": 16416346,
+   "slug": "2026-09-16_fc-barcelona-real-racing-club",
+   "raw": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json",
+   "available_fields": [
+    "average_positions",
+    "event",
+    "incidents",
+    "lineups",
+    "statistics"
+   ],
+   "missing_press_labels": [
+    "Counter attacks",
+    "Errors lead to a shot",
+    "Progressive passes",
+    "Successful dribbles"
+   ],
+   "rows": [
+    {
+     "key": "16416346-01",
+     "label": "Ball possession",
+     "barca": "69%",
+     "opp": "31%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Ball possession'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "69%"
+    },
+    {
+     "key": "16416346-02",
+     "label": "Big chances",
+     "barca": "13",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "13"
+    },
+    {
+     "key": "16416346-03",
+     "label": "Big chances scored",
+     "barca": "5",
+     "opp": "2",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances scored'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "5"
+    },
+    {
+     "key": "16416346-04",
+     "label": "Big chances missed",
+     "barca": "8",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances missed'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "8"
+    },
+    {
+     "key": "16416346-05",
+     "label": "Expected goals",
+     "barca": "6.74",
+     "opp": "1.98",
+     "section": "statistics",
+     "where": "statistics period ALL 'Expected goals'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "6.74"
+    },
+    {
+     "key": "16416346-06",
+     "label": "Expected goals on target",
+     "barca": "4.41",
+     "opp": "1.38",
+     "section": "statistics",
+     "where": "statistics period ALL 'Expected goals on target'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "4.41"
+    },
+    {
+     "key": "16416346-07",
+     "label": "Total shots",
+     "barca": "30",
+     "opp": "5",
+     "section": "statistics",
+     "where": "statistics period ALL 'Total shots'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "30"
+    },
+    {
+     "key": "16416346-08",
+     "label": "Shots on target",
+     "barca": "9",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots on target'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "9"
+    },
+    {
+     "key": "16416346-09",
+     "label": "Shots inside box",
+     "barca": "23",
+     "opp": "5",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots inside box'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "23"
+    },
+    {
+     "key": "16416346-10",
+     "label": "Shots outside box",
+     "barca": "7",
+     "opp": "0",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots outside box'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "7"
+    },
+    {
+     "key": "16416346-11",
+     "label": "Blocked shots",
+     "barca": "6",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Blocked shots'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "6"
+    },
+    {
+     "key": "16416346-12",
+     "label": "Touches in penalty area",
+     "barca": "64",
+     "opp": "10",
+     "section": "statistics",
+     "where": "statistics period ALL 'Touches in penalty area'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "64"
+    },
+    {
+     "key": "16416346-13",
+     "label": "Final third entries",
+     "barca": "82",
+     "opp": "15",
+     "section": "statistics",
+     "where": "statistics period ALL 'Final third entries'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "82"
+    },
+    {
+     "key": "16416346-14",
+     "label": "Final third phase",
+     "barca": "196/235 (83%)",
+     "opp": "7/19 (37%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Final third phase'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "196/235 (83%)"
+    },
+    {
+     "key": "16416346-15",
+     "label": "Long balls",
+     "barca": "21/29 (72%)",
+     "opp": "12/29 (41%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Long balls'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "21/29 (72%)"
+    },
+    {
+     "key": "16416346-16",
+     "label": "Crosses",
+     "barca": "7/25 (28%)",
+     "opp": "2/4 (50%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Crosses'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "7/25 (28%)"
+    },
+    {
+     "key": "16416346-17",
+     "label": "Duels",
+     "barca": "56%",
+     "opp": "44%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Duels'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "56%"
+    },
+    {
+     "key": "16416346-18",
+     "label": "Ground duels",
+     "barca": "33/63 (52%)",
+     "opp": "30/63 (48%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Ground duels'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "33/63 (52%)"
+    },
+    {
+     "key": "16416346-19",
+     "label": "Aerial duels",
+     "barca": "11/16 (69%)",
+     "opp": "5/16 (31%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Aerial duels'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "11/16 (69%)"
+    },
+    {
+     "key": "16416346-20",
+     "label": "Dispossessed",
+     "barca": "5",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Dispossessed'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "5"
+    },
+    {
+     "key": "16416346-21",
+     "label": "Total tackles",
+     "barca": "7",
+     "opp": "15",
+     "section": "statistics",
+     "where": "statistics period ALL 'Total tackles'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "7"
+    },
+    {
+     "key": "16416346-22",
+     "label": "Tackles",
+     "barca": "7",
+     "opp": "15",
+     "section": "statistics",
+     "where": "statistics period ALL 'Tackles'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "7"
+    },
+    {
+     "key": "16416346-23",
+     "label": "Tackles won",
+     "barca": "29%",
+     "opp": "80%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Tackles won'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "29%"
+    },
+    {
+     "key": "16416346-24",
+     "label": "Interceptions",
+     "barca": "9",
+     "opp": "9",
+     "section": "statistics",
+     "where": "statistics period ALL 'Interceptions'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "9"
+    },
+    {
+     "key": "16416346-25",
+     "label": "Recoveries",
+     "barca": "46",
+     "opp": "30",
+     "section": "statistics",
+     "where": "statistics period ALL 'Recoveries'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "46"
+    },
+    {
+     "key": "16416346-26",
+     "label": "Clearances",
+     "barca": "5",
+     "opp": "39",
+     "section": "statistics",
+     "where": "statistics period ALL 'Clearances'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "5"
+    },
+    {
+     "key": "16416346-27",
+     "label": "Offsides",
+     "barca": "3",
+     "opp": "2",
+     "section": "statistics",
+     "where": "statistics period ALL 'Offsides'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "3"
+    },
+    {
+     "key": "16416346-28",
+     "label": "Fouls",
+     "barca": "10",
+     "opp": "13",
+     "section": "statistics",
+     "where": "statistics period ALL 'Fouls'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "10"
+    },
+    {
+     "key": "16416346-29",
+     "label": "Fouled in final third",
+     "barca": "5",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Fouled in final third'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "5"
+    },
+    {
+     "key": "16416346-30",
+     "label": "Number of sprints",
+     "barca": "173",
+     "opp": "126",
+     "section": "statistics",
+     "where": "statistics period ALL 'Number of sprints'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "173"
+    },
+    {
+     "key": "16416346-31",
+     "label": "Distance covered",
+     "barca": "103.2 km",
+     "opp": "103.3 km",
+     "section": "statistics",
+     "where": "statistics period ALL 'Distance covered'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "103.2 km"
+    },
+    {
+     "key": "16416346-32",
+     "label": "Dribbles",
+     "barca": "15/25 (60%)",
+     "opp": "7/11 (64%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Dribbles'",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics",
+     "value": "15/25 (60%)"
+    },
+    {
+     "key": "16416346-g1",
+     "label": "Goals scored",
+     "barca": "7",
+     "opp": "2",
+     "section": "event",
+     "where": "event homeScore/awayScore current",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /event homeScore|awayScore",
+     "value": "7"
+    },
+    {
+     "key": "16416346-g2",
+     "label": "Goals conceded",
+     "barca": "2",
+     "opp": "7",
+     "section": "event",
+     "where": "event homeScore/awayScore current",
+     "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /event homeScore|awayScore",
+     "value": "2"
+    }
+   ]
+  },
+  {
+   "event_id": 16416329,
+   "slug": "2026-09-13_levante-ud-fc-barcelona",
+   "raw": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json",
+   "available_fields": [
+    "event",
+    "incidents",
+    "statistics"
+   ],
+   "missing_press_labels": [
+    "Counter attacks",
+    "Progressive passes",
+    "Successful dribbles"
+   ],
+   "rows": [
+    {
+     "key": "16416329-01",
+     "label": "Ball possession",
+     "barca": "75%",
+     "opp": "25%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Ball possession'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "75%"
+    },
+    {
+     "key": "16416329-02",
+     "label": "Big chances",
+     "barca": "3",
+     "opp": "5",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "3"
+    },
+    {
+     "key": "16416329-03",
+     "label": "Big chances scored",
+     "barca": "3",
+     "opp": "2",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances scored'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "3"
+    },
+    {
+     "key": "16416329-04",
+     "label": "Big chances missed",
+     "barca": "0",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances missed'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "0"
+    },
+    {
+     "key": "16416329-05",
+     "label": "Expected goals",
+     "barca": "2.58",
+     "opp": "2.42",
+     "section": "statistics",
+     "where": "statistics period ALL 'Expected goals'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "2.58"
+    },
+    {
+     "key": "16416329-06",
+     "label": "Expected goals on target",
+     "barca": "3.67",
+     "opp": "2.46",
+     "section": "statistics",
+     "where": "statistics period ALL 'Expected goals on target'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "3.67"
+    },
+    {
+     "key": "16416329-07",
+     "label": "Total shots",
+     "barca": "12",
+     "opp": "13",
+     "section": "statistics",
+     "where": "statistics period ALL 'Total shots'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "12"
+    },
+    {
+     "key": "16416329-08",
+     "label": "Shots on target",
+     "barca": "6",
+     "opp": "7",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots on target'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "6"
+    },
+    {
+     "key": "16416329-09",
+     "label": "Shots inside box",
+     "barca": "10",
+     "opp": "10",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots inside box'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "10"
+    },
+    {
+     "key": "16416329-10",
+     "label": "Shots outside box",
+     "barca": "2",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots outside box'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "2"
+    },
+    {
+     "key": "16416329-11",
+     "label": "Blocked shots",
+     "barca": "3",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Blocked shots'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "3"
+    },
+    {
+     "key": "16416329-12",
+     "label": "Touches in penalty area",
+     "barca": "33",
+     "opp": "27",
+     "section": "statistics",
+     "where": "statistics period ALL 'Touches in penalty area'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "33"
+    },
+    {
+     "key": "16416329-13",
+     "label": "Final third entries",
+     "barca": "72",
+     "opp": "50",
+     "section": "statistics",
+     "where": "statistics period ALL 'Final third entries'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "72"
+    },
+    {
+     "key": "16416329-14",
+     "label": "Final third phase",
+     "barca": "127/160 (79%)",
+     "opp": "35/67 (52%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Final third phase'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "127/160 (79%)"
+    },
+    {
+     "key": "16416329-15",
+     "label": "Long balls",
+     "barca": "23/47 (49%)",
+     "opp": "23/59 (39%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Long balls'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "23/47 (49%)"
+    },
+    {
+     "key": "16416329-16",
+     "label": "Crosses",
+     "barca": "1/7 (14%)",
+     "opp": "4/22 (18%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Crosses'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "1/7 (14%)"
+    },
+    {
+     "key": "16416329-17",
+     "label": "Duels",
+     "barca": "56%",
+     "opp": "44%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Duels'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "56%"
+    },
+    {
+     "key": "16416329-18",
+     "label": "Ground duels",
+     "barca": "43/83 (52%)",
+     "opp": "40/83 (48%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Ground duels'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "43/83 (52%)"
+    },
+    {
+     "key": "16416329-19",
+     "label": "Aerial duels",
+     "barca": "12/15 (80%)",
+     "opp": "3/15 (20%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Aerial duels'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "12/15 (80%)"
+    },
+    {
+     "key": "16416329-20",
+     "label": "Dispossessed",
+     "barca": "7",
+     "opp": "13",
+     "section": "statistics",
+     "where": "statistics period ALL 'Dispossessed'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "7"
+    },
+    {
+     "key": "16416329-21",
+     "label": "Total tackles",
+     "barca": "24",
+     "opp": "20",
+     "section": "statistics",
+     "where": "statistics period ALL 'Total tackles'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "24"
+    },
+    {
+     "key": "16416329-22",
+     "label": "Tackles",
+     "barca": "24",
+     "opp": "20",
+     "section": "statistics",
+     "where": "statistics period ALL 'Tackles'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "24"
+    },
+    {
+     "key": "16416329-23",
+     "label": "Tackles won",
+     "barca": "46%",
+     "opp": "60%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Tackles won'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "46%"
+    },
+    {
+     "key": "16416329-24",
+     "label": "Interceptions",
+     "barca": "9",
+     "opp": "6",
+     "section": "statistics",
+     "where": "statistics period ALL 'Interceptions'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "9"
+    },
+    {
+     "key": "16416329-25",
+     "label": "Recoveries",
+     "barca": "54",
+     "opp": "49",
+     "section": "statistics",
+     "where": "statistics period ALL 'Recoveries'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "54"
+    },
+    {
+     "key": "16416329-26",
+     "label": "Clearances",
+     "barca": "36",
+     "opp": "14",
+     "section": "statistics",
+     "where": "statistics period ALL 'Clearances'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "36"
+    },
+    {
+     "key": "16416329-27",
+     "label": "Errors lead to a shot",
+     "barca": "4",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Errors lead to a shot'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "4"
+    },
+    {
+     "key": "16416329-28",
+     "label": "Offsides",
+     "barca": "2",
+     "opp": "4",
+     "section": "statistics",
+     "where": "statistics period ALL 'Offsides'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "2"
+    },
+    {
+     "key": "16416329-29",
+     "label": "Fouls",
+     "barca": "11",
+     "opp": "11",
+     "section": "statistics",
+     "where": "statistics period ALL 'Fouls'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "11"
+    },
+    {
+     "key": "16416329-30",
+     "label": "Fouled in final third",
+     "barca": "3",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Fouled in final third'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "3"
+    },
+    {
+     "key": "16416329-31",
+     "label": "Number of sprints",
+     "barca": "122",
+     "opp": "125",
+     "section": "statistics",
+     "where": "statistics period ALL 'Number of sprints'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "122"
+    },
+    {
+     "key": "16416329-32",
+     "label": "Distance covered",
+     "barca": "109.7 km",
+     "opp": "112.6 km",
+     "section": "statistics",
+     "where": "statistics period ALL 'Distance covered'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "109.7 km"
+    },
+    {
+     "key": "16416329-33",
+     "label": "Dribbles",
+     "barca": "9/22 (41%)",
+     "opp": "10/21 (48%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Dribbles'",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics",
+     "value": "9/22 (41%)"
+    },
+    {
+     "key": "16416329-g1",
+     "label": "Goals scored",
+     "barca": "4",
+     "opp": "2",
+     "section": "event",
+     "where": "event homeScore/awayScore current",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /event homeScore|awayScore",
+     "value": "4"
+    },
+    {
+     "key": "16416329-g2",
+     "label": "Goals conceded",
+     "barca": "2",
+     "opp": "4",
+     "section": "event",
+     "where": "event homeScore/awayScore current",
+     "source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /event homeScore|awayScore",
+     "value": "2"
+    }
+   ]
+  },
+  {
+   "event_id": 16938784,
+   "slug": "2026-09-09_fc-barcelona-feyenoord",
+   "raw": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json",
+   "available_fields": [
+    "event",
+    "incidents",
+    "statistics"
+   ],
+   "missing_press_labels": [
+    "Counter attacks",
+    "Errors lead to a shot",
+    "Progressive passes",
+    "Successful dribbles"
+   ],
+   "rows": [
+    {
+     "key": "16938784-01",
+     "label": "Ball possession",
+     "barca": "72%",
+     "opp": "28%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Ball possession'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "72%"
+    },
+    {
+     "key": "16938784-02",
+     "label": "Big chances",
+     "barca": "3",
+     "opp": "2",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "3"
+    },
+    {
+     "key": "16938784-03",
+     "label": "Big chances scored",
+     "barca": "2",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances scored'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "2"
+    },
+    {
+     "key": "16938784-04",
+     "label": "Big chances missed",
+     "barca": "1",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Big chances missed'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "1"
+    },
+    {
+     "key": "16938784-05",
+     "label": "Expected goals",
+     "barca": "2.10",
+     "opp": "0.53",
+     "section": "statistics",
+     "where": "statistics period ALL 'Expected goals'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "2.10"
+    },
+    {
+     "key": "16938784-06",
+     "label": "Expected goals on target",
+     "barca": "3.87",
+     "opp": "0.97",
+     "section": "statistics",
+     "where": "statistics period ALL 'Expected goals on target'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "3.87"
+    },
+    {
+     "key": "16938784-07",
+     "label": "Total shots",
+     "barca": "24",
+     "opp": "4",
+     "section": "statistics",
+     "where": "statistics period ALL 'Total shots'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "24"
+    },
+    {
+     "key": "16938784-08",
+     "label": "Shots on target",
+     "barca": "9",
+     "opp": "2",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots on target'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "9"
+    },
+    {
+     "key": "16938784-09",
+     "label": "Shots inside box",
+     "barca": "13",
+     "opp": "3",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots inside box'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "13"
+    },
+    {
+     "key": "16938784-10",
+     "label": "Shots outside box",
+     "barca": "11",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Shots outside box'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "11"
+    },
+    {
+     "key": "16938784-11",
+     "label": "Blocked shots",
+     "barca": "5",
+     "opp": "1",
+     "section": "statistics",
+     "where": "statistics period ALL 'Blocked shots'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "5"
+    },
+    {
+     "key": "16938784-12",
+     "label": "Touches in penalty area",
+     "barca": "46",
+     "opp": "11",
+     "section": "statistics",
+     "where": "statistics period ALL 'Touches in penalty area'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "46"
+    },
+    {
+     "key": "16938784-13",
+     "label": "Final third entries",
+     "barca": "82",
+     "opp": "17",
+     "section": "statistics",
+     "where": "statistics period ALL 'Final third entries'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "82"
+    },
+    {
+     "key": "16938784-14",
+     "label": "Final third phase",
+     "barca": "162/192 (84%)",
+     "opp": "32/51 (63%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Final third phase'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "162/192 (84%)"
+    },
+    {
+     "key": "16938784-15",
+     "label": "Long balls",
+     "barca": "18/26 (69%)",
+     "opp": "11/31 (35%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Long balls'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "18/26 (69%)"
+    },
+    {
+     "key": "16938784-16",
+     "label": "Crosses",
+     "barca": "4/12 (33%)",
+     "opp": "3/5 (60%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Crosses'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "4/12 (33%)"
+    },
+    {
+     "key": "16938784-17",
+     "label": "Duels",
+     "barca": "51%",
+     "opp": "49%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Duels'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "51%"
+    },
+    {
+     "key": "16938784-18",
+     "label": "Ground duels",
+     "barca": "46/92 (50%)",
+     "opp": "46/92 (50%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Ground duels'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "46/92 (50%)"
+    },
+    {
+     "key": "16938784-19",
+     "label": "Aerial duels",
+     "barca": "8/13 (62%)",
+     "opp": "5/13 (38%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Aerial duels'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "8/13 (62%)"
+    },
+    {
+     "key": "16938784-20",
+     "label": "Dispossessed",
+     "barca": "12",
+     "opp": "6",
+     "section": "statistics",
+     "where": "statistics period ALL 'Dispossessed'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "12"
+    },
+    {
+     "key": "16938784-21",
+     "label": "Total tackles",
+     "barca": "17",
+     "opp": "24",
+     "section": "statistics",
+     "where": "statistics period ALL 'Total tackles'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "17"
+    },
+    {
+     "key": "16938784-22",
+     "label": "Tackles",
+     "barca": "17",
+     "opp": "24",
+     "section": "statistics",
+     "where": "statistics period ALL 'Tackles'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "17"
+    },
+    {
+     "key": "16938784-23",
+     "label": "Tackles won",
+     "barca": "82%",
+     "opp": "54%",
+     "section": "statistics",
+     "where": "statistics period ALL 'Tackles won'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "82%"
+    },
+    {
+     "key": "16938784-24",
+     "label": "Interceptions",
+     "barca": "5",
+     "opp": "6",
+     "section": "statistics",
+     "where": "statistics period ALL 'Interceptions'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "5"
+    },
+    {
+     "key": "16938784-25",
+     "label": "Recoveries",
+     "barca": "50",
+     "opp": "48",
+     "section": "statistics",
+     "where": "statistics period ALL 'Recoveries'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "50"
+    },
+    {
+     "key": "16938784-26",
+     "label": "Clearances",
+     "barca": "14",
+     "opp": "11",
+     "section": "statistics",
+     "where": "statistics period ALL 'Clearances'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "14"
+    },
+    {
+     "key": "16938784-27",
+     "label": "Offsides",
+     "barca": "2",
+     "opp": "8",
+     "section": "statistics",
+     "where": "statistics period ALL 'Offsides'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "2"
+    },
+    {
+     "key": "16938784-28",
+     "label": "Fouls",
+     "barca": "10",
+     "opp": "12",
+     "section": "statistics",
+     "where": "statistics period ALL 'Fouls'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "10"
+    },
+    {
+     "key": "16938784-29",
+     "label": "Fouled in final third",
+     "barca": "3",
+     "opp": "0",
+     "section": "statistics",
+     "where": "statistics period ALL 'Fouled in final third'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "3"
+    },
+    {
+     "key": "16938784-30",
+     "label": "Number of sprints",
+     "barca": "135",
+     "opp": "128",
+     "section": "statistics",
+     "where": "statistics period ALL 'Number of sprints'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "135"
+    },
+    {
+     "key": "16938784-31",
+     "label": "Distance covered",
+     "barca": "117.5 km",
+     "opp": "115.1 km",
+     "section": "statistics",
+     "where": "statistics period ALL 'Distance covered'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "117.5 km"
+    },
+    {
+     "key": "16938784-32",
+     "label": "Dribbles",
+     "barca": "17/29 (59%)",
+     "opp": "12/23 (52%)",
+     "section": "statistics",
+     "where": "statistics period ALL 'Dribbles'",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics",
+     "value": "17/29 (59%)"
+    },
+    {
+     "key": "16938784-g1",
+     "label": "Goals scored",
+     "barca": "5",
+     "opp": "1",
+     "section": "event",
+     "where": "event homeScore/awayScore current",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /event homeScore|awayScore",
+     "value": "5"
+    },
+    {
+     "key": "16938784-g2",
+     "label": "Goals conceded",
+     "barca": "1",
+     "opp": "5",
+     "section": "event",
+     "where": "event homeScore/awayScore current",
+     "source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /event homeScore|awayScore",
+     "value": "1"
+    }
+   ]
+  }
+ ]
+}

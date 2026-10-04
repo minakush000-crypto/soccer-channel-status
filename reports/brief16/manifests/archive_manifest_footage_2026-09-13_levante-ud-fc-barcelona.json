@@ -1,0 +1,24 @@
+{
+ "artifact": "2026-09-13_levante-ud-fc-barcelona.mp4",
+ "stem": "2026-09-13_levante-ud-fc-barcelona",
+ "event_id": 16416329,
+ "url": "https://www.youtube.com/watch?v=te6eWlim9yU",
+ "uploader": "LALIGA (official league channel)",
+ "vcodec": "h264",
+ "height": 1080,
+ "duration_s": 194.39746,
+ "bytes": 140763083,
+ "sha256": "3c8c74faa97bcc32d2f05663a56dca0e5a64e290b2ada47eaea4302e09f6548c",
+ "sha1": "cbf4cca2c649d77abfa8ceeffea1205ea68d37dd",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-13_levante-ud-fc-barcelona.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-13_levante-ud-fc-barcelona.mp4.manifest.json",
+ "pod": "in/brief16/2026-09-13_levante-ud-fc-barcelona.mp4",
+ "staged_rel": "brief16/2026-09-13_levante-ud-fc-barcelona.mp4",
+ "pod_dir": "brief16",
+ "pod_file": "2026-09-13_levante-ud-fc-barcelona.mp4",
+ "local_deleted": true,
+ "verified_seq": [
+  "rclone hashsum SHA1 (B2)",
+  "modal volume ls (pod)"
+ ]
+}

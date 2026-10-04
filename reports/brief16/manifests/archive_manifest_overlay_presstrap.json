@@ -1,0 +1,17 @@
+{
+ "artifact": "footage_presstrap.mp4",
+ "name": "footage_presstrap",
+ "slug": "2026-09-19_sevilla-fc-barcelona",
+ "event_id": 16416349,
+ "freeze_at": 61.0,
+ "duration_s": 10.5,
+ "bytes": 4678839,
+ "sha256": "df22d777284f24597631e012c110006e497e3a7504f4b71f6a339c2cf4412752",
+ "sha1": "6b431347d37c9927b562a303be60504a72813a8d",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_footage_presstrap.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_footage_presstrap.mp4.manifest.json",
+ "pod": "in/brief16/clips/../2026-09-19_sevilla-fc-barcelona.mp4",
+ "pod_out": "out/2026-09-19_sevilla-fc-barcelona/footage_presstrap.mp4",
+ "produced_by": "glm-5.3-flash:cloud via Claude Code",
+ "task": "brief 16 job 6 freeze-frame overlay (the strongest press moment)"
+}

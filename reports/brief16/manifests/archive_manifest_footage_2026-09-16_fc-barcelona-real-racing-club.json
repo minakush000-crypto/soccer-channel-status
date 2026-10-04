@@ -1,0 +1,24 @@
+{
+ "artifact": "2026-09-16_fc-barcelona-real-racing-club.mp4",
+ "stem": "2026-09-16_fc-barcelona-real-racing-club",
+ "event_id": 16416346,
+ "url": "https://www.youtube.com/watch?v=bo9g36xT5UA",
+ "uploader": "LALIGA (official league channel)",
+ "vcodec": "h264",
+ "height": 1080,
+ "duration_s": 194.49034,
+ "bytes": 139432336,
+ "sha256": "d18a28a7d8c49567a115d95bea3d3581981f25d74ced1b1a6d90a8e248e72094",
+ "sha1": "e51306885ce70f3e229a0944f4847e3e46db5dc7",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-16_fc-barcelona-real-racing-club.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-16_fc-barcelona-real-racing-club.mp4.manifest.json",
+ "pod": "in/brief16/2026-09-16_fc-barcelona-real-racing-club.mp4",
+ "staged_rel": "brief16/2026-09-16_fc-barcelona-real-racing-club.mp4",
+ "pod_dir": "brief16",
+ "pod_file": "2026-09-16_fc-barcelona-real-racing-club.mp4",
+ "local_deleted": true,
+ "verified_seq": [
+  "rclone hashsum SHA1 (B2)",
+  "modal volume ls (pod)"
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "artifact": "CL03.mp4",
+ "clip_id": "CL03",
+ "claim_id": "C8",
+ "event_id": 16416346,
+ "slug": "2026-09-16_fc-barcelona-real-racing-club",
+ "start_s": 130.0,
+ "end_s": 142.0,
+ "duration_probe": 12.0,
+ "duration_expected": 12.0,
+ "bytes": 11006785,
+ "sha256": "744a4dbbab2ae9e2e602f306c99e75947bee3ea0a5f911c2125e8ccb54fc403b",
+ "sha1": "c2d5ca48ef51ced32d67fe505450f602cecbc047",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL03.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL03.mp4.manifest.json",
+ "b2_sha1": "c2d5ca48ef51ced32d67fe505450f602cecbc047",
+ "pod": "in/brief16/clips/CL03.mp4",
+ "produced_by": "glm-5.3-flash:cloud via Claude Code",
+ "task": "brief 16 job 6 clip cuts (pod-side ffmpeg)",
+ "produced_at": "2026-10-04T03:2xZ",
+ "duration_s": 12.0
+}

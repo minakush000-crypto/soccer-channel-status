@@ -1,0 +1,55 @@
+{
+ "generated_at": "2026-10-03T21:33:00Z",
+ "brief": 16,
+ "renders": [
+  {
+   "name": "card_title_b16",
+   "slug": "2026-09-19_sevilla-fc-barcelona",
+   "spec": "reports/brief15/cards/card_title.json",
+   "mp4": "/home/muads/yt-digest/soccer-channel/renders/2026-09-19_sevilla-fc-barcelona/card_title_b16.mp4",
+   "codec": "h264",
+   "width": 1920,
+   "height": 1080,
+   "fps": 30,
+   "duration_s": 8.0,
+   "bytes": 207135,
+   "sha256": "8d52b22af3df6e51000e5a54a147163edfb1d6e900928e4e110bc29b082b775f",
+   "note": "brief 16 job 0a BEFORE/AFTER sizing proof: same spec, new photo box (900px = 46.9% frame width) + audit minima; brief 15's original card_title.mp4 kept untouched",
+   "pod_log": "pod render2d returned CARD-CHECK OK card_title (2026-10-03)"
+  },
+  {
+   "name": "footage_sev_block_b16",
+   "slug": "2026-09-19_sevilla-fc-barcelona",
+   "spec": "renders/2026-09-19_sevilla-fc-barcelona/board_specs/footage_sev_block.json",
+   "mp4": "/home/muads/yt-digest/soccer-channel/renders/2026-09-19_sevilla-fc-barcelona/footage_sev_block_b16.mp4",
+   "codec": "h264",
+   "width": 1920,
+   "height": 1080,
+   "fps": 30,
+   "duration_s": 10.5,
+   "bytes": 4131032,
+   "sha256": "800fa48b222ed0a5f1aaaaebbee5bfc8704a75991abfbef392125fa6e4177e5d",
+   "note": "brief 16 job 0b BEFORE/AFTER ellipse proof: same spec, bolder ellipse (glow 16/blur 48 + core stroke 7, logged); brief 15's footage_sev_block.mp4 kept untouched",
+   "pod_log": "pod renderfootage returned FOOTAGE-CHECK OK footage_sev_block + OVERLAY15-OK (2026-10-03)"
+  },
+  {
+   "name": "footage_presstrap",
+   "slug": "2026-09-19_sevilla-fc-barcelona",
+   "spec": "renders/2026-09-19_sevilla-fc-barcelona/board_specs/footage_presstrap.json",
+   "mp4": "/home/muads/yt-digest/soccer-channel/renders/2026-09-19_sevilla-fc-barcelona/footage_presstrap.mp4",
+   "codec": "h264",
+   "width": 1920,
+   "height": 1080,
+   "fps": 30,
+   "duration_s": 10.5,
+   "bytes": 4678839,
+   "sha256": "df22d777284f24597631e012c110006e497e3a7504f4b71f6a339c2cf4412752",
+   "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_footage_presstrap.mp4",
+   "note": "brief 16 job 6: the strongest press moment (Sevilla 21:42 trap around the ball before Raphinha's 22' equalizer); FOOTAGE-CHECK OK",
+   "freeze_at": 61.0
+  }
+ ],
+ "spot_render": "footage_presstrap",
+ "overlay_archive": "manifests/archive_manifest_overlay_presstrap.json",
+ "freeze_at": 61.0
+}

@@ -1,0 +1,467 @@
+{
+ "thesis": "Flick's press: how Barcelona win the ball high, and what it costs them.",
+ "claims": [
+  {
+   "id": "C1",
+   "matches": [
+    16416349,
+    16416346,
+    16416329,
+    16938784
+   ],
+   "text": "The platform is the ball: Barcelona held 69, 69, 75 and 72 percent of possession across the four matches (the press always starts with Barcelona already in the game's leading share).",
+   "numbers": [
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-01",
+     "value": "69%"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-01",
+     "value": "69%"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-01",
+     "value": "75%"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-01",
+     "value": "72%"
+    }
+   ],
+   "side": "press"
+  },
+  {
+   "id": "C2",
+   "matches": [
+    16416349,
+    16416346,
+    16416329,
+    16938784
+   ],
+   "text": "Opponents cannot build through it: their final-third pass phase is 37 to 63 percent (Racing 37, Levante 52, Sevilla 55, Feyenoord 63) while Barcelona's runs 79 to 84 (Sevilla 84, Racing 83, Levante 79, Feyenoord 84).",
+   "numbers": [
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-14",
+     "value": "37%",
+     "part_of": "7/19 (37%)"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-14",
+     "value": "52%",
+     "part_of": "35/67 (52%)"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-14",
+     "value": "55%",
+     "part_of": "46/83 (55%)"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-14",
+     "value": "63%",
+     "part_of": "32/51 (63%)"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-14",
+     "value": "84%",
+     "part_of": "142/169 (84%)"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-14",
+     "value": "83%",
+     "part_of": "196/235 (83%)"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-14",
+     "value": "79%",
+     "part_of": "127/160 (79%)"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-14",
+     "value": "84%",
+     "part_of": "162/192 (84%)"
+    }
+   ],
+   "side": "press"
+  },
+  {
+   "id": "C3",
+   "matches": [
+    16416349,
+    16416346,
+    16416329,
+    16938784
+   ],
+   "text": "The high line wins the offside battle 19-9: opponents caught 5, 2, 4 and 8 times (Sevilla, Racing, Levante, Feyenoord) against Barcelona's 2, 3, 2, 2.",
+   "numbers": [
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-28",
+     "value": "5"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-27",
+     "value": "2"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-28",
+     "value": "4"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-27",
+     "value": "8"
+    }
+   ],
+   "side": "press"
+  },
+  {
+   "id": "C4",
+   "matches": [
+    16416349,
+    16416346,
+    16416329,
+    16938784
+   ],
+   "text": "Territory, whatever the phase: 314 final-third entries to 133 (78, 82, 72, 82 against 51, 15, 50, 17) and 171 touches in the box against 60 (28, 64, 33, 46 against 12, 10, 27, 11).",
+   "numbers": [
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-13",
+     "value": "78"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-13",
+     "value": "82"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-13",
+     "value": "72"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-13",
+     "value": "82"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-12",
+     "value": "28"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-12",
+     "value": "64"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-12",
+     "value": "33"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-12",
+     "value": "46"
+    }
+   ],
+   "side": "press"
+  },
+  {
+   "id": "C5",
+   "matches": [
+    16416349,
+    16416346,
+    16416329,
+    16938784
+   ],
+   "text": "The press ends in the box: 25 big chances in four games (6, 13, 3, 3) and 19 goals (3, 7, 4, 5).",
+   "numbers": [
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-02",
+     "value": "6"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-02",
+     "value": "13"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-02",
+     "value": "3"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-02",
+     "value": "3"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-g1",
+     "value": "3"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-g1",
+     "value": "7"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-g1",
+     "value": "4"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-g1",
+     "value": "5"
+    }
+   ],
+   "side": "press"
+  },
+  {
+   "id": "C6",
+   "matches": [
+    16416349,
+    16416346,
+    16416329,
+    16938784
+   ],
+   "text": "The cost is real: 11 big chances conceded (1, 3, 5, 2), 5.33 expected goals against (0.40, 1.98, 2.42, 0.53) and 6 goals conceded (1, 2, 2, 1).",
+   "numbers": [
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-02",
+     "value": "1"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-02",
+     "value": "3"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-02",
+     "value": "5"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-02",
+     "value": "2"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-05",
+     "value": "0.40"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-05",
+     "value": "1.98"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-05",
+     "value": "2.42"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-05",
+     "value": "0.53"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-g2",
+     "value": "1"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-g2",
+     "value": "2"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-g2",
+     "value": "2"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-g2",
+     "value": "1"
+    }
+   ],
+   "side": "cost"
+  },
+  {
+   "id": "C7",
+   "matches": [
+    16416329
+   ],
+   "text": "One raw field names the mechanism: in Levante's match, 4 Barcelona errors led straight to a shot (Sevilla's match carries 1 such error for the opponent and 0 for Barcelona; Racing's and Feyenoord's raws carry no such field), so the giveaway cost is direct.",
+   "numbers": [
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-27",
+     "value": "4"
+    }
+   ],
+   "side": "cost"
+  },
+  {
+   "id": "C8",
+   "matches": [
+    16416346
+   ],
+   "text": "The few entries still bite: from 15 final-third entries Racing built 1.98 expected goals and scored 2, against Barcelona's 82 entries building 6.74.",
+   "numbers": [
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-13",
+     "value": "15"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-05",
+     "value": "1.98"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-g2",
+     "value": "2"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-05",
+     "value": "6.74"
+    }
+   ],
+   "side": "cost"
+  },
+  {
+   "id": "C9",
+   "matches": [
+    16416349,
+    16416346,
+    16416329,
+    16938784
+   ],
+   "text": "The trade still pays: 19 goals for, 6 against, and 14.89 expected goals against 5.33 (3.47+6.74+2.58+2.10 for; 0.40+1.98+2.42+0.53 against).",
+   "numbers": [
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-05",
+     "value": "3.47"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-05",
+     "value": "6.74"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-05",
+     "value": "2.58"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-05",
+     "value": "2.10"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-05",
+     "value": "0.40"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-05",
+     "value": "1.98"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-05",
+     "value": "2.42"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-05",
+     "value": "0.53"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-g1",
+     "value": "3"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-g1",
+     "value": "7"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-g1",
+     "value": "4"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-g1",
+     "value": "5"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-g2",
+     "value": "1"
+    },
+    {
+     "event_id": 16416346,
+     "fact_key": "16416346-g2",
+     "value": "2"
+    },
+    {
+     "event_id": 16416329,
+     "fact_key": "16416329-g2",
+     "value": "2"
+    },
+    {
+     "event_id": 16938784,
+     "fact_key": "16938784-g2",
+     "value": "1"
+    }
+   ],
+   "side": "cost"
+  }
+ ],
+ "dropped": [
+  {
+   "claim": "Possession won in the final third (the headline press field)",
+   "reason": "label absent from the ALL-period statistics of all four raws; the vocabulary was printed and it (or any per-third recovery count) does not exist. Not invented."
+  },
+  {
+   "claim": "Tackles/interceptions by zone",
+   "reason": "Sofascore's team statistics carry totals only (Tackles, Interceptions, Recoveries), no zone split, in all four raws."
+  },
+  {
+   "claim": "PPDA / press-resistance per build-up",
+   "reason": "not exposed in the raw statistics; computing it needs events data Sofascore does not serve on these endpoints."
+  },
+  {
+   "claim": "Every conceded goal came from a counter",
+   "reason": "cannot be traced: the raws carry no build-up provenance per goal; the video clips (CL03-CL05) show counters, but a general claim would outrun the data."
+  }
+ ]
+}

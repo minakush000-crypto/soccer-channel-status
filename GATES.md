@@ -425,3 +425,65 @@ chrome; writes only under /tmp).
       commit, is published in reports/brief15/reverify.txt
   CHECK: test -s reports/brief15/reverify.txt && grep -q "ALL MET" reports/brief15/reverify.txt && echo REVERIFY-B15
   EXPECT: REVERIFY-B15
+
+## Brief 16: thesis clip list + multi-match footage (gates B92-B101)
+
+Brief source: briefs/brief16.md (jobs 0-8). Oracle: tools/brief16_check.py.
+The md artifacts (matches.md, press_facts.md, claims.md, clip_list.md) are
+rendered from JSON sidecars next to them; the oracle checks the JSONs
+(single source of truth) and a grep ties each md to its sidecar ids.
+
+- [ ] B92: the matches table lists 3-4 chosen matches, each with its
+      Sofascore event id, competition, score and highlights URL row, and
+      every chosen match has a cached raw on disk
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py matches
+  EXPECT: MATCHES-OK
+- [ ] B93: every cached brief-16 raw carries a fetched_at stamp reported in
+      the report; every chosen event id appears in the cached last-events
+      list; the list cache carries a fetched_at stamp of 2026-10-03 or
+      later OR a fetch-attempts log proves the re-fetch was challenged
+      (every attempt logged, none silently skipped)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py freshness
+  EXPECT: FRESH-OK
+- [ ] B94: press_facts.md has one table per chosen match; every number-Row
+      traces to an existing raw path and the value is found at that path
+      (positive control: a planted wrong value fails)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py facts
+  EXPECT: FACTS-OK
+- [ ] B95: claims.md holds 6-10 accepted claims building the thesis, each
+      with traced numbers and match sources, and every dropped claim states
+      its reason
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py claims
+  EXPECT: CLAIMS-OK
+- [ ] B96: every chosen match's highlights video is archived to B2 with a
+      manifest, present on the pod volume, and DELETED locally (positive
+      control: the check flags a footage path that still exists locally)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py footage
+  EXPECT: FOOTAGE-OK
+- [ ] B97: clip_list.md: every clip row carries a claim id, match, start/end
+      seconds and what the viewer sees; every clip exists in B2 with a
+      manifest whose duration matches end-start within 0.2s; every accepted
+      claim has at least one clip or says no-clip with a reason
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py clips
+  EXPECT: CLIPS-OK
+- [ ] B98: the contact sheet exists at 640px wide with exactly one frame per
+      published clip
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py sheet
+  EXPECT: SHEET-OK
+- [ ] B99: the sizing minima are enforced in code and proven: the title
+      audit requires a photo box >= 45 percent of frame width with the drawn
+      cutout >= 45 percent of frame height, the overlay audit requires the
+      bold ellipse stroke floor, and before/after sheets exist for one card
+      and one overlay clip
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py sizing
+  EXPECT: SIZING-OK
+- [ ] B100: the strongest press moment's freeze-frame overlay is rendered
+      with FOOTAGE-CHECK OK, stored in renders with a manifest entry, and
+      archived to B2 with a JSON manifest
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py overlay
+  EXPECT: OVERLAY-OK
+- [ ] B101: the reverify proof ending ALL MET, run after the last brief-16
+      code commit, is published in reports/brief16/reverify.txt AND at the
+      mirror (positive control: a reverify.txt without ALL MET fails)
+  CHECK: test -s reports/brief16/reverify.txt && grep -q "ALL MET" reports/brief16/reverify.txt && grep -q "ALL MET" ~/soccer-channel-status/reports/brief16/reverify.txt && echo REVERIFY-B16
+  EXPECT: REVERIFY-B16

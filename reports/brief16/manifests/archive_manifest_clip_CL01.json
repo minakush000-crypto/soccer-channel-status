@@ -1,0 +1,22 @@
+{
+ "artifact": "CL01.mp4",
+ "clip_id": "CL01",
+ "claim_id": "C2",
+ "event_id": 16416349,
+ "slug": "2026-09-19_sevilla-fc-barcelona",
+ "start_s": 58.0,
+ "end_s": 66.0,
+ "duration_probe": 8.0,
+ "duration_expected": 8.0,
+ "bytes": 7871179,
+ "sha256": "0d651ee10f07b7ccc96de470946cb29a339a8efc0ccfcaaf069501a87fb3d553",
+ "sha1": "1044751e8673dde09930e6aa27713056c4e529ad",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL01.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL01.mp4.manifest.json",
+ "b2_sha1": "1044751e8673dde09930e6aa27713056c4e529ad",
+ "pod": "in/brief16/clips/CL01.mp4",
+ "produced_by": "glm-5.3-flash:cloud via Claude Code",
+ "task": "brief 16 job 6 clip cuts (pod-side ffmpeg)",
+ "produced_at": "2026-10-04T03:2xZ",
+ "duration_s": 8.0
+}

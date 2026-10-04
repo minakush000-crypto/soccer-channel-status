@@ -1220,3 +1220,21 @@ specs carry badge assets so the page preloader finds them; audit_T now
 computed per card from the page's real reveal math, and cardCheck draws
 each row's alpha and fails anything below 1 (the "audit reads the FINISHED
 page" rule, now enforced).
+
+## Brief 16 (2026-10-03): Sofascore transport hardened; oracle + pod tools added
+Akamai hard-blocked both api hosts from this IP during the re-fetch
+(measured 2026-10-03 02:2xZ: curl_cffi chrome131/chrome124 -> 403 challenge
+x5 rounds; direct api navigation in the cached Chromium -> 200 with EMPTY
+body on api.sofascore.app, 403 "challenge" on api.sofascore.com). The route
+that answers: in-page fetch from the site's own origin
+(www.sofascore.com/team/football/barcelona/<id> -> fetch
+api.sofascore.com/api/v1/...). sofascore_chrome_fetch.js got that route-2
+(fast direct probe first, then seed page + in-page fetch; .app URLs are
+rewritten to .com because only .com serves the CORS allow-origin for the
+site). sofascore_client.py grew SOFA_CHROME_FIRST=1: one real-browser
+request per retry round instead of the previous ~20-request impersonation
+ladder per round, which kept the challenged IP hot (rounds now sleep
+8/16/32/64/128s). Direct-impersonation behavior unchanged for every other
+caller. New tools (brief16_data.py driver + JSON sidecars,
+brief16_check.py oracle, brief16_frames.py/brief16_clips.py pod mechanics,
+brief16_sheets.py) serve only brief 16 until wired by its gates.

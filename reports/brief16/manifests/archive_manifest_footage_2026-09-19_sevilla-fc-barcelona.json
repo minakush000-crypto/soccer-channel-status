@@ -1,0 +1,24 @@
+{
+ "artifact": "2026-09-19_sevilla-fc-barcelona.mp4",
+ "stem": "2026-09-19_sevilla-fc-barcelona",
+ "event_id": 16416349,
+ "url": "https://www.youtube.com/watch?v=ZJom79fRhv0",
+ "uploader": "LALIGA (official league channel)",
+ "vcodec": "h264",
+ "height": 1080,
+ "duration_s": 194.74576,
+ "bytes": 135864119,
+ "sha256": "11293c827a9fd50f14468c5823890cd0f9880bb465bf604be15d9b3f9630580e",
+ "sha1": "424ad1df25225f0ccf851b52d2df704079dd680e",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-19_sevilla-fc-barcelona.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-19_sevilla-fc-barcelona.mp4.manifest.json",
+ "pod": "in/brief16/2026-09-19_sevilla-fc-barcelona.mp4",
+ "staged_rel": "brief16/2026-09-19_sevilla-fc-barcelona.mp4",
+ "pod_dir": "brief16",
+ "pod_file": "2026-09-19_sevilla-fc-barcelona.mp4",
+ "local_deleted": true,
+ "verified_seq": [
+  "rclone hashsum SHA1 (B2)",
+  "modal volume ls (pod)"
+ ]
+}

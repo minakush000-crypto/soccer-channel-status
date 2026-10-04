@@ -1,0 +1,28 @@
+{
+ "slug": "2026-09-19_sevilla-fc-barcelona",
+ "kind": "timeline",
+ "name": "card_title",
+ "duration_s": 8.0,
+ "fps": 30,
+ "side": "home",
+ "title": "card_title",
+ "kicker": "BARCELONA TACTICAL FILE",
+ "card": {
+  "type": "title",
+  "photo": "yamal_cutout.png",
+  "assets": [
+   "yamal_cutout.png"
+  ],
+  "title_lines": [
+   "THE FAR-POST",
+   "IS A MAP",
+   "NOT AN ACCIDENT"
+  ],
+  "byline": "Barcelona tactical file - brief 15",
+  "stag": 0.55,
+  "t0": 0.6,
+  "hold": 6.2,
+  "audit_T": 3.45
+ },
+ "source": "brief 15 job 3: card spec; every number stamped to the cached raw responses per row"
+}

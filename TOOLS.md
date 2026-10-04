@@ -51,6 +51,13 @@ exists — anything dead is deleted or in retired/.
 | `brief15_sheets.py` | WIRED | GATES B88/B89 (sheets + keyframes) | job-6 publisher: before/after overlay sheets, per-card sheets (640px) + committed keyframes from the rendered MP4s |
 | `brief13_overlays.py` | WIRED | pod_build.py render_footage; brief 13 jobs 3-5 | freeze-frame overlay spec emitter from reports/brief13/marks.json (image-space steps, identity sources) |
 | `brief13_frames.py` | HAND-RUN | hand-invoked (brief 13 jobs 4-6) | pod-side stamped/clean/full-res frame extraction for marking + visual check (frames live on the volume) |
+| `brief16_data.py` | WIRED | GATES B92-B95 oracle + hand-run | brief-16 driver: re-fetch/chosen matches + press_facts.json rows + md renderer matches.md/press_facts.md/clip_list.md from the JSON sidecars; every fetch through the batch chrome transport (SOFA_CHROME_FIRST) |
+| `brief16_check.py` | WIRED | GATES B92-B100 (9 subcommands) | brief-16 gate oracle: matches/freshness/facts/claims/footage/clips/sheet/sizing/overlay, each with planted positive controls; local page audits via cached chrome |
+| `brief16_frames.py` | HAND-RUN | brief 16 job 5 (frames) | pod-side 4s stamped survey + arbitrary-range 1s/0.5s drills to out/brief16/frames/, one pull tarball with integrity retry |
+| `brief16_clips.py` | HAND-RUN | brief 16 job 6 (cuts) | pod-side clip cutter from clip_list.json (accurate seek, h264, prints CCLIP lines) |
+| `brief16_footage.py` | HAND-RUN | brief 16 job 4 | official-highlights chain: staged-reuse download -> b2_archive + sha1 verify -> modal volume put + ls verify -> local delete; adopt path for the brief-13 volume files |
+| `brief16_sheets.py` | HAND-RUN | brief 16 jobs 0/5/7 sheets | before/after pair sheets, 4-across review tiles (320px), 640px contact sheet |
+| `brief16_retry_fetch.sh` | HAND-RUN | brief 16 job 1 (Akamai loop) | single-request re-fetch loop (~20 min apart, 5 attempts), logs fetch_attempts.log, copies the fresh list to /tmp on success |
 | `brief12_timeline.py` | WIRED | brief 12 job 5 (proof boards); brief 16 assembly | timeline spec emitter (formation / runners / move) from match_data + raw cache, per docs/board_timeline.md |
 | `brief12_data.py` | HAND-RUN | hand-invoked (brief 12 job 1) | Barcelona team-id + 4 most recent completed matches driver; every fetch through sofascore_client.py; id verified against the payload events |
 | `census.py` | WIRED | GATES B20 | script-driven census: TOOLS.md must match tools/ exactly (brief 06 job 5) |

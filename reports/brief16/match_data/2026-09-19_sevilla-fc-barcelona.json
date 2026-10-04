@@ -1,0 +1,557 @@
+{
+  "match_id": "16416349",
+  "source": "sofascore",
+  "date": 1789844400,
+  "competition": "LaLiga",
+  "home_team": {
+    "name": "Sevilla",
+    "short_name": "Sevilla",
+    "abbreviation": "",
+    "score": 1,
+    "color": "",
+    "logo": "",
+    "id": "2833"
+  },
+  "away_team": {
+    "name": "FC Barcelona",
+    "short_name": "Barcelona",
+    "abbreviation": "",
+    "score": 3,
+    "color": "",
+    "logo": "",
+    "id": "2817"
+  },
+  "venue": "Ram\u00f3n S\u00e1nchez Pizju\u00e1n",
+  "home_formation": "4-2-3-1",
+  "away_formation": "4-3-3",
+  "home_lineup": [
+    {
+      "name": "Odysseas Vlachodimos",
+      "jersey": "1",
+      "position": "G",
+      "id": "138149"
+    },
+    {
+      "name": "Juan Iglesias",
+      "jersey": "2",
+      "position": "D",
+      "id": "949707"
+    },
+    {
+      "name": "Arouna Sangante",
+      "jersey": "12",
+      "position": "D",
+      "id": "1035988"
+    },
+    {
+      "name": "Andr\u00e9s Castrin",
+      "jersey": "5",
+      "position": "D",
+      "id": "1428699"
+    },
+    {
+      "name": "Gabriel Suazo",
+      "jersey": "17",
+      "position": "D",
+      "id": "818986"
+    },
+    {
+      "name": "Giorgi Kochorashvili",
+      "jersey": "8",
+      "position": "M",
+      "id": "886402"
+    },
+    {
+      "name": "Lucien Agoum\u00e9",
+      "jersey": "6",
+      "position": "M",
+      "id": "960006"
+    },
+    {
+      "name": "Miguel Sierra",
+      "jersey": "30",
+      "position": "M",
+      "id": "2509247"
+    },
+    {
+      "name": "Youssouf Fofana",
+      "jersey": "24",
+      "position": "M",
+      "id": "945062"
+    },
+    {
+      "name": "F\u00e9lix Correia",
+      "jersey": "20",
+      "position": "M",
+      "id": "934498"
+    },
+    {
+      "name": "Robbie Ure",
+      "jersey": "9",
+      "position": "F",
+      "id": "1142351"
+    }
+  ],
+  "away_lineup": [
+    {
+      "name": "Dominik Livakovi\u0107",
+      "jersey": "25",
+      "position": "G",
+      "id": "190419"
+    },
+    {
+      "name": "Eric Garc\u00eda",
+      "jersey": "24",
+      "position": "D",
+      "id": "876214"
+    },
+    {
+      "name": "Pau Cubars\u00ed",
+      "jersey": "5",
+      "position": "D",
+      "id": "1402913"
+    },
+    {
+      "name": "Andreas Christensen",
+      "jersey": "15",
+      "position": "D",
+      "id": "186795"
+    },
+    {
+      "name": "Jo\u00e3o Cancelo",
+      "jersey": "2",
+      "position": "D",
+      "id": "138892"
+    },
+    {
+      "name": "Ferm\u00edn L\u00f3pez",
+      "jersey": "7",
+      "position": "M",
+      "id": "1153270"
+    },
+    {
+      "name": "Rodri",
+      "jersey": "16",
+      "position": "M",
+      "id": "827606"
+    },
+    {
+      "name": "Pedri",
+      "jersey": "8",
+      "position": "M",
+      "id": "992587"
+    },
+    {
+      "name": "Lamine Yamal",
+      "jersey": "10",
+      "position": "M",
+      "id": "1402912"
+    },
+    {
+      "name": "Raphinha",
+      "jersey": "11",
+      "position": "M",
+      "id": "831005"
+    },
+    {
+      "name": "Anthony Gordon",
+      "jersey": "17",
+      "position": "F",
+      "id": "914902"
+    }
+  ],
+  "home_stats": {
+    "possession": 31.0,
+    "shots": 7,
+    "on_goal": 3,
+    "corner_kicks": 1,
+    "fouls": 10,
+    "yellow_cards": 1,
+    "passes": 280,
+    "accurate_passes": 205,
+    "tackles": 21,
+    "interceptions": 2,
+    "xg": 0.4,
+    "big_chances": 1,
+    "saves": 5,
+    "clearances": 11,
+    "offsides": 5,
+    "_sofascore_raw": {
+      "Ball possession": "31%",
+      "Distance covered": "101.0 km",
+      "Expected goals": "0.40",
+      "Big chances": "1",
+      "Total shots": "7",
+      "Goalkeeper saves": "5",
+      "Number of sprints": "91",
+      "Corner kicks": "1",
+      "Fouls": "10",
+      "Passes": "280",
+      "Tackles": "21",
+      "Free kicks": "11",
+      "Yellow cards": "1",
+      "Average rating": "6.72",
+      "Shots on target": "3",
+      "Expected goals on target": "0.81",
+      "Hit woodwork": "0",
+      "Shots off target": "4",
+      "Blocked shots": "0",
+      "Shots inside box": "3",
+      "Shots outside box": "4",
+      "Big chances scored": "1",
+      "Big chances missed": "0",
+      "Through balls": "1",
+      "Touches in penalty area": "12",
+      "Fouled in final third": "1",
+      "Offsides": "5",
+      "Accurate passes": "205",
+      "Throw-ins": "15",
+      "Final third entries": "51",
+      "Final third phase": "46/83 (55%)",
+      "Long balls": "27/58 (47%)",
+      "Crosses": "4/8 (50%)",
+      "Duels": "49%",
+      "Dispossessed": "8",
+      "Ground duels": "43/82 (52%)",
+      "Aerial duels": "10/27 (37%)",
+      "Dribbles": "11/18 (61%)",
+      "Tackles won": "71%",
+      "Total tackles": "21",
+      "Interceptions": "2",
+      "Recoveries": "45",
+      "Clearances": "11",
+      "Errors lead to a shot": "1",
+      "Total saves": "5",
+      "Goals prevented": "-1.38",
+      "Big saves": "3",
+      "High claims": "1",
+      "Goal kicks": "14"
+    }
+  },
+  "away_stats": {
+    "possession": 69.0,
+    "shots": 24,
+    "on_goal": 7,
+    "corner_kicks": 3,
+    "fouls": 11,
+    "yellow_cards": 0,
+    "passes": 644,
+    "accurate_passes": 581,
+    "tackles": 15,
+    "interceptions": 5,
+    "xg": 3.47,
+    "big_chances": 6,
+    "saves": 2,
+    "clearances": 26,
+    "offsides": 2,
+    "_sofascore_raw": {
+      "Ball possession": "69%",
+      "Distance covered": "99.0 km",
+      "Expected goals": "3.47",
+      "Big chances": "6",
+      "Total shots": "24",
+      "Goalkeeper saves": "2",
+      "Number of sprints": "101",
+      "Corner kicks": "3",
+      "Fouls": "11",
+      "Passes": "644",
+      "Tackles": "15",
+      "Free kicks": "10",
+      "Yellow cards": "0",
+      "Average rating": "7.72",
+      "Shots on target": "7",
+      "Expected goals on target": "1.62",
+      "Hit woodwork": "2",
+      "Shots off target": "12",
+      "Blocked shots": "5",
+      "Shots inside box": "12",
+      "Shots outside box": "12",
+      "Big chances scored": "2",
+      "Big chances missed": "4",
+      "Through balls": "3",
+      "Touches in penalty area": "28",
+      "Fouled in final third": "4",
+      "Offsides": "2",
+      "Accurate passes": "581",
+      "Throw-ins": "15",
+      "Final third entries": "78",
+      "Final third phase": "142/169 (84%)",
+      "Long balls": "18/34 (53%)",
+      "Crosses": "3/11 (27%)",
+      "Duels": "51%",
+      "Dispossessed": "12",
+      "Ground duels": "39/82 (48%)",
+      "Aerial duels": "17/27 (63%)",
+      "Dribbles": "16/25 (64%)",
+      "Tackles won": "73%",
+      "Total tackles": "15",
+      "Interceptions": "5",
+      "Recoveries": "45",
+      "Clearances": "26",
+      "Errors lead to a shot": "0",
+      "Total saves": "2",
+      "Goals prevented": "-0.19",
+      "Big saves": "0",
+      "High claims": "0",
+      "Goal kicks": "5"
+    }
+  },
+  "events": [
+    {
+      "type": "period",
+      "clock": "90'",
+      "text": "FT",
+      "team_id": ""
+    },
+    {
+      "type": "substitution",
+      "clock": "86'",
+      "text": "Substitution (away): ? replaces ?.",
+      "team_id": "away"
+    },
+    {
+      "type": "substitution",
+      "clock": "86'",
+      "text": "Substitution (away): ? replaces ?.",
+      "team_id": "away"
+    },
+    {
+      "type": "card",
+      "clock": "80'",
+      "text": "Card (home): Lucien Agoum\u00e9. Foul.",
+      "team_id": "home"
+    },
+    {
+      "type": "substitution",
+      "clock": "79'",
+      "text": "Substitution (home): ? replaces ?.",
+      "team_id": "home"
+    },
+    {
+      "type": "substitution",
+      "clock": "78'",
+      "text": "Substitution (home): ? replaces ?.",
+      "team_id": "home"
+    },
+    {
+      "type": "substitution",
+      "clock": "77'",
+      "text": "Substitution (away): ? replaces ?.",
+      "team_id": "away"
+    },
+    {
+      "type": "substitution",
+      "clock": "76'",
+      "text": "Substitution (away): ? replaces ?.",
+      "team_id": "away"
+    },
+    {
+      "type": "goal",
+      "clock": "69'",
+      "minute": 69,
+      "text": "Goal! Raphinha (away). Assist: ?",
+      "team_id": "away",
+      "scorer": "Raphinha",
+      "home_score": 1,
+      "away_score": 3
+    },
+    {
+      "type": "substitution",
+      "clock": "68'",
+      "text": "Substitution (home): ? replaces ?.",
+      "team_id": "home"
+    },
+    {
+      "type": "substitution",
+      "clock": "68'",
+      "text": "Substitution (home): ? replaces ?.",
+      "team_id": "home"
+    },
+    {
+      "type": "substitution",
+      "clock": "59'",
+      "text": "Substitution (away): ? replaces ?.",
+      "team_id": "away"
+    },
+    {
+      "type": "substitution",
+      "clock": "59'",
+      "text": "Substitution (home): ? replaces ?.",
+      "team_id": "home"
+    },
+    {
+      "type": "goal",
+      "clock": "52'",
+      "minute": 52,
+      "text": "Goal! Raphinha (away). Assist: ?",
+      "team_id": "away",
+      "scorer": "Raphinha",
+      "home_score": 1,
+      "away_score": 2
+    },
+    {
+      "type": "period",
+      "clock": "45'",
+      "text": "HT",
+      "team_id": ""
+    },
+    {
+      "type": "goal",
+      "clock": "22'",
+      "minute": 22,
+      "text": "Goal! Raphinha (away). Assist: ?",
+      "team_id": "away",
+      "scorer": "Raphinha",
+      "home_score": 1,
+      "away_score": 1
+    },
+    {
+      "type": "goal",
+      "clock": "19'",
+      "minute": 19,
+      "text": "Goal! Youssouf Fofana (home). Assist: ?",
+      "team_id": "home",
+      "scorer": "Youssouf Fofana",
+      "home_score": 1,
+      "away_score": 0
+    }
+  ],
+  "home_avg_positions": [
+    {
+      "name": "Odysseas Vlachodimos",
+      "jersey": "1",
+      "x": 6.6071428571429,
+      "y": 51.109523809524
+    },
+    {
+      "name": "Juan Iglesias",
+      "jersey": "2",
+      "x": 41.525454545455,
+      "y": 15.287272727273
+    },
+    {
+      "name": "Arouna Sangante",
+      "jersey": "12",
+      "x": 30.416129032258,
+      "y": 35.109677419355
+    },
+    {
+      "name": "Andr\u00e9s Castrin",
+      "jersey": "5",
+      "x": 31.338709677419,
+      "y": 61.261290322581
+    },
+    {
+      "name": "Gabriel Suazo",
+      "jersey": "17",
+      "x": 45.646774193548,
+      "y": 80.306451612903
+    },
+    {
+      "name": "Giorgi Kochorashvili",
+      "jersey": "8",
+      "x": 43.40350877193,
+      "y": 36.99649122807
+    },
+    {
+      "name": "Lucien Agoum\u00e9",
+      "jersey": "6",
+      "x": 42.465454545455,
+      "y": 50.294545454545
+    },
+    {
+      "name": "Miguel Sierra",
+      "jersey": "30",
+      "x": 59.834615384615,
+      "y": 27.894230769231
+    },
+    {
+      "name": "Youssouf Fofana",
+      "jersey": "24",
+      "x": 53.479545454545,
+      "y": 36.5
+    },
+    {
+      "name": "F\u00e9lix Correia",
+      "jersey": "20",
+      "x": 51.287878787879,
+      "y": 77.921212121212
+    },
+    {
+      "name": "Robbie Ure",
+      "jersey": "9",
+      "x": 60.792307692308,
+      "y": 51.041025641026
+    }
+  ],
+  "away_avg_positions": [
+    {
+      "name": "Dominik Livakovi\u0107",
+      "jersey": "25",
+      "x": 11.4,
+      "y": 49.571794871795
+    },
+    {
+      "name": "Eric Garc\u00eda",
+      "jersey": "24",
+      "x": 45.69,
+      "y": 20.698
+    },
+    {
+      "name": "Pau Cubars\u00ed",
+      "jersey": "5",
+      "x": 41.624369747899,
+      "y": 42.665546218487
+    },
+    {
+      "name": "Andreas Christensen",
+      "jersey": "15",
+      "x": 41.407575757576,
+      "y": 66.139393939394
+    },
+    {
+      "name": "Jo\u00e3o Cancelo",
+      "jersey": "2",
+      "x": 48.3,
+      "y": 87.529032258065
+    },
+    {
+      "name": "Ferm\u00edn L\u00f3pez",
+      "jersey": "7",
+      "x": 52.79,
+      "y": 36.941428571429
+    },
+    {
+      "name": "Rodri",
+      "jersey": "16",
+      "x": 46.326262626263,
+      "y": 50.548484848485
+    },
+    {
+      "name": "Pedri",
+      "jersey": "8",
+      "x": 53.525274725275,
+      "y": 62.386813186813
+    },
+    {
+      "name": "Lamine Yamal",
+      "jersey": "10",
+      "x": 69.88375,
+      "y": 20.77125
+    },
+    {
+      "name": "Raphinha",
+      "jersey": "11",
+      "x": 61.472222222222,
+      "y": 49.552777777778
+    },
+    {
+      "name": "Anthony Gordon",
+      "jersey": "17",
+      "x": 66.412244897959,
+      "y": 83.555102040816
+    }
+  ],
+  "fetched_at": "2026-09-28T05:10:49Z",
+  "source_url": "https://www.sofascore.com/football/match/16416349 (api: event/lineups/incidents/statistics/average-positions)"
+}

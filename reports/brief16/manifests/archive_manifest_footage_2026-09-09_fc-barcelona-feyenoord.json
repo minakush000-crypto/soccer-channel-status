@@ -1,0 +1,24 @@
+{
+ "artifact": "2026-09-09_fc-barcelona-feyenoord.mp4",
+ "stem": "2026-09-09_fc-barcelona-feyenoord",
+ "event_id": 16938784,
+ "url": "https://www.youtube.com/watch?v=XqSrz6MKVlk",
+ "uploader": "FC Barcelona (official club channel)",
+ "vcodec": "h264",
+ "height": 1080,
+ "duration_s": 218.917732,
+ "bytes": 84130306,
+ "sha256": "dea9f8b5c46c23b88c3e0741d065635660cde100d97c903c60da9054702eaec8",
+ "sha1": "fd6503c5c10c5b57c092cf5b58527e6185e6e492",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-09_fc-barcelona-feyenoord.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_2026-09-09_fc-barcelona-feyenoord.mp4.manifest.json",
+ "pod": "in/brief16/2026-09-09_fc-barcelona-feyenoord.mp4",
+ "staged_rel": "brief16/2026-09-09_fc-barcelona-feyenoord.mp4",
+ "pod_dir": "brief16",
+ "pod_file": "2026-09-09_fc-barcelona-feyenoord.mp4",
+ "local_deleted": true,
+ "verified_seq": [
+  "rclone hashsum SHA1 (B2)",
+  "modal volume ls (pod)"
+ ]
+}

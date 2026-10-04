@@ -1,0 +1,22 @@
+{
+ "artifact": "CL04.mp4",
+ "clip_id": "CL04",
+ "claim_id": "C6",
+ "event_id": 16416329,
+ "slug": "2026-09-13_levante-ud-fc-barcelona",
+ "start_s": 116.0,
+ "end_s": 124.0,
+ "duration_probe": 8.0,
+ "duration_expected": 8.0,
+ "bytes": 7859321,
+ "sha256": "71c378cda87870019dd8b2dadb6afe379ff6921bc4abfa02748e872fd9951d2e",
+ "sha1": "b9eb37ae295beedcba7db21ac612845b13017c02",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL04.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL04.mp4.manifest.json",
+ "b2_sha1": "b9eb37ae295beedcba7db21ac612845b13017c02",
+ "pod": "in/brief16/clips/CL04.mp4",
+ "produced_by": "glm-5.3-flash:cloud via Claude Code",
+ "task": "brief 16 job 6 clip cuts (pod-side ffmpeg)",
+ "produced_at": "2026-10-04T03:2xZ",
+ "duration_s": 8.0
+}

@@ -1,0 +1,22 @@
+{
+ "artifact": "CL05.mp4",
+ "clip_id": "CL05",
+ "claim_id": "C6",
+ "event_id": 16938784,
+ "slug": "2026-09-09_fc-barcelona-feyenoord",
+ "start_s": 86.0,
+ "end_s": 98.0,
+ "duration_probe": 12.0,
+ "duration_expected": 12.0,
+ "bytes": 14836633,
+ "sha256": "93d7820d72e1eb5f25c8f0e8c660d38dfa9fcafbb81e6f549f086d8175d18ecf",
+ "sha1": "450dadc6b619ad78e8221f0d9e7c84e6edb46178",
+ "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL05.mp4",
+ "b2_manifest": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL05.mp4.manifest.json",
+ "b2_sha1": "450dadc6b619ad78e8221f0d9e7c84e6edb46178",
+ "pod": "in/brief16/clips/CL05.mp4",
+ "produced_by": "glm-5.3-flash:cloud via Claude Code",
+ "task": "brief 16 job 6 clip cuts (pod-side ffmpeg)",
+ "produced_at": "2026-10-04T03:2xZ",
+ "duration_s": 12.0
+}

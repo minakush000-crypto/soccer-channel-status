@@ -2,13 +2,15 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-10-03 (brief 15: nine renders' audit
-> lines verified in logs, oracle RENDERS-OK/PUBLISH-OK re-run,
-> render_manifest.json sha1s cross-checked on B2 with rclone hashsum; brief
-> 14 state below kept for lineage)
-> CENSUS OK files=57 wired=36 handrun=21; hooks leaned 75 -> 23 global
-> entries, doctor clean; three timeline proof boards from brief 12 and
-> brief-13 sizing gates re-verified).
+> **Last verified against code:** 2026-10-04 (brief 16: matches/press_
+> facts/claims/clip_list oracle-checked (B92-B101), 6 clips + the
+> presstrap freeze overlay audited pod-side, footage 4/4
+> archived+shipped+deleted locally, CENSUS OK re-run today; brief 15
+> state kept below for lineage)
+> CENSUS OK files=68 wired=42 handrun=26; Sofascore transport: Akamai
+> 403-challenges the api hosts from this IP since 2026-10-04T02:1xZ (log:
+> reports/brief16/logs/fetch_attempts.log); the working in-page route =
+> site-origin fetch (sofascore_chrome_fetch.js route 2).
 
 Rewritten 2026-09-27 (brief 06) against the code on disk. Brief 03-05 history
 lives in DECISIONS.md, PROGRESS.md, and retired/. Every claim below carries
