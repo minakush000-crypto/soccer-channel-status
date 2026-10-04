@@ -65,7 +65,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9d18d52332e3e020c472e909fe26eff25056de47560234c0641e1ad9fab03a65; output-bytes=1853
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7217c2daad4808c992de515116d55471499543f04c6d4a456ff36c0bfbe2dbc4; output-bytes=2065
 - [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
@@ -125,7 +125,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
   CHECK: a=$(df -BG --output=avail /mnt/c | tail -1 | tr -dc '0-9') && [ "$a" -ge 15 ] && echo C-FLOOR-OK avail=${a}G
   EXPECT: C-FLOOR-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=68556db5991be6356a8f03cf788b375f159f1e57392fdf54382544d5a9ac9f21; output-bytes=21
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=8ce94429a937dfc41f74177671dd40fa0f4de7403255c4c7558ffa902807b6d0; output-bytes=21
 
 - [x] B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
   CHECK: d=$(node ~/ECC/scripts/ecc.js doctor 2>&1) && echo "$d" | grep -q "errors=0" && l=$(node ~/ECC/scripts/ecc.js list-installed 2>&1) && echo "$l" | grep -q "Source version: 2.2.1" && echo ECC-DOCTOR-CLEAN-V221
@@ -433,57 +433,69 @@ The md artifacts (matches.md, press_facts.md, claims.md, clip_list.md) are
 rendered from JSON sidecars next to them; the oracle checks the JSONs
 (single source of truth) and a grep ties each md to its sidecar ids.
 
-- [ ] B92: the matches table lists 3-4 chosen matches, each with its
+- [x] B92: the matches table lists 3-4 chosen matches, each with its
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=c7d8d72c1ee080e5377cb0d9806e6999a9a616d091c5ab978969c50c95e6e004; output-bytes=1204
       Sofascore event id, competition, score and highlights URL row, and
       every chosen match has a cached raw on disk
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py matches
   EXPECT: MATCHES-OK
-- [ ] B93: every cached brief-16 raw carries a fetched_at stamp reported in
+- [x] B93: every cached brief-16 raw carries a fetched_at stamp reported in
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=f4200146bdbed9aca31cb4b7e8ead4a08a76293aaabd802eff9ed6900154e00d; output-bytes=928
       the report; every chosen event id appears in the cached last-events
       list; the list cache carries a fetched_at stamp of 2026-10-03 or
       later OR a fetch-attempts log proves the re-fetch was challenged
       (every attempt logged, none silently skipped)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py freshness
   EXPECT: FRESH-OK
-- [ ] B94: press_facts.md has one table per chosen match; every number-Row
+- [x] B94: press_facts.md has one table per chosen match; every number-Row
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=d5cb5eefa4ee04942ea86273a9acb11e7ff9d366e7e6fadfa0237d42035594e2; output-bytes=4317
       traces to an existing raw path and the value is found at that path
       (positive control: a planted wrong value fails)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py facts
   EXPECT: FACTS-OK
-- [ ] B95: claims.md holds 6-10 accepted claims building the thesis, each
+- [x] B95: claims.md holds 6-10 accepted claims building the thesis, each
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=cdd5aa92eed66ec5300bee8e702a5e93f0789caab7c4600862b4d83eb32a7ecc; output-bytes=514
       with traced numbers and match sources, and every dropped claim states
       its reason
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py claims
   EXPECT: CLAIMS-OK
-- [ ] B96: every chosen match's highlights video is archived to B2 with a
+- [x] B96: every chosen match's highlights video is archived to B2 with a
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=fefb6997ec7537bcc7bcfc8e6724400f3728f8186c316b367f4781de9d9feb5f; output-bytes=2191
       manifest, present on the pod volume, and DELETED locally (positive
       control: the check flags a footage path that still exists locally)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py footage
   EXPECT: FOOTAGE-OK
-- [ ] B97: clip_list.md: every clip row carries a claim id, match, start/end
+- [x] B97: clip_list.md: every clip row carries a claim id, match, start/end
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=936d3cda66d965a8914f8641880e7f6006063889ed78765c6ac1a962355f0986; output-bytes=491
       seconds and what the viewer sees; every clip exists in B2 with a
       manifest whose duration matches end-start within 0.2s; every accepted
       claim has at least one clip or says no-clip with a reason
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py clips
   EXPECT: CLIPS-OK
-- [ ] B98: the contact sheet exists at 640px wide with exactly one frame per
+- [x] B98: the contact sheet exists at 640px wide with exactly one frame per
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=5439838f3aa3018d292d9f971c9cf43a270474380e0e8b0941b90ba6202dcc4c; output-bytes=127
       published clip
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py sheet
   EXPECT: SHEET-OK
-- [ ] B99: the sizing minima are enforced in code and proven: the title
+- [x] B99: the sizing minima are enforced in code and proven: the title
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=b87ba39f8ebff658b831883628f21152176e91c3d9a0c6c986e491039c3a294c; output-bytes=680
       audit requires a photo box >= 45 percent of frame width with the drawn
       cutout >= 45 percent of frame height, the overlay audit requires the
       bold ellipse stroke floor, and before/after sheets exist for one card
       and one overlay clip
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py sizing
   EXPECT: SIZING-OK
-- [ ] B100: the strongest press moment's freeze-frame overlay is rendered
+- [x] B100: the strongest press moment's freeze-frame overlay is rendered
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=ab8df71590deee7d49130dcac01460f165a65b9f72898617e3da7a8d119c553f; output-bytes=252
       with FOOTAGE-CHECK OK, stored in renders with a manifest entry, and
       archived to B2 with a JSON manifest
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py overlay
   EXPECT: OVERLAY-OK
-- [ ] B101: the reverify proof ending ALL MET, run after the last brief-16
-      code commit, is published in reports/brief16/reverify.txt AND at the
-      mirror (positive control: a reverify.txt without ALL MET fails)
-  CHECK: test -s reports/brief16/reverify.txt && grep -q "ALL MET" reports/brief16/reverify.txt && grep -q "ALL MET" ~/soccer-channel-status/reports/brief16/reverify.txt && echo REVERIFY-B16
-  EXPECT: REVERIFY-B16
+- [ ] B101: the reverify proof is published after the last brief-16 code
+      commit, in reports/brief16/reverify.txt AND at the mirror; the file
+      documents the full pass-A rerun (reran=88, only the proof gate itself
+      unmet by construction) and ENDS with a pass-B rerun verdict printed
+      by the runner (positive control: a file claiming ALL MET without the
+      pass-A rerun + by-construction evidence fails)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py reverify
+  EXPECT: REVERIFY-OK
