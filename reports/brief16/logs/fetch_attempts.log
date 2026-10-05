@@ -4,3 +4,4 @@
 2026-10-04T04:45:34Z AKAMAI-BLOCKED (rc=4, 403) attempt 4 (single-request, no impersonation ladder run)
 2026-10-04T05:05:40Z AKAMAI-BLOCKED (rc=4, 403) attempt 5 (single-request, no impersonation ladder run)
 2026-10-04T05:05:47Z GAVE-UP after 5 single attempts (~100 min)
+2026-10-05T07:44:43Z AKAMAI-BLOCKED (rc=4, 403 inpage) attempt 6 (cron wake-up single retry, ~26h quiet)
