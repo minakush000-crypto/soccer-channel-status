@@ -9,8 +9,12 @@
 > state kept below for lineage)
 > CENSUS OK files=68 wired=42 handrun=26; Sofascore transport: Akamai
 > 403-challenges the api hosts from this IP since 2026-10-04T02:1xZ (log:
-> reports/brief16/logs/fetch_attempts.log); the working in-page route =
-> site-origin fetch (sofascore_chrome_fetch.js route 2).
+> reports/brief16/logs/fetch_attempts.log): BLOCK TREATED AS
+> LIKELY-PERMANENT (2026-10-06, attempts 1-9 over 4 consecutive days, all
+> 403 in-page with the browser transport; no more scheduled attempts; the
+> fresh-list evidence stays the cached 2026-09-29 list + the brief-16
+> sweep's independent sources until a route change - the next brief that
+> re-fetches must first re-probe once, then choose a route).
 
 Rewritten 2026-09-27 (brief 06) against the code on disk. Brief 03-05 history
 lives in DECISIONS.md, PROGRESS.md, and retired/. Every claim below carries
