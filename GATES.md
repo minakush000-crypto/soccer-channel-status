@@ -66,10 +66,10 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=80752afec2531e4050557ec250ac34949ce798755d24014e1de7327bdbed9fe3; output-bytes=2210
-- [ ] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
+- [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
-  EVIDENCE: pending
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7e11f8b60ada90f702114686f4c992332a3c591b6458f432fa3aa551c69067a0; output-bytes=13
 - [x] B23: brief 09 research artifacts exist (3 CSVs, 3 transcripts, measurements, catalog, gaps, durations)
   CHECK: for f in reports/brief09/frames_A.csv reports/brief09/frames_B.csv reports/brief09/frames_C.csv reports/brief09/transcript_A.txt reports/brief09/transcript_B.txt reports/brief09/transcript_C.txt reports/brief09/measurements.md reports/brief09/overlay_catalog.md reports/brief09/gaps.md reports/brief09/durations.json; do test -f "$f" || exit 1; done && echo BRIEF09-ARTIFACTS-OK
   EXPECT: BRIEF09-ARTIFACTS-OK
@@ -89,7 +89,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B27: the disk guard exists and is wired to every entry point (5+ callers grepped, not counted by memory)
   CHECK: test -x tools/disk_guard.sh && n=$(grep -rlE "disk_guard\.sh" tools/ .claude/hooks/ 2>/dev/null | grep -v "disk_guard.sh$" | wc -l) && [ "$n" -ge 5 ] && echo GUARD-WIRED callers=$n
   EXPECT: GUARD-WIRED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=63a1455860d7da6aed83be200f505957a828ed7bed36d8032fc116b81046f595; output-bytes=23
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9931f25d32b998f546588a51c4567a7f2096f31771210aa164c161ee174cdd8b; output-bytes=23
 - [x] B28: the guard's positive controls FAIL on faked states (100000G floor; unmounted-F target) and the cleanup exemption PASSES
   CHECK: bash tools/disk_guard.sh --selftest
   EXPECT: GUARD-SELFTEST-OK
@@ -147,10 +147,10 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: test -f ~/.claude/skills/context-transfer/SKILL.md && grep -q '^name:' ~/.claude/skills/context-transfer/SKILL.md && echo CT-SKILL-PRESENT
   EXPECT: CT-SKILL-PRESENT
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=0278fde26d143fe0d3f1d2c7c808cbfca3ac62e1d11adddd20caa7707f8dc6c2; output-bytes=17
-- [ ] B44: the ECC data cap is wired: guard selftest (incl. oversized-ECC control 4) passes and the live report shows the ecc_data line under cap (brief 07 job 5, Mayo instruction)
+- [x] B44: the ECC data cap is wired: guard selftest (incl. oversized-ECC control 4) passes and the live report shows the ecc_data line under cap (brief 07 job 5, Mayo instruction)
   CHECK: bash tools/disk_guard.sh --selftest 2>&1 | grep -q GUARD-SELFTEST-OK && bash tools/disk_guard.sh --report 2>/dev/null | grep -qE "ecc_data [0-9]+B <= [0-9]+B cap" && echo ECC-CAP-WIRED
   EXPECT: ECC-CAP-WIRED
-  EVIDENCE: pending
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=4083c7d2c6597821ff2607367b9783836c8103b0643132360e44d11fe266d52e; output-bytes=14
 - [x] B45: before/after session-start context numbers are recorded in both artifacts (brief 07 job 3f + job 6)
   CHECK: test -s reports/brief07/context_before.txt && grep -q "39837" reports/brief07/context_before.txt && test -s reports/brief07/context_after.txt && grep -q "50652" reports/brief07/context_after.txt && echo CTX-BEFORE-AFTER-RECORDED
   EXPECT: CTX-BEFORE-AFTER-RECORDED
@@ -292,8 +292,8 @@ committed alongside the proof.
       equal the plan's after counts
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py applied
   EXPECT: APPLIED-MATCHES-PLAN
-- [ ] B73: the hook end state matches the plan across every settings file
-  EVIDENCE: pending
+- [x] B73: the hook end state matches the plan across every settings file
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=d8bbf1233ca04d9a1f14a0478845de31a7f2e8d11749e5aca3aa5d9af6126e4d; output-bytes=529
       (global, soccer project, jiheeye project): every planned-removed hook
       snippet absent, every planned-kept snippet present (unlazy Stop, soccer
       push_status, disk guard, jiheeye hooks, claude-mem)
@@ -592,7 +592,8 @@ canonical output stays at renders/brief17-episode-one/voice_elevenlabs.mp3.
   reports/brief17/photo_sources.md)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py description
   EXPECT: DESCRIPTION-OK
-- [ ] B112: the reverify proof is ALL MET after the last code commit and
+- [x] B112: the reverify proof is ALL MET after the last code commit and
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=2f16c6d855e0d505b7f732d1bee8b913091e0a3b9ef7ba63a42dece5042253ea; output-bytes=446
   published to the mirror (two-pass, brief16 B101 convention: pass A runs
   the ledger with this gate unmet by construction and records the rerun;
   pass B is the published ALL MET proof)
