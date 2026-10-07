@@ -2,7 +2,7 @@
 
 > **Purpose:** the four-lane (A/B/C/D) expansion build ledger; each stage appends its findings here.
 > **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Line-drift corrections applied 2026-09-13 (Stage-12B rewrite of produce_v2.py + Stage-14 retirement of step4b/tactical_render.py shifted cited line numbers; all re-grep'd against current code).
-> **Last verified against code:** 2026-10-03 (brief 15 jobs 0-8 appended;
+> **Last verified against code:** 2026-10-07 (brief 17 phase B section appended;
 > census re-run live this session: CENSUS OK files=60 wired=39 handrun=21.
 > The 2026-09-27 note below was written from git log 3c7a90b..b5dc799 and
 > reports/brief08/reverify.txt. Historical stage log: nothing in the
@@ -4067,3 +4067,34 @@ turbo, atempo 1.15) and published to the mirror. Gates B102-B107 added and
 met; full ledger reverify ALL MET 94/94; proof at reports/brief17/
 reverify.txt + the mirror. PHASE B (jobs 5-8) starts only after Mayo types
 "voice ok".
+
+### Brief 17 phase B (2026-10-07): jobs 5-8 executed
+Job 5: full voice = take 5, 242.46s / 534 words / 132.1 wpm at atempo 1.0
+(takes 1-2 at the sample's 1.15 read 207-222s: the engine reads long
+unpunctuated text 25-30% faster per word than the 47-word sample; no roll
+under the unchanged setting reaches Mayo's 240s floor, so the shipped take
+uses the tool's default 1.0; four takes' record + reason in
+reports/brief17/voice_full.json). SRC-tag strip fixed so the SOURCES block
+is never spoken. Ambience: 30s texture (the API's cap) x9 concat = 270s.
+Job 6: reel built pod-side (13 pieces, 122.6s), 11 boards rendered under
+the episode slug with their audits (9 CARD-CHECK + 2 PAGE-CHECK OK; the
+pod's render2d gained per-spec facts + assets-dir overrides for the
+multi-match episode), assembled: final 241.92s / 25 shots / mean 9.67s;
+shares: clips 28%, overlays 20%, boards 13%, cards 39%. Two assembly
+faults found and fixed: the card page fades every line out at t0+hold
+(~6-6.6s) regardless of duration_s (13-15s slots played ~7s of empty
+board; the stage tool now sizes card hold to the slot; 8 cards
+re-rendered), and the c10 card's keeper printed 14.72 where the
+convention (raw 14.71875, truncate) says 14.71. Job 7: 77 stamped stills
+(25 rows + 52 probes) extracted pod-side from the real cut list; every
+row verdicted in reports/brief17/wmp/visual_check.md: 25/25 MATCH after
+five fixes (R07's 8'-goal claim has no film in any rac asset; R08's
+package is the LIVE 36' Cancelo goal; R18's window was a 0-0 minute-8
+chance; R06's 14.71; the holds). Chips: the B102 crops + 3 broadcast
+lower-thirds (Cancelo 36'/Fofana 19'/Romero 79') + 12 native board stills
+published. description_draft.md carries both photo credit rows. Job 8:
+final video + voice + ambience + both manifests archived to
+b2:soccer-channel/2026-10-07/ (5 artifacts, each with a manifest); D:
+staging emptied (581MB). Gates B108-B112 added + met via the two-pass
+reverify (B112 = the brief16 B101 convention). Nothing uploaded to
+YouTube.

@@ -2,7 +2,7 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-10-06 (brief 17 phase A: brief17_check.py + brief17_cards.py wired; brief15_photo.py parameterized; rows below verified. The brief-13 census note that used to live here moved to its row.)
+> **Last verified against code:** 2026-10-07 (brief 17 phase B: brief17_stage.py + brief17_reel.py + brief17_stills.py wired; keeper-row truncation fixed in brief17_cards.py; rows below verified.)
 > 56 files / 35 WIRED / 21 HAND-RUN; three new rows added brief 13).
 
 Rebuilt 2026-09-23 (brief 05 job 12) by command; **now enforced by command**
@@ -59,6 +59,9 @@ exists — anything dead is deleted or in retired/.
 | `brief16_sheets.py` | HAND-RUN | brief 16 jobs 0/5/7 sheets | before/after pair sheets, 4-across review tiles (320px), 640px contact sheet |
 | `brief16_retry_fetch.sh` | HAND-RUN | brief 16 job 1 (Akamai loop) | single-request re-fetch loop (~20 min apart, 5 attempts), logs fetch_attempts.log, copies the fresh list to /tmp on success |
 | `brief17_check.py` | WIRED | GATES B102-B107 oracle | brief-17 phase-A oracle: chips (crops+kit rule+planted), title (subject share vs benchmark B), draw (arrows on entities + overlap walk + planted), claims (re-side trace + keeper axis), script (rows/assets/number trace + pace), voice (sample + mirror sha). Reads only cached raws + renders; never touches Sofascore |
+| `brief17_stage.py` | WIRED | brief17_reel.py, pod_build.py assemble | brief-17 phase-B staging: parses the script the way the pod's assemble does, sizes every board spec to its allocated segment (duration_s = ceil(alloc+1.5); card hold sized so the page's fade-out clears the row), sets slug + per-spec facts (timeline -> match_data_racing.json); prints the section table + the volume put lines |
+| `brief17_reel.py` | WIRED | pod_build.py assemble | brief-17 phase-B reel builder: 13 pieces (6 CLs + 5 overlays + rac 63-69 + sev 36-44) normalized (1920x1080/25fps/an) and concat-encoded pod-side to in/reel.mp4; writes reel_manifest.json (the jobs-6/7 share + audit mapping); REFUSES on any piece/window drift |
+| `brief17_stills.py` | WIRED | brief17_check.py wmp | brief-17 phase-B stills: extracts one stamped mid-frame per manifest row + 4 probes per footage section from the final on the pod, into out/<episode>/wmp_frames/ |
 | `brief17_cards.py` | WIRED | brief17_check.py title/script | emits the episode-one card specs: title (Yamal + Flick, photo_box from spec), stat cards C1/C3/C7/C9/C10 (rows stamped to press_facts rows / raw recomputes), chapter cards; audit_T = 1.2 + rows*0.85 + 0.65 |
 | `brief12_timeline.py` | WIRED | brief 12 job 5 (proof boards); brief 16 assembly | timeline spec emitter (formation / runners / move) from match_data + raw cache, per docs/board_timeline.md |
 | `brief12_data.py` | HAND-RUN | hand-invoked (brief 12 job 1) | Barcelona team-id + 4 most recent completed matches driver; every fetch through sofascore_client.py; id verified against the payload events |

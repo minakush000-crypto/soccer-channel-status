@@ -1376,3 +1376,38 @@ commands cited in the report:
     verbatim copy case in .claude/hooks/push_status.sh (the loop
     silently skipped audio before). The sample published at
     reports/brief17/voice_sample.mp3 on the mirror, sha-identical.
+
+## Brief 17 phase B decisions (2026-10-07)
+
+14. **Atempo 1.15 -> 1.0 for the full narration (job 5).** The approved
+    sample's measured pace (108.9 wpm) does not scale: the engine reads
+    the long unpunctuated script at 126-154 wpm under the SAME settings
+    (takes 1-2 = 221.8s/207.2s at 1.15, both under Mayo's 240s floor).
+    The shipped take (take 5) uses the tool's default atempo 1.0 =
+    242.46s, inside decision 5's 240-300. Same voice, same
+    stability/similarity/style. Mayo's "voice ok" still governs the sound;
+    the deviation is the pace knob only.
+15. **The rac/sev package window corrections (jobs 6-7).** The phase-A
+    record had two window claims wrong: rac 62-70 is the LIVE 36' Cancelo
+    goal (chip JOAO CANCELO MIN. 36'), not the 8' goal's replay - the 8'
+    goal is not in the rac highlights track (it starts at clock 21:18);
+    sev 23-31 is a 0-0 Barcelona chance at clock 07:20-35, not Fofana's
+    19' goal - Fofana's window = sev 36-44 (the chip 24 YOUSSEF FOFANA
+    MIN. 19' + the 1-0 flip). The reel cuts: rac 63-69, sev 36-44. The
+    script's R07/R08 narration was rewritten to what the pictures carry;
+    C5's claim numbers untouched.
+16. **Card holds are duration-sized (job 6/7).** board_page.html's
+    cardReveal fades every line out at t0+hold (~6-6.6s absolute)
+    regardless of duration_s: brief-15 cards were 8s-shaped, episode
+    one's slots are 13-16s. brief17_stage.py now sets hold = sized-1.2 so
+    the fade lands after the row's cut point. The 8 cards re-rendered.
+    Related repair: the claim-cards re-emit overwrote the phase-A
+    hand-tightened specs (commit 921494c edited the JSONs, not the
+    emitter); the five restored from git and the truncation fix applied
+    on top (keeper row = 14.71, the truncate convention).
+17. **Multi-match pod audit design (job 6).** pod_build render2d gains two
+    per-spec overrides: "facts" (a facts filename under specs/<slug>/
+    default match_data.json) and "assets_dir" (the card cutouts; default
+    in/brief15/assets). The episode's default = the sevilla copy; the
+    timeline boards point at the racing copy. Single-match episodes are
+    unchanged.

@@ -1,6 +1,6 @@
 {
  "worktree_gates": 55,
- "census_full": "CENSUS OK files=70 wired=44 handrun=26 (exempt from rows: USAGE.md)",
+ "census_full": "CENSUS OK files=73 wired=47 handrun=26 (exempt from rows: USAGE.md)",
  "before": {
   "session_start_first_turn_input": 51297,
   "session_start_aggregate_input": 48552
@@ -58,5 +58,6 @@
    "rebased_census_full_to": "CENSUS OK files=70 wired=44 handrun=26 (exempt from rows: USAGE.md)",
    "reason": "brief 17 added brief17_check.py + brief17_cards.py (wired) and the census now counts 70 files / 44 WIRED / 26 HAND-RUN; historical run answers stay frozen"
   }
- ]
+ ],
+ "census_rebased": "2026-10-07 brief 17 phase B: +3 wired tools (stage/reel/stills)"
 }

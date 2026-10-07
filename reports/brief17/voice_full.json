@@ -1,0 +1,49 @@
+{
+ "slug_voice": "brief17-episode-one",
+ "script": "scripts/brief17-episode-one.md",
+ "cleaned_words": 534,
+ "takes": [
+  {
+   "take": 1,
+   "atempo": 1.15,
+   "dur_s": 221.8,
+   "wpm": 144.2
+  },
+  {
+   "take": 2,
+   "atempo": 1.15,
+   "dur_s": 207.2,
+   "wpm": 154.3
+  },
+  {
+   "take": 3,
+   "atempo": 1.0,
+   "dur_s": 239.5,
+   "wpm": 133.5
+  },
+  {
+   "take": 4,
+   "atempo": 1.0,
+   "dur_s": 241.81,
+   "wpm": 132.3
+  },
+  {
+   "take": 5,
+   "atempo": 1.0,
+   "dur_s": 242.46,
+   "wpm": 132.1,
+   "shipped": true,
+   "note": "first take over the corrected R07/R08/R18 wording (R07's claim of Cancelo scoring the first goal 8' was refuted by the footage: the rac package starts at clock 21:18 and CL06's goal = Raphinha's, the 2nd barca goal; R08 rewritten around the 36' Cancelo chip; R18's piece re-cut to the real Fofana window sev 36-44)"
+  }
+ ],
+ "shipped": {
+  "atempo": 1.0,
+  "duration_s": 242.46,
+  "wpm": 132.2,
+  "model": "eleven_turbo_v2_5",
+  "voice": "VOICE_ID onwK4e9ZLuTAKqWW03F9 (Daniel)",
+  "settings": "stability 0.30, similarity 0.80, style 0.50, speaker_boost on"
+ },
+ "atempo_change_reason": "at atempo 1.15 (the sample's setting) the engine reads the script at 207-222 s (takes 1-2, two rolls, long unpunctuated text reads faster per word than the 47-word sample measured); no roll reaches the 240 s floor. atempo 1.0 (the tool's shipped default) lands 242.5 s (take 5) inside Mayo's 240-300 s runtime decision. Same voice, same stability/similarity/style. Reason recorded in DECISIONS.md.",
+ "measured_at": "2026-10-06"
+}

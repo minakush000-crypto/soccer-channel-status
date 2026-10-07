@@ -1,0 +1,130 @@
+{
+ "episode": "2026-10-06_flicks-high-line",
+ "total_s": 122.5,
+ "fps": 25,
+ "size": [
+  1920,
+  1080
+ ],
+ "pieces": [
+  {
+   "piece": "CL01",
+   "type": "clip",
+   "source": "/vol/in/brief16/CL01.mp4",
+   "in_start": 0.0,
+   "dur": 8.0,
+   "reel_start": 0.0,
+   "reel_end": 8.0
+  },
+  {
+   "piece": "footage_presstrap",
+   "type": "overlay",
+   "source": "/vol/in/brief17/overlays/footage_presstrap.mp4",
+   "in_start": 0.0,
+   "dur": 10.5,
+   "reel_start": 8.0,
+   "reel_end": 18.5
+  },
+  {
+   "piece": "CL06",
+   "type": "clip",
+   "source": "/vol/in/brief16/CL06.mp4",
+   "in_start": 0.0,
+   "dur": 10.0,
+   "reel_start": 18.5,
+   "reel_end": 28.5
+  },
+  {
+   "piece": "rac63-69",
+   "type": "clip",
+   "source": "/vol/in/brief16/2026-09-16_fc-barcelona-real-racing-club.mp4",
+   "in_start": 63.0,
+   "dur": 6.0,
+   "reel_start": 28.5,
+   "reel_end": 34.5
+  },
+  {
+   "piece": "CL02",
+   "type": "clip",
+   "source": "/vol/in/brief16/CL02.mp4",
+   "in_start": 0.0,
+   "dur": 6.0,
+   "reel_start": 34.5,
+   "reel_end": 40.5
+  },
+  {
+   "piece": "footage_sev_overload",
+   "type": "overlay",
+   "source": "/vol/in/brief17/overlays/footage_sev_overload.mp4",
+   "in_start": 0.0,
+   "dur": 10.5,
+   "reel_start": 40.5,
+   "reel_end": 51.0
+  },
+  {
+   "piece": "footage_rac_freekick",
+   "type": "overlay",
+   "source": "/vol/in/brief17/overlays/footage_rac_freekick.mp4",
+   "in_start": 0.0,
+   "dur": 10.5,
+   "reel_start": 51.0,
+   "reel_end": 61.5
+  },
+  {
+   "piece": "footage_rac_farpost",
+   "type": "overlay",
+   "source": "/vol/in/brief17/overlays/footage_rac_farpost.mp4",
+   "in_start": 0.0,
+   "dur": 10.5,
+   "reel_start": 61.5,
+   "reel_end": 72.0
+  },
+  {
+   "piece": "footage_sev_block",
+   "type": "overlay",
+   "source": "/vol/in/brief17/overlays/footage_sev_block_b16.mp4",
+   "in_start": 0.0,
+   "dur": 10.5,
+   "reel_start": 72.0,
+   "reel_end": 82.5
+  },
+  {
+   "piece": "sev36-44",
+   "type": "clip",
+   "source": "/vol/in/brief16/2026-09-19_sevilla-fc-barcelona.mp4",
+   "in_start": 36.0,
+   "dur": 8.0,
+   "reel_start": 82.5,
+   "reel_end": 90.5
+  },
+  {
+   "piece": "CL04",
+   "type": "clip",
+   "source": "/vol/in/brief16/CL04.mp4",
+   "in_start": 0.0,
+   "dur": 8.0,
+   "reel_start": 90.5,
+   "reel_end": 98.5
+  },
+  {
+   "piece": "CL05",
+   "type": "clip",
+   "source": "/vol/in/brief16/CL05.mp4",
+   "in_start": 0.0,
+   "dur": 12.0,
+   "reel_start": 98.5,
+   "reel_end": 110.5
+  },
+  {
+   "piece": "CL03",
+   "type": "clip",
+   "source": "/vol/in/brief16/CL03.mp4",
+   "in_start": 0.0,
+   "dur": 12.0,
+   "reel_start": 110.5,
+   "reel_end": 122.5
+  }
+ ],
+ "piece_sources_note": "CL01-06 pre-cut in brief 16 job 6 (window cuts, durations exact); overlays re-rendered brief 17 job 0 (oracles B102/B104); rac63-69 + sev36-44 are cut pod-side by this tool from the brief-16 full-track mp4s at the frame-probed windows",
+ "rac62_cut_note": "R08's row window is 28.5-34.5 (6.0 s) inside the 8.0 s rac 62-70 package: cut at 63.0-69.0 (build, finish, the celebration close-up carrying chip JOAO CANCELO MIN. 36'; frame-probed 2026-10-07). The R18 piece re-cut from sev package 23-31 to 36-44: the 23-31 window is a 0-0 Barcelona chance at clock 07:20-35, the 36-44 window is Fofana's 19' goal with the chip and the 1-0 flip (frame-probed 2026-10-07)"
+}
