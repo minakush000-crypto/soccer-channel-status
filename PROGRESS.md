@@ -4044,3 +4044,26 @@ the pod; 5 clips + CL06 mapped to claims. Job 6: 6 clips cut pod-side
 (footage_presstrap, freeze 61.0 = the 21:42 trap; FOOTAGE-CHECK OK).
 Job 7: contact sheet (640px, 6 panels), manifests, visual_check.md.
 Job 8: gates B92-B101 + reverify published to the mirror.
+
+## Brief 17 (2026-10-06): phase A complete, phase B waiting on "voice ok"
+Jobs 0-4 executed. Job 0: chip placement oracle B102 (native crops at each
+chip's point_to paired with its lineup row; kit rule + planted wrong-team
+control that FAILS; the A. GORDON chip re-identified to F. LOPEZ no. 7
+(Fermin Lopez) because the readable number at the anchor is 7 and the only
+white 17 is Sevilla's Suazo), title-card oracle B103 (subject outline share
+vs benchmark B's measured person: ours 18.6/20.2% vs B 21.4%), overlay
+drawing oracle B104 (arrows on marked entities; overlap walk on footage
+overlays with a planted control; two unmarked balls marked; FK arrow ended
+on a new goal-mouth mark). Job 1: claims re-sided to "Flick's high line: what
+it wins and what it costs", C10 added (back four 44.26/50.2 vs keepers
+11.4/14.71 on the per-team attack axis; two of four matches), ten skeptics
+ran (two wordings fixed), matches.md endpoints corrected, CL04 identity
+re-cited. Job 2: scripts/brief17-episode-one.md (25 rows, 533 words, the 13-
+piece reel layout in SOURCES, three new verified windows). Job 3: five claim
+stat cards + two chapter cards + the Sevilla avgpositions board emitted and
+audited (CARD-CHECK OK everywhere). Job 4: the 20 s voice sample
+(reports/brief17/voice_sample.mp3) measured 108.9 wpm (ElevenLabs Daniel,
+turbo, atempo 1.15) and published to the mirror. Gates B102-B107 added and
+met; full ledger reverify ALL MET 94/94; proof at reports/brief17/
+reverify.txt + the mirror. PHASE B (jobs 5-8) starts only after Mayo types
+"voice ok".
