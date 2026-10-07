@@ -127,14 +127,14 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   EXPECT: C-FLOOR-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=558ab3186a0cc937a14eb3900c6b1884ac8b58585071dd3e9d4c7b8b101ccd4c; output-bytes=21
 
-- [ ] B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
+- [x] B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
   CHECK: d=$(node ~/ECC/scripts/ecc.js doctor 2>&1) && echo "$d" | grep -q "errors=0" && l=$(node ~/ECC/scripts/ecc.js list-installed 2>&1) && echo "$l" | grep -q "Source version: 2.2.1" && echo ECC-DOCTOR-CLEAN-V221
   EXPECT: ECC-DOCTOR-CLEAN-V221
-  EVIDENCE: pending
-- [ ] B40: the unlazy Stop hook AND ECC's dispatcher coexist in ~/.claude/settings.json post-install (brief 07 job 8)
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=255fae43e759ec80d73791dc86d43e2cc6cff650ec789ae380f5d7aef0ceab2b; output-bytes=22
+- [x] B40: the unlazy Stop hook AND ECC's dispatcher coexist in ~/.claude/settings.json post-install (brief 07 job 8)
   CHECK: grep -q "stop-hook.mjs" ~/.claude/settings.json && grep -q "pre:bash:dispatcher" ~/.claude/settings.json && echo HOOKS-COEXIST
   EXPECT: HOOKS-COEXIST
-  EVIDENCE: pending
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=40ad8a1dc2118c44aae5d4af2f45c59389b6e887049073ad1856d01ff1cba4e6; output-bytes=14
 - [x] B41: the disk-guard session-start hook is still wired in project settings and the guard selftest passes post-install (brief 07 job 8; hook renamed check_mnt_f.sh → check_scratch.sh by brief 11 job 4, so the grep follows the rename)
   CHECK: grep -q "check_scratch.sh" .claude/settings.json && bash tools/disk_guard.sh --selftest 2>&1 | grep -q GUARD-SELFTEST-OK && echo GUARD-INTACT
   EXPECT: GUARD-INTACT
@@ -245,7 +245,7 @@ which touches nothing in the repo (writes only under /tmp).
 - [x] B66: neither npm nor yt-dlp cache resolves on C: in a login shell (npm env var and yt-dlp --cache-dir both point at /mnt/d or the WSL home, never /mnt/c)
   CHECK: bash -lic 'c=$(npm config get cache 2>/dev/null); y=$(grep -oE "cache-dir [^ ]+" ~/.config/yt-dlp/config | head -1); case "$c$y" in */mnt/c/*) exit 1;; esac; echo "$c | $y" | grep -q "mnt/d" && echo CACHES-OFF-C' 2>/dev/null
   EXPECT: CACHES-OFF-C
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=3618b8d001d6b4e8a21dddb2d63187ffad1bb20eaae5ba69681a0e5491570720; output-bytes=781
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=bf0bc11d94142cc1f26807c3be72fe2451aaecd0296fdfc8a33fe4b120582356; output-bytes=13
 - [x] B67: the machine env rename is live: bash -lic resolves the five scratch vars through the new path, the old path is a one-line shim, and .bashrc sources the new path
   CHECK: bash -lic 'test -f ~/.config/machine/env.sh && test "$(grep -c . ~/.config/soccer/env.sh)" -eq 1 && grep -q "config/machine/env.sh" ~/.bashrc && [ "$SOCCER_STAGING_ROOT" = "/mnt/d/scratch/soccer-staging" ] && echo ENV-SHIM-OK' 2>/dev/null
   EXPECT: ENV-SHIM-OK
@@ -292,8 +292,8 @@ committed alongside the proof.
       equal the plan's after counts
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py applied
   EXPECT: APPLIED-MATCHES-PLAN
-- [x] B73: the hook end state matches the plan across every settings file
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=d8bbf1233ca04d9a1f14a0478845de31a7f2e8d11749e5aca3aa5d9af6126e4d; output-bytes=529
+- [ ] B73: the hook end state matches the plan across every settings file
+  EVIDENCE: pending
       (global, soccer project, jiheeye project): every planned-removed hook
       snippet absent, every planned-kept snippet present (unlazy Stop, soccer
       push_status, disk guard, jiheeye hooks, claude-mem)
@@ -316,10 +316,10 @@ committed alongside the proof.
       (both memory dirs: yt-digest and soccer-channel)
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py memory
   EXPECT: MEMORY-MERGED-OK
-- [ ] B77: ECC doctor reports zero warnings and zero errors for what remains
+- [x] B77: ECC doctor reports zero warnings and zero errors for what remains
   CHECK: node /home/muads/ECC/scripts/ecc.js doctor > /tmp/b14_doctor.txt 2>&1 && grep -q "warnings=0" /tmp/b14_doctor.txt && grep -q "errors=0" /tmp/b14_doctor.txt && echo DOCTOR-CLEAN
   EXPECT: DOCTOR-CLEAN
-  EVIDENCE: pending
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=dd49e82c3de041ea16e143bea972a11696d09ed16c56c2d33c20437f6f6b08dc; output-bytes=13
 - [x] B78: reports/brief14/after.md carries the before/after table with all
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=42fefc84b182780d3d17af9b3600c730b615eafbecbe59cdf851380b1f617f64; output-bytes=485
       seven done-means rows (session_start_tokens, bench_wall_ms,
@@ -357,8 +357,8 @@ Brief 15 gates (overlay styling pass + text, title and stat cards; added
 mechanism (node tools/board_html.js --audit-only with the local cached
 chrome; writes only under /tmp).
 
-- [ ] B83: the 60-skill marketing kit is removed and verifiable: roster dirs
-  EVIDENCE: pending
+- [x] B83: the 60-skill marketing kit is removed and verifiable: roster dirs
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=47991cd0aaf81e018e1a5acc81a1778625436ffbe15075bba504fff47bc6cd64; output-bytes=288
       absent under ~/.claude/skills, skills dir count 193, the B2 backup's
       upload/download md5s match (two lines in kit_removal.md), tar listing
       count 413, ecc.js doctor clean, brief-07 session-start tokens recorded
