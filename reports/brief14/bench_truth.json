@@ -1,6 +1,6 @@
 {
  "worktree_gates": 55,
- "census_full": "CENSUS OK files=68 wired=42 handrun=26 (exempt from rows: USAGE.md)",
+ "census_full": "CENSUS OK files=70 wired=44 handrun=26 (exempt from rows: USAGE.md)",
  "before": {
   "session_start_first_turn_input": 51297,
   "session_start_aggregate_input": 48552
@@ -50,5 +50,13 @@
   ],
   "verdict_basis": "runs 3 and 4 answered and are correct; runs 1 and 2 recorded verbatim as max-turns variance runs"
  },
- "census_rebase_note": "2026-10-04 brief 16 rebased files 61->68 wired 40->42 handrun 21->26: the six brief-16 tools (data/check/frames/clips/footage/sheets + retry_fetch.sh = 7 files; 6 WIRED-or-tested by the brief-16 gates, retry hand-run) per the brief-15 rebase procedure. Verified: tools/census.py printed CENSUS OK files=68 wired=42 handrun=26."
+ "census_rebase_note": "2026-10-04 brief 16 rebased files 61->68 wired 40->42 handrun 21->26: the six brief-16 tools (data/check/frames/clips/footage/sheets + retry_fetch.sh = 7 files; 6 WIRED-or-tested by the brief-16 gates, retry hand-run) per the brief-15 rebase procedure. Verified: tools/census.py printed CENSUS OK files=68 wired=42 handrun=26.",
+ "rebase_history": [
+  {
+   "date": "2026-10-06",
+   "by": "glm-5.3-flash:cloud (brief 17 phase A reverify pass)",
+   "rebased_census_full_to": "CENSUS OK files=70 wired=44 handrun=26 (exempt from rows: USAGE.md)",
+   "reason": "brief 17 added brief17_check.py + brief17_cards.py (wired) and the census now counts 70 files / 44 WIRED / 26 HAND-RUN; historical run answers stay frozen"
+  }
+ ]
 }

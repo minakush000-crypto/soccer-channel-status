@@ -9,15 +9,15 @@
  "kicker": "BARCELONA TACTICAL FILE",
  "card": {
   "type": "stat",
-  "title": "The trade still pays",
+  "title": "THE TRADE",
   "rows": [
    {
-    "label": "goals for - against, four matches",
+    "label": "GOALS FOR-AGAINST",
     "value": "19 - 6",
     "_source": "sums of the four g1/g2 rows (brief16_check claims walk)"
    },
    {
-    "label": "expected goals for - against",
+    "label": "xG FOR-AGAINST",
     "value": "14.89 - 5.33",
     "_source": "sums of the four -05 cells (brief16_check claims walk)"
    }

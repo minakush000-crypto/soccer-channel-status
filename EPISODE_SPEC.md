@@ -17,7 +17,7 @@
 > be traced to a reference. Production is frozen against this spec until
 > approved.
 > **Derived:** 2026-09-12, from 6 reference videos (5 tactical/explainer + 1 highlights).
-> **Last verified against code:** 2026-09-13 (§9 source-footage provenance + §10
+> **Last verified against code:** 2026-10-06 (§9 source-footage provenance + §10
 > narration source-of-truth + §11 board design properties added and verified this
 > pass — gemini_judge.py exists and is the AUTHORITATIVE judge, the .script_verified
 > gate + script_gen constraint + sources.json are wired, the 12B/Sofascore findings
@@ -276,3 +276,12 @@ one dimension that lands inside a reference range (the fast-style references).
 
 **Impossible with the tools available:**
 - None after the 10A amendments. The three items previously listed (talking-head, 3D renders, footage) are respectively a format choice, a build target, and a solved acquisition path.
+
+## Brief 17 episode-one overrides (2026-10-06, DECISIONS.md 8)
+
+- Runtime: 240 to 300 s for episode one only (brief 17 decision 5),
+  overriding this file's 8 to 14 minute MUST for that episode.
+- Voice pace: the measured sample reads 108.9 wpm (ElevenLabs Turbo,
+  atempo 1.15, Daniel) on the brief-17 script style; episode one runs at
+  the measured pace, below this file's 155-195 wpm MUST. Mayo's "voice
+  ok" on the 20 s sample covers it.

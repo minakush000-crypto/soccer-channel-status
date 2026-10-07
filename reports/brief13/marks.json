@@ -1,5 +1,5 @@
 {
- "marked_at": "2026-09-28T08:12:17Z",
+ "marked_at": "2026-10-06T21:45:00Z (brief 17 job 0c note: goal_mouth added; earlier marks untouched)",
  "marker": "glm-5.3-flash:cloud (Claude Code session, brief 13 job 4)",
  "method": "frames extracted on the pod (brief13_frames.py, stamped ids), viewed at full res with 100px grid + 2x zoom crops (50px grid); foot points read off the grid; identity evidence = shirt number/name visible on THAT frame, matched against the raw XI caches",
  "moments": [
@@ -450,6 +450,11 @@
      "x": 1093,
      "y": 592,
      "who": "the free kick, parked"
+    },
+    "goal_mouth": {
+     "x": 640,
+     "y": 430,
+     "who": "the goal mouth the 67' free kick lands in (brief 17 job 0c: marked target for the shot-path arrow; visible on the frozen frame rac_0152p0s between the posts)"
     }
    },
    "plan": [

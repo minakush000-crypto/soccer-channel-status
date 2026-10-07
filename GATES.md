@@ -65,7 +65,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7217c2daad4808c992de515116d55471499543f04c6d4a456ff36c0bfbe2dbc4; output-bytes=2065
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7119733152ba1ece99f1e0888cf8b37d58e1e4d7a273133a0f2eff782f6fca1a; output-bytes=2123
 - [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
@@ -125,7 +125,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
   CHECK: a=$(df -BG --output=avail /mnt/c | tail -1 | tr -dc '0-9') && [ "$a" -ge 15 ] && echo C-FLOOR-OK avail=${a}G
   EXPECT: C-FLOOR-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=8ce94429a937dfc41f74177671dd40fa0f4de7403255c4c7558ffa902807b6d0; output-bytes=21
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=558ab3186a0cc937a14eb3900c6b1884ac8b58585071dd3e9d4c7b8b101ccd4c; output-bytes=21
 
 - [x] B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
   CHECK: d=$(node ~/ECC/scripts/ecc.js doctor 2>&1) && echo "$d" | grep -q "errors=0" && l=$(node ~/ECC/scripts/ecc.js list-installed 2>&1) && echo "$l" | grep -q "Source version: 2.2.1" && echo ECC-DOCTOR-CLEAN-V221
@@ -241,7 +241,7 @@ which touches nothing in the repo (writes only under /tmp).
 - [x] B65: the drift check compares rendered mark positions against the marked foot points and a spec with one ellipse shifted 150 px FAILS it (positive control, brief job 6)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py drift
   EXPECT: DRIFT-CONTROL-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=d3d495d7a55162694751ed977edc1339f004349c69c0fae2404504e66f20aa42; output-bytes=278
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=cbbef6db836eeb707367d4ef43eedb87ad4fcc1f6cb44362f571f67fea242ee5; output-bytes=278
 - [x] B66: neither npm nor yt-dlp cache resolves on C: in a login shell (npm env var and yt-dlp --cache-dir both point at /mnt/d or the WSL home, never /mnt/c)
   CHECK: bash -lic 'c=$(npm config get cache 2>/dev/null); y=$(grep -oE "cache-dir [^ ]+" ~/.config/yt-dlp/config | head -1); case "$c$y" in */mnt/c/*) exit 1;; esac; echo "$c | $y" | grep -q "mnt/d" && echo CACHES-OFF-C' 2>/dev/null
   EXPECT: CACHES-OFF-C
@@ -378,7 +378,7 @@ chrome; writes only under /tmp).
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py overlay
   EXPECT: OVERLAY-STYLE-OK
 - [x] B85: freeze points re-checked against broadcaster graphics: every
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=caa795606a61ee286bb1f3e1b6ab9639ca4e26400878cdeeb84c6c5a84fcaa8d; output-bytes=2851
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=c2245121ad083a6d79392cccf943cbf7d2c119528fcdfa91cf3885b3112b6bf3; output-bytes=2925
       moment records either banner bboxes (hand-measured from the frame via
       the vision report) or a clear verdict, the marked-area extents do not
       intersect the banner bboxes, and a planted intersecting banner FAILS
@@ -440,7 +440,7 @@ rendered from JSON sidecars next to them; the oracle checks the JSONs
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py matches
   EXPECT: MATCHES-OK
 - [x] B93: every cached brief-16 raw carries a fetched_at stamp reported in
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=f4200146bdbed9aca31cb4b7e8ead4a08a76293aaabd802eff9ed6900154e00d; output-bytes=928
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=4d68056c2ff1bf50698ec872a0967dbc9b6045bc009d7e37280bf4272d5ed517; output-bytes=928
       the report; every chosen event id appears in the cached last-events
       list; the list cache carries a fetched_at stamp of 2026-10-03 or
       later OR a fetch-attempts log proves the re-fetch was challenged
@@ -448,13 +448,13 @@ rendered from JSON sidecars next to them; the oracle checks the JSONs
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py freshness
   EXPECT: FRESH-OK
 - [x] B94: press_facts.md has one table per chosen match; every number-Row
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=d5cb5eefa4ee04942ea86273a9acb11e7ff9d366e7e6fadfa0237d42035594e2; output-bytes=4317
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=c0acd22a62f7fb816feb1fd23c13793ab5a2b02855a664c7afad901f32cd2fbe; output-bytes=4699
       traces to an existing raw path and the value is found at that path
       (positive control: a planted wrong value fails)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py facts
   EXPECT: FACTS-OK
 - [x] B95: claims.md holds 6-10 accepted claims building the thesis, each
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=cdd5aa92eed66ec5300bee8e702a5e93f0789caab7c4600862b4d83eb32a7ecc; output-bytes=514
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9a076fba0967ee9c62a9f219d76afddc9d95ba0e9c394ab9d007094eb1599deb; output-bytes=539
       with traced numbers and match sources, and every dropped claim states
       its reason
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py claims
@@ -508,7 +508,8 @@ Oracle: tools/brief17_check.py. Footage-overlay set checked: footage_presstrap,
 footage_sev_block, footage_sev_overload, footage_rac_freekick, footage_rac_farpost
 (the superset of what episode one can use).
 
-- [ ] B102: every name chip on every footage overlay episode one uses has a
+- [x] B102: every name chip on every footage overlay episode one uses has a
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=d51e66aefeb9043122dae8487c2efdec62cf51b60cc35c404f9cac6a16ef3aa6; output-bytes=1071
   native-resolution crop (~400px square, no downscale) centered on the chip's
   anchor published under reports/brief17/ next to the lineup row (team +
   jersey + name) it claims; no chip stays on an anchor where the shirt is not
@@ -517,7 +518,8 @@ footage_sev_block, footage_sev_overload, footage_rac_freekick, footage_rac_farpo
   the wrong team's shirt) FAILS the check
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py chips
   EXPECT: CHIP-PLACE-OK
-- [ ] B103: the title-card audit measures the subject's own outline
+- [x] B103: the title-card audit measures the subject's own outline
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=a025e1ba245eb733542a0a55f9c221fe70ea2fcf72f809c0a160fcd111dd20f6; output-bytes=1103
   (non-transparent pixels on the rendered card), prints that subject share
   beside benchmark B's subject share measured from the brief-09 study frames,
   and the headline carries the decision-2 wording; both photo versions
@@ -525,13 +527,15 @@ footage_sev_block, footage_sev_overload, footage_rac_freekick, footage_rac_farpo
   (the Flick source row recorded either way)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py title
   EXPECT: TITLE-SUBJECT-OK
-- [ ] B104: on every footage overlay episode one uses: every arrow starts
+- [x] B104: on every footage overlay episode one uses: every arrow starts
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=8253dc96eeb23e86a47ad71126006cb07dae01eb7c1ba2024105c2fe77e3b035; output-bytes=1256
   and ends on a marked entity, every chip is legible at 480p, and the
   brief-13 overlap audit runs over the footage overlays with a planted
   overlapping marker FAILING
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py draw
   EXPECT: DRAW-OK
-- [ ] B105: claims.md and claims.json are re-sided to the high-line thesis
+- [x] B105: claims.md and claims.json are re-sided to the high-line thesis
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7bec3607c8ebb91f64c1f52e5d48477507682db6da2a0a7c921d6809cb4f7d19; output-bytes=1207
   (decision 2 wording; C3 and C6-C9 as the spine), the skeptic pass on every
   changed or new wording is recorded, a candidate claim from the
   average-position rows is added with its two-match data limit stated,
@@ -539,14 +543,16 @@ footage_sev_block, footage_sev_overload, footage_rac_freekick, footage_rac_farpo
   reports/brief16/matches.md's endpoints column is corrected
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py claims
   EXPECT: RESIDE-OK
-- [ ] B106: script.md holds two columns (narration line; exact clip,
+- [x] B106: script.md holds two columns (narration line; exact clip,
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=e63a4f88cd9674d17d88307d1867fa61fbe1ef4c6a302f98f5e9fc3b7d512095; output-bytes=4533
   overlay, board or card it plays over); every row traces to a claim id;
   every number traces to press_facts.json; the episode opens on footage or a
   striking number, not a silent board; both sides argued through the verdict
   (C9); the word count at the measured pace lands in 240-300 s
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py script
   EXPECT: SCRIPT-OK
-- [ ] B107: the 20-second voice sample exists at
+- [x] B107: the 20-second voice sample exists at
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=36b211d5b7c493d1c41b910a659f3cf6ee6c584d548f5dc52144133cae3ec591; output-bytes=367
   reports/brief17/voice_sample.mp3, is published to the mirror (allowlist
   path recorded), and the measured words-per-minute is printed in the report
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py voice

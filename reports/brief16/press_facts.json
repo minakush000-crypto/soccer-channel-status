@@ -371,7 +371,7 @@
     },
     {
      "key": "16416349-avg-876214",
-     "label": "Average x, Eric García (D)",
+     "label": "Average x (raw), Eric García (D)",
      "barca": "45.69",
      "opp": "-",
      "section": "average_positions",
@@ -381,43 +381,43 @@
     },
     {
      "key": "16416349-avg-1402913",
-     "label": "Average x, Pau Cubarsí (D)",
-     "barca": "41.62",
+     "label": "Average x (raw), Pau Cubarsí (D)",
+     "barca": "41.624369747899",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions away, player Pau Cubarsí (id 1402913)",
      "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions",
-     "value": "41.62"
+     "value": "41.624369747899"
     },
     {
      "key": "16416349-avg-186795",
-     "label": "Average x, Andreas Christensen (D)",
-     "barca": "41.41",
+     "label": "Average x (raw), Andreas Christensen (D)",
+     "barca": "41.407575757576",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions away, player Andreas Christensen (id 186795)",
      "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions",
-     "value": "41.41"
+     "value": "41.407575757576"
     },
     {
      "key": "16416349-avg-138892",
-     "label": "Average x, João Cancelo (D)",
-     "barca": "48.30",
+     "label": "Average x (raw), João Cancelo (D)",
+     "barca": "48.3",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions away, player João Cancelo (id 138892)",
      "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions",
-     "value": "48.30"
+     "value": "48.3"
     },
     {
      "key": "16416349-avg-190419",
-     "label": "Average x, Dominik Livaković (G)",
-     "barca": "11.40",
+     "label": "Average x (raw), Dominik Livaković (G)",
+     "barca": "11.4",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions away, player Dominik Livaković (id 190419)",
      "source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions",
-     "value": "11.40"
+     "value": "11.4"
     }
    ]
   },
@@ -781,53 +781,53 @@
     },
     {
      "key": "16416346-avg-876214",
-     "label": "Average x, Eric García (D)",
-     "barca": "52.62",
+     "label": "Average x (raw), Eric García (D)",
+     "barca": "52.617431192661",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions home, player Eric García (id 876214)",
      "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions",
-     "value": "52.62"
+     "value": "52.617431192661"
     },
     {
      "key": "16416346-avg-186795",
-     "label": "Average x, Andreas Christensen (D)",
-     "barca": "43.45",
+     "label": "Average x (raw), Andreas Christensen (D)",
+     "barca": "43.445",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions home, player Andreas Christensen (id 186795)",
      "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions",
-     "value": "43.45"
+     "value": "43.445"
     },
     {
      "key": "16416346-avg-1094827",
-     "label": "Average x, Gerard Martín (D)",
-     "barca": "44.37",
+     "label": "Average x (raw), Gerard Martín (D)",
+     "barca": "44.368674698795",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions home, player Gerard Martín (id 1094827)",
      "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions",
-     "value": "44.37"
+     "value": "44.368674698795"
     },
     {
      "key": "16416346-avg-138892",
-     "label": "Average x, João Cancelo (D)",
-     "barca": "60.36",
+     "label": "Average x (raw), João Cancelo (D)",
+     "barca": "60.362637362637",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions home, player João Cancelo (id 138892)",
      "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions",
-     "value": "60.36"
+     "value": "60.362637362637"
     },
     {
      "key": "16416346-avg-930267",
-     "label": "Average x, Joan García (G)",
-     "barca": "14.72",
+     "label": "Average x (raw), Joan García (G)",
+     "barca": "14.71875",
      "opp": "-",
      "section": "average_positions",
      "where": "average_positions home, player Joan García (id 930267)",
      "source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions",
-     "value": "14.72"
+     "value": "14.71875"
     }
    ]
   },

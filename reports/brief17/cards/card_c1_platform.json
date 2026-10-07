@@ -9,25 +9,25 @@
  "kicker": "BARCELONA TACTICAL FILE",
  "card": {
   "type": "stat",
-  "title": "The platform is the ball",
+  "title": "THE PLATFORM",
   "rows": [
    {
-    "label": "SEVILLA (A) 2026-09-19 possession",
+    "label": "SEV (A) 09-19",
     "value": "69%",
     "_source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics"
    },
    {
-    "label": "RACING (H) 2026-09-16 possession",
+    "label": "RAC (H) 09-16",
     "value": "69%",
     "_source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics"
    },
    {
-    "label": "LEVANTE (A) 2026-09-13 possession",
+    "label": "LEV (A) 09-13",
     "value": "75%",
     "_source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics"
    },
    {
-    "label": "FEYENOORD (H) 2026-09-09 possession",
+    "label": "FEY (H) 09-09",
     "value": "72%",
     "_source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics"
    }

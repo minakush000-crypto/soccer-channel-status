@@ -9,20 +9,20 @@
  "kicker": "BARCELONA TACTICAL FILE",
  "card": {
   "type": "stat",
-  "title": "Gifts that become shots (Levante: 4)",
+  "title": "THE GIVEAWAYS",
   "rows": [
    {
-    "label": "LEVANTE (A) 2026-09-13: Barca errors -> a shot",
+    "label": "LEV (A) 09-13",
     "value": "4",
     "_source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics"
    },
    {
-    "label": "SEVILLA (A) 2026-09-19: the same field",
+    "label": "SEV (A) 09-19",
     "value": "opp 1, Barca 0",
     "_source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics"
    },
    {
-    "label": "RACING + FEYENOORD raws",
+    "label": "RAC + FEY",
     "value": "field not exposed",
     "_source": "checked in brief 16 job 2 (no such label in the two raws; listed as missing, never invented)"
    }

@@ -2,7 +2,7 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-09-27 (brief 07 job 5: ECC data paths measured live in the new entry; earlier entries are historical).
+> **Last verified against code:** 2026-10-06 (brief 17 phase A: the new entries' paths re-ran live this session; earlier entries are historical).
 
 Chronological order (oldest first); append new entries at the end. Each
 entry is dated. "Why" is the actual reason, not a retcon. If a decision is
@@ -1275,3 +1275,104 @@ Today's session exposed and fixed three standing infra drifts (all touched
 
 Also today: benchmark census rebased (61->68 files, dated note in
 reports/brief14/bench_truth.json) per the gate's own rebase procedure.
+
+## Brief 17 (2026-10-06): phase A — three drawn faults, re-side, script, voice sample
+
+Executed briefs/brief17.md jobs 0-4 (phase A), phase B waiting on Mayo's
+"voice ok". Decisions made this session, all reproducible from the
+commands cited in the report:
+
+1. **Chip-anchor convention (B102).** "The chip's anchor" = the spec's
+   `point_to` (the pointer tip), not the chip label's own x,y; the
+   published native crops are centered there. The identity gate gets the
+   chip's claimed side from the XI whose player NAME matches the chip
+   text (jerseys collide across both XIs), tied by the spec's
+   identity_sources line when it names a side (presstrap's GORDON row).
+2. **The Gordon chip was unprovable, so it is re-identified, not deleted.**
+   At the frozen frame the anchor's shirt is Barcelona's, the readable
+   number is 7 (not 17): Barcelona's no. 7 = Fermin Lopez (the facts XI).
+   The white no. 17 near the box = Sevilla's Gabriel Suazo; the spec's
+   old "shirt 17 readable" identity row was reading the wrong team's
+   number. Spec re-marked (chip text F. LOPEZ, jersey 7, source
+   lineup:7); before/after crops published
+   (reports/brief17/chip_crops/). Planted control: the GORDON chip moved
+   onto Suazo's white shirt FAILS the kit rule.
+3. **Kit classes are team-based, not venue-based:** Barcelona wears the
+   blaugrana dark kit in BOTH fixtures (it is the listed home side v
+   Racing and still wore dark); Sevilla and Racing wear white. The
+   oracle's kit registry is keyed by the match facts' team names with the
+   frame crops as proof.
+4. **Arrow rule (B104).** Every arrow's from/to must land on a marked
+   body (the ellipses, the unit discs, the chips). Fixes: presstrap's
+   grass-ward arrow deleted (the ball->press relation is carried by the
+   duel-zone + the single press disc); rac_freekick's shot-path arrow now
+   ends on a new marked goal-mouth ellipse (Raphinha's 67', events raw);
+   rac_farpost's run-line arrow now ends on the marked Raphinha ellipse;
+   sev_overload's open-lane arrow deleted. Two unmarked ball points
+   became marked ball ellipses (sev_block 569,510; rac_farpost
+   1120,296). The brief-13 overlap mechanic runs on footage overlays
+   inside brief17_check.py draw (planted control: discs 30px apart fail).
+5. **The title card's gate is the subject's outline, not the invisible
+   box.** The page now takes the photo box from the spec
+   (card.photo_box); the audit keeps the brief-16 box floors and the new
+   B103 floor pair (subject pixel share + bbox height >= 0.8 x the
+   benchmark-B person measured 2026-10-06 from grid_B_45 t=296: px
+   21.4%, bboxH 81.1%). Yamal card: px 18.6% / bboxH 86.7%: PASS; Flick
+   card: px 20.2% / bboxH 86.3%: PASS. The page must not getImageData
+   (file:// taint): the oracle measures alpha from the dumped draw rect
+   + the asset pixel-exactly.
+6. **Flick photo (job 0b): a licensed photo exists, so both versions
+   rendered.** The April 2025 press-desk photo (JaflaumS05, CC BY-SA 4.0)
+   works but keeps the desk, a laptop with a brand logo and a bottle; a
+   brand logo at title size is unwanted, so the RENDERED Flick version
+   uses the 2022 chest-up portrait (Stepro, CC BY-SA 4.0, rembg,
+   1400x2024). Both sheets published (reports/brief17/ba_card_title_
+   {yamal,flick}.jpg) for Mayo's pick; rows written in
+   reports/brief17/photo_sources.md. rembg kept the whole scene on the
+   desk photo's full raw (two people), so a torso crop was tested first
+   and then replaced by the portrait source.
+7. **Episode-one slug = 2026-10-06_flicks-high-line.** The claim cards
+   live in reports/brief17/cards/ (the checker's dir) and the pod-side
+   copies / facts-file design for assembly is brief 17 phase B (the
+   carry-forward uncertainty item).
+8. **Voice pace reality (job 4):** the measured sample (rows R01+R02, 47
+   words, 25.9s) reads 108.9 wpm at the shipped settings
+   (eleven_turbo_v2_5, stability 0.30/similarity 0.80/style 0.50,
+   atempo 1.15, voice VOICE_ID/Daniel). This is far below EPISODE_SPEC's
+   155-195 wpm MUST for the measured style; episode one therefore runs
+   at the measured pace (the script's word budget 533 words =
+   294s projected, inside decision 5's 240-300s). Mayo's "voice ok"
+   covers the pace, because he hears it. The EPISODE_SPEC note is
+   recorded there too.
+9. **The script's format keeps both contracts:** the machine part
+   (## rows + ONE [VISUAL: ...] tag per row, ## SOURCES end) between two
+   --- markers for both assemblers; the two-column view is rendered
+   below the trailing --- so no parser reads it. The reel layout (the
+   windows the assembler cuts) = the table in the script's SOURCES (13
+   footage pieces, 122.5s, row order).
+10. **Four new verified footage windows** (brief 16's six stay as cut,
+    decision 3): rac package 62.0-70.0 (Cancelo's 8' goal replay), rac
+    71.0-78.0 (Raphinha's 42' replay), rac 149.0-158.0 (the 67' free
+    kick live), sev package 23.0-31.0 (Fofana's 19' goal + the dive
+    replay). Chosen from the 4s survey tiles + verified by 1s drill
+    frames (pod-side brief16_frames.py pulls 2026-10-06); the windows'
+    evidence = the drill sheets in /tmp (transient) and the reel table
+    in the script's SOURCES.
+11. **Average-position claims (C10) trace through press_facts.json:** ten
+    avgX rows added (labels "Average x, <name> (<role>)", keyed
+    <event>-avg-<player id>), values = the raws' own two decimals; the
+    MEANS (44.26 / 50.20) stay derived numbers stated in the claim
+    wording and recomputed by the oracle (B105) and the card emitter.
+    The axis: 0 = own team's own goal (per-team attack direction),
+    proven by both keepers reading low in BOTH fixtures (6.61/11.40;
+    7.81/14.72). The coordinator's 11.4/14.7 pair = Barcelona's two
+    keepers, one per fixture, not one fixture's pair.
+12. **matches.md corrected** (brief 17 job 1): the endpoints column now
+    comes from each chosen row's own `endpoints` field in
+    matches.json (Levante and Feyenoord carry event/incidents/
+    statistics only). CL04's identity now cites the broadcast chip + the
+    incidents raw (the Levante cache has no lineups).
+13. **Mirror mechanics:** ALLOW_REPORTS += brief17 and a new .mp3
+    verbatim copy case in .claude/hooks/push_status.sh (the loop
+    silently skipped audio before). The sample published at
+    reports/brief17/voice_sample.mp3 on the mirror, sha-identical.

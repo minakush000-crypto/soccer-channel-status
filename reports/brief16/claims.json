@@ -452,7 +452,7 @@
     16416349,
     16416346
    ],
-   "text": "How high the wall stands: Barcelona's four defenders' average x reads 45.69, 41.62, 41.41 and 48.30 in Sevilla's match and 52.62, 43.45, 44.37 and 60.36 in Racing's (means 44.26 and 50.20), against the keepers' 11.40 and 14.72 on the same per-team attack axis (0 is the own goal) - position data exists in two of the four matches; the other two say nothing.",
+   "text": "How high the wall stands: Barcelona's four defenders' average x reads 45.69, 41.62, 41.40 and 48.3 in Sevilla's match and 52.61, 43.44, 44.36 and 60.36 in Racing's (means 44.26 and 50.2), against the keepers' 11.4 and 14.71 on the same per-team attack axis (0 is the own goal) - position data exists in two of the four matches; the other two say nothing. The quoted values are the raws' own digits truncated to two decimals, never rounded up.",
    "numbers": [
     {
      "event_id": 16416349,
@@ -467,27 +467,32 @@
     {
      "event_id": 16416349,
      "fact_key": "16416349-avg-186795",
-     "value": "41.41"
+     "value": "41.40"
     },
     {
      "event_id": 16416349,
      "fact_key": "16416349-avg-138892",
-     "value": "48.30"
+     "value": "48.3"
+    },
+    {
+     "event_id": 16416349,
+     "fact_key": "16416349-avg-190419",
+     "value": "11.4"
     },
     {
      "event_id": 16416346,
      "fact_key": "16416346-avg-876214",
-     "value": "52.62"
+     "value": "52.61"
     },
     {
      "event_id": 16416346,
      "fact_key": "16416346-avg-186795",
-     "value": "43.45"
+     "value": "43.44"
     },
     {
      "event_id": 16416346,
      "fact_key": "16416346-avg-1094827",
-     "value": "44.37"
+     "value": "44.36"
     },
     {
      "event_id": 16416346,
@@ -495,14 +500,9 @@
      "value": "60.36"
     },
     {
-     "event_id": 16416349,
-     "fact_key": "16416349-avg-190419",
-     "value": "11.40"
-    },
-    {
      "event_id": 16416346,
      "fact_key": "16416346-avg-930267",
-     "value": "14.72"
+     "value": "14.71"
     }
    ],
    "kind": "line_height"

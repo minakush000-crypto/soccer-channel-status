@@ -2,7 +2,7 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-09-28 (brief 13: census.py at
+> **Last verified against code:** 2026-10-06 (brief 17 phase A: brief17_check.py + brief17_cards.py wired; brief15_photo.py parameterized; rows below verified. The brief-13 census note that used to live here moved to its row.)
 > 56 files / 35 WIRED / 21 HAND-RUN; three new rows added brief 13).
 
 Rebuilt 2026-09-23 (brief 05 job 12) by command; **now enforced by command**
@@ -47,7 +47,7 @@ exists — anything dead is deleted or in retired/.
 | `brief14_check.py` | WIRED | GATES B71-B79 | brief-14 gate oracle: plan/applied/hooks/mcp/memory/after_table/quality over reports/brief14/plan.json (reads settings and ~/.claude.json; writes only under /tmp) |
 | `brief15_check.py` | WIRED | GATES B83-B89 | brief-15 gate oracle: kit/overlay/freeze/cards/renders/publish (page audits via node board_html.js --audit-only, cached chrome; writes only under /tmp) |
 | `brief15_cards.py` | WIRED | GATES B87 (5 card renders) | brief-15 card spec emitter: the 5 bench-B card specs to reports/brief15/cards/, every number walked from the cached Sofascore raws, audit_T mirrored from the page reveal math |
-| `brief15_photo.py` | WIRED | GATES B89 (photo rows) | pod-side subject cutout for the title card: Modal + rembg, raw in, cutout at /vol/in/brief15/assets/yamal_cutout.png |
+| `brief15_photo.py` | WIRED | GATES B89 (photo rows) | pod-side subject cutout for the title cards: Modal + rembg, parameterized since brief 17 job 0b (in-name/out-name/vol-dir; the Yamal default unchanged) |
 | `brief15_sheets.py` | WIRED | GATES B88/B89 (sheets + keyframes) | job-6 publisher: before/after overlay sheets, per-card sheets (640px) + committed keyframes from the rendered MP4s |
 | `brief13_overlays.py` | WIRED | pod_build.py render_footage; brief 13 jobs 3-5 | freeze-frame overlay spec emitter from reports/brief13/marks.json (image-space steps, identity sources) |
 | `brief13_frames.py` | HAND-RUN | hand-invoked (brief 13 jobs 4-6) | pod-side stamped/clean/full-res frame extraction for marking + visual check (frames live on the volume) |
@@ -58,6 +58,8 @@ exists — anything dead is deleted or in retired/.
 | `brief16_footage.py` | HAND-RUN | brief 16 job 4 | official-highlights chain: staged-reuse download -> b2_archive + sha1 verify -> modal volume put + ls verify -> local delete; adopt path for the brief-13 volume files |
 | `brief16_sheets.py` | HAND-RUN | brief 16 jobs 0/5/7 sheets | before/after pair sheets, 4-across review tiles (320px), 640px contact sheet |
 | `brief16_retry_fetch.sh` | HAND-RUN | brief 16 job 1 (Akamai loop) | single-request re-fetch loop (~20 min apart, 5 attempts), logs fetch_attempts.log, copies the fresh list to /tmp on success |
+| `brief17_check.py` | WIRED | GATES B102-B107 oracle | brief-17 phase-A oracle: chips (crops+kit rule+planted), title (subject share vs benchmark B), draw (arrows on entities + overlap walk + planted), claims (re-side trace + keeper axis), script (rows/assets/number trace + pace), voice (sample + mirror sha). Reads only cached raws + renders; never touches Sofascore |
+| `brief17_cards.py` | WIRED | brief17_check.py title/script | emits the episode-one card specs: title (Yamal + Flick, photo_box from spec), stat cards C1/C3/C7/C9/C10 (rows stamped to press_facts rows / raw recomputes), chapter cards; audit_T = 1.2 + rows*0.85 + 0.65 |
 | `brief12_timeline.py` | WIRED | brief 12 job 5 (proof boards); brief 16 assembly | timeline spec emitter (formation / runners / move) from match_data + raw cache, per docs/board_timeline.md |
 | `brief12_data.py` | HAND-RUN | hand-invoked (brief 12 job 1) | Barcelona team-id + 4 most recent completed matches driver; every fetch through sofascore_client.py; id verified against the payload events |
 | `census.py` | WIRED | GATES B20 | script-driven census: TOOLS.md must match tools/ exactly (brief 06 job 5) |

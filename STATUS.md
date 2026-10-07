@@ -2,21 +2,20 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-10-04 (brief 16: matches/press_
-> facts/claims/clip_list oracle-checked (B92-B101), 6 clips + the
-> presstrap freeze overlay audited pod-side, footage 4/4
-> archived+shipped+deleted locally, CENSUS OK re-run today; brief 15
-> state kept below for lineage)
-> CENSUS OK files=68 wired=42 handrun=26; Sofascore transport: Akamai
-> 403-challenges the api hosts from this IP since 2026-10-04T02:1xZ (log:
-> reports/brief16/logs/fetch_attempts.log): BLOCK TREATED AS
-> LIKELY-PERMANENT (2026-10-06, attempts 1-9 over 4 consecutive days, all
-> 403 in-page with the browser transport; no more scheduled attempts; the
-> fresh-list evidence stays the cached 2026-09-29 list + the brief-16
-> sweep's independent sources until a route change - the next brief that
-> re-fetches must first re-probe once, then choose a route).
+> **Last verified against code:** 2026-10-06 (brief 17 phase A: jobs 0-4
+> executed; B102-B107 met, ledger 94/94 (gate-check --approve + the
+> --reverify pass published at reports/brief17/reverify.txt + mirror);
+> five footage overlays re-rendered with the fault fixes and archived
+> (B2 brief17/2026-10-06/); both title cards + 7 cards + 2 board specs
+> emitted and audited; script.md 25 rows / 533 words at the measured
+> 108.9 wpm = 294s projected; the 20s voice sample measured and on the
+> mirror. PHASE A STOPS HERE — phase B (jobs 5-8) waits for Mayo's
+> "voice ok". Sofascore transport: still Akamai-403 from this IP
+> (attempts 1-9 logged 2026-10-04..06, treated likely-permanent); no
+> fetch was attempted this session; the numbers came from the cached
+> 2026-09-28 raws + the 2026-09-29 list cache, as before.)
 
-Rewritten 2026-09-27 (brief 06) against the code on disk. Brief 03-05 history
+Rewritten 2026-09-27 (brief 06) against the code on disk.Rewritten 2026-09-27 (brief 06) against the code on disk. Brief 03-05 history
 lives in DECISIONS.md, PROGRESS.md, and retired/. Every claim below carries
 the command that proved it.
 

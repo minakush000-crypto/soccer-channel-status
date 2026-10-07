@@ -9,30 +9,30 @@
  "kicker": "BARCELONA TACTICAL FILE",
  "card": {
   "type": "stat",
-  "title": "The line wins the offside battle 19-9",
+  "title": "THE TRAP 19-9",
   "rows": [
    {
-    "label": "SEVILLA (A) 2026-09-19 opponents caught",
+    "label": "SEV (A) 09-19",
     "value": "5",
     "_source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics"
    },
    {
-    "label": "RACING (H) 2026-09-16 opponents caught",
+    "label": "RAC (H) 09-16",
     "value": "2",
     "_source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics"
    },
    {
-    "label": "LEVANTE (A) 2026-09-13 opponents caught",
+    "label": "LEV (A) 09-13",
     "value": "4",
     "_source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics"
    },
    {
-    "label": "FEYENOORD (H) 2026-09-09 opponents caught",
+    "label": "FEY (H) 09-09",
     "value": "8",
     "_source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics"
    },
    {
-    "label": "BARCELONA'S OWN OFFSIDES, all four",
+    "label": "BARCA'S OWN",
     "value": "9",
     "_source": "sum of the four Offsides rows' barca cells (brief16_check claims walk)"
    }

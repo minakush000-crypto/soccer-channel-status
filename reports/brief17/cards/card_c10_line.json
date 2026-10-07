@@ -9,30 +9,30 @@
  "kicker": "BARCELONA TACTICAL FILE",
  "card": {
   "type": "stat",
-  "title": "How high the wall stands (2 of 4 matches)",
+  "title": "THE WALL",
   "rows": [
    {
-    "label": "SEVILLA (A) back four, mean of 4 defenders' x",
+    "label": "SEV (A) mean x",
     "value": "44.26",
     "_source": "brief16 cache 2026-09-19_sevilla-fc-barcelona.json: averageX of the starting defenders (raw fetched_at 2026-09-28T05:10:49Z); recomputed by brief17_cards.py"
    },
    {
-    "label": "RACING (H) back four, mean of 4 defenders' x",
+    "label": "RAC (H) mean x",
     "value": "50.20",
     "_source": "brief16 cache 2026-09-16_fc-barcelona-real-racing-club.json: averageX of the starting defenders (raw fetched_at 2026-09-28T05:11:15Z); recomputed by brief17_cards.py"
    },
    {
-    "label": "position data",
+    "label": "POSITION DATA",
     "value": "2 / 4 matches",
     "_source": "Levante and Feyenoord raws carry no average_positions (available_fields, verified in brief 16)"
    },
    {
-    "label": "Barcelona's keeper on the same axis (Dominik Livaković)",
+    "label": "KEEPER (LIVAKOVIC)",
     "value": "11.40",
     "_source": "brief16 cache 2026-09-19_sevilla-fc-barcelona.json average_positions (raw fetched_at 2026-09-28T05:10:49Z); recomputed by brief17_cards.py"
    },
    {
-    "label": "Barcelona's keeper on the same axis (Joan García)",
+    "label": "KEEPER (J. GARCIA)",
     "value": "14.72",
     "_source": "brief16 cache 2026-09-16_fc-barcelona-real-racing-club.json average_positions (raw fetched_at 2026-09-28T05:11:15Z); recomputed by brief17_cards.py"
    }
