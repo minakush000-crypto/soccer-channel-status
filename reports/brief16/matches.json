@@ -105,7 +105,14 @@
     "duration_s": 194.74576,
     "vcodec": "h264",
     "height": 1080
-   }
+   },
+   "endpoints": [
+    "event",
+    "lineups",
+    "incidents",
+    "statistics",
+    "average_positions"
+   ]
   },
   {
    "event_id": 16416346,
@@ -133,7 +140,14 @@
     "duration_s": 194.49034,
     "vcodec": "h264",
     "height": 1080
-   }
+   },
+   "endpoints": [
+    "event",
+    "lineups",
+    "incidents",
+    "statistics",
+    "average_positions"
+   ]
   },
   {
    "event_id": 16416329,
@@ -161,7 +175,12 @@
     "duration_s": 194.39746,
     "vcodec": "h264",
     "height": 1080
-   }
+   },
+   "endpoints": [
+    "event",
+    "incidents",
+    "statistics"
+   ]
   },
   {
    "event_id": 16938784,
@@ -189,7 +208,12 @@
     "duration_s": 218.917732,
     "vcodec": "h264",
     "height": 1080
-   }
+   },
+   "endpoints": [
+    "event",
+    "incidents",
+    "statistics"
+   ]
   }
  ],
  "footage_results": [

@@ -1,0 +1,42 @@
+{
+ "slug": "2026-10-06_flicks-high-line",
+ "kind": "timeline",
+ "name": "card_c1_platform",
+ "duration_s": 8.0,
+ "fps": 30,
+ "side": "home",
+ "title": "The platform is the ball",
+ "kicker": "BARCELONA TACTICAL FILE",
+ "card": {
+  "type": "stat",
+  "title": "The platform is the ball",
+  "rows": [
+   {
+    "label": "SEVILLA (A) 2026-09-19 possession",
+    "value": "69%",
+    "_source": "sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics"
+   },
+   {
+    "label": "RACING (H) 2026-09-16 possession",
+    "value": "69%",
+    "_source": "sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics"
+   },
+   {
+    "label": "LEVANTE (A) 2026-09-13 possession",
+    "value": "75%",
+    "_source": "sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json (fetched_at 2026-09-28T05:11:34Z, event id 16416329) /statistics"
+   },
+   {
+    "label": "FEYENOORD (H) 2026-09-09 possession",
+    "value": "72%",
+    "_source": "sofascore_cache/2026-09-09_fc-barcelona-feyenoord.json (fetched_at 2026-09-28T05:14:34Z, event id 16938784) /statistics"
+   }
+  ],
+  "stag": 0.85,
+  "t0": 0.6,
+  "hold": 6.2,
+  "audit_T": 6.1
+ },
+ "source": "brief 17 jobs 0b/3: card spec; every number stamped to press_facts.json rows (B94-verified) or recomputed from the cached raws",
+ "fetched_at": "2026-10-04T03:45:41Z"
+}

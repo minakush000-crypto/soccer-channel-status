@@ -500,3 +500,54 @@ rendered from JSON sidecars next to them; the oracle checks the JSONs
       pass-A rerun + by-construction evidence fails)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py reverify
   EXPECT: REVERIFY-OK
+
+## Brief 17: fix three drawn faults, then assemble episode one (gates B102-B107)
+
+Brief source: briefs/brief17.md (jobs 0-4 = PHASE A; B108-B112 added only after "voice ok").
+Oracle: tools/brief17_check.py. Footage-overlay set checked: footage_presstrap,
+footage_sev_block, footage_sev_overload, footage_rac_freekick, footage_rac_farpost
+(the superset of what episode one can use).
+
+- [ ] B102: every name chip on every footage overlay episode one uses has a
+  native-resolution crop (~400px square, no downscale) centered on the chip's
+  anchor published under reports/brief17/ next to the lineup row (team +
+  jersey + name) it claims; no chip stays on an anchor where the shirt is not
+  that player's team kit with a readable matching number (or is not proven by
+  the broadcast's own on-screen name); the planted control (a chip anchored on
+  the wrong team's shirt) FAILS the check
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py chips
+  EXPECT: CHIP-PLACE-OK
+- [ ] B103: the title-card audit measures the subject's own outline
+  (non-transparent pixels on the rendered card), prints that subject share
+  beside benchmark B's subject share measured from the brief-09 study frames,
+  and the headline carries the decision-2 wording; both photo versions
+  (Yamal default + licensed Flick photo) render as published sheets for Mayo
+  (the Flick source row recorded either way)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py title
+  EXPECT: TITLE-SUBJECT-OK
+- [ ] B104: on every footage overlay episode one uses: every arrow starts
+  and ends on a marked entity, every chip is legible at 480p, and the
+  brief-13 overlap audit runs over the footage overlays with a planted
+  overlapping marker FAILING
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py draw
+  EXPECT: DRAW-OK
+- [ ] B105: claims.md and claims.json are re-sided to the high-line thesis
+  (decision 2 wording; C3 and C6-C9 as the spine), the skeptic pass on every
+  changed or new wording is recorded, a candidate claim from the
+  average-position rows is added with its two-match data limit stated,
+  the x-axis direction is confirmed from the raws (keeper positions), and
+  reports/brief16/matches.md's endpoints column is corrected
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py claims
+  EXPECT: RESIDE-OK
+- [ ] B106: script.md holds two columns (narration line; exact clip,
+  overlay, board or card it plays over); every row traces to a claim id;
+  every number traces to press_facts.json; the episode opens on footage or a
+  striking number, not a silent board; both sides argued through the verdict
+  (C9); the word count at the measured pace lands in 240-300 s
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py script
+  EXPECT: SCRIPT-OK
+- [ ] B107: the 20-second voice sample exists at
+  reports/brief17/voice_sample.mp3, is published to the mirror (allowlist
+  path recorded), and the measured words-per-minute is printed in the report
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py voice
+  EXPECT: VOICE-SAMPLE-OK

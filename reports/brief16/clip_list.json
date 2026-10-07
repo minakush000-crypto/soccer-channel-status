@@ -47,7 +47,7 @@
    "start_s": 116.0,
    "end_s": 124.0,
    "sees": "The cost on camera: at 78:50 on the score bug (1-3), Romero runs through with only a recovering defender left between him and the exposed Barcelona keeper (Ivan Romero's goal, MIN. 79' on the broadcast chip) - the space behind the line the claim names.",
-   "identity": "IVAN ROMERO no. 9 (Levante): the broadcast lower-third (IVAN ROMERO MIN. 79') on the sequence; lineup raw jersey 9.",
+   "identity": "IVÁN ROMERO no. 9 (Levante): the broadcast lower-third (IVAN ROMERO MIN. 79') on the sequence + the incidents raw's goal row (time 79, jerseyNumber 9, id 1014042). The Levante cache carries no lineups, so there is no lineup citation for him here.",
    "pod": "in/brief16/clips/CL04.mp4",
    "b2": "b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL04.mp4",
    "manifest": "manifests/archive_manifest_clip_CL04.json"
@@ -95,6 +95,10 @@
   {
    "claim_id": "C9",
    "reason": "the aggregate line (19-6, xG for and against) lives on the results/stat cards in assembly"
+  },
+  {
+   "claim_id": "C10",
+   "reason": "the line-height claim comes from average-position data (two of the four matches carry it); there is no film beat that carries a positional average, so its picture is the C10 stat card + the Sevilla avgpositions board (brief 17 job 3)"
   }
  ],
  "note": "every clip window read frame-by-frame from the 4s survey + 1s/0.5s drills; see the tiles referenced in the report"

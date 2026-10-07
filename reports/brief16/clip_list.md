@@ -25,7 +25,7 @@
 - match: event id 16416329 (2026-09-13_levante-ud-fc-barcelona)
 - clip: 116.0s to 124.0s (8.0s)
 - what the viewer sees: The cost on camera: at 78:50 on the score bug (1-3), Romero runs through with only a recovering defender left between him and the exposed Barcelona keeper (Ivan Romero's goal, MIN. 79' on the broadcast chip) - the space behind the line the claim names.
-- identity evidence for named players: IVAN ROMERO no. 9 (Levante): the broadcast lower-third (IVAN ROMERO MIN. 79') on the sequence; lineup raw jersey 9.
+- identity evidence for named players: IVÁN ROMERO no. 9 (Levante): the broadcast lower-third (IVAN ROMERO MIN. 79') on the sequence + the incidents raw's goal row (time 79, jerseyNumber 9, id 1014042). The Levante cache carries no lineups, so there is no lineup citation for him here.
 - pod: `in/brief16/clips/CL04.mp4`; B2: `b2:mendymax-archive/soccer-channel/brief16/2026-10-04/2026-10-04_glm_CL04.mp4`
 
 ## CL05 (claim C6)

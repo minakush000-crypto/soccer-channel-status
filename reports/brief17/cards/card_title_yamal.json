@@ -1,0 +1,35 @@
+{
+ "slug": "2026-10-06_flicks-high-line",
+ "kind": "timeline",
+ "name": "card_title_yamal",
+ "duration_s": 8.0,
+ "fps": 30,
+ "side": "home",
+ "title": "card_title_yamal",
+ "kicker": "BARCELONA TACTICAL FILE",
+ "card": {
+  "type": "title",
+  "photo": "yamal_waist.png",
+  "assets": [
+   "yamal_waist.png"
+  ],
+  "photo_box": {
+   "x": 60,
+   "y": 40,
+   "w": 900,
+   "h": 950
+  },
+  "title_lines": [
+   "FLICK'S HIGH LINE",
+   "WHAT IT WINS AND",
+   "WHAT IT COSTS"
+  ],
+  "byline": "Barcelona tactical file - episode one",
+  "stag": 0.55,
+  "t0": 0.6,
+  "hold": 8.7,
+  "audit_T": 3.45
+ },
+ "source": "brief 17 jobs 0b/3: card spec; every number stamped to press_facts.json rows (B94-verified) or recomputed from the cached raws",
+ "fetched_at": "2026-10-04T03:45:41Z"
+}

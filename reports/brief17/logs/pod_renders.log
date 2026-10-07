@@ -1,0 +1,10 @@
+== footage_presstrap
+OK /vol/out/2026-09-19_sevilla-fc-barcelona/footage_presstrap.mp4 4540401 FOOTAGE-CHECK OK footage_presstrap: overlay audit clean at 3 step ends (identity evidence vs the facts XI, no missing frames, chip overlap) (extracted 121 footage frames at freeze_at=61.0s)
+== footage_sev_block
+OK /vol/out/2026-09-19_sevilla-fc-barcelona/footage_sev_block.mp4 4139353 FOOTAGE-CHECK OK footage_sev_block: overlay audit clean at 8 step ends (identity evidence vs the facts XI, no missing frames, chip overlap) (extracted 121 footage frames at freeze_at=127.0s)
+== footage_sev_overload
+OK /vol/out/2026-09-19_sevilla-fc-barcelona/footage_sev_overload.mp4 4637165 FOOTAGE-CHECK OK footage_sev_overload: overlay audit clean at 3 step ends (identity evidence vs the facts XI, no missing frames, chip overlap) (extracted 121 footage frames at freeze_at=92.133s)
+== footage_rac_freekick
+OK /vol/out/2026-09-16_fc-barcelona-real-racing-club/footage_rac_freekick.mp4 3291982 FOOTAGE-CHECK OK footage_rac_freekick: overlay audit clean at 8 step ends (identity evidence vs the facts XI, no missing frames, chip overlap) (extracted 121 footage frames at freeze_at=152.0s)
+== footage_rac_farpost
+OK /vol/out/2026-09-16_fc-barcelona-real-racing-club/footage_rac_farpost.mp4 4075561 FOOTAGE-CHECK OK footage_rac_farpost: overlay audit clean at 8 step ends (identity evidence vs the facts XI, no missing frames, chip overlap) (extracted 121 footage frames at freeze_at=87.0s)

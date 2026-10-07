@@ -1,0 +1,35 @@
+{
+ "generated_at": "2026-10-06 (phase A)",
+ "chips": {
+  "footage_presstrap_F.LOPEZ": {
+   "read_number": true
+  },
+  "footage_sev_block_Y.FOFANA": {
+   "read_number": true
+  },
+  "footage_sev_block_A.SANGANTE": {
+   "read_number": true
+  },
+  "footage_sev_block_R.URE": {
+   "read_number": true
+  },
+  "footage_rac_freekick_S.CANALES": {
+   "read_number": true
+  },
+  "footage_rac_freekick_I.SAINZ-MAZA": {
+   "read_number": true
+  },
+  "footage_rac_freekick_M.GUEYE": {
+   "read_number": true
+  },
+  "footage_rac_freekick_J.CANCELO": {
+   "read_number": true
+  },
+  "footage_rac_farpost_RAPHINHA": {
+   "read_number": true
+  },
+  "footage_rac_farpost_YAMAL": {
+   "read_number": true
+  }
+ }
+}

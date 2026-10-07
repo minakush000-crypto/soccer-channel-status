@@ -1,0 +1,20 @@
+{
+ "slug": "2026-10-06_flicks-high-line",
+ "kind": "timeline",
+ "name": "card_ch1_wins",
+ "duration_s": 8.0,
+ "fps": 30,
+ "side": "home",
+ "title": "card_ch1_wins",
+ "kicker": "BARCELONA TACTICAL FILE",
+ "card": {
+  "type": "chapter",
+  "number": "01",
+  "name": "What the line wins",
+  "t0": 0.6,
+  "hold": 6.2,
+  "audit_T": 1.3
+ },
+ "source": "brief 17 jobs 0b/3: card spec; every number stamped to press_facts.json rows (B94-verified) or recomputed from the cached raws",
+ "fetched_at": "2026-10-04T03:45:41Z"
+}

@@ -43,6 +43,11 @@ Missing press labels the raw does not carry: Counter attacks, Progressive passes
 | 16416349-33 | Dribbles | 16/25 (64%) | 11/18 (61%) | statistics period ALL 'Dribbles' |
 | 16416349-g1 | Goals scored | 3 | 1 | event homeScore/awayScore current |
 | 16416349-g2 | Goals conceded | 1 | 3 | event homeScore/awayScore current |
+| 16416349-avg-876214 | Average x, Eric García (D) | 45.69 | - | average_positions away, player Eric García (id 876214) |
+| 16416349-avg-1402913 | Average x, Pau Cubarsí (D) | 41.62 | - | average_positions away, player Pau Cubarsí (id 1402913) |
+| 16416349-avg-186795 | Average x, Andreas Christensen (D) | 41.41 | - | average_positions away, player Andreas Christensen (id 186795) |
+| 16416349-avg-138892 | Average x, João Cancelo (D) | 48.30 | - | average_positions away, player João Cancelo (id 138892) |
+| 16416349-avg-190419 | Average x, Dominik Livaković (G) | 11.40 | - | average_positions away, player Dominik Livaković (id 190419) |
 
 Per-row raw source:
 - 16416349-01: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics
@@ -80,6 +85,11 @@ Per-row raw source:
 - 16416349-33: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /statistics
 - 16416349-g1: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /event homeScore|awayScore
 - 16416349-g2: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /event homeScore|awayScore
+- 16416349-avg-876214: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions
+- 16416349-avg-1402913: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions
+- 16416349-avg-186795: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions
+- 16416349-avg-138892: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions
+- 16416349-avg-190419: sofascore_cache/2026-09-19_sevilla-fc-barcelona.json (fetched_at 2026-09-28T05:10:49Z, event id 16416349) /average_positions
 
 ## 2026-09-16_fc-barcelona-real-racing-club (event id 16416346)
 Raw: `sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json`
@@ -121,6 +131,11 @@ Missing press labels the raw does not carry: Counter attacks, Errors lead to a s
 | 16416346-32 | Dribbles | 15/25 (60%) | 7/11 (64%) | statistics period ALL 'Dribbles' |
 | 16416346-g1 | Goals scored | 7 | 2 | event homeScore/awayScore current |
 | 16416346-g2 | Goals conceded | 2 | 7 | event homeScore/awayScore current |
+| 16416346-avg-876214 | Average x, Eric García (D) | 52.62 | - | average_positions home, player Eric García (id 876214) |
+| 16416346-avg-186795 | Average x, Andreas Christensen (D) | 43.45 | - | average_positions home, player Andreas Christensen (id 186795) |
+| 16416346-avg-1094827 | Average x, Gerard Martín (D) | 44.37 | - | average_positions home, player Gerard Martín (id 1094827) |
+| 16416346-avg-138892 | Average x, João Cancelo (D) | 60.36 | - | average_positions home, player João Cancelo (id 138892) |
+| 16416346-avg-930267 | Average x, Joan García (G) | 14.72 | - | average_positions home, player Joan García (id 930267) |
 
 Per-row raw source:
 - 16416346-01: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics
@@ -157,6 +172,11 @@ Per-row raw source:
 - 16416346-32: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /statistics
 - 16416346-g1: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /event homeScore|awayScore
 - 16416346-g2: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /event homeScore|awayScore
+- 16416346-avg-876214: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions
+- 16416346-avg-186795: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions
+- 16416346-avg-1094827: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions
+- 16416346-avg-138892: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions
+- 16416346-avg-930267: sofascore_cache/2026-09-16_fc-barcelona-real-racing-club.json (fetched_at 2026-09-28T05:11:15Z, event id 16416346) /average_positions
 
 ## 2026-09-13_levante-ud-fc-barcelona (event id 16416329)
 Raw: `sofascore_cache/2026-09-13_levante-ud-fc-barcelona.json`

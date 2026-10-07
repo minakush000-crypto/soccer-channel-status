@@ -6,8 +6,8 @@ Endpoint: `/api/v1/team/2817/events/last/0` (re-fetched 2026-09-29T06:14:14Z, te
 |---|---|---|---|---|---|---|
 | 2026-09-19 | LaLiga | Sevilla v FC Barcelona (A) | 3-1 | 16416349 | event, lineups, incidents, statistics, average_positions | [LALIGA (official league channel)](https://www.youtube.com/watch?v=ZJom79fRhv0) |
 | 2026-09-16 | LaLiga | FC Barcelona v Real Racing Club (H) | 7-2 | 16416346 | event, lineups, incidents, statistics, average_positions | [LALIGA (official league channel)](https://www.youtube.com/watch?v=bo9g36xT5UA) |
-| 2026-09-13 | LaLiga | Levante UD v FC Barcelona (A) | 4-2 | 16416329 | event, lineups, incidents, statistics, average_positions | [LALIGA (official league channel)](https://www.youtube.com/watch?v=te6eWlim9yU) |
-| 2026-09-09 | UEFA Champions League | FC Barcelona v Feyenoord (H) | 5-1 | 16938784 | event, lineups, incidents, statistics, average_positions | [FC Barcelona (official club channel)](https://www.youtube.com/watch?v=XqSrz6MKVlk) |
+| 2026-09-13 | LaLiga | Levante UD v FC Barcelona (A) | 4-2 | 16416329 | event, incidents, statistics | [LALIGA (official league channel)](https://www.youtube.com/watch?v=te6eWlim9yU) |
+| 2026-09-09 | UEFA Champions League | FC Barcelona v Feyenoord (H) | 5-1 | 16938784 | event, incidents, statistics | [FC Barcelona (official club channel)](https://www.youtube.com/watch?v=XqSrz6MKVlk) |
 
 ## All 8 finished matches on the fetched list (context only)
 
