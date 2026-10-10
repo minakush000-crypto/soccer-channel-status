@@ -635,27 +635,31 @@ three script-driven assemblers; job 3 lands as tools/spec_assemble.py with
 legacy rows normalized exactly like the brief-17 reel chain
 (DECISIONS.md 24).
 
-- [ ] B118: diagram_gen.py renders the committed formation test spec to a valid 1920x1080 PNG, regenerated under /tmp (the committed proof PNG is never re-run on)
+- [x] B118: diagram_gen.py renders the committed formation test spec to a valid 1920x1080 PNG, regenerated under /tmp (the committed proof PNG is never re-run on)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b118
   EXPECT: DIAGRAM-PNG-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=19fd1f972cdacd032d4868e28573a4be1edc6e128df40d1d6615391282692b15; output-bytes=25
 - [ ] B119: diagram_gen.py renders the committed highline test spec to a valid ~4s 1920x1080 h264 MP4, regenerated under /tmp
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b119
   EXPECT: DIAGRAM-MP4-OK
 - [ ] B120: fan_clip_dl provenance: the build-phase manifest parses and states a decision, the exclusion filter provably drops every planted excluded channel id (positive control), and the re-run search phase leaves the recorded decision consistent
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b120
   EXPECT: FANCLIP-OK
-- [ ] B121: the fan-clip transformation doubles duration (>= 1.9x) and a same-content clip NOT under the fan-clips root stays untransformed (positive control)
+- [x] B121: the fan-clip transformation doubles duration (>= 1.9x) and a same-content clip NOT under the fan-clips root stays untransformed (positive control)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b121
   EXPECT: SLOWMO-OK
-- [ ] B122: legacy backward-compat: the assembler builds a board+card sequence with ZERO diagram rows into a valid 1920x1080 h264 render whose per-piece durations land within 0.1s
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=b03cac30180671a488dcc392061b0e3334ab19d96e994fb60ba1afb50199b31a; output-bytes=34
+- [x] B122: legacy backward-compat: the assembler builds a board+card sequence with ZERO diagram rows into a valid 1920x1080 h264 render whose per-piece durations land within 0.1s
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b122
   EXPECT: LEGACY-ASSEMBLE-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=657c773ab2665b2ef150e1b1e0d2d50a59d0245792c6956e57f202f41de16d3d; output-bytes=56
 - [ ] B123: the committed integration render reports/brief19/test_sequence.mp4 is 28-32s, 1920x1080, h264 video with an aac audio track, over 1MB
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b123
   EXPECT: TESTSEQ-OK
 - [ ] B124: brief-19 proof is published: test_sequence.mp4 present at the public mirror, the four brief-19 tools tracked and unmodified in git, and the mirror allowlist carries brief19
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b124
   EXPECT: BRIEF19-PUBLISHED-OK
-- [ ] B125: two-renderer invariant (replaces frozen B3, DECISIONS.md 25): exactly one matplotlib importer in tools/ (diagram_gen.py), the HTML board renderer pair intact, and the planted-control counter provably counts a fake second importer
+- [x] B125: two-renderer invariant (replaces frozen B3, DECISIONS.md 25): exactly one matplotlib importer in tools/ (diagram_gen.py), the HTML board renderer pair intact, and the planted-control counter provably counts a fake second importer
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py renderers
   EXPECT: TWO-RENDERER-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=cab0c80921baaf053f041e0be452f566139f980b131ab1966103315866b04076; output-bytes=57

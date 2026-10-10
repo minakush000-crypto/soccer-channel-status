@@ -1,0 +1,1 @@
+{"type": "highline", "title": "Test: high defensive line", "players": [{"label":"GK","x":50,"y":5,"team":"home"}], "arrows":[], "zones": [{"x0":0,"y0":0,"x1":100,"y1":35,"label":"HIGH LINE ZONE","alpha":0.15}]}

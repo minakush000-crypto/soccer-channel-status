@@ -2,8 +2,11 @@
 
 > **Purpose:** one row per file in tools/ (status: WIRED / HAND-RUN).
 > **Reader:** every session; mirrored to the public status repo.
-> **Last verified against code:** 2026-10-07 (brief 17 phase B: brief17_stage.py + brief17_reel.py + brief17_stills.py wired; keeper-row truncation fixed in brief17_cards.py; rows below verified.)
-> 56 files / 35 WIRED / 21 HAND-RUN; three new rows added brief 13).
+> **Last verified against code:** 2026-10-10 (brief 19: diagram_gen.py +
+> fan_clip_dl.py + spec_assemble.py + brief19_check.py rows added and the
+> four files on disk; census run this session: CENSUS OK files=78 wired=51
+> handrun=27.)
+> 78 files / 51 WIRED / 27 HAND-RUN (four rows added brief 19).
 
 Rebuilt 2026-09-23 (brief 05 job 12) by command; **now enforced by command**
 (brief 06 job 5): tools/census.py compares this table against `ls tools/`
@@ -17,14 +20,15 @@ DECISIONS.md and retired/RETIREMENT_NOTES.md.
 
 ## Census (computed by tools/census.py, brief 06 job 5)
 
-$ ls -p tools/ | grep -v / | wc -l  →  53  (USAGE.md exempt from rows)
+$ ls -p tools/ | grep -v / | wc -l  →  78  (USAGE.md exempt from rows)
 
-40 .py + 3 .js + 7 .sh + board_page.html + watchlist.yaml +
-sofascore_team_ids.json.
-35 WIRED, 21 HAND-RUN (deliberately kept operating tools/data). No DEAD class
+64 .py + 3 .js + 8 .sh + board_page.html + watchlist.yaml +
+sofascore_team_ids.json (census run 2026-10-10, brief 19).
+
+51 WIRED, 27 HAND-RUN (deliberately kept operating tools/data). No DEAD class
 exists — anything dead is deleted or in retired/.
 
-## The 53 rows
+## The rows
 
 | File | Class | Called by (file:line) | Notes |
 |---|---|---|---|
@@ -97,6 +101,10 @@ exists — anything dead is deleted or in retired/.
 | `oauth_setup.py` | HAND-RUN | hand-invoked | YouTube OAuth |
 | `thumbnail_generator.py` | HAND-RUN | hand-invoked | thumbnails |
 | `brief18_check.py` | WIRED | GATES B113-B117 oracle | idempotent read-only upload-record checks: channels (channels.list mine title), upload (videos.list id resolution + title match), privacy (status.privacyStatus==unlisted), thumbnail (snippet.thumbnails kind + public CDN 200; thumbnails.get no longer exists in the served api), result (local+mirror upload_result.json parity), description (uploaded copy carries the credit snippets, whitespace-normalized) |
+| `diagram_gen.py` | WIRED | spec_assemble.py (import); hand-run CLI | brief-19 tactical pitch diagrams: formation/pressing/highline/passmap/zone from a JSON spec; PNG static or animated MP4 (30 fps, staggered fade-ins, draw-on arrows, exact duration); episode style (#0D0D0D pitch, #2A2A2A lines, #A50044 home, white away at 70 percent); gates B118/B119 |
+| `fan_clip_dl.py` | HAND-RUN | episode acquisition (hand-invoked); brief19_check.py b120 (manifest + planted list) | fan/personal-account clip acquisition: ytsearch10 search + EXCLUDED_CHANNELS hard skip (8 rights-holder ids, brief 19 job 2), follower<500k and views>5k preference, --download-sections cut into the fan-clips scratch dir; provenance manifest reports/brief19/fan_clip_manifest.json; --search-only and --from-json feed the gate oracle |
+| `spec_assemble.py` | WIRED | brief19_check.py b122, b121 | brief-19 row assembler (DECISIONS.md 24): diagram rows generate via tools.diagram_gen at assembly time with the 1920x1080 assert, clip rows transform under the fan-clips root (2x slow-mo, 75 percent zoom-crop, atempo 0.5, overlay_png composite in one pass), legacy rows reel-normalized (brief-17 chain); segments uniform 1080p 25fps h264; silent AAC when no row carries audio (DECISIONS.md 27); writes <stem>.assemble_manifest.json |
+| `brief19_check.py` | WIRED | GATES B118-B125 oracle | brief-19 gate oracle: b118 png, b119 mp4, b120 manifest + planted exclusion control, b121 slow-mo + non-fan control, b122 legacy board+card assembly + narration probe, b123 committed test sequence, b124 mirror + tracked + allowlist, renderers two-renderer invariant (frozen B3 replaced, DECISIONS.md 25) |
 | `b2_archive.py` | HAND-RUN | hand-invoked per task | B2 upload + provenance manifest (archive of record) |
 | `backup_env.py` | HAND-RUN | hand-invoked | encrypted .env backup |
 | `pod_check.py` | HAND-RUN (hook-adjacent) | .claude/hooks/check_pods.sh | pod-leak check + --terminate |
