@@ -2,8 +2,11 @@
 
 > **Purpose:** the four-lane (A/B/C/D) expansion build ledger; each stage appends its findings here.
 > **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Line-drift corrections applied 2026-09-13 (Stage-12B rewrite of produce_v2.py + Stage-14 retirement of step4b/tactical_render.py shifted cited line numbers; all re-grep'd against current code).
-> **Last verified against code:** 2026-10-07 (brief 17 phase B section appended;
-> census re-run live this session: CENSUS OK files=60 wired=39 handrun=21.
+> **Last verified against code:** 2026-10-10 (brief 18: episode 1 uploaded
+> to YouTube unlisted, https://youtu.be/qk9loU0Gvt0; re-authorized token
+> with youtube.upload + youtube.readonly; B113-B117 met, ledger 104/104.
+> Prior: 2026-10-07 brief 17 phase B census re-run live this session:
+> CENSUS OK files=60 wired=39 handrun=21.
 > The 2026-09-27 note below was written from git log 3c7a90b..b5dc799 and
 > reports/brief08/reverify.txt. Historical stage log: nothing in the
 > earlier entries is wired at runtime.)
@@ -4098,3 +4101,27 @@ b2:soccer-channel/2026-10-07/ (5 artifacts, each with a manifest); D:
 staging emptied (581MB). Gates B108-B112 added + met via the two-pass
 reverify (B112 = the brief16 B101 convention). Nothing uploaded to
 YouTube.
+### Brief 18 (2026-10-10): episode 1 uploaded to YouTube, unlisted
+Job 0: the Sep 9 token was dead (invalid_grant on refresh — Google kills
+refresh tokens from testing-mode OAuth apps after 7 days). Re-authorized
+in one interactive step (Mayo approved in Chrome; the waiting server on
+localhost:8080 caught the redirect via Windows→WSL localhost forwarding,
+no code copy needed). New token carries youtube.upload +
+youtube.readonly, because the upload-only scope 403s on
+channels().list(mine=True) (obs 10194). Live check: CHANNEL-OK MENDY
+TACTS. Job 1: resumable upload, unlisted, title "Flick's High Line:
+What It Wins and What It Costs", description from
+reports/brief17/description_draft.md (the brief's stated root path was
+stale; the draft lives under reports/brief17/). Result:
+https://youtu.be/qk9loU0Gvt0 (11-char id, uploadStatus=processed,
+dur=PT4M2S). Job 2: thumbnails.set ba_card_title_yamal.jpg → HTTP 200,
+full kind set (maxres/standard/high/medium/default); the source is
+640×772 so YouTube shows a 16:9 crop — Mayo can re-pick in Studio if it
+looks wrong. Job 3: reports/brief18/upload_result.json written, committed
+to the private repo, on the mirror (video_id populated both sides),
+archived to B2 with a manifest. Note: thumbnails.get returned only
+'set' from the live API (deprecated server-side), so B116 verifies via
+snippet.thumbnails + a 200 fetch of the image URL. Two upload-tool bugs
+fixed in passing: tags builder crashed when scripts/<slug>.md is absent
+(slug-derived fallback), and the split authurl/authcode path lost the
+PKCE verifier across processes (authwait single-process is primary).

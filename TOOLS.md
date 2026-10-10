@@ -93,9 +93,10 @@ exists — anything dead is deleted or in retired/.
 | `viral_angle.py` | HAND-RUN | hand-invoked | topic research (YouTube API) |
 | `agent_reach_research.py` | HAND-RUN | hand-invoked | multi-platform research |
 | `fresh_fetch.py` | HAND-RUN | hand-invoked | dated news fetch (kills stale rumors) |
-| `youtube_upload.py` | HAND-RUN | hand-invoked | publishing (private uploads) |
+| `youtube_upload.py` | HAND-RUN | hand-invoked; brief18_check.py imports build_credentials | publishing (private/unlisted uploads); verbs: legacy slug, channels, authurl, authcode, authwait (single-process PKCE on localhost:8080), upload (--title/-description-file/-privacy/-result-json), setthumb |
 | `oauth_setup.py` | HAND-RUN | hand-invoked | YouTube OAuth |
 | `thumbnail_generator.py` | HAND-RUN | hand-invoked | thumbnails |
+| `brief18_check.py` | WIRED | GATES B113-B117 oracle | idempotent read-only upload-record checks: channels (channels.list mine title), upload (videos.list id resolution + title match), privacy (status.privacyStatus==unlisted), thumbnail (snippet.thumbnails kind + public CDN 200; thumbnails.get no longer exists in the served api), result (local+mirror upload_result.json parity), description (uploaded copy carries the credit snippets, whitespace-normalized) |
 | `b2_archive.py` | HAND-RUN | hand-invoked per task | B2 upload + provenance manifest (archive of record) |
 | `backup_env.py` | HAND-RUN | hand-invoked | encrypted .env backup |
 | `pod_check.py` | HAND-RUN (hook-adjacent) | .claude/hooks/check_pods.sh | pod-leak check + --terminate |

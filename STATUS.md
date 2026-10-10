@@ -2,15 +2,11 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-10-06 (brief 17 phase A: jobs 0-4
-> executed; B102-B107 met, ledger 94/94 (gate-check --approve + the
-> --reverify pass published at reports/brief17/reverify.txt + mirror);
-> five footage overlays re-rendered with the fault fixes and archived
-> (B2 brief17/2026-10-06/); both title cards + 7 cards + 2 board specs
-> emitted and audited; script.md 25 rows / 533 words at the measured
-> 108.9 wpm = 294s projected; the 20s voice sample measured and on the
-> mirror. PHASE A STOPS HERE — phase B (jobs 5-8) waits for Mayo's
-> "voice ok". Sofascore transport: still Akamai-403 from this IP
+> **Last verified against code:** 2026-10-10 (brief 18: episode 1 is on
+> YouTube UNLISTED at https://youtu.be/qk9loU0Gvt0 with the yamal
+> thumbnail and the brief-17 credit description; B113-B117 met, ledger
+> 104/104 published; prior state: brief 17 phase B closed ALL MET
+> 99/99 2026-10-07). Sofascore transport: still Akamai-403 from this IP
 > (attempts 1-9 logged 2026-10-04..06, treated likely-permanent); no
 > fetch was attempted this session; the numbers came from the cached
 > 2026-09-28 raws + the 2026-09-29 list cache, as before.)
@@ -301,3 +297,11 @@ without a row, a row without a file, or wrong class totals fails gate B20.
   9 sheets (640px) + keyframes/ committed as proof, photo_sources.md,
   SYSTEM.md section 5 kit outcome + section 7 mapping line + dated B2 copy
   b2:mendymax-archive/system/2026-09-29_SYSTEM.md.
+- Episode 1 is live, UNLISTED (brief 18, 2026-10-10): https://youtu.be/qk9loU0Gvt0 —
+  241.92s render, yamal title thumbnail set (640x772 source, YouTube displays
+  a 16:9 crop), description = the brief-17 credit copy (1427 chars live,
+  credits verified in the check). Token re-authorized 2026-10-10
+  (youtube.upload + youtube.readonly; testing-mode app refresh tokens die
+  after ~7 days, so every future upload may need one fresh Allow click).
+  Records: reports/brief18/upload_result.json (git + mirror), B2
+  soccer-channel/2026-10-10/ (manifest next to it), publish-log/.

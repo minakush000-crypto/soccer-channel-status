@@ -1411,3 +1411,38 @@ commands cited in the report:
     in/brief15/assets). The episode's default = the sevilla copy; the
     timeline boards point at the racing copy. Single-match episodes are
     unchanged.
+18. **Token scope widened with youtube.readonly (job 0, 2026-10-10).**
+    The stored token carried only youtube.upload, which the live API
+    rejects with 403 on channels().list(mine=True) (obs 10194, Sep 9).
+    Brief 18 gate B113 uses that exact call, so the re-auth requested
+    youtube.upload + youtube.readonly. Readonly is the narrowest scope
+    that covers channels().list(mine=true); youtube.force-ssl would
+    have covered the same checks but exposes moderation verbs we do
+    not use.
+
+19. **authwait: OAuth completes with zero pasting (job 0, 2026-10-10).**
+    WSL2's Windows-localhost forwarding lets the consent redirect land
+    on a small server here, so run_local_server(port=8080) replaces the
+    copy-the-URL dance. The old split authurl/authcode is kept as
+    fallback: it now persists flow.code_verifier + state to
+    secrets/youtube_pkce.json (0600), because google-auth-oauthlib 1.4.0
+    holds the PKCE verifier only on the live flow object and a
+    cross-process exchange fails silently without it. authwait must NOT
+    call authorization_url before run_local_server: a second call
+    rotates the state and every callback then fails "Mismatched state".
+
+20. **Episode slugs have no scripts/<slug>.md (job 1, 2026-10-10).**
+    The brief-17 pipeline names its script scripts/brief17-episode-one.md
+    while the render dir is renders/2026-10-06_flicks-high-line/, so the
+    legacy metadata builder crashed on FileNotFoundError when reading
+    tags from the script path. The upload verb now derives tag words
+    from the slug itself when the script file is absent. Title and
+    description on this episode come from brief 18's explicit flags,
+    not from the legacy script scraper.
+
+21. **thumbnails.get is gone from the served YouTube v3 discovery doc
+    (2026-10-10).** The live api exposes only thumbnails().set for this
+    client build; verifying a set thumbnail inside an idempotent gate
+    check therefore reads snippet.thumbnails from videos().list and
+    fetches the image URL from the public CDN (maxres, 200, non-empty)
+    instead of calling the missing method.

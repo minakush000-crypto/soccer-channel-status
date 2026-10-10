@@ -62,14 +62,14 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: bash tools/pagecheck_proof.sh
   EXPECT: PAGECHECK-PROOF OK mirrored-fail=1 real-pass=1
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=737acfa4b7ded0d2b0cf86f1919063a1067a4f51537cc507205d477cadb17739; output-bytes=47
-- [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
+- [ ] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=80752afec2531e4050557ec250ac34949ce798755d24014e1de7327bdbed9fe3; output-bytes=2210
-- [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
+  EVIDENCE: pending
+- [ ] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7e11f8b60ada90f702114686f4c992332a3c591b6458f432fa3aa551c69067a0; output-bytes=13
+  EVIDENCE: pending
 - [x] B23: brief 09 research artifacts exist (3 CSVs, 3 transcripts, measurements, catalog, gaps, durations)
   CHECK: for f in reports/brief09/frames_A.csv reports/brief09/frames_B.csv reports/brief09/frames_C.csv reports/brief09/transcript_A.txt reports/brief09/transcript_B.txt reports/brief09/transcript_C.txt reports/brief09/measurements.md reports/brief09/overlay_catalog.md reports/brief09/gaps.md reports/brief09/durations.json; do test -f "$f" || exit 1; done && echo BRIEF09-ARTIFACTS-OK
   EXPECT: BRIEF09-ARTIFACTS-OK
@@ -125,7 +125,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B37: C: free space stays above the 15 GB floor at the end of brief 07 jobs 1-4 (brief 07 job 2 stop rule)
   CHECK: a=$(df -BG --output=avail /mnt/c | tail -1 | tr -dc '0-9') && [ "$a" -ge 15 ] && echo C-FLOOR-OK avail=${a}G
   EXPECT: C-FLOOR-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=558ab3186a0cc937a14eb3900c6b1884ac8b58585071dd3e9d4c7b8b101ccd4c; output-bytes=21
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=4a806fba3394f5602cd4dd08c62b78afda819294e46300b00fc5ceaa4eb91a90; output-bytes=21
 
 - [x] B39: ECC doctor is clean at source version 2.2.1 after the install (brief 07 job 8)
   CHECK: d=$(node ~/ECC/scripts/ecc.js doctor 2>&1) && echo "$d" | grep -q "errors=0" && l=$(node ~/ECC/scripts/ecc.js list-installed 2>&1) && echo "$l" | grep -q "Source version: 2.2.1" && echo ECC-DOCTOR-CLEAN-V221
@@ -327,8 +327,8 @@ committed alongside the proof.
       numeric
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py after_table
   EXPECT: AFTER-TABLE-OK
-- [x] B79: no regression bundle: soccer disk_guard selftest, scratch_mount
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=8929fb6a7804dcee3c7e8375e60d03cc90cbae587211f8e8305eece783612a3f; output-bytes=301
+- [ ] B79: no regression bundle: soccer disk_guard selftest, scratch_mount
+  EVIDENCE: pending
       --check, jiheeye disk_guard selftest (read-only), brief13 board-render
       identity gate re-run locally without Modal, and both after benchmark
       runs' answers equal the same-time locally counted truth
@@ -599,24 +599,29 @@ canonical output stays at renders/brief17-episode-one/voice_elevenlabs.mp3.
   pass B is the published ALL MET proof)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py proof
   EXPECT: PROOF-OK
-- [ ] B113: the stored YouTube token authorizes channels().list(mine=True)
+- [x] B113: the stored YouTube token authorizes channels().list(mine=True)
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=1a353351789459f71f9f69834baa893c2330fb23f08bf67e51a2b60203a2d187; output-bytes=23
   and a live call prints the channel title (re-consent with the added
   youtube.readonly scope if the upload-only token 403s, brief18 job 0)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py channels
   EXPECT: CHANNEL-OK
-- [ ] B114: the uploaded episode resolves live on YouTube with an 11-char
+- [x] B114: the uploaded episode resolves live on YouTube with an 11-char
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=edd43ac6a4b3dd3e9f028d1f3fd16fa46ab968f0894d35abdf8451f87e78abb5; output-bytes=56
   video id and its snippet title equals the brief title (verifies the
   upload_result.json record against the live API; insert is not re-run)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py upload
   EXPECT: UPLOAD-OK
-- [ ] B115: the live video's status.privacyStatus is exactly "unlisted"
+- [x] B115: the live video's status.privacyStatus is exactly "unlisted"
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py privacy
   EXPECT: UNLISTED-OK
-- [ ] B116: the yamal jpg thumbnail is set on the live video
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=510948244dbaa7c0ec10fb4f830e1d5b71eadd1e7d0d7d2a3c3b7ebd9a373002; output-bytes=12
+- [x] B116: the yamal jpg thumbnail is set on the live video
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=1d9d54871008e50b44d9f455bed1d8207b4cc0ea40728a0eef1ef62220e1e0a0; output-bytes=45
   (thumbnails.get returns 200 with a non-default thumbnail kind)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py thumbnail
   EXPECT: THUMB-OK
-- [ ] B117: reports/brief18/upload_result.json exists locally and on the
+- [x] B117: reports/brief18/upload_result.json exists locally and on the
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7e58de0685b99904c68b1ad8625c65dde2ac20f42ecf5beab1078ff94faec54e; output-bytes=43
   public mirror with a populated 11-char video_id matching on both sides
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py result
   EXPECT: RESULT-OK
