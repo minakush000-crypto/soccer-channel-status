@@ -30,10 +30,6 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: ~/yt-digest/.venv/bin/python -c "import ast; ast.parse(open('tools/produce_v2.py').read()); ast.parse(open('tools/pod_build.py').read()); print('PIPE-OK')"
   EXPECT: PIPE-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=afdbfb412303fe91a9d1e181aec00cdb4cc744f9c34ed876804c71475f5d59d9; output-bytes=8
-- [x] B3: one 2D renderer; zero matplotlib importers in tools/ (positive control included)
-  CHECK: test -f tools/board_page.html && test -f tools/board_html.js && printf 'import matplotlib\n' > /tmp/b08_pc_b3.py && grep -qE "^\s*(import matplotlib|from matplotlib)" /tmp/b08_pc_b3.py && rm -f /tmp/b08_pc_b3.py && n=$(grep -rlE "^\s*import matplotlib|^\s*from matplotlib" tools/*.py | wc -l) && echo "ONE-RENDERER matplotlib-importers=$n"
-  EXPECT: ONE-RENDERER matplotlib-importers=0
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=075f6c4fda1e62134063d83ea711df518f3738048209a044746cc4fd72f1edb1; output-bytes=36
 - [x] B6: main repo confirmed private via gh
   CHECK: gh repo view minakush000-crypto/yt-digest --json isPrivate --jq .isPrivate | grep -q true && echo REPO-PRIVATE
   EXPECT: REPO-PRIVATE
@@ -625,3 +621,41 @@ canonical output stays at renders/brief17-episode-one/voice_elevenlabs.mp3.
   public mirror with a populated 11-char video_id matching on both sides
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py result
   EXPECT: RESULT-OK
+
+## Brief 19: visual pipeline rebuild (gates B118-B124, added before implementation, 2026-10-10)
+
+Brief source: briefs/brief19.md (jobs 0-4). Oracle: tools/brief19_check.py
+(WIRED, TOOLS.md row registered when the land). Deps installed job 0:
+mplsoccer 1.8.0 / matplotlib 3.11.1 / pillow 12.2.0 in ~/yt-digest/.venv
+(DECISIONS.md 23). Same edit: B3 was FROZEN to reports/brief19/
+GATES_frozen.md because brief 19 mandates a matplotlib-based renderer in
+tools/; its one-per-family intent continues as B125 below (DECISIONS.md 25).
+Design ruling: the brief's typed-row assembler did not exist among the
+three script-driven assemblers; job 3 lands as tools/spec_assemble.py with
+legacy rows normalized exactly like the brief-17 reel chain
+(DECISIONS.md 24).
+
+- [ ] B118: diagram_gen.py renders the committed formation test spec to a valid 1920x1080 PNG, regenerated under /tmp (the committed proof PNG is never re-run on)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b118
+  EXPECT: DIAGRAM-PNG-OK
+- [ ] B119: diagram_gen.py renders the committed highline test spec to a valid ~4s 1920x1080 h264 MP4, regenerated under /tmp
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b119
+  EXPECT: DIAGRAM-MP4-OK
+- [ ] B120: fan_clip_dl provenance: the build-phase manifest parses and states a decision, the exclusion filter provably drops every planted excluded channel id (positive control), and the re-run search phase leaves the recorded decision consistent
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b120
+  EXPECT: FANCLIP-OK
+- [ ] B121: the fan-clip transformation doubles duration (>= 1.9x) and a same-content clip NOT under the fan-clips root stays untransformed (positive control)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b121
+  EXPECT: SLOWMO-OK
+- [ ] B122: legacy backward-compat: the assembler builds a board+card sequence with ZERO diagram rows into a valid 1920x1080 h264 render whose per-piece durations land within 0.1s
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b122
+  EXPECT: LEGACY-ASSEMBLE-OK
+- [ ] B123: the committed integration render reports/brief19/test_sequence.mp4 is 28-32s, 1920x1080, h264 video with an aac audio track, over 1MB
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b123
+  EXPECT: TESTSEQ-OK
+- [ ] B124: brief-19 proof is published: test_sequence.mp4 present at the public mirror, the four brief-19 tools tracked and unmodified in git, and the mirror allowlist carries brief19
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b124
+  EXPECT: BRIEF19-PUBLISHED-OK
+- [ ] B125: two-renderer invariant (replaces frozen B3, DECISIONS.md 25): exactly one matplotlib importer in tools/ (diagram_gen.py), the HTML board renderer pair intact, and the planted-control counter provably counts a fake second importer
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py renderers
+  EXPECT: TWO-RENDERER-OK

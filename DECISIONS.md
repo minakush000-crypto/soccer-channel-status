@@ -1453,3 +1453,69 @@ commands cited in the report:
     live line, rebase_history appended (dated, brief 18), historical
     run answers (57/36/21) stay frozen. brief14_check.py quality now
     prints QUALITY-NO-REGRESSION (8 probes OK).
+
+23. **mplsoccer stack installed into the venv, not with the brief's
+    system-pip flag (job 0, 2026-10-10).** Brief 19 states
+    `pip install --break-system-packages mplsoccer matplotlib pillow`;
+    that flag is a system-pip guard, and this machine installs into
+    ~/yt-digest/.venv (python 3.14) where the venv's own pip needs no
+    flag. Installed and import-verified: mplsoccer 1.8.0,
+    matplotlib 3.11.1, pillow 12.2.0. The B3 ledger impact this creates
+    is decision 25.
+
+24. **The brief's row-driven assembler did not exist; spec_assemble.py
+    is job 3's vehicle (job 0, 2026-10-10).** The brief marked the
+    assembly tool ● and its slot types ○ ("confirm by reading"). Reading
+    found three assemblers, all script- or episode-driven, none of them
+    speaking typed rows: pod_build.py assemble (parses script.md
+    board=/footage= tags into sections, pod-side), produce_v2.py
+    step5_assemble (long-lane local concat), brief17_reel.py (the
+    episode-one reel). Rewriting the load-bearing pod_build assembler
+    would put episode-one's verified state (104/104 at close, brief 18)
+    at risk for no episode in this brief, so the brief's interface is
+    implemented as tools/spec_assemble.py: a local spec-row assembler
+    with the brief's row contract (diagram/clip/board/card/overlay/
+    narration rows; spec_file or spec_inline; 1920x1080 assert before
+    concat; fan-clip transform branch keyed on the fan-clips root).
+    Legacy row behavior = the reel normalization chain
+    (brief17_reel.py: scale/pad to 1920x1080, setsar, 25 fps, libx264
+    fast crf20, per-piece duration within 0.10 s). pod_build.py is
+    untouched. Future episodes stage pod render output as piece rows;
+    diagrams generate locally at assembly time.
+
+25. **B3 frozen and replaced by B125 (ledger edit, 2026-10-10, brief 19).**
+    Brief 19 job 1 mandates a mplsoccer/matplotlib tool in tools/, which
+    makes B3's "zero matplotlib importers" impossible by design. The
+    coordinator's explicit brief outranks the brief-04 anti-matplotlib
+    decision, and CLAUDE.md section 1 says a rule that blocks the
+    benchmark is wrong, say so and break it. B3 moved verbatim (CHECK +
+    EXPECT + EVIDENCE) to reports/brief19/GATES_frozen.md, headed
+    historical, not run. Its anti-duplication intent (one renderer per
+    family) is preserved live as B125: exactly one matplotlib importer
+    in tools/ (diagram_gen.py), the HTML board renderer pair intact
+    (board_page.html + board_html.js), and the counting control proven
+    on a planted fake.
+
+26. **fan_clip_dl.py conventions beyond the brief text (job 2,
+    2026-10-10).** (a) The tool also writes a provenance manifest
+    reports/brief19/fan_clip_manifest.json (candidates with channel
+    id/name/follower_count/view_count, excluded_seen count, decision:
+    downloaded | NO_FAN_SOURCE | download_failed, output path) so gate
+    B120 verifies from data, not stdout recall. (b) A failed download
+    exits 0 with DOWNLOAD-FAILED recorded in the manifest: the brief's
+    exit-0-for-zero-results rule extended, because a transient YouTube
+    block must not crash an episode run; the manifest carries what
+    actually happened. (c) The tool gains --search-only and accepts a
+    --from-json candidate list so gate B120 proves the exclusion filter
+    on a PLANTED list containing every excluded channel id,
+    deterministic, no network in the oracle.
+
+27. **Silent-audio track and scratch fixture rules for the test
+    sequence (jobs 3-4, 2026-10-10).** The 30-second integration
+    sequence has no voice (this brief produces no episode content), so
+    spec_assemble muxes a silent AAC track when no narration row carries
+    audio; B123 checks the track/codec contract, the silence is the
+    honest test state. B121's fixture regenerate-if-missing writes ONLY
+    into /mnt/d/scratch/soccer-staging/fan-clips/ (durable scratch
+    outside the repo; the ledger bans repo writes, not test fixtures).
+    All other check outputs go under /tmp per the ledger rule.
