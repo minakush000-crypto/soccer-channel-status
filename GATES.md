@@ -599,3 +599,24 @@ canonical output stays at renders/brief17-episode-one/voice_elevenlabs.mp3.
   pass B is the published ALL MET proof)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py proof
   EXPECT: PROOF-OK
+- [ ] B113: the stored YouTube token authorizes channels().list(mine=True)
+  and a live call prints the channel title (re-consent with the added
+  youtube.readonly scope if the upload-only token 403s, brief18 job 0)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py channels
+  EXPECT: CHANNEL-OK
+- [ ] B114: the uploaded episode resolves live on YouTube with an 11-char
+  video id and its snippet title equals the brief title (verifies the
+  upload_result.json record against the live API; insert is not re-run)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py upload
+  EXPECT: UPLOAD-OK
+- [ ] B115: the live video's status.privacyStatus is exactly "unlisted"
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py privacy
+  EXPECT: UNLISTED-OK
+- [ ] B116: the yamal jpg thumbnail is set on the live video
+  (thumbnails.get returns 200 with a non-default thumbnail kind)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py thumbnail
+  EXPECT: THUMB-OK
+- [ ] B117: reports/brief18/upload_result.json exists locally and on the
+  public mirror with a populated 11-char video_id matching on both sides
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py result
+  EXPECT: RESULT-OK
