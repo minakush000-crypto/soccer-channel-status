@@ -1,6 +1,6 @@
 {
  "worktree_gates": 55,
- "census_full": "CENSUS OK files=73 wired=47 handrun=26 (exempt from rows: USAGE.md)",
+ "census_full": "CENSUS OK files=74 wired=48 handrun=26 (exempt from rows: USAGE.md)",
  "before": {
   "session_start_first_turn_input": 51297,
   "session_start_aggregate_input": 48552
@@ -57,7 +57,13 @@
    "by": "glm-5.3-flash:cloud (brief 17 phase A reverify pass)",
    "rebased_census_full_to": "CENSUS OK files=70 wired=44 handrun=26 (exempt from rows: USAGE.md)",
    "reason": "brief 17 added brief17_check.py + brief17_cards.py (wired) and the census now counts 70 files / 44 WIRED / 26 HAND-RUN; historical run answers stay frozen"
+  },
+  {
+   "date": "2026-10-10",
+   "by": "glm-5.3-flash:cloud (brief 18)",
+   "rebased_census_full_to": "CENSUS OK files=74 wired=48 handrun=26 (exempt from rows: USAGE.md)",
+   "reason": "brief 18 added tools/brief18_check.py (WIRED, B113-B117 oracle); live census counts 74/48/26; historical run answers stay frozen"
   }
  ],
- "census_rebased": "2026-10-07 brief 17 phase B: +3 wired tools (stage/reel/stills)"
+ "census_rebased": "2026-10-10 brief 18: +1 WIRED tool (brief18_check.py); census 73->74 files, 47->48 wired, handrun unchanged 26"
 }

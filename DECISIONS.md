@@ -1446,3 +1446,10 @@ commands cited in the report:
     check therefore reads snippet.thumbnails from videos().list and
     fetches the image URL from the public CDN (maxres, 200, non-empty)
     instead of calling the missing method.
+22. **Bench census rebase, files 73->74 (2026-10-10, brief 18 B79).**
+    brief18_check.py is a new WIRED tool, so the live census line moved
+    (74/48/26) while bench_truth's stored census_full still said 73. Per
+    the brief-15/16/17 rebase procedure: root census_full advanced to the
+    live line, rebase_history appended (dated, brief 18), historical
+    run answers (57/36/21) stay frozen. brief14_check.py quality now
+    prints QUALITY-NO-REGRESSION (8 probes OK).

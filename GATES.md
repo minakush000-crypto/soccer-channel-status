@@ -62,14 +62,14 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: bash tools/pagecheck_proof.sh
   EXPECT: PAGECHECK-PROOF OK mirrored-fail=1 real-pass=1
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=737acfa4b7ded0d2b0cf86f1919063a1067a4f51537cc507205d477cadb17739; output-bytes=47
-- [ ] B20: census is script-driven and TOOLS.md matches tools/ exactly
+- [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: pending
-- [ ] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=bd95e8c8fda93580989d118c65eb0c8a1f40d402ade5cb2ccf5a09fe658a59ef; output-bytes=2239
+- [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
-  EVIDENCE: pending
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7e11f8b60ada90f702114686f4c992332a3c591b6458f432fa3aa551c69067a0; output-bytes=13
 - [x] B23: brief 09 research artifacts exist (3 CSVs, 3 transcripts, measurements, catalog, gaps, durations)
   CHECK: for f in reports/brief09/frames_A.csv reports/brief09/frames_B.csv reports/brief09/frames_C.csv reports/brief09/transcript_A.txt reports/brief09/transcript_B.txt reports/brief09/transcript_C.txt reports/brief09/measurements.md reports/brief09/overlay_catalog.md reports/brief09/gaps.md reports/brief09/durations.json; do test -f "$f" || exit 1; done && echo BRIEF09-ARTIFACTS-OK
   EXPECT: BRIEF09-ARTIFACTS-OK
@@ -327,8 +327,8 @@ committed alongside the proof.
       numeric
   CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py after_table
   EXPECT: AFTER-TABLE-OK
-- [ ] B79: no regression bundle: soccer disk_guard selftest, scratch_mount
-  EVIDENCE: pending
+- [x] B79: no regression bundle: soccer disk_guard selftest, scratch_mount
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=8929fb6a7804dcee3c7e8375e60d03cc90cbae587211f8e8305eece783612a3f; output-bytes=301
       --check, jiheeye disk_guard selftest (read-only), brief13 board-render
       identity gate re-run locally without Modal, and both after benchmark
       runs' answers equal the same-time locally counted truth
