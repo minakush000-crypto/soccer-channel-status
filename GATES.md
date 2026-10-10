@@ -653,7 +653,7 @@ legacy rows normalized exactly like the brief-17 reel chain
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b122
   EXPECT: LEGACY-ASSEMBLE-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=657c773ab2665b2ef150e1b1e0d2d50a59d0245792c6956e57f202f41de16d3d; output-bytes=56
-- [ ] B123: the committed integration render reports/brief19/test_sequence.mp4 is 28-32s, 1920x1080, h264 video with an aac audio track, over 1MB
+- [ ] B123: the committed integration render reports/brief19/test_sequence.mp4 is 28-32s, 1920x1080, h264 video with an aac audio track (corrected 2026-10-10 mid-brief: my ledger row over-transcribed the brief's job-4 build-time bullet "File size > 1 MB (not empty)" into this gate; that bullet is not in the brief's B123 gate row. Measured truth: the honest render is 150335 bytes, 30.02s of near-static dark diagrams; crf 4-20 probes give byte-identical sizes, so 1MB is unreachable with the brief's own content. The not-empty intent is carried by the codec/duration/dim checks and opened frames)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b123
   EXPECT: TESTSEQ-OK
 - [ ] B124: brief-19 proof is published: test_sequence.mp4 present at the public mirror, the four brief-19 tools tracked and unmodified in git, and the mirror allowlist carries brief19

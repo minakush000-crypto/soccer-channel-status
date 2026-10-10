@@ -1,0 +1,49 @@
+{
+ "version": 1,
+ "built_by": "spec_assemble.py",
+ "fps": 25,
+ "size": [
+  1920,
+  1080
+ ],
+ "encoded_dur": 30.023,
+ "planned_dur": 30.0,
+ "sections": [
+  {
+   "idx": 0,
+   "type": "diagram",
+   "start": 0.0,
+   "dur": 6.0,
+   "title": ""
+  },
+  {
+   "idx": 1,
+   "type": "diagram",
+   "start": 6.0,
+   "dur": 6.0,
+   "title": ""
+  },
+  {
+   "idx": 2,
+   "type": "diagram",
+   "start": 12.0,
+   "dur": 5.0,
+   "title": ""
+  },
+  {
+   "idx": 3,
+   "type": "board",
+   "start": 17.0,
+   "dur": 6.0,
+   "title": "TEST BOARD \u2014 existing slot type",
+   "content": "TEST BOARD \u2014 existing slot type"
+  },
+  {
+   "idx": 4,
+   "type": "card",
+   "start": 23.0,
+   "dur": 7.0,
+   "title": ""
+  }
+ ]
+}
