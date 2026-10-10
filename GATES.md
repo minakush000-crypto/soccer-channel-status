@@ -620,3 +620,8 @@ canonical output stays at renders/brief17-episode-one/voice_elevenlabs.mp3.
   public mirror with a populated 11-char video_id matching on both sides
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py result
   EXPECT: RESULT-OK
+ABANDON: B113 paused mid-brief 2026-10-10: token refresh returned invalid_grant (Sep 9 testing-mode app token expired, expected); needs Mayo's browser OAuth paste, resumes in-run and this ABANDON is removed after the authcode exchange saves the token
+ABANDON: B114 paused 2026-10-10: upload cannot start until B113's re-authorization completes (job 1 blocked by the same human step); resumes in-run
+ABANDON: B115 paused 2026-10-10: privacy check reads the uploaded video, blocked by B113's re-authorization; resumes in-run
+ABANDON: B116 paused 2026-10-10: thumbnails.set blocked by B113's re-authorization; resumes in-run
+ABANDON: B117 paused 2026-10-10: upload_result.json does not exist until the upload completes; resumes in-run
