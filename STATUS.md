@@ -375,3 +375,45 @@ without a row, a row without a file, or wrong class totals fails gate B20.
   missed strikes - now output -ss. census 80/53/27 (bench_truth rebased).
 - **Gates:** B126-B134 met; B135 proof + B136 close land at close (see
   trail below); B114-B116 remain ABANDONED (brief-19 handoff).
+
+## Brief 20r (2026-10-10/11): ep02 VOICED rebuild — Barcelona 3-0 Getafe
+
+- **The pending decision resolved:** DECISIONS.md 29(h) said "a voice/slot-
+  length pass is Mayo's pending decision"; brief 20r is that pass. The
+  voiced cut replaces the silent 81 s review draft.
+- **Episode v2:** ep02_v2.mp4 = 192.68 s (3:12.7) 1920x1080 h264+aac, 12
+  voice-led rows (assembler manifest S01-S12). Voice: ElevenLabs Turbo
+  eleven_turbo_v2_5 at atempo 1.0, 397 words, measured 180.5 s (132 wpm,
+  matching brief 17's take5 measurement), mean -22.9 dB / max -2.6 dB.
+- **Benchmark study (pre-work):** one full Football Oculus episode
+  (q_bkQib7Sk8, Flick's Barca, 8:21) downloaded and measured: 62 stamped
+  frames + scene-cut scans (7 hard cuts; chapters 60-90 s at the 0.14
+  threshold). Applied: light panel style, big type, long voice-led holds.
+  Notes: reports/brief20r/benchmark_notes.md.
+- **Diagrams restyled:** diagram_gen.py gained spec["style"] (page/panel
+  split, ink colors, font sizes, dot radius); legacy specs render
+  byte-identical (cmp vs the staged brief-20 PNG: identical). v2 specs in
+  diagram_specs_v2/ (6) with Getafe unit labels only (the XI is not in
+  the data file) and the d02/d04/d05 mirror FIXED (Koundé attacks the
+  right side, matching pass_map right=34%).
+- **Cards:** stat_card_gen.py measures text (the brief-20 fixed-size box
+  overflowed; "Koundé 73'..." clipped past the frame edge); new
+  finalboard mode (closing board). Cards v2 on /mnt/d scratch ep02v2/.
+- **Assembler audio model:** any row may declare "audio"; clip rows mix
+  the declared voice OVER the slowed clip bed (volume 1.5 vs 0.30). The
+  brief-19 contract (DECISIONS 27) is preserved for rows without audio.
+- **Uploaded:** eUHPwhUOpTI (unlisted, pending_review), thumbnail set,
+  supersedes 2L-Yj09gJ7M; the record is
+  data/barcelona-getafe-20261010/youtube_upload.json.
+- **Gates:** B137-B146 in GATES.md (brief20r_check.py oracle); TOOLS.md +
+  census rebased (files=81 wired=54 handrun=27).
+
+- **Pass C (same night):** the session's own adversarial audit (workflow,
+  four lenses) caught a false description sentence (the fan-clip labels do
+  NOT survive the 75 percent crop) and a data contradiction (21 points
+  over 7 matches vs a "5-match winning run" string). S12 re-voiced
+  without the streak claim; corrected cut uploaded as nWjbw2GCP_A
+  (v3, the review copy); eUHPwhUOpTI and 2L-Yj09gJ7M recorded as
+  superseded. Claims table now 21 rows (minute-3 and 8-games derives
+  added). The token cannot edit a live description (brief-18 scopes,
+  upheld); the correction ships on the new cut.

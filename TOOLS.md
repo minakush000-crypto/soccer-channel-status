@@ -4,7 +4,7 @@
 > **Reader:** every session; mirrored to the public status repo.
 > **Last verified against code:** 2026-10-10 (brief 19: diagram_gen.py +
 > fan_clip_dl.py + spec_assemble.py + brief19_check.py rows added and the
-> four files on disk; census run this session: CENSUS OK files=80 wired=53
+> four files on disk; census run this session (brief 20r): CENSUS OK files=80 wired=53
 > handrun=27.)
 > 80 files / 53 WIRED / 27 HAND-RUN (two rows added brief 20).
 
@@ -107,6 +107,7 @@ exists — anything dead is deleted or in retired/.
 | `brief19_check.py` | WIRED | GATES B118-B125 oracle | brief-19 gate oracle: b118 png, b119 mp4, b120 manifest + planted exclusion control, b121 slow-mo + non-fan control, b122 legacy board+card assembly + narration probe, b123 committed test sequence, b124 mirror + tracked + allowlist, renderers two-renderer invariant (frozen B3 replaced, DECISIONS.md 25) |
 | `stat_card_gen.py` | WIRED | brief20_check.py b130; hand-run job 4 | episode-2 stat overlay cards + title card (pillow only, no matplotlib; B125 two-renderer invariant kept): 1920x1080 RGBA cards (#0D0D0D wash at alpha 180, centered 960x200 #1A1A1A rounded card, #A50044 accent stripe, DejaVuSans-Bold fallback), cards+titlecard modes |
 | `brief20_check.py` | WIRED | GATES B126-B136 oracle | brief-20 gate oracle: b126 preflight, b127 diagrams, b128 clips (usable-count from clip_sources.txt with substitution fallback), b129 narration (450-750 words), b130 cards, b131 assembly (codec/duration/size/sections), b132 thumbnail sha, b133 upload record, b134 mirror fetch-compare + freshness, b135 two-pass proof with bare-ALL-MET control, b136 close report |
+| `brief20r_check.py` | WIRED | GATES B137-B146 oracle | brief-20r voiced-rebuild oracle: b137 brief + brief-19 prerequisites, b138 benchmark study (notes, scene cuts, frames), b139 claims resolve from the data file by path, b140 script band + retired phrases, b141 VO manifest, b142 voiced assembly + loudness, b143 committed frames, b144 voice-lead sync, b145 upload record v2 + supersede, b146 close + census |
 | `b2_archive.py` | HAND-RUN | hand-invoked per task | B2 upload + provenance manifest (archive of record) |
 | `backup_env.py` | HAND-RUN | hand-invoked | encrypted .env backup |
 | `pod_check.py` | HAND-RUN (hook-adjacent) | .claude/hooks/check_pods.sh | pod-leak check + --terminate |

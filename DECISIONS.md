@@ -1590,3 +1590,59 @@ commands cited in the report:
     ~620 words (124-155 wpm implied): 642 words = ~5:53 spoken; the
     delivered draft is a SILENT 81 s review cut (brief 20 has no voice
     job); a voice/slot-length pass is Mayo's pending decision.
+
+## 30. Brief 20r — the voiced ep02 rebuild (2026-10-10/11)
+
+(a) RESOLVES DECISIONS 29(h): brief 20r is the voice/slot-length pass
+Mayo's coordinator had left open. 397 words at the measured 132 wpm =
+180.5 s VO; the shipped cut is 192.68 s (3:12.7), inside the brief's
+3-4 min band.
+(b) GETAFE XI: lineups.getafe carries NO starting_xi (only formation +
+subs). The brief-20 spec names (Terrats, Maksimović, Duarte, Mitrović,
+"Soria" as the keeper, "Soria Jr") are not traceable to the data file and
+are RETIRED from all v2 diagrams and from the spoken track ("the Getafe
+keeper"). Abqar/Mojica/Femenía/Azón/Terrats WERE traceable (subs + the
+75' yellow) but are neutralized too, for one consistent rule.
+(c) MIRROR FIX: d02 (and d05) drew Koundé (RB) on the LEFT; the data's
+pass_map right=34% story requires him on the RIGHT. v2 specs draw the
+true sides (x' = 100 - x).
+(d) STYLE: diagram_gen.py grows spec["style"] (page vs panel colors, ink
+colors, label/title pt, dot radius). Defaults = the brief-19 constants;
+legacy specs render byte-identical (cmp vs the staged PNG). v2 uses the
+Football Oculus light panel on a navy page (measured, brief-20r
+benchmark_notes.md).
+(e) CARDS: stat_card_gen sizes boxes from measured text; the brief-20
+fixed box clipped "Koundé 73' — header, assist Yamal" past the frame
+edge (seen in the draft frame at 50 s). "On target" relabeled
+"On-target xG" (the field is xg_on_target, xGOT, not a shot count).
+(f) ASSEMBLER: any row may declare "audio"; a clip row's declared voice
+mixes OVER its slowed bed (volume 1.5 voice / 0.30 bed). Loudness
+measured: mean -22.9 dB, max -2.6 dB (no clipping).
+(g) UPLOAD: eUHPwhUOpTI replaces 2L-Yj09gJ7M as the review copy; the
+record carries version 2, voiced: true, duration 192.68 s, the v2
+thumbnail, and the supersede note. Credits: fan channel named in the
+description (Carpetas Blaugranas), Sofascore data credit. youtube_upload
+has no revision/playlist flag: new video id rather than an in-place
+replace.
+(h) VOICE PACE: atempo stays 1.0. The 132 wpm punctuated measurement
+(brief 17 take5) matches this script; the 108.9 wpm sample was the
+1.15-lane on an unpunctuated sample. Scripts size from ~130 wpm, subject
+to per-run measurement.
+
+(i) DATA CONTRADICTION FOUND: context carries 21 league points over 7
+matches (forces 7 wins) AND a "5-match winning run" form string; the two
+cannot both describe the same streak. The spoken "six wins in a row" was
+retired at pass C; the derived wins row deleted; S12 re-voiced. Do not
+derive streaks from the form string until the source fields reconcile.
+(j) DESCRIPTION TRUTH: an adversarial audit lens proved the brief's and
+the v2 description's "source's own goal label on screen" is false on
+screen (the fan transformation's centered 75 percent crop removes the
+top-left labels; frame-probed on the live cut). Sentence dropped; the
+token's scopes (brief 18) cannot edit a live snippet anyway, so the fix
+ships with the re-upload (v3). Rule: only describe what survives the
+transform.
+(k) AUDIT WORKFLOW: the session ran a four-lens adversarial audit
+(claims coverage, ledger consistency, description truth, sync math) as
+the quality gate behind Mayo's review; blockers/warnings were fixed
+within the brief rather than deferred. The lens outputs live in the
+session logs; their fixes are in close.md.

@@ -4158,3 +4158,12 @@ input -ss snapped to keyframes and landed clip windows off their goal
 strikes; both now correct. Narration 642 words with data-grounded
 replacements (details DECISIONS.md 29). Upload 2L-Yj09gJ7M unlisted +
 thumbnail set; census 80/53/27 (bench_truth rebased).
+
+## 2026-10-11 — brief 20r: episode 2 voiced rebuild shipped
+Brief 20r executed: one full Football Oculus episode studied (measured),
+narration cut to 397 words (132 wpm measured), 12 voice-led rows
+assembled (192.68s), light benchmark diagram style added to diagram_gen
+(legacy byte-identical), cards measured + finalboard added, assembler
+row-audio model (voice over slowed clip beds), uploaded eUHPwhUOpTI
+unlisted (supersedes 2L-Yj09gJ7M). Gates B137-B146 oracle written
+(brief20r_check.py); census 81/54/27. See reports/brief20r/close.md.

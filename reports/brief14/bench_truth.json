@@ -1,6 +1,6 @@
 {
  "worktree_gates": 55,
- "census_full": "CENSUS OK files=80 wired=53 handrun=27 (exempt from rows: USAGE.md)",
+ "census_full": "CENSUS OK files=81 wired=54 handrun=27 (exempt from rows: USAGE.md)",
  "before": {
   "session_start_first_turn_input": 51297,
   "session_start_aggregate_input": 48552
@@ -76,5 +76,5 @@
    "date": "2026-10-10"
   }
  ],
- "census_rebased": "2026-10-10 brief 19: +4 tools (diagram_gen WIRED, fan_clip_dl HAND-RUN, spec_assemble WIRED, brief19_check WIRED); census 74->78 files, 48->51 wired, 26->27 handrun; B3 frozen to reports/brief19/GATES_frozen.md"
+ "census_rebased": "2026-10-10 brief 20r: +1 tool (brief20r_check.py WIRED, gates B137-B146); files 80->81 wired 53->54; prior: brief 19/20 (files=80 wired=53 handrun=27)"
 }

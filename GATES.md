@@ -61,11 +61,11 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9a491ab5df897c6f84b3a7869b978db8b1add81eaa529f836d59ceaab2c596c8; output-bytes=2409
-- [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=d538e15280ec4372e7015a553fb40299a38349fa8358e2662981bd86bc9fa18a; output-bytes=2439
+- [ ] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7e11f8b60ada90f702114686f4c992332a3c591b6458f432fa3aa551c69067a0; output-bytes=13
+  EVIDENCE: pending
 - [x] B23: brief 09 research artifacts exist (3 CSVs, 3 transcripts, measurements, catalog, gaps, durations)
   CHECK: for f in reports/brief09/frames_A.csv reports/brief09/frames_B.csv reports/brief09/frames_C.csv reports/brief09/transcript_A.txt reports/brief09/transcript_B.txt reports/brief09/transcript_C.txt reports/brief09/measurements.md reports/brief09/overlay_catalog.md reports/brief09/gaps.md reports/brief09/durations.json; do test -f "$f" || exit 1; done && echo BRIEF09-ARTIFACTS-OK
   EXPECT: BRIEF09-ARTIFACTS-OK
@@ -143,10 +143,10 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: test -f ~/.claude/skills/context-transfer/SKILL.md && grep -q '^name:' ~/.claude/skills/context-transfer/SKILL.md && echo CT-SKILL-PRESENT
   EXPECT: CT-SKILL-PRESENT
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=0278fde26d143fe0d3f1d2c7c808cbfca3ac62e1d11adddd20caa7707f8dc6c2; output-bytes=17
-- [x] B44: the ECC data cap is wired: guard selftest (incl. oversized-ECC control 4) passes and the live report shows the ecc_data line under cap (brief 07 job 5, Mayo instruction)
+- [ ] B44: the ECC data cap is wired: guard selftest (incl. oversized-ECC control 4) passes and the live report shows the ecc_data line under cap (brief 07 job 5, Mayo instruction)
   CHECK: bash tools/disk_guard.sh --selftest 2>&1 | grep -q GUARD-SELFTEST-OK && bash tools/disk_guard.sh --report 2>/dev/null | grep -qE "ecc_data [0-9]+B <= [0-9]+B cap" && echo ECC-CAP-WIRED
   EXPECT: ECC-CAP-WIRED
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=4083c7d2c6597821ff2607367b9783836c8103b0643132360e44d11fe266d52e; output-bytes=14
+  EVIDENCE: pending
 - [x] B45: before/after session-start context numbers are recorded in both artifacts (brief 07 job 3f + job 6)
   CHECK: test -s reports/brief07/context_before.txt && grep -q "39837" reports/brief07/context_before.txt && test -s reports/brief07/context_after.txt && grep -q "50652" reports/brief07/context_after.txt && echo CTX-BEFORE-AFTER-RECORDED
   EXPECT: CTX-BEFORE-AFTER-RECORDED
@@ -729,10 +729,10 @@ editing the brief-19 assembler; DECISIONS.md 29 carries the full list):
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b133
   EXPECT: UPLOAD-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=fdfba266e8014564da74ab21bebfdc6dc05490daaabd9ffedfb8d7110a9c0be7; output-bytes=155
-- [x] B134: mirror: the soccer-channel work is pushed (HEAD equals the fetched remote head) and the public mirror repo updatedAt is within the last hour
+- [ ] B134: mirror: the soccer-channel work is pushed (HEAD equals the fetched remote head) and the public mirror repo updatedAt is within the last hour
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b134
   EXPECT: MIRROR-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=263118c5d7c8ab25e63a0faad31e7499dc621c4616543508ebe829ca92c06e6a; output-bytes=196
+  EVIDENCE: pending
 - [x] B135: proof: the brief-16 B101 convention re-verify proof exists for this brief: pass A records the full rerun count AND B135's own by-construction failure, pass B shows ALL MET, the proof is byte-identical on the public mirror, and a bare ALL-MET sample (no pass-A section) fails the oracle's marker probes
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b135
   EXPECT: PROOF-OK
@@ -741,3 +741,46 @@ editing the brief-19 assembler; DECISIONS.md 29 carries the full list):
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b136
   EXPECT: CLOSE-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=8061198ab859e769663b4ed70d2b71d26e671467f8ce8af737fa3ec6571f6b4b; output-bytes=222
+
+## Brief 20r (2026-10-10): ep02 voiced rebuild — Barcelona 3-0 Getafe
+
+- [x] B137: brief and prerequisite: briefs/brief20r.md is committed and brief 19's B118-B125 all carry EVIDENCE lines in this ledger
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b137
+  EXPECT: BRIEF-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=fe693426ad87a58e9eb727769a090a357d036939a472851bdb92a7ee2ade494a; output-bytes=292
+- [x] B138: benchmark study watched, not imagined: reports/brief20r/benchmark_notes.md committed, cites the source video id plus an ffprobe-measured duration, scene_cuts.txt has >=15 strictly-increasing timestamps, and >=12 stamped benchmark frames are committed
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b138
+  EXPECT: BENCH-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=90820bde8b6305ef2d6115ac1035d13608d947622469809019b74454a8e6bd10; output-bytes=194
+- [x] B139: claims: every spoken stat resolves from data/barcelona-getafe-20261010/sofascore_stats.json via the claims table scripts/ep02_claims.json (re-read from the file, not recalled)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b139
+  EXPECT: CLAIMS-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9bf6aeb04d628ddb08120a4e469a6573e916dd3cbc8630c8bb238fc9a05dbc39; output-bytes=842
+- [x] B140: script: scripts/ep02_narration_v2.md is 300-460 words, covers the three goal minutes the data carries, and speaks none of the retired phrases (Soria, 9.5, thirty meters, 90 seconds)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b140
+  EXPECT: SCRIPT-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9b93d769f393ad5b3d432d36773b21075898def98470232e0fd24a69e4d0fa27; output-bytes=230
+- [x] B141: voice: per-section ElevenLabs files exist with a duration manifest, total 170-250s at 44100 Hz
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b141
+  EXPECT: VOICE-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=b3354f0c6a653824e886662fbfcd2a581a6bddfb1cb1cee1684e53f8e680ff91; output-bytes=109
+- [x] B142: assembly: the voiced cut is h264+aac 1920x1080, 170-250s, <2GB, >=8 sections in its assemble manifest, and its audio track is non-silent (volumedetect mean_volume > -60 dB)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b142
+  EXPECT: VOICED-ASSEMBLE-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=c758bc84bfce999433e8e544041075eab414a8a3290926a7b114d582b5280293; output-bytes=238
+- [x] B143: frames: >=6 stamped 1920x1080 frames of the voiced cut committed under reports/brief20r/final_frames/, non-trivial in size
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b143
+  EXPECT: FRAME-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=1ee794481698ec8a8c84f382b8ba25205bc725ff4d41138995744d3a21126e98; output-bytes=70
+- [x] B144: voice-lead sync: every narration-bearing row's duration exceeds its VO section duration, and the assembled planned duration matches the VO plan within 3s (no speech chopped mid-word)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b144
+  EXPECT: SYNC-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=a7151faf4c0801fc01bb95fc35a68c4237f6abcb5fecf1f39b4e9c3fd929699a; output-bytes=101
+- [x] B145: upload: data/barcelona-getafe-20261010/youtube_upload.json carries a new 11-char video_id, privacy unlisted, status pending_review, and names v1 2L-Yj09gJ7M as superseded with the v2 thumbnail recorded
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b145
+  EXPECT: UPLOAD2-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=e97c2a5c9804782c8776c943d2607db6d059961ffef47e9938ac464101947dac; output-bytes=230
+- [x] B146: close: reports/brief20r/close.md carries the shipped/pending/broke/disk-state lists, census rebased, STATUS/PROGRESS/DECISIONS/TOOLS updated, mirror pushed
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b146
+  EXPECT: CLOSE2-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=bd334666f294473a1a1086b71671f0c0975a6ca18a56db878a8be77372aa2ebd; output-bytes=260
