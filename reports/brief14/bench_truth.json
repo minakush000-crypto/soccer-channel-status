@@ -1,6 +1,6 @@
 {
  "worktree_gates": 55,
- "census_full": "CENSUS OK files=78 wired=51 handrun=27 (exempt from rows: USAGE.md)",
+ "census_full": "CENSUS OK files=80 wired=53 handrun=27 (exempt from rows: USAGE.md)",
  "before": {
   "session_start_first_turn_input": 51297,
   "session_start_aggregate_input": 48552
@@ -69,6 +69,11 @@
    "by": "glm-5.3-flash:cloud (brief 19)",
    "rebased_census_full_to": "CENSUS OK files=78 wired=51 handrun=27 (exempt from rows: USAGE.md)",
    "reason": "brief 19 added diagram_gen.py + fan_clip_dl.py + spec_assemble.py + brief19_check.py (51 WIRED total, fan_clip_dl HAND-RUN acquisition; gates B118-B125 met) and FROZE gate B3 (the zero-matplotlib invariant is obsolete by the diagram-first format; replaced by B125); live census counts 78/51/27; historical run answers stay frozen"
+  },
+  {
+   "census_full": "CENSUS OK files=80 wired=53 handrun=27 (exempt from rows: USAGE.md)",
+   "reason": "brief-20: brief20_check.py + stat_card_gen.py added",
+   "date": "2026-10-10"
   }
  ],
  "census_rebased": "2026-10-10 brief 19: +4 tools (diagram_gen WIRED, fan_clip_dl HAND-RUN, spec_assemble WIRED, brief19_check WIRED); census 74->78 files, 48->51 wired, 26->27 handrun; B3 frozen to reports/brief19/GATES_frozen.md"

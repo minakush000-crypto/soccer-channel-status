@@ -670,3 +670,74 @@ legacy rows normalized exactly like the brief-17 reel chain
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py renderers
   EXPECT: TWO-RENDERER-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=cab0c80921baaf053f041e0be452f566139f980b131ab1966103315866b04076; output-bytes=57
+
+## Brief 20: episode 02 Barcelona 3-0 Getafe (gates B126-B136, added before implementation, 2026-10-10)
+
+Brief source: briefs/brief20.md (jobs 0-10). Oracle: tools/brief20_check.py.
+ID-shift note: the brief's own gate ids B125-B135 collide with brief 19's
+B125 (two-renderer invariant, met above). Every brief-20 gate is shifted
++1: brief B125->B126 ... brief B135->B136.
+
+Contract rulings made before implementation (brief 20 job 5 authorizes
+editing the brief-19 assembler; DECISIONS.md 29 carries the full list):
+- diagram_gen.py speaks only formation|pressing|highline|passmap|zone;
+  the brief's passing_sequence/run_diagram types are mapped onto
+  pressing/formation specs; its title_card is built by the new
+  tools/stat_card_gen.py (Pillow only, no matplotlib, B125 invariant kept).
+- Away dots render white at 70% (the brief-19 episode style); the brief's
+  #003399 Getafe dots and per-spec fonts are not in the tool's contract.
+- Arrows draw home-color only; dashed style marks the opponent's action.
+- spec_assemble serves the brief-20 row set via its own schema (bare row
+  list, diagram rows carry spec_file, clips transform only under
+  /mnt/d/scratch/soccer-staging/fan-clips); diagram-row overlay_png support
+  added for the brief's diagram+card slots; the draft is 25 fps with a
+  silent AAC track when no narration rows exist (documented assembler
+  contract), not the brief's fps 30.
+- Narration: the data file contradicts "94 touches / 6 misplaced passes",
+  "one was on target", and the "90 seconds" hold for a goal it timestamps
+  at 2'; those narration lines are corrected to data-grounded facts.
+
+- [x] B126: pre-flight: the three brief-19 tools and youtube_upload.py exist, the Sofascore data file parses with xG for both teams and 3 goals, mplsoccer imports in the venv, ffmpeg and ffprobe resolve, D: scratch is writable, and secrets/youtube_token.json is present (brief job 0, no commits before this passes)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b126
+  EXPECT: PREFLIGHT-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7560995e234b5cb296a7128c46cb960d560b29e747807940021a5f080c802048; output-bytes=372
+- [x] B127: diagrams: all five episode visuals exist at the brief's ep02/diagrams paths (4 PNG + 1 MP4) with the PNGs at 1920x1080 and the MP4 h264 1920x1080 in 3.5-5.0s; specs committed under data/barcelona-getafe-20261010/diagram_specs/
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b127
+  EXPECT: DIAGRAMS-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=cd4c7f7c64b1ffe3f792d85470549794120ff364a8c6da8cc08670563d35df5d; output-bytes=587
+- [x] B128: clips: data/barcelona-getafe-20261010/clip_sources.txt records every attempted query with its provenance decision (url, channel, subscriber count), AND either >=2 mp4s sit under fan-clips/ep02/ or the designed diagram-substitution fallback is present in assembly_log.txt (the brief's partial-clip ship lane); the measured clip count is printed
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b128
+  EXPECT: CLIPS-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=746078e8fa2a29f22d43aa079006496f573b4f579afa8d175ed1bbfac176d476; output-bytes=260
+- [x] B129: narration: scripts/ep02_narration.md is tracked in git and carries 450-750 words (brief target ~620; measured voice pace 108.9 wpm is noted in DECISIONS.md 29 since the brief's 4-5 min band implies ~124-155 wpm)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b129
+  EXPECT: NARRATION-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=96993dd57b9e187c1aaa3dd5ba7e6757225182295181b63d2ff21e921bc21bb6; output-bytes=104
+- [x] B130: stat cards: tools/stat_card_gen.py is tracked and all six overlay PNGs exist at /mnt/d/scratch/soccer-staging/ep02/overlays/ as RGBA 1920x1080
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b130
+  EXPECT: CARDS-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=ab5fe9813b067b187658f46289af746b633ddb5c71a3f72fcb653d1bf3fd47e9; output-bytes=632
+- [x] B131: assembly: /mnt/d/scratch/soccer-staging/ep02/ep02_draft.mp4 is h264+aac 1920x1080, duration within 1.0s of the committed sequence's planned sum and >= 60s, size < 2GB, and its assemble manifest lists 10 sections
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b131
+  EXPECT: ASSEMBLE-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=42c0361668032d986cdf1d16417c14cb9ff4993d3c52948ae2bd05d681895e86; output-bytes=342
+- [x] B132: thumbnail: /mnt/d/scratch/soccer-staging/ep02/thumbnail.png and soccer-channel/assets/ep02_thumbnail.png are byte-identical 1920x1080 PNGs (sha256 compared, not assumed)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b132
+  EXPECT: THUMB-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=fb4bdf802baf38ec85b1657034ed78b68f619babe53131b3ad51db2b99dbc3cc; output-bytes=232
+- [x] B133: upload: data/barcelona-getafe-20261010/youtube_upload.json carries a valid 11-character video_id, privacy unlisted, status pending_review (auth failure aborts this gate for a handoff, never a workaround)
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b133
+  EXPECT: UPLOAD-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=fdfba266e8014564da74ab21bebfdc6dc05490daaabd9ffedfb8d7110a9c0be7; output-bytes=155
+- [x] B134: mirror: the soccer-channel work is pushed (HEAD equals the fetched remote head) and the public mirror repo updatedAt is within the last hour
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b134
+  EXPECT: MIRROR-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=453979ab3e089a58704741d3e932afbef89ec80d9eb8e9f9363862645f05c97a; output-bytes=197
+- [ ] B135: proof: the brief-16 B101 convention re-verify proof exists for this brief: pass A records the full rerun count AND B135's own by-construction failure, pass B shows ALL MET, the proof is byte-identical on the public mirror, and a bare ALL-MET sample (no pass-A section) fails the oracle's marker probes
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b135
+  EXPECT: PROOF-OK
+  EVIDENCE: pending
+- [ ] B136: close report: soccer-channel/reports/ep02_session_close.md is committed and carries the shipped/pending/broke/disk-state lists the brief's job 10 specifies
+  CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b136
+  EXPECT: CLOSE-OK
+  EVIDENCE: pending
