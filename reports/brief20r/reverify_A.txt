@@ -1,0 +1,909 @@
+APPROVAL REQUIRED GATES:G2
+    CHECK: printf 'import scene_gen\nscene_gen("x")\n' > /tmp/b08_pc_g2.py && grep -qE "(import scene_gen\b)|(\bscene_gen\()" /tmp/b08_pc_g2.py && rm -f /tmp/b08_pc_g2.py && n=$(grep -rnE "(import (scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match)\b|from (scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match) import)|\b(scene_gen|modal_render3d|runpod_fulltrack|generate_captions|assemble_words_match)\(" tools/*.py | wc -l) && echo "REFS-CLEAN live-refs=$n"
+    EXPECT: REFS-CLEAN live-refs=0
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:G10
+    CHECK: ~/yt-digest/.venv/bin/python -c "import ast; ast.parse(open('tools/produce_v2.py').read()); ast.parse(open('tools/pod_build.py').read()); print('PIPE-OK')"
+    EXPECT: PIPE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B6
+    CHECK: gh repo view minakush000-crypto/yt-digest --json isPrivate --jq .isPrivate | grep -q true && echo REPO-PRIVATE
+    EXPECT: REPO-PRIVATE
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B8
+    CHECK: printf 'SLUG = "x"\n' > /tmp/b08_pc_b8.py && grep -q "^SLUG" /tmp/b08_pc_b8.py && rm -f /tmp/b08_pc_b8.py && n=$(grep -c "^SLUG" tools/pod_build.py || true) && echo "SLUG-ARG consts=$n"
+    EXPECT: SLUG-ARG consts=0
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B9
+    CHECK: git check-ignore -q reports/gates/brief04.log && ! git check-ignore -q CLAUDE.md && echo GATELOG-IGNORED
+    EXPECT: GATELOG-IGNORED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B16
+    CHECK: ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-08_real-madrid-inter
+    EXPECT: DATA-CHECK OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B17
+    CHECK: grep -q "sofascore_client.py" tools/produce_v2.py && test ! -e tools/match_data.py && test -e retired/match_data.py && n=$(grep -nE "^\s*(from|import) match_data\b|match_data\.py\"" tools/*.py 2>/dev/null | wc -l); echo "FACTS-SOFA callers-left=$n"
+    EXPECT: FACTS-SOFA callers-left=0
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B18
+    CHECK: ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-08_real-madrid-inter >/dev/null && ~/yt-digest/.venv/bin/python tools/board_data_check.py --slug 2026-09-12_bournemouth-brentford >/dev/null && echo DATACHECK-BOTH-OK
+    EXPECT: DATACHECK-BOTH-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B19
+    CHECK: bash tools/pagecheck_proof.sh
+    EXPECT: PAGECHECK-PROOF OK mirrored-fail=1 real-pass=1
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B20
+    CHECK: ~/yt-digest/.venv/bin/python tools/census.py
+    EXPECT: CENSUS OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B22
+    CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
+    EXPECT: CLEAN-PUSHED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B23
+    CHECK: for f in reports/brief09/frames_A.csv reports/brief09/frames_B.csv reports/brief09/frames_C.csv reports/brief09/transcript_A.txt reports/brief09/transcript_B.txt reports/brief09/transcript_C.txt reports/brief09/measurements.md reports/brief09/overlay_catalog.md reports/brief09/gaps.md reports/brief09/durations.json; do test -f "$f" || exit 1; done && echo BRIEF09-ARTIFACTS-OK
+    EXPECT: BRIEF09-ARTIFACTS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B24
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief09_check.py rows
+    EXPECT: ROWS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B25
+    CHECK: n=$(ls reports/brief09/sheet_*.jpg 2>/dev/null | wc -l) && [ "$n" -ge 1 ] && [ "$n" -le 12 ] && echo SHEETS-OK
+    EXPECT: SHEETS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B26
+    CHECK: mkdir -p /tmp/b09_pc && printf x > /tmp/b09_pc/pc.mp4 && n=$(find /tmp/b09_pc -name "*.mp4" 2>/dev/null | wc -l) && rm -rf /tmp/b09_pc && [ "$n" -eq 1 ] && real=$(find /mnt/f/benchmark /mnt/c/Users/muads/Downloads/benchmark -maxdepth 1 -type f \( -name "*.mp4" -o -name "*.mkv" -o -name "*.webm" \) 2>/dev/null | wc -l) && [ "$real" -eq 0 ] && echo BENCH-LOCAL-DELETED
+    EXPECT: BENCH-LOCAL-DELETED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B27
+    CHECK: test -x tools/disk_guard.sh && n=$(grep -rlE "disk_guard\.sh" tools/ .claude/hooks/ 2>/dev/null | grep -v "disk_guard.sh$" | wc -l) && [ "$n" -ge 5 ] && echo GUARD-WIRED callers=$n
+    EXPECT: GUARD-WIRED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B28
+    CHECK: bash tools/disk_guard.sh --selftest
+    EXPECT: GUARD-SELFTEST-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B30
+    CHECK: s=$HOME/.config/machine/env.sh && test -f "$s" && [ "$(grep -cE '^export (PIP_CACHE_DIR|UV_CACHE_DIR|npm_config_cache|HF_HOME|SOCCER_STAGING_ROOT)=/mnt/d/scratch/' "$s")" -eq 5 ] && echo CACHES-ON-D
+    EXPECT: CACHES-ON-D
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B31
+    CHECK: grep -qE '^memory=[0-9]+MB' /mnt/c/Users/muads/.wslconfig && echo WSLCONFIG-CAPPED
+    EXPECT: WSLCONFIG-CAPPED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B32
+    CHECK: u=b2:mendymax-archive/keys/2026-09-27_soccer-channel-keys.tar.gz; n=$(rclone cat "$u" 2>/dev/null | tar tzf - 2>/dev/null | grep -vc '/$') && m=$(rclone cat b2:mendymax-archive/keys/2026-09-27_soccer-channel-keys.manifest.json 2>/dev/null | ~/yt-digest/.venv/bin/python -c "import json,sys; print(json.load(sys.stdin)['file_count'])") && [ -n "$n" ] && [ "$n" -gt 0 ] && [ "$n" = "$m" ] && echo KEYS-RESCUE-VERIFIED files=$n
+    EXPECT: KEYS-RESCUE-VERIFIED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B33
+    CHECK: u=b2:mendymax-archive/backups/2026-09-27_claude_home_pre_ecc.tar.gz; s=$(rclone lsjson "$u" 2>/dev/null | ~/yt-digest/.venv/bin/python -c "import json,sys; print(json.load(sys.stdin)[0]['Size'])") && m=$(rclone cat b2:mendymax-archive/backups/2026-09-27_claude_home_pre_ecc.manifest.json 2>/dev/null | ~/yt-digest/.venv/bin/python -c "import json,sys; print(json.load(sys.stdin)['size_bytes'])") && [ -n "$s" ] && [ "$s" -gt 500000000 ] && [ "$s" = "$m" ] && echo BACKUP-ON-B2 size=$s
+    EXPECT: BACKUP-ON-B2
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B34
+    CHECK: git -C ~/ECC describe --tags --exact-match 2>/dev/null | grep -qx v2.2.1 && echo ECC-PINNED-V221
+    EXPECT: ECC-PINNED-V221
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B35
+    CHECK: ~/yt-digest/.venv/bin/python -c "import json; json.load(open('reports/brief07/ecc_plan.json')); print('PLAN-OK')" && test -s reports/brief07/ecc_plan.txt
+    EXPECT: PLAN-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B36
+    CHECK: for f in counts.txt clashes.txt hooks.txt settings_diff.txt size_estimate.txt context_before.txt; do test -s "reports/brief07/$f" || exit 1; done && echo BRIEF07-ANALYSIS-OK
+    EXPECT: BRIEF07-ANALYSIS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B37
+    CHECK: a=$(df -BG --output=avail /mnt/c | tail -1 | tr -dc '0-9') && [ "$a" -ge 15 ] && echo C-FLOOR-OK avail=${a}G
+    EXPECT: C-FLOOR-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B39
+    CHECK: d=$(node ~/ECC/scripts/ecc.js doctor 2>&1) && echo "$d" | grep -q "errors=0" && l=$(node ~/ECC/scripts/ecc.js list-installed 2>&1) && echo "$l" | grep -q "Source version: 2.2.1" && echo ECC-DOCTOR-CLEAN-V221
+    EXPECT: ECC-DOCTOR-CLEAN-V221
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B40
+    CHECK: grep -q "stop-hook.mjs" ~/.claude/settings.json && grep -q "pre:bash:dispatcher" ~/.claude/settings.json && echo HOOKS-COEXIST
+    EXPECT: HOOKS-COEXIST
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B41
+    CHECK: grep -q "check_scratch.sh" .claude/settings.json && bash tools/disk_guard.sh --selftest 2>&1 | grep -q GUARD-SELFTEST-OK && echo GUARD-INTACT
+    EXPECT: GUARD-INTACT
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B42
+    CHECK: test -s ~/.claude/rules/precedence.md && grep -q "rules/precedence.md" ~/.claude/CLAUDE.md && echo PRECEDENCE-WIRED
+    EXPECT: PRECEDENCE-WIRED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B43
+    CHECK: test -f ~/.claude/skills/context-transfer/SKILL.md && grep -q '^name:' ~/.claude/skills/context-transfer/SKILL.md && echo CT-SKILL-PRESENT
+    EXPECT: CT-SKILL-PRESENT
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B44
+    CHECK: bash tools/disk_guard.sh --selftest 2>&1 | grep -q GUARD-SELFTEST-OK && bash tools/disk_guard.sh --report 2>/dev/null | grep -qE "ecc_data [0-9]+B <= [0-9]+B cap" && echo ECC-CAP-WIRED
+    EXPECT: ECC-CAP-WIRED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B45
+    CHECK: test -s reports/brief07/context_before.txt && grep -q "39837" reports/brief07/context_before.txt && test -s reports/brief07/context_after.txt && grep -q "50652" reports/brief07/context_after.txt && echo CTX-BEFORE-AFTER-RECORDED
+    EXPECT: CTX-BEFORE-AFTER-RECORDED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B46
+    CHECK: test -s reports/brief11/inventory.txt && grep -q "NTFS" reports/brief11/inventory.txt && grep -q "MNTF-HITS=" reports/brief11/inventory.txt && echo INVENTORY-OK
+    EXPECT: INVENTORY-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B47
+    CHECK: test -x tools/scratch_mount.sh && bash tools/scratch_mount.sh --check 2>&1 | grep -q D-MOUNT-OK && echo SCRATCH-MOUNT-OK
+    EXPECT: SCRATCH-MOUNT-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B48
+    CHECK: test -s reports/brief11/speed.txt && grep -q "WRITE-MBps=" reports/brief11/speed.txt && grep -q "READ-MBps=" reports/brief11/speed.txt && echo SPEED-RECORDED
+    EXPECT: SPEED-RECORDED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B50
+    CHECK: n=$(grep -rn "/mnt/f" ~/.config/machine/env.sh ~/.config/yt-dlp/config tools/staging.py tools/scratch_mount.sh tools/b2_mount.sh tools/backup_env.py tools/produce_v2.py tools/f_mount.sh .claude/hooks/check_scratch.sh .claude/settings.json 2>/dev/null | grep -vE ':[0-9]+:#' | wc -l) && [ "$n" -eq 0 ] && h=$(grep -c "/mnt/f" tools/brief10_elevated_setup.sh) && [ "$h" -gt 0 ] && echo NO-LIVE-MNTF history-hits=$h
+    EXPECT: NO-LIVE-MNTF
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B51
+    CHECK: test -s reports/brief11/controls.txt && grep -q GUARD-SELFTEST-OK reports/brief11/controls.txt && echo CONTROLS-RECORDED
+    EXPECT: CONTROLS-RECORDED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B52
+    CHECK: test -s reports/brief11/elevated_setup_output.txt && grep -q "VISUDO-OK" reports/brief11/elevated_setup_output.txt && grep -q "F-SUDOERS-REMOVED" reports/brief11/elevated_setup_output.txt && echo SUDOERS-OK
+    EXPECT: SUDOERS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B53
+    CHECK: test -s reports/brief11/ytdlp_download.txt && grep -q "/mnt/d/scratch" reports/brief11/ytdlp_download.txt && echo YTDLP-ON-D
+    EXPECT: YTDLP-ON-D
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B54
+    CHECK: test -s reports/brief11/modal_smoke.txt && grep -q "MODAL-SMOKE-OK" reports/brief11/modal_smoke.txt && grep -q "/mnt/d/scratch" reports/brief11/modal_smoke.txt && echo MODAL-THRU-D
+    EXPECT: MODAL-THRU-D
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B55
+    CHECK: test -s reports/brief11/reverify.txt && grep -q "ALL MET" reports/brief11/reverify.txt && echo REVERIFY-PUBLISHED
+    EXPECT: REVERIFY-PUBLISHED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B56
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py specs
+    EXPECT: TIMELINE-SPECS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B57
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py durations
+    EXPECT: DURATIONS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B58
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py keyframes
+    EXPECT: KEYFRAME-AUDIT-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B59
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py swap
+    EXPECT: SWAP-CONTROL-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B60
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py sheets
+    EXPECT: SHEETS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B61
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief12_check.py numbers
+    EXPECT: NUMBERS-TRACED-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B62
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py sizing
+    EXPECT: SIZING-MINIMA-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B63
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py overlap
+    EXPECT: OVERLAP-CONTROL-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B64
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py identity
+    EXPECT: IDENTITY-EVIDENCE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B65
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief13_check.py drift
+    EXPECT: DRIFT-CONTROL-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B66
+    CHECK: bash -lic 'c=$(npm config get cache 2>/dev/null); y=$(grep -oE "cache-dir [^ ]+" ~/.config/yt-dlp/config | head -1); case "$c$y" in */mnt/c/*) exit 1;; esac; echo "$c | $y" | grep -q "mnt/d" && echo CACHES-OFF-C' 2>/dev/null
+    EXPECT: CACHES-OFF-C
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B67
+    CHECK: bash -lic 'test -f ~/.config/machine/env.sh && test "$(grep -c . ~/.config/soccer/env.sh)" -eq 1 && grep -q "config/machine/env.sh" ~/.bashrc && [ "$SOCCER_STAGING_ROOT" = "/mnt/d/scratch/soccer-staging" ] && echo ENV-SHIM-OK' 2>/dev/null
+    EXPECT: ENV-SHIM-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B68
+    CHECK: m=/home/muads/.claude/projects/-home-muads-yt-digest-soccer-channel/memory && test ! -f "$m/tactical-dominant-balance.md" && ! grep -qE "tactical_render|step4" "$m/stop-adding-start-replacing.md" && echo MEMORY-CLEAN
+    EXPECT: MEMORY-CLEAN
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B69
+    CHECK: a=$(cut -d' ' -f1 reports/brief14/backup_upload.md5) && rclone copyto b2:mendymax-archive/backups/2026-09-28_claude_home_pre_lean.tar.gz /tmp/b14_backup_verify.tar.gz && b=$(md5sum /tmp/b14_backup_verify.tar.gz | cut -d' ' -f1) && n=$(tar tzf /tmp/b14_backup_verify.tar.gz | wc -l) && e=$(tail -1 reports/brief14/backup_listing.txt) && [ "$a" = "$b" ] && [ "$n" -eq "$e" ] && echo BACKUP-VERIFIED
+    EXPECT: BACKUP-VERIFIED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B70
+    CHECK: grep -q "SESSION-START-TOKENS" reports/brief14/before.md && grep -q "BENCH-RUN-1" reports/brief14/before.md && grep -q "BENCH-RUN-2" reports/brief14/before.md && grep -q "HOOKS-TABLE" reports/brief14/before.md && echo BEFORE-RECORDED
+    EXPECT: BEFORE-RECORDED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B71
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py plan
+    EXPECT: PLAN-CONSISTENT
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B72
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py applied
+    EXPECT: APPLIED-MATCHES-PLAN
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B73
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py hooks
+    EXPECT: HOOKS-STATE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B74
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py mcp
+    EXPECT: MCP-STATE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B75
+    CHECK: grep -q "Read discipline" /home/muads/.claude/CLAUDE.md && grep -q "Grep first" /home/muads/.claude/CLAUDE.md && echo READ-RULE-PRESENT
+    EXPECT: READ-RULE-PRESENT
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B76
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py memory
+    EXPECT: MEMORY-MERGED-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B77
+    CHECK: node /home/muads/ECC/scripts/ecc.js doctor > /tmp/b14_doctor.txt 2>&1 && grep -q "warnings=0" /tmp/b14_doctor.txt && grep -q "errors=0" /tmp/b14_doctor.txt && echo DOCTOR-CLEAN
+    EXPECT: DOCTOR-CLEAN
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B78
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py after_table
+    EXPECT: AFTER-TABLE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B79
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief14_check.py quality
+    EXPECT: QUALITY-NO-REGRESSION
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B80
+    CHECK: grep -q "2026-09-28" /home/muads/.claude/SYSTEM.md && grep -qi "brief 14" /home/muads/.claude/SYSTEM.md && rclone lsf b2:mendymax-archive/system/ 2>/dev/null | grep -q "2026-09-28_SYSTEM" && echo SYSTEM-STREAMED
+    EXPECT: SYSTEM-STREAMED
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B81
+    CHECK: grep -qi "brief 14" /home/muads/yt-digest/soccer-channel/DECISIONS.md && grep -qi "brief 14" /home/muads/jiheeye-ultra/DECISIONS.md && echo DECISIONS-BOTH-REPOS
+    EXPECT: DECISIONS-BOTH-REPOS
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B82
+    CHECK: test -s reports/brief14/reverify.txt && grep -q "ALL MET" reports/brief14/reverify.txt && echo REVERIFY-B14
+    EXPECT: REVERIFY-B14
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B83
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py kit
+    EXPECT: KIT-REMOVAL-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B84
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py overlay
+    EXPECT: OVERLAY-STYLE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B85
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py freeze
+    EXPECT: FREEZE-CLEAR-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B86
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py cards
+    EXPECT: CARDS-FACTS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B87
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py renders
+    EXPECT: RENDERS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B88
+    CHECK: test -s reports/brief15/visual_check.md && grep -q "EVERY-RENDER-CHECKED" reports/brief15/visual_check.md && echo VISUAL-CHECK-OK
+    EXPECT: VISUAL-CHECK-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B89
+    CHECK: /home/muads/yt-digest/.venv/bin/python tools/brief15_check.py publish
+    EXPECT: PUBLISH-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B90
+    CHECK: grep -q "audit ledger" /home/muads/.claude/SYSTEM.md && grep -qi "kit" /home/muads/.claude/SYSTEM.md && rclone lsf b2:mendymax-archive/system/ 2>/dev/null | grep -q "2026-09-29_SYSTEM" && echo SYSTEM-B15-OK
+    EXPECT: SYSTEM-B15-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B91
+    CHECK: test -s reports/brief15/reverify.txt && grep -q "ALL MET" reports/brief15/reverify.txt && echo REVERIFY-B15
+    EXPECT: REVERIFY-B15
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B92
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py matches
+    EXPECT: MATCHES-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B93
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py freshness
+    EXPECT: FRESH-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B94
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py facts
+    EXPECT: FACTS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B95
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py claims
+    EXPECT: CLAIMS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B96
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py footage
+    EXPECT: FOOTAGE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B97
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py clips
+    EXPECT: CLIPS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B98
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py sheet
+    EXPECT: SHEET-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B99
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py sizing
+    EXPECT: SIZING-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B100
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py overlay
+    EXPECT: OVERLAY-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B101
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief16_check.py reverify
+    EXPECT: REVERIFY-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B102
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py chips
+    EXPECT: CHIP-PLACE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B103
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py title
+    EXPECT: TITLE-SUBJECT-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B104
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py draw
+    EXPECT: DRAW-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B105
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py claims
+    EXPECT: RESIDE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B106
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py script
+    EXPECT: SCRIPT-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B107
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py voice
+    EXPECT: VOICE-SAMPLE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B108
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py voice-full
+    EXPECT: FULL-VOICE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B109
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py assemble
+    EXPECT: ASSEMBLE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B110
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py wmp
+    EXPECT: WMP-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B111
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py description
+    EXPECT: DESCRIPTION-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B112
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief17_check.py proof
+    EXPECT: PROOF-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B113
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py channels
+    EXPECT: CHANNEL-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B117
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py result
+    EXPECT: RESULT-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B118
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b118
+    EXPECT: DIAGRAM-PNG-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B119
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b119
+    EXPECT: DIAGRAM-MP4-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B120
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b120
+    EXPECT: FANCLIP-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B121
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b121
+    EXPECT: SLOWMO-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B122
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b122
+    EXPECT: LEGACY-ASSEMBLE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B123
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b123
+    EXPECT: TESTSEQ-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B124
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b124
+    EXPECT: BRIEF19-PUBLISHED-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B125
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py renderers
+    EXPECT: TWO-RENDERER-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B126
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b126
+    EXPECT: PREFLIGHT-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B127
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b127
+    EXPECT: DIAGRAMS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B128
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b128
+    EXPECT: CLIPS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B129
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b129
+    EXPECT: NARRATION-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B130
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b130
+    EXPECT: CARDS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B131
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b131
+    EXPECT: ASSEMBLE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B132
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b132
+    EXPECT: THUMB-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B133
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b133
+    EXPECT: UPLOAD-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B134
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b134
+    EXPECT: MIRROR-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B135
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b135
+    EXPECT: PROOF-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B136
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b136
+    EXPECT: CLOSE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B137
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b137
+    EXPECT: BRIEF-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B138
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b138
+    EXPECT: BENCH-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B139
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b139
+    EXPECT: CLAIMS-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B140
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b140
+    EXPECT: SCRIPT-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B141
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b141
+    EXPECT: VOICE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B142
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b142
+    EXPECT: VOICED-ASSEMBLE-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B143
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b143
+    EXPECT: FRAME-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B144
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b144
+    EXPECT: SYNC-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B145
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b145
+    EXPECT: UPLOAD2-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+APPROVAL REQUIRED GATES:B146
+    CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b146
+    EXPECT: CLOSE2-OK
+    CWD: /home/muads/yt-digest/soccer-channel
+    SHELL: /bin/bash
+    PATH: /home/muads/.bun/bin:/home/muads/.local/bin:/home/muads/.bun/bin:/home/muads/.nvm/versions/node/v24.18.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/muads/.local/bin:/snap/bin
+    NOT RUN: inspect this oracle, then re-run with --approve
+GATES.md: 132 gates
+HANDOFF REQUIRED: 3 abandoned (met: 0, unmet: 129, reran: 0, previously met reverified: 0)
+  GATES:B114, GATES:B115, GATES:B116
+UNMET: 129 (met: 0, abandoned: 3, reran: 0, previously met reverified: 0)
+  GATES:B137, GATES:B138, GATES:B139, GATES:B140, GATES:B141, GATES:B142, GATES:B143, GATES:B144, GATES:B145, GATES:B146, GATES:G2 (reverify not run), GATES:G10 (reverify not run), +117 more
+REVERIFY-A-EXIT=1
