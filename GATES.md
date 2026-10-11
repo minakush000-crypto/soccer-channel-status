@@ -61,7 +61,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=27db80f13ef246acd11bc56fb4919702c8a45498b601511e27aa76ddf4fa4753; output-bytes=2351
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9a491ab5df897c6f84b3a7869b978db8b1add81eaa529f836d59ceaab2c596c8; output-bytes=2409
 - [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
@@ -732,12 +732,12 @@ editing the brief-19 assembler; DECISIONS.md 29 carries the full list):
 - [x] B134: mirror: the soccer-channel work is pushed (HEAD equals the fetched remote head) and the public mirror repo updatedAt is within the last hour
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b134
   EXPECT: MIRROR-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=453979ab3e089a58704741d3e932afbef89ec80d9eb8e9f9363862645f05c97a; output-bytes=197
-- [ ] B135: proof: the brief-16 B101 convention re-verify proof exists for this brief: pass A records the full rerun count AND B135's own by-construction failure, pass B shows ALL MET, the proof is byte-identical on the public mirror, and a bare ALL-MET sample (no pass-A section) fails the oracle's marker probes
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=263118c5d7c8ab25e63a0faad31e7499dc621c4616543508ebe829ca92c06e6a; output-bytes=196
+- [x] B135: proof: the brief-16 B101 convention re-verify proof exists for this brief: pass A records the full rerun count AND B135's own by-construction failure, pass B shows ALL MET, the proof is byte-identical on the public mirror, and a bare ALL-MET sample (no pass-A section) fails the oracle's marker probes
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b135
   EXPECT: PROOF-OK
-  EVIDENCE: pending
-- [ ] B136: close report: soccer-channel/reports/ep02_session_close.md is committed and carries the shipped/pending/broke/disk-state lists the brief's job 10 specifies
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=557e317f82910a90e59f389bfc7f7d1b3b4d122524e0de007ee858ee9fec89c2; output-bytes=340
+- [x] B136: close report: soccer-channel/reports/ep02_session_close.md is committed and carries the shipped/pending/broke/disk-state lists the brief's job 10 specifies
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b136
   EXPECT: CLOSE-OK
-  EVIDENCE: pending
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=8061198ab859e769663b4ed70d2b71d26e671467f8ce8af737fa3ec6571f6b4b; output-bytes=222

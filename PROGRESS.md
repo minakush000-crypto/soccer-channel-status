@@ -4144,3 +4144,17 @@ it); the no-voice test sequence carries a silent AAC track. Integration
 proof: reports/brief19/test_sequence.mp4 (30.02s h264+aac 1080p, 5
 segments, 43 s assemble wall) + five opened frames; on the mirror.
 Census 78/51/27 (bench_truth rebased).
+
+Brief 20 (2026-10-10): episode 02 delivered as a silent 81.02 s review
+cut (10 slots: 7 diagram rows with cards composited, 3 fan-clip rows from
+one title-verified fan vod, all three goal strikes frame-pinned). Built
+stat_card_gen.py (pillow; title-card mode for job 6), brief20_check.py
+(11-gate oracle, B126-B136 after the +1 ID shift), added --max-height to
+fan_clip_dl (1080p stall measured at 230 s with 8.9 MB partial; 720p
+sections complete), and FIXED two spec_assemble defects measured on the
+first draft: the brief-19 overlay filtergraph had [ovl][base] reversed
+(opaque video covered the cards; the path had never been exercised), and
+input -ss snapped to keyframes and landed clip windows off their goal
+strikes; both now correct. Narration 642 words with data-grounded
+replacements (details DECISIONS.md 29). Upload 2L-Yj09gJ7M unlisted +
+thumbnail set; census 80/53/27 (bench_truth rebased).

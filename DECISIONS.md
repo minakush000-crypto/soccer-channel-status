@@ -1548,3 +1548,45 @@ commands cited in the report:
     s diagram MP4 renders in 8.1 s SOLO and 4-6 min under concurrent
     renders on the 4.9 GB WSL cap; diagram renders and their gates run
     SOLO (the B119 120 s gate budget assumes solo).
+
+## Brief 20 (2026-10-10): episode 02 Barcelona 3-0 Getafe (gates B126-B136)
+
+(a) LEDGER ID SHIFT: brief 20's own gate ids B125-B135 collide with
+    brief 19's B125 (two-renderer invariant); every brief-20 gate shifted
+    +1 (B126-B136). (b) DIAGRAM MAPPING: diagram_gen.py serves only
+    formation|pressing|highline|passmap|zone; the brief's
+    passing_sequence/run_diagram map onto pressing/formation specs; its
+    title_card type does not exist, so the thumbnail is built by
+    stat_card_gen.py titlecard (pillow, B125 invariant kept). Away dots
+    render white at 70 percent (the brief-19 episode style), not the
+    brief's #003399; arrows draw home color only and a dashed style marks
+    the opponent's action. Each spec's _note carries its coordinate
+    transform. (c) SAZONOV: the data's substitution list shows him
+    entering at 82' for Femenia, so he cannot start; the kickoff 5-4-1
+    and the beaten-defender labels are neutral "Getafe CB". (d)
+    NARRATION DATA FIXES: replaced lines the data file contradict or do
+    not contain: 94 touches/6 misplaced passes, "one was on target"
+    (shots_on_target null), "90 seconds" hold for a 2' goal, "tap-in" for
+    a header (data: heads in), "ghosting past Sazonov" (82' entry), "he
+    did everything right" (goals prevented -1.30), the clean-sheet streak
+    and fixture list, per-player Kounde season claim. (e) CARD 6:
+    kounde_season's "4 goal involvements" replaced by the data-grounded
+    "Kounde 73' - header, assist Yamal". (f) ASSEMBLER FIXES measured on
+    drafts: the brief-19 overlay filtergraph had labels REVERSED
+    ([ovl][base] made the opaque video cover the card; the path existed
+    but was never exercised); now [base][ovl]. Input -ss snapped to
+    keyframes and landed windows off the goal (jesus section); -ss moved
+    to output position (accurate, decode of <=50s sections trivial).
+    fan_clip_dl gained --max-height (default 1080 unchanged; B120/B121
+    oracles untouched): the 1080p lane stalled 230 s, 720p sections
+    complete. (g) UPLOAD: token at secrets/youtube_token.json (the
+    brief's correction), refreshed today 19:03 local and still valid;
+    youtube_upload.py is verb-based (upload <render-slug>), so the draft
+    staged at renders/2026-10-10_barcelona-getafe/final_video.mp4; the
+    tool has no --playlist flag (skipped, logged); push branch is master,
+    not the brief's main; description timestamps carry the 81s draft's
+    real manifest starts, not the brief's 4:20 bands. (h) PACE: measured
+    voice pace 108.9 wpm (brief 17) vs the brief's 4-5 min band over
+    ~620 words (124-155 wpm implied): 642 words = ~5:53 spoken; the
+    delivered draft is a SILENT 81 s review cut (brief 20 has no voice
+    job); a voice/slot-length pass is Mayo's pending decision.

@@ -355,3 +355,23 @@ without a row, a row without a file, or wrong class totals fails gate B20.
   1920x1080 h264+aac, 5 segments (3 diagrams + board + card), assembled
   in 43 s; on the public mirror (B124); census 78 files / 51 WIRED /
   27 HAND-RUN (bench_truth rebased, brief 19).
+
+## Brief 20 (2026-10-10): episode 02 Barcelona 3-0 Getafe
+
+- **Delivered:** 5 diagrams (4 PNG + 1 animated MP4) on D: scratch from
+  5 committed specs; 6 stat-overlap cards + title card
+  (tools/stat_card_gen.py, pillow); scripts/ep02_narration.md (642 words,
+  data-grounded); assembly 10 slots / 81.02 s 1920x1080 h264+aac
+  (draft silent by design, assembler contract); uploaded UNLISTED
+  https://youtu.be/2L-Yj09gJ7M (video_id 2L-Yj09gJ7M, pending_review)
+  with thumbnail set; B2 archived 21 artifacts with manifests.
+- **Clips:** one title-verified fan vod (Carpetas Blaugranas, 295
+  followers, uploaded match day, Camp Nou) supplies all three goal
+  sections (frame-verified strikes); six attempts logged in
+  clip_sources.txt; four rejected sources isolated. fan_clip_dl gained
+  --max-height (1080p lane stalls residential).
+- **Fixed (measured):** spec_assemble overlay labels were REVERSED from
+  brief 19 (cards invisible under opaque video); input -ss keyframe snap
+  missed strikes - now output -ss. census 80/53/27 (bench_truth rebased).
+- **Gates:** B126-B134 met; B135 proof + B136 close land at close (see
+  trail below); B114-B116 remain ABANDONED (brief-19 handoff).
