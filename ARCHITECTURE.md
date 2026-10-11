@@ -2,7 +2,10 @@
 
 > **Purpose:** code map — which tool calls which, the produce_v2 pipeline.
 > **Reader:** every session (CLAUDE.md loads it).
-> **Last verified against code:** 2026-09-22.
+> **Last verified against code:** 2026-10-10 (brief 19: the diagram-first
+> assembler section below was RUN LIVE this session, gates B118-B125 met;
+> the brief-09-era step tables above were NOT line-re-grepped this pass
+> and remain historical).
 
 Verified against code on 2026-09-22 (brief 03: 25 tools retired, entry points
 are produce_v2.py (910 lines) + pod_build.py (204 lines, the flash pipeline
@@ -249,3 +252,41 @@ skills were not installed (wrong stack). The ~130 user marketing skills
 manually invokable. dev-docs commands not adopted (project has its own doc
 spine). Verified: verify-setup.sh 8/8 PASS + a real trigger test (skill-developer
 suggested via regex). See TOOLS.md and LANE_PLAN.md §Stage 12C.
+
+## Brief 19: the diagram-first row assembler (2026-10-10)
+
+Verified live this session (gates B118-B125 ALL MET, ledger 111; runs +
+ffprobe outputs in reports/brief19/ and the mirror; DECISIONS.md 23-28).
+
+- `tools/spec_assemble.py` (440 lines, NEW): the brief-19 TYPED-ROW
+  assembler. Input: a JSON list of rows (every row: type + duration_s):
+  diagram (spec_file or spec_inline; generates via tools.diagram_gen at
+  assembly time, probed 1920x1080 BEFORE the concat, normalized 30->25
+  fps), clip (source + in_start; a source under the fan-clips root
+  TRANSFORMS in one pass: setpts=2.0*PTS + 75 percent centered zoom-crop
+  + scale 1920x1080 + atempo=0.5 + optional overlay_png full-frame
+  composite; a source elsewhere keeps the reel normalization and carries
+  no audio), board/card/overlay (piece path = pod render output; a
+  content-board/blank-card renders a minimal local still, test plumbing),
+  narration (audio path; a dark still + its audio in the sequential audio
+  track). Segments uniform 1080p/25fps/h264/crf20; audio aac 44.1k;
+  silent-AAC track when no row carries audio (DECISIONS.md 27).
+  Manifest: <stem>.assemble_manifest.json. Entry:
+  `.venv/bin/python tools/spec_assemble.py --spec seq.json --out out.mp4`.
+- `tools/diagram_gen.py` (456 lines, NEW): five diagram types
+  (formation/pressing/highline/passmap/zone) from JSON specs; PNG static
+  or MP4 animated (30 fps rawvideo pipe, staggered fade-ins, draw-on
+  arrows, hold floor); VerticalPitch 105x68 mapped from the spec's
+  0-100 coordinates, title at y=108. Render cost: ~8 s per 4 s MP4 solo,
+  4-6 min when renders contend on the 4.9 GB WSL cap.
+- `tools/fan_clip_dl.py` (607 lines, NEW): fan-channel clip acquisition;
+  hard exclusion (the brief's 8 ids + 4 measured ids, 2026-10-10) +
+  EXCLUDED_NAMES exact-name guard; strict pick (views>5000,
+  follower<500000, duration covers the requested window; no fallback
+  lane); provenance manifest + --search-only/--from-json/--manifest-out
+  for the oracle. The brief's exclusion ids do NOT match live YouTube
+  (measured; DECISIONS.md 28).
+- `tools/brief19_check.py` (433 lines, NEW): the B118-B125 oracle.
+- pod_build.py / produce_v2.py / brief17_reel.py are UNTOUCHED (the row
+  assembler is a separate local interface; script lanes keep their
+  assemblers).

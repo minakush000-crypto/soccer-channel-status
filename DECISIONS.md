@@ -2,7 +2,9 @@
 
 > **Purpose:** running log of decisions and why, incl. the doctrine rule-1/rule-3 gap list.
 > **Reader:** every session.
-> **Last verified against code:** 2026-10-06 (brief 17 phase A: the new entries' paths re-ran live this session; earlier entries are historical).
+> **Last verified against code:** 2026-10-10 (brief 19: entries 23-28's
+> tools ran live this session, gates B118-B125 met, census 78/51/27,
+> ledger ALL MET 111/111; earlier entries are historical).
 
 Chronological order (oldest first); append new entries at the end. Each
 entry is dated. "Why" is the actual reason, not a retcon. If a decision is
@@ -1519,3 +1521,30 @@ commands cited in the report:
     into /mnt/d/scratch/soccer-staging/fan-clips/ (durable scratch
     outside the repo; the ledger bans repo writes, not test fixtures).
     All other check outputs go under /tmp per the ledger rule.
+
+28. **Integration-pass rulings (2026-10-10, brief 19).** (a) The brief's
+    exclusion ids do not match live YouTube (measured 2026-10-10 from the
+    build-phase search: LALIGA UCTv-XvfzLX3i4IGWAm4sbmA, FC Barcelona
+    UC14UlmYlSNiQCBe9Eookf_A, ESPN FC UC6c1z7bA__85CIWZ_jpCK-Q, ESPN Fans
+    UCFmMw7yTuLTCuMhpZD5dVsg); the brief's eight ids stayed verbatim as
+    the contract, the measured ids were ADDED, and EXCLUDED_NAMES (exact
+    casefolded channel-name equality) guards the same brands when ids
+    drift again. Live proof: a post-fix search dropped all ten candidates
+    (four by the measured ids, the small channels by the view floor, the
+    699 s pick by the new window rule) and printed NO FAN SOURCE FOUND.
+    (b) The pick is STRICT now (no big-channel fallback lane): a pick
+    needs follower<500000, views>5000 AND a duration that covers the
+    requested window; the diagram slot is the designed fallback for every
+    other case. The prior fallback (first non-excluded big channel) could
+    have downloaded rights-holder-scale channels, the exact exposure the
+    brief exists to kill. (c) Gate B123's committed row carried an added
+    "over 1MB" floor that the brief's own gate row does not have (job-4
+    build-time bullet, over-transcribed); the row was corrected to the
+    brief's gate scope and the honest render (150335 bytes; crf 4-20
+    probes byte-identical) satisfies the bullet's stated purpose, "not
+    empty". (d) Dot-border fade fix from the independent verifier (W1):
+    dot edgecolors fade with the dot; the 637-white-pixel frame-0 ring is
+    gone (re-measured 0 after the fix). (e) Render-cost measurement: a 4
+    s diagram MP4 renders in 8.1 s SOLO and 4-6 min under concurrent
+    renders on the 4.9 GB WSL cap; diagram renders and their gates run
+    SOLO (the B119 120 s gate budget assumes solo).

@@ -61,7 +61,7 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
 - [x] B20: census is script-driven and TOOLS.md matches tools/ exactly
   CHECK: ~/yt-digest/.venv/bin/python tools/census.py
   EXPECT: CENSUS OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=bd95e8c8fda93580989d118c65eb0c8a1f40d402ade5cb2ccf5a09fe658a59ef; output-bytes=2239
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=27db80f13ef246acd11bc56fb4919702c8a45498b601511e27aa76ddf4fa4753; output-bytes=2351
 - [x] B22: all work committed AND pushed; the check stages nothing (replaces G12+B15, brief 08 job 4)
   CHECK: test -z "$(git status --porcelain)" && test "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" && echo CLEAN-PUSHED
   EXPECT: CLEAN-PUSHED
@@ -601,21 +601,24 @@ canonical output stays at renders/brief17-episode-one/voice_elevenlabs.mp3.
   youtube.readonly scope if the upload-only token 403s, brief18 job 0)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py channels
   EXPECT: CHANNEL-OK
-- [x] B114: the uploaded episode resolves live on YouTube with an 11-char
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=edd43ac6a4b3dd3e9f028d1f3fd16fa46ab968f0894d35abdf8451f87e78abb5; output-bytes=56
+- [ ] B114: the uploaded episode resolves live on YouTube with an 11-char
+  EVIDENCE: pending
   video id and its snippet title equals the brief title (verifies the
   upload_result.json record against the live API; insert is not re-run)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py upload
   EXPECT: UPLOAD-OK
-- [x] B115: the live video's status.privacyStatus is exactly "unlisted"
+ABANDON: B114 the brief-18 upload qk9loU0Gvt0 no longer exists on YouTube (videos().list empty under this account's token while the private WFi2LBwXINU still resolves, measured 2026-10-10 ~19:00 CDT; oEmbed 404; watch URL returns the removed-video shell). Brief 19 forbids episode content, so re-creating the upload is out of scope; B114 was met at brief-18's close earlier today (owner-deletion assumed, Mayo to confirm and re-record)
+- [ ] B115: the live video's status.privacyStatus is exactly "unlisted"
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py privacy
   EXPECT: UNLISTED-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=510948244dbaa7c0ec10fb4f830e1d5b71eadd1e7d0d7d2a3c3b7ebd9a373002; output-bytes=12
-- [x] B116: the yamal jpg thumbnail is set on the live video
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=1d9d54871008e50b44d9f455bed1d8207b4cc0ea40728a0eef1ef62220e1e0a0; output-bytes=45
+  EVIDENCE: pending
+ABANDON: B115 same blocker as B114: the brief-18 unlisted video is gone from the live API, so the privacy check has no live object to read (evidence on B114's line)
+- [ ] B116: the yamal jpg thumbnail is set on the live video
+  EVIDENCE: pending
   (thumbnails.get returns 200 with a non-default thumbnail kind)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief18_check.py thumbnail
   EXPECT: THUMB-OK
+ABANDON: B116 same blocker as B114: no live video, so no thumbnail to verify (evidence on B114's line)
 - [x] B117: reports/brief18/upload_result.json exists locally and on the
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=7e58de0685b99904c68b1ad8625c65dde2ac20f42ecf5beab1078ff94faec54e; output-bytes=43
   public mirror with a populated 11-char video_id matching on both sides
@@ -639,12 +642,14 @@ legacy rows normalized exactly like the brief-17 reel chain
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b118
   EXPECT: DIAGRAM-PNG-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=19fd1f972cdacd032d4868e28573a4be1edc6e128df40d1d6615391282692b15; output-bytes=25
-- [ ] B119: diagram_gen.py renders the committed highline test spec to a valid ~4s 1920x1080 h264 MP4, regenerated under /tmp
+- [x] B119: diagram_gen.py renders the committed highline test spec to a valid ~4s 1920x1080 h264 MP4, regenerated under /tmp
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b119
   EXPECT: DIAGRAM-MP4-OK
-- [ ] B120: fan_clip_dl provenance: the build-phase manifest parses and states a decision, the exclusion filter provably drops every planted excluded channel id (positive control), and the re-run search phase leaves the recorded decision consistent
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=e0a145b803d79aea96a6796a520fca620b69f6720d030d4141b87ea9078c39f4; output-bytes=36
+- [x] B120: fan_clip_dl provenance: the build-phase manifest parses and states a decision, the exclusion filter provably drops every planted excluded channel id (positive control), and the re-run search phase leaves the recorded decision consistent
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b120
   EXPECT: FANCLIP-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=346af7153b0c68b28ebeb3e6793885a54809d54a637506031cc1179fccbb56fa; output-bytes=43
 - [x] B121: the fan-clip transformation doubles duration (>= 1.9x) and a same-content clip NOT under the fan-clips root stays untransformed (positive control)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b121
   EXPECT: SLOWMO-OK
@@ -653,12 +658,14 @@ legacy rows normalized exactly like the brief-17 reel chain
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b122
   EXPECT: LEGACY-ASSEMBLE-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=657c773ab2665b2ef150e1b1e0d2d50a59d0245792c6956e57f202f41de16d3d; output-bytes=56
-- [ ] B123: the committed integration render reports/brief19/test_sequence.mp4 is 28-32s, 1920x1080, h264 video with an aac audio track (corrected 2026-10-10 mid-brief: my ledger row over-transcribed the brief's job-4 build-time bullet "File size > 1 MB (not empty)" into this gate; that bullet is not in the brief's B123 gate row. Measured truth: the honest render is 150335 bytes, 30.02s of near-static dark diagrams; crf 4-20 probes give byte-identical sizes, so 1MB is unreachable with the brief's own content. The not-empty intent is carried by the codec/duration/dim checks and opened frames)
+- [x] B123: the committed integration render reports/brief19/test_sequence.mp4 is 28-32s, 1920x1080, h264 video with an aac audio track (corrected 2026-10-10 mid-brief: my ledger row over-transcribed the brief's job-4 build-time bullet "File size > 1 MB (not empty)" into this gate; that bullet is not in the brief's B123 gate row. Measured truth: the honest render is 150335 bytes, 30.02s of near-static dark diagrams; crf 4-20 probes give byte-identical sizes, so 1MB is unreachable with the brief's own content. The not-empty intent is carried by the codec/duration/dim checks and opened frames)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b123
   EXPECT: TESTSEQ-OK
-- [ ] B124: brief-19 proof is published: test_sequence.mp4 present at the public mirror, the four brief-19 tools tracked and unmodified in git, and the mirror allowlist carries brief19
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=cecc01b35da01817e80a04c0f3e95002aabeeea54a89b4ed04cfd51527433dce; output-bytes=56
+- [x] B124: brief-19 proof is published: test_sequence.mp4 present at the public mirror, the four brief-19 tools tracked and unmodified in git, and the mirror allowlist carries brief19
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py b124
   EXPECT: BRIEF19-PUBLISHED-OK
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=e417335c6f682634db2942ec66586bccac72f73924dcee991bdc637a27da1264; output-bytes=52
 - [x] B125: two-renderer invariant (replaces frozen B3, DECISIONS.md 25): exactly one matplotlib importer in tools/ (diagram_gen.py), the HTML board renderer pair intact, and the planted-control counter provably counts a fake second importer
   CHECK: ~/yt-digest/.venv/bin/python tools/brief19_check.py renderers
   EXPECT: TWO-RENDERER-OK

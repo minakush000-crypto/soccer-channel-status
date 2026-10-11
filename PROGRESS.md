@@ -2,10 +2,10 @@
 
 > **Purpose:** the four-lane (A/B/C/D) expansion build ledger; each stage appends its findings here.
 > **Reader:** every session (the brief appends to it); mirrored (in push_status.sh ALLOW_PROJECT and the mirror .gitignore un-ignore list — verified 2026-09-13). Line-drift corrections applied 2026-09-13 (Stage-12B rewrite of produce_v2.py + Stage-14 retirement of step4b/tactical_render.py shifted cited line numbers; all re-grep'd against current code).
-> **Last verified against code:** 2026-10-10 (brief 18: episode 1 uploaded
-> to YouTube unlisted, https://youtu.be/qk9loU0Gvt0; re-authorized token
-> with youtube.upload + youtube.readonly; B113-B117 met, ledger 104/104.
-> Prior: 2026-10-07 brief 17 phase B census re-run live this session:
+> **Last verified against code:** 2026-10-10 (brief 19: this entry's
+> claims ran live this session, ledger 111/111; brief 18 facts above
+> verified in their session. Prior: 2026-10-07 brief 17 phase B census
+> re-run live this session:
 > CENSUS OK files=60 wired=39 handrun=21.
 > The 2026-09-27 note below was written from git log 3c7a90b..b5dc799 and
 > reports/brief08/reverify.txt. Historical stage log: nothing in the
@@ -4125,3 +4125,22 @@ snippet.thumbnails + a 200 fetch of the image URL. Two upload-tool bugs
 fixed in passing: tags builder crashed when scripts/<slug>.md is absent
 (slug-derived fallback), and the split authurl/authcode path lost the
 PKCE verifier across processes (authwait single-process is primary).
+
+## Brief 19 (2026-10-10): diagram-first tooling; no episode content
+
+Executed from the coordinator's paste (briefs/brief19.md, 1301 words,
+commit c7d45cc). Workflow-orchestrated: two builder agents (diagram_gen,
+fan_clip_dl) built in parallel and were adversarially verified by two
+more; the assembler, oracle, ledger and integration render ran in the
+main session. All four brief-19 tools + the B118-B125 gates landed and
+ALL MET (111/111). Key rulings in DECISIONS 23-28: the row assembler
+did not exist (spec_assemble.py is its vehicle); B3 frozen (the
+diagram-first format mandates matplotlib) and replaced by B125; the
+brief's exclusion ids measured WRONG against live YouTube (live
+LALIGA/FCB/ESPN ids added + name guard); the pick made strict
+(fan-sized + window-covering, no big-channel fallback); B123's
+over-transcribed 1MB floor corrected (the brief's gate row never had
+it); the no-voice test sequence carries a silent AAC track. Integration
+proof: reports/brief19/test_sequence.mp4 (30.02s h264+aac 1080p, 5
+segments, 43 s assemble wall) + five opened frames; on the mirror.
+Census 78/51/27 (bench_truth rebased).

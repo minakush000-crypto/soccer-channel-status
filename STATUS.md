@@ -2,10 +2,10 @@
 
 > **Purpose:** verified current state of the pipeline (the status spine).
 > **Reader:** every session (CLAUDE.md @STATUS.md).
-> **Last verified against code:** 2026-10-10 (brief 18: episode 1 is on
-> YouTube UNLISTED at https://youtu.be/qk9loU0Gvt0 with the yamal
-> thumbnail and the brief-17 credit description; B113-B117 met, ledger
-> 104/104 published; prior state: brief 17 phase B closed ALL MET
+> **Last verified against code:** 2026-10-10 (brief 19 update: the tools
+> and gates below were RUN LIVE this session, ledger 111/111 ALL MET,
+> ffprobe + census outputs quoted; brief 18 facts above verified in their
+> session and unchanged. Prior: brief 17 phase B closed ALL MET
 > 99/99 2026-10-07). Sofascore transport: still Akamai-403 from this IP
 > (attempts 1-9 logged 2026-10-04..06, treated likely-permanent); no
 > fetch was attempted this session; the numbers came from the cached
@@ -305,3 +305,53 @@ without a row, a row without a file, or wrong class totals fails gate B20.
   after ~7 days, so every future upload may need one fresh Allow click).
   Records: reports/brief18/upload_result.json (git + mirror), B2
   soccer-channel/2026-10-10/ (manifest next to it), publish-log/.
+
+## Brief 19 (2026-10-10): diagram-first format tooling, no episode content
+
+- **Why:** episode 1 hit 4 Content ID claims on upload (the sourced
+  clips were identical files to rights-holder-registered ones). The new
+  format: tactical pitch diagrams (generated, fully owned) as primary
+  visuals + transformed fan-sourced clips as secondary.
+- **tools/spec_assemble.py (NEW, the brief's row assembler; DECISIONS.md
+  24):** typed rows diagram/clip/board/card/overlay/narration; diagram
+  rows call tools.diagram_gen.generate_diagram at assembly time and are
+  probed 1920x1080 BEFORE the concat; fan-clips transform in one pass
+  (2x slow-mo, 75 percent zoom-crop, atempo 0.5, overlay_png composite)
+  keyed on the fan-clips root; legacy rows keep the brief-17 reel
+  normalization; silent AAC track when no row carries audio
+  (DECISIONS.md 27). Writes <stem>.assemble_manifest.json. pod_build.py
+  untouched (its script-driven flow stays the episode assembler for
+  script lanes).
+- **tools/diagram_gen.py (NEW):** five diagram types (formation, pressing,
+  highline, passmap, zone) from JSON specs, PNG static or animated MP4
+  (30 fps, 80 ms player stagger, draw-on arrows, exact-duration hold with
+  a 0.3 s floor). Measured render cost: 8.1 s for a 4 s MP4 SOLO; 4-6 min
+  when two renders run concurrently on the 4.9 GB WSL cap (schedule
+  diagram renders sequentially; the B119 gate budget assumes solo).
+- **tools/fan_clip_dl.py (NEW + same-day integration pass):**
+  ytsearch10 + hard exclusion. THE BRIEF'S EXCLUSION IDS DO NOT MATCH
+  LIVE YOUTUBE (measured 2026-10-10, manifest data): live LALIGA =
+  UCTv-XvfzLX3i4IGWAm4sbmA, live FC Barcelona = UC14UlmYlSNiQCBe9Eookf_A,
+  live ESPN FC = UC6c1z7bA__85CIWZ_jpCK-Q, live ESPN Fans =
+  UCFmMw7yTuLTCuMhpZD5dVsg; those were ADDED (brief ids kept verbatim)
+  plus an EXCLUDED_NAMES exact-name guard. The pick is STRICT
+  (non-excluded + views>5000 + follower<500000 + the source's duration
+  must cover the requested window; no big-channel fallback); the diagram
+  slot is the designed fallback when no fan source qualifies. Live
+  outcome 2026-10-10: NO_FAN_SOURCE for "Barcelona Racing Club 2026"
+  (no candidate covered the 32.3-min window; longest live candidate
+  1363 s). Provenance manifest reports/brief19/fan_clip_manifest.json
+  (candidates carry urls + durations; decision; download_error);
+  --search-only / --from-json / --manifest-out feed gate oracle B120
+  (DECISIONS.md 26/28).
+- **Gates B118-B125 ALL MET (ledger 111/111).** B3 (zero matplotlib
+  importers) FROZEN verbatim to reports/brief19/GATES_frozen.md and
+  replaced by B125 (two-renderer invariant); DECISIONS.md 25. B123's
+  committed row had an added 1MB size floor that the brief's own gate
+  row does not carry; corrected mid-brief (DECISIONS.md 28): the honest
+  render is 150335 bytes and no honest x264 setting inflates it (measured
+  crf 4-20 byte-identical).
+- **Integration proof:** reports/brief19/test_sequence.mp4 = 30.02s
+  1920x1080 h264+aac, 5 segments (3 diagrams + board + card), assembled
+  in 43 s; on the public mirror (B124); census 78 files / 51 WIRED /
+  27 HAND-RUN (bench_truth rebased, brief 19).

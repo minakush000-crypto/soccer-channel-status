@@ -2,9 +2,10 @@
 
 > **Purpose:** the session brief — goal, where things live, what's broken, measured facts.
 > **Reader:** every session (CLAUDE.md @CONTEXT.md).
-> **Last verified against code:** 2026-10-03 (brief 15: card types + audits
-> grepped in board_page.html/board_html.js, oracle re-runs green; brief 11
-> staging/cache-path facts below unchanged and still true).
+> **Last verified against code:** 2026-10-10 (brief 19: the new spec-row
+> assembler, diagram generator and fan-clip tool ran through their gates
+> B118-B125 this session; earlier measured facts not re-derived and
+> unchanged).
 
 Rewritten 2026-09-22 (brief 03) against the code on disk. Read STATUS.md for
 the verified state spine and DECISIONS.md for why things are the way they are.
@@ -81,6 +82,18 @@ See STATUS.md "What is broken" — judge wobble, footage-overrun freezes
 disallowed goal at reel t=90, migration phases 5-8 unfinished.
 
 ## MEASURED FACTS, DO NOT RE-DERIVE
+- Diagram-first assembler (brief 19, 2026-10-10): tools/spec_assemble.py
+  assembles TYPED ROWS (diagram/clip/board/card/overlay/narration;
+  DECISIONS.md 24-27). Diagram rows generate via tools/diagram_gen.py at
+  assembly time (1920x1080 asserted before the concat; a 4 s MP4 renders
+  in ~8 s SOLO vs 4-6 min when renders contend on the 4.9 GB cap). Fan-
+  sourced clips transform under the fan-clips root (2x slow-mo + 75
+  percent zoom-crop + atempo 0.5, overlay_png in the one pass); legacy
+  rows keep the brief-17 reel chain. tools/fan_clip_dl.py sources fan
+  clips with the MEASURED exclusion list (the brief's ids do not match
+  live YouTube; STATUS.md brief-19 section) + the strict pick
+  (fan-sized, views>5000, window-covering); the diagram slot is the
+  designed fallback when no fan source qualifies.
 - EP001 (Real Madrid 2-1 Inter, 2026-09-08) final: 140.96s, 75.6MB,
   1920x1080 (ffprobe verified 2026-09-27, v7). Voice 155.5 WPM (ElevenLabs).
 - Sofascore retires old events' sub-endpoints (event 16363640 served empty
