@@ -755,19 +755,19 @@ editing the brief-19 assembler; DECISIONS.md 29 carries the full list):
 - [x] B139: claims: every spoken stat resolves from data/barcelona-getafe-20261010/sofascore_stats.json via the claims table scripts/ep02_claims.json (re-read from the file, not recalled)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b139
   EXPECT: CLAIMS-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9bf6aeb04d628ddb08120a4e469a6573e916dd3cbc8630c8bb238fc9a05dbc39; output-bytes=842
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=fc9dd7ebace4282f973207933cfb2516571525642f13cf08473809b164f4af7c; output-bytes=882
 - [x] B140: script: scripts/ep02_narration_v2.md is 300-460 words, covers the three goal minutes the data carries, and speaks none of the retired phrases (Soria, 9.5, thirty meters, 90 seconds)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b140
   EXPECT: SCRIPT-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9b93d769f393ad5b3d432d36773b21075898def98470232e0fd24a69e4d0fa27; output-bytes=230
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=2c0ff1e9850e2dde2aa8785ca94df73513942e3d14bc3dfec182d1959b500046; output-bytes=230
 - [x] B141: voice: per-section ElevenLabs files exist with a duration manifest, total 170-250s at 44100 Hz
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b141
   EXPECT: VOICE-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=b3354f0c6a653824e886662fbfcd2a581a6bddfb1cb1cee1684e53f8e680ff91; output-bytes=109
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=9c57bdd630c185f34fb00bfafe71d28d78519eea76ea21343f5fc840a7c571fd; output-bytes=109
 - [x] B142: assembly: the voiced cut is h264+aac 1920x1080, 170-250s, <2GB, >=8 sections in its assemble manifest, and its audio track is non-silent (volumedetect mean_volume > -60 dB)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b142
   EXPECT: VOICED-ASSEMBLE-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=c758bc84bfce999433e8e544041075eab414a8a3290926a7b114d582b5280293; output-bytes=238
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=3e4375d5acb4039d5422a12ada59bd08e9c1a5f96c28583a274c41dee45cf3ce; output-bytes=238
 - [x] B143: frames: >=6 stamped 1920x1080 frames of the voiced cut committed under reports/brief20r/final_frames/, non-trivial in size
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b143
   EXPECT: FRAME-OK
@@ -775,11 +775,11 @@ editing the brief-19 assembler; DECISIONS.md 29 carries the full list):
 - [x] B144: voice-lead sync: every narration-bearing row's duration exceeds its VO section duration, and the assembled planned duration matches the VO plan within 3s (no speech chopped mid-word)
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b144
   EXPECT: SYNC-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=a7151faf4c0801fc01bb95fc35a68c4237f6abcb5fecf1f39b4e9c3fd929699a; output-bytes=101
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=bade87baab3fb0eb0b6ef8ba78943579e450166436e972fb269289bc7ac6f3c3; output-bytes=101
 - [x] B145: upload: data/barcelona-getafe-20261010/youtube_upload.json carries a new 11-char video_id, privacy unlisted, status pending_review, and names v1 2L-Yj09gJ7M as superseded with the v2 thumbnail recorded
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b145
   EXPECT: UPLOAD2-OK
-  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=e97c2a5c9804782c8776c943d2607db6d059961ffef47e9938ac464101947dac; output-bytes=230
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=46bc47f3b979e398ae2e9a5b2eed16d68b038e1e7b9148d25c3e541c9b3a41b1; output-bytes=228
 - [x] B146: close: reports/brief20r/close.md carries the shipped/pending/broke/disk-state lists, census rebased, STATUS/PROGRESS/DECISIONS/TOOLS updated, mirror pushed
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20r_check.py b146
   EXPECT: CLOSE2-OK
