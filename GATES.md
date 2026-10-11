@@ -143,10 +143,10 @@ Rules for this ledger (Mayo, brief 08 closed decisions 1-4):
   CHECK: test -f ~/.claude/skills/context-transfer/SKILL.md && grep -q '^name:' ~/.claude/skills/context-transfer/SKILL.md && echo CT-SKILL-PRESENT
   EXPECT: CT-SKILL-PRESENT
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=0278fde26d143fe0d3f1d2c7c808cbfca3ac62e1d11adddd20caa7707f8dc6c2; output-bytes=17
-- [ ] B44: the ECC data cap is wired: guard selftest (incl. oversized-ECC control 4) passes and the live report shows the ecc_data line under cap (brief 07 job 5, Mayo instruction)
+- [x] B44: the ECC data cap is wired: guard selftest (incl. oversized-ECC control 4) passes and the live report shows the ecc_data line under cap (brief 07 job 5, Mayo instruction)
   CHECK: bash tools/disk_guard.sh --selftest 2>&1 | grep -q GUARD-SELFTEST-OK && bash tools/disk_guard.sh --report 2>/dev/null | grep -qE "ecc_data [0-9]+B <= [0-9]+B cap" && echo ECC-CAP-WIRED
   EXPECT: ECC-CAP-WIRED
-  EVIDENCE: pending
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=4083c7d2c6597821ff2607367b9783836c8103b0643132360e44d11fe266d52e; output-bytes=14
 - [x] B45: before/after session-start context numbers are recorded in both artifacts (brief 07 job 3f + job 6)
   CHECK: test -s reports/brief07/context_before.txt && grep -q "39837" reports/brief07/context_before.txt && test -s reports/brief07/context_after.txt && grep -q "50652" reports/brief07/context_after.txt && echo CTX-BEFORE-AFTER-RECORDED
   EXPECT: CTX-BEFORE-AFTER-RECORDED
@@ -729,10 +729,10 @@ editing the brief-19 assembler; DECISIONS.md 29 carries the full list):
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b133
   EXPECT: UPLOAD-OK
   EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=fdfba266e8014564da74ab21bebfdc6dc05490daaabd9ffedfb8d7110a9c0be7; output-bytes=155
-- [ ] B134: mirror: the soccer-channel work is pushed (HEAD equals the fetched remote head) and the public mirror repo updatedAt is within the last hour
+- [x] B134: mirror: the soccer-channel work is pushed (HEAD equals the fetched remote head) and the public mirror repo updatedAt is within the last hour
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b134
   EXPECT: MIRROR-OK
-  EVIDENCE: pending
+  EVIDENCE: exit=0; shell=/bin/bash; cwd=/home/muads/yt-digest/soccer-channel; path=f6ab58f858b3/19 entries; EXPECT=matched; output-sha256=3bdec94aa3b2be8aa479f03d16da7f4062ca214826ff7aa5a957a3fb5ef3b46c; output-bytes=196
 - [x] B135: proof: the brief-16 B101 convention re-verify proof exists for this brief: pass A records the full rerun count AND B135's own by-construction failure, pass B shows ALL MET, the proof is byte-identical on the public mirror, and a bare ALL-MET sample (no pass-A section) fails the oracle's marker probes
   CHECK: ~/yt-digest/.venv/bin/python tools/brief20_check.py b135
   EXPECT: PROOF-OK
